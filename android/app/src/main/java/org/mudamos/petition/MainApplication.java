@@ -1,4 +1,4 @@
-package com.mudamosmobile;
+package org.mudamos.petition;
 
 import android.app.Application;
 import android.util.Log;

@@ -1,4 +1,4 @@
-package com.mudamosmobile;
+package org.mudamos.petition;
 
 import com.facebook.react.ReactActivity;
 

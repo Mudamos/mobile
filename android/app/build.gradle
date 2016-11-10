@@ -87,7 +87,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.mudamosmobile"
+        applicationId "org.mudamos.petition"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -121,6 +121,13 @@ android {
                 output.versionCodeOverride =
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
+        }
+    }
+
+    productFlavors {
+        development {
+            applicationId = "org.mudamos.petition.development"
+            versionName "1.0-debug"
         }
     }
 }
