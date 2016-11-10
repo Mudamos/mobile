@@ -64,3 +64,6 @@
 -dontwarn java.nio.file.*
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
+
+# React Native Config
+-keep class org.mudamos.petition.BuildConfig { *; }

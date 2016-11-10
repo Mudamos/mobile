@@ -4,6 +4,8 @@
  * @flow
  */
 
+import Config from "react-native-config";
+
 import React, { Component } from "react";
 import {
   AppRegistry,
@@ -14,6 +16,8 @@ import {
 
 export default class MudamosMobile extends Component {
   render() {
+    console.log(Config.MUDAMOS_API_URL);
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
