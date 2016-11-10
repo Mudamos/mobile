@@ -4,13 +4,13 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
-} from 'react-native';
+  View,
+} from "react-native";
 
 export default class MudamosMobile extends Component {
   render() {
@@ -23,7 +23,7 @@ export default class MudamosMobile extends Component {
           To get started, edit index.android.js
         </Text>
         <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
+          Double tap R on your keyboard to reload,{"\n"}
           Shake or press menu button for dev menu
         </Text>
       </View>
@@ -34,20 +34,20 @@ export default class MudamosMobile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF",
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     margin: 10,
   },
   instructions: {
-    textAlign: 'center',
-    color: '#333333',
+    textAlign: "center",
+    color: "#333333",
     marginBottom: 5,
   },
 });
 
-AppRegistry.registerComponent('MudamosMobile', () => MudamosMobile);
+AppRegistry.registerComponent("MudamosMobile", () => MudamosMobile);

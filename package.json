@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "lint": "eslint src/ index.*.js",
     "test": "jest"
   },
   "dependencies": {
@@ -17,8 +18,50 @@
     "babel-jest": "17.0.0",
     "babel-preset-react-native": "1.9.0",
     "eslint": "^3.9.1",
+    "eslint-plugin-react": "^6.6.0",
     "jest": "17.0.0",
     "jest-react-native": "17.0.0",
     "react-test-renderer": "15.3.2"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "globals": {
+      "fetch": false,
+      "require": false
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "no-console": "off",
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "react/sort-prop-types": [
+        "warn",
+        {
+          "callbacksLast": true
+        }
+      ],
+      "strict": [
+        "error",
+        "global"
+      ]
+    }
   }
 }
