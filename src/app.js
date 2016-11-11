@@ -8,6 +8,13 @@ import {
   View,
 } from "react-native";
 
+import { Actions, Router, Scene } from "react-native-router-flux";
+import sceneStyle from "./styles/scene-default";
+
+import { PlipContainer } from "./containers";
+
+
+
 import reducer from "./reducers";
 import sagas from "./sagas";
 
@@ -39,15 +46,36 @@ const store = __DEV__ ?
   createStore(reducer, applyMiddleware(sagaRunner, logger)) :
   createStore(reducer, applyMiddleware(sagaRunner));
 
-sagaRunner.run(sagas);
 
-import { PlipContainer } from "./containers";
+//const getSceneStyle = (props, computedProps) => {
+//  const style = {
+//    flex: 1,
+//    backgroundColor: '#fff',
+//    shadowColor: null,
+//    shadowOffset: null,
+//    shadowOpacity: null,
+//    shadowRadius: null,
+//  };
+//  if (computedProps.isActive) {
+//    style.marginTop = computedProps.hideNavBar ? 0 : 64;
+//    style.marginBottom = computedProps.hideTabBar ? 0 : 50;
+//  }
+//  return style;
+//};
+
+const scenes = Actions.create(
+  <Scene key="root">
+    <Scene key="showPlip" initial={true} component={PlipContainer} />
+  </Scene>
+);
+
+sagaRunner.run(sagas);
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <PlipContainer />
+        <Router scenes={scenes} getSceneStyle={sceneStyle} />
       </Provider>
     );
   }
