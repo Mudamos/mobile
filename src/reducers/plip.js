@@ -4,8 +4,8 @@ export default  (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case "PLIP_FETCHED":
-      return { ...state, plip: payload.plip };
+    case "PLIPS_FETCHED":
+      return { ...state, plips: payload.plips };
     default:
       return state;
   }

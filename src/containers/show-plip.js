@@ -1,12 +1,15 @@
 import { connect } from "react-redux";
 
-import { fetchPlip } from "../actions";
+import { fetchPlips } from "../actions";
+import { findCurrentPlip } from "../selectors";
 
 import PlipLayout from "../components/plip-layout";
 
-const mapStateToProps = state => ({ plip: state.plips.plip });
+const mapStateToProps = state => ({
+  plip: findCurrentPlip(state)
+});
 const mapDispatchToProps = dispatch => ({
-  signPlip: () => dispatch(fetchPlip())
+  retryPlip: () => dispatch(fetchPlips())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlipLayout);

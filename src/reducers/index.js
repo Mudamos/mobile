@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
-import plips from "./plips";
+import plip from "./plip";
 
 export default combineReducers({
-  plips
+  plip
 });
