@@ -1,12 +1,11 @@
 const initialState = {};
 
 export default  (state = initialState, action) => {
-  const { type } = action;
-  console.log('le type', type)
+  const { type, payload } = action;
 
   switch (type) {
-    case "TEST":
-      return { ...state, testing: 'yolo'};
+    case "PLIP_FETCHED":
+      return { ...state, plip: payload.plip };
     default:
       return state;
   }

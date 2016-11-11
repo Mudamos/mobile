@@ -11,6 +11,7 @@ import {
 import reducer from "./reducers";
 import sagas from "./sagas";
 
+import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import createReduxLogger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
@@ -40,43 +41,14 @@ const store = __DEV__ ?
 
 sagaRunner.run(sagas);
 
+import { PlipContainer } from "./containers";
+
 export default class App extends Component {
-  state = {};
-
-  constructor(...args) {
-    super(...args);
-
-    store.subscribe(() => {
-      const state = store.getState()
-      console.log('my store', state);
-      this.setState({ testing: state.plips.testing });
-    });
-  }
-
   render() {
-    console.log(Config.MUDAMOS_API_URL);
-    console.log('render', this.state)
-    const { testing } = this.state;
-
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native! { testing }
-        </Text>
-        <Button
-          onPress={() => { store.dispatch({type: 'TEST'})} }
-          title="Learn More"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{"\n"}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <Provider store={store}>
+        <PlipContainer />
+      </Provider>
     );
   }
 }
