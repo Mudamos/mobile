@@ -65,7 +65,7 @@ const store = __DEV__ ?
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="showPlip" initial={true} component={PlipContainer} />
+    <Scene key="showPlip" initial={true} component={PlipContainer} hideNavBar={true} />
   </Scene>
 );
 
