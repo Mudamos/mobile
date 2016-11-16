@@ -1,0 +1,78 @@
+{
+  "name": "MudamosMobile",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "android/gradlew -p android installDevelopmentDebug && adb reverse tcp:8081 tcp:8081 && adb shell am start -n org.mudamos.petition.development/org.mudamos.petition.MainActivity",
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
+    "lint": "eslint src/ index.*.js",
+    "test": "mocha --compilers js:babel-core/register --require spec/support.js 'spec/**/*.spec.js'"
+  },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "react": "15.3.2",
+    "react-native": "0.37.0",
+    "react-native-config": "^0.1.2",
+    "react-native-parallax-scroll-view": "^0.19.0",
+    "react-native-router-flux": "^3.37.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.4",
+    "redux-saga": "^0.12.1"
+  },
+  "jest": {
+    "preset": "jest-react-native"
+  },
+  "devDependencies": {
+    "babel-jest": "17.0.0",
+    "babel-preset-react-native": "1.9.0",
+    "eslint": "^3.9.1",
+    "eslint-plugin-react": "^6.6.0",
+    "jest": "17.0.0",
+    "jest-react-native": "17.0.0",
+    "react-test-renderer": "15.3.2"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "globals": {
+      "fetch": false,
+      "require": false
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "no-console": "off",
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "react/sort-prop-types": [
+        "warn",
+        {
+          "callbacksLast": true
+        }
+      ],
+      "strict": [
+        "error",
+        "global"
+      ]
+    }
+  }
+}
