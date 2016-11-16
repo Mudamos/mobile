@@ -10,7 +10,8 @@ export default StyleSheet.create({
     flex: 1
   },
   imageCall: {
-    height: imageHeight
+    height: imageHeight,
+    backgroundColor: "#fff"
   },
   foreGroundContainer: {
     flex: 1,
@@ -38,11 +39,6 @@ export default StyleSheet.create({
   navCycleTitle: {
     fontSize: 14,
     color: "#fff"
-  },
-  parallaxNav: {
-    height: 64,
-    flexDirection: "row",
-    alignItems: "center"
   }
 })
 

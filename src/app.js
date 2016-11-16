@@ -14,6 +14,7 @@ import sceneStyle from "./styles/scene-default";
 import { PlipContainer } from "./containers";
 
 
+import MudamosWebApi from "./services/mudamos-web";
 
 import reducer from "./reducers";
 import sagas from "./sagas";
@@ -47,29 +48,15 @@ const store = __DEV__ ?
   createStore(reducer, applyMiddleware(sagaRunner));
 
 
-//const getSceneStyle = (props, computedProps) => {
-//  const style = {
-//    flex: 1,
-//    backgroundColor: '#fff',
-//    shadowColor: null,
-//    shadowOffset: null,
-//    shadowOpacity: null,
-//    shadowRadius: null,
-//  };
-//  if (computedProps.isActive) {
-//    style.marginTop = computedProps.hideNavBar ? 0 : 64;
-//    style.marginBottom = computedProps.hideTabBar ? 0 : 50;
-//  }
-//  return style;
-//};
-
 const scenes = Actions.create(
   <Scene key="root">
     <Scene key="showPlip" initial={true} component={PlipContainer} hideNavBar={true} />
   </Scene>
 );
 
-sagaRunner.run(sagas);
+sagaRunner.run(sagas, {
+  mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL)
+});
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 
@@ -77,7 +64,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router scenes={scenes} getSceneStyle={getSceneStyle} />
+        <Router scenes={scenes} getSceneStyle={getSceneStyle} title="Mudamos" />
       </Provider>
     );
   }
