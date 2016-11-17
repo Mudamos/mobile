@@ -3,26 +3,25 @@ import React, { Component, PropTypes } from "react";
 import {
   Text,
   View,
-  TouchableOpacity
 } from "react-native";
+
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 class RetryButton extends Component {
   static propTypes = {
     onPress: PropTypes.func,
-    children: PropTypes.node
   }
 
   render() {
     const {
       onPress,
-      children
     } = this.props;
 
     return (
-      <View style={{flex: 1}}>
-        <TouchableOpacity onPress={onPress}>
-          {children}
-        </TouchableOpacity>
+      <View style={{flex: 1, alignItems: "center" }}>
+        <Icon.Button name="error" backgroundColor="#3b5998" onPress={onPress}>
+          Tentar novamente
+        </Icon.Button>
       </View>
     );
   }

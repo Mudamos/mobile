@@ -1,11 +1,9 @@
 import React, { Component, PropTypes }  from "react";
 
 import {
-  ActivityIndicator,
-  Button,
-  Image,
   Text,
-  View
+  View,
+  WebView
 } from "react-native";
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
@@ -14,9 +12,13 @@ import Layout from "./layout";
 import NavigationBar from "./navigation-bar";
 import NetworkImage from "./network-image";
 import PageLoader from "./page-loader";
+import RetryButton from "./retry-button";
 import style, { parallaxScrollView } from "../styles/plip-show";
 
 import Spinner from "react-native-spinkit";
+
+import WebContainer from "./web-container";
+
 class PlipLayout  extends Component {
   static propTypes = {
     plip: PropTypes.object.isRequired,
@@ -29,13 +31,15 @@ class PlipLayout  extends Component {
     plip: {}
   };
 
+  get plipName() {
+    const { plip } = this.props;
+    return plip.cycle && plip.cycle.name;
+  }
+
   render() {
     const {
-      plip,
-      retryPlip,
       isFetching,
       errorFetchingPlips,
-      navigationState
     } = this.props;
 
     return (
@@ -43,64 +47,96 @@ class PlipLayout  extends Component {
         <PageLoader isVisible={isFetching} />
 
         <Layout>
-          <ParallaxScrollView
-            style={style.scrollView.style}
-            bounces={false}
-            {...parallaxScrollView}
-            backgroundSpeed={10}
-
-            renderBackground={() => (
-              <View style={{flex: 1}}>
-                { plip.cycle && <NetworkImage source={{ uri: plip.cycle.pictures.original }} style={style.imageCall}/> }
-              </View>
-            )}
-            renderForeground={() => (
-              <View style={{flex: 1}}>
-                <NavigationBar title={navigationState.title} />
-
-                <View style={style.foreGroundContainer}>
-                  <View style={style.mainTitleContainer}>
-                    <Text style={style.mainCycleTitle}>
-                      {this.plipName()}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            )}
-            renderStickyHeader={() => (
-              <View style={style.stickyHeader}>
-                <Text style={style.navCycleTitle} numberOfLines={1}>{this.plipName()}</Text>
-              </View>
-            )}
-            >
-            <View style={{ alignItems: 'center' }}>
-              <Text style={{ fontSize: 30 }}>{JSON.stringify(this.props)}</Text>
-              <Text style={{ fontSize: 30 }}>{plip.content}</Text>
-              <Text style={{ fontSize: 30 }}>{plip.content}</Text>
-              <Text style={{ fontSize: 30 }}>{plip.content}</Text>
-              <Text style={{ fontSize: 30 }}>{plip.content}</Text>
-              <Text style={{ fontSize: 30 }}>{plip.content}</Text>
-              <Text style={{ fontSize: 30 }}>{plip.content}</Text>
-              { errorFetchingPlips && this.renderError() }
-            </View>
-          </ParallaxScrollView>
+          { isFetching && this.renderNavBar() }
+          { errorFetchingPlips && this.renderRetry() }
+          { !errorFetchingPlips && !isFetching && this.renderScrollView() }
         </Layout>
       </View>
     );
   }
 
-  renderError() {
+  renderScrollView() {
+    const {
+      plip
+    } = this.props;
+
     return (
-      <View>
-        <Text>error</Text>
-        <Button onPress={() => this.props.retryPlip() } title="Retry" />
+      <ParallaxScrollView
+        style={style.scrollView.style}
+        bounces={false}
+        {...parallaxScrollView}
+        backgroundSpeed={10}
+
+        renderBackground={this.renderBackground.bind(this)}
+
+        renderForeground={() => (
+          <View style={{flex: 1}}>
+            { this.renderNavBar() }
+            <View style={style.foreGroundContainer}>
+              <View style={style.mainTitleContainer}>
+                <Text style={style.mainCycleTitle}>
+                  {this.plipName}
+                </Text>
+              </View>
+            </View>
+          </View>
+        )}
+        renderStickyHeader={() => (
+          <View style={style.stickyHeader}>
+            <Text style={style.navCycleTitle} numberOfLines={1}>{this.plipName}</Text>
+          </View>
+        )}
+        >
+        <View style={{ flex: 1, backgroundColor: 'blue', marginTop: 20 }}>
+          <Text>asdfsd</Text>
+          <WebContainer source={{ html: plip.content}} onError={(e) => { console.log('eeeeeeeeeeeeeeeeeeeeee', e)}}
+            onLoadEnd={this.lol.bind(this)}
+            style={{backgroundColor: "red"  }}
+            automaticallyAdjustContentInsets={false}
+            scalesPageToFit={false}
+            bounces={false}
+            onLoad={(e) => { this.logload.bind(this)(e)}}
+          />
+        </View>
+      </ParallaxScrollView>
+    );
+  }
+
+  lol() {
+    console.log('444444444444444444444444444444')
+  }
+
+  logload(e) {
+     console.log('iiiiiiiiiiiiiiiiiiiiiiiii', e)
+  }
+
+  renderNavBar() {
+    const {
+      navigationState
+    } = this.props;
+
+    return (
+      <NavigationBar title={navigationState.title} />
+    );
+  }
+
+  renderRetry() {
+    return (
+      <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+        { this.renderNavBar() }
+        <RetryButton onPress={this.props.retryPlip} />
       </View>
     );
   }
 
-  plipName() {
+  renderBackground() {
     const { plip } = this.props;
-    return plip.cycle && plip.cycle.name;
+
+    return (
+      <View style={style.backgroundContainer}>
+        { plip.cycle && <NetworkImage source={{ uri: plip.cycle.pictures.original }} style={style.imageCall}/> }
+      </View>
+    );
   }
 }
 

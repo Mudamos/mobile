@@ -9,6 +9,11 @@ export default StyleSheet.create({
   scrollView: {
     flex: 1
   },
+  backgroundContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    height: imageHeight
+  },
   imageCall: {
     height: imageHeight,
     backgroundColor: "#fff"
@@ -44,5 +49,6 @@ export default StyleSheet.create({
 
 export const parallaxScrollView = {
   stickyHeaderHeight: 64,
-  parallaxHeaderHeight: imageHeight
+  parallaxHeaderHeight: imageHeight,
+  backgroundColor: "#fff"
 };
