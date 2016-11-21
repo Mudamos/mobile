@@ -15,6 +15,7 @@
     "humps": "^2.0.0",
     "marked": "^0.3.6",
     "mocha": "^3.1.2",
+    "moment": "^2.16.0",
     "ramda": "^0.22.1",
     "react": "15.3.2",
     "react-addons-shallow-compare": "^15.4.0",

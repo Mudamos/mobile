@@ -5,6 +5,8 @@ import {
   View,
 } from "react-native";
 
+import moment from "moment";
+
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 import Layout from "./layout";
@@ -33,6 +35,14 @@ class PlipLayout  extends Component {
   get plipName() {
     const { plip } = this.props;
     return plip.cycle && plip.cycle.name;
+  }
+
+  get daysLeft() {
+    const { plip } = this.props;
+    const start = moment(plip.cycle.initialDate);
+    const end = moment(plip.cycle.finalDate);
+
+    return end.diff(start, "days");
   }
 
   render() {
@@ -86,10 +96,25 @@ class PlipLayout  extends Component {
           </View>
         )}
         >
-        <View style={{ flex: 1, marginTop: 20 }}>
+        <View style={{ flex: 1 }}>
+          <View style={{height: 50, backgroundColor: "#ccc", padding: 10}}>
+            <View style={{flexDirection: "row"}}>
+              { !!this.daysLeft && this.renderDaysLeft()}
+              { !this.daysLeft && <Text>Petição finalizada</Text>}
+            </View>
+          </View>
           <MarkdownView content={plip.content} />
         </View>
       </ParallaxScrollView>
+    );
+  }
+
+  renderDaysLeft() {
+    return (
+      <View style={{flex: 1}}>
+        <Text style={{fontStyle: "italic"}}>{this.daysLeft} dia(s) restante(s)</Text>
+        <Text style={{fontStyle: "italic", fontSize: 10}}>para o fim da petição</Text>
+      </View>
     );
   }
 
