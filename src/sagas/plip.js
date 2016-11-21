@@ -4,7 +4,7 @@ import { call, fork, put } from "redux-saga/effects";
 import {
   fetchPlips as fetchPlipsAction,
   plipsFetched,
-  plipsFetchError
+  plipsFetchError,
 } from "../actions";
 
 export function* fetchPlips({ mudamosWebApi }) {

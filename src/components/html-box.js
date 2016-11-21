@@ -1,20 +1,20 @@
 import React, { Component, PropTypes }  from "react";
 
 import {
-  View
+  View,
 } from "react-native";
 
 import HTML from "react-native-fence-html";
 
 
 class HTMLBox extends Component {
-  static propTypes ={
+  static propTypes = {
     html: PropTypes.string.isRequired,
-    style: PropTypes.object
+    style: PropTypes.object,
   }
 
   static defaultProps = {
-    style: {}
+    style: {},
   }
 
   render() {

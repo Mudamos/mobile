@@ -1,12 +1,6 @@
 import Config from "react-native-config";
 
 import React, { Component } from "react";
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
 
 import { Actions, Router, Scene } from "react-native-router-flux";
 import sceneStyle from "./styles/scene-default";
@@ -40,9 +34,10 @@ const logger = createReduxLogger({
     action: "log",
     nextState: "log",
     error: "error",
-  }
+  },
 });
 
+// eslint-disable-next-line no-undef
 const store = __DEV__ ?
   createStore(reducer, applyMiddleware(sagaRunner, logger)) :
   createStore(reducer, applyMiddleware(sagaRunner));
@@ -55,7 +50,7 @@ const scenes = Actions.create(
 );
 
 sagaRunner.run(sagas, {
-  mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL)
+  mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
 });
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene

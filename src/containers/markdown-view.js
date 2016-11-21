@@ -8,11 +8,11 @@ import HTMLBox from "../components/html-box";
 
 class MarkdownView extends Component {
   static propTypes = {
-    content: PropTypes.string
+    content: PropTypes.string,
   }
 
   static defaultProps = {
-    content: ""
+    content: "",
   }
 
   render() {

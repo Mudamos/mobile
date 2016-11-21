@@ -5,12 +5,12 @@ import {
   View,
 } from "react-native";
 
-import ActionButton from 'react-native-action-button';
-import Ionicon from 'react-native-vector-icons/Ionicons';
+import ActionButton from "react-native-action-button";
+import Ionicon from "react-native-vector-icons/Ionicons";
 
 import moment from "moment";
 
-import ParallaxScrollView from 'react-native-parallax-scroll-view';
+import ParallaxScrollView from "react-native-parallax-scroll-view";
 
 import Layout from "./layout";
 import NavigationBar from "./navigation-bar";
@@ -19,20 +19,19 @@ import PageLoader from "./page-loader";
 import RetryButton from "./retry-button";
 import style, { parallaxScrollView } from "../styles/plip-show";
 
-import Spinner from "react-native-spinkit";
-
 import MarkdownView from "../containers/markdown-view";
 
 class PlipLayout  extends Component {
   static propTypes = {
+    errorFetchingPlips: PropTypes.object,
+    isFetching: PropTypes.bool.isRequired,
+    navigationState: PropTypes.object.isRequired,
     plip: PropTypes.object.isRequired,
     retryPlip: PropTypes.func.isRequired,
-    isFetchingPlips: PropTypes.bool,
-    errorFetchingPlips: PropTypes.object
   };
 
   static defaultProps = {
-    plip: {}
+    plip: {},
   };
 
   get plipName() {
@@ -68,9 +67,7 @@ class PlipLayout  extends Component {
   }
 
   renderMainContent() {
-    const {
-      plip
-    } = this.props;
+    const { plip } = this.props;
 
     return (
       <View style={{flex: 1}}>
@@ -133,9 +130,7 @@ class PlipLayout  extends Component {
   }
 
   renderNavBar() {
-    const {
-      navigationState
-    } = this.props;
+    const { navigationState } = this.props;
 
     return (
       <NavigationBar title={navigationState.title} />

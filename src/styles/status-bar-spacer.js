@@ -7,8 +7,8 @@ export default StyleSheet.create({
   spacer: {
     ...Platform.select({
       ios: { height: 20 },
-      android: { height: 0 }
-    })
+      android: { height: 0 },
+    }),
   },
   transparent: {
     backgroundColor: "rgba(0,0,0,0)",

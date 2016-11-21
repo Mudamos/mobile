@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 
 import { View } from "react-native";
 
@@ -7,12 +7,20 @@ import Spinner from "react-native-spinkit";
 import style from "../styles/page-loader";
 
 class PageLoader extends Component {
+  static propTypes = {
+    color: PropTypes.string,
+    containerBackgroundColor: PropTypes.string,
+    isVisible: PropTypes.bool,
+    size: PropTypes.number,
+    type: PropTypes.string,
+  }
+
   static defaultProps = {
-    size: 100,
     color: "#CCCCCC",
+    containerBackgroundColor: "rgba(0, 0, 0, .6)",
     isVisible: true,
+    size: 100,
     type: "ThreeBounce",
-    containerBackgroundColor: "rgba(0, 0, 0, .6)"
   }
 
   render() {
@@ -21,7 +29,7 @@ class PageLoader extends Component {
       size,
       color,
       isVisible,
-      type
+      type,
     } = this.props;
 
     if (!isVisible) return null;

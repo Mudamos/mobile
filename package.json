@@ -36,6 +36,7 @@
     "preset": "jest-react-native"
   },
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
     "babel-jest": "17.0.0",
     "babel-preset-react-native": "1.9.0",
     "eslint": "^3.9.1",
@@ -45,8 +46,15 @@
     "react-test-renderer": "15.3.2"
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
     "parserOptions": {
-      "sourceType": "module"
+      "sourceType": "module",
+      "ecmaVersion": 6,
+      "ecmaFeatures": {
+        "classes": true,
+        "jsx": true,
+        "modules": true
+      }
     },
     "env": {
       "browser": true,

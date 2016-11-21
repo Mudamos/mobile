@@ -9,19 +9,19 @@ export default  (state = initialState, action) => {
         ...state,
         plips: payload.plips,
         errorFetchingPlips: null,
-        isFetchingPlips: false
+        isFetchingPlips: false,
       };
     case "FETCH_PLIPS":
       return {
         ...state,
         errorFetchingPlips: null,
-        isFetchingPlips: true
+        isFetchingPlips: true,
       };
     case "ERROR_FETCHING_PLIPS":
       return {
         ...state,
         errorFetchingPlips: payload.error.json,
-        isFetchingPlips: false
+        isFetchingPlips: false,
       };
     default:
       return state;

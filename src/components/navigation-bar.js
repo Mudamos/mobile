@@ -2,19 +2,19 @@ import React, { Component, PropTypes } from "react";
 
 import {
   Text,
-  View
+  View,
 } from "react-native";
 
 import style from "../styles/navigation-bar";
 
 class NavigationBar extends Component {
   static propTypes = {
-    title: PropTypes.string
+    title: PropTypes.string,
   }
 
   render() {
     const {
-      title
+      title,
     } = this.props;
 
     return (

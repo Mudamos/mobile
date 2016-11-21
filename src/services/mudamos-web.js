@@ -1,8 +1,7 @@
 import farfetch, { prefix, requestLogger, responseLogger } from "farfetch";
-import { is } from "ramda";
 import { camelizeKeys } from "humps";
 
-const isFunction = is(Function);
+// eslint-disable-next-line no-undef
 const isDev = __DEV__;
 
 const requester = ({ host }) => {
@@ -20,7 +19,7 @@ const requester = ({ host }) => {
     .use(req => req.set("Accept", "application/json"))
     .use((req, execute) => ({
       ...req,
-      execute: req => handleResponseError(execute(req))
+      execute: req => handleResponseError(execute(req)),
     }));
 
   return builder;
@@ -62,6 +61,6 @@ export default function MudamosWebApi(host) {
   const client = requester({ host });
 
   return {
-    listPlips: listPlips(client)
+    listPlips: listPlips(client),
   };
 }

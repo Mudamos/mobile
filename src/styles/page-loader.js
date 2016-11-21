@@ -10,6 +10,6 @@ export default StyleSheet.create({
     left: 0,
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
