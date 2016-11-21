@@ -108,7 +108,9 @@ class PlipLayout  extends Component {
                 { !this.daysLeft && <Text>Petição finalizada</Text>}
               </View>
             </View>
-            <MarkdownView content={plip.content} />
+            <View style={{ paddingLeft: 10, paddingRight: 10 }}>
+              <MarkdownView content={plip.content} />
+            </View>
           </View>
         </ParallaxScrollView>
 
