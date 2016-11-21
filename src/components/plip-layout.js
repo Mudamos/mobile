@@ -3,7 +3,6 @@ import React, { Component, PropTypes }  from "react";
 import {
   Text,
   View,
-  WebView
 } from "react-native";
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
@@ -17,7 +16,7 @@ import style, { parallaxScrollView } from "../styles/plip-show";
 
 import Spinner from "react-native-spinkit";
 
-import WebContainer from "./web-container";
+import MarkdownView from "../containers/markdown-view";
 
 class PlipLayout  extends Component {
   static propTypes = {
@@ -71,7 +70,7 @@ class PlipLayout  extends Component {
 
         renderForeground={() => (
           <View style={{flex: 1}}>
-            { this.renderNavBar() }
+            {this.renderNavBar()}
             <View style={style.foreGroundContainer}>
               <View style={style.mainTitleContainer}>
                 <Text style={style.mainCycleTitle}>
@@ -87,27 +86,11 @@ class PlipLayout  extends Component {
           </View>
         )}
         >
-        <View style={{ flex: 1, backgroundColor: 'blue', marginTop: 20 }}>
-          <Text>asdfsd</Text>
-          <WebContainer source={{ html: plip.content}} onError={(e) => { console.log('eeeeeeeeeeeeeeeeeeeeee', e)}}
-            onLoadEnd={this.lol.bind(this)}
-            style={{backgroundColor: "red"  }}
-            automaticallyAdjustContentInsets={false}
-            scalesPageToFit={false}
-            bounces={false}
-            onLoad={(e) => { this.logload.bind(this)(e)}}
-          />
+        <View style={{ flex: 1, marginTop: 20 }}>
+          <MarkdownView content={plip.content} />
         </View>
       </ParallaxScrollView>
     );
-  }
-
-  lol() {
-    console.log('444444444444444444444444444444')
-  }
-
-  logload(e) {
-     console.log('iiiiiiiiiiiiiiiiiiiiiiiii', e)
   }
 
   renderNavBar() {
@@ -123,7 +106,7 @@ class PlipLayout  extends Component {
   renderRetry() {
     return (
       <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
-        { this.renderNavBar() }
+        {this.renderNavBar()}
         <RetryButton onPress={this.props.retryPlip} />
       </View>
     );
@@ -134,7 +117,7 @@ class PlipLayout  extends Component {
 
     return (
       <View style={style.backgroundContainer}>
-        { plip.cycle && <NetworkImage source={{ uri: plip.cycle.pictures.original }} style={style.imageCall}/> }
+        {plip.cycle && <NetworkImage source={{ uri: plip.cycle.pictures.original }} style={style.imageCall}/>}
       </View>
     );
   }
