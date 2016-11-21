@@ -5,6 +5,9 @@ import {
   View,
 } from "react-native";
 
+import ActionButton from 'react-native-action-button';
+import Ionicon from 'react-native-vector-icons/Ionicons';
+
 import moment from "moment";
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
@@ -58,54 +61,63 @@ class PlipLayout  extends Component {
         <Layout>
           { isFetching && this.renderNavBar() }
           { errorFetchingPlips && this.renderRetry() }
-          { !errorFetchingPlips && !isFetching && this.renderScrollView() }
+          { !errorFetchingPlips && !isFetching && this.renderMainContent() }
         </Layout>
       </View>
     );
   }
 
-  renderScrollView() {
+  renderMainContent() {
     const {
       plip
     } = this.props;
 
     return (
-      <ParallaxScrollView
-        style={style.scrollView.style}
-        bounces={false}
-        {...parallaxScrollView}
-        backgroundSpeed={10}
+      <View style={{flex: 1}}>
 
-        renderBackground={this.renderBackground.bind(this)}
+        <ParallaxScrollView
+          style={style.scrollView.style}
+          bounces={false}
+          {...parallaxScrollView}
+          backgroundSpeed={10}
 
-        renderForeground={() => (
-          <View style={{flex: 1}}>
-            {this.renderNavBar()}
-            <View style={style.foreGroundContainer}>
-              <View style={style.mainTitleContainer}>
-                <Text style={style.mainCycleTitle}>
-                  {this.plipName}
-                </Text>
+          renderBackground={this.renderBackground.bind(this)}
+
+          renderForeground={() => (
+            <View style={{flex: 1}}>
+              {this.renderNavBar()}
+              <View style={style.foreGroundContainer}>
+                <View style={style.mainTitleContainer}>
+                  <Text style={style.mainCycleTitle}>
+                    {this.plipName}
+                  </Text>
+                </View>
               </View>
             </View>
-          </View>
-        )}
-        renderStickyHeader={() => (
-          <View style={style.stickyHeader}>
-            <Text style={style.navCycleTitle} numberOfLines={1}>{this.plipName}</Text>
-          </View>
-        )}
-        >
-        <View style={{ flex: 1 }}>
-          <View style={{height: 50, backgroundColor: "#ccc", padding: 10}}>
-            <View style={{flexDirection: "row"}}>
-              { !!this.daysLeft && this.renderDaysLeft()}
-              { !this.daysLeft && <Text>Petição finalizada</Text>}
+          )}
+          renderStickyHeader={() => (
+            <View style={style.stickyHeader}>
+              <Text style={style.navCycleTitle} numberOfLines={1}>{this.plipName}</Text>
             </View>
+          )}
+          >
+          <View style={{ flex: 1 }}>
+            <View style={{height: 50, backgroundColor: "#ccc", padding: 10}}>
+              <View style={{flexDirection: "row"}}>
+                { !!this.daysLeft && this.renderDaysLeft()}
+                { !this.daysLeft && <Text>Petição finalizada</Text>}
+              </View>
+            </View>
+            <MarkdownView content={plip.content} />
           </View>
-          <MarkdownView content={plip.content} />
-        </View>
-      </ParallaxScrollView>
+        </ParallaxScrollView>
+
+        <ActionButton buttonColor="rgba(231,76,60,1)" offsetX={10} offsetY={0.1}>
+          <ActionButton.Item buttonColor="#1abc9c" title="Assinar" onPress={() => {}}>
+            <Ionicon name="md-create"  style={{fontSize: 20, height: 22, color: "#fff"}}/>
+          </ActionButton.Item>
+        </ActionButton>
+      </View>
     );
   }
 
