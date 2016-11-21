@@ -88,7 +88,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "org.mudamos.petition"
+        applicationId "br.com.tagview.petition"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -96,7 +96,12 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+
+        // react-native-config
         resValue "string", "build_config_package", "org.mudamos.petition"
+    }
+    signingConfigs {
+      release
     }
     splits {
         abi {
@@ -112,6 +117,27 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+
+    // Default release signin configs
+    def Properties props = new Properties()
+    def propFile = file('../keystores/mudamos-publishing-qa.properties')
+    if (propFile.canRead()) {
+        println "Will load realease properties"
+
+        props.load(new FileInputStream(propFile))
+
+        if (props!=null && props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+                props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+
+            println "Release variables found"
+
+            android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+            android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+            android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+            android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+        }
+    }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -128,13 +154,20 @@ android {
 
     productFlavors {
         development {
-            applicationId = "org.mudamos.petition.development"
+            applicationId = "br.com.tagview.petition.development"
             versionName "1.0-debug"
+        }
+        mudamosBeta {
+            applicationId = "br.com.tagview.petition.mudamos.beta"
+            versionCode 1
+            versionName "1.0-beta-mudamos"
+            signingConfig signingConfigs.release
         }
     }
 }
 
 dependencies {
+    compile project(':react-native-facebook-login')
     compile project(':react-native-vector-icons')
     compile project(':react-native-spinkit')
     compile project(':react-native-config')

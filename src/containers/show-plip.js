@@ -1,6 +1,9 @@
 import { connect } from "react-redux";
 
-import { fetchPlips } from "../actions";
+import {
+  fetchPlips,
+  navigate,
+} from "../actions";
 import {
   findCurrentPlip,
   isFetchingPlips,
@@ -16,6 +19,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   retryPlip: () => dispatch(fetchPlips()),
+  onPlipSign: () => dispatch(navigate("signIn")),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlipLayout);

@@ -94,3 +94,43 @@ npm run ios
 ```
 npm test
 ```
+
+## Building
+
+### Android
+
+Garanta que seu arquivo `.env` esteja configurado com as configurações do ambiente em questão.
+No android ainda é possível ter diferentes arquivo de `env` e usálos passando para os comandos de build.
+
+Tenha certeza também que as configurações de assinatura da app estejam presentes caso vá gerar a versão em questão.
+Atualmente os seguintes *flavors* precisam das informações de configurações abaixo:
+
+- MudamosBeta
+  - configurações em `./android/keystores/mudamos-publishing-qa.properties`
+  - keystore em `android/keystores/mudamos-android-publishing.keystore`
+
+Para gerar a apk:
+
+```
+$ ENVFILE=.env.somenv android/gradlew -p android assemble{Flavor}{Env}
+```
+
+Onde **Flavor** é o flavor em questão e **Env** um entre *Debug* e *Release*
+
+Para gerar a versão de QA portanto:
+
+```
+$ ENVFILE=.env.somenv android/gradlew -p android assembleMudamosBetaRelease
+```
+
+## Facebook Hash key (somente android)
+
+Para android é necessário configurar o hash key da assinatura da app, que deve ser colocado no portal do Facebook.
+
+Apontando para os mesmos arquivos e configurações do passo de Building execute:
+
+```
+$ keytool -exportcert -alias <RELEASE_KEY_ALIAS> -keystore <RELEASE_KEY_PATH> | openssl sha1 -binary | openssl base64
+```
+
+Onde `<RELEASE_KEY_ALIAS>` é o alis encontrado no seu arquivo `.properties` e `RELEASE_KEY_PATH` é o caminho para o arquivo `.keystore`.

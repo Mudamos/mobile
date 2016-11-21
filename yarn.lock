@@ -3011,6 +3011,10 @@ istextorbinary@^1.0.2:
     binaryextensions "~1.0.0"
     textextensions "~1.0.0"
 
+itypeof@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/itypeof/-/itypeof-1.1.2.tgz#6fb22639dc78a414f594b3d553a5f2c2488fd022"
+
 jasmine-check@^0.1.4:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/jasmine-check/-/jasmine-check-0.1.5.tgz#dbad7eec56261c4b3d175ada55fe59b09ac9e415"
@@ -4295,6 +4299,12 @@ react-native-experimental-navigation@0.26.x:
     fbjs "^0.8.1"
     react-addons-pure-render-mixin "^15.0.2"
 
+react-native-facebook-login:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-facebook-login/-/react-native-facebook-login-1.4.0.tgz#b9ec7b05bd9666d7d697d1ecc71a4c82c77f86c9"
+  dependencies:
+    itypeof "^1.1.2"
+
 react-native-fence-html:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-native-fence-html/-/react-native-fence-html-1.0.6.tgz#ebbe882ff3a7a8a1881581db71b395a13c292212"
@@ -4304,6 +4314,12 @@ react-native-fence-html:
     html-entities "^1.2.0"
     htmlparser2 "^3.9.0"
     stream "0.0.2"
+
+react-native-keyboard-aware-scroll-view:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.2.4.tgz#0974e9a8e7e91e7031c6bbc57d3d339f3ca41e85"
+  dependencies:
+    react-timer-mixin "^0.13.3"
 
 react-native-parallax-scroll-view:
   version "0.19.0"
@@ -4317,6 +4333,10 @@ react-native-router-flux:
     react-native-experimental-navigation "0.26.x"
     react-native-tabs "^1.0.9"
     react-static-container "1.0.1"
+
+react-native-simple-toast:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-simple-toast/-/react-native-simple-toast-0.0.5.tgz#8530a9d0696613ad25bc5d4283f1e3c541ec2bc4"
 
 react-native-spinkit:
   version "0.1.5"
@@ -4434,7 +4454,7 @@ react-test-renderer@15.3.2:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.3.2.tgz#d8f083d37d2d41e97bbdc26a1dd9282f0baf7857"
 
-react-timer-mixin@^0.13.2:
+react-timer-mixin@^0.13.2, react-timer-mixin@^0.13.3:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.3.tgz#0da8b9f807ec07dc3e854d082c737c65605b3d22"
 

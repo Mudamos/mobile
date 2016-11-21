@@ -5,10 +5,16 @@ import React, { Component } from "react";
 import { Actions, Router, Scene } from "react-native-router-flux";
 import sceneStyle from "./styles/scene-default";
 
-import { PlipContainer } from "./containers";
+import {
+  PlipContainer,
+  SignInContainer,
+} from "./containers";
 
+import { fetchSession } from "./actions";
 
 import MudamosWebApi from "./services/mudamos-web";
+import SessionManager from "./services/session";
+import MobileApi from "./services/mobile-api";
 
 import reducer from "./reducers";
 import sagas from "./sagas";
@@ -42,16 +48,22 @@ const store = __DEV__ ?
   createStore(reducer, applyMiddleware(sagaRunner, logger)) :
   createStore(reducer, applyMiddleware(sagaRunner));
 
+const sessionStore = SessionManager("@Mudamos");
 
 const scenes = Actions.create(
   <Scene key="root">
     <Scene key="showPlip" initial={true} component={PlipContainer} hideNavBar={true} />
+    <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
   </Scene>
 );
 
 sagaRunner.run(sagas, {
   mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
+  mobileApi: MobileApi(Config.MOBILE_API_URL),
+  sessionStore,
 });
+
+store.dispatch(fetchSession());
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 
