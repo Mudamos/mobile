@@ -18,7 +18,7 @@ class PageLoader extends Component {
   static defaultProps = {
     color: "#CCCCCC",
     containerBackgroundColor: "rgba(0, 0, 0, .6)",
-    isVisible: true,
+    isVisible: false,
     size: 100,
     type: "ThreeBounce",
   }
@@ -32,7 +32,7 @@ class PageLoader extends Component {
       type,
     } = this.props;
 
-    if (!isVisible) return null;
+    if (!isVisible) return (<View/>);
 
     return (
       <View style={[style.container, { backgroundColor: containerBackgroundColor }]}>

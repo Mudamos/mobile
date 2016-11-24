@@ -21,13 +21,14 @@ import style, { parallaxScrollView } from "../styles/plip-show";
 
 import MarkdownView from "../containers/markdown-view";
 
-class PlipLayout  extends Component {
+class PlipLayout extends Component {
   static propTypes = {
     errorFetchingPlips: PropTypes.object,
     isFetching: PropTypes.bool.isRequired,
     navigationState: PropTypes.object.isRequired,
     plip: PropTypes.object.isRequired,
     retryPlip: PropTypes.func.isRequired,
+    onPlipSign: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -67,7 +68,7 @@ class PlipLayout  extends Component {
   }
 
   renderMainContent() {
-    const { plip } = this.props;
+    const { onPlipSign, plip } = this.props;
 
     return (
       <View style={{flex: 1}}>
@@ -112,7 +113,7 @@ class PlipLayout  extends Component {
         </ParallaxScrollView>
 
         <ActionButton buttonColor="rgba(231,76,60,1)" offsetX={10} offsetY={0.1}>
-          <ActionButton.Item buttonColor="#1abc9c" title="Assinar" onPress={() => {}}>
+          <ActionButton.Item buttonColor="#1abc9c" title="Assinar" onPress={onPlipSign}>
             <Ionicon name="md-create"  style={{fontSize: 20, height: 22, color: "#fff"}}/>
           </ActionButton.Item>
         </ActionButton>

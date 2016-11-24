@@ -50,3 +50,8 @@ yarn-error.log
 .env
 
 .arcconfig
+
+# Android Sign info
+android/keystores/*.keystore
+android/keystores/*.properties
+!android/keystores/debug.keystore.properties
