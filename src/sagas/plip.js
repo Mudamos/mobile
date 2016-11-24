@@ -1,21 +1,25 @@
 import { takeLatest } from "redux-saga";
-import { fork, put } from "redux-saga/effects";
+import { call, fork, put } from "redux-saga/effects";
 
 import {
   fetchPlips as fetchPlipsAction,
-  plipsFetched
+  plipsFetched,
+  plipsFetchError,
 } from "../actions";
 
-export function* fetchPlips() {
+export function* fetchPlips({ mudamosWebApi }) {
   yield takeLatest("FETCH_PLIPS", function* () {
-    yield put(plipsFetched([{
-      id: 1,
-      content: "plip body"
-    }]));
+    try {
+      const plips = yield call(mudamosWebApi.listPlips);
+      yield put(plipsFetched(plips));
+    } catch(e) {
+      yield put(plipsFetchError(e));
+    }
   });
 }
-export default function* plipSaga() {
-  yield fork(fetchPlips);
+
+export default function* plipSaga({ mudamosWebApi }) {
+  yield fork(fetchPlips, { mudamosWebApi });
 
   yield put(fetchPlipsAction());
 }

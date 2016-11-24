@@ -10,5 +10,5 @@ export default (props, computedProps) =>
       backgroundColor: "#fff",
       marginTop: computedProps.hideNavBar ? 0 : defaultNavBarSize,
       marginBottom: (computedProps.hideTabBar || computedProps.hideTabBar === undefined) ? 0 : defaultTabBarSize,
-    }
+    },
   })
