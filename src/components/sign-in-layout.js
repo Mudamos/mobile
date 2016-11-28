@@ -13,6 +13,7 @@ import PageLoader from "./page-loader";
 import { FBLogin } from "react-native-facebook-login";
 import FBLoginView from "./fb-login-view";
 import TextInput from "./text-input";
+import SimpleButton from "./simple-button";
 
 import locale from "../locales/pt-BR";
 
@@ -26,10 +27,15 @@ class SignInLayout extends Component {
     onFacebookError: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
+    onSignIn: PropTypes.func.isRequired,
     onSignUp: PropTypes.func.isRequired,
   }
 
   state = {};
+
+  get shouldDisableLoginButton() {
+    return !this.state.email || !this.state.password;
+  }
 
   render() {
     const {
@@ -51,7 +57,7 @@ class SignInLayout extends Component {
               <TextInput
                 label={locale.email}
                 value={this.state.email}
-                onChangeText={name => this.setState({ name })}
+                onChangeText={email => this.setState({ email })}
               />
 
               <TextInput
@@ -60,6 +66,13 @@ class SignInLayout extends Component {
                 secureTextEntry={true}
                 onChangeText={password => this.setState({ password })}
               />
+
+              <SimpleButton
+                disabled={this.shouldDisableLoginButton}
+                containerStyle={{ marginBottom: 20 }}
+                onPress={this.onSubmit.bind(this)}>
+                Login
+              </SimpleButton>
 
               {this.renderFBLogin()}
 
@@ -84,6 +97,13 @@ class SignInLayout extends Component {
         </Layout>
       </View>
     );
+  }
+
+  onSubmit() {
+    const { email, password } = this.state;
+    const { onSignIn } = this.props;
+
+    onSignIn(email, password);
   }
 
   renderFBLogin() {

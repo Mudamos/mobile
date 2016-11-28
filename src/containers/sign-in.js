@@ -11,6 +11,7 @@ import {
 import {
   facebookUserLoggedIn,
   facebookLogInError,
+  loginUser,
   logout,
 } from "../actions";
 
@@ -27,6 +28,7 @@ const mapDispatchToProps = dispatch => ({
   onFacebookLogin: data => dispatch(facebookUserLoggedIn(data)),
   onFacebookError: data => dispatch(facebookLogInError(data)),
   onLogout: () => dispatch(logout()),
+  onSignIn: (email, password) => dispatch(loginUser(email, password)),
   onSignUp: () => {},
 });
 

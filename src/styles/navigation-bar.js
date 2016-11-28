@@ -11,7 +11,7 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     flex: 1,
     height: 64,
-    backgroundColor: "#f86048",
+    backgroundColor: "transparent",
   },
   middle: {
     flex: 1,
