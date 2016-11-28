@@ -50,5 +50,5 @@ export default StyleSheet.create({
 export const parallaxScrollView = {
   stickyHeaderHeight: 64,
   parallaxHeaderHeight: imageHeight,
-  backgroundColor: "#fff",
+  backgroundColor: "transparent",
 };

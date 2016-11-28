@@ -15,6 +15,11 @@ export const fetchSession = () => ({
   type: "SESSION_FETCH_SESSION",
 });
 
+export const loginUser = (email, password) => ({
+  type: "SESSION_LOGIN_USER",
+  payload: { email, password },
+});
+
 export const logout = () => ({
   type: "SESSION_LOGOUT",
 });

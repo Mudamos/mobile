@@ -1,8 +1,11 @@
 import farfetch, { prefix, requestLogger, responseLogger } from "farfetch";
 import { camelizeKeys } from "humps";
 
-// eslint-disable-next-line no-undef
-const isDev = __DEV__;
+import {
+  isDev,
+  toCredential,
+} from "../utils";
+
 
 const requester = ({ host }) => {
   let builder = farfetch;
@@ -51,7 +54,7 @@ const defineErrorType = err => {
   const json = err.json || {};
   const data = json.data || {};
 
-  return Promise.reject({ ...err, json, type: data.type || "unknown" });
+  return Promise.reject({ ...err, json, type: data.type || "unknown", userMessage: data.message });
 };
 
 
@@ -62,10 +65,20 @@ const fbSignIn = ({ client }) => fbToken =>
       .then(getData)
       .then(json => json.accessToken);
 
+const signIn = ({ client }) => (email, password) =>
+  client
+    .use(req => req.set("Authorization", "Basic " + toCredential(email, password)))
+    .use(req => req.set("grant_type", "client_credentials"))
+    .post("/auth/token")
+    .then(getData)
+    .then(json => json.accessToken);
+
+
 export default function MobileApi(host) {
   const client = requester({ host });
 
   return {
     fbSignIn: fbSignIn({ client }),
+    signIn: signIn({ client }),
   };
 }
