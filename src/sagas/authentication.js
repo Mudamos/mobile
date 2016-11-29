@@ -6,8 +6,12 @@ import {
   logginSucceeded,
   finishedLogIn,
   logInError,
+  updatedUserProfile,
+  profileStateMachine,
+  clearSession,
 } from "../actions";
 
+import { User } from "../models";
 import { isDev } from "../utils";
 
 
@@ -18,15 +22,22 @@ function* login({ mobileApi, sessionStore }) {
     try {
       yield put(isLoggingIn());
       const token =  yield call(mobileApi.signIn, email, password);
-      const user = { token };
+      const appAuth = { token };
 
-      yield call(sessionStore.persist, user);
+      yield call(sessionStore.persist, appAuth);
 
-      yield put(logginSucceeded(user));
+      yield put(logginSucceeded(appAuth));
+
+      const response = yield call(mobileApi.profile, appAuth.token);
+      const user = User.fromJson(response.user);
+
+      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(profileStateMachine());
     } catch(e) {
       if (isDev) console.log("API Error: ", e.message, e.stack);
 
       yield call(sessionStore.destroy);
+      yield put(clearSession());
       yield put(finishedLogIn());
       yield put(logInError(e));
     }

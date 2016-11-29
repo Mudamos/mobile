@@ -4,12 +4,27 @@ import { spawn } from "redux-saga/effects";
 import Toast from "react-native-simple-toast";
 
 
-const errorMessageFor = ({ payload, defaultMessage }) => {
-  const { error } = payload;
-  const message = error && error.userMessage || defaultMessage || "Houve um erro ao tentar completar sua ação. Tente novamente.";
+const genericErrorMessage = "Houve um erro ao tentar completar sua ação. Tente novamente.";
 
-  return message;
+const validationMessageFor = validations => (validations || []).map(v => v.message).join("\n");
+
+const errorMessageFor = ({ payload, defaultMessage }) => {
+  const { error } = (payload || {});
+  let message;
+
+  if (error.type === "validation") {
+    message = validationMessageFor(error.validations);
+  }
+
+  return message || error.userMessage || defaultMessage || genericErrorMessage;
 }
+
+const defaultErrorHandler = ({ payload }) =>
+  Toast.show(
+    errorMessageFor({
+      payload,
+    })
+  )
 
 function* facebookLoginError() {
   yield takeEvery("FACEBOOK_LOGIN_ERROR", () => Toast.show("Erro ao tentar entrar com o facebook."));
@@ -26,7 +41,12 @@ function* loginError() {
   );
 }
 
+function* saveUserProfileError() {
+  yield takeEvery("PROFILE_USER_SAVE_FAILURE", defaultErrorHandler);
+}
+
 export default function* errorSaga() {
   yield spawn(facebookLoginError);
   yield spawn(loginError);
+  yield spawn(saveUserProfileError);
 }

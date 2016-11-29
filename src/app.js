@@ -2,15 +2,20 @@ import Config from "react-native-config";
 
 import React, { Component } from "react";
 
-import { Actions, Router, Scene } from "react-native-router-flux";
+import { Actions, Router, Reducer, Scene } from "react-native-router-flux";
 import sceneStyle from "./styles/scene-default";
 
 import {
   PlipContainer,
+  ProfileBirthContainer,
   SignInContainer,
+  SignUpContainer,
 } from "./containers";
 
 import { fetchSession } from "./actions";
+
+import routeReducer from "./services/route-reducer";
+import backAndroidHandler from "./back-android-handler";
 
 import MudamosWebApi from "./services/mudamos-web";
 import SessionManager from "./services/session";
@@ -53,7 +58,10 @@ const sessionStore = SessionManager("@Mudamos");
 const scenes = Actions.create(
   <Scene key="root">
     <Scene key="showPlip" initial={true} component={PlipContainer} hideNavBar={true} />
+
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
+    <Scene key="signUp" component={SignUpContainer} hideNavBar={true} title="Identificação" />
+    <Scene key="profileBirth" component={ProfileBirthContainer} hideNavBar={true} title="Data de Nascimento" />
   </Scene>
 );
 
@@ -71,7 +79,13 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router scenes={scenes} getSceneStyle={getSceneStyle} title="Mudamos" />
+        <Router
+          createReducer={routeReducer(store)}
+          scenes={scenes}
+          getSceneStyle={getSceneStyle}
+          title="Mudamos"
+          backAndroidHandler={backAndroidHandler(store)}
+        />
       </Provider>
     );
   }

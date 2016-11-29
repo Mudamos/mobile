@@ -7,7 +7,7 @@ export default StyleSheet.create({
     borderColor: "white",
     borderRadius: 3,
     borderWidth: 1,
-    height: 50,
+    height: 64,
     marginBottom: 10,
   },
   containerDisabled: {

@@ -1,5 +1,7 @@
 import { connect } from "react-redux";
 
+import { ActionConst } from "react-native-router-flux";
+
 import SignInLayout from "../components/sign-in-layout";
 
 import {
@@ -13,6 +15,7 @@ import {
   facebookLogInError,
   loginUser,
   logout,
+  navigate,
 } from "../actions";
 
 const facebookPermissions = ["public_profile", "email"];
@@ -29,7 +32,7 @@ const mapDispatchToProps = dispatch => ({
   onFacebookError: data => dispatch(facebookLogInError(data)),
   onLogout: () => dispatch(logout()),
   onSignIn: (email, password) => dispatch(loginUser(email, password)),
-  onSignUp: () => {},
+  onSignUp: () => dispatch(navigate("signUp")),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInLayout);
