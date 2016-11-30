@@ -7,7 +7,7 @@ import {
 } from "../actions";
 
 import {
-  isFacebookLoggedIn,
+  isUserLoggedIn,
   isSavingProfile,
   currentUser,
   profileSaveErrors,
@@ -21,7 +21,7 @@ const mapStateToProps = state => {
     currentUser: user,
     errors: profileSaveErrors(state),
     showEmail: !user || !user.email,
-    showPassword: !isFacebookLoggedIn(state),
+    showPassword: !isUserLoggedIn(state),
     isSaving: isSavingProfile(state),
   };
 };
