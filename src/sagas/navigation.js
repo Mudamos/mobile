@@ -57,10 +57,7 @@ function* userProfileNavigator() {
         const goToScreen = firstScreenNotDone(screensDone);
         if (isDev) console.log("Go to profile screen: ", goToScreen);
 
-        // TODO: default showPlip Here should never happen once
-        // everything is done.
-        // Please remove it.
-        yield put(navigate(goToScreen ||  "showPlip"));
+        yield put(navigate(goToScreen));
       }
     } catch (e) {
       if (isDev) console.log("Error while navigating: ", e.message, e.stack, e);

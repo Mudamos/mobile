@@ -20,7 +20,10 @@ import { errorForField } from "../utils";
 
 
 export default class SignUpLayout extends Component {
-  state = {}
+  state = {
+    name: this.props.currentUser.name,
+    email: this.props.currentUser.email,
+  }
 
   static propTypes = {
     currenUser: PropTypes.instanceOf(User),
@@ -31,12 +34,8 @@ export default class SignUpLayout extends Component {
     onSave: PropTypes.func,
   }
 
-  constructor(props) {
-    super(props);
-
-    const user = props.currenUser || {};
-    this.state.name = user.name;
-    this.state.email = user.email
+  static defaultProps = {
+    currentUser: {}
   }
 
   render() {

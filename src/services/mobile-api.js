@@ -85,14 +85,13 @@ const signIn = ({ client }) => (email, password) =>
     .then(json => json.accessToken);
 
 const signUp = ({ client }) => (authToken, payload) => {
-  // TODO: use authToken when it is present
+  const api =  authToken ? authorizedClient(client, authToken) : client;
 
-  let api = client
+  return api
     .use(serializeJson)
     .post("/users/sign_up")
-    .send({ user: payload });
-
-  return api.then(getData);
+    .send({ user: payload })
+    .then(getData);
 };
 
 const profile = ({ client }) => authToken =>
