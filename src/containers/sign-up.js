@@ -18,7 +18,7 @@ const mapStateToProps = state => {
   const user = currentUser(state);
 
   return {
-    currentUser: user,
+    previousName: user ? user.name : null,
     errors: profileSaveErrors(state),
     showEmail: !user || !user.email,
     showPassword: !isUserLoggedIn(state),

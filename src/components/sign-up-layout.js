@@ -14,28 +14,21 @@ import PageLoader from "./page-loader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import locale from "../locales/pt-BR";
-import { User } from "../models";
-
 import { errorForField } from "../utils";
 
 
 export default class SignUpLayout extends Component {
   state = {
-    name: this.props.currentUser.name,
-    email: this.props.currentUser.email,
+    name: this.props.previousName,
   }
 
   static propTypes = {
-    currenUser: PropTypes.instanceOf(User),
     errors: PropTypes.array,
     isSaving: PropTypes.bool,
+    previousName: PropTypes.string,
     showEmail: PropTypes.bool,
     showPassword: PropTypes.bool,
     onSave: PropTypes.func,
-  }
-
-  static defaultProps = {
-    currentUser: {}
   }
 
   render() {
