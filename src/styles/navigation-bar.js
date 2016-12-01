@@ -2,15 +2,14 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: "row",
+    height: 64,
   },
   bar: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    flex: 1,
-    height: 64,
     backgroundColor: "transparent",
   },
   middle: {

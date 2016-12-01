@@ -17,6 +17,7 @@ const mapStateToProps = state => ({
   isFetching: isFetchingPlips(state),
   errorFetchingPlips: errorFetchingPlips(state),
 });
+
 const mapDispatchToProps = dispatch => ({
   retryPlip: () => dispatch(fetchPlips()),
   onPlipSign: () => dispatch(navigate("signIn")),

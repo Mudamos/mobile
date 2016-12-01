@@ -50,7 +50,7 @@ class SignInLayout extends Component {
         <PageLoader isVisible={isLoggingIn} />
 
         <Layout>
-          <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView bounces={false}>
             <Text style={{fontSize: 24, fontWeight: "bold", paddingTop: 15, paddingBottom: 15, textAlign: "center"}}>Mudamos</Text>
 
             <View style={{paddingHorizontal: 20}}>

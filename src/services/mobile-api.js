@@ -28,6 +28,7 @@ const requester = ({ host }) => {
   return builder;
 };
 
+const serializeJson = req => ({ ...req, body: JSON.stringify(req.body) });
 
 const handleResponseError = res => res
   .then(rejectErrorResponses)
@@ -54,8 +55,18 @@ const defineErrorType = err => {
   const json = err.json || {};
   const data = json.data || {};
 
-  return Promise.reject({ ...err, json, type: data.type || "unknown", userMessage: data.message });
+  return Promise.reject({
+    ...err,
+    json,
+    type: data.type || "unknown",
+    userMessage: json.status === "fail" && data.message,
+    validations: data.validations,
+  });
 };
+
+const authorizedClient = (client, token) =>
+  client
+    .use(req => req.set("Authorization", "Bearer " + token));
 
 
 const fbSignIn = ({ client }) => fbToken =>
@@ -73,12 +84,29 @@ const signIn = ({ client }) => (email, password) =>
     .then(getData)
     .then(json => json.accessToken);
 
+const signUp = ({ client }) => (authToken, payload) => {
+  const api =  authToken ? authorizedClient(client, authToken) : client;
+
+  return api
+    .use(serializeJson)
+    .post("/users/sign_up")
+    .send({ user: payload })
+    .then(getData);
+};
+
+const profile = ({ client }) => authToken =>
+  authorizedClient(client, authToken)
+    .get("/profile")
+    .then(getData);
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
 
   return {
     fbSignIn: fbSignIn({ client }),
+    profile: profile({ client }),
     signIn: signIn({ client }),
+    signUp: signUp({ client }),
   };
 }
