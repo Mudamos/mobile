@@ -12,7 +12,7 @@ import {
 import { currentAuthToken } from "../selectors";
 
 import {
-  User
+  User,
 } from "../models";
 
 import { isDev } from "../utils";

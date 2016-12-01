@@ -7,8 +7,11 @@ export default (state = initialState, action) => {
     case "PROFILE_SAVING":
       return { ...state, isSaving: payload.isSaving, errors: null };
     case "PROFILE_USER_UPDATED":
-      const { currentUser, isProfileComplete } = payload;
-      return { ...state, currentUser, isProfileComplete };
+      return {
+        ...state,
+        currentUser: payload.currentUser,
+        isProfileComplete: payload.isProfileComplete,
+      };
     case "PROFILE_USER_SAVE_FAILURE":
       return { ...state, errors: payload.error.validations };
     case "SESSION_CLEAR_SESSION":
@@ -17,7 +20,7 @@ export default (state = initialState, action) => {
         currentUser: null,
         isProfileComplete: false,
         isSaving: false,
-        errors: null
+        errors: null,
       };
     default:
       return state;

@@ -1,7 +1,7 @@
 import {
   find,
   is,
-  propEq
+  propEq,
 } from "ramda";
 
 import { Buffer } from "buffer";

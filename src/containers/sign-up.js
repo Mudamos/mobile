@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import SignUpLayout from "../components/sign-up-layout";
 
 import {
-  profileSaveMain
+  profileSaveMain,
 } from "../actions";
 
 import {

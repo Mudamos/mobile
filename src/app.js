@@ -2,7 +2,7 @@ import Config from "react-native-config";
 
 import React, { Component } from "react";
 
-import { Actions, Router, Reducer, Scene } from "react-native-router-flux";
+import { Actions, Router, Scene } from "react-native-router-flux";
 import sceneStyle from "./styles/scene-default";
 
 import {

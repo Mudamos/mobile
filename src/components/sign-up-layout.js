@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from "react";
 
 import {
   View,
-  Text,
 } from "react-native";
 
 import Layout from "./layout";
@@ -25,6 +24,7 @@ export default class SignUpLayout extends Component {
   static propTypes = {
     errors: PropTypes.array,
     isSaving: PropTypes.bool,
+    navigationState: PropTypes.object.isRequired,
     previousName: PropTypes.string,
     showEmail: PropTypes.bool,
     showPassword: PropTypes.bool,
@@ -37,7 +37,6 @@ export default class SignUpLayout extends Component {
       isSaving,
       showEmail,
       showPassword,
-      onSave
     } = this.props;
 
     return (

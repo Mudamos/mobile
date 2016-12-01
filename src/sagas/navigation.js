@@ -8,7 +8,6 @@ import { isDev } from "../utils";
 import { findIndex } from "ramda";
 
 import {
-  currentUser,
   isProfileComplete,
   isMainProfileComplete,
   isBirthProfileComplete,

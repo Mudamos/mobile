@@ -1,7 +1,5 @@
 import { connect } from "react-redux";
 
-import { ActionConst } from "react-native-router-flux";
-
 import SignInLayout from "../components/sign-in-layout";
 
 import {
