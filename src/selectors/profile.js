@@ -16,5 +16,10 @@ export const isMainProfileComplete = state => {
 
 export const isBirthProfileComplete = state => {
   const currentUser = state.profile.currentUser || new User();
-  return currentUser.birthDate;
+  return !!currentUser.birthdate;
+}
+
+export const isAddressProfileComplete = state => {
+  const currentUser = state.profile.currentUser || new User();
+  return !!currentUser.zipCode;
 }

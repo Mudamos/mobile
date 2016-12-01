@@ -8,6 +8,7 @@ import { isDev } from "../utils";
 import { findIndex } from "ramda";
 
 import {
+  isAddressProfileComplete,
   isProfileComplete,
   isMainProfileComplete,
   isBirthProfileComplete,
@@ -38,6 +39,7 @@ function* userProfileNavigator() {
   const screenKeys = [
     "signUp",
     "profileBirth",
+    "profileAddress",
   ];
 
   const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
@@ -51,6 +53,7 @@ function* userProfileNavigator() {
         const screensDone = [
           yield select(isMainProfileComplete),
           yield select(isBirthProfileComplete),
+          yield select(isAddressProfileComplete),
         ];
 
         const goToScreen = firstScreenNotDone(screensDone);

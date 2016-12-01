@@ -5,10 +5,10 @@ import {
   View,
 } from "react-native";
 
+import { moment } from "../utils";
+
 import ActionButton from "react-native-action-button";
 import Ionicon from "react-native-vector-icons/Ionicons";
-
-import moment from "moment";
 
 import ParallaxScrollView from "react-native-parallax-scroll-view";
 

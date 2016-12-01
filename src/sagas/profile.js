@@ -1,4 +1,4 @@
-import { takeLatest } from "redux-saga";
+import { takeLatest, delay } from "redux-saga";
 import { call, put, spawn, select } from "redux-saga/effects";
 
 import {
@@ -9,13 +9,13 @@ import {
   logginSucceeded,
 } from "../actions";
 
-import { currentAuthToken } from "../selectors";
+import { currentAuthToken, currentUser } from "../selectors";
 
 import {
   User,
 } from "../models";
 
-import { isDev } from "../utils";
+import { logError } from "../utils";
 
 
 function* saveMainProfile({ mobileApi, sessionStore }) {
@@ -45,7 +45,38 @@ function* saveMainProfile({ mobileApi, sessionStore }) {
       yield put(savingProfile(false));
       yield put(profileStateMachine());
     } catch(e) {
-      if(isDev) console.log("saveMainProfile Error: ", e.message, e.stack, e);
+      logError(e, { tag: "saveMainProfile" });
+
+      yield put(savingProfile(false));
+      yield put(saveUserProfileError(e));
+    }
+  });
+}
+
+function* saveBirthdateProfile({ mobileApi }) {
+  yield takeLatest("PROFILE_SAVE_BIRTH_DATE", function* ({ payload }) {
+    try {
+      const { birthdate } = payload;
+
+      yield put(savingProfile(true));
+
+      const authToken = yield select(currentAuthToken);
+      const response = yield call(mobileApi.saveBirthdate, authToken, birthdate);
+
+      // TODO: remove mock
+      const mock = yield select(currentUser);
+      yield delay(1000);
+      response.user = mock.toJson();
+      response.user.userBirthdate = "1985-01-23";
+      response.complete = false;
+
+      const user = User.fromJson(response.user);
+
+      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(savingProfile(false));
+      yield put(profileStateMachine());
+    } catch (e) {
+      logError(e, { tag: "saveBirthdateProfile" });
 
       yield put(savingProfile(false));
       yield put(saveUserProfileError(e));
@@ -56,4 +87,5 @@ function* saveMainProfile({ mobileApi, sessionStore }) {
 
 export default function* profileSaga({ mobileApi, sessionStore }) {
   yield spawn(saveMainProfile, { mobileApi, sessionStore });
+  yield spawn(saveBirthdateProfile, { mobileApi });
 }
