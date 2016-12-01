@@ -1,10 +1,11 @@
 import { takeEvery } from "redux-saga";
-import { spawn } from "redux-saga/effects";
 
 import Toast from "react-native-simple-toast";
 
+import locale from "../locales/pt-BR";
 
-const genericErrorMessage = "Houve um erro ao tentar completar sua ação. Tente novamente.";
+
+const showToast = message => Toast.show(message);
 
 const validationMessageFor = validations => (validations || []).map(v => v.message).join("\n");
 
@@ -16,37 +17,31 @@ const errorMessageFor = ({ payload, defaultMessage }) => {
     message = validationMessageFor(error.validations);
   }
 
-  return message || error.userMessage || defaultMessage || genericErrorMessage;
+  return message || error.userMessage || defaultMessage || locale.errors.genericError;
 }
 
-const defaultErrorHandler = ({ payload }) =>
+const defaultErrorHandler = ({ payload, defaultMessage }) =>
   Toast.show(
     errorMessageFor({
       payload,
+      defaultMessage,
     })
   )
 
-function* facebookLoginError() {
-  yield takeEvery("FACEBOOK_LOGIN_ERROR", () => Toast.show("Erro ao tentar entrar com o facebook."));
-}
+function appError({ type, payload }) {
+  const handleWithPayload = ({ defaultMessage } = {}) =>
+    defaultErrorHandler({ payload, defaultMessage });
 
-function* loginError() {
-  yield takeEvery("AUTHENTICATION_LOGIN_ERROR", ({ payload }) =>
-    Toast.show(
-      errorMessageFor({
-        payload,
-        defaultMessage: "Houve um erro ao efetuar o login. Tente novamente.",
-      })
-    )
-  );
-}
-
-function* saveUserProfileError() {
-  yield takeEvery("PROFILE_USER_SAVE_FAILURE", defaultErrorHandler);
+  switch (type) {
+    case "AUTHENTICATION_LOGIN_ERROR":
+      return handleWithPayload({ defaultMessage: locale.errors.loginError });
+    case "FACEBOOK_LOGIN_ERROR":
+      return showToast(locale.errors.facebookLoginError);
+    case "PROFILE_USER_SAVE_FAILURE":
+      return handleWithPayload();
+  }
 }
 
 export default function* errorSaga() {
-  yield spawn(facebookLoginError);
-  yield spawn(loginError);
-  yield spawn(saveUserProfileError);
+  yield takeEvery("*", appError);
 }
