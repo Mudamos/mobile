@@ -1,18 +1,27 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, "9.0"
 
+def pods
+  pod "Bolts"
+  pod "FBSDKCoreKit"
+  pod "FBSDKLoginKit"
+end
+
 target "MudamosMobile" do
   # Uncomment the next line if you"re using Swift or would like to use dynamic frameworks
   use_frameworks!
 
-  # Pods for MudamosMobile
-  pod "Bolts"
-  pod "FBSDKCoreKit"
-  pod "FBSDKLoginKit"
+  pods
 
   target "MudamosMobileTests" do
     inherit! :search_paths
     # Pods for testing
   end
 
+end
+
+target "MudamosMobileTagviewBeta" do
+  use_frameworks!
+
+  pods
 end
