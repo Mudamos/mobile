@@ -21,6 +21,7 @@ export default store => () => {
   if (isDev) console.log("Current scene key: ", currentKey);
 
   switch (currentKey) {
+    case "profileAddress":
     case "profileBirth":
     case "signUp": return false
     default:

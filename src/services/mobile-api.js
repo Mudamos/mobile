@@ -66,7 +66,7 @@ const defineErrorType = err => {
 
 const authorizedClient = (client, token) =>
   client
-    .use(req => req.set("Authorization", "Bearer " + token));
+    .use(req => req.set("Authorization", `Bearer ${token}`));
 
 
 const fbSignIn = ({ client }) => fbToken =>
@@ -78,7 +78,7 @@ const fbSignIn = ({ client }) => fbToken =>
 
 const signIn = ({ client }) => (email, password) =>
   client
-    .use(req => req.set("Authorization", "Basic " + toCredential(email, password)))
+    .use(req => req.set("Authorization", `Basic ${toCredential(email, password)}`))
     .use(req => req.set("grant_type", "client_credentials"))
     .post("/auth/token")
     .then(getData)
@@ -99,6 +99,17 @@ const profile = ({ client }) => authToken =>
     .get("/profile")
     .then(getData);
 
+const saveBirthdate = ({ client }) => (authToken, birthdate) => {
+  // TODO: remove mock
+  return Promise.resolve({});
+  // eslint-disable-next-line no-unreachable
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/users/birthdate")
+    .send({ birthdate: birthdate })
+    .then(getData);
+};
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
@@ -106,6 +117,7 @@ export default function MobileApi(host) {
   return {
     fbSignIn: fbSignIn({ client }),
     profile: profile({ client }),
+    saveBirthdate: saveBirthdate({ client }),
     signIn: signIn({ client }),
     signUp: signUp({ client }),
   };

@@ -5,7 +5,8 @@ export default class User {
     this.email = attrs.email;
     this.voteCard = attrs.voteCard;
     this.cpf = attrs.cpf;
-    this.zipcode = attrs.zipcode;
+    this.zipCode = attrs.zipCode;
+    this.birthdate = attrs.birthdate;
   }
 
   toJson() {
@@ -15,7 +16,8 @@ export default class User {
       profileEmail: this.email,
       userVoteidcard: this.voteCard,
       userCpf: this.cpf,
-      userZipcode: this.zipcode,
+      userZipcode: this.zipCode,
+      userBirthdate: this.birthdate,
     }
   }
 
@@ -26,7 +28,8 @@ export default class User {
       email: json.profileEmail,
       voteCard: json.userVoteidcard,
       cpf: json.userCpf,
-      zipcode: json.userZipcode,
+      zipCode: json.userZipcode,
+      birthdate: json.userBirthdate,
     });
   }
 }

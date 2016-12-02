@@ -3,6 +3,11 @@ export const profileSaveMain = ({ name, email, password }) => ({
   payload: { name, email, password },
 });
 
+export const saveProfileBirthdate = birthdate => ({
+  type: "PROFILE_SAVE_BIRTH_DATE",
+  payload: { birthdate },
+});
+
 export const savingProfile = isSaving => ({
   type: "PROFILE_SAVING",
   payload: { isSaving },
