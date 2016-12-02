@@ -7,7 +7,10 @@
     "android": "android/gradlew -p android installDevelopmentDebug && adb reverse tcp:8081 tcp:8081 && adb shell am start -n br.com.tagview.petition.development/org.mudamos.petition.MainActivity",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "lint": "eslint src/ index.*.js",
-    "test": "mocha --compilers js:babel-core/register --require spec/support.js 'spec/**/*.spec.js'"
+    "test": "mocha --compilers js:babel-core/register --require spec/support.js 'spec/**/*.spec.js'",
+    "build-ios-beta": " ipa build -w ios/MudamosMobile.xcworkspace -s 'MudamosMobileBeta' -d ios/ipa --ipa MudamosTagviewBeta.ipa",
+    "build-android-beta": "ENVFILE=.env.beta android/gradlew -p android assembleMudamosBetaRelease",
+    "distribute-ios-beta": "ipa distribute:s3 -b mudamos-mobile-beta -f ios/ipa/MudamosTagviewBeta.ipa"
   },
   "dependencies": {
     "buffer": "^5.0.1",
