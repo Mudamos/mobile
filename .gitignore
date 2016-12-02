@@ -19,6 +19,7 @@ xcuserdata
 DerivedData
 *.hmap
 *.ipa
+ios/ipa/*.dSYM.zip
 *.xcuserstate
 project.xcworkspace
 
