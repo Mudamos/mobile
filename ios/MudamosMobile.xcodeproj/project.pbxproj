@@ -1341,8 +1341,8 @@
 			baseConfigurationReference = 245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mor & Dan Tecnologia Consultoria Empresarial Ltda (T97PZRMFDE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mor & Dan Tecnologia Consultoria Empresarial Ltda (T97PZRMFDE)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T97PZRMFDE;
 				HEADER_SEARCH_PATHS = (
