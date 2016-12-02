@@ -134,3 +134,22 @@ $ keytool -exportcert -alias <RELEASE_KEY_ALIAS> -keystore <RELEASE_KEY_PATH> | 
 ```
 
 Onde `<RELEASE_KEY_ALIAS>` é o alis encontrado no seu arquivo `.properties` e `RELEASE_KEY_PATH` é o caminho para o arquivo `.keystore`.
+
+
+### iOS
+
+Atualmente temos somente a versão beta de distribuição.
+
+Para gerar o `.ipa`:
+
+```
+$ npm run build-ios-beta
+```
+
+Para distruibuir, envie o `.ipa` gerado para o storage S3:
+
+```
+$ npm run distribute-ios-beta -- -a <AWS_ACCESS_KEY> -s <AWS_SECRET_ACCESS_KEY>
+```
+
+Essas chaves podem ser obtidas com um responsável.
