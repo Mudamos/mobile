@@ -683,6 +683,7 @@
 					};
 					46ED2A6B1DF194E400B36CD0 = {
 						DevelopmentTeam = T97PZRMFDE;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1306,6 +1307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = T97PZRMFDE;
@@ -1329,6 +1331,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: br.com.tagview.mudamosmobile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1339,6 +1342,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T97PZRMFDE;
 				HEADER_SEARCH_PATHS = (
@@ -1361,6 +1365,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: br.com.tagview.mudamosmobile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
