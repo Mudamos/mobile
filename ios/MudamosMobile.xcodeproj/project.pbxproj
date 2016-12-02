@@ -1331,7 +1331,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: br.com.tagview.mudamosmobile";
+				PROVISIONING_PROFILE = "ed10aefe-30e8-4e1b-9646-19ad847002b7";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos Mobile Development";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
