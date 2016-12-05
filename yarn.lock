@@ -2260,6 +2260,13 @@ gh-got@^2.2.0:
     object-assign "^4.0.1"
     pinkie-promise "^2.0.0"
 
+"git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25":
+  name react-native-material-kit
+  version "0.3.3"
+  resolved "git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25"
+  dependencies:
+    ramda "~0.21.0"
+
 github-username@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/github-username/-/github-username-2.1.0.tgz#200e5a104af42ba08a54096c708d4b6ec2fa256b"
@@ -4234,6 +4241,10 @@ qs@4.0.0:
 ramda:
   version "0.22.1"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.22.1.tgz#031da0c3df417c5b33c96234757eb37033f36a0e"
+
+ramda@~0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.21.0.tgz#a001abedb3ff61077d4ff1d577d44de77e8d0a35"
 
 random-bytes@~1.0.0:
   version "1.0.0"

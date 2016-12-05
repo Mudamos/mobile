@@ -29,6 +29,7 @@
     "react-native-facebook-login": "^1.4.0",
     "react-native-fence-html": "^1.0.6",
     "react-native-keyboard-aware-scroll-view": "^0.2.4",
+    "react-native-material-kit": "git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25",
     "react-native-parallax-scroll-view": "^0.19.0",
     "react-native-router-flux": "^3.37.0",
     "react-native-simple-toast": "^0.0.5",
