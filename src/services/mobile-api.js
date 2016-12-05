@@ -99,16 +99,12 @@ const profile = ({ client }) => authToken =>
     .get("/profile")
     .then(getData);
 
-const saveBirthdate = ({ client }) => (authToken, birthdate) => {
-  // TODO: remove mock
-  return Promise.resolve({});
-  // eslint-disable-next-line no-unreachable
+const saveBirthdate = ({ client }) => (authToken, birthdate) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
-    .post("/users/birthdate")
-    .send({ birthdate: birthdate })
+    .post("/profile/birthday")
+    .send({ user: { birthday: birthdate }})
     .then(getData);
-};
 
 
 export default function MobileApi(host) {

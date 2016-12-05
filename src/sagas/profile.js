@@ -1,4 +1,4 @@
-import { takeLatest, delay } from "redux-saga";
+import { takeLatest } from "redux-saga";
 import { call, put, spawn, select } from "redux-saga/effects";
 
 import {
@@ -62,13 +62,6 @@ function* saveBirthdateProfile({ mobileApi }) {
 
       const authToken = yield select(currentAuthToken);
       const response = yield call(mobileApi.saveBirthdate, authToken, birthdate);
-
-      // TODO: remove mock
-      const mock = yield select(currentUser);
-      yield delay(1000);
-      response.user = mock.toJson();
-      response.user.userBirthdate = "1985-01-23";
-      response.complete = false;
 
       const user = User.fromJson(response.user);
 
