@@ -26,5 +26,6 @@ export const toCredential = (email, password) => new Buffer(`${email}:${password
 export const errorForField = (field, errors) => (find(propEq("key", field))(errors || []) || {}).message;
 
 export const dateMask = (text, separator = "/") => StringMask.apply(text, `00${separator}00${separator}0000`);
+export const cepMask = text => StringMask.apply(text, "00000-000");
 
 export const toISODate = (value, format = "DD/MM/YYYY") => moment(value, format).format("YYYY-MM-DD");
