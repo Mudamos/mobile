@@ -1,3 +1,4 @@
+export * from "./address";
 export * from "./authentication";
 export * from "./facebook";
 export * from "./plip";

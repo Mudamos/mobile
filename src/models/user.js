@@ -17,7 +17,7 @@ export default class User {
       userVoteidcard: this.voteCard,
       userCpf: this.cpf,
       userZipcode: this.zipCode,
-      userBirthdate: this.birthdate,
+      userBirthday: this.birthdate,
     }
   }
 
@@ -29,7 +29,7 @@ export default class User {
       voteCard: json.userVoteidcard,
       cpf: json.userCpf,
       zipCode: json.userZipcode,
-      birthdate: json.userBirthdate,
+      birthdate: json.userBirthday,
     });
   }
 }

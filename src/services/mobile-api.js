@@ -99,17 +99,17 @@ const profile = ({ client }) => authToken =>
     .get("/profile")
     .then(getData);
 
-const saveBirthdate = ({ client }) => (authToken, birthdate) => {
-  // TODO: remove mock
-  return Promise.resolve({});
-  // eslint-disable-next-line no-unreachable
+const saveBirthdate = ({ client }) => (authToken, birthdate) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
-    .post("/users/birthdate")
-    .send({ birthdate: birthdate })
+    .post("/profile/birthday")
+    .send({ user: { birthday: birthdate }})
     .then(getData);
-};
 
+const searchZipCode = ({ client }) => (authToken, zipCode) =>
+  authorizedClient(client, authToken)
+    .get(`/address/search/${zipCode}`)
+    .then(getData);
 
 export default function MobileApi(host) {
   const client = requester({ host });
@@ -118,6 +118,7 @@ export default function MobileApi(host) {
     fbSignIn: fbSignIn({ client }),
     profile: profile({ client }),
     saveBirthdate: saveBirthdate({ client }),
+    searchZipCode: searchZipCode({ client }),
     signIn: signIn({ client }),
     signUp: signUp({ client }),
   };

@@ -5,6 +5,7 @@ import plip from "./plip";
 import profile from "./profile";
 import session from "./session";
 import navigation from "./navigation";
+import address from "./address";
 
 export default combineReducers({
   facebook,
@@ -12,4 +13,5 @@ export default combineReducers({
   plip,
   session,
   navigation,
+  address,
 });

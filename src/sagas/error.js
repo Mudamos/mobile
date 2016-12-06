@@ -38,6 +38,7 @@ function appError({ type, payload }) {
     case "FACEBOOK_LOGIN_ERROR":
       return showToast(locale.errors.facebookLoginError);
     case "PROFILE_USER_SAVE_FAILURE":
+    case "ADDRESS_ZIP_CODE_SEARCH_ERROR":
       return handleWithPayload();
   }
 }

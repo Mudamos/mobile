@@ -1,0 +1,19 @@
+export const addressZipCodeSearch = zipCode => ({
+  type: "ADDRESS_ZIP_CODE_SEARCH",
+  payload: { zipCode },
+});
+
+export const addressZipCodeSearching = isSearchingZipCode => ({
+  type: "ADDRESS_ZIP_CODE_SEARCHING",
+  payload: { isSearchingZipCode },
+});
+
+export const addressZipCodeSearchError = error => ({
+  type: "ADDRESS_ZIP_CODE_SEARCH_ERROR",
+  payload: { error },
+});
+
+export const addressFound = location => ({
+  type: "ADDRESS_FOUND",
+  payload: { location },
+});
