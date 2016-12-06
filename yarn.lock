@@ -2260,13 +2260,6 @@ gh-got@^2.2.0:
     object-assign "^4.0.1"
     pinkie-promise "^2.0.0"
 
-"git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25":
-  name react-native-material-kit
-  version "0.3.3"
-  resolved "git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25"
-  dependencies:
-    ramda "~0.21.0"
-
 github-username@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/github-username/-/github-username-2.1.0.tgz#200e5a104af42ba08a54096c708d4b6ec2fa256b"
@@ -4338,6 +4331,16 @@ react-native-keyboard-aware-scroll-view:
   resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.2.4.tgz#0974e9a8e7e91e7031c6bbc57d3d339f3ca41e85"
   dependencies:
     react-timer-mixin "^0.13.3"
+
+react-native-maps:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.11.0.tgz#8baa56eef83e9f2f04a70b192624b7bc9c56289d"
+
+"react-native-material-kit@git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25":
+  version "0.3.3"
+  resolved "git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25"
+  dependencies:
+    ramda "~0.21.0"
 
 react-native-parallax-scroll-view:
   version "0.19.0"

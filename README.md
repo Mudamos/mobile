@@ -68,6 +68,8 @@ Primeiramente, crie um arquivo de configuração a partir do sample
 cp .env.sample .env
 ```
 
+Algumas variáveis de ambiente não estão no projeto *by design*.
+
 ### React packager
 
 Rode o servidor de desenvolvimento:

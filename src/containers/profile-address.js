@@ -5,6 +5,7 @@ import ProfileAddressLayout from "../components/profile-address-layout";
 import { extractNumbers } from "../utils";
 
 import {
+  addressClear,
   addressZipCodeSearch,
 } from "../actions";
 
@@ -20,6 +21,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  onClearLocation: () => dispatch(addressClear()),
   onSearch: zipCode => dispatch(addressZipCodeSearch(extractNumbers(zipCode))),
 })
 

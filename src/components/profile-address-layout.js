@@ -4,7 +4,10 @@ import {
   Keyboard,
   Text,
   View,
+  StyleSheet,
 } from "react-native";
+
+import MapView, { Marker } from "react-native-maps";
 
 import Layout from "./layout";
 
@@ -17,6 +20,10 @@ import HeaderLogo from "./header-logo";
 import FlatButton from "./flat-button";
 import PageLoader from"./page-loader";
 
+const LATITUDE_DELTA = 0.015;
+const LONGITUDE_DELTA = 0.0121;
+
+
 export default class ProfileAddressLayout extends Component {
 
   state = {
@@ -27,6 +34,7 @@ export default class ProfileAddressLayout extends Component {
   static propTypes = {
     isSearching: PropTypes.bool,
     location: PropTypes.object,
+    onClearLocation: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
   }
 
@@ -36,6 +44,25 @@ export default class ProfileAddressLayout extends Component {
 
   get searchEnabled() {
     return this.validSearch && !this.state.hasKeyboard;
+  }
+
+  get locationAddress() {
+    const { location } = this.props;
+    return location && location.address;
+  }
+
+  get locationTitle() {
+    const address = this.locationAddress;
+    if (!address) return;
+
+    return address.split(",")[0]
+  }
+
+  get locationDescription() {
+    const address = this.locationAddress;
+    if (!address) return;
+
+    return address.split(",").slice(1).join(",").trim();
   }
 
   render() {
@@ -48,8 +75,10 @@ export default class ProfileAddressLayout extends Component {
       <View style={{flex: 1, backgroundColor: "teal"}}>
         <PageLoader isVisible={isSearching} />
 
-        <Layout>
-          <KeyboardAwareScrollView bounces={false} keyboardShouldPersistTaps={false}>
+        <Layout contentStyle={{flexDirection: "column-reverse"}}>
+          { location && this.renderResults() }
+
+          <KeyboardAwareScrollView style={{flex: 1}} bounces={false} keyboardShouldPersistTaps={false}>
             <HeaderLogo />
 
             <Text style={{
@@ -61,24 +90,66 @@ export default class ProfileAddressLayout extends Component {
               {locale.addressSearchHeader}
             </Text>
 
-            <View style={{marginHorizontal: 30}}>
-              <ZipCodeInput
-                value={this.state.zipCode}
-                onChangeZipCodeText={zipCode => this.setState({zipCode})}
-                placeholder={locale.zipCode}
-              />
+            {
+              !location &&
+                <View style={{marginHorizontal: 30}}>
+                  <ZipCodeInput
+                    value={this.state.zipCode}
+                    onChangeZipCodeText={zipCode => this.setState({zipCode})}
+                    placeholder={locale.zipCode}
+                  />
 
-              { location && <Text>{JSON.stringify(location)}</Text> }
+                  <FlatButton
+                    title="BUSCAR"
+                    enabled={this.searchEnabled}
+                    onPress={this.onSearch.bind(this)}
+                    style={{marginTop: 20}}
+                  />
+                </View>
+            }
 
-              <FlatButton
-                title="BUSCAR"
-                enabled={this.searchEnabled}
-                onPress={this.onSearch.bind(this)}
-                style={{marginTop: 20}}
-              />
-            </View>
+            {
+              location &&
+                <View style={{marginHorizontal: 30}}>
+                  <FlatButton
+                    title="VOLTAR"
+                    onPress={this.onClearLocation.bind(this)}
+                  />
+                </View>
+            }
+
           </KeyboardAwareScrollView>
+
         </Layout>
+      </View>
+    );
+  }
+
+  renderResults() {
+    const { location } = this.props;
+
+    return (
+      <View style={{flex: 1}}>
+        <MapView style={styles.map}
+          initialRegion={{
+            latitude: location.lat,
+            longitude: location.lng,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }}
+        >
+          <Marker
+            coordinate={{latitude: location.lat, longitude: location.lng}}
+            title={this.locationTitle}
+            description={this.locationDescription}
+          />
+        </MapView>
+
+        <FlatButton
+          title="CONFIRMAR"
+          onPress={() => { console.log("Confirm") }}
+          style={{position: "absolute", bottom: 30, left: 0, right: 0, marginHorizontal: 30}}
+        />
       </View>
     );
   }
@@ -88,6 +159,13 @@ export default class ProfileAddressLayout extends Component {
     const { onSearch } = this.props;
 
     onSearch(zipCode);
+  }
+
+  onClearLocation() {
+    const { onClearLocation } = this.props;
+
+    this.setState({ zipCode: null });
+    onClearLocation();
   }
 
   componentWillMount () {
@@ -108,3 +186,9 @@ export default class ProfileAddressLayout extends Component {
     this.setState({ hasKeyboard: false });
   }
 }
+
+const styles = StyleSheet.create({
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+});
