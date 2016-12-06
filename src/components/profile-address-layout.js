@@ -8,8 +8,9 @@ import {
 
 import Layout from "./layout";
 
+import locale from "../locales/pt-BR";
 
-import CepInput from "./cep-input";
+import ZipCodeInput from "./zip-code-input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import HeaderLogo from "./header-logo";
@@ -19,7 +20,7 @@ import PageLoader from"./page-loader";
 export default class ProfileAddressLayout extends Component {
 
   state = {
-    cep: null,
+    zipCode: null,
     hasKeyboard: false,
   }
 
@@ -30,7 +31,7 @@ export default class ProfileAddressLayout extends Component {
   }
 
   get validSearch() {
-    return String(this.state.cep).length === 9;
+    return String(this.state.zipCode).length === 9;
   }
 
   get searchEnabled() {
@@ -56,13 +57,15 @@ export default class ProfileAddressLayout extends Component {
               fontSize: 22,
               color: "white",
               alignSelf: "center",
-              marginBottom: 20}}>Informe seu CEP</Text>
+              marginBottom: 20}}>
+              {locale.addressSearchHeader}
+            </Text>
 
             <View style={{marginHorizontal: 30}}>
-              <CepInput
-                value={this.state.cep}
-                onChangeCepText={cep => this.setState({cep})}
-                placeholder="CEP"
+              <ZipCodeInput
+                value={this.state.zipCode}
+                onChangeZipCodeText={zipCode => this.setState({zipCode})}
+                placeholder={locale.zipCode}
               />
 
               { location && <Text>{JSON.stringify(location)}</Text> }
@@ -81,10 +84,10 @@ export default class ProfileAddressLayout extends Component {
   }
 
   onSearch() {
-    const { cep } = this.state;
+    const { zipCode } = this.state;
     const { onSearch } = this.props;
 
-    onSearch(cep);
+    onSearch(zipCode);
   }
 
   componentWillMount () {

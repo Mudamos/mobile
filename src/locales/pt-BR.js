@@ -1,5 +1,7 @@
 const translations = {
+  addressSearchHeader: "Informe seu CEP",
   birthdate: "Data de nascimento",
+  zipCode: "CEP",
   email: "E-mail",
   name: "Nome",
   password: "Senha",
