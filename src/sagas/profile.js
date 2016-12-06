@@ -9,7 +9,7 @@ import {
   logginSucceeded,
 } from "../actions";
 
-import { currentAuthToken, currentUser } from "../selectors";
+import { currentAuthToken } from "../selectors";
 
 import {
   User,

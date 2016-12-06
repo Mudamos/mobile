@@ -7,7 +7,7 @@ const style = StyleSheet.create({
     alignSelf: "center",
     marginTop: 12,
     marginBottom: 26,
-  }
+  },
 });
 
 export default class HeaderLogo extends Component {

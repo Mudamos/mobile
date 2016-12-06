@@ -10,8 +10,6 @@ import {
   MKTextField,
 } from "react-native-material-kit";
 
-const { MKTextFieldPropTypes } = MKTextField.propTypes;
-
 const selectionColor = "rgba(255, 255, 255, 0.5)";
 const errorColor = "#d50000";
 const whiteTransparent = "rgba(255,255,255,0.7)";
@@ -36,11 +34,11 @@ const style = StyleSheet.create({
 
 export default class MDTextInput extends Component {
   static propTypes = {
+    error: PropTypes.string,
+    hasError: PropTypes.bool,
     mdContainerStyle: PropTypes.object,
     mdErrorTextStyle: PropTypes.object,
-    hasError: PropTypes.bool,
-    error: PropTypes.string,
-    ...MKTextField.propTypes
+    ...MKTextField.propTypes,
   }
 
   static defaultProps = {
@@ -50,7 +48,7 @@ export default class MDTextInput extends Component {
     tintColor: "#fff",
     floatingLabelFont: {
       fontSize: 12,
-      fontWeight: '200',
+      fontWeight: "200",
     },
     style: style.textFieldStyle,
   }
@@ -71,7 +69,8 @@ export default class MDTextInput extends Component {
       mdErrorTextStyle,
       textInputStyle,
       floatingLabelFont,
-      ...textFieldProps,
+
+      ...textFieldProps
     } = this.props;
 
     return (

@@ -106,6 +106,10 @@ const saveBirthdate = ({ client }) => (authToken, birthdate) =>
     .send({ user: { birthday: birthdate }})
     .then(getData);
 
+const searchZipCode = ({ client }) => (authToken, zipCode) =>
+  authorizedClient(client, authToken)
+    .get(`/address/search/${zipCode}`)
+    .then(getData);
 
 export default function MobileApi(host) {
   const client = requester({ host });
@@ -114,6 +118,7 @@ export default function MobileApi(host) {
     fbSignIn: fbSignIn({ client }),
     profile: profile({ client }),
     saveBirthdate: saveBirthdate({ client }),
+    searchZipCode: searchZipCode({ client }),
     signIn: signIn({ client }),
     signUp: signUp({ client }),
   };

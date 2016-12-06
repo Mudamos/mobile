@@ -7,6 +7,7 @@ import plipSaga from "./plip";
 import profileSaga from "./profile";
 import navigationSaga from "./navigation";
 import sessionSaga from "./session";
+import addressSaga from "./address";
 
 export default function* rootSaga({ mudamosWebApi, mobileApi, sessionStore }) {
   yield spawn(navigationSaga);
@@ -16,4 +17,5 @@ export default function* rootSaga({ mudamosWebApi, mobileApi, sessionStore }) {
   yield spawn(profileSaga, { mobileApi, sessionStore });
   yield spawn(errorSaga);
   yield spawn(sessionSaga, { sessionStore });
+  yield spawn(addressSaga, { mobileApi });
 }

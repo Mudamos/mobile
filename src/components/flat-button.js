@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from "react";
 
-import { Text } from "react-native";
-
 import { merge } from "ramda";
 
 import { MKButton } from "react-native-material-kit";

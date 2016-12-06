@@ -29,3 +29,5 @@ export const dateMask = (text, separator = "/") => StringMask.apply(text, `00${s
 export const cepMask = text => StringMask.apply(text, "00000-000");
 
 export const toISODate = (value, format = "DD/MM/YYYY") => moment(value, format).format("YYYY-MM-DD");
+
+export const extractNumbers = text => (String(text).match(/\d+/g) || []).join("");
