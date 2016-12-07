@@ -1,7 +1,6 @@
-import React, { Component, PropTypes } from "react";
+import React, { PropTypes } from "react";
 
 import {
-  Keyboard,
   Text,
   View,
   StyleSheet,
@@ -9,6 +8,7 @@ import {
 
 import MapView, { Marker } from "react-native-maps";
 
+import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import Layout from "./layout";
 
 import locale from "../locales/pt-BR";
@@ -24,11 +24,10 @@ const LATITUDE_DELTA = 0.015;
 const LONGITUDE_DELTA = 0.0121;
 
 
-export default class ProfileAddressLayout extends Component {
+export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
 
   state = {
     zipCode: null,
-    hasKeyboard: false,
   }
 
   static propTypes = {
@@ -81,7 +80,7 @@ export default class ProfileAddressLayout extends Component {
         <Layout contentStyle={{flexDirection: "column-reverse"}}>
           { location && this.renderResults() }
 
-          <KeyboardAwareScrollView style={{flex: 1}} bounces={false} keyboardShouldPersistTaps={false}>
+          <KeyboardAwareScrollView style={{flex: 1}} bounces={false}>
             <HeaderLogo />
 
             <Text style={{
@@ -169,24 +168,6 @@ export default class ProfileAddressLayout extends Component {
 
     this.setState({ zipCode: null });
     onClearLocation();
-  }
-
-  componentWillMount () {
-    this.keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", this.keyboardDidShow.bind(this));
-    this.keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", this.keyboardDidHide.bind(this));
-  }
-
-  componentWillUnmount () {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
-
-  keyboardDidShow () {
-    this.setState({ hasKeyboard: true });
-  }
-
-  keyboardDidHide () {
-    this.setState({ hasKeyboard: false });
   }
 }
 

@@ -10,6 +10,7 @@ import {
   ProfileAddressContainer,
   ProfileBirthContainer,
   ProfileDocumentsContainer,
+  ProfilePhoneContainer,
   SignInContainer,
   SignUpContainer,
 } from "./containers";
@@ -66,6 +67,7 @@ const scenes = Actions.create(
     <Scene key="profileBirth" component={ProfileBirthContainer} hideNavBar={true} title="Data de Nascimento" />
     <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
     <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
+    <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
   </Scene>
 );
 

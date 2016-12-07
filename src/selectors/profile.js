@@ -28,3 +28,8 @@ export const isDocumentsProfileComplete = state => {
   const currentUser = state.profile.currentUser || new User();
   return currentUser.cpf && currentUser.voteCard;
 }
+
+export const isPhoneProfileComplete = state => {
+  const currentUser = state.profile.currentUser || new User();
+  return !!currentUser.phone;
+}

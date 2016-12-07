@@ -101,9 +101,34 @@ function* saveZipCodeProfile({ mobileApi }) {
   });
 }
 
+function* saveDocumentsProfile({ mobileApi }) {
+  yield takeLatest("PROFILE_SAVE_DOCUMENTS", function* ({ payload }) {
+    try {
+      const { cpf, voteCard } = payload;
+
+      yield put(savingProfile(true));
+
+      const authToken = yield select(currentAuthToken);
+      const response = yield call(mobileApi.saveDocuments, authToken, { cpf, voteCard });
+
+      const user = User.fromJson(response.user);
+
+      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(savingProfile(false));
+      yield put(profileStateMachine());
+    } catch (e) {
+      logError(e, { tag: "saveDocumentsProfile" });
+
+      yield put(savingProfile(false));
+      yield put(saveUserProfileError(e));
+    }
+  });
+}
+
 
 export default function* profileSaga({ mobileApi, sessionStore }) {
   yield spawn(saveMainProfile, { mobileApi, sessionStore });
   yield spawn(saveBirthdateProfile, { mobileApi });
   yield spawn(saveZipCodeProfile, { mobileApi });
+  yield spawn(saveDocumentsProfile, { mobileApi });
 }
