@@ -6,6 +6,7 @@ import { extractNumbers } from "../utils";
 
 import {
   saveProfileDocuments,
+  openURL,
 } from "../actions";
 
 import {
@@ -14,7 +15,7 @@ import {
   profileSaveErrors,
 } from "../selectors";
 
-
+const TSE_URL = "http://www.tse.jus.br/eleitor/servicos/situacao-eleitoral/consulta-por-nome";
 
 const mapStateToProps = state => {
   const user = currentUser(state);
@@ -33,6 +34,7 @@ const mapDispatchToProps = dispatch => ({
       cpf: extractNumbers(cpf),
       voteCard: extractNumbers(voteCard),
     })),
+  onTSERequested: () => dispatch(openURL(TSE_URL)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileDocumentsLayout);

@@ -31,6 +31,7 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
     previousCpf: PropTypes.string,
     previousVoteCard: PropTypes.string,
     onSave: PropTypes.func.isRequired,
+    onTSERequested: PropTypes.func.isRequired,
   }
 
   get validForm() {
@@ -48,6 +49,7 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
     const {
       errors,
       isSaving,
+      onTSERequested,
     } = this.props;
 
     return (
@@ -94,6 +96,19 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
                 hasError={!!errorForField("voteidcard", errors)}
                 hint={errorForField("voteidcard", errors)}
               />
+
+              <Text
+                onPress={onTSERequested}
+                style={{
+                  alignSelf: "center",
+                  color: "#fff",
+                  fontSize: 14,
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Não lembra do seu título?
+              </Text>
             </View>
 
             <FlatButton
