@@ -118,6 +118,14 @@ const saveZipCode = ({ client }) => (authToken, zipCode) =>
     .send({ user: { zipcode: zipCode }})
     .then(getData);
 
+const saveDocuments = ({ client }) => (authToken, { cpf, voteCard }) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/profile/documents")
+    .send({ user: { cpf, voteidcard: voteCard }})
+    .then(getData);
+
+
 export default function MobileApi(host) {
   const client = requester({ host });
 
@@ -125,6 +133,7 @@ export default function MobileApi(host) {
     fbSignIn: fbSignIn({ client }),
     profile: profile({ client }),
     saveBirthdate: saveBirthdate({ client }),
+    saveDocuments: saveDocuments({ client }),
     saveZipCode: saveZipCode({ client }),
     searchZipCode: searchZipCode({ client }),
     signIn: signIn({ client }),
