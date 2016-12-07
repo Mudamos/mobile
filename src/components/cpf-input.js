@@ -11,12 +11,9 @@ export default class CpfInput extends Component {
     onChangeCpfText: PropTypes.func.isRequired,
   }
 
-  state = {
-    previousText: this.props.value,
-  }
-
   render() {
     const {
+      value,
       ...mdInputProps
     } = this.props;
 
@@ -24,6 +21,7 @@ export default class CpfInput extends Component {
       <MDTextInput
         {...mdInputProps}
 
+        value={this.removeLastSeparator(value)}
         keyboardType="numeric"
         maxLength={14}
         onChangeText={this.onChangeText.bind(this)}
@@ -34,25 +32,22 @@ export default class CpfInput extends Component {
   onChangeText(text) {
     const { onChangeCpfText } = this.props;
 
-    // Avoids user trying to type any symbol aother than number
+    // Avoids user trying to type any symbol other than number
     // when there is already a separator
     if (/\D{2}$/.test(text)) return;
 
-    const rawText = this.cleanText(text);
-    let cpf = cpfMask(rawText);
-
-    // Maybe the user is trying to remove a char. If it ends
-    // with the separator already, removes two last chars.
-    if (cpf === this.state.previousText && /\.|-$/.test(this.state.previousText)) {
-      cpf = cpf.slice(0, -2);
-    }
-
-    this.setState({ previousText: cpf });
+    const cpf = this.removeLastSeparator(text);
 
     onChangeCpfText(cpf);
   }
 
   cleanText(text) {
-    return String(text).replace(/-|\./g, "");
+    return String(text || "").replace(/-|\./g, "");
+  }
+
+  removeLastSeparator(text) {
+    return cpfMask(this.cleanText(text))
+      .replace(/\.$/, "")
+      .replace(/-$/,"")
   }
 }

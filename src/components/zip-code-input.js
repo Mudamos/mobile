@@ -6,10 +6,6 @@ import { zipCodeMask } from "../utils";
 
 
 export default class ZipCodeInput extends Component {
-  state = {
-    previousText: this.props.value,
-  }
-
   static propTypes = {
     value: PropTypes.string,
     onChangeZipCodeText: PropTypes.func.isRequired,
@@ -17,6 +13,7 @@ export default class ZipCodeInput extends Component {
 
   render() {
     const {
+      value,
       ...mdInputProps
     } = this.props;
 
@@ -24,6 +21,7 @@ export default class ZipCodeInput extends Component {
       <MDTextInput
         {...mdInputProps}
 
+        value={this.removeLastSeparator(value)}
         keyboardType="numeric"
         maxLength={9}
         onChangeText={this.onChangeText.bind(this)}
@@ -34,25 +32,21 @@ export default class ZipCodeInput extends Component {
   onChangeText(text) {
     const { onChangeZipCodeText } = this.props;
 
-    // Avoids user trying to type any symbol aother than number
+    // Avoids user trying to type any symbol other than number
     // when there is already a separator
     if (/\D{2}$/.test(text)) return;
 
-    const rawText = this.cleanText(text);
-    let zipCode = zipCodeMask(rawText);
-
-    // Maybe the user is trying to remove a char. If it ends
-    // with the separator already, removes two last chars.
-    if (zipCode === this.state.previousText && this.state.previousText.endsWith("-")) {
-      zipCode = zipCode.slice(0, -2);
-    }
-
-    this.setState({ previousText: zipCode });
+    const zipCode = this.removeLastSeparator(text);
 
     onChangeZipCodeText(zipCode);
   }
 
   cleanText(text) {
-    return String(text).replace("-", "");
+    return String(text || "").replace("-", "");
+  }
+
+  removeLastSeparator(text) {
+    return zipCodeMask(this.cleanText(text))
+      .replace(/-$/, "");
   }
 }

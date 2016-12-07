@@ -18,45 +18,45 @@ export default class DateInput extends Component {
     returnKeyType: "send",
   }
 
-  state = {
-    previousText: this.props.value,
-  }
-
   get separatorRegex() {
     return new RegExp(this.props.separator, "g");
   }
 
   render() {
+    const {
+      value,
+      ...inputProps
+    } = this.props;
+
     return (
       <TextInput
-        {...this.props}
+        {...inputProps}
+
+        value={this.removeLastSeparator(value)}
         maxLength={10}
         onChangeText={this.onChangeText.bind(this)} />
     );
   }
 
   onChangeText(text) {
-    const { onChangeDateText, separator } = this.props;
+    const { onChangeDateText } = this.props;
 
-    // Avoids user trying to type any symbol aother than number
+    // Avoids user trying to type any symbol other than number
     // when there is already a separator
     if (/\D{2}$/.test(text)) return;
 
-    const rawText = this.cleanText(text);
-    let date = dateMask(rawText);
-
-    // Maybe the user is trying to remove a char. If it ends
-    // with the separator already, removes two last chars.
-    if (date === this.state.previousText && this.state.previousText.endsWith(separator)) {
-      date = date.slice(0, -2);
-    }
-
-    this.setState({ previousText: date });
+    const date = this.removeLastSeparator(text);
 
     onChangeDateText(date);
   }
 
   cleanText(text) {
-    return String(text).replace(this.separatorRegex, "");
+    return String(text || "").replace(this.separatorRegex, "");
+  }
+
+  removeLastSeparator(text) {
+    return dateMask(this.cleanText(text))
+      .replace(/-$/, "")
+      .replace(/\/$/, "");
   }
 }
