@@ -77,8 +77,33 @@ function* saveBirthdateProfile({ mobileApi }) {
   });
 }
 
+function* saveZipCodeProfile({ mobileApi }) {
+  yield takeLatest("PROFILE_SAVE_ZIP_CODE", function* ({ payload }) {
+    try {
+      const { zipCode } = payload;
+
+      yield put(savingProfile(true));
+
+      const authToken = yield select(currentAuthToken);
+      const response = yield call(mobileApi.saveZipCode, authToken, zipCode);
+
+      const user = User.fromJson(response.user);
+
+      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(savingProfile(false));
+      yield put(profileStateMachine());
+    } catch (e) {
+      logError(e, { tag: "saveZipCodeProfile" });
+
+      yield put(savingProfile(false));
+      yield put(saveUserProfileError(e));
+    }
+  });
+}
+
 
 export default function* profileSaga({ mobileApi, sessionStore }) {
   yield spawn(saveMainProfile, { mobileApi, sessionStore });
   yield spawn(saveBirthdateProfile, { mobileApi });
+  yield spawn(saveZipCodeProfile, { mobileApi });
 }

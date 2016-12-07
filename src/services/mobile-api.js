@@ -111,6 +111,13 @@ const searchZipCode = ({ client }) => (authToken, zipCode) =>
     .get(`/address/search/${zipCode}`)
     .then(getData);
 
+const saveZipCode = ({ client }) => (authToken, zipCode) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/profile/zipcode")
+    .send({ user: { zipcode: zipCode }})
+    .then(getData);
+
 export default function MobileApi(host) {
   const client = requester({ host });
 
@@ -118,6 +125,7 @@ export default function MobileApi(host) {
     fbSignIn: fbSignIn({ client }),
     profile: profile({ client }),
     saveBirthdate: saveBirthdate({ client }),
+    saveZipCode: saveZipCode({ client }),
     searchZipCode: searchZipCode({ client }),
     signIn: signIn({ client }),
     signUp: signUp({ client }),

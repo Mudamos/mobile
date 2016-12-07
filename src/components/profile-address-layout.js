@@ -32,9 +32,11 @@ export default class ProfileAddressLayout extends Component {
   }
 
   static propTypes = {
+    isSaving: PropTypes.bool,
     isSearching: PropTypes.bool,
     location: PropTypes.object,
     onClearLocation: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
   }
 
@@ -67,13 +69,14 @@ export default class ProfileAddressLayout extends Component {
 
   render() {
     const {
+      isSaving,
       isSearching,
       location,
     } = this.props;
 
     return (
       <View style={{flex: 1, backgroundColor: "teal"}}>
-        <PageLoader isVisible={isSearching} />
+        <PageLoader isVisible={isSearching || isSaving} />
 
         <Layout contentStyle={{flexDirection: "column-reverse"}}>
           { location && this.renderResults() }
@@ -100,7 +103,7 @@ export default class ProfileAddressLayout extends Component {
                   />
 
                   <FlatButton
-                    title="BUSCAR"
+                    title={locale.search.toUpperCase()}
                     enabled={this.searchEnabled}
                     onPress={this.onSearch.bind(this)}
                     style={{marginTop: 20}}
@@ -112,7 +115,7 @@ export default class ProfileAddressLayout extends Component {
               location &&
                 <View style={{marginHorizontal: 30}}>
                   <FlatButton
-                    title="VOLTAR"
+                    title={locale.back.toUpperCase()}
                     onPress={this.onClearLocation.bind(this)}
                   />
                 </View>
@@ -126,7 +129,7 @@ export default class ProfileAddressLayout extends Component {
   }
 
   renderResults() {
-    const { location } = this.props;
+    const { location, onSave } = this.props;
 
     return (
       <View style={{flex: 1}}>
@@ -147,7 +150,7 @@ export default class ProfileAddressLayout extends Component {
 
         <FlatButton
           title="CONFIRMAR"
-          onPress={() => { console.log("Confirm") }}
+          onPress={() => onSave(location.zipcode)}
           style={{position: "absolute", bottom: 30, left: 0, right: 0, marginHorizontal: 30}}
         />
       </View>
