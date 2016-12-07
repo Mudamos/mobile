@@ -7,21 +7,25 @@ import { extractNumbers } from "../utils";
 import {
   addressClear,
   addressZipCodeSearch,
+  saveZipCode,
 } from "../actions";
 
 import {
   isSearchingZipCode,
   fetchLocation,
+  isSavingProfile,
 } from "../selectors";
 
 
 const mapStateToProps = state => ({
   isSearching: isSearchingZipCode(state),
+  isSaving: isSavingProfile(state),
   location: fetchLocation(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   onClearLocation: () => dispatch(addressClear()),
+  onSave: zipCode => dispatch(saveZipCode(zipCode)),
   onSearch: zipCode => dispatch(addressZipCodeSearch(extractNumbers(zipCode))),
 })
 

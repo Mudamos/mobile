@@ -23,3 +23,8 @@ export const isAddressProfileComplete = state => {
   const currentUser = state.profile.currentUser || new User();
   return !!currentUser.zipCode;
 }
+
+export const isDocumentsProfileComplete = state => {
+  const currentUser = state.profile.currentUser || new User();
+  return currentUser.cpf && currentUser.voteCard;
+}

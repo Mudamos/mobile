@@ -23,6 +23,7 @@ export default store => () => {
   switch (currentKey) {
     case "profileAddress":
     case "profileBirth":
+    case "profileDocuments":
     case "signUp": return false
     default:
       return defaultBackAction();
