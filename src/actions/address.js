@@ -1,3 +1,7 @@
+export const addressClear = () => ({
+  type: "ADDRESS_CLEAR_LOCATION",
+});
+
 export const addressZipCodeSearch = zipCode => ({
   type: "ADDRESS_ZIP_CODE_SEARCH",
   payload: { zipCode },

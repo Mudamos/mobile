@@ -14,6 +14,7 @@ import styles from "../styles/layout";
 class Layout extends Component {
   static propTypes = {
     children: PropTypes.node,
+    contentStyle: PropTypes.object,
     style: PropTypes.object,
   };
 
@@ -21,7 +22,7 @@ class Layout extends Component {
     return (
       <View style={[styles.container, this.props.style]}>
         <StatusBarSpacer />
-        <View style={styles.content}>
+        <View style={[styles.content, this.props.contentStyle]}>
           {this.props.children}
         </View>
       </View>
