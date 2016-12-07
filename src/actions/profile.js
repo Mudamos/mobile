@@ -8,6 +8,11 @@ export const saveProfileBirthdate = birthdate => ({
   payload: { birthdate },
 });
 
+export const saveProfileDocuments = ({ cpf, voteCard }) => ({
+  type: "PROFILE_SAVE_DOCUMENTS",
+  payload: { cpf, voteCard },
+});
+
 export const savingProfile = isSaving => ({
   type: "PROFILE_SAVING",
   payload: { isSaving },

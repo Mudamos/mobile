@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropTypes } from "react";
 
 import {
   Text,
@@ -11,6 +11,9 @@ import HeaderLogo from "./header-logo";
 import CpfInput from "./cpf-input";
 import VoteCardInput from "./vote-card-input";
 import FlatButton from "./flat-button";
+import PageLoader from"./page-loader";
+
+import { errorForField } from "../utils";
 
 import locale from "../locales/pt-BR";
 
@@ -18,13 +21,22 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
   state = {
-    cpf: null,
+    cpf: this.props.previousCpf,
+    voteCard: this.props.previousVoteCard,
+  }
+
+  static propTypes = {
+    errors: PropTypes.array,
+    isSaving: PropTypes.bool,
+    previousCpf: PropTypes.string,
+    previousVoteCard: PropTypes.string,
+    onSave: PropTypes.func.isRequired,
   }
 
   get validForm() {
     return [
       this.state.cpf,
-      this.state.voteCard
+      this.state.voteCard,
     ].every(v => String(v).length === 14);
   }
 
@@ -33,34 +45,45 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
   }
 
   render() {
+    const {
+      errors,
+      isSaving,
+    } = this.props;
+
     return (
       <View style={{flex: 1, backgroundColor: "purple"}}>
+        <PageLoader isVisible={isSaving} />
+
         <Layout>
           <KeyboardAwareScrollView style={{flex: 1}} bounces={false}>
             <HeaderLogo />
 
-            <Text style={{
-              fontWeight: "bold",
-              fontSize: 22,
-              color: "white",
-              alignSelf: "center",
-              marginBottom: 20}}>
-              {locale.documentsHeaderTitle}
-            </Text>
+              <Text style={{
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: 22,
+                color: "white",
+                alignSelf: "center",
+                marginBottom: 20}}>
+                {locale.documentsHeaderTitle}
+              </Text>
 
-            <Text style={{
-              fontSize: 18,
-              color: "white",
-              alignSelf: "center",
-              marginBottom: 20}}>
-              Seus documentos são necessários para validar suas assinaturas
-            </Text>
+              <Text style={{
+                textAlign: "center",
+                fontSize: 18,
+                color: "white",
+                alignSelf: "center",
+                marginBottom: 20}}>
+                Seus documentos são necessários para validar suas assinaturas
+              </Text>
 
             <View style={{marginHorizontal: 30}}>
               <CpfInput
                 value={this.state.cpf}
                 onChangeCpfText={cpf => this.setState({cpf})}
                 placeholder={locale.cpf.toUpperCase()}
+                hasError={!!errorForField("cpf", errors)}
+                hint={errorForField("cpf", errors)}
               />
 
               <VoteCardInput
@@ -68,6 +91,8 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
                 onChangeVoteCardText={voteCard => this.setState({voteCard})}
                 placeholder={locale.voteCard}
                 mdContainerStyle={{marginVertical: 20}}
+                hasError={!!errorForField("voteidcard", errors)}
+                hint={errorForField("voteidcard", errors)}
               />
             </View>
 
@@ -85,5 +110,9 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
   }
 
   onSave() {
+    const { onSave } = this.props;
+    const { cpf, voteCard } = this.state;
+
+    onSave({ cpf, voteCard });
   }
 }

@@ -18,9 +18,14 @@ const style = StyleSheet.create({
   container: {
     backgroundColor: "transparent",
   },
+  hint: {
+    fontSize: 10,
+    color: "#fff",
+    opacity: 0.7,
+    marginTop: 3,
+  },
   errorText: {
     color: errorColor,
-    marginTop: 3,
   },
   textFieldStyle: {
     height: 48,
@@ -34,10 +39,11 @@ const style = StyleSheet.create({
 
 export default class MDTextInput extends Component {
   static propTypes = {
-    error: PropTypes.string,
     hasError: PropTypes.bool,
+    hint: PropTypes.string,
     mdContainerStyle: PropTypes.object,
     mdErrorTextStyle: PropTypes.object,
+    mdHintTextStyle: PropTypes.object,
     ...MKTextField.propTypes,
   }
 
@@ -45,7 +51,7 @@ export default class MDTextInput extends Component {
     floatingLabelEnabled: true,
     hasError: false,
     placeholderTextColor: whiteTransparent,
-    tintColor: "#fff",
+    tintColor: "rgba(255,255,255,0.7)",
     floatingLabelFont: {
       fontSize: 12,
       fontWeight: "200",
@@ -64,9 +70,10 @@ export default class MDTextInput extends Component {
   render() {
     const {
       hasError,
-      error,
+      hint,
       mdContainerStyle,
       mdErrorTextStyle,
+      mdHintTextStyle,
       textInputStyle,
       floatingLabelFont,
 
@@ -84,12 +91,13 @@ export default class MDTextInput extends Component {
           highlightColor={this.highlightColor}
           textInputStyle={[style.textInputStyle, textInputStyle]}
           floatingLabelFont={floatingLabelFont}
+          underlineSize={1}
         />
 
         {
-          hasError &&
-            <Text style={[style.errorText, mdErrorTextStyle]}>
-              {error}
+          hint &&
+            <Text style={[style.hint, mdHintTextStyle, hasError && style.errorText, hasError && mdErrorTextStyle]}>
+              {hint}
             </Text>
         }
       </View>

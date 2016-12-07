@@ -24,6 +24,7 @@ export default store => () => {
     case "profileAddress":
     case "profileBirth":
     case "profileDocuments":
+    case "profilePhone":
     case "signUp": return false
     default:
       return defaultBackAction();
