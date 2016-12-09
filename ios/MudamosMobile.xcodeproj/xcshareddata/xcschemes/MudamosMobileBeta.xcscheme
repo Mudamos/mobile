@@ -70,6 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "46ED2A6B1DF194E400B36CD0"
+            BuildableName = "MudamosMobileTagviewBeta.app"
+            BlueprintName = "MudamosMobileTagviewBeta"
+            ReferencedContainer = "container:MudamosMobile.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
