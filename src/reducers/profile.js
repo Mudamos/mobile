@@ -38,6 +38,9 @@ export default (state = initialState, action) => {
         isProfileComplete: false,
         isSaving: false,
         errors: null,
+        isSendingPhoneValidation: false,
+        hasSentPhoneValidation: false,
+        sendValidationErrors: null,
       };
     default:
       return state;

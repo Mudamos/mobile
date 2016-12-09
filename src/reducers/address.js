@@ -19,6 +19,12 @@ export default (state = initialState, action) => {
         ...state,
         location: payload.location,
       };
+    case "SESSION_CLEAR_SESSION":
+      return {
+        ...state,
+        location: null,
+        isSearchingZipCode: false,
+      };
     default:
       return state;
   }
