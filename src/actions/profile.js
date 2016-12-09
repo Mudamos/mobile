@@ -1,3 +1,7 @@
+export const phoneValidationSent = () => ({
+  type: "PROFILE_PHONE_VALIDATION_SENT",
+});
+
 export const profileSaveMain = ({ name, email, password }) => ({
   type: "PROFILE_SAVE_MAIN",
   payload: { name, email, password },
@@ -18,6 +22,11 @@ export const savingProfile = isSaving => ({
   payload: { isSaving },
 });
 
+export const sendingPhoneValidation = isSendingValidation => ({
+  type: "PROFILE_SENDING_PHONE_VALIDATION",
+  payload: { isSendingValidation },
+});
+
 export const updatedUserProfile = ({ user , profileComplete }) => ({
   type: "PROFILE_USER_UPDATED",
   payload: { currentUser: user, isProfileComplete: profileComplete },
@@ -31,4 +40,19 @@ export const saveUserProfileError = error => ({
 export const saveZipCode = zipCode => ({
   type: "PROFILE_SAVE_ZIP_CODE",
   payload: { zipCode },
+});
+
+export const sendPhoneValidation = phone => ({
+  type: "PROFILE_SEND_PHONE_VALIDATION",
+  payload: { phone },
+});
+
+export const sendingPhoneValidationError = error => ({
+  type: "PROFILE_SENDING_PHONE_VALIDATION_ERROR",
+  payload: { error },
+});
+
+export const savePhone = ({ phone, code }) => ({
+  type: "PROFILE_SAVE_PHONE",
+  payload: { phone, code },
 });

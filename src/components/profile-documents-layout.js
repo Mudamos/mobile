@@ -11,7 +11,7 @@ import HeaderLogo from "./header-logo";
 import CpfInput from "./cpf-input";
 import VoteCardInput from "./vote-card-input";
 import FlatButton from "./flat-button";
-import PageLoader from"./page-loader";
+import PageLoader from "./page-loader";
 
 import { errorForField } from "../utils";
 

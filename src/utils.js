@@ -29,6 +29,8 @@ export const dateMask = (text, separator = "/") => StringMask.apply(text, `00${s
 
 export const cpfMask = text => StringMask.apply(text, "000.000.000-00");
 
+export const phoneMask = text => StringMask.apply(text, "(00) 90000-0000");
+
 export const voteCardMask = text => StringMask.apply(text, "0000.0000.0000");
 
 export const zipCodeMask = text => StringMask.apply(text, "00000-000");

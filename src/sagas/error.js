@@ -39,6 +39,7 @@ function appError({ type, payload }) {
       return showToast(locale.errors.facebookLoginError);
     case "LINKING_OPEN_URL_ERROR":
       return showToast(locale.errors.openURLError);
+    case "PROFILE_SENDING_PHONE_VALIDATION_ERROR":
     case "PROFILE_USER_SAVE_FAILURE":
     case "ADDRESS_ZIP_CODE_SEARCH_ERROR":
       return handleWithPayload();

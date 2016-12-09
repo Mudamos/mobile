@@ -125,6 +125,20 @@ const saveDocuments = ({ client }) => (authToken, { cpf, voteCard }) =>
     .send({ user: { cpf, voteidcard: voteCard }})
     .then(getData);
 
+const savePhone = ({ client }) => (authToken, payload) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/profile/mobile")
+    .send(payload)
+    .then(getData);
+
+const sendPhoneValidation = ({ client }) => (authToken, number) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/profile/mobile_pin")
+    .send({ mobile: { number }})
+    .then(getData);
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
@@ -134,8 +148,10 @@ export default function MobileApi(host) {
     profile: profile({ client }),
     saveBirthdate: saveBirthdate({ client }),
     saveDocuments: saveDocuments({ client }),
+    savePhone: savePhone({ client }),
     saveZipCode: saveZipCode({ client }),
     searchZipCode: searchZipCode({ client }),
+    sendPhoneValidation: sendPhoneValidation({ client }),
     signIn: signIn({ client }),
     signUp: signUp({ client }),
   };
