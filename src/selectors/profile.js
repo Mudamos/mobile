@@ -1,11 +1,17 @@
 import { User } from "../models";
 
 
+export const hasSentPhoneValidation = state => state.profile.hasSentPhoneValidation;
+
 export const isSavingProfile = state => state.profile.isSaving;
+
+export const isSendingPhoneValidation = state => state.profile.isSendingPhoneValidation;
 
 export const currentUser = state => state.profile.currentUser;
 
 export const profileSaveErrors = state => state.profile.errors;
+
+export const profileSendPhoneValidationErrors = state => state.profile.sendValidationErrors;
 
 export const isProfileComplete = state => state.profile.isProfileComplete;
 
@@ -31,5 +37,5 @@ export const isDocumentsProfileComplete = state => {
 
 export const isPhoneProfileComplete = state => {
   const currentUser = state.profile.currentUser || new User();
-  return !!currentUser.phone;
+  return currentUser.mobile.status;
 }

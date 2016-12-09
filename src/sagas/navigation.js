@@ -65,7 +65,12 @@ function* userProfileNavigator() {
         const goToScreen = firstScreenNotDone(screensDone);
         if (isDev) console.log("Go to profile screen: ", goToScreen);
 
-        yield put(navigate(goToScreen));
+        if (goToScreen) {
+          yield put(navigate(goToScreen));
+        } else {
+          // TODO: for now, as we should not reach this.
+          yield put(navigate("showPlip", { type: "reset" }));
+        }
       }
     } catch (e) {
       if (isDev) console.log("Error while navigating: ", e.message, e.stack, e);

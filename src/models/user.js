@@ -1,15 +1,21 @@
+import Mobile from "./mobile";
+
+
 export default class User {
   constructor(attrs = {}) {
     this.id = attrs.id;
-    this.name = attrs.name;
-    this.email = attrs.email;
-    this.voteCard = attrs.voteCard;
-    this.cpf = attrs.cpf;
-    this.zipCode = attrs.zipCode;
     this.birthdate = attrs.birthdate;
+    this.cpf = attrs.cpf;
+    this.email = attrs.email;
+    this.mobile = attrs.mobile || new Mobile();
+    this.name = attrs.name;
+    this.voteCard = attrs.voteCard;
+    this.zipCode = attrs.zipCode;
   }
 
   toJson() {
+    const mobileJson = this.mobile ? this.mobile.toJson() : {};
+
     return {
       userId: this.id,
       userName: this.name,
@@ -18,18 +24,21 @@ export default class User {
       userCpf: this.cpf,
       userZipcode: this.zipCode,
       userBirthday: this.birthdate,
+
+      ...mobileJson,
     }
   }
 
   static fromJson(json = {}) {
     return new User({
       id: json.userId,
-      name: json.userName,
-      email: json.profileEmail,
-      voteCard: json.userVoteidcard,
-      cpf: json.userCpf,
-      zipCode: json.userZipcode,
       birthdate: json.userBirthday,
+      cpf: json.userCpf,
+      email: json.profileEmail,
+      mobile: Mobile.fromJson(json),
+      name: json.userName,
+      voteCard: json.userVoteidcard,
+      zipCode: json.userZipcode,
     });
   }
 }

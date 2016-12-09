@@ -37,13 +37,14 @@ export default class MyFlatButton extends Component {
     } = this.props;
 
     const button = MKButton.flatButton()
-      .withOnPress(onPress)
       .withBackgroundColor("#fff")
       .withMaskBorderRadius(100)
       .withStyle(merge({ borderRadius: 100 }, style))
       .withTextStyle(textStyle);
 
-    if (!enabled) {
+    if (enabled) {
+      button.withOnPress(onPress);
+    } else {
       button.withRippleColor("transparent")
         .withMaskEnabled(false)
         .withMaskColor("transparent")

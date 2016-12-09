@@ -6,6 +6,23 @@ export default (state = initialState, action) => {
   switch (type) {
     case "PROFILE_SAVING":
       return { ...state, isSaving: payload.isSaving, errors: null };
+    case "PROFILE_SENDING_PHONE_VALIDATION":
+      return {
+        ...state,
+        isSendingPhoneValidation: payload.isSendingValidation,
+        hasSentPhoneValidation: false,
+        sendValidationErrors: null,
+      };
+    case "PROFILE_SENDING_PHONE_VALIDATION_ERROR":
+      return {
+        ...state,
+        sendValidationErrors: payload.error.validations,
+      };
+    case "PROFILE_PHONE_VALIDATION_SENT":
+      return {
+        ...state,
+        hasSentPhoneValidation: true,
+      };
     case "PROFILE_USER_UPDATED":
       return {
         ...state,
@@ -21,6 +38,9 @@ export default (state = initialState, action) => {
         isProfileComplete: false,
         isSaving: false,
         errors: null,
+        isSendingPhoneValidation: false,
+        hasSentPhoneValidation: false,
+        sendValidationErrors: null,
       };
     default:
       return state;
