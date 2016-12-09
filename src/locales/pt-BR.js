@@ -15,6 +15,7 @@ const translations = {
     facebookLoginError: "Erro ao tentar entrar com o facebook.",
     genericError: "Houve um erro ao tentar completar sua ação. Tente novamente.",
     loginError: "Houve um erro ao efetuar o login. Tente novamente.",
+    openURLError: "Não foi possível abrir a url",
   },
 };
 
