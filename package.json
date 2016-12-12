@@ -26,6 +26,7 @@
     "react-native": "0.37.0",
     "react-native-action-button": "^2.0.15",
     "react-native-config": "^0.1.2",
+    "react-native-device-info": "^0.9.7",
     "react-native-facebook-login": "^1.4.0",
     "react-native-fence-html": "^1.0.6",
     "react-native-keyboard-aware-scroll-view": "^0.2.4",
@@ -48,7 +49,7 @@
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "babel-jest": "17.0.0",
-    "babel-preset-react-native": "1.9.0",
+    "babel-preset-react-native": "^1.9.0",
     "eslint": "^3.9.1",
     "eslint-plugin-react": "^6.6.0",
     "jest": "17.0.0",

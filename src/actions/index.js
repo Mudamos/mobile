@@ -6,3 +6,4 @@ export * from "./plip";
 export * from "./profile";
 export * from "./navigation";
 export * from "./session";
+export * from "./wallet";

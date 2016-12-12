@@ -167,6 +167,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-device-info')
     compile project(':react-native-material-kit')
     compile project(':react-native-maps')
     compile project(':react-native-facebook-login')

@@ -35,6 +35,8 @@ function appError({ type, payload }) {
   switch (type) {
     case "AUTHENTICATION_LOGIN_ERROR":
       return handleWithPayload({ defaultMessage: locale.errors.loginError });
+    case "WALLET_CREATE_ERROR":
+      return showToast(locale.errors.walletCreationError);
     case "FACEBOOK_LOGIN_ERROR":
       return showToast(locale.errors.facebookLoginError);
     case "LINKING_OPEN_URL_ERROR":
