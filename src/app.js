@@ -23,6 +23,7 @@ import backAndroidHandler from "./back-android-handler";
 import MudamosWebApi from "./services/mudamos-web";
 import SessionManager from "./services/session";
 import MobileApi from "./services/mobile-api";
+import DeviceInfo from "./services/device-info";
 
 import reducer from "./reducers";
 import sagas from "./sagas";
@@ -72,6 +73,7 @@ const scenes = Actions.create(
 );
 
 sagaRunner.run(sagas, {
+  deviceInfo: DeviceInfo(),
   mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
   mobileApi: MobileApi(Config.MOBILE_API_URL),
   sessionStore,
