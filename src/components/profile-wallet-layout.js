@@ -11,7 +11,7 @@ import PageLoader from "./page-loader";
 
 import locale from "../locales/pt-BR";
 
-export default class ProfilePhoneLayout extends Component {
+export default class ProfileWalletLayout extends Component {
   static propTypes = {
     hasError: PropTypes.bool,
     isCreatingWallet: PropTypes.bool,
@@ -34,11 +34,13 @@ export default class ProfilePhoneLayout extends Component {
 
           {
             hasError &&
-              <FlatButton
-                title={locale.retry}
-                onPress={onRetry}
-                style={{marginHorizontal: 20}}
-              />
+              <View style={{flex: 1, justifyContent: "center"}}>
+                <FlatButton
+                  title={locale.retry}
+                  onPress={onRetry}
+                  style={{marginHorizontal: 20}}
+                />
+              </View>
           }
 
         </Layout>
