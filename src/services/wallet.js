@@ -1,31 +1,66 @@
 import LocalStorage from "./local-storage";
+import DeviceInfo from "./device-info";
 
 import crypto from "./crypto";
 
-import { isDev } from "../utils";
+import LibCrypto from "mudamos-libcrypto";
+
+import {
+  isDev,
+  moment,
+} from "../utils";
 
 const key = "wallet";
+const LANG = "BRAZILIAN-PORTUGUESE";
 
 export default root => {
   const storage = LocalStorage(root);
 
+  const create = password => {
+    const info = DeviceInfo.info();
+    if (isDev) console.log("Device info:", info);
+
+    const entropy = [
+      info.toString(),
+      moment().toISOString(),
+    ].join(";");
+
+    const seed = LibCrypto.createSeedAndWallet(LANG, entropy);
+    if (isDev) console.log("Seed:", seed);
+
+    return persist(seed.seed, password);
+  };
+
+  const valid = password => retrieve(password)
+    .then(currentSeed => currentSeed && LibCrypto.validateSeed(currentSeed));
+
+  const persist = (seed, password) => {
+    if (isDev) console.log("Will encrypt: ", seed, "password: ", password);
+
+    const encryptedSeed = crypto.encrypt(seed, password);
+
+    if (isDev) console.log("Seed encryption: ", encryptedSeed);
+    if (!encryptedSeed) return Promise.reject();
+
+    return storage.store(key, encryptedSeed);
+  };
+
+  const retrieve = password => {
+    return storage.fetch(key)
+      .then(encryptedSeed => {
+        if (!encryptedSeed) return;
+
+        return crypto.decrypt(encryptedSeed, password);
+      });
+  };
+
+  const destroy = () => storage.destroy(key);
+
   return {
-    persist: (seed, password) => {
-      const encryptedSeed = crypto.encrypt(seed, password);
-
-      if (isDev) console.log("Seed encryption: ", encryptedSeed);
-      if (!encryptedSeed) return Promise.reject();
-
-      return storage.store(key, encryptedSeed);
-    },
-    retrieve: password => {
-      return storage.fetch(key)
-        .then(encryptedSeed => {
-          if (!encryptedSeed) return;
-
-          return crypto.decrypt(encryptedSeed, password);
-        });
-    },
-    destroy: () => storage.destroy(key),
+    create: create,
+    valid: valid,
+    persist: persist,
+    retrieve: retrieve,
+    destroy: destroy,
   };
 }

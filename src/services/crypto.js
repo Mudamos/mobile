@@ -14,7 +14,7 @@ const encrypt = (text, password) => {
 
     return encryption;
   } catch (e) {
-    logError(e);
+    logError(e, { tag: "encrypt" });
   }
 };
 
@@ -27,7 +27,7 @@ const decrypt = (text, password) => {
 
     return decryption;
   } catch (e) {
-    logError(e);
+    logError(e, { tag: "decrypt" });
   }
 }
 

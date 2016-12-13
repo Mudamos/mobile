@@ -14,8 +14,8 @@ const getInfo = () => new Device({
   userAgent: DeviceInfo.getUserAgent(),
 });
 
-export default () => {
-  return {
-    info: getInfo,
-  };
-}
+const service = {
+  info: getInfo,
+};
+
+export default service;

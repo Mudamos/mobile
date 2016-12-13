@@ -32,12 +32,14 @@ export default class ProfilePhoneLayout extends Component {
         <Layout>
           <HeaderLogo />
 
-          <FlatButton
-            enabled={hasError}
-            title={locale.retry}
-            onPress={onRetry}
-            style={{marginHorizontal: 20}}
-          />
+          {
+            hasError &&
+              <FlatButton
+                title={locale.retry}
+                onPress={onRetry}
+                style={{marginHorizontal: 20}}
+              />
+          }
 
         </Layout>
       </View>

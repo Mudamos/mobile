@@ -19,7 +19,7 @@ export const isString = is(String);
 // eslint-disable-next-line no-undef
 export const isDev = __DEV__;
 
-export const logError = (error, { tag }) => isDev && console.log(tag ? `[${tag}] ` : "", error.message, error.stack, error);
+export const logError = (error, { tag } = {}) => isDev && console.log(tag ? `[${tag}] ` : "", error.message, error.stack, error);
 
 export const toCredential = (email, password) => new Buffer(`${email}:${password}`).toString("base64");
 
