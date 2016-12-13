@@ -11,7 +11,13 @@ import addressSaga from "./address";
 import linkingSaga from "./linking";
 import walletSaga from "./wallet";
 
-export default function* rootSaga({ deviceInfo, mudamosWebApi, mobileApi, sessionStore }) {
+export default function* rootSaga({
+  deviceInfo,
+  mudamosWebApi,
+  mobileApi,
+  sessionStore,
+  walletStore,
+}) {
   yield spawn(navigationSaga);
   yield spawn(facebookSaga, { sessionStore, mobileApi });
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
@@ -21,5 +27,5 @@ export default function* rootSaga({ deviceInfo, mudamosWebApi, mobileApi, sessio
   yield spawn(sessionSaga, { sessionStore });
   yield spawn(addressSaga, { mobileApi });
   yield spawn(linkingSaga);
-  yield spawn(walletSaga, { deviceInfo, mobileApi });
+  yield spawn(walletSaga, { deviceInfo, mobileApi, walletStore });
 }

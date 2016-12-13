@@ -39,3 +39,5 @@ export const isPhoneProfileComplete = state => {
   const currentUser = state.profile.currentUser || new User();
   return currentUser.mobile.status;
 }
+
+export const isWalletProfileComplete = state => !!state.wallet.hasWallet;

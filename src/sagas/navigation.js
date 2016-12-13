@@ -14,6 +14,7 @@ import {
   isMainProfileComplete,
   isBirthProfileComplete,
   isPhoneProfileComplete,
+  isWalletProfileComplete,
 } from "../selectors";
 
 import { navigate } from "../actions";
@@ -44,6 +45,7 @@ function* userProfileNavigator() {
     "profileAddress",
     "profileDocuments",
     "profilePhone",
+    "profileWallet",
   ];
 
   const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
@@ -60,6 +62,7 @@ function* userProfileNavigator() {
           yield select(isAddressProfileComplete),
           yield select(isDocumentsProfileComplete),
           yield select(isPhoneProfileComplete),
+          yield select(isWalletProfileComplete),
         ];
 
         const goToScreen = firstScreenNotDone(screensDone);
