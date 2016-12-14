@@ -10,38 +10,47 @@
     "test": "mocha --compilers js:babel-core/register --require spec/support.js 'spec/**/*.spec.js'",
     "build-ios-beta": " ipa build -w ios/MudamosMobile.xcworkspace -s 'MudamosMobileBeta' -d ios/ipa --ipa MudamosTagviewBeta.ipa",
     "build-android-beta": "ENVFILE=.env.beta android/gradlew -p android assembleMudamosBetaRelease",
-    "distribute-ios-beta": "ipa distribute:s3 -b mudamos-mobile-beta -f ios/ipa/MudamosTagviewBeta.ipa"
+    "distribute-ios-beta": "ipa distribute:s3 -b mudamos-mobile-beta -f ios/ipa/MudamosTagviewBeta.ipa",
+    "postinstall": "./node_modules/.bin/rn-nodeify --install vm,buffer,stream,events,crypto,assert,process,react-native-randombytes,react-native-crypto --hack"
   },
   "dependencies": {
-    "buffer": "^5.0.1",
+    "assert": "^1.4.1",
+    "buffer": "^3.6.0",
     "chai": "^3.5.0",
     "farfetch": "^0.7.0",
     "humps": "^2.0.0",
     "marked": "^0.3.6",
     "mocha": "^3.1.2",
     "moment": "^2.16.0",
+    "mudamos-libcrypto": "^0.6.1",
+    "process": "^0.11.9",
     "ramda": "^0.22.1",
     "react": "15.3.2",
     "react-addons-shallow-compare": "^15.4.0",
     "react-native": "0.37.0",
     "react-native-action-button": "^2.0.15",
     "react-native-config": "^0.1.2",
-    "react-native-device-info": "^0.9.7",
+    "react-native-crypto": "^2.0.1",
+    "react-native-device-info": "https://github.com/guimello/react-native-device-info",
     "react-native-facebook-login": "^1.4.0",
     "react-native-fence-html": "^1.0.6",
     "react-native-keyboard-aware-scroll-view": "^0.2.4",
     "react-native-maps": "^0.11.0",
     "react-native-material-kit": "git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25",
     "react-native-parallax-scroll-view": "^0.19.0",
+    "react-native-randombytes": "^2.2.0",
     "react-native-router-flux": "^3.37.0",
     "react-native-simple-toast": "^0.0.5",
     "react-native-spinkit": "^0.1.5",
     "react-native-vector-icons": "^3.0.0",
     "react-redux": "^4.4.5",
+    "readable-stream": "^1.0.33",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-saga": "^0.12.1",
-    "string-mask": "^0.3.0"
+    "stream-browserify": "^1.0.0",
+    "string-mask": "^0.3.0",
+    "vm-browserify": "0.0.4"
   },
   "jest": {
     "preset": "jest-react-native"
@@ -54,7 +63,8 @@
     "eslint-plugin-react": "^6.6.0",
     "jest": "17.0.0",
     "jest-react-native": "17.0.0",
-    "react-test-renderer": "15.3.2"
+    "react-test-renderer": "15.3.2",
+    "rn-nodeify": "^7.0.1"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
@@ -103,5 +113,25 @@
         "global"
       ]
     }
+  },
+  "react-native": {
+    "crypto": "react-native-crypto",
+    "_stream_transform": "readable-stream/transform",
+    "_stream_readable": "readable-stream/readable",
+    "_stream_writable": "readable-stream/writable",
+    "_stream_duplex": "readable-stream/duplex",
+    "_stream_passthrough": "readable-stream/passthrough",
+    "stream": "stream-browserify",
+    "vm": "vm-browserify"
+  },
+  "browser": {
+    "crypto": "react-native-crypto",
+    "_stream_transform": "readable-stream/transform",
+    "_stream_readable": "readable-stream/readable",
+    "_stream_writable": "readable-stream/writable",
+    "_stream_duplex": "readable-stream/duplex",
+    "_stream_passthrough": "readable-stream/passthrough",
+    "stream": "stream-browserify",
+    "vm": "vm-browserify"
   }
 }

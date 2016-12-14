@@ -11,3 +11,8 @@ export const createWalletError = error => ({
   type: "WALLET_CREATE_ERROR",
   payload: { error },
 });
+
+export const walletAvailable = hasWallet => ({
+  type: "WALLET_AVAILABLE",
+  payload: { hasWallet },
+});

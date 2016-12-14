@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.bitgo.randombytes.RandomBytesPackage;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.magus.fblogin.FacebookLoginPackage;
@@ -32,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNDeviceInfo(),
+            new RandomBytesPackage(),
             new ReactMaterialKitPackage(),
             new MapsPackage(),
             new FacebookLoginPackage(),

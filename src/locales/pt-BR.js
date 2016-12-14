@@ -11,6 +11,7 @@ const translations = {
   password: "Senha",
   phoneHeaderTitle: "Informe seu celular",
   resendCode: "Reenviar código",
+  retry: "Tentar novamente",
   search: "buscar",
   sendSMSCode: "Enviar código via SMS",
   verify: "Verificar",

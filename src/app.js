@@ -11,6 +11,7 @@ import {
   ProfileBirthContainer,
   ProfileDocumentsContainer,
   ProfilePhoneContainer,
+  ProfileWalletContainer,
   SignInContainer,
   SignUpContainer,
 } from "./containers";
@@ -22,8 +23,8 @@ import backAndroidHandler from "./back-android-handler";
 
 import MudamosWebApi from "./services/mudamos-web";
 import SessionManager from "./services/session";
+import WalletManager from "./services/wallet";
 import MobileApi from "./services/mobile-api";
-import DeviceInfo from "./services/device-info";
 
 import reducer from "./reducers";
 import sagas from "./sagas";
@@ -58,6 +59,7 @@ const store = __DEV__ ?
   createStore(reducer, applyMiddleware(sagaRunner));
 
 const sessionStore = SessionManager("@Mudamos");
+const walletStore = WalletManager("@Mudamos");
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -69,14 +71,15 @@ const scenes = Actions.create(
     <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
     <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
     <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
+    <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} title="Wallet" />
   </Scene>
 );
 
 sagaRunner.run(sagas, {
-  deviceInfo: DeviceInfo(),
   mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
   mobileApi: MobileApi(Config.MOBILE_API_URL),
   sessionStore,
+  walletStore,
 });
 
 store.dispatch(fetchSession());
