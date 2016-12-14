@@ -7,8 +7,9 @@ export const plipsFetched = plips => ({
   payload: { plips },
 });
 
-export const signPlip = () => ({
+export const signPlip = ({ plip }) => ({
   type: "PLIP_SIGN",
+  payload: { plip },
 });
 
 export const isSigningPlip = isSigning => ({

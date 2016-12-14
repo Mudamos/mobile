@@ -26,7 +26,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   retryPlip: () => dispatch(fetchPlips()),
   onLogout: () => dispatch(logout()),
-  onPlipSign: () => dispatch(signPlip()),
+  onPlipSign: plip => dispatch(signPlip({ plip })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlipLayout);

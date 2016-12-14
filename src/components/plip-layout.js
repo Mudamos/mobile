@@ -77,7 +77,6 @@ class PlipLayout extends Component {
   renderMainContent() {
     const {
       isSigning,
-      onPlipSign,
       plip,
     } = this.props;
 
@@ -131,12 +130,17 @@ class PlipLayout extends Component {
         </ParallaxScrollView>
 
         <ActionButton buttonColor="rgba(231,76,60,1)" offsetX={10} offsetY={0.1}>
-          <ActionButton.Item buttonColor="#1abc9c" title="Assinar" onPress={onPlipSign}>
+          <ActionButton.Item buttonColor="#1abc9c" title="Assinar" onPress={this.onPlipSign.bind(this)}>
             <Ionicon name="md-create"  style={{fontSize: 20, height: 22, color: "#fff"}}/>
           </ActionButton.Item>
         </ActionButton>
       </View>
     );
+  }
+
+  onPlipSign() {
+    const { plip, onPlipSign } = this.props;
+    onPlipSign(plip);
   }
 
   onScroll(event) {
