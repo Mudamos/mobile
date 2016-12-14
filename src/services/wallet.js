@@ -28,7 +28,8 @@ export default root => {
     const seed = LibCrypto.createSeedAndWallet(LANG, entropy);
     if (isDev) console.log("Seed:", seed);
 
-    return persist(seed.seed, password);
+    return persist(seed.seed, password)
+      .then(() => seed);
   };
 
   const valid = password => retrieve(password)

@@ -5,10 +5,12 @@ import {
   creatingWallet,
   createWalletError,
   profileStateMachine,
+  updatedUserProfile,
   walletAvailable,
 } from "../actions";
 
 import {
+  currentAuthToken,
   currentUser,
 } from "../selectors";
 
@@ -16,6 +18,8 @@ import {
   isDev,
   logError,
 } from "../utils";
+
+import { User } from "../models";
 
 
 // eslint-disable-next-line no-unused-vars
@@ -28,7 +32,13 @@ function* createWallet({ mobileApi, walletStore }) {
       const valid = yield call(walletStore.valid, user.voteCard);
 
       if (!valid) {
-        yield call(walletStore.create, user.voteCard);
+        const seed = yield call(walletStore.create, user.voteCard);
+
+        const authToken = yield select(currentAuthToken);
+        const response = yield call(mobileApi.saveWallet, authToken, seed.publicKey);
+        const newUser = User.fromJson(response.user);
+
+        yield put(updatedUserProfile({ user: newUser, profileComplete: response.complete }));
       } else {
         if (isDev) console.log("Valid seed");
       }

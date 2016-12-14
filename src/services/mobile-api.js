@@ -139,6 +139,13 @@ const sendPhoneValidation = ({ client }) => (authToken, number) =>
     .send({ mobile: { number }})
     .then(getData);
 
+const saveWallet = ({ client }) => (authToken, walletKey) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/profile/wallet")
+    .send({ user: { walletKey }})
+    .then(getData);
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
@@ -149,6 +156,7 @@ export default function MobileApi(host) {
     saveBirthdate: saveBirthdate({ client }),
     saveDocuments: saveDocuments({ client }),
     savePhone: savePhone({ client }),
+    saveWallet: saveWallet({ client }),
     saveZipCode: saveZipCode({ client }),
     searchZipCode: searchZipCode({ client }),
     sendPhoneValidation: sendPhoneValidation({ client }),

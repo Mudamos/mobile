@@ -1,4 +1,5 @@
 import Mobile from "./mobile";
+import Wallet from "./wallet";
 
 
 export default class User {
@@ -10,11 +11,13 @@ export default class User {
     this.mobile = attrs.mobile || new Mobile();
     this.name = attrs.name;
     this.voteCard = attrs.voteCard;
+    this.wallet = attrs.wallet || new Wallet();
     this.zipCode = attrs.zipCode;
   }
 
   toJson() {
     const mobileJson = this.mobile ? this.mobile.toJson() : {};
+    const walletJson = this.wallet ? this.wallet.toJson() : {};
 
     return {
       userId: this.id,
@@ -26,6 +29,7 @@ export default class User {
       userBirthday: this.birthdate,
 
       ...mobileJson,
+      ...walletJson,
     }
   }
 
@@ -38,6 +42,7 @@ export default class User {
       mobile: Mobile.fromJson(json),
       name: json.userName,
       voteCard: json.userVoteidcard,
+      wallet: Wallet.fromJson(json),
       zipCode: json.userZipcode,
     });
   }
