@@ -2,6 +2,7 @@ import { takeLatest } from "redux-saga";
 import { call, put, spawn, select } from "redux-saga/effects";
 
 import {
+  isFetchingProfile,
   savingProfile,
   updatedUserProfile,
   phoneValidationSent,
@@ -12,7 +13,7 @@ import {
   logginSucceeded,
 } from "../actions";
 
-import { currentAuthToken } from "../selectors";
+import { currentAuthToken, currentUser } from "../selectors";
 
 import {
   User,
@@ -197,6 +198,27 @@ function* savePhoneProfile({ mobileApi }) {
   });
 }
 
+
+export function* fetchProfile({ mobileApi }) {
+  try {
+    yield put(isFetchingProfile(true));
+    let user = yield select(currentUser);
+
+    if (user) return user;
+
+    const authToken = yield select(currentAuthToken);
+    if (!authToken) return;
+
+    const response = yield call(mobileApi.profile, authToken);
+    user = User.fromJson(response.user);
+
+    yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+
+    return user;
+  } finally {
+    yield put(isFetchingProfile(false));
+  }
+}
 
 export default function* profileSaga({ mobileApi, sessionStore }) {
   yield spawn(saveMainProfile, { mobileApi, sessionStore });

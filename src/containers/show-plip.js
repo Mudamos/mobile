@@ -2,11 +2,14 @@ import { connect } from "react-redux";
 
 import {
   fetchPlips,
-  navigate,
+  logout,
+  signPlip,
 } from "../actions";
 import {
   findCurrentPlip,
   isFetchingPlips,
+  isSigningPlip,
+  isUserLoggedIn,
   errorFetchingPlips,
 } from "../selectors";
 
@@ -14,13 +17,16 @@ import PlipLayout from "../components/plip-layout";
 
 const mapStateToProps = state => ({
   plip: findCurrentPlip(state),
-  isFetching: isFetchingPlips(state),
+  isFetchingPlip: isFetchingPlips(state),
+  isSigning: isSigningPlip(state),
+  isUserLoggedIn: isUserLoggedIn(state),
   errorFetchingPlips: errorFetchingPlips(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   retryPlip: () => dispatch(fetchPlips()),
-  onPlipSign: () => dispatch(navigate("signIn")),
+  onLogout: () => dispatch(logout()),
+  onPlipSign: () => dispatch(signPlip()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlipLayout);

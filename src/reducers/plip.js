@@ -17,6 +17,11 @@ export default  (state = initialState, action) => {
         errorFetchingPlips: null,
         isFetchingPlips: true,
       };
+    case "PLIP_SIGNING":
+      return {
+        ...state,
+        isSigning: payload.isSigning,
+      };
     case "ERROR_FETCHING_PLIPS":
       return {
         ...state,

@@ -4,6 +4,8 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case "PROFILE_FETCHING":
+      return { ...state, isFetching: payload.isFetching };
     case "PROFILE_SAVING":
       return { ...state, isSaving: payload.isSaving, errors: null };
     case "PROFILE_SENDING_PHONE_VALIDATION":
@@ -36,6 +38,7 @@ export default (state = initialState, action) => {
         ...state,
         currentUser: null,
         isProfileComplete: false,
+        isFetching: false,
         isSaving: false,
         errors: null,
         isSendingPhoneValidation: false,

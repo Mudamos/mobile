@@ -39,6 +39,20 @@ function* backward() {
 }
 
 function* userProfileNavigator() {
+  // Defines a state machine for the user profile screens
+  yield takeLatest("USER_PROFILE_NAVIGATOR", function* () {
+    try {
+      const { key, ...args } = yield call(profileScreenForCurrentUser);
+      if (isDev) console.log("Go to profile screen: ", key);
+
+      yield put(navigate(key, args));
+    } catch (e) {
+      if (isDev) console.log("Error while navigating: ", e.message, e.stack, e);
+    }
+  });
+}
+
+export function* profileScreenForCurrentUser() {
   const screenKeys = [
     "signUp",
     "profileBirth",
@@ -49,36 +63,27 @@ function* userProfileNavigator() {
   ];
 
   const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
+  const showPlipKey = "showPlip";
 
-  // Defines a state machine for the user profile screens
-  yield takeLatest("USER_PROFILE_NAVIGATOR", function* () {
-    try {
-      if (yield select(isProfileComplete)) {
-        yield put(navigate("showPlip", { type: "reset" }));
-      } else {
-        const screensDone = [
-          yield select(isMainProfileComplete),
-          yield select(isBirthProfileComplete),
-          yield select(isAddressProfileComplete),
-          yield select(isDocumentsProfileComplete),
-          yield select(isPhoneProfileComplete),
-          yield select(isWalletProfileComplete),
-        ];
+  if (yield select(isProfileComplete)) {
+    return { key: showPlipKey, type: "reset" };
+  } else {
+    const screensDone = [
+      yield select(isMainProfileComplete),
+      yield select(isBirthProfileComplete),
+      yield select(isAddressProfileComplete),
+      yield select(isDocumentsProfileComplete),
+      yield select(isPhoneProfileComplete),
+      yield select(isWalletProfileComplete),
+    ];
 
-        const goToScreen = firstScreenNotDone(screensDone);
-        if (isDev) console.log("Go to profile screen: ", goToScreen);
+    const goToScreen = firstScreenNotDone(screensDone);
 
-        if (goToScreen) {
-          yield put(navigate(goToScreen));
-        } else {
-          // TODO: for now, as we should not reach this.
-          yield put(navigate("showPlip", { type: "reset" }));
-        }
-      }
-    } catch (e) {
-      if (isDev) console.log("Error while navigating: ", e.message, e.stack, e);
-    }
-  });
+    if (goToScreen) return { key: goToScreen };
+
+    // TODO: for now, as we should not reach this.
+    return { key: showPlipKey, type: "reset" };
+  }
 }
 
 export default function* navigationSaga() {

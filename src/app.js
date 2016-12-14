@@ -16,7 +16,10 @@ import {
   SignUpContainer,
 } from "./containers";
 
-import { fetchSession } from "./actions";
+import {
+  existsLocalWallet,
+  fetchSession,
+} from "./actions";
 
 import routeReducer from "./services/route-reducer";
 import backAndroidHandler from "./back-android-handler";
@@ -83,6 +86,7 @@ sagaRunner.run(sagas, {
 });
 
 store.dispatch(fetchSession());
+store.dispatch(existsLocalWallet());
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 

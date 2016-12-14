@@ -1,3 +1,8 @@
+export const isFetchingProfile = isFetching => ({
+  type: "PROFILE_FETCHING",
+  payload: { isFetching },
+});
+
 export const phoneValidationSent = () => ({
   type: "PROFILE_PHONE_VALIDATION_SENT",
 });

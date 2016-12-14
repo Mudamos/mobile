@@ -22,12 +22,19 @@ import style, { parallaxScrollView } from "../styles/plip-show";
 import MarkdownView from "../containers/markdown-view";
 
 class PlipLayout extends Component {
+  state = {
+    hasScroll: false,
+  };
+
   static propTypes = {
     errorFetchingPlips: PropTypes.object,
-    isFetching: PropTypes.bool.isRequired,
+    isFetchingPlip: PropTypes.bool.isRequired,
+    isSigning: PropTypes.bool,
+    isUserLoggedIn: PropTypes.bool,
     navigationState: PropTypes.object.isRequired,
     plip: PropTypes.object.isRequired,
     retryPlip: PropTypes.func.isRequired,
+    onLogout: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
   };
 
@@ -50,34 +57,45 @@ class PlipLayout extends Component {
 
   render() {
     const {
-      isFetching,
+      isFetchingPlip,
       errorFetchingPlips,
     } = this.props;
 
     return (
       <View style={style.container}>
-        <PageLoader isVisible={isFetching} />
+        <PageLoader isVisible={isFetchingPlip} />
 
         <Layout>
-          { isFetching && this.renderNavBar() }
+          { isFetchingPlip && this.renderNavBar() }
           { errorFetchingPlips && this.renderRetry() }
-          { !errorFetchingPlips && !isFetching && this.renderMainContent() }
+          { !errorFetchingPlips && !isFetchingPlip && this.renderMainContent() }
         </Layout>
       </View>
     );
   }
 
   renderMainContent() {
-    const { onPlipSign, plip } = this.props;
+    const {
+      isSigning,
+      onPlipSign,
+      plip,
+    } = this.props;
+
+    const { stickyHeaderHeight, ...parallaxOptions } = parallaxScrollView;
+
 
     return (
       <View style={{flex: 1}}>
+        <PageLoader isVisible={isSigning} />
 
         <ParallaxScrollView
           style={style.scrollView.style}
           bounces={false}
-          {...parallaxScrollView}
+          {...parallaxOptions}
+          stickyHeaderHeight={ this.state.hasScroll ? stickyHeaderHeight : 1 }
           backgroundSpeed={10}
+          onScroll={this.onScroll.bind(this)}
+          scrollEventThrottle={700}
 
           renderBackground={this.renderBackground.bind(this)}
 
@@ -121,6 +139,16 @@ class PlipLayout extends Component {
     );
   }
 
+  onScroll(event) {
+    const hasScroll = event.nativeEvent.contentOffset.y > 0;
+    const oldHasScroll = this.state.hasScroll;
+
+    // Hack to allow click when we have a stick header
+    if (hasScroll !== oldHasScroll) {
+      this.setState({ hasScroll });
+    }
+  }
+
   renderDaysLeft() {
     return (
       <View style={{flex: 1}}>
@@ -131,10 +159,26 @@ class PlipLayout extends Component {
   }
 
   renderNavBar() {
-    const { navigationState } = this.props;
+    const {
+      isUserLoggedIn,
+      navigationState,
+      onLogout,
+    } = this.props;
+
+    const leftView = isUserLoggedIn ? (
+      <Text
+        style={{color: "#fff"}}
+        onPress={onLogout}
+      >
+        Logout
+      </Text>
+    ) : null;
 
     return (
-      <NavigationBar title={navigationState.title} />
+      <NavigationBar
+        leftView={leftView}
+        title={navigationState.title}
+      />
     );
   }
 

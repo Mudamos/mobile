@@ -1,4 +1,4 @@
-import { takeLatest } from "redux-saga";
+import { takeLatest, takeEvery } from "redux-saga";
 import { call, put, select, spawn } from "redux-saga/effects";
 
 import {
@@ -56,7 +56,15 @@ function* createWallet({ mobileApi, walletStore }) {
   });
 }
 
+function* hasLocalWallet({ walletStore }) {
+  yield takeEvery("WALLET_HAS_LOCAL", function* () {
+    const hasWallet = yield call(walletStore.exists);
+    yield put(walletAvailable(hasWallet));
+  });
+}
+
 
 export default function* walletSaga({ mobileApi, walletStore }) {
   yield spawn(createWallet, { mobileApi, walletStore });
+  yield spawn(hasLocalWallet, { walletStore });
 }

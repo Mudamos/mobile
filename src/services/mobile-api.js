@@ -146,11 +146,18 @@ const saveWallet = ({ client }) => (authToken, walletKey) =>
     .send({ user: { walletKey }})
     .then(getData);
 
+const fetchDifficulty = ({ client }) => authToken =>
+  authorizedClient(client, authToken)
+    .get("/config/difficulty")
+    .then(getData)
+    .then(data => data.config.value);
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
 
   return {
+    difficulty: fetchDifficulty({ client }),
     fbSignIn: fbSignIn({ client }),
     profile: profile({ client }),
     saveBirthdate: saveBirthdate({ client }),
