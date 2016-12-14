@@ -16,3 +16,7 @@ export const walletAvailable = hasWallet => ({
   type: "WALLET_AVAILABLE",
   payload: { hasWallet },
 });
+
+export const existsLocalWallet = () => ({
+  type: "WALLET_HAS_LOCAL",
+});

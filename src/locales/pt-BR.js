@@ -22,6 +22,7 @@ const translations = {
     genericError: "Houve um erro ao tentar completar sua ação. Tente novamente.",
     loginError: "Houve um erro ao efetuar o login. Tente novamente.",
     openURLError: "Não foi possível abrir a url",
+    signPlipError: "Houve um erro ao efetuar sua assinatura. Tente novamente.",
     walletCreationError: "Houve um erro ao preparar algumas informações para suas assinaturas.",
   },
 };

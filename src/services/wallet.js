@@ -57,9 +57,12 @@ export default root => {
 
   const destroy = () => storage.destroy(key);
 
+  const exists = () => storage.fetch(key).then(seed => !!seed);
+
   return {
     create: create,
     valid: valid,
+    exists: exists,
     persist: persist,
     retrieve: retrieve,
     destroy: destroy,

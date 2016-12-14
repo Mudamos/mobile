@@ -20,7 +20,7 @@ export default function* rootSaga({
   yield spawn(navigationSaga);
   yield spawn(facebookSaga, { sessionStore, mobileApi });
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
-  yield spawn(plipSaga, { mudamosWebApi });
+  yield spawn(plipSaga, { mobileApi, mudamosWebApi });
   yield spawn(profileSaga, { mobileApi, sessionStore });
   yield spawn(errorSaga);
   yield spawn(sessionSaga, { sessionStore });

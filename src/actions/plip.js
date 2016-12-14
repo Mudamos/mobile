@@ -7,6 +7,20 @@ export const plipsFetched = plips => ({
   payload: { plips },
 });
 
+export const signPlip = () => ({
+  type: "PLIP_SIGN",
+});
+
+export const isSigningPlip = isSigning => ({
+  type: "PLIP_SIGNING",
+  payload: { isSigning },
+});
+
+export const plipSignError = error => ({
+  type: "PLIP_SIGN_ERROR",
+  payload: { error },
+})
+
 export const plipsFetchError = error => ({
   type: "ERROR_FETCHING_PLIPS",
   payload: { error },
