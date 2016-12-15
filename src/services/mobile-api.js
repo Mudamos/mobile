@@ -152,6 +152,18 @@ const fetchDifficulty = ({ client }) => authToken =>
     .then(getData)
     .then(data => parseInt(data.config.value, 10));
 
+const signPlip = ({ client }) => (authToken, signMessage) => {
+  return Promise.resolve({
+    signMessage: { dateTime: "2016-11-15T19:20:30" },
+  });
+  // eslint-disable-next-line no-unreachable
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/message/sign")
+    .send({ signMessage })
+    .then(getData);
+};
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
@@ -169,5 +181,6 @@ export default function MobileApi(host) {
     sendPhoneValidation: sendPhoneValidation({ client }),
     signIn: signIn({ client }),
     signUp: signUp({ client }),
+    signPlip: signPlip({ client }),
   };
 }
