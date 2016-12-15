@@ -1,5 +1,6 @@
 import {
   find,
+  head,
   is,
   propEq,
 } from "ramda";
@@ -15,6 +16,8 @@ moment.locale("pt-br");
 export { moment };
 
 export const isString = is(String);
+
+export const first = list => head(list || []);
 
 // eslint-disable-next-line no-undef
 export const isDev = __DEV__;

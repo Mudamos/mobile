@@ -164,6 +164,16 @@ const signPlip = ({ client }) => (authToken, signMessage) => {
     .then(getData);
 };
 
+const userSignInfo = ({ client }) => (authToken, plipId) => {
+  return Promise.resolve({
+    signMessage: { dateTime: "2016-11-14T19:20:30" },
+  });
+  // eslint-disable-next-line no-unreachable
+  authorizedClient(client, authToken)
+    .get(`/user/message/${plipId}`)
+    .then(getData);
+};
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
@@ -182,5 +192,6 @@ export default function MobileApi(host) {
     signIn: signIn({ client }),
     signUp: signUp({ client }),
     signPlip: signPlip({ client }),
+    userSignInfo: userSignInfo({ client }),
   };
 }

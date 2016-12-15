@@ -17,9 +17,8 @@ class Container extends Component {
     onCreateWallet: PropTypes.func.isRequired,
   }
 
-  constructor(props) {
-    super(props);
-    props.onCreateWallet(); // Fire the wallet creation
+  componentWillMount() {
+    this.props.onCreateWallet(); // Fire the wallet creation
   }
 
   render() {

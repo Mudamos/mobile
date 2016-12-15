@@ -24,10 +24,12 @@ function* forward() {
   yield takeEvery("NAVIGATE", function* ({ payload }) {
     const { route, params } = payload;
 
+    if (isDev) console.log("Will navigate with: ", route, params);
+
     try {
       yield call(Actions[route], params);
     } catch(e) {
-      console.log(e);
+      if (isDev) console.log(e);
     }
   });
 }
