@@ -1,7 +1,7 @@
 import { takeLatest } from "redux-saga";
 import { call, spawn, put, select } from "redux-saga/effects";
 
-import { logError } from "../utils";
+import { logError, moment } from "../utils";
 
 import {
   fetchPlips as fetchPlipsAction,
@@ -19,6 +19,17 @@ import {
 import { fetchProfile } from "./profile";
 import { profileScreenForCurrentUser } from "./navigation";
 
+import LibCrypto from "mudamos-libcrypto";
+
+const buildSignMessage = ({ user, plip }) => [
+  user.name,
+  user.zipCode,
+  user.voteCard,
+  moment().toISOString(),
+  plip.cycle.name,
+  plip.id,
+].join(";");
+
 export function* fetchPlips({ mudamosWebApi }) {
   yield takeLatest("FETCH_PLIPS", function* () {
     try {
@@ -30,9 +41,11 @@ export function* fetchPlips({ mudamosWebApi }) {
   });
 }
 
-function* signPlip({ mobileApi }) {
-  yield takeLatest("PLIP_SIGN", function* () {
+function* signPlip({ mobileApi, walletStore }) {
+  yield takeLatest("PLIP_SIGN", function* ({ payload }) {
     try {
+      const { plip } = payload;
+
       yield put(isSigningPlip(true));
 
       const user = yield call(fetchProfile, { mobileApi });
@@ -45,8 +58,13 @@ function* signPlip({ mobileApi }) {
       if (screenKey !== "showPlip") return yield put(navigate(screenKey, screenArgs));
 
       const authToken = yield select(currentAuthToken);
+
       const difficulty = yield call(mobileApi.difficulty, authToken);
-      console.log("Sign difficulty:", difficulty);
+      const seed = yield call(walletStore.retrieve, user.voteCard);
+      const message = buildSignMessage({ user, plip });
+      const result = LibCrypto.signMessage(seed, message, difficulty);
+
+      console.log("Sign result:", result);
     } catch(e) {
       logError(e);
 
@@ -57,9 +75,9 @@ function* signPlip({ mobileApi }) {
   });
 }
 
-export default function* plipSaga({ mobileApi, mudamosWebApi }) {
+export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore }) {
   yield spawn(fetchPlips, { mudamosWebApi });
-  yield spawn(signPlip, { mobileApi });
+  yield spawn(signPlip, { mobileApi, walletStore });
 
   yield put(fetchPlipsAction());
 }

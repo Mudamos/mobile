@@ -150,7 +150,7 @@ const fetchDifficulty = ({ client }) => authToken =>
   authorizedClient(client, authToken)
     .get("/config/difficulty")
     .then(getData)
-    .then(data => data.config.value);
+    .then(data => parseInt(data.config.value, 10));
 
 
 export default function MobileApi(host) {
