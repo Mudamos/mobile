@@ -70,15 +70,13 @@ const scenes = Actions.create(
       <Scene key="plipPage" initial={true} component={PlipContainer} hideNavBar={true} />
     </Scene>
 
-    <Scene key="signIn" hideNavBar={true} type="reset">
-      <Scene key="firstSignIn" component={SignInContainer} hideNavBar={true} />
-      <Scene key="signUp" component={SignUpContainer} hideNavBar={true} title="Identificação" />
-      <Scene key="profileBirth" component={ProfileBirthContainer} hideNavBar={true} title="Data de Nascimento" />
-      <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
-      <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
-      <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
-      <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} title="Wallet" />
-    </Scene>
+    <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
+    <Scene key="signUp" component={SignUpContainer} hideNavBar={true} title="Identificação" />
+    <Scene key="profileBirth" component={ProfileBirthContainer} hideNavBar={true} title="Data de Nascimento" />
+    <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
+    <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
+    <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
+    <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} title="Wallet" />
   </Scene>
 );
 

@@ -15,6 +15,7 @@ export const navigationHappened = ({ sceneKey }) => ({
   payload: { sceneKey },
 })
 
-export const profileStateMachine = () => ({
+export const profileStateMachine = (params = {}) => ({
   type: "USER_PROFILE_NAVIGATOR",
+  payload: { params: params || {} },
 });

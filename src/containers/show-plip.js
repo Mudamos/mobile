@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 
-import { moment } from "../utils";
+import { isDev, moment } from "../utils";
 
 import {
   fetchPlips,
@@ -19,6 +19,8 @@ import {
 
 import PlipLayout from "../components/plip-layout";
 
+import Toast from "react-native-simple-toast";
+
 class Container extends Component {
   static propTypes = {
     errorFetchingPlips: PropTypes.bool,
@@ -35,6 +37,7 @@ class Container extends Component {
   };
 
   componentWillMount() {
+    if (isDev) Toast.show("Plip componentWillMount");
     this.props.onPlipsFetch();
   }
 

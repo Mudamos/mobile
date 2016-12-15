@@ -8,6 +8,7 @@ import { isDev } from "../utils";
 import { findIndex } from "ramda";
 
 import {
+  isUserLoggedIn,
   isAddressProfileComplete,
   isDocumentsProfileComplete,
   isProfileComplete,
@@ -17,7 +18,7 @@ import {
   isWalletProfileComplete,
 } from "../selectors";
 
-import { navigate } from "../actions";
+import { fetchPlips, navigate } from "../actions";
 
 
 function* forward() {
@@ -42,12 +43,16 @@ function* backward() {
 
 function* userProfileNavigator() {
   // Defines a state machine for the user profile screens
-  yield takeLatest("USER_PROFILE_NAVIGATOR", function* () {
+  yield takeLatest("USER_PROFILE_NAVIGATOR", function* ({ payload }) {
     try {
-      const { key, ...args } = yield call(profileScreenForCurrentUser);
-      if (isDev) console.log("Go to profile screen: ", key);
+      const { params } = payload;
 
-      yield put(navigate(key, args));
+      const { key, ...args } = yield call(profileScreenForCurrentUser);
+      const options = { ...args, ...params };
+
+      if (isDev) console.log("Go to profile screen: ", key, options);
+
+      yield put(navigate(key, options));
     } catch (e) {
       if (isDev) console.log("Error while navigating: ", e.message, e.stack, e);
     }
