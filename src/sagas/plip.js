@@ -69,7 +69,6 @@ function* signPlip({ mobileApi, walletStore }) {
 
       const apiResult = yield call(mobileApi.signPlip, authToken, {
         petitionId: plip.id,
-        walletKey: user.wallet.key,
         message,
       });
 
