@@ -8,7 +8,6 @@ import { isDev } from "../utils";
 import { findIndex } from "ramda";
 
 import {
-  isUserLoggedIn,
   isAddressProfileComplete,
   isDocumentsProfileComplete,
   isProfileComplete,
@@ -18,7 +17,7 @@ import {
   isWalletProfileComplete,
 } from "../selectors";
 
-import { fetchPlips, navigate } from "../actions";
+import { navigate } from "../actions";
 
 
 function* forward() {
