@@ -76,7 +76,7 @@ const scenes = Actions.create(
     <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
     <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
     <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
-    <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} title="Wallet" />
+    <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
   </Scene>
 );
 
