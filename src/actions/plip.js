@@ -26,3 +26,8 @@ export const plipsFetchError = error => ({
   type: "ERROR_FETCHING_PLIPS",
   payload: { error },
 })
+
+export const plipUserSignInfo = ({ plipId, info }) => ({
+  type: "PLIP_USER_SIGN_INFO",
+  payload: { plipId, info },
+})

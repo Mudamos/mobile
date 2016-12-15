@@ -1,7 +1,7 @@
 import { takeLatest } from "redux-saga";
 import { call, spawn, put, select } from "redux-saga/effects";
 
-import { logError, moment } from "../utils";
+import { isDev, logError, moment } from "../utils";
 
 import {
   fetchPlips as fetchPlipsAction,
@@ -10,6 +10,7 @@ import {
   plipsFetched,
   plipsFetchError,
   plipSignError,
+  plipUserSignInfo,
 } from "../actions";
 
 import {
@@ -64,7 +65,17 @@ function* signPlip({ mobileApi, walletStore }) {
       const message = buildSignMessage({ user, plip });
       const result = LibCrypto.signMessage(seed, message, difficulty);
 
-      console.log("Sign result:", result);
+      if (isDev) console.log("Sign result:", result);
+
+      const apiResult = yield call(mobileApi.signPlip, authToken, {
+        petitionId: plip.id,
+        walletKey: user.wallet.key,
+        message,
+      });
+
+      if (isDev) console.log("Sign api result:", apiResult);
+
+      yield put(plipUserSignInfo({ plipId: plip.id, info: apiResult.signMessage }));
     } catch(e) {
       logError(e);
 
