@@ -17,6 +17,7 @@ const defaultBackAction = () => {
 export default store => () => {
   const state = store.getState();
   const currentKey = state.navigation.currentKey || "";
+  const loggedIn = !!state.session.token;
 
   if (isDev) console.log("Current scene key: ", currentKey);
 
@@ -25,7 +26,9 @@ export default store => () => {
     case "profileBirth":
     case "profileDocuments":
     case "profilePhone":
-    case "signUp": return false
+      return false;
+    case "signUp":
+      return loggedIn ? false : defaultBackAction();
     default:
       return defaultBackAction();
   }

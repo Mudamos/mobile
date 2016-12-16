@@ -4,27 +4,21 @@ const initialState = {
 
 export default  (state = initialState, action) => {
   const { type, payload } = action;
-  let userSignInfo;
-
-  if (type === "PLIP_USER_SIGN_INFO") {
-    userSignInfo = { ...state.userSignInfo };
-    userSignInfo[payload.plipId] = payload.info;
-  }
 
   switch (type) {
+    case "PLIP_SET_CURRENT_PLIP":
+      return { ...state, currentPlip: payload.currentPlip };
     case "PLIPS_FETCHED":
       return {
         ...state,
         plips: payload.plips,
-        errorFetchingPlips: null,
-        isFetchingPlips: false,
       };
-    case "FETCH_PLIPS":
+    case "PLIPS_FETCHING":
       return {
         ...state,
-        errorFetchingPlips: null,
-        isFetchingPlips: true,
-      };
+        isFetchingPlips: payload.isFetching,
+        errorFetchingPlips: false,
+    };
     case "PLIP_SIGNING":
       return {
         ...state,
@@ -33,13 +27,20 @@ export default  (state = initialState, action) => {
     case "PLIP_USER_SIGN_INFO":
       return {
         ...state,
-        userSignInfo,
+        userSignInfo: {
+          ...state.userSignInfo,
+          [payload.plipId]: payload.info,
+        },
+      };
+    case "PLIP_FETCHING_USER_SIGN_INFO":
+      return {
+        ...state,
+        isFetchingUserSignInfo: payload.isFetchingUserSignInfo,
       };
     case "ERROR_FETCHING_PLIPS":
       return {
         ...state,
-        errorFetchingPlips: payload.error.json,
-        isFetchingPlips: false,
+        errorFetchingPlips: true,
       };
     case "SESSION_CLEAR_SESSION":
       return {

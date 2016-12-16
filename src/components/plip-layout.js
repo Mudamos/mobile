@@ -27,28 +27,29 @@ class PlipLayout extends Component {
   };
 
   static propTypes = {
-    errorFetchingPlips: PropTypes.object,
+    errorFetchingPlips: PropTypes.bool,
     isFetchingPlip: PropTypes.bool.isRequired,
     isSigning: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     navigationState: PropTypes.object.isRequired,
-    plip: PropTypes.object.isRequired,
+    plip: PropTypes.object,
+    plipSignDate: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
   };
 
-  static defaultProps = {
-    plip: {},
-  };
-
   get plipName() {
     const { plip } = this.props;
+    if (!plip) return;
+
     return plip.cycle && plip.cycle.name;
   }
 
   get daysLeft() {
     const { plip } = this.props;
+    if (!plip) return;
+
     const start = moment(plip.cycle.initialDate);
     const end = moment(plip.cycle.finalDate);
 
@@ -78,6 +79,7 @@ class PlipLayout extends Component {
     const {
       isSigning,
       plip,
+      plipSignDate,
     } = this.props;
 
     const { stickyHeaderHeight, ...parallaxOptions } = parallaxScrollView;
@@ -118,22 +120,35 @@ class PlipLayout extends Component {
           >
           <View style={{ flex: 1 }}>
             <View style={{height: 50, backgroundColor: "#ccc", padding: 10}}>
-              <View style={{flexDirection: "row"}}>
-                { !!this.daysLeft && this.renderDaysLeft()}
-                { !this.daysLeft && <Text>Petição finalizada</Text>}
-              </View>
+            {
+              !plipSignDate &&
+                <View style={{flexDirection: "row"}}>
+                  { !!this.daysLeft && this.renderDaysLeft()}
+                  { !this.daysLeft && <Text>Petição finalizada</Text>}
+                </View>
+            }
+            {
+              plipSignDate &&
+                <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                  <Text>Projeto Assinado</Text>
+                  <Text>{plipSignDate.format("DD/MM/YYYY HH:mm:ss")}</Text>
+                </View>
+            }
             </View>
             <View style={{ paddingLeft: 10, paddingRight: 10 }}>
-              <MarkdownView content={plip.content} />
+            { plip && <MarkdownView content={plip.content} /> }
             </View>
           </View>
         </ParallaxScrollView>
 
-        <ActionButton buttonColor="rgba(231,76,60,1)" offsetX={10} offsetY={0.1}>
-          <ActionButton.Item buttonColor="#1abc9c" title="Assinar" onPress={this.onPlipSign.bind(this)}>
-            <Ionicon name="md-create"  style={{fontSize: 20, height: 22, color: "#fff"}}/>
-          </ActionButton.Item>
-        </ActionButton>
+        {
+          plip && !plipSignDate &&
+          <ActionButton buttonColor="rgba(231,76,60,1)" offsetX={10} offsetY={0.1}>
+            <ActionButton.Item buttonColor="#1abc9c" title="Assinar" onPress={this.onPlipSign.bind(this)}>
+              <Ionicon name="md-create"  style={{fontSize: 20, height: 22, color: "#fff"}}/>
+            </ActionButton.Item>
+          </ActionButton>
+        }
       </View>
     );
   }
@@ -200,7 +215,7 @@ class PlipLayout extends Component {
 
     return (
       <View style={style.backgroundContainer}>
-        {plip.cycle && <NetworkImage source={{ uri: plip.cycle.pictures.original }} style={style.imageCall}/>}
+        {plip && plip.cycle && <NetworkImage source={{ uri: plip.cycle.pictures.original }} style={style.imageCall}/>}
       </View>
     );
   }

@@ -66,7 +66,9 @@ const walletStore = WalletManager("@Mudamos");
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="showPlip" initial={true} component={PlipContainer} hideNavBar={true} />
+    <Scene key="showPlip" initial={true} type="reset" hideNavBar={true}>
+      <Scene key="plipPage" initial={true} component={PlipContainer} hideNavBar={true} />
+    </Scene>
 
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
     <Scene key="signUp" component={SignUpContainer} hideNavBar={true} title="Identificação" />
@@ -74,7 +76,7 @@ const scenes = Actions.create(
     <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
     <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
     <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
-    <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} title="Wallet" />
+    <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
   </Scene>
 );
 

@@ -32,7 +32,7 @@ function* login({ mobileApi, sessionStore }) {
       const user = User.fromJson(response.user);
 
       yield put(updatedUserProfile({ user, profileComplete: response.complete }));
-      yield put(profileStateMachine());
+      yield put(profileStateMachine({ type: "reset" }));
     } catch(e) {
       if (isDev) console.log("API Error: ", e.message, e.stack);
 

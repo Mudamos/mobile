@@ -1,20 +1,29 @@
 import { takeLatest } from "redux-saga";
 import { call, spawn, put, select } from "redux-saga/effects";
 
-import { isDev, logError, moment } from "../utils";
+import {
+  first,
+  isDev,
+  logError,
+  moment,
+} from "../utils";
 
 import {
-  fetchPlips as fetchPlipsAction,
+  fetchingPlips,
+  fetchingUserSignInfo,
   isSigningPlip,
   navigate,
   plipsFetched,
   plipsFetchError,
   plipSignError,
   plipUserSignInfo,
+  setCurrentPlip,
 } from "../actions";
 
 import {
   currentAuthToken,
+  findPlips,
+  isUserLoggedIn,
 } from "../selectors";
 
 import { fetchProfile } from "./profile";
@@ -31,15 +40,53 @@ const buildSignMessage = ({ user, plip }) => [
   plip.id,
 ].join(";");
 
-export function* fetchPlips({ mudamosWebApi }) {
+export function* fetchPlips({ mobileApi, mudamosWebApi }) {
   yield takeLatest("FETCH_PLIPS", function* () {
     try {
-      const plips = yield call(mudamosWebApi.listPlips);
+      yield put(fetchingPlips(true));
+
+      // TODO: remove the user sign info from here.
+      // For now we can easily to this because of the MVP
+      // Later we need to fire another action.
+      //
+      // This helps now because we can handle the error in a single
+      // point of failure.
+      const plips = (yield select(findPlips)) || (yield call(mudamosWebApi.listPlips));
       yield put(plipsFetched(plips));
+      const currentPlip = first(plips);
+      yield put(setCurrentPlip(currentPlip));
+
+      yield call(fetchPlipRelatedInfo, { mobileApi, plipId: currentPlip && currentPlip.id });
+
+      yield put(fetchingPlips(false));
     } catch(e) {
+      logError(e);
+
+      yield put(fetchingPlips(false));
       yield put(plipsFetchError(e));
     }
   });
+}
+
+function* fetchPlipRelatedInfo({ mobileApi, plipId }) {
+  const loggedIn = yield select(isUserLoggedIn);
+  const willFetchUserInfo = loggedIn && plipId;
+
+  [
+    willFetchUserInfo && (yield call(fetchUserSignInfo, { mobileApi, plipId })),
+  ];
+}
+
+function* fetchUserSignInfo({ mobileApi, plipId }) {
+  try {
+    const authToken = yield select(currentAuthToken);
+
+    yield put(fetchingUserSignInfo(true));
+    const userSignInfo = yield call(mobileApi.userSignInfo, authToken, plipId);
+    yield put(plipUserSignInfo({ plipId, info: userSignInfo.signMessage }));
+  } finally {
+    yield put(fetchingUserSignInfo(false));
+  }
 }
 
 function* signPlip({ mobileApi, walletStore }) {
@@ -54,9 +101,9 @@ function* signPlip({ mobileApi, walletStore }) {
       if (!user) return yield put(navigate("signIn"));
 
       // Check profile completion
-      const { key: screenKey, ...screenArgs } = yield call(profileScreenForCurrentUser);
+      const { key: screenKey } = yield call(profileScreenForCurrentUser);
 
-      if (screenKey !== "showPlip") return yield put(navigate(screenKey, screenArgs));
+      if (screenKey !== "showPlip") return yield put(navigate(screenKey, { type: "reset" }));
 
       const authToken = yield select(currentAuthToken);
 
@@ -86,8 +133,6 @@ function* signPlip({ mobileApi, walletStore }) {
 }
 
 export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore }) {
-  yield spawn(fetchPlips, { mudamosWebApi });
+  yield spawn(fetchPlips, { mobileApi, mudamosWebApi });
   yield spawn(signPlip, { mobileApi, walletStore });
-
-  yield put(fetchPlipsAction());
 }

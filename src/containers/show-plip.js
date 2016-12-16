@@ -1,4 +1,7 @@
+import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
+
+import { isDev, moment } from "../utils";
 
 import {
   fetchPlips,
@@ -7,6 +10,7 @@ import {
 } from "../actions";
 import {
   findCurrentPlip,
+  getUserCurrentPlipSignInfo,
   isFetchingPlips,
   isSigningPlip,
   isUserLoggedIn,
@@ -15,18 +19,53 @@ import {
 
 import PlipLayout from "../components/plip-layout";
 
-const mapStateToProps = state => ({
-  plip: findCurrentPlip(state),
-  isFetchingPlip: isFetchingPlips(state),
-  isSigning: isSigningPlip(state),
-  isUserLoggedIn: isUserLoggedIn(state),
-  errorFetchingPlips: errorFetchingPlips(state),
-});
+import Toast from "react-native-simple-toast";
+
+class Container extends Component {
+  static propTypes = {
+    errorFetchingPlips: PropTypes.bool,
+    isFetchingPlip: PropTypes.bool.isRequired,
+    isSigning: PropTypes.bool,
+    isUserLoggedIn: PropTypes.bool,
+    navigationState: PropTypes.object.isRequired,
+    plip: PropTypes.object,
+    plipSignDate: PropTypes.object,
+    retryPlip: PropTypes.func.isRequired,
+    onLogout: PropTypes.func.isRequired,
+    onPlipSign: PropTypes.func.isRequired,
+    onPlipsFetch: PropTypes.func.isRequired,
+  };
+
+  componentWillMount() {
+    if (isDev) Toast.show("Plip componentWillMount");
+    this.props.onPlipsFetch();
+  }
+
+  render() {
+    return (
+      <PlipLayout {...this.props} />
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  const signInfo = getUserCurrentPlipSignInfo(state);
+
+  return {
+    plipSignDate: signInfo && moment(signInfo.dateTime),
+    plip: findCurrentPlip(state),
+    isFetchingPlip: isFetchingPlips(state),
+    isSigning: isSigningPlip(state),
+    isUserLoggedIn: isUserLoggedIn(state),
+    errorFetchingPlips: errorFetchingPlips(state),
+  };
+}
 
 const mapDispatchToProps = dispatch => ({
   retryPlip: () => dispatch(fetchPlips()),
   onLogout: () => dispatch(logout()),
+  onPlipsFetch: () => dispatch(fetchPlips()),
   onPlipSign: plip => dispatch(signPlip({ plip })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlipLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(Container);
