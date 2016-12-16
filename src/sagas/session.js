@@ -3,8 +3,7 @@ import { call, fork, put } from "redux-saga/effects";
 
 import { FBLoginManager } from "react-native-facebook-login";
 
-// eslint-disable-next-line no-undef
-const isDev = __DEV__;
+import { isDev } from "../utils";
 
 import {
   clearSession,

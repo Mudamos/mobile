@@ -1,8 +1,7 @@
 import farfetch, { prefix, requestLogger, responseLogger } from "farfetch";
 import { camelizeKeys } from "humps";
 
-// eslint-disable-next-line no-undef
-const isDev = __DEV__;
+import { isDev } from "../utils";
 
 const requester = ({ host }) => {
   let builder = farfetch;
