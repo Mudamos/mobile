@@ -4,6 +4,7 @@ import { call, spawn, put, select } from "redux-saga/effects";
 import {
   first,
   isDev,
+  isUnauthorized,
   logError,
   moment,
 } from "../utils";
@@ -20,6 +21,7 @@ import {
   plipSignInfoFetched,
   plipUserSignInfo,
   setCurrentPlip,
+  unauthorized,
 } from "../actions";
 
 import {
@@ -65,6 +67,9 @@ export function* fetchPlips({ mobileApi, mudamosWebApi }) {
       logError(e);
 
       yield put(fetchingPlips(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized());
+
       yield put(plipsFetchError(e));
     }
   });
@@ -137,6 +142,7 @@ function* signPlip({ mobileApi, walletStore }) {
       yield put(plipUserSignInfo({ plipId: plip.id, info: apiResult.signMessage }));
     } catch(e) {
       logError(e);
+      if (isUnauthorized(e)) return yield put(unauthorized());
 
       yield put(plipSignError(e));
     } finally {

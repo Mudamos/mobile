@@ -5,11 +5,15 @@ import {
   addressZipCodeSearching,
   addressZipCodeSearchError,
   addressFound,
+  unauthorized,
 } from "../actions";
 
 import { currentAuthToken } from "../selectors";
 
-import { logError } from "../utils";
+import {
+  isUnauthorized,
+  logError,
+} from "../utils";
 
 function* searchZipCode({ mobileApi }) {
   yield takeLatest("ADDRESS_ZIP_CODE_SEARCH", function* ({ payload }) {
@@ -27,6 +31,9 @@ function* searchZipCode({ mobileApi }) {
       logError(e, { tag: "searchZipCode" });
 
       yield put(addressZipCodeSearching(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
       yield put(addressZipCodeSearchError(e));
     }
   });

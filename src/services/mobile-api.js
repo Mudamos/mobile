@@ -3,8 +3,11 @@ import { camelizeKeys } from "humps";
 
 import {
   isDev,
+  isUnauthorized,
   toCredential,
 } from "../utils";
+
+import { UnauthorizedError } from "../models/net-error";
 
 
 const requester = ({ host }) => {
@@ -41,17 +44,25 @@ const logError = err => {
   return Promise.reject(err);
 };
 
-const rejectErrorResponses = res => deserialize(res)
-  .then(json =>  {
-    const response = { response: res, json: camelizeKeys(json) };
-    return json.status !== "success" ? Promise.reject(response) : response;
-  });
+const rejectErrorResponses = res => {
+  if (res.status === 401) {
+    return Promise.reject(new UnauthorizedError(res));
+  }
+
+  return deserialize(res)
+    .then(json =>  {
+      const response = { response: res, json: camelizeKeys(json) };
+      return json.status !== "success" ? Promise.reject(response) : response;
+    });
+}
 
 const deserialize = res => res.json().then(camelizeKeys);
 
 const getData = ({ json }) => json.data;
 
 const defineErrorType = err => {
+  if (isUnauthorized(err)) return Promise.reject(err);
+
   const json = err.json || {};
   const data = json.data || {};
 

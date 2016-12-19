@@ -19,3 +19,8 @@ export const profileStateMachine = (params = {}) => ({
   type: "USER_PROFILE_NAVIGATOR",
   payload: { params: params || {} },
 });
+
+export const unauthorized = (params = {}) => ({
+  type: "NAVIGATE_UNAUTHORIZED",
+  payload: { params },
+});

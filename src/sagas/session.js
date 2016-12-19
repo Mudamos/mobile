@@ -21,20 +21,23 @@ function* fetchSession({ sessionStore }) {
   });
 }
 
-function* logout({ sessionStore }) {
+function* logoutSaga({ sessionStore }) {
   yield takeLatest("SESSION_LOGOUT", function* () {
-    yield call(sessionStore.destroy);
-    yield call(FBLoginManager.logout, () => {});
-    // TODO: call logou api but failures should not propagate
-    yield put(clearSession());
-    // TODO: when proper logout is implemented, dispatch a NAVIGATE to somewhere
+    yield call(logout, { sessionStore });
   });
+}
+
+export function* logout({ sessionStore }) {
+  yield call(sessionStore.destroy);
+  yield call(FBLoginManager.logout, () => {});
+  // TODO: call logout api but failures should not propagate
+  yield put(clearSession());
 }
 
 export default function* sessionSaga({ sessionStore }) {
   yield fork(fetchSession, { sessionStore });
 
   yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
-    yield fork(logout, { sessionStore });
+    yield fork(logoutSaga, { sessionStore });
   });
 }
