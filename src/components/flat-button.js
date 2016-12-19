@@ -5,9 +5,10 @@ import { merge } from "ramda";
 import { MKButton } from "react-native-material-kit";
 
 const textStyle = {
-   fontSize: 14,
-   color: "#595959",
-   fontWeight: "bold",
+  fontFamily: "roboto",
+  fontSize: 14,
+  color: "#595959",
+  fontWeight: "bold",
 };
 
 

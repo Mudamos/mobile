@@ -59,6 +59,10 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>roboto_bold_italic.ttf</string>
+		<string>roboto_italic.ttf</string>
+		<string>roboto_bold.ttf</string>
+		<string>roboto.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>FontAwesome.ttf</string>
