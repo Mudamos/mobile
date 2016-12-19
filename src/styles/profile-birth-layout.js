@@ -4,7 +4,7 @@ import textStyles from "./text";
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: "green",
+    backgroundColor: "transparent",
     flex: 1,
   },
   headerTitle: StyleSheet.flatten([textStyles.header]),

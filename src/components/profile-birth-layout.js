@@ -12,7 +12,7 @@ import { errorForField } from "../utils";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
-import Layout from "./layout";
+import Layout from "./purple-layout";
 import HeaderLogo from "./header-logo";
 import DateInput from "./date-input";
 import FlatButton from "./flat-button";
@@ -63,8 +63,8 @@ export default class ProfileBirthLayout extends ComponentWithKeyboardEvent {
               value={this.state.birthdate}
               onChangeDateText={birthdate => this.setState({ birthdate })}
               mdContainerStyle={{marginHorizontal: 13}}
-              hasError={!!errorForField("birthdate", errors)}
-              hint={errorForField("birthdate", errors)}
+              hasError={!!errorForField("birthday", errors)}
+              hint={errorForField("birthday", errors)}
             />
 
             <FlatButton

@@ -7,4 +7,7 @@ export default StyleSheet.create({
   content: {
     flex: 1,
   },
+  purpleBackground: {
+    backgroundColor: "#7049DE",
+  },
 });

@@ -1,26 +1,29 @@
 import React, {
   Component,
-  PropTypes,
 } from "react";
 
 import {
-  StyleSheet,
-  View,
+  StatusBar,
 } from "react-native";
 
-import styles from "../styles/status-bar-spacer";
 
 export default class StatusBarSpacer extends Component {
   static propTypes = {
-    style: PropTypes.instanceOf(StyleSheet),
-    transparent: PropTypes.bool,
+    ...StatusBar.propTypes.style,
   };
 
+  static defaultProps = {
+    translucent: true,
+    backgroundColor: "#20000000",
+    barStyle: "light-content",
+  }
+
   render() {
-    const colorStyle = this.props.transparent ? styles.transparent : styles.color;
 
     return (
-      <View style={[colorStyle, this.props.style, styles.spacer]}></View>
+      <StatusBar
+        {...this.props}
+      />
     );
   }
 }
