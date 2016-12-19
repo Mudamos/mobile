@@ -6,7 +6,7 @@ const style = StyleSheet.create({
   image: {
     alignSelf: "center",
     marginTop: 12,
-    marginBottom: 26,
+    marginBottom: 16,
   },
 });
 

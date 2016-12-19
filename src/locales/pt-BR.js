@@ -1,7 +1,8 @@
 const translations = {
   addressSearchHeader: "Informe seu CEP",
   back: "voltar",
-  birthdate: "Data de nascimento",
+  birthdate: "Data de Nascimento",
+  birthdayHeaderTitle: "Informe sua data de nascimento",
   confirm: "Confirmar",
   cpf: "cpf",
   documentsHeaderTitle: "Informe seus documentos",
