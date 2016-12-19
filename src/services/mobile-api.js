@@ -152,25 +152,36 @@ const fetchDifficulty = ({ client }) => authToken =>
     .then(getData)
     .then(data => parseInt(data.config.value, 10));
 
-const signPlip = ({ client }) => (authToken, signMessage) => {
-  return Promise.resolve({
-    signMessage: { dateTime: "2016-11-15T19:20:30" },
-  });
-  // eslint-disable-next-line no-unreachable
+const signPlip = ({ client }) => (authToken, signMessage) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
     .post("/message/sign")
     .send({ signMessage })
     .then(getData);
-};
 
 const userSignInfo = ({ client }) => (authToken, plipId) => {
+  return Promise.resolve({});
+  // eslint-disable-next-line no-unreachable
   return Promise.resolve({
     signMessage: { dateTime: "2016-11-14T19:20:30" },
   });
   // eslint-disable-next-line no-unreachable
   authorizedClient(client, authToken)
     .get(`/user/message/${plipId}`)
+    .then(getData);
+};
+
+const plipSignInfo = ({ client }) => plipId => {
+  return Promise.resolve({
+    info: {
+      updatedAt: "2016-11-14T19:20:30",
+      blockchainAddress: "xpto address",
+      signaturesCount: 777,
+    },
+  });
+  // eslint-disable-next-line no-unreachable
+  client
+    .get(`/petition/${plipId}/info`)
     .then(getData);
 };
 
@@ -181,6 +192,7 @@ export default function MobileApi(host) {
   return {
     difficulty: fetchDifficulty({ client }),
     fbSignIn: fbSignIn({ client }),
+    plipSignInfo: plipSignInfo({ client }),
     profile: profile({ client }),
     saveBirthdate: saveBirthdate({ client }),
     saveDocuments: saveDocuments({ client }),

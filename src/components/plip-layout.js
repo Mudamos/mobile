@@ -33,8 +33,9 @@ class PlipLayout extends Component {
     isUserLoggedIn: PropTypes.bool,
     navigationState: PropTypes.object.isRequired,
     plip: PropTypes.object,
-    plipSignDate: PropTypes.object,
+    plipSignInfo: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
+    userSignDate: PropTypes.object,
     onLogout: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
   };
@@ -79,7 +80,8 @@ class PlipLayout extends Component {
     const {
       isSigning,
       plip,
-      plipSignDate,
+      plipSignInfo,
+      userSignDate,
     } = this.props;
 
     const { stickyHeaderHeight, ...parallaxOptions } = parallaxScrollView;
@@ -119,21 +121,33 @@ class PlipLayout extends Component {
           )}
           >
           <View style={{ flex: 1 }}>
-            <View style={{height: 50, backgroundColor: "#ccc", padding: 10}}>
-            {
-              !plipSignDate &&
-                <View style={{flexDirection: "row"}}>
-                  { !!this.daysLeft && this.renderDaysLeft()}
-                  { !this.daysLeft && <Text>Petição finalizada</Text>}
-                </View>
-            }
-            {
-              plipSignDate &&
-                <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                  <Text>Projeto Assinado</Text>
-                  <Text>{plipSignDate.format("DD/MM/YYYY HH:mm:ss")}</Text>
-                </View>
-            }
+            <View style={{minHeight: 50, backgroundColor: "#ccc", padding: 10}}>
+              {
+                !userSignDate &&
+                  <View style={{flexDirection: "row"}}>
+                    { !!this.daysLeft && this.renderDaysLeft()}
+                    { !this.daysLeft && <Text>Petição finalizada</Text>}
+                  </View>
+              }
+              {
+                userSignDate &&
+                  <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                    <Text>Projeto Assinado</Text>
+                    <Text>{userSignDate.format("DD/MM/YYYY HH:mm:ss")}</Text>
+                  </View>
+              }
+              {
+                plipSignInfo && plipSignInfo.updatedAt &&
+                  <Text style={{marginTop: 5}}>
+                    Atualizado em: {plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss")}
+                  </Text>
+              }
+              {
+                plipSignInfo && plipSignInfo.signaturesCount &&
+                  <Text style={{marginTop: 5}}>
+                    Assinaturas: {plipSignInfo.signaturesCount}
+                  </Text>
+              }
             </View>
             <View style={{ paddingLeft: 10, paddingRight: 10 }}>
             { plip && <MarkdownView content={plip.content} /> }
@@ -142,7 +156,7 @@ class PlipLayout extends Component {
         </ParallaxScrollView>
 
         {
-          plip && !plipSignDate &&
+          plip && !userSignDate &&
           <ActionButton buttonColor="rgba(231,76,60,1)" offsetX={10} offsetY={0.1}>
             <ActionButton.Item buttonColor="#1abc9c" title="Assinar" onPress={this.onPlipSign.bind(this)}>
               <Ionicon name="md-create"  style={{fontSize: 20, height: 22, color: "#fff"}}/>

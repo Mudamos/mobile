@@ -9,12 +9,13 @@ import {
   signPlip,
 } from "../actions";
 import {
-  findCurrentPlip,
-  getUserCurrentPlipSignInfo,
+  errorFetchingPlips,
   isFetchingPlips,
   isSigningPlip,
   isUserLoggedIn,
-  errorFetchingPlips,
+  findCurrentPlip,
+  getPlipSignInfo,
+  getUserCurrentPlipSignInfo,
 } from "../selectors";
 
 import PlipLayout from "../components/plip-layout";
@@ -29,8 +30,9 @@ class Container extends Component {
     isUserLoggedIn: PropTypes.bool,
     navigationState: PropTypes.object.isRequired,
     plip: PropTypes.object,
-    plipSignDate: PropTypes.object,
+    plipSignInfo: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
+    userSignDate: PropTypes.object,
     onLogout: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
     onPlipsFetch: PropTypes.func.isRequired,
@@ -49,15 +51,24 @@ class Container extends Component {
 }
 
 const mapStateToProps = state => {
-  const signInfo = getUserCurrentPlipSignInfo(state);
+  const userSignInfo = getUserCurrentPlipSignInfo(state);
+  let plipSignInfo = getPlipSignInfo(state);
+
+  if (plipSignInfo) {
+    plipSignInfo = {
+      ...plipSignInfo,
+      updatedAt: plipSignInfo.updatedAt ? moment(plipSignInfo.updatedAt) : null,
+    };
+  }
 
   return {
-    plipSignDate: signInfo && moment(signInfo.dateTime),
-    plip: findCurrentPlip(state),
+    errorFetchingPlips: errorFetchingPlips(state),
     isFetchingPlip: isFetchingPlips(state),
     isSigning: isSigningPlip(state),
     isUserLoggedIn: isUserLoggedIn(state),
-    errorFetchingPlips: errorFetchingPlips(state),
+    plip: findCurrentPlip(state),
+    plipSignInfo: plipSignInfo,
+    userSignDate: userSignInfo && moment(userSignInfo.dateTime),
   };
 }
 

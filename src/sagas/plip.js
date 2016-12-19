@@ -10,12 +10,14 @@ import {
 
 import {
   fetchingPlips,
+  fetchingPlipSignInfo,
   fetchingUserSignInfo,
   isSigningPlip,
   navigate,
   plipsFetched,
   plipsFetchError,
   plipSignError,
+  plipSignInfoFetched,
   plipUserSignInfo,
   setCurrentPlip,
 } from "../actions";
@@ -72,8 +74,9 @@ function* fetchPlipRelatedInfo({ mobileApi, plipId }) {
   const loggedIn = yield select(isUserLoggedIn);
   const willFetchUserInfo = loggedIn && plipId;
 
-  [
-    willFetchUserInfo && (yield call(fetchUserSignInfo, { mobileApi, plipId })),
+  yield [
+    willFetchUserInfo ? call(fetchUserSignInfo, { mobileApi, plipId }) : Promise.resolve(),
+    call(fetchPlipSignInfo, { mobileApi, plipId }),
   ];
 }
 
@@ -86,6 +89,16 @@ function* fetchUserSignInfo({ mobileApi, plipId }) {
     yield put(plipUserSignInfo({ plipId, info: userSignInfo.signMessage }));
   } finally {
     yield put(fetchingUserSignInfo(false));
+  }
+}
+
+function* fetchPlipSignInfo({ mobileApi, plipId }) {
+  try {
+    yield put(fetchingPlipSignInfo(true));
+    const plipSignInfo = yield call(mobileApi.plipSignInfo, plipId);
+    yield put(plipSignInfoFetched({ plipId, info: plipSignInfo.info }));
+  } finally {
+    yield put(fetchingPlipSignInfo(false));
   }
 }
 
@@ -110,13 +123,13 @@ function* signPlip({ mobileApi, walletStore }) {
       const difficulty = yield call(mobileApi.difficulty, authToken);
       const seed = yield call(walletStore.retrieve, user.voteCard);
       const message = buildSignMessage({ user, plip });
-      const result = LibCrypto.signMessage(seed, message, difficulty);
+      const block = LibCrypto.signMessage(seed, message, difficulty);
 
-      if (isDev) console.log("Sign result:", result);
+      if (isDev) console.log("Block:", block);
 
       const apiResult = yield call(mobileApi.signPlip, authToken, {
         petitionId: plip.id,
-        message,
+        block,
       });
 
       if (isDev) console.log("Sign api result:", apiResult);

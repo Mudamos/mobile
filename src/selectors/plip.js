@@ -11,6 +11,8 @@ export const errorFetchingPlips = state => state.plip.errorFetchingPlips;
 
 export const getUserSignInfo = state => state.plip.userSignInfo;
 
+export const getPlipSignInfo = state => state.plip.plipSignInfo;
+
 export const getUserCurrentPlipSignInfo = state => {
   const currentPlip = findCurrentPlip(state);
   return currentPlip && state.plip.userSignInfo[currentPlip.id];
