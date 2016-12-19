@@ -7,6 +7,7 @@ import {
   profileStateMachine,
   updatedUserProfile,
   walletAvailable,
+  unauthorized,
 } from "../actions";
 
 import {
@@ -16,6 +17,7 @@ import {
 
 import {
   isDev,
+  isUnauthorized,
   logError,
 } from "../utils";
 
@@ -50,6 +52,9 @@ function* createWallet({ mobileApi, walletStore }) {
 
       yield call(walletStore.destroy);
       yield put(creatingWallet(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
       yield put(createWalletError(e));
     }
   });

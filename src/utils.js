@@ -5,6 +5,8 @@ import {
   propEq,
 } from "ramda";
 
+import { UnauthorizedError } from "./models/net-error";
+
 import { Buffer } from "buffer";
 import StringMask from "string-mask";
 
@@ -14,6 +16,8 @@ import "moment/locale/pt-br";
 moment.locale("pt-br");
 
 export { moment };
+
+export const isUnauthorized = error => error instanceof UnauthorizedError;
 
 export const isString = is(String);
 

@@ -7,6 +7,8 @@ import { isDev } from "../utils";
 
 import { findIndex } from "ramda";
 
+import { logout } from "./session";
+
 import {
   isAddressProfileComplete,
   isDocumentsProfileComplete,
@@ -37,6 +39,18 @@ function* forward() {
 function* backward() {
   yield takeEvery("NAVIGATE_BACK", function* () {
     yield call(Actions.pop);
+  });
+}
+
+function* unauthorized({ sessionStore }) {
+  yield takeLatest("NAVIGATE_UNAUTHORIZED", function* ({ payload }) {
+    try {
+      const { params } = payload;
+      yield call(logout, { sessionStore });
+      yield put(navigate("signIn", params));
+    } catch(e) {
+      if (isDev) console.log("Error unauthorized navigation: ", e.message, e.stack, e);
+    }
   });
 }
 
@@ -92,8 +106,9 @@ export function* profileScreenForCurrentUser() {
   }
 }
 
-export default function* navigationSaga() {
+export default function* navigationSaga({ sessionStore }) {
   yield fork(forward);
   yield fork(backward);
   yield spawn(userProfileNavigator);
+  yield spawn(unauthorized, { sessionStore });
 }

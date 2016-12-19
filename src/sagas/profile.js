@@ -11,6 +11,7 @@ import {
   sendingPhoneValidation,
   sendingPhoneValidationError,
   logginSucceeded,
+  unauthorized,
 } from "../actions";
 
 import { currentAuthToken, currentUser } from "../selectors";
@@ -19,7 +20,7 @@ import {
   User,
 } from "../models";
 
-import { logError } from "../utils";
+import { isUnauthorized, logError } from "../utils";
 
 import Toast from "react-native-simple-toast";
 
@@ -78,6 +79,9 @@ function* saveBirthdateProfile({ mobileApi }) {
       logError(e, { tag: "saveBirthdateProfile" });
 
       yield put(savingProfile(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
       yield put(saveUserProfileError(e));
     }
   });
@@ -102,6 +106,9 @@ function* saveZipCodeProfile({ mobileApi }) {
       logError(e, { tag: "saveZipCodeProfile" });
 
       yield put(savingProfile(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
       yield put(saveUserProfileError(e));
     }
   });
@@ -126,6 +133,9 @@ function* saveDocumentsProfile({ mobileApi }) {
       logError(e, { tag: "saveDocumentsProfile" });
 
       yield put(savingProfile(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
       yield put(saveUserProfileError(e));
     }
   });
@@ -154,6 +164,9 @@ function* sendPhoneValidation({ mobileApi }) {
       logError(e, { tag: "sendPhoneValidation" });
 
       yield put(sendingPhoneValidation(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
       yield put(sendingPhoneValidationError(e));
     }
   });
@@ -193,6 +206,9 @@ function* savePhoneProfile({ mobileApi }) {
       logError(e, { tag: "verifyCode" });
 
       yield put(savingProfile(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
       yield put(saveUserProfileError(e));
     }
   });

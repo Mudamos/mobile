@@ -17,7 +17,7 @@ export default function* rootSaga({
   sessionStore,
   walletStore,
 }) {
-  yield spawn(navigationSaga);
+  yield spawn(navigationSaga, { sessionStore });
   yield spawn(facebookSaga, { sessionStore, mobileApi });
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
   yield spawn(plipSaga, { mobileApi, mudamosWebApi, walletStore });
