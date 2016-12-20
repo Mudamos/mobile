@@ -27,8 +27,18 @@
 		2364B1868423443CBD44C241 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D778CA95AA41818810664F /* libLRDRCTSimpleToast.a */; };
 		25C471E7FD8644158C6B3260 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1082FEFEA6B34CF8A23BF45D /* libAirMaps.a */; };
 		30910D199404C3C085B8EE95 /* Pods_MudamosMobileTagviewBeta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */; };
+		321F777C009E4EAD870F828D /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9BB36D0B0549BF80BA15B1 /* libBVLinearGradient.a */; };
 		400834B331534457AC160DEA /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8424FEEF17243CFB758995F /* libRNRandomBytes.a */; };
 		4623C3E71E0081A800158849 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623C3E31E00818500158849 /* libRNDeviceInfo.a */; };
+		463C8ED11E0841D500E79749 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463C8EB71E08419900E79749 /* libBVLinearGradient.a */; };
+		4649074B1E0860610079C6B8 /* roboto_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 464907471E0860610079C6B8 /* roboto_bold_italic.ttf */; };
+		4649074C1E0860610079C6B8 /* roboto_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 464907471E0860610079C6B8 /* roboto_bold_italic.ttf */; };
+		4649074D1E0860610079C6B8 /* roboto_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 464907481E0860610079C6B8 /* roboto_bold.ttf */; };
+		4649074E1E0860610079C6B8 /* roboto_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 464907481E0860610079C6B8 /* roboto_bold.ttf */; };
+		4649074F1E0860610079C6B8 /* roboto_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 464907491E0860610079C6B8 /* roboto_italic.ttf */; };
+		464907501E0860610079C6B8 /* roboto_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 464907491E0860610079C6B8 /* roboto_italic.ttf */; };
+		464907511E0860610079C6B8 /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4649074A1E0860610079C6B8 /* roboto.ttf */; };
+		464907521E0860610079C6B8 /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4649074A1E0860610079C6B8 /* roboto.ttf */; };
 		4658C25A1DFF25020063E371 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46668FAD1DFB386E002ECF64 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4673AD161DF88AA100E81C9A /* libAirMaps.a */; };
 		46668FAE1DFB3875002ECF64 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
@@ -159,6 +169,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
 			remoteInfo = RNDeviceInfo;
+		};
+		463C8EB61E08419900E79749 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BVLinearGradient;
 		};
 		4658C2561DFF24EB0063E371 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -305,6 +322,10 @@
 		207C3AC18ADF55D82D20DF88 /* Pods-MudamosMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTests/Pods-MudamosMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTagviewBeta.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTagviewBeta/Pods-MudamosMobileTagviewBeta.release.xcconfig"; sourceTree = "<group>"; };
 		413B12353FD34D1C9F7FE084 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		464907471E0860610079C6B8 /* roboto_bold_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_bold_italic.ttf; sourceTree = "<group>"; };
+		464907481E0860610079C6B8 /* roboto_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_bold.ttf; sourceTree = "<group>"; };
+		464907491E0860610079C6B8 /* roboto_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_italic.ttf; sourceTree = "<group>"; };
+		4649074A1E0860610079C6B8 /* roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto.ttf; sourceTree = "<group>"; };
 		46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InfoTagviewBeta.plist; path = MudamosMobile/InfoTagviewBeta.plist; sourceTree = "<group>"; };
 		46D30D7B1DE46B8400CE09C0 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		46DE63581DE469430031B576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -314,6 +335,7 @@
 		58704BD66EA349B7BB79C7ED /* LRDRCTSimpleToast.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = LRDRCTSimpleToast.xcodeproj; path = "../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast.xcodeproj"; sourceTree = "<group>"; };
 		5A381532B2A246F99750EEF9 /* libRCTFBLogin.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBLogin.a; sourceTree = "<group>"; };
 		5CA59394A12E918879BC09D5 /* Pods-MudamosMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTests/Pods-MudamosMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7C6E4E916C3B4AFEBB903B41 /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobileTagviewBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,6 +349,7 @@
 		B55C452B89744C8C88F648C4 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		BB620C49F665BCB96048640D /* Pods-MudamosMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile.release.xcconfig"; sourceTree = "<group>"; };
 		CB358AEDAED7A7D4E7C8E06C /* Pods_MudamosMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF9BB36D0B0549BF80BA15B1 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		D8424FEEF17243CFB758995F /* libRNRandomBytes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRandomBytes.a; sourceTree = "<group>"; };
 		DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E26FDBD24B0A4D90A5A1EB13 /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTMaterialKit.a; sourceTree = "<group>"; };
@@ -371,6 +394,7 @@
 				1100EFAB76364256B1E566B8 /* libRCTMaterialKit.a in Frameworks */,
 				400834B331534457AC160DEA /* libRNRandomBytes.a in Frameworks */,
 				B994268565B54407A5F37EDF /* libRNDeviceInfo.a in Frameworks */,
+				321F777C009E4EAD870F828D /* libBVLinearGradient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +402,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				463C8ED11E0841D500E79749 /* libBVLinearGradient.a in Frameworks */,
 				4623C3E71E0081A800158849 /* libRNDeviceInfo.a in Frameworks */,
 				4658C25A1DFF25020063E371 /* libRNRandomBytes.a in Frameworks */,
 				46668FAE1DFB3875002ECF64 /* libRCTMaterialKit.a in Frameworks */,
@@ -522,6 +547,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		463C8EB21E08419900E79749 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				463C8EB71E08419900E79749 /* libBVLinearGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4658C23C1DFF24EA0063E371 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,6 +614,10 @@
 		6FF64EC282744621BB244B38 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				464907471E0860610079C6B8 /* roboto_bold_italic.ttf */,
+				464907481E0860610079C6B8 /* roboto_bold.ttf */,
+				464907491E0860610079C6B8 /* roboto_italic.ttf */,
+				4649074A1E0860610079C6B8 /* roboto.ttf */,
 				46D30D7B1DE46B8400CE09C0 /* FacebookSDKStrings.bundle */,
 				FC816BA612714338983ED538 /* Entypo.ttf */,
 				10E569BB49504C0E8E0A286A /* EvilIcons.ttf */,
@@ -626,6 +663,7 @@
 				97451B22B8FD4C2CB64542DB /* RCTMaterialKit.xcodeproj */,
 				A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */,
 				1BDA6C103B4A4B678E5DC06B /* RNDeviceInfo.xcodeproj */,
+				6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -792,6 +830,10 @@
 					ProjectRef = E43A712CA50B405C881A95F5 /* AirMaps.xcodeproj */;
 				},
 				{
+					ProductGroup = 463C8EB21E08419900E79749 /* Products */;
+					ProjectRef = 6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */;
+				},
+				{
 					ProductGroup = 460E7DC91DF18C1100F86028 /* Products */;
 					ProjectRef = 58704BD66EA349B7BB79C7ED /* LRDRCTSimpleToast.xcodeproj */;
 				},
@@ -944,6 +986,13 @@
 			remoteRef = 4623C3E21E00818500158849 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		463C8EB71E08419900E79749 /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 463C8EB61E08419900E79749 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1070,7 +1119,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4649074F1E0860610079C6B8 /* roboto_italic.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				4649074B1E0860610079C6B8 /* roboto_bold_italic.ttf in Resources */,
+				4649074D1E0860610079C6B8 /* roboto_bold.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				609EBA8E9D8E4A92BF4BBEA5 /* Entypo.ttf in Resources */,
 				46D30D7C1DE46B8400CE09C0 /* FacebookSDKStrings.bundle in Resources */,
@@ -1078,6 +1130,7 @@
 				F424078D44A14BFBBE1D412B /* FontAwesome.ttf in Resources */,
 				C9AFB9662A2E495A8F9DC469 /* Foundation.ttf in Resources */,
 				12DE1FDA65EF4A9BBD79B18B /* Ionicons.ttf in Resources */,
+				464907511E0860610079C6B8 /* roboto.ttf in Resources */,
 				AE65A15000BA4D24BE9384D3 /* MaterialIcons.ttf in Resources */,
 				D3E5BB9F9F7942BAAFD16EF4 /* Octicons.ttf in Resources */,
 				B9DC8F78B14942C9AA8886FC /* SimpleLineIcons.ttf in Resources */,
@@ -1091,15 +1144,19 @@
 			files = (
 				46ED2A821DF194E400B36CD0 /* Images.xcassets in Resources */,
 				46BD9FDC1DF1A0E600366372 /* InfoTagviewBeta.plist in Resources */,
+				4649074C1E0860610079C6B8 /* roboto_bold_italic.ttf in Resources */,
 				46ED2A831DF194E400B36CD0 /* LaunchScreen.xib in Resources */,
+				4649074E1E0860610079C6B8 /* roboto_bold.ttf in Resources */,
 				46ED2A841DF194E400B36CD0 /* Entypo.ttf in Resources */,
 				46ED2A851DF194E400B36CD0 /* FacebookSDKStrings.bundle in Resources */,
+				464907501E0860610079C6B8 /* roboto_italic.ttf in Resources */,
 				46ED2A861DF194E400B36CD0 /* EvilIcons.ttf in Resources */,
 				46ED2A871DF194E400B36CD0 /* FontAwesome.ttf in Resources */,
 				46ED2A881DF194E400B36CD0 /* Foundation.ttf in Resources */,
 				46ED2A891DF194E400B36CD0 /* Ionicons.ttf in Resources */,
 				46ED2A8A1DF194E400B36CD0 /* MaterialIcons.ttf in Resources */,
 				46ED2A8B1DF194E400B36CD0 /* Octicons.ttf in Resources */,
+				464907521E0860610079C6B8 /* roboto.ttf in Resources */,
 				46ED2A8C1DF194E400B36CD0 /* SimpleLineIcons.ttf in Resources */,
 				46ED2A8D1DF194E400B36CD0 /* Zocial.ttf in Resources */,
 			);
@@ -1338,6 +1395,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MudamosMobile.app/MudamosMobile";
@@ -1355,6 +1413,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1383,6 +1442,7 @@
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1418,6 +1478,7 @@
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1456,12 +1517,14 @@
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1499,12 +1562,14 @@
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1567,6 +1632,7 @@
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1617,6 +1683,7 @@
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

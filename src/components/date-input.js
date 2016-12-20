@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react";
 
-import TextInput from "./text-input";
+import MDTextInput from "./md-text-input";
 
 import { dateMask } from "../utils";
 
@@ -25,12 +25,12 @@ export default class DateInput extends Component {
   render() {
     const {
       value,
-      ...inputProps
+      ...mdInputProps
     } = this.props;
 
     return (
-      <TextInput
-        {...inputProps}
+      <MDTextInput
+        {...mdInputProps}
 
         value={this.removeLastSeparator(value)}
         maxLength={10}

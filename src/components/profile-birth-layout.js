@@ -1,22 +1,27 @@
-import React, { Component, PropTypes } from "react";
+import React, { PropTypes } from "react";
 
 import {
+  Text,
   View,
 } from "react-native";
+
+import styles from "../styles/profile-birth-layout";
 
 import { errorForField } from "../utils";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import Layout from "./layout";
+import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
+import Layout from "./purple-layout";
+import HeaderLogo from "./header-logo";
 import DateInput from "./date-input";
-import SimpleButton from "./simple-button";
+import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
 
 import locale from "../locales/pt-BR";
 
 
-export default class ProfileBirthLayout extends Component {
+export default class ProfileBirthLayout extends ComponentWithKeyboardEvent {
   state = {}
 
   static propTypes = {
@@ -30,6 +35,10 @@ export default class ProfileBirthLayout extends Component {
     return String(this.state.birthdate).length === 10;
   }
 
+  get formEnabled() {
+    return this.valid && !this.state.hasKeyboard;
+  }
+
   render() {
     const {
       errors,
@@ -38,24 +47,32 @@ export default class ProfileBirthLayout extends Component {
     } = this.props;
 
     return (
-      <View style={{flex: 1, backgroundColor: "green"}}>
+      <View style={styles.container}>
         <PageLoader isVisible={isSaving} />
 
         <Layout>
-          <KeyboardAwareScrollView bounces={false}>
+          <KeyboardAwareScrollView bounces={false} style={styles.scrollView}>
+            <HeaderLogo />
+
+            <Text style={styles.headerTitle}>
+              {locale.birthdayHeaderTitle}
+            </Text>
+
             <DateInput
-              label={locale.birthdate}
+              placeholder={locale.birthdate}
               value={this.state.birthdate}
               onChangeDateText={birthdate => this.setState({ birthdate })}
-              hasError={!!errorForField("birthdate", errors)}
-              hint={errorForField("birthdate", errors)}
+              mdContainerStyle={{marginHorizontal: 13}}
+              hasError={!!errorForField("birthday", errors)}
+              hint={errorForField("birthday", errors)}
             />
 
-            <SimpleButton
-              disabled={!this.valid}
-              onPress={() => onSave(this.state.birthdate)}>
-              Confirmar
-            </SimpleButton>
+            <FlatButton
+              title={locale.confirm.toUpperCase()}
+              enabled={this.formEnabled}
+              onPress={() => onSave(this.state.birthdate)}
+              style={{marginTop: 20}}
+            />
           </KeyboardAwareScrollView>
         </Layout>
       </View>

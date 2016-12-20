@@ -19,6 +19,7 @@ const style = StyleSheet.create({
     backgroundColor: "transparent",
   },
   hint: {
+    fontFamily: "roboto",
     fontSize: 10,
     color: "#fff",
     opacity: 0.7,
@@ -33,6 +34,8 @@ const style = StyleSheet.create({
   },
   textInputStyle: {
     color: "#fff",
+    fontFamily: "roboto",
+    fontSize: 14,
   },
 });
 
@@ -53,7 +56,7 @@ export default class MDTextInput extends Component {
     placeholderTextColor: whiteTransparent,
     tintColor: "rgba(255,255,255,0.7)",
     floatingLabelFont: {
-      fontSize: 12,
+      fontSize: 10,
       fontWeight: "200",
     },
     style: style.textFieldStyle,

@@ -5,9 +5,10 @@ import { merge } from "ramda";
 import { MKButton } from "react-native-material-kit";
 
 const textStyle = {
-   fontSize: 14,
-   color: "#595959",
-   fontWeight: "bold",
+  fontFamily: "roboto",
+  fontSize: 14,
+  color: "#595959",
+  fontWeight: "bold",
 };
 
 
@@ -39,7 +40,7 @@ export default class MyFlatButton extends Component {
     const button = MKButton.flatButton()
       .withBackgroundColor("#fff")
       .withMaskBorderRadius(100)
-      .withStyle(merge({ borderRadius: 100 }, style))
+      .withStyle(merge({ borderRadius: 100, height: 42 }, style))
       .withTextStyle(textStyle);
 
     if (enabled) {
