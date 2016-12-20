@@ -9,6 +9,12 @@ export default StyleSheet.create({
     fontSize: 24,
     color: "#fff",
     alignSelf: "center",
-    marginBottom: 20,
+  },
+  subtitle: {
+    textAlign: "center",
+    fontFamily: "roboto",
+    fontSize: 16,
+    color: "#fff",
+    alignSelf: "center",
   },
 });

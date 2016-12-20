@@ -7,7 +7,10 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
     flex: 1,
   },
-  headerTitle: StyleSheet.flatten([textStyles.header]),
+  headerTitle: StyleSheet.flatten([
+    textStyles.header,
+    { marginBottom: 20 },
+  ]),
   scrollView: {
     marginHorizontal: 20,
   },
