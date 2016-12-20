@@ -23,6 +23,7 @@ import LinearGradient from "react-native-linear-gradient";
 
 import HeaderLogo from "./header-logo";
 import FlatButton from "./flat-button";
+import PurpleFlatButton from "./purple-flat-button";
 import PageLoader from"./page-loader";
 
 const LATITUDE_DELTA = 0.015;
@@ -165,7 +166,7 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
           />
         </MapView>
 
-        <FlatButton
+        <PurpleFlatButton
           title={locale.confirm.toUpperCase()}
           onPress={() => onSave(location.zipcode)}
           style={{
