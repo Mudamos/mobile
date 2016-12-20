@@ -3,6 +3,7 @@ const translations = {
   back: "voltar",
   birthdate: "Data de Nascimento",
   birthdayHeaderTitle: "Informe sua data de nascimento",
+  cantRememberVoteCard: "Não lembra do seu título?",
   confirm: "Confirmar",
   cpf: "cpf",
   documentsHeaderTitle: "Informe seus documentos",
@@ -17,6 +18,7 @@ const translations = {
   sendSMSCode: "Enviar código via SMS",
   verify: "Verificar",
   voteCard: "Título de Eleitor",
+  whyRequestDocuments: "Por que pedimos estes dados?",
   zipCode: "CEP",
   zipCodeReason: "Não precisamos saber o seu endereço específico, apenas uma localização aproximada de onde você mora",
   errors: {

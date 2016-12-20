@@ -6,12 +6,15 @@ import {
 } from "react-native";
 
 import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
-import Layout from "./layout";
+import Layout from "./purple-layout";
 import HeaderLogo from "./header-logo";
 import CpfInput from "./cpf-input";
 import VoteCardInput from "./vote-card-input";
 import FlatButton from "./flat-button";
+import TransparentFlatButton from "./transparent-flat-button";
 import PageLoader from "./page-loader";
+
+import styles from "../styles/profile-documents-layout";
 
 import { errorForField } from "../utils";
 
@@ -53,33 +56,24 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
     } = this.props;
 
     return (
-      <View style={{flex: 1, backgroundColor: "purple"}}>
+      <View style={styles.container}>
         <PageLoader isVisible={isSaving} />
 
         <Layout>
-          <KeyboardAwareScrollView style={{flex: 1}} bounces={false}>
+          <KeyboardAwareScrollView style={styles.scrollView} bounces={false}>
             <HeaderLogo />
 
-              <Text style={{
-                textAlign: "center",
-                fontWeight: "bold",
-                fontSize: 22,
-                color: "white",
-                alignSelf: "center",
-                marginBottom: 20}}>
-                {locale.documentsHeaderTitle}
-              </Text>
+            <Text style={styles.headerTitle}>
+              {locale.documentsHeaderTitle}
+            </Text>
 
-              <Text style={{
-                textAlign: "center",
-                fontSize: 18,
-                color: "white",
-                alignSelf: "center",
-                marginBottom: 20}}>
-                Seus documentos são necessários para validar suas assinaturas
-              </Text>
+            <TransparentFlatButton
+              title={locale.whyRequestDocuments}
+              onPress={() => { console.log("reason")}}
+              style={{marginHorizontal: 20}}
+            />
 
-            <View style={{marginHorizontal: 30}}>
+            <View style={{marginHorizontal: 33, marginTop: 5}}>
               <CpfInput
                 value={this.state.cpf}
                 onChangeCpfText={cpf => this.setState({cpf})}
@@ -99,15 +93,9 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
 
               <Text
                 onPress={onTSERequested}
-                style={{
-                  alignSelf: "center",
-                  color: "#fff",
-                  fontSize: 14,
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
+                style={styles.cantRememberVoteCard}
               >
-                Não lembra do seu título?
+                {locale.cantRememberVoteCard}
               </Text>
             </View>
 
