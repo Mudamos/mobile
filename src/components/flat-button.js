@@ -26,13 +26,22 @@ export default class MyFlatButton extends Component {
   }
 
   render() {
-    return this.button();
+    return this.renderButton();
   }
 
-  button() {
+  renderButton() {
+    const { title } = this.props;
+
+    const Button = this.buttonClass()
+      .withText(title)
+      .build();
+
+    return <Button />;
+  }
+
+  buttonClass() {
     const {
       enabled,
-      title,
       onPress,
       style,
     } = this.props;
@@ -40,7 +49,7 @@ export default class MyFlatButton extends Component {
     const button = MKButton.flatButton()
       .withBackgroundColor("#fff")
       .withMaskBorderRadius(100)
-      .withStyle(merge({ borderRadius: 100, height: 42 }, style))
+      .withStyle(merge({ borderRadius: 100, height: 42, overflow: "hidden" }, style))
       .withTextStyle(textStyle);
 
     if (enabled) {
@@ -52,10 +61,6 @@ export default class MyFlatButton extends Component {
         .withTextStyle({ ...textStyle, opacity: 0.5 });
     }
 
-    const Button = button
-      .withText(title)
-      .build();
-
-    return <Button />
+    return button;
   }
 }

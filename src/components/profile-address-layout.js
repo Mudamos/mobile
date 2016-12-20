@@ -3,21 +3,27 @@ import React, { PropTypes } from "react";
 import {
   Text,
   View,
-  StyleSheet,
 } from "react-native";
+
+import styles from "../styles/profile-address-layout";
 
 import MapView, { Marker } from "react-native-maps";
 
 import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
-import Layout from "./layout";
+import Layout from "./purple-layout";
+
+import BackButton from "./back-button";
 
 import locale from "../locales/pt-BR";
 
 import ZipCodeInput from "./zip-code-input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+import LinearGradient from "react-native-linear-gradient";
+
 import HeaderLogo from "./header-logo";
 import FlatButton from "./flat-button";
+import PurpleFlatButton from "./purple-flat-button";
 import PageLoader from"./page-loader";
 
 const LATITUDE_DELTA = 0.015;
@@ -74,31 +80,42 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
     } = this.props;
 
     return (
-      <View style={{flex: 1, backgroundColor: "teal"}}>
+      <View style={styles.container}>
         <PageLoader isVisible={isSearching || isSaving} />
 
-        <Layout contentStyle={{flexDirection: "column-reverse"}}>
+        <Layout contentStyle={styles.layoutContentStyle}>
           { location && this.renderResults() }
 
-          <KeyboardAwareScrollView style={{flex: 1}} bounces={false}>
+          <KeyboardAwareScrollView style={styles.scrollView} bounces={false}>
             <HeaderLogo />
+            {
+              location &&
+                <BackButton
+                  style={{
+                    position: "absolute",
+                    top: 20,
+                    left: 0,
+                  }}
+                  onPress={this.onClearLocation.bind(this)}
+                />
+            }
 
-            <Text style={{
-              fontWeight: "bold",
-              fontSize: 22,
-              color: "white",
-              alignSelf: "center",
-              marginBottom: 20}}>
+            <Text style={styles.headerTitle}>
               {locale.addressSearchHeader}
             </Text>
 
             {
               !location &&
-                <View style={{marginHorizontal: 30}}>
+                <View>
+                  <Text style={styles.subHeader}>
+                    {locale.zipCodeReason}
+                  </Text>
+
                   <ZipCodeInput
                     value={this.state.zipCode}
                     onChangeZipCodeText={zipCode => this.setState({zipCode})}
                     placeholder={locale.zipCode}
+                    mdContainerStyle={{marginHorizontal: 13}}
                   />
 
                   <FlatButton
@@ -112,12 +129,9 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
 
             {
               location &&
-                <View style={{marginHorizontal: 30}}>
-                  <FlatButton
-                    title={locale.back.toUpperCase()}
-                    onPress={this.onClearLocation.bind(this)}
-                  />
-                </View>
+                <Text style={styles.zipCode}>
+                  {this.state.zipCode}
+                </Text>
             }
 
           </KeyboardAwareScrollView>
@@ -131,7 +145,12 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
     const { location, onSave } = this.props;
 
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.mapContainer}>
+        <LinearGradient
+          style={styles.mapShadow}
+          colors={["#bababa", "transparent", "transparent"]}
+        >
+        </LinearGradient>
         <MapView style={styles.map}
           initialRegion={{
             latitude: location.lat,
@@ -147,10 +166,16 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
           />
         </MapView>
 
-        <FlatButton
-          title="CONFIRMAR"
+        <PurpleFlatButton
+          title={locale.confirm.toUpperCase()}
           onPress={() => onSave(location.zipcode)}
-          style={{position: "absolute", bottom: 30, left: 0, right: 0, marginHorizontal: 30}}
+          style={{
+            position: "absolute",
+            bottom: 30,
+            left: 0,
+            right: 0,
+            marginHorizontal: 20,
+          }}
         />
       </View>
     );
@@ -170,9 +195,3 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
     onClearLocation();
   }
 }
-
-const styles = StyleSheet.create({
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-});

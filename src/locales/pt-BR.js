@@ -18,6 +18,7 @@ const translations = {
   verify: "Verificar",
   voteCard: "Título de Eleitor",
   zipCode: "CEP",
+  zipCodeReason: "Não precisamos saber o seu endereço específico, apenas uma localização aproximada de onde você mora",
   errors: {
     facebookLoginError: "Erro ao tentar entrar com o facebook.",
     genericError: "Houve um erro ao tentar completar sua ação. Tente novamente.",

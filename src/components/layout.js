@@ -14,8 +14,8 @@ import styles from "../styles/layout";
 class Layout extends Component {
   static propTypes = {
     children: PropTypes.node,
-    contentStyle: PropTypes.object,
-    style: PropTypes.object,
+    contentStyle: View.propTypes.style,
+    style: View.propTypes.style,
   };
 
   render() {
