@@ -17,6 +17,10 @@ export default StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
+  mapContainer: {
+    backgroundColor: "transparent",
+    flex: 1.5,
+  },
   mapShadow: {
     height: 30,
     position: "absolute",

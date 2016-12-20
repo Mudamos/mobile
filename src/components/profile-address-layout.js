@@ -145,7 +145,7 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
     const { location, onSave } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View style={styles.mapContainer}>
         <LinearGradient
           style={styles.mapShadow}
           colors={["#bababa", "transparent", "transparent"]}
