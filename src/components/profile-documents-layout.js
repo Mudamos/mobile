@@ -13,9 +13,10 @@ import VoteCardInput from "./vote-card-input";
 import FlatButton from "./flat-button";
 import TransparentFlatButton from "./transparent-flat-button";
 import PageLoader from "./page-loader";
-import DocumentsReasonView from "./documents-reason-layout";
+import Modal from "./documents-reason-modal";
 
 import styles from "../styles/profile-documents-layout";
+import textStyles from "../styles/text";
 
 import { errorForField } from "../utils";
 
@@ -115,9 +116,17 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
 
         {
           reasonEnabled &&
-            <DocumentsReasonView
+            <Modal
               onAcknowledge={() => this.setState({ reasonEnabled: false })}
-            />
+            >
+              <Text style={textStyles.modalTitle}>
+                {locale.whyRequestDocumentsAlternative}
+              </Text>
+
+              <Text style={textStyles.modalText}>
+                {locale.documentsReasonExplained}
+              </Text>
+            </Modal>
         }
 
       </View>

@@ -6,17 +6,17 @@ import {
   Dimensions,
   Image,
   ScrollView,
-  Text,
   View,
 } from "react-native";
 
 import HeaderLogo from "./header-logo";
 
-import locale from "../locales/pt-BR";
-import styles from "../styles/documents-reason";
+import styles from "../styles/modal";
+
+const ANIMATION_DURATION = 500;
 
 
-export default class DocumentsReasonLayout extends Component {
+export default class Modal extends Component {
   state = {
     slideInAnimation: new Animated.Value(0),
     slideOutAnimation: new Animated.Value(0),
@@ -24,33 +24,31 @@ export default class DocumentsReasonLayout extends Component {
   }
 
   static propTypes = {
-    onAcknowledge: PropTypes.func.isRequired,
-  };
+    children: PropTypes.node,
+  }
 
   componentDidMount() {
     Animated.timing(
       this.state.slideInAnimation,
       {
         toValue: 1,
-        duration: 500,
+        duration: ANIMATION_DURATION,
         easing: Easing.quad,
       }
     ).start();
   }
 
-  animateOff() {
+  hideAnimated(done) {
     this.setState({ isHidding: true });
-
-    const { onAcknowledge } = this.props;
 
     Animated.timing(
       this.state.slideOutAnimation,
       {
         toValue: 1,
-        duration: 500,
+        duration: ANIMATION_DURATION,
         easing: Easing.quad,
       }
-    ).start(onAcknowledge);
+    ).start(done);
   }
 
   render() {
@@ -63,15 +61,15 @@ export default class DocumentsReasonLayout extends Component {
     const slide = isHidding ?
       this.state.slideOutAnimation.interpolate({
         inputRange: [0, 1],
-        outputRange: [0, height],
+        outputRange: [0, windowHeight],
       }) :
       this.state.slideInAnimation.interpolate({
         inputRange: [0, 1],
-        outputRange: [height, 0],
+        outputRange: [windowHeight, 0],
       });
 
     return (
-      <Animated.View style={[styles.cardContainer, { height, top: slide }]}>
+      <Animated.View style={[styles.container, { height, top: slide }]}>
         <Image
           source={require("../images/header-people.png")}
           style={styles.peopleImage}
@@ -82,23 +80,16 @@ export default class DocumentsReasonLayout extends Component {
 
         <View style={styles.contentContainer}>
           <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-            <Text style={styles.title}>
-              {locale.whyRequestDocumentsAlternative}
-            </Text>
-
-            <Text style={styles.text}>
-              {locale.documentsReasonExplained}
-            </Text>
+            {this.props.children}
           </ScrollView>
 
-          <Text
-            style={styles.link}
-            onPress={() => { this.animateOff() }}
-          >
-            {locale.gotIt.toUpperCase()}
-          </Text>
+          {this.renderFooter()}
         </View>
       </Animated.View>
     );
+  }
+
+  renderFooter() {
+    return <View />;
   }
 }
