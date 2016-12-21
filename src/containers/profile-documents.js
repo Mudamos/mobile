@@ -5,7 +5,6 @@ import ProfileDocumentsLayout from "../components/profile-documents-layout";
 import { extractNumbers } from "../utils";
 
 import {
-  navigate,
   openURL,
   saveProfileDocuments,
 } from "../actions";
@@ -35,7 +34,6 @@ const mapDispatchToProps = dispatch => ({
       cpf: extractNumbers(cpf),
       voteCard: extractNumbers(voteCard),
     })),
-  onDocumentsReason: () => dispatch(navigate("documentsReason")),
   onTSERequested: () => dispatch(openURL(TSE_URL)),
 });
 

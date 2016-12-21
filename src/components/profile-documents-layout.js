@@ -13,6 +13,7 @@ import VoteCardInput from "./vote-card-input";
 import FlatButton from "./flat-button";
 import TransparentFlatButton from "./transparent-flat-button";
 import PageLoader from "./page-loader";
+import DocumentsReasonView from "./documents-reason-layout";
 
 import styles from "../styles/profile-documents-layout";
 
@@ -26,6 +27,7 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
   state = {
     cpf: this.props.previousCpf,
     voteCard: this.props.previousVoteCard,
+    reasonEnabled: false,
   }
 
   static propTypes = {
@@ -33,7 +35,6 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
     isSaving: PropTypes.bool,
     previousCpf: PropTypes.string,
     previousVoteCard: PropTypes.string,
-    onDocumentsReason: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onTSERequested: PropTypes.func.isRequired,
   }
@@ -53,9 +54,10 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
     const {
       errors,
       isSaving,
-      onDocumentsReason,
       onTSERequested,
     } = this.props;
+
+    const { reasonEnabled } = this.state;
 
     return (
       <View style={styles.container}>
@@ -71,7 +73,7 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
 
             <TransparentFlatButton
               title={locale.whyRequestDocuments}
-              onPress={onDocumentsReason}
+              onPress={() => this.setState({ reasonEnabled: true })}
               style={{marginHorizontal: 20}}
             />
 
@@ -110,6 +112,14 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
 
           </KeyboardAwareScrollView>
         </Layout>
+
+        {
+          reasonEnabled &&
+            <DocumentsReasonView
+              onAcknowledge={() => this.setState({ reasonEnabled: false })}
+            />
+        }
+
       </View>
     );
   }

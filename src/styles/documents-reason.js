@@ -10,6 +10,10 @@ export default StyleSheet.create({
     shadowRadius: 10,
     shadowOffset: { height: 5 },
     shadowOpacity: 0.7,
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
   container: {
     flex: 1,

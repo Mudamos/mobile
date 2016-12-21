@@ -1,58 +1,104 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 import {
+  Animated,
+  Easing,
+  Dimensions,
   Image,
   ScrollView,
   Text,
   View,
 } from "react-native";
 
-import Layout from "./purple-layout";
 import HeaderLogo from "./header-logo";
 
 import locale from "../locales/pt-BR";
 import styles from "../styles/documents-reason";
 
 
-const DocumentsReasonLayout = ({ onAcknowledge }) => {
-  return (
-    <View style={styles.container}>
-      <Layout>
-        <View style={styles.cardContainer}>
-          <Image
-            source={require("../images/header-people.png")}
-            style={styles.peopleImage}
-            resizeMode="cover"
-          >
-            <HeaderLogo style={styles.logo}/>
-          </Image>
+export default class DocumentsReasonLayout extends Component {
+  state = {
+    slideInAnimation: new Animated.Value(0),
+    slideOutAnimation: new Animated.Value(0),
+    isHidding: false,
+  }
 
-          <View style={styles.contentContainer}>
-            <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-              <Text style={styles.title}>
-                {locale.whyRequestDocumentsAlternative}
-              </Text>
+  static propTypes = {
+    onAcknowledge: PropTypes.func.isRequired,
+  };
 
-              <Text style={styles.text}>
-                {locale.documentsReasonExplained}
-              </Text>
-            </ScrollView>
+  componentDidMount() {
+    Animated.timing(
+      this.state.slideInAnimation,
+      {
+        toValue: 1,
+        duration: 500,
+        easing: Easing.quad,
+      }
+    ).start();
+  }
 
-            <Text
-              style={styles.link}
-              onPress={onAcknowledge}
-            >
-              {locale.gotIt.toUpperCase()}
+  animateOff() {
+    this.setState({ isHidding: true });
+
+    const { onAcknowledge } = this.props;
+
+    Animated.timing(
+      this.state.slideOutAnimation,
+      {
+        toValue: 1,
+        duration: 500,
+        easing: Easing.quad,
+      }
+    ).start(onAcknowledge);
+  }
+
+  render() {
+    const { height: windowHeight } = Dimensions.get("window");
+    const margins = 40;
+    const height = windowHeight - margins;
+
+    const { isHidding } = this.state;
+
+    const slide = isHidding ?
+      this.state.slideOutAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, height],
+      }) :
+      this.state.slideInAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [height, 0],
+      });
+
+    return (
+      <Animated.View style={[styles.cardContainer, { height, top: slide }]}>
+        <Image
+          source={require("../images/header-people.png")}
+          style={styles.peopleImage}
+          resizeMode="cover"
+        >
+          <HeaderLogo style={styles.logo}/>
+        </Image>
+
+        <View style={styles.contentContainer}>
+          <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+            <Text style={styles.title}>
+              {locale.whyRequestDocumentsAlternative}
             </Text>
-          </View>
+
+            <Text style={styles.text}>
+              {locale.documentsReasonExplained}
+            </Text>
+          </ScrollView>
+
+          <Text
+            style={styles.link}
+            onPress={() => { this.animateOff() }}
+          >
+            {locale.gotIt.toUpperCase()}
+          </Text>
         </View>
-      </Layout>
-    </View>
-  );
-};
-
-DocumentsReasonLayout.propTypes = {
-  onAcknowledge: PropTypes.func.isRequired,
-};
-
-export default DocumentsReasonLayout;
+      </Animated.View>
+    );
+  }
+}
