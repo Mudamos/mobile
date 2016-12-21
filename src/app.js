@@ -8,6 +8,7 @@ import sceneStyle from "./styles/scene-default";
 import { isDev } from "./utils";
 
 import {
+  DocumentsReasonContainer,
   PlipContainer,
   ProfileAddressContainer,
   ProfileBirthContainer,
@@ -78,6 +79,8 @@ const scenes = Actions.create(
     <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
     <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
     <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
+
+    <Scene key="documentsReason" component={DocumentsReasonContainer} hideNavBar={true} direction="vertical" title="Motivo dos documentos" />
   </Scene>
 );
 

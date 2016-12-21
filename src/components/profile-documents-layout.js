@@ -33,6 +33,7 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
     isSaving: PropTypes.bool,
     previousCpf: PropTypes.string,
     previousVoteCard: PropTypes.string,
+    onDocumentsReason: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onTSERequested: PropTypes.func.isRequired,
   }
@@ -52,6 +53,7 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
     const {
       errors,
       isSaving,
+      onDocumentsReason,
       onTSERequested,
     } = this.props;
 
@@ -69,7 +71,7 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
 
             <TransparentFlatButton
               title={locale.whyRequestDocuments}
-              onPress={() => { console.log("reason")}}
+              onPress={onDocumentsReason}
               style={{marginHorizontal: 20}}
             />
 
