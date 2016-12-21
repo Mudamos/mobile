@@ -15,9 +15,6 @@ export default StyleSheet.create({
     bottom: 0,
     left: 0,
   },
-  container: {
-    flex: 1,
-  },
   contentContainer: {
     flex: 1,
     backgroundColor: "#fff",
