@@ -13,7 +13,7 @@ import HeaderLogo from "./header-logo";
 import PhoneInput from "./phone-input";
 import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
-import MDTextInput from "./md-text-input";
+import CodeInput from "./code-input";
 
 import styles from "../styles/profile-phone-layout";
 
@@ -123,14 +123,13 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
           {locale.typeCode}
         </Text>
 
-        <MDTextInput
+        <CodeInput
           value={this.state.code}
-          onChangeText={code => this.setState({code})}
+          onChangeCodeText={code => this.setState({code})}
           keyboardType="numeric"
-          maxLength={5}
+          length={5}
           mdContainerStyle={{marginHorizontal: 13}}
         />
-
 
         <FlatButton
           title={locale.verify.toUpperCase()}
