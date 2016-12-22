@@ -45,6 +45,8 @@ const logError = err => {
 };
 
 const rejectErrorResponses = res => {
+  if (isDev) console.log("Api response:", res);
+
   if (res.status === 401) {
     return Promise.reject(new UnauthorizedError(res));
   }
