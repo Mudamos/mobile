@@ -1,20 +1,25 @@
 import React, { Component, PropTypes } from "react";
 
-import { merge } from "ramda";
-
 import { MKButton } from "react-native-material-kit";
 
-const textStyle = {
+export const textStyle = {
   fontFamily: "roboto",
   fontSize: 14,
   color: "#595959",
   fontWeight: "bold",
 };
 
+export const buttonStyle = {
+  borderRadius: 100,
+  height: 42,
+  overflow: "hidden",
+};
+
 
 export default class MyFlatButton extends Component {
   static propTypes = {
     style: PropTypes.object,
+    textStyle: PropTypes.object,
     title: PropTypes.string,
     onPress: PropTypes.func.isRequired,
     ...MKButton.propTypes,
@@ -22,6 +27,7 @@ export default class MyFlatButton extends Component {
 
   static defaultProps = {
     enabled: true,
+    textStyle: {},
     style: {},
   }
 
@@ -49,8 +55,8 @@ export default class MyFlatButton extends Component {
     const button = MKButton.flatButton()
       .withBackgroundColor("#fff")
       .withMaskBorderRadius(100)
-      .withStyle(merge({ borderRadius: 100, height: 42, overflow: "hidden" }, style))
-      .withTextStyle(textStyle);
+      .withStyle({ ...buttonStyle, ...style })
+      .withTextStyle({ ...textStyle, ...this.props.textStyle });
 
     if (enabled) {
       button.withOnPress(onPress);
@@ -58,7 +64,7 @@ export default class MyFlatButton extends Component {
       button.withRippleColor("transparent")
         .withMaskEnabled(false)
         .withMaskColor("transparent")
-        .withTextStyle({ ...textStyle, opacity: 0.5 });
+        .withTextStyle({ ...textStyle, ...this.props.textStyle, opacity: 0.5 });
     }
 
     return button;
