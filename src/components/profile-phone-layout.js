@@ -8,12 +8,14 @@ import {
 import { errorForField } from "../utils";
 
 import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
-import Layout from "./layout";
+import Layout from "./purple-layout";
 import HeaderLogo from "./header-logo";
 import PhoneInput from "./phone-input";
 import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
 import MDTextInput from "./md-text-input";
+
+import styles from "../styles/profile-phone-layout";
 
 import locale from "../locales/pt-BR";
 
@@ -54,11 +56,11 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
     } = this.props;
 
     return (
-      <View style={{flex: 1, backgroundColor: "purple"}}>
+      <View style={styles.container}>
         <PageLoader isVisible={isSending || isVerifying} />
 
         <Layout>
-          <KeyboardAwareScrollView style={{flex: 1}} bounces={false}>
+          <KeyboardAwareScrollView style={styles.scrollView} bounces={false}>
             <HeaderLogo />
 
             { !hasSentValidation && this.renderPhoneForm() }
@@ -77,42 +79,28 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
 
     return (
       <View>
-        <View style={{marginHorizontal: 20}}>
-          <Text style={{
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: 24,
-            color: "white",
-            alignSelf: "center",
-            marginBottom: 20}}>
-            {locale.phoneHeaderTitle}
-          </Text>
+        <Text style={styles.headerTitle}>
+          {locale.phoneHeaderTitle}
+        </Text>
 
-          <Text style={{
-            textAlign: "center",
-            fontSize: 16,
-            color: "white",
-            alignSelf: "center",
-            marginBottom: 20}}>
-            Um código de confirmação será enviado via SMS
-          </Text>
-        </View>
+        <Text style={styles.subHeader}>
+          {locale.phoneSubtitle}
+        </Text>
 
-        <View style={{marginHorizontal: 30}}>
-          <PhoneInput
-            value={this.state.phone}
-            onChangePhoneText={phone => this.setState({phone})}
-            placeholder={locale.mobile}
-            hasError={!!errorForField("number", sendErrors)}
-            hint={errorForField("number", sendErrors)}
-          />
-        </View>
+        <PhoneInput
+          value={this.state.phone}
+          onChangePhoneText={phone => this.setState({phone})}
+          placeholder={locale.mobile}
+          hasError={!!errorForField("number", sendErrors)}
+          hint={errorForField("number", sendErrors)}
+          mdContainerStyle={{marginHorizontal: 13}}
+        />
 
         <FlatButton
           title={locale.sendSMSCode.toUpperCase()}
           enabled={this.sendEnabled}
           onPress={this.onSend.bind(this)}
-          style={{marginHorizontal: 20, marginTop: 20}}
+          style={{marginTop: 40}}
         />
       </View>
     );
@@ -122,66 +110,40 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
     const { phone } = this.state;
 
     return (
-      <View>
-        <View style={{marginHorizontal: 20}}>
-          <Text style={{
-            textAlign: "center",
-            fontSize: 16,
-            color: "white",
-            alignSelf: "center",
-            marginBottom: 20}}>
-            Um código foi enviado para o seu celular:
-          </Text>
+      <View style={{flex: 1}}>
+        <Text style={styles.subHeader}>
+          {locale.codeHasBeenSentToPhone}
+        </Text>
 
-          <Text style={{
-            textAlign: "center",
-            fontSize: 16,
-            fontWeight: "bold",
-            color: "white",
-            alignSelf: "center",
-            marginBottom: 20}}>
-            { phone }
-          </Text>
+        <Text style={styles.phoneText}>
+          { phone }
+        </Text>
 
-          <Text style={{
-            textAlign: "center",
-            fontSize: 18,
-            fontWeight: "bold",
-            color: "white",
-            alignSelf: "center",
-            marginBottom: 20}}>
-            Informe o código
-          </Text>
-        </View>
+        <Text style={styles.typeCodeText}>
+          {locale.typeCode}
+        </Text>
 
-        <View style={{marginHorizontal: 30}}>
-          <MDTextInput
-            value={this.state.code}
-            onChangeText={code => this.setState({code})}
-            keyboardType="numeric"
-            maxLength={5}
-          />
-        </View>
+        <MDTextInput
+          value={this.state.code}
+          onChangeText={code => this.setState({code})}
+          keyboardType="numeric"
+          maxLength={5}
+          mdContainerStyle={{marginHorizontal: 13}}
+        />
+
 
         <FlatButton
           title={locale.verify.toUpperCase()}
           enabled={this.verifyEnabled}
           onPress={this.onVerifyCode.bind(this)}
-          style={{marginHorizontal: 20, marginTop: 20}}
+          style={{marginTop: 20}}
         />
 
         <Text
           onPress={this.onSend.bind(this)}
-          style={{
-            textAlign: "center",
-            fontSize: 14,
-            fontWeight: "bold",
-            color: "white",
-            alignSelf: "center",
-            marginTop: 20,
-          }}
+          style={styles.resendLink}
         >
-          { locale.resendCode.toUpperCase() }
+          {locale.resendCode.toUpperCase()}
         </Text>
 
       </View>

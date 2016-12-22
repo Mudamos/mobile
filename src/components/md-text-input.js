@@ -16,6 +16,7 @@ const whiteTransparent = "rgba(255,255,255,0.7)";
 
 const style = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "transparent",
   },
   hint: {
@@ -89,6 +90,7 @@ export default class MDTextInput extends Component {
         <MKTextField
           {...textFieldProps}
 
+          ref="myinput"
           tintColor={this.tintColor}
           selectionColor={selectionColor}
           highlightColor={this.highlightColor}
@@ -105,5 +107,9 @@ export default class MDTextInput extends Component {
         }
       </View>
     );
+  }
+
+  focus() {
+    this.refs["myinput"].focus();
   }
 }

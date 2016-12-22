@@ -33,6 +33,7 @@ export default StyleSheet.create({
     textAlign: "center",
     fontFamily: "roboto",
     fontSize: 16,
+    lineHeight: 23,
     color: "#fff",
     alignSelf: "center",
   },
