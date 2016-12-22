@@ -51,6 +51,7 @@ export default class CodeInput extends Component {
 
             ref="hiddenField"
             value={value}
+            maxLength={length}
             keyboardType="numeric"
             onChangeText={text => this.onChangeText(text)}
             underlineEnabled={false}
