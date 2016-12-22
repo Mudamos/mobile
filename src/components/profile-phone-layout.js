@@ -139,7 +139,7 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
         />
 
         <Text
-          onPress={this.onSend.bind(this)}
+          onPress={this.resend.bind(this)}
           style={styles.resendLink}
         >
           {locale.resendCode.toUpperCase()}
@@ -147,6 +147,11 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
 
       </View>
     );
+  }
+
+  resend() {
+    this.setState({ code: "" });
+    this.onSend();
   }
 
   onSend() {
