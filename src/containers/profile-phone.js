@@ -18,13 +18,17 @@ import {
 } from "../selectors";
 
 
-const mapStateToProps = state => ({
-  hasSentValidation: hasSentPhoneValidation(state),
-  isVerifying: isSavingProfile(state),
-  isSending: isSendingPhoneValidation(state),
-  phone: phoneMask(currentUser(state).mobile.number),
-  sendErrors: profileSendPhoneValidationErrors(state),
-});
+const mapStateToProps = state => {
+  const user = currentUser(state);
+
+  return {
+    hasSentValidation: hasSentPhoneValidation(state),
+    isVerifying: isSavingProfile(state),
+    isSending: isSendingPhoneValidation(state),
+    phone: phoneMask(user && user.mobile.number || ""),
+    sendErrors: profileSendPhoneValidationErrors(state),
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   onPhoneGiven: phone => dispatch(sendPhoneValidation(extractNumbers(phone))),

@@ -45,6 +45,8 @@ const logError = err => {
 };
 
 const rejectErrorResponses = res => {
+  if (isDev) console.log("Api response:", res);
+
   if (res.status === 401) {
     return Promise.reject(new UnauthorizedError(res));
   }
@@ -170,31 +172,15 @@ const signPlip = ({ client }) => (authToken, signMessage) =>
     .send({ signMessage })
     .then(getData);
 
-const userSignInfo = ({ client }) => (authToken, plipId) => {
-  return Promise.resolve({});
-  // eslint-disable-next-line no-unreachable
-  return Promise.resolve({
-    signMessage: { dateTime: "2016-11-14T19:20:30" },
-  });
-  // eslint-disable-next-line no-unreachable
+const userSignInfo = ({ client }) => (authToken, plipId) =>
   authorizedClient(client, authToken)
-    .get(`/user/message/${plipId}`)
+    .get(`/users/message/${plipId}`)
     .then(getData);
-};
 
-const plipSignInfo = ({ client }) => plipId => {
-  return Promise.resolve({
-    info: {
-      updatedAt: "2016-11-14T19:20:30",
-      blockchainAddress: "xpto address",
-      signaturesCount: 777,
-    },
-  });
-  // eslint-disable-next-line no-unreachable
+const plipSignInfo = ({ client }) => plipId =>
   client
     .get(`/petition/${plipId}/info`)
     .then(getData);
-};
 
 
 export default function MobileApi(host) {

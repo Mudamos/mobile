@@ -16,6 +16,7 @@ const whiteTransparent = "rgba(255,255,255,0.7)";
 
 const style = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "transparent",
   },
   hint: {
@@ -59,7 +60,9 @@ export default class MDTextInput extends Component {
       fontSize: 10,
       fontWeight: "200",
     },
+    selectionColor: selectionColor,
     style: style.textFieldStyle,
+    underlineEnabled: true,
   }
 
   get highlightColor() {
@@ -79,6 +82,8 @@ export default class MDTextInput extends Component {
       mdHintTextStyle,
       textInputStyle,
       floatingLabelFont,
+      underlineEnabled,
+      selectionColor,
 
       ...textFieldProps
     } = this.props;
@@ -89,12 +94,14 @@ export default class MDTextInput extends Component {
         <MKTextField
           {...textFieldProps}
 
+          ref="myinput"
           tintColor={this.tintColor}
           selectionColor={selectionColor}
           highlightColor={this.highlightColor}
           textInputStyle={[style.textInputStyle, textInputStyle]}
           floatingLabelFont={floatingLabelFont}
-          underlineSize={1}
+          underlineSize={underlineEnabled ? 1 : 0}
+          underlineEnabled={underlineEnabled}
         />
 
         {
@@ -105,5 +112,9 @@ export default class MDTextInput extends Component {
         }
       </View>
     );
+  }
+
+  focus() {
+    this.refs["myinput"].focus();
   }
 }
