@@ -142,12 +142,7 @@ class PlipLayout extends Component {
                     Atualizado em: {plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss")}
                   </Text>
               }
-              {
-                plipSignInfo && plipSignInfo.signaturesCount &&
-                  <Text style={{marginTop: 5}}>
-                    Assinaturas: {plipSignInfo.signaturesCount}
-                  </Text>
-              }
+              {this.renderSignaturesCount()}
             </View>
             <View style={{ paddingLeft: 10, paddingRight: 10 }}>
             { plip && <MarkdownView content={plip.content} /> }
@@ -164,6 +159,17 @@ class PlipLayout extends Component {
           </ActionButton>
         }
       </View>
+    );
+  }
+
+  renderSignaturesCount() {
+    const { plipSignInfo } = this.props;
+
+    const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
+    return (
+      <Text style={{marginTop: 5}}>
+        Assinaturas: {count}
+      </Text>
     );
   }
 
