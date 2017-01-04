@@ -68,7 +68,7 @@ const mapStateToProps = state => {
     isUserLoggedIn: isUserLoggedIn(state),
     plip: findCurrentPlip(state),
     plipSignInfo: plipSignInfo,
-    userSignDate: userSignInfo && moment(userSignInfo.dateTime),
+    userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
 }
 
