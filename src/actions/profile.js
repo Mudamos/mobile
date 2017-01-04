@@ -1,3 +1,12 @@
+export const fetchProfile = () => ({
+  type: "PROFILE_FETCH",
+});
+
+export const fetchingProfileError = profileFetchError => ({
+  type: "PROFILE_FETCHING_ERROR",
+  payload: { profileFetchError },
+});
+
 export const isFetchingProfile = isFetching => ({
   type: "PROFILE_FETCHING",
   payload: { isFetching },

@@ -6,6 +6,8 @@ export default (state = initialState, action) => {
   switch (type) {
     case "PROFILE_FETCHING":
       return { ...state, isFetching: payload.isFetching };
+    case "PROFILE_FETCHING_ERROR":
+      return { ...state, profileFetchError: payload.profileFetchError };
     case "PROFILE_SAVING":
       return { ...state, isSaving: payload.isSaving, errors: null };
     case "PROFILE_SENDING_PHONE_VALIDATION":
@@ -43,6 +45,7 @@ export default (state = initialState, action) => {
         errors: null,
         isSendingPhoneValidation: false,
         hasSentPhoneValidation: false,
+        profileFetchError: false,
         sendValidationErrors: null,
       };
     default:

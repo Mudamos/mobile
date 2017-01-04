@@ -9,6 +9,7 @@ import { moment } from "../utils";
 
 import ActionButton from "react-native-action-button";
 import Ionicon from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 import ParallaxScrollView from "react-native-parallax-scroll-view";
 
@@ -32,11 +33,11 @@ class PlipLayout extends Component {
     isSigning: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     navigationState: PropTypes.object.isRequired,
+    openMenu: PropTypes.func.isRequired,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
     userSignDate: PropTypes.object,
-    onLogout: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
   };
 
@@ -201,16 +202,16 @@ class PlipLayout extends Component {
     const {
       isUserLoggedIn,
       navigationState,
-      onLogout,
+      openMenu,
     } = this.props;
 
     const leftView = isUserLoggedIn ? (
-      <Text
-        style={{color: "#fff"}}
-        onPress={onLogout}
-      >
-        Logout
-      </Text>
+      <Icon
+        name="dehaze"
+        size={24}
+        color="#fff"
+        onPress={openMenu}
+      />
     ) : null;
 
     return (
