@@ -3,31 +3,24 @@ import { connect } from "react-redux";
 import SignUpLayout from "../components/sign-up-layout";
 
 import {
+  navigate,
   profileSaveMain,
 } from "../actions";
 
 import {
-  isUserLoggedIn,
   isSavingProfile,
-  currentUser,
   profileSaveErrors,
 } from "../selectors";
 
 
-const mapStateToProps = state => {
-  const user = currentUser(state);
-
-  return {
-    previousName: user ? user.name : null,
-    errors: profileSaveErrors(state),
-    showEmail: !user || !user.email,
-    showPassword: !isUserLoggedIn(state),
-    isSaving: isSavingProfile(state),
-  };
-};
+const mapStateToProps = state => ({
+  createErrors: profileSaveErrors(state),
+  isCreating: isSavingProfile(state),
+});
 
 const mapDispatchToProps = dispatch => ({
-  onSave: ({ name, email, password }) => dispatch(profileSaveMain({ name, email, password })),
+  onCreate: ({ name, email, password }) => dispatch(profileSaveMain({ name, email, password })),
+  onSignIn: () => dispatch(navigate("signIn")),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpLayout);

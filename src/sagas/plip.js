@@ -116,7 +116,7 @@ function* signPlip({ mobileApi, walletStore }) {
 
       const user = yield call(fetchProfile, { mobileApi });
 
-      if (!user) return yield put(navigate("signIn"));
+      if (!user) return yield put(navigate("signUp"));
 
       // Check profile completion
       const { key: screenKey } = yield call(profileScreenForCurrentUser);
