@@ -11,7 +11,13 @@ const translations = {
   documentsReasonExplained: "Porque aqui sua assinatura tem validade legal. Ela vai propor oficialmente um projeto de lei. Diferente de outros sites de “assinaturas”, o nosso é para valer! Todos os dados são confidenciais e mantidos em regime de total privacidade. Somos uma das organizações que mais defendem a segurança e privacidade de dados no mundo e faremos isso também com os seus dados.",
   email: "E-mail",
   gotIt: "entendi",
+  loading: "Carregando...",
+  logout: "Sair",
   mobile: "Celular",
+  menu: {
+    changePassword: "Alterar senha",
+    editProfile: "Editar perfil",
+  },
   name: "Nome",
   password: "Senha",
   phoneHeaderTitle: "Informe seu celular",

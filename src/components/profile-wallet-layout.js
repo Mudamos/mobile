@@ -4,7 +4,7 @@ import {
   View,
 } from "react-native";
 
-import Layout from "./layout";
+import Layout from "./purple-layout";
 import HeaderLogo from "./header-logo";
 import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
@@ -26,7 +26,7 @@ export default class ProfileWalletLayout extends Component {
     } = this.props;
 
     return (
-      <View style={{flex: 1, backgroundColor: "purple"}}>
+      <View style={{flex: 1}}>
         <PageLoader isVisible={isCreatingWallet} />
 
         <Layout>

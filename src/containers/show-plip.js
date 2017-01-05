@@ -4,13 +4,17 @@ import { connect } from "react-redux";
 import { isDev, moment } from "../utils";
 
 import {
+  fetchProfile,
   fetchPlips,
   logout,
   signPlip,
 } from "../actions";
+
 import {
   errorFetchingPlips,
+  currentUser as getCurrentUser,
   isFetchingPlips,
+  isFetchingProfile,
   isSigningPlip,
   isUserLoggedIn,
   findCurrentPlip,
@@ -19,13 +23,21 @@ import {
 } from "../selectors";
 
 import PlipLayout from "../components/plip-layout";
+import Menu from "../components/side-menu";
+import LoggedInMenu from "../components/logged-in-menu-content";
 
 import Toast from "react-native-simple-toast";
 
 class Container extends Component {
+  state = {
+    menuOpen: false,
+  };
+
   static propTypes = {
+    currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
     isFetchingPlip: PropTypes.bool.isRequired,
+    isFetchingProfile: PropTypes.bool,
     isSigning: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     navigationState: PropTypes.object.isRequired,
@@ -33,6 +45,7 @@ class Container extends Component {
     plipSignInfo: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
     userSignDate: PropTypes.object,
+    onFetchProfile: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
     onPlipsFetch: PropTypes.func.isRequired,
@@ -44,9 +57,55 @@ class Container extends Component {
   }
 
   render() {
+    const { isUserLoggedIn } = this.props;
+
+    return isUserLoggedIn ? this.renderWithMenu() : this.renderPage();
+  }
+
+  renderWithMenu() {
+    const { menuOpen: open } = this.state;
+
     return (
-      <PlipLayout {...this.props} />
+      <Menu
+        open={open}
+        content={this.renderMenuContent()}
+        onClose={() => this.setState({ menuOpen: false })}
+      >
+        {this.renderPage()}
+      </Menu>
     );
+  }
+
+  renderPage() {
+    return (
+      <PlipLayout
+        {...this.props}
+        openMenu={this.openMenu.bind(this)}
+      />
+    );
+  }
+
+  renderMenuContent() {
+    const {
+      currentUser,
+      isFetchingProfile,
+      onLogout,
+    } = this.props;
+
+    return (
+      <LoggedInMenu
+        currentUser={currentUser}
+        isFetchingProfile={isFetchingProfile}
+        onLogout={onLogout}
+      />
+    );
+  }
+
+  openMenu() {
+    const { onFetchProfile } = this.props;
+
+    this.setState({ menuOpen: true });
+    onFetchProfile();
   }
 }
 
@@ -62,18 +121,21 @@ const mapStateToProps = state => {
   }
 
   return {
+    currentUser: getCurrentUser(state),
     errorFetchingPlips: errorFetchingPlips(state),
     isFetchingPlip: isFetchingPlips(state),
+    isFetchingProfile: isFetchingProfile(state),
     isSigning: isSigningPlip(state),
     isUserLoggedIn: isUserLoggedIn(state),
     plip: findCurrentPlip(state),
     plipSignInfo: plipSignInfo,
-    userSignDate: userSignInfo && moment(userSignInfo.dateTime),
+    userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
 }
 
 const mapDispatchToProps = dispatch => ({
   retryPlip: () => dispatch(fetchPlips()),
+  onFetchProfile: () => dispatch(fetchProfile()),
   onLogout: () => dispatch(logout()),
   onPlipsFetch: () => dispatch(fetchPlips()),
   onPlipSign: plip => dispatch(signPlip({ plip })),

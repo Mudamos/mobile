@@ -2,6 +2,7 @@ import { takeLatest } from "redux-saga";
 import { call, put, spawn, select } from "redux-saga/effects";
 
 import {
+  fetchingProfileError,
   isFetchingProfile,
   savingProfile,
   updatedUserProfile,
@@ -217,10 +218,11 @@ function* savePhoneProfile({ mobileApi }) {
 
 export function* fetchProfile({ mobileApi }) {
   try {
-    yield put(isFetchingProfile(true));
     let user = yield select(currentUser);
 
     if (user) return user;
+
+    yield put(isFetchingProfile(true));
 
     const authToken = yield select(currentAuthToken);
     if (!authToken) return;
@@ -236,6 +238,17 @@ export function* fetchProfile({ mobileApi }) {
   }
 }
 
+export function* fetchProfileSaga({ mobileApi }) {
+  yield takeLatest("PROFILE_FETCH", function* () {
+    try {
+      yield put(fetchingProfileError(false));
+      yield call(fetchProfile, { mobileApi });
+    } catch (e) {
+      yield put(fetchingProfileError(true));
+    }
+  });
+}
+
 export default function* profileSaga({ mobileApi, sessionStore }) {
   yield spawn(saveMainProfile, { mobileApi, sessionStore });
   yield spawn(saveBirthdateProfile, { mobileApi });
@@ -243,4 +256,5 @@ export default function* profileSaga({ mobileApi, sessionStore }) {
   yield spawn(saveDocumentsProfile, { mobileApi });
   yield spawn(sendPhoneValidation, { mobileApi });
   yield spawn(savePhoneProfile, { mobileApi });
+  yield spawn(fetchProfileSaga, { mobileApi });
 }
