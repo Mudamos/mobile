@@ -90,6 +90,7 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
                 onChangeText={email => this.setState({ email })}
                 hasError={!!errorForField("email", createErrors)}
                 hint={errorForField("email", createErrors)}
+                keyboardType="email-address"
               />
 
               <MDTextInput
