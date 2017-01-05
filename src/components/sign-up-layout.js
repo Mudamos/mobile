@@ -27,6 +27,7 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
   static propTypes = {
     createErrors: PropTypes.array,
     isCreating: PropTypes.bool,
+    onBack: PropTypes.func.isRequired,
     onCreate: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
   }
@@ -47,6 +48,7 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
     const {
       createErrors,
       isCreating,
+      onBack,
       onSignIn,
     } = this.props;
 
@@ -60,7 +62,7 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
 
             <BackButton
               style={styles.backButton}
-              onPress={() => {}}
+              onPress={onBack}
             />
 
             <Text style={styles.headerTitle}>

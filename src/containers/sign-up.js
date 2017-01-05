@@ -4,6 +4,7 @@ import SignUpLayout from "../components/sign-up-layout";
 
 import {
   navigate,
+  navigateBack,
   profileSaveMain,
 } from "../actions";
 
@@ -19,6 +20,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  onBack: () => dispatch(navigateBack()),
   onCreate: ({ name, email, password }) => dispatch(profileSaveMain({ name, email, password })),
   onSignIn: () => dispatch(navigate("signIn")),
 });
