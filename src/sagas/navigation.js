@@ -47,7 +47,7 @@ function* unauthorized({ sessionStore }) {
     try {
       const { params } = payload;
       yield call(logout, { sessionStore });
-      yield put(navigate("signIn", params));
+      yield put(navigate("signUp", params));
     } catch(e) {
       if (isDev) console.log("Error unauthorized navigation: ", e.message, e.stack, e);
     }

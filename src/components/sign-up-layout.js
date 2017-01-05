@@ -1,109 +1,140 @@
-import React, { Component, PropTypes } from "react";
+import React, { PropTypes } from "react";
 
 import {
+  Text,
   View,
 } from "react-native";
 
-import Layout from "./layout";
-import TextInput from "./text-input";
-import NavigationBar from "./navigation-bar";
-import SimpleButton from "./simple-button";
+import Layout from "./purple-layout";
+import HeaderLogo from "./header-logo";
+import MDTextInput from "./md-text-input";
 import PageLoader from "./page-loader";
+import BackButton from "./back-button";
+import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
+import FlatButton from "./flat-button";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import locale from "../locales/pt-BR";
 import { errorForField } from "../utils";
 
+import styles from "../styles/sign-up-layout";
 
-export default class SignUpLayout extends Component {
-  state = {
-    name: this.props.previousName,
-  }
+
+export default class SignUpLayout extends ComponentWithKeyboardEvent {
+  state = {}
 
   static propTypes = {
-    errors: PropTypes.array,
-    isSaving: PropTypes.bool,
-    navigationState: PropTypes.object.isRequired,
-    previousName: PropTypes.string,
-    showEmail: PropTypes.bool,
-    showPassword: PropTypes.bool,
-    onSave: PropTypes.func,
+    createErrors: PropTypes.array,
+    isCreating: PropTypes.bool,
+    onBack: PropTypes.func.isRequired,
+    onCreate: PropTypes.func.isRequired,
+    onSignIn: PropTypes.func.isRequired,
+  }
+
+  get validForm() {
+    return [
+      this.state.name,
+      this.state.email,
+      this.state.password,
+    ].every(v => v);
+  }
+
+  get createEnabled() {
+    return this.validForm && !this.state.hasKeyboard;
   }
 
   render() {
     const {
-      errors,
-      isSaving,
-      showEmail,
-      showPassword,
+      createErrors,
+      isCreating,
+      onBack,
+      onSignIn,
     } = this.props;
 
     return (
-      <View style={{flex: 1, backgroundColor: "#f7c44c"}}>
-        <PageLoader isVisible={isSaving} />
+      <View style={styles.container}>
+        <PageLoader isVisible={isCreating} />
 
-        <Layout style={{backgroundColor: "red"}}>
-          {this.renderNavBar()}
+        <Layout>
+          <KeyboardAwareScrollView bounces={false} style={styles.scrollView}>
+            <HeaderLogo />
 
-          <KeyboardAwareScrollView bounces={false} style={{backgroundColor: "blue"}}>
-            <TextInput
-              label={locale.name}
-              value={this.state.name}
-              onChangeText={name => this.setState({ name })}
-              hasError={!!errorForField("name", errors)}
-              hint={errorForField("name", errors)}
+            <BackButton
+              style={styles.backButton}
+              onPress={onBack}
             />
 
-            { showEmail &&
-                <TextInput
-                  label={locale.email}
-                  value={this.state.email}
-                  onChangeText={email => this.setState({ email })}
-                  hasError={!!errorForField("email", errors)}
-                  hint={errorForField("email", errors)}
-                />
-            }
+            <Text style={styles.headerTitle}>
+              {locale.signUpTitle}
+            </Text>
 
-            { showPassword &&
-                <TextInput
-                  label={locale.password}
-                  value={this.state.password}
-                  onChangeText={password => this.setState({ password })}
-                  secureTextEntry={true}
-                  hasError={!!errorForField("password", errors)}
-                  hint={errorForField("password", errors)}
-                />
-            }
+            <View style={styles.separatorContainer}>
+              <View style={styles.separatorLine} />
+              <Text style={styles.separatorText}>ou</Text>
+              <View style={styles.separatorLine} />
+            </View>
 
-            <SimpleButton
+            <View style={styles.inputContainer}>
+              <MDTextInput
+                placeholder={locale.name}
+                value={this.state.name}
+                onChangeText={name => this.setState({ name })}
+                hasError={!!errorForField("name", createErrors)}
+                hint={errorForField("name", createErrors)}
+              />
+
+              <MDTextInput
+                placeholder={locale.email}
+                value={this.state.email}
+                onChangeText={email => this.setState({ email })}
+                hasError={!!errorForField("email", createErrors)}
+                hint={errorForField("email", createErrors)}
+                keyboardType="email-address"
+              />
+
+              <MDTextInput
+                placeholder={locale.password}
+                value={this.state.password}
+                onChangeText={password => this.setState({ password })}
+                password={true}
+                hasError={!!errorForField("password", createErrors)}
+                hint={errorForField("password", createErrors)}
+              />
+            </View>
+
+            <FlatButton
+              title={locale.enroll.toUpperCase()}
+              enabled={this.createEnabled}
               onPress={this.submit.bind(this)}
-            >
-              Salvar
-            </SimpleButton>
+              style={{marginHorizontal: 20, marginTop: 20}}
+            />
+
+            <View style={styles.signInContainer}>
+              <Text
+                style={styles.lightText}
+                onPress={onSignIn}
+              >
+                {locale.hasAnAccountAlready}
+              </Text>
+
+              <Text
+                style={styles.login}
+                onPress={onSignIn}
+              >
+                {locale.performLogin}
+              </Text>
+            </View>
           </KeyboardAwareScrollView>
         </Layout>
       </View>
     );
   }
 
-  renderNavBar() {
-    const { navigationState } = this.props;
-
-    return (
-      <NavigationBar title={navigationState.title} />
-    );
-  }
-
   submit() {
-    const { showEmail, showPassword } = this.props;
+    const { onCreate } = this.props;
     const { name, email, password } = this.state;
 
-    const payload = { name };
-
-    if (showEmail) payload.email = email;
-    if (showPassword) payload.password = password;
-
-    this.props.onSave(payload);
+    onCreate({ name, email, password });
   }
 }
