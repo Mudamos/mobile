@@ -12,6 +12,7 @@ import PageLoader from "./page-loader";
 import BackButton from "./back-button";
 import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import FlatButton from "./flat-button";
+import FBLoginButton from "./fb-login-button";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -27,8 +28,10 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
   static propTypes = {
     createErrors: PropTypes.array,
     isCreating: PropTypes.bool,
+    isLoggingIn: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
     onCreate: PropTypes.func.isRequired,
+    onFacebookLogin: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
   }
 
@@ -48,13 +51,14 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
     const {
       createErrors,
       isCreating,
+      isLoggingIn,
       onBack,
       onSignIn,
     } = this.props;
 
     return (
       <View style={styles.container}>
-        <PageLoader isVisible={isCreating} />
+        <PageLoader isVisible={isCreating || isLoggingIn} />
 
         <Layout>
           <KeyboardAwareScrollView bounces={false} style={styles.scrollView}>
@@ -68,6 +72,8 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
             <Text style={styles.headerTitle}>
               {locale.signUpTitle}
             </Text>
+
+            {this.renderFBLogin()}
 
             <View style={styles.separatorContainer}>
               <View style={styles.separatorLine} />
@@ -128,6 +134,17 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
           </KeyboardAwareScrollView>
         </Layout>
       </View>
+    );
+  }
+
+  renderFBLogin() {
+    const { onFacebookLogin } = this.props;
+
+    return (
+      <FBLoginButton
+        onPress={onFacebookLogin}
+        style={{marginHorizontal: 20, marginTop: 24}}
+      />
     );
   }
 

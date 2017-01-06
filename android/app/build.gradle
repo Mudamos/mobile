@@ -167,12 +167,12 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fbsdk')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-device-info')
     compile project(':react-native-randombytes')
     compile project(':react-native-material-kit')
     compile project(':react-native-maps')
-    compile project(':react-native-facebook-login')
     compile project(':react-native-vector-icons')
     compile project(':react-native-spinkit')
     compile project(':react-native-config')

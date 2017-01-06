@@ -8,12 +8,10 @@ export default class TransparentFlatButton extends FlatButton {
     const {
       enabled,
       style,
-      title,
     } = this.props;
 
     const button = this.buttonClass()
       .withBackgroundColor("transparent")
-      .withText(title)
       .withStyle({ ...buttonStyle, borderColor: "#fff", borderWidth: 1, ...style })
       .withTextStyle({ ...textStyle, color: "#fff", ...this.props.textStyle });
 
@@ -24,6 +22,6 @@ export default class TransparentFlatButton extends FlatButton {
 
     const Button = button.build();
 
-    return <Button />;
+    return <Button>{this.props.children}</Button>;
   }
 }
