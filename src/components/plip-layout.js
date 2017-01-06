@@ -2,6 +2,7 @@ import React, { Component, PropTypes }  from "react";
 
 import {
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
@@ -206,12 +207,13 @@ class PlipLayout extends Component {
     } = this.props;
 
     const leftView = isUserLoggedIn ? (
-      <Icon
-        name="dehaze"
-        size={24}
-        color="#fff"
-        onPress={openMenu}
-      />
+      <TouchableOpacity onPress={openMenu}>
+        <Icon
+          name="dehaze"
+          size={24}
+          color="#fff"
+        />
+      </TouchableOpacity>
     ) : null;
 
     return (
