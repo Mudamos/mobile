@@ -14,6 +14,7 @@ import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
 import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import FlatButton from "./flat-button";
+import FBLoginButton from "./fb-login-button";
 
 import locale from "../locales/pt-BR";
 
@@ -26,6 +27,7 @@ class SignInLayout extends ComponentWithKeyboardEvent {
   static propTypes = {
     isLoggingIn: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
+    onFacebookLogin: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
   }
 
@@ -55,13 +57,15 @@ class SignInLayout extends ComponentWithKeyboardEvent {
             <HeaderLogo />
 
             <BackButton
-              style={styles.backButton}
+              containerStyle={styles.backButton}
               onPress={onBack}
             />
 
             <Text style={styles.headerTitle}>
               {locale.signInTitle}
             </Text>
+
+            {this.renderFBLogin()}
 
             <View style={styles.separatorContainer}>
               <View style={styles.separatorLine} />
@@ -94,6 +98,17 @@ class SignInLayout extends ComponentWithKeyboardEvent {
           </KeyboardAwareScrollView>
         </Layout>
       </View>
+    );
+  }
+
+  renderFBLogin() {
+    const { onFacebookLogin } = this.props;
+
+    return (
+      <FBLoginButton
+        onPress={onFacebookLogin}
+        style={{marginHorizontal: 20, marginTop: 24}}
+      />
     );
   }
 

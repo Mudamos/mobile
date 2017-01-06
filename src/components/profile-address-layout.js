@@ -91,7 +91,7 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
             {
               location &&
                 <BackButton
-                  style={{
+                  containerStyle={{
                     position: "absolute",
                     top: 20,
                     left: 0,

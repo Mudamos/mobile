@@ -11,6 +11,7 @@ const translations = {
   documentsReasonExplained: "Porque aqui sua assinatura tem validade legal. Ela vai propor oficialmente um projeto de lei. Diferente de outros sites de “assinaturas”, o nosso é para valer! Todos os dados são confidenciais e mantidos em regime de total privacidade. Somos uma das organizações que mais defendem a segurança e privacidade de dados no mundo e faremos isso também com os seus dados.",
   email: "E-mail",
   enroll: "Cadastrar",
+  facebookLogin: "Entrar com Facebook",
   getIn: "Entrar",
   gotIt: "entendi",
   hasAnAccountAlready: "Já tem uma conta?",

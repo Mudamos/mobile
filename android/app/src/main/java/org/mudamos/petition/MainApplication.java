@@ -3,13 +3,15 @@ package org.mudamos.petition;
 import android.app.Application;
 import android.util.Log;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
 import com.facebook.react.ReactApplication;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.airbnb.android.react.maps.MapsPackage;
-import com.magus.fblogin.FacebookLoginPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -22,6 +24,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
+  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
+
+  protected static CallbackManager getCallbackManager() {
+    return mCallbackManager;
+  }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -33,12 +40,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FBSDKPackage(mCallbackManager),
             new LinearGradientPackage(),
             new RNDeviceInfo(),
             new RandomBytesPackage(),
             new ReactMaterialKitPackage(),
             new MapsPackage(),
-            new FacebookLoginPackage(),
             new VectorIconsPackage(),
             new RNSpinkitPackage(),
             new ReactNativeConfigPackage()
@@ -49,5 +56,11 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public ReactNativeHost getReactNativeHost() {
       return mReactNativeHost;
+  }
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    FacebookSdk.sdkInitialize(getApplicationContext());
   }
 }

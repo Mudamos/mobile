@@ -1,7 +1,7 @@
 import { takeLatest } from "redux-saga";
 import { call, fork, put } from "redux-saga/effects";
 
-import { FBLoginManager } from "react-native-facebook-login";
+import { LoginManager } from "react-native-fbsdk";
 
 import { isDev } from "../utils";
 
@@ -29,7 +29,7 @@ function* logoutSaga({ sessionStore }) {
 
 export function* logout({ sessionStore }) {
   yield call(sessionStore.destroy);
-  yield call(FBLoginManager.logout, () => {});
+  yield call(LoginManager.logOut);
   // TODO: call logout api but failures should not propagate
   yield put(clearSession());
 }

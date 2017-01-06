@@ -7,6 +7,7 @@ import {
 } from "../selectors";
 
 import {
+  facebookUserLogIn,
   loginUser,
   navigateBack,
 } from "../actions";
@@ -17,6 +18,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onBack: () => dispatch(navigateBack()),
+  onFacebookLogin: () => dispatch(facebookUserLogIn()),
   onSignIn: (email, password) => dispatch(loginUser(email, password)),
 });
 

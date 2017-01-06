@@ -42,7 +42,7 @@ export default class MyFlatButton extends Component {
       .withText(title)
       .build();
 
-    return <Button />;
+    return <Button>{this.props.children}</Button>;
   }
 
   buttonClass() {
@@ -50,6 +50,7 @@ export default class MyFlatButton extends Component {
       enabled,
       onPress,
       style,
+      title,
     } = this.props;
 
     const button = MKButton.flatButton()
@@ -57,6 +58,10 @@ export default class MyFlatButton extends Component {
       .withMaskBorderRadius(100)
       .withStyle({ ...buttonStyle, ...style })
       .withTextStyle({ ...textStyle, ...this.props.textStyle });
+
+    if (title) {
+      button.withText(title);
+    }
 
     if (enabled) {
       button.withOnPress(onPress);

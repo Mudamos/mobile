@@ -1,11 +1,12 @@
 import { takeLatest } from "redux-saga";
 import { call, fork, put } from "redux-saga/effects";
 
-import { FBLoginManager } from "react-native-facebook-login";
+import { AccessToken, LoginManager } from "react-native-fbsdk";
 
 import {
   isLoggingIn,
   logginSucceeded,
+  facebookUserLoggedIn,
   finishedLogIn,
   facebookLogInError,
   updatedUserProfile,
@@ -14,15 +15,27 @@ import {
 } from "../actions";
 
 import { User } from "../models";
-import { isDev } from "../utils";
+import { logError } from "../utils";
 
+
+const facebookPermissions = ["public_profile", "email"];
 
 function* login({ mobileApi, sessionStore }) {
-  yield takeLatest("FACEBOOK_USER_LOGGED_IN", function* ({ payload }) {
-    const fbToken = payload.data.credentials.token;
-
+  yield takeLatest("FACEBOOK_USER_LOG_IN", function* () {
     try {
+      const fbResult = yield call(LoginManager.logInWithReadPermissions, facebookPermissions);
+
+      if (fbResult.isCancelled) {
+        yield put(finishedLogIn());
+        return
+      }
+
       yield put(isLoggingIn());
+
+      const tokenData = yield call(AccessToken.getCurrentAccessToken);
+      yield put(facebookUserLoggedIn(tokenData));
+
+      const fbToken = tokenData.accessToken.toString();
       const token =  yield call(mobileApi.fbSignIn, fbToken);
       const appAuth = { token };
 
@@ -36,10 +49,10 @@ function* login({ mobileApi, sessionStore }) {
       yield put(updatedUserProfile({ user, profileComplete: response.complete }));
       yield put(profileStateMachine({ type: "reset" }));
     } catch(e) {
-      if (isDev) console.log("API Error: ", e.message, e.stack);
+      logError(e);
 
       yield call(sessionStore.destroy);
-      yield call(FBLoginManager.logout, () => {});
+      yield call(LoginManager.logOut);
       yield put(clearSession());
       yield put(finishedLogIn());
       yield put(facebookLogInError(e));
