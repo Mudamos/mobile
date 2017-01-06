@@ -26,6 +26,7 @@ export default store => () => {
     case "profileDocuments":
     case "profileMissingFields":
     case "profilePhone":
+    case "profileWallet":
       return false;
     default:
       return defaultBackAction();
