@@ -1,12 +1,17 @@
 import React, { Component, PropTypes } from "react";
 
-import { Text } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 export default class BackButton extends Component {
   static propTypes = {
     color: PropTypes.string,
+    containerStyle: View.propTypes.style,
     size: PropTypes.number,
 
     ...Text.propTypes,
@@ -21,18 +26,22 @@ export default class BackButton extends Component {
     const {
       color,
       size,
+      onPress,
+      containerStyle,
 
       ...textProps
     } = this.props;
 
     return (
-      <Icon
-        name="arrow-back"
-        size={size}
-        color={color}
+      <TouchableOpacity onPress={onPress} style={containerStyle}>
+        <Icon
+          name="arrow-back"
+          size={size}
+          color={color}
 
-        {...textProps}
-      />
+          {...textProps}
+        />
+      </TouchableOpacity>
     );
   }
 }

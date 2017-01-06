@@ -65,7 +65,7 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
             <HeaderLogo />
 
             <BackButton
-              style={styles.backButton}
+              containerStyle={styles.backButton}
               onPress={onBack}
             />
 
