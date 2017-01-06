@@ -6,6 +6,7 @@ const translations = {
   cantRememberVoteCard: "Não lembra do seu título?",
   codeHasBeenSentToPhone: "Um código foi enviado para seu celular",
   confirm: "Confirmar",
+  confirmInformation: "Confirme suas informações",
   cpf: "cpf",
   documentsHeaderTitle: "Informe seus documentos",
   documentsReasonExplained: "Porque aqui sua assinatura tem validade legal. Ela vai propor oficialmente um projeto de lei. Diferente de outros sites de “assinaturas”, o nosso é para valer! Todos os dados são confidenciais e mantidos em regime de total privacidade. Somos uma das organizações que mais defendem a segurança e privacidade de dados no mundo e faremos isso também com os seus dados.",
