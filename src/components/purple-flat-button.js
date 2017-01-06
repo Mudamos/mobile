@@ -14,7 +14,7 @@ export default class PurpleFlatButton extends FlatButton {
       title,
     } = this.props;
 
-    const Button = this.buttonClass().build();
+    const Button = this.buttonClass().withText("").build();
 
     return (
       <Button>
