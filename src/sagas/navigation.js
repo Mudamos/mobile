@@ -74,7 +74,7 @@ function* userProfileNavigator() {
 
 export function* profileScreenForCurrentUser() {
   const screenKeys = [
-    "signUp",
+    "profileMissingFields",
     "profileBirth",
     "profileAddress",
     "profileDocuments",
