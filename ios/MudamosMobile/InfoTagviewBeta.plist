@@ -59,6 +59,16 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>lato.ttf</string>
+		<string>lato_light.ttf</string>
+		<string>lato_light_italic.ttf</string>
+		<string>lato_italic.ttf</string>
+		<string>lato_hairline.ttf</string>
+		<string>lato_hairline_italic.ttf</string>
+		<string>lato_bold.ttf</string>
+		<string>lato_bold_italic.ttf</string>
+		<string>lato_black.ttf</string>
+		<string>lato_black_italic.ttf</string>
 		<string>roboto_bold_italic.ttf</string>
 		<string>roboto_italic.ttf</string>
 		<string>roboto_bold.ttf</string>

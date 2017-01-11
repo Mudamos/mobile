@@ -148,7 +148,7 @@ class PlipLayout extends Component {
                     title={plip.callToAction}
                     onPress={this.onPlipSign.bind(this)}
                     style={{marginHorizontal: 20}}
-                    textStyle={{fontSize: 16}}
+                    textStyle={{fontSize: 19, fontFamily: "lato"}}
                   />
               }
 

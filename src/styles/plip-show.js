@@ -17,7 +17,7 @@ export default StyleSheet.create({
   actionTitle: {
     color: "#fff",
     flex: 3,
-    fontFamily: "roboto",
+    fontFamily: "lato",
     fontSize: 15,
     fontWeight: "bold",
   },
@@ -31,8 +31,8 @@ export default StyleSheet.create({
   },
   actionSubtitle: {
     color: "#fff",
-    fontFamily: "roboto",
-    fontSize: 12,
+    fontFamily: "lato",
+    fontSize: 11,
   },
   backgroundImage: {
     height: IMAGE_HEIGHT_WITH_LEAK,
@@ -123,14 +123,14 @@ export default StyleSheet.create({
   projectSigned: {
     backgroundColor: "transparent",
     color: "#fff",
-    fontFamily: "roboto",
+    fontFamily: "lato",
     fontSize: 21,
     fontWeight: "bold",
   },
   remainingDays: {
     color: "#fff",
-    fontFamily: "roboto",
-    fontSize: 16,
+    fontFamily: "lato",
+    fontSize: 18,
     fontWeight: "bold",
     fontStyle: "italic",
   },
@@ -143,7 +143,7 @@ export default StyleSheet.create({
   },
   remainingDaysSubtitle: {
     color: "#fff",
-    fontFamily: "roboto",
+    fontFamily: "lato",
     fontSize: 12,
     fontWeight: "bold",
     fontStyle: "italic",
@@ -170,15 +170,15 @@ export default StyleSheet.create({
   },
   signatures: {
     color: "#fff",
-    fontFamily: "roboto",
+    fontFamily: "lato",
     fontSize: 12,
     fontWeight: "bold",
     textAlign: "right",
   },
   signaturesCount: {
     color: "#fff",
-    fontFamily: "roboto",
-    fontSize: 16,
+    fontFamily: "lato",
+    fontSize: 18,
     fontWeight: "bold",
     textAlign: "right",
   },
@@ -199,7 +199,7 @@ export default StyleSheet.create({
   userSignDate: {
     backgroundColor: "transparent",
     color: "#fff",
-    fontFamily: "roboto",
+    fontFamily: "lato",
     fontSize: 14,
     fontWeight: "bold",
     textAlign: "right",
