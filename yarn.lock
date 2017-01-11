@@ -4933,10 +4933,6 @@ react-native-maps:
   dependencies:
     ramda "~0.21.0"
 
-react-native-parallax-scroll-view:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/react-native-parallax-scroll-view/-/react-native-parallax-scroll-view-0.19.0.tgz#23b9af1f13249a610f4641e2582a58997df7d80a"
-
 react-native-randombytes@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-native-randombytes/-/react-native-randombytes-2.2.0.tgz#93099cd7f93b1b228bbd380617e8bbf0d73c4cfb"
