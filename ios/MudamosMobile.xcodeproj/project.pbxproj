@@ -43,6 +43,14 @@
 		4658C25A1DFF25020063E371 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46668FAD1DFB386E002ECF64 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4673AD161DF88AA100E81C9A /* libAirMaps.a */; };
 		46668FAE1DFB3875002ECF64 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
+		46918CE11E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
+		46918CE21E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
+		46918CE31E26989000AF78FF /* pt_sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */; };
+		46918CE41E26989000AF78FF /* pt_sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */; };
+		46918CE51E26989000AF78FF /* pt_sans_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */; };
+		46918CE61E26989000AF78FF /* pt_sans_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */; };
+		46918CE71E26989000AF78FF /* pt_sans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CE01E26989000AF78FF /* pt_sans.ttf */; };
+		46918CE81E26989000AF78FF /* pt_sans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CE01E26989000AF78FF /* pt_sans.ttf */; };
 		46BD9FDC1DF1A0E600366372 /* InfoTagviewBeta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */; };
 		46CBB3611E268E52000B4F5A /* lato_black_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */; };
 		46CBB3621E268E52000B4F5A /* lato_black_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */; };
@@ -345,6 +353,10 @@
 		464907481E0860610079C6B8 /* roboto_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_bold.ttf; sourceTree = "<group>"; };
 		464907491E0860610079C6B8 /* roboto_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_italic.ttf; sourceTree = "<group>"; };
 		4649074A1E0860610079C6B8 /* roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto.ttf; sourceTree = "<group>"; };
+		46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold_italic.ttf; sourceTree = "<group>"; };
+		46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold.ttf; sourceTree = "<group>"; };
+		46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_italic.ttf; sourceTree = "<group>"; };
+		46918CE01E26989000AF78FF /* pt_sans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans.ttf; sourceTree = "<group>"; };
 		46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InfoTagviewBeta.plist; path = MudamosMobile/InfoTagviewBeta.plist; sourceTree = "<group>"; };
 		46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato_black_italic.ttf; sourceTree = "<group>"; };
 		46CBB3581E268E52000B4F5A /* lato_black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato_black.ttf; sourceTree = "<group>"; };
@@ -644,6 +656,10 @@
 		6FF64EC282744621BB244B38 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */,
+				46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */,
+				46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */,
+				46918CE01E26989000AF78FF /* pt_sans.ttf */,
 				46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */,
 				46CBB3581E268E52000B4F5A /* lato_black.ttf */,
 				46CBB3591E268E52000B4F5A /* lato_bold_italic.ttf */,
@@ -1161,12 +1177,14 @@
 			files = (
 				4649074F1E0860610079C6B8 /* roboto_italic.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				46918CE51E26989000AF78FF /* pt_sans_italic.ttf in Resources */,
 				46CBB36D1E268E52000B4F5A /* lato_italic.ttf in Resources */,
 				4649074B1E0860610079C6B8 /* roboto_bold_italic.ttf in Resources */,
 				4649074D1E0860610079C6B8 /* roboto_bold.ttf in Resources */,
 				46CBB36B1E268E52000B4F5A /* lato_hairline.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				609EBA8E9D8E4A92BF4BBEA5 /* Entypo.ttf in Resources */,
+				46918CE71E26989000AF78FF /* pt_sans.ttf in Resources */,
 				46CBB3731E268E52000B4F5A /* lato.ttf in Resources */,
 				46D30D7C1DE46B8400CE09C0 /* FacebookSDKStrings.bundle in Resources */,
 				46CBB3711E268E52000B4F5A /* lato_light.ttf in Resources */,
@@ -1174,10 +1192,12 @@
 				46CBB3691E268E52000B4F5A /* lato_hairline_italic.ttf in Resources */,
 				F424078D44A14BFBBE1D412B /* FontAwesome.ttf in Resources */,
 				C9AFB9662A2E495A8F9DC469 /* Foundation.ttf in Resources */,
+				46918CE11E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */,
 				12DE1FDA65EF4A9BBD79B18B /* Ionicons.ttf in Resources */,
 				464907511E0860610079C6B8 /* roboto.ttf in Resources */,
 				46CBB3631E268E52000B4F5A /* lato_black.ttf in Resources */,
 				AE65A15000BA4D24BE9384D3 /* MaterialIcons.ttf in Resources */,
+				46918CE31E26989000AF78FF /* pt_sans_bold.ttf in Resources */,
 				D3E5BB9F9F7942BAAFD16EF4 /* Octicons.ttf in Resources */,
 				46CBB3651E268E52000B4F5A /* lato_bold_italic.ttf in Resources */,
 				B9DC8F78B14942C9AA8886FC /* SimpleLineIcons.ttf in Resources */,
@@ -1200,7 +1220,10 @@
 				4649074C1E0860610079C6B8 /* roboto_bold_italic.ttf in Resources */,
 				46CBB3681E268E52000B4F5A /* lato_bold.ttf in Resources */,
 				46ED2A831DF194E400B36CD0 /* LaunchScreen.xib in Resources */,
+				46918CE21E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */,
 				4649074E1E0860610079C6B8 /* roboto_bold.ttf in Resources */,
+				46918CE41E26989000AF78FF /* pt_sans_bold.ttf in Resources */,
+				46918CE81E26989000AF78FF /* pt_sans.ttf in Resources */,
 				46CBB36E1E268E52000B4F5A /* lato_italic.ttf in Resources */,
 				46ED2A841DF194E400B36CD0 /* Entypo.ttf in Resources */,
 				46ED2A851DF194E400B36CD0 /* FacebookSDKStrings.bundle in Resources */,
@@ -1209,6 +1232,7 @@
 				46CBB3641E268E52000B4F5A /* lato_black.ttf in Resources */,
 				46ED2A861DF194E400B36CD0 /* EvilIcons.ttf in Resources */,
 				46ED2A871DF194E400B36CD0 /* FontAwesome.ttf in Resources */,
+				46918CE61E26989000AF78FF /* pt_sans_italic.ttf in Resources */,
 				46CBB3741E268E52000B4F5A /* lato.ttf in Resources */,
 				46ED2A881DF194E400B36CD0 /* Foundation.ttf in Resources */,
 				46ED2A891DF194E400B36CD0 /* Ionicons.ttf in Resources */,

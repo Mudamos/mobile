@@ -57,6 +57,10 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+    <string>pt_sans_bold.ttf</string>
+    <string>pt_sans_italic.ttf</string>
+    <string>pt_sans.ttf</string>
+    <string>pt_sans_bold_italic.ttf</string>
     <string>lato.ttf</string>
     <string>lato_light.ttf</string>
     <string>lato_light_italic.ttf</string>

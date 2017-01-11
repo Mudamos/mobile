@@ -92,7 +92,7 @@ export default StyleSheet.create({
   },
   mainTitle: {
     color: "#fff",
-    fontFamily: "roboto",
+    fontFamily: "pt sans",
     fontSize: 48,
     fontWeight: "bold",
     textAlign: "left",
@@ -111,7 +111,7 @@ export default StyleSheet.create({
   },
   presentation: {
     color: "#313131",
-    fontFamily: "roboto",
+    fontFamily: "pt sans",
     fontSize: 17,
   },
   presentationContainer: {
