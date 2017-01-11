@@ -24,6 +24,7 @@
     "mocha": "^3.1.2",
     "moment": "^2.16.0",
     "mudamos-libcrypto": "^0.6.1",
+    "numeral": "^2.0.4",
     "process": "^0.11.9",
     "ramda": "^0.22.1",
     "react": "15.3.2",

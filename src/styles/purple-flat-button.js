@@ -6,6 +6,7 @@ export default StyleSheet.create({
     flex:1,
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 10,
 
     ...StyleSheet.absoluteFillObject,
   },
@@ -15,5 +16,6 @@ export default StyleSheet.create({
     fontSize: 14,
     color: "#fff",
     fontWeight: "bold",
+    textAlign: "center",
   },
 });

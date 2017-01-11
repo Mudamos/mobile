@@ -50,10 +50,12 @@ class SignInLayout extends ComponentWithKeyboardEvent {
 
     return (
       <View style={styles.container}>
-        <PageLoader isVisible={isLoggingIn} />
-
         <Layout>
-          <KeyboardAwareScrollView bounces={false} style={styles.scrollView}>
+          <KeyboardAwareScrollView
+            bounces={false}
+            showsVerticalScrollIndicator={false}
+            style={styles.scrollView}
+          >
             <HeaderLogo />
 
             <BackButton
@@ -97,6 +99,8 @@ class SignInLayout extends ComponentWithKeyboardEvent {
             />
           </KeyboardAwareScrollView>
         </Layout>
+
+        <PageLoader isVisible={isLoggingIn} />
       </View>
     );
   }
