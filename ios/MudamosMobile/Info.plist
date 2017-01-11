@@ -71,10 +71,18 @@
     <string>lato_bold_italic.ttf</string>
     <string>lato_black.ttf</string>
     <string>lato_black_italic.ttf</string>
-		<string>roboto_bold_italic.ttf</string>
-		<string>roboto_italic.ttf</string>
-		<string>roboto_bold.ttf</string>
-		<string>roboto.ttf</string>
+    <string>roboto_black_italic.ttf</string>
+    <string>roboto_black.ttf</string>
+    <string>roboto_bold_italic.ttf</string>
+    <string>roboto_bold.ttf</string>
+    <string>roboto_italic.ttf</string>
+    <string>roboto_light_italic.ttf</string>
+    <string>roboto_light.ttf</string>
+    <string>roboto_medium_italic.ttf</string>
+    <string>roboto_medium.ttf</string>
+    <string>roboto_thin_italic.ttf</string>
+    <string>roboto_thin.ttf</string>
+    <string>roboto.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>FontAwesome.ttf</string>
