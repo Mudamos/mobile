@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from "react";
+import { Alert } from "react-native";
 import { connect } from "react-redux";
 
 import { isDev, moment } from "../utils";
+
+import locale from "../locales/pt-BR";
 
 import {
   fetchProfile,
@@ -109,6 +112,17 @@ class Container extends Component {
   }
 }
 
+const onPlipSign = ({ dispatch, plip }) => {
+  Alert.alert(
+    null,
+    `${locale.doYouWantToSign} "${plip.phase.name}"?`,
+    [
+      {text: locale.cancel, onPress: () => {}, style: "cancel"},
+      {text: locale.yes, onPress: () => dispatch(signPlip({ plip }))},
+    ]
+  )
+};
+
 const mapStateToProps = state => {
   const userSignInfo = getUserCurrentPlipSignInfo(state);
   let plipSignInfo = getPlipSignInfo(state);
@@ -138,7 +152,7 @@ const mapDispatchToProps = dispatch => ({
   onFetchProfile: () => dispatch(fetchProfile()),
   onLogout: () => dispatch(logout()),
   onPlipsFetch: () => dispatch(fetchPlips()),
-  onPlipSign: plip => dispatch(signPlip({ plip })),
+  onPlipSign: plip => onPlipSign({ dispatch, plip }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);
