@@ -17,3 +17,8 @@ export const getUserCurrentPlipSignInfo = state => {
   const currentPlip = findCurrentPlip(state);
   return currentPlip && state.plip.userSignInfo[currentPlip.id];
 }
+
+export const hasUserJustSignedPlip = state => {
+  const currentPlip = findCurrentPlip(state);
+  return currentPlip && state.plip.justSignedPlips[currentPlip.id];
+}

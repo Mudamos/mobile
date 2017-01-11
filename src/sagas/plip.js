@@ -17,6 +17,7 @@ import {
   navigate,
   plipsFetched,
   plipsFetchError,
+  plipJustSigned,
   plipSignError,
   plipSignInfoFetched,
   plipUserSignInfo,
@@ -140,6 +141,7 @@ function* signPlip({ mobileApi, walletStore }) {
       if (isDev) console.log("Sign api result:", apiResult);
 
       yield put(plipUserSignInfo({ plipId: plip.id, info: apiResult.signMessage }));
+      yield put(plipJustSigned({ plipId: plip.id })); //Marks the flow end
     } catch(e) {
       logError(e);
       if (isUnauthorized(e)) return yield put(unauthorized());

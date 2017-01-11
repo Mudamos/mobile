@@ -23,6 +23,7 @@ import {
   findCurrentPlip,
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
+  hasUserJustSignedPlip,
 } from "../selectors";
 
 import PlipLayout from "../components/plip-layout";
@@ -43,6 +44,7 @@ class Container extends Component {
     isFetchingProfile: PropTypes.bool,
     isSigning: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
+    justSignedPlip: PropTypes.bool,
     navigationState: PropTypes.object.isRequired,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
@@ -142,6 +144,7 @@ const mapStateToProps = state => {
     isSigning: isSigningPlip(state),
     isUserLoggedIn: isUserLoggedIn(state),
     plip: findCurrentPlip(state),
+    justSignedPlip: hasUserJustSignedPlip(state),
     plipSignInfo: plipSignInfo,
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };

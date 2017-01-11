@@ -24,20 +24,29 @@ import NetworkImage from "./network-image";
 import PageLoader from "./page-loader";
 import RetryButton from "./retry-button";
 import PurpleFlatButton from "./purple-flat-button";
+import SignModal from "./plip-signed-modal";
+
 import styles, {
   HEADER_SCROLL_DISTANCE,
   SMALL_ANIM_OFFSET,
 } from "../styles/plip-show";
 
+import textStyles from "../styles/text";
+
 import locale from "../locales/pt-BR";
 
 
 class PlipLayout extends Component {
+  state = {
+    showSignSuccess: false,
+  };
+
   static propTypes = {
     errorFetchingPlips: PropTypes.bool,
     isFetchingPlip: PropTypes.bool.isRequired,
     isSigning: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
+    justSignedPlip: PropTypes.bool,
     navigationState: PropTypes.object.isRequired,
     openMenu: PropTypes.func.isRequired,
     plip: PropTypes.object,
@@ -87,6 +96,13 @@ class PlipLayout extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    // Handling the success modal after signing the plip. It should be just displayed once.
+    if (nextProps.justSignedPlip && nextProps.justSignedPlip !== this.props.justSignedPlip) {
+      this.setState({ showSignSuccess: true });
+    }
+  }
+
   render() {
     const {
       isFetchingPlip,
@@ -94,6 +110,7 @@ class PlipLayout extends Component {
       errorFetchingPlips,
     } = this.props;
 
+    const { showSignSuccess } = this.state;
 
     return (
       <View style={[styles.container]}>
@@ -102,6 +119,9 @@ class PlipLayout extends Component {
           { !errorFetchingPlips && !isFetchingPlip && this.renderMainContent() }
           { this.renderNavBar() }
         </Layout>
+
+        {showSignSuccess && this.renderSignSuccess()}
+
         <PageLoader isVisible={isFetchingPlip || isSigning} />
       </View>
     );
@@ -426,6 +446,24 @@ class PlipLayout extends Component {
           style={{marginHorizontal: 20}}
         />
       </View>
+    );
+  }
+
+  renderSignSuccess() {
+    return (
+      <SignModal
+        onClose={() => this.setState({ showSignSuccess: false })}
+      >
+        <Text style={textStyles.modalTitle}>
+          {locale.projectSignedYeah}
+        </Text>
+
+        <Text style={textStyles.modalText}>
+          {
+            `${locale.projectSignedCongratulations} "${this.plipName}"!`
+          }
+        </Text>
+      </SignModal>
     );
   }
 
