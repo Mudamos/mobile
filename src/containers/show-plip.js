@@ -11,6 +11,7 @@ import {
   fetchPlips,
   logout,
   navigate,
+  openURL,
   removeJustSignedPlip,
   signPlip,
 } from "../actions";
@@ -53,6 +54,7 @@ class Container extends Component {
     userSignDate: PropTypes.object,
     onFetchProfile: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
+    onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
     onPlipsFetch: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
@@ -157,6 +159,7 @@ const mapDispatchToProps = dispatch => ({
   retryPlip: () => dispatch(fetchPlips()),
   onFetchProfile: () => dispatch(fetchProfile()),
   onLogout: () => dispatch(logout()),
+  onOpenURL: url => dispatch(openURL(url)),
   onPlipsFetch: () => dispatch(fetchPlips()),
   onPlipSign: plip => onPlipSign({ dispatch, plip }),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
