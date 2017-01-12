@@ -57,16 +57,20 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
 
     return (
       <View style={styles.container}>
-        <PageLoader isVisible={isSending || isVerifying} />
-
         <Layout>
-          <KeyboardAwareScrollView style={styles.scrollView} bounces={false}>
+          <KeyboardAwareScrollView
+            style={styles.scrollView}
+            bounces={false}
+            showsVerticalScrollIndicator={false}
+          >
             <HeaderLogo />
 
             { !hasSentValidation && this.renderPhoneForm() }
             { hasSentValidation && this.renderCodeForm() }
           </KeyboardAwareScrollView>
         </Layout>
+
+        <PageLoader isVisible={isSending || isVerifying} />
       </View>
     );
   }

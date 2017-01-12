@@ -58,10 +58,12 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
 
     return (
       <View style={styles.container}>
-        <PageLoader isVisible={isCreating || isLoggingIn} />
-
         <Layout>
-          <KeyboardAwareScrollView bounces={false} style={styles.scrollView}>
+          <KeyboardAwareScrollView
+            bounces={false}
+            showsVerticalScrollIndicator={false}
+            style={styles.scrollView}
+          >
             <HeaderLogo />
 
             <BackButton
@@ -133,6 +135,8 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
             </View>
           </KeyboardAwareScrollView>
         </Layout>
+
+        <PageLoader isVisible={isCreating || isLoggingIn} />
       </View>
     );
   }

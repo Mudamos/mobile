@@ -10,10 +10,16 @@ import { UnauthorizedError } from "./models/net-error";
 import { Buffer } from "buffer";
 import StringMask from "string-mask";
 
+import numeral from "numeral";
+import "numeral/locales/pt-br";
+
 import moment from "moment";
 import "moment/locale/pt-br";
 
-moment.locale("pt-br");
+const DEFAULT_LOCALE = "pt-br";
+
+moment.locale(DEFAULT_LOCALE);
+
 
 export { moment };
 
@@ -45,3 +51,8 @@ export const zipCodeMask = text => StringMask.apply(text, "00000-000");
 export const toISODate = (value, format = "DD/MM/YYYY") => moment(value, format).format("YYYY-MM-DD");
 
 export const extractNumbers = text => (String(text).match(/\d+/g) || []).join("");
+
+export const formatNumber = (value, locale = DEFAULT_LOCALE) => {
+  numeral.locale(locale);
+  return numeral(value).format("0,0");
+}

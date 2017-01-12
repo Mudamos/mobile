@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from "react";
+import { Alert } from "react-native";
 import { connect } from "react-redux";
 
 import { isDev, moment } from "../utils";
+
+import locale from "../locales/pt-BR";
 
 import {
   fetchProfile,
@@ -20,6 +23,7 @@ import {
   findCurrentPlip,
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
+  hasUserJustSignedPlip,
 } from "../selectors";
 
 import PlipLayout from "../components/plip-layout";
@@ -40,6 +44,7 @@ class Container extends Component {
     isFetchingProfile: PropTypes.bool,
     isSigning: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
+    justSignedPlip: PropTypes.bool,
     navigationState: PropTypes.object.isRequired,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
@@ -109,6 +114,17 @@ class Container extends Component {
   }
 }
 
+const onPlipSign = ({ dispatch, plip }) => {
+  Alert.alert(
+    null,
+    `${locale.doYouWantToSign} "${plip.phase.name}"?`,
+    [
+      {text: locale.cancel, onPress: () => {}, style: "cancel"},
+      {text: locale.yes, onPress: () => dispatch(signPlip({ plip }))},
+    ]
+  )
+};
+
 const mapStateToProps = state => {
   const userSignInfo = getUserCurrentPlipSignInfo(state);
   let plipSignInfo = getPlipSignInfo(state);
@@ -128,6 +144,7 @@ const mapStateToProps = state => {
     isSigning: isSigningPlip(state),
     isUserLoggedIn: isUserLoggedIn(state),
     plip: findCurrentPlip(state),
+    justSignedPlip: hasUserJustSignedPlip(state),
     plipSignInfo: plipSignInfo,
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
@@ -138,7 +155,7 @@ const mapDispatchToProps = dispatch => ({
   onFetchProfile: () => dispatch(fetchProfile()),
   onLogout: () => dispatch(logout()),
   onPlipsFetch: () => dispatch(fetchPlips()),
-  onPlipSign: plip => dispatch(signPlip({ plip })),
+  onPlipSign: plip => onPlipSign({ dispatch, plip }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

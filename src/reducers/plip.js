@@ -1,5 +1,6 @@
 const initialState = {
   userSignInfo: {},
+  justSignedPlips: {},
 };
 
 export default  (state = initialState, action) => {
@@ -23,6 +24,14 @@ export default  (state = initialState, action) => {
       return {
         ...state,
         isSigning: payload.isSigning,
+      };
+    case "PLIP_JUST_SIGNED":
+      return {
+        ...state,
+        justSignedPlips: {
+          ...state.justSignedPlips,
+          [payload.plipId]: true,
+        },
       };
     case "PLIP_USER_SIGN_INFO":
       return {
@@ -56,6 +65,7 @@ export default  (state = initialState, action) => {
       return {
         ...state,
         userSignInfo: {},
+        justSignedPlips: {},
       };
     default:
       return state;

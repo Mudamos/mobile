@@ -27,8 +27,6 @@ export default class ProfileWalletLayout extends Component {
 
     return (
       <View style={{flex: 1}}>
-        <PageLoader isVisible={isCreatingWallet} />
-
         <Layout>
           <HeaderLogo />
 
@@ -44,6 +42,8 @@ export default class ProfileWalletLayout extends Component {
           }
 
         </Layout>
+
+        <PageLoader isVisible={isCreatingWallet} />
       </View>
     );
   }

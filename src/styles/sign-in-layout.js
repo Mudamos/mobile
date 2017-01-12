@@ -30,11 +30,10 @@ export default StyleSheet.create({
     marginHorizontal: 20,
   },
   separatorLine: {
-    borderTopColor: "rgba(255, 255, 255, .5)",
-    borderTopWidth: 1,
+    borderBottomColor: "rgba(255,255,255,0.23)",
+    borderBottomWidth: StyleSheet.hairlineWidth,
     flex: 1,
-    height: 1,
-    marginTop: 2,
+    marginTop: 3,
   },
   separatorText: {
     color: "#fff",

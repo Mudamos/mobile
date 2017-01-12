@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from "react";
-import { ActivityIndicator, Image, View } from "react-native";
+import { Animated, ActivityIndicator } from "react-native";
+
+import styles from "../styles/network-image";
 
 export default class NetworkImage extends Component {
   static propTypes = {
@@ -19,22 +21,20 @@ export default class NetworkImage extends Component {
     if (!this.state.loading) return null;
 
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator color={this.props.loaderColor} />
-      </View>
+      <ActivityIndicator style={styles.loader} color={this.props.loaderColor} />
     );
   }
 
   render() {
     return (
-      <Image
+      <Animated.Image
         {...this.props}
         onLoadStart={() => this.setState({ loading: true })}
         onError={() => this.setState({ loading: false })}
         onLoad={() => this.setState({ loading: false })}>
-        {this.renderLoading()}
         {this.props.children}
-      </Image>
+        {this.renderLoading()}
+      </Animated.Image>
     );
   }
 }

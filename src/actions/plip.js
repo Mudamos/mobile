@@ -22,6 +22,11 @@ export const signPlip = ({ plip }) => ({
   payload: { plip },
 });
 
+export const plipJustSigned = ({ plipId }) => ({
+  type: "PLIP_JUST_SIGNED",
+  payload: { plipId },
+});
+
 export const isSigningPlip = isSigning => ({
   type: "PLIP_SIGNING",
   payload: { isSigning },

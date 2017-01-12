@@ -53,10 +53,12 @@ export default class ProfileMissingFieldsLayout extends ComponentWithKeyboardEve
 
     return (
       <View style={styles.container}>
-        <PageLoader isVisible={isSaving} />
-
         <Layout>
-          <KeyboardAwareScrollView bounces={false} style={styles.scrollView}>
+          <KeyboardAwareScrollView
+            bounces={false}
+            showsVerticalScrollIndicator={false}
+            style={styles.scrollView}
+          >
             <HeaderLogo />
 
             <Text style={styles.headerTitle}>
@@ -93,6 +95,8 @@ export default class ProfileMissingFieldsLayout extends ComponentWithKeyboardEve
             />
           </KeyboardAwareScrollView>
         </Layout>
+
+        <PageLoader isVisible={isSaving} />
       </View>
     );
   }

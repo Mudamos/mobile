@@ -62,10 +62,12 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
 
     return (
       <View style={styles.container}>
-        <PageLoader isVisible={isSaving} />
-
         <Layout>
-          <KeyboardAwareScrollView style={styles.scrollView} bounces={false}>
+          <KeyboardAwareScrollView
+            style={styles.scrollView}
+            bounces={false}
+            showsVerticalScrollIndicator={false}
+          >
             <HeaderLogo />
 
             <Text style={styles.headerTitle}>
@@ -128,6 +130,8 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
               </Text>
             </Modal>
         }
+
+        <PageLoader isVisible={isSaving} />
 
       </View>
     );

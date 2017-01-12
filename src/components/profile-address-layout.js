@@ -81,12 +81,14 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
 
     return (
       <View style={styles.container}>
-        <PageLoader isVisible={isSearching || isSaving} />
-
         <Layout contentStyle={styles.layoutContentStyle}>
           { location && this.renderResults() }
 
-          <KeyboardAwareScrollView style={styles.scrollView} bounces={false}>
+          <KeyboardAwareScrollView
+            style={styles.scrollView}
+            bounces={false}
+            showsVerticalScrollIndicator={false}
+          >
             <HeaderLogo />
             {
               location &&
@@ -137,6 +139,8 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
           </KeyboardAwareScrollView>
 
         </Layout>
+
+        <PageLoader isVisible={isSearching || isSaving} />
       </View>
     );
   }

@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 
-import { Image, StyleSheet } from "react-native";
+import { Animated, StyleSheet } from "react-native";
 
 const style = StyleSheet.create({
   image: {
@@ -12,11 +12,15 @@ const style = StyleSheet.create({
 
 export default class HeaderLogo extends Component {
   static propTypes = {
-    imgStyle: PropTypes.object,
+    imgStyle: Animated.Image.propTypes.style,
+  }
+
+  setNativeProps(nativeProps) {
+    this.image.setNativeProps(nativeProps);
   }
 
   render() {
     const { imgStyle } = this.props;
-    return <Image source={require("../images/Logo.png")} style={[style.image, imgStyle]}/>
+    return <Animated.Image ref={ref => this.image = ref} source={require("../images/Logo.png")} style={[style.image, imgStyle]}/>
   }
 }
