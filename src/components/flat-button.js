@@ -59,7 +59,9 @@ export default class MyFlatButton extends Component {
     }
 
     if (enabled) {
-      button.withOnPress(onPress);
+      button
+        .withOnPress(onPress)
+        .withRippleColor("transparent"); // Disabling ripple effect as it does not work on android
     } else {
       button.withRippleColor("transparent")
         .withMaskEnabled(false)
