@@ -32,6 +32,7 @@ export default class DateInput extends Component {
       <MDTextInput
         {...mdInputProps}
 
+        ref={ref => this.input = ref}
         value={this.removeLastSeparator(value)}
         maxLength={10}
         onChangeText={this.onChangeText.bind(this)} />
@@ -58,5 +59,13 @@ export default class DateInput extends Component {
     return dateMask(this.cleanText(text))
       .replace(/-$/, "")
       .replace(/\/$/, "");
+  }
+
+  focus() {
+    this.input.focus();
+  }
+
+  blur() {
+    this.input.blur();
   }
 }

@@ -87,6 +87,8 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
                 placeholder={locale.cpf.toUpperCase()}
                 hasError={!!errorForField("cpf", errors)}
                 hint={errorForField("cpf", errors)}
+                onSubmitEditing={() => this.cpfInput.blur()}
+                ref={ref => this.cpfInput = ref}
               />
 
               <VoteCardInput
@@ -96,6 +98,8 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
                 mdContainerStyle={{marginVertical: 20}}
                 hasError={!!errorForField("voteidcard", errors)}
                 hint={errorForField("voteidcard", errors)}
+                onSubmitEditing={() => this.cardInput.blur()}
+                ref={ref => this.cardInput = ref}
               />
 
               <Text

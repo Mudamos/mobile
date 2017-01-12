@@ -21,6 +21,7 @@ export default class VoteCardInput extends Component {
       <MDTextInput
         {...mdInputProps}
 
+        ref={ref => this.input = ref}
         value={this.removeLastSeparator(value)}
         keyboardType="numeric"
         maxLength={14}
@@ -47,5 +48,13 @@ export default class VoteCardInput extends Component {
 
   removeLastSeparator(text) {
     return voteCardMask(this.cleanText(text)).replace(/\.$/, "");
+  }
+
+  focus() {
+    this.input.focus();
+  }
+
+  blur() {
+    this.input.blur();
   }
 }

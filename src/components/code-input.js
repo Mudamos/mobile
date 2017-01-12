@@ -49,7 +49,7 @@ export default class CodeInput extends Component {
           <MDTextInput
             {...mdInputProps}
 
-            ref="hiddenField"
+            ref={ref => this.hiddenField = ref}
             value={value}
             maxLength={length}
             keyboardType="numeric"
@@ -76,8 +76,6 @@ export default class CodeInput extends Component {
       length,
       codeSize,
       marginFromCode,
-
-      ...mdInputProps
     } = this.props;
 
     const value = this.getValue(ref);
@@ -85,13 +83,12 @@ export default class CodeInput extends Component {
 
     return (
       <MDTextInput
-        {...mdInputProps}
 
         key={`codeInput${index}`}
         ref={ref}
         value={value}
         maxLength={1}
-        onFocus={() => this.refs["hiddenField"].focus()}
+        onFocus={() => this.hiddenField.focus()}
         mdContainerStyle={{width: codeSize, flex: 0, marginRight: (last ? 0 : marginFromCode)}}
         textInputStyle={{ textAlign: "center"  }}
       />
@@ -110,5 +107,13 @@ export default class CodeInput extends Component {
     const { onChangeCodeText } = this.props;
 
     onChangeCodeText(text)
+  }
+
+  focus() {
+    this.hiddenField.focus();
+  }
+
+  blur() {
+    this.hiddenField.blur();
   }
 }

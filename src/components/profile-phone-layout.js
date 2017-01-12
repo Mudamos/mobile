@@ -98,6 +98,8 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
           hasError={!!errorForField("number", sendErrors)}
           hint={errorForField("number", sendErrors)}
           mdContainerStyle={{marginHorizontal: 13}}
+          onSubmitEditing={() => this.phoneInput.blur()}
+          ref={ref => this.phoneInput = ref}
         />
 
         <FlatButton
@@ -133,6 +135,8 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
           keyboardType="numeric"
           length={5}
           mdContainerStyle={{marginHorizontal: 13}}
+          onSubmitEditing={() => this.codeInput.blur()}
+          ref={ref => this.codeInput = ref}
         />
 
         <FlatButton

@@ -21,6 +21,7 @@ export default class ZipCodeInput extends Component {
       <MDTextInput
         {...mdInputProps}
 
+        ref={ref => this.input = ref}
         value={this.removeLastSeparator(value)}
         keyboardType="numeric"
         maxLength={9}
@@ -48,5 +49,13 @@ export default class ZipCodeInput extends Component {
   removeLastSeparator(text) {
     return zipCodeMask(this.cleanText(text))
       .replace(/-$/, "");
+  }
+
+  focus() {
+    this.input.focus();
+  }
+
+  blur() {
+    this.input.blur();
   }
 }

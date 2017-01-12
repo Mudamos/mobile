@@ -21,6 +21,7 @@ export default class CpfInput extends Component {
       <MDTextInput
         {...mdInputProps}
 
+        ref={ref => this.input = ref}
         value={this.removeLastSeparator(value)}
         keyboardType="numeric"
         maxLength={14}
@@ -49,5 +50,13 @@ export default class CpfInput extends Component {
     return cpfMask(this.cleanText(text))
       .replace(/\.$/, "")
       .replace(/-$/,"")
+  }
+
+  focus() {
+    this.input.focus();
+  }
+
+  blur() {
+    this.input.blur();
   }
 }
