@@ -9,6 +9,7 @@ import { isDev } from "./utils";
 
 import {
   PlipContainer,
+  PlipViewerContainer,
   ProfileAddressContainer,
   ProfileBirthContainer,
   ProfileDocumentsContainer,
@@ -70,6 +71,7 @@ const scenes = Actions.create(
   <Scene key="root">
     <Scene key="showPlip" initial={true} type="reset" hideNavBar={true}>
       <Scene key="plipPage" initial={true} component={PlipContainer} hideNavBar={true} />
+      <Scene key="plipViewer" component={PlipViewerContainer} hideNavBar={true} title="Texto do projeto"/>
     </Scene>
 
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />

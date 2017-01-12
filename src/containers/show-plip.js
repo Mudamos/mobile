@@ -10,6 +10,8 @@ import {
   fetchProfile,
   fetchPlips,
   logout,
+  navigate,
+  removeJustSignedPlip,
   signPlip,
 } from "../actions";
 
@@ -45,7 +47,6 @@ class Container extends Component {
     isSigning: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
-    navigationState: PropTypes.object.isRequired,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
@@ -54,6 +55,8 @@ class Container extends Component {
     onLogout: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
     onPlipsFetch: PropTypes.func.isRequired,
+    onSignSuccessClose: PropTypes.func.isRequired,
+    onViewPlip: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -156,6 +159,8 @@ const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch(logout()),
   onPlipsFetch: () => dispatch(fetchPlips()),
   onPlipSign: plip => onPlipSign({ dispatch, plip }),
+  onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
+  onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

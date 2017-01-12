@@ -27,6 +27,11 @@ export const plipJustSigned = ({ plipId }) => ({
   payload: { plipId },
 });
 
+export const removeJustSignedPlip = ({ plipId }) => ({
+  type: "PLIP_REMOVE_JUST_SIGNED",
+  payload: { plipId },
+});
+
 export const isSigningPlip = isSigning => ({
   type: "PLIP_SIGNING",
   payload: { isSigning },

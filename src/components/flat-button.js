@@ -36,11 +36,7 @@ export default class MyFlatButton extends Component {
   }
 
   renderButton() {
-    const { title } = this.props;
-
-    const Button = this.buttonClass()
-      .withText(title)
-      .build();
+    const Button = this.buttonClass().build();
 
     return <Button>{this.props.children}</Button>;
   }
