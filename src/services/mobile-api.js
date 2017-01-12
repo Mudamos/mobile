@@ -182,6 +182,13 @@ const plipSignInfo = ({ client }) => plipId =>
     .get(`/petition/${plipId}/info`)
     .then(getData);
 
+const logout = ({ client }) => authToken =>
+  authorizedClient(client, authToken)
+    .post("/auth/logout")
+    .catch(() => {
+      if (isDev) console.log("Logout failed, but skipping.");
+    });
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
@@ -189,6 +196,7 @@ export default function MobileApi(host) {
   return {
     difficulty: fetchDifficulty({ client }),
     fbSignIn: fbSignIn({ client }),
+    logout: logout({ client }),
     plipSignInfo: plipSignInfo({ client }),
     profile: profile({ client }),
     saveBirthdate: saveBirthdate({ client }),

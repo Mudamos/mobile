@@ -1,5 +1,5 @@
 import { takeLatest } from "redux-saga";
-import { call, fork, put } from "redux-saga/effects";
+import { call, fork, put, select } from "redux-saga/effects";
 
 import { LoginManager } from "react-native-fbsdk";
 
@@ -9,6 +9,10 @@ import {
   clearSession,
   logginSucceeded,
 } from "../actions";
+
+import {
+  currentAuthToken,
+} from "../selectors";
 
 function* fetchSession({ sessionStore }) {
   yield takeLatest("SESSION_FETCH_SESSION", function* () {
@@ -21,23 +25,29 @@ function* fetchSession({ sessionStore }) {
   });
 }
 
-function* logoutSaga({ sessionStore }) {
+function* logoutSaga({ mobileApi, sessionStore }) {
   yield takeLatest("SESSION_LOGOUT", function* () {
-    yield call(logout, { sessionStore });
+    yield call(logout, { mobileApi, sessionStore });
   });
 }
 
-export function* logout({ sessionStore }) {
+export function* logout({ mobileApi, sessionStore }) {
   yield call(sessionStore.destroy);
   yield call(LoginManager.logOut);
-  // TODO: call logout api but failures should not propagate
+
+  const authToken = yield select(currentAuthToken);
   yield put(clearSession());
+
+  if (authToken) {
+    if (isDev) console.log("Will call logout api with token:", authToken);
+    yield call(mobileApi.logout, authToken);
+  }
 }
 
-export default function* sessionSaga({ sessionStore }) {
+export default function* sessionSaga({ mobileApi, sessionStore }) {
   yield fork(fetchSession, { sessionStore });
 
   yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
-    yield fork(logoutSaga, { sessionStore });
+    yield fork(logoutSaga, { mobileApi, sessionStore });
   });
 }

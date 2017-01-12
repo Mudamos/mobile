@@ -17,13 +17,13 @@ export default function* rootSaga({
   sessionStore,
   walletStore,
 }) {
-  yield spawn(navigationSaga, { sessionStore });
+  yield spawn(navigationSaga, { mobileApi, sessionStore });
   yield spawn(facebookSaga, { sessionStore, mobileApi });
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
   yield spawn(plipSaga, { mobileApi, mudamosWebApi, walletStore });
   yield spawn(profileSaga, { mobileApi, sessionStore });
   yield spawn(errorSaga);
-  yield spawn(sessionSaga, { sessionStore });
+  yield spawn(sessionSaga, { mobileApi, sessionStore });
   yield spawn(addressSaga, { mobileApi });
   yield spawn(linkingSaga);
   yield spawn(walletSaga, { mobileApi, walletStore });
