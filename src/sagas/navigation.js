@@ -42,11 +42,11 @@ function* backward() {
   });
 }
 
-function* unauthorized({ sessionStore }) {
+function* unauthorized({ mobileApi, sessionStore }) {
   yield takeLatest("NAVIGATE_UNAUTHORIZED", function* ({ payload }) {
     try {
       const { params } = payload;
-      yield call(logout, { sessionStore });
+      yield call(logout, { mobileApi, sessionStore });
       yield put(navigate("signUp", params));
     } catch(e) {
       if (isDev) console.log("Error unauthorized navigation: ", e.message, e.stack, e);
@@ -106,9 +106,9 @@ export function* profileScreenForCurrentUser() {
   }
 }
 
-export default function* navigationSaga({ sessionStore }) {
+export default function* navigationSaga({ mobileApi, sessionStore }) {
   yield fork(forward);
   yield fork(backward);
   yield spawn(userProfileNavigator);
-  yield spawn(unauthorized, { sessionStore });
+  yield spawn(unauthorized, { mobileApi, sessionStore });
 }
