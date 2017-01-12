@@ -12,7 +12,6 @@ export const textStyle = {
 export const buttonStyle = {
   borderRadius: 100,
   height: 42,
-  overflow: "hidden",
 };
 
 
