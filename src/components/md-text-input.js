@@ -94,7 +94,7 @@ export default class MDTextInput extends Component {
         <MKTextField
           {...textFieldProps}
 
-          ref="myinput"
+          ref={ref => this.input = ref}
           tintColor={this.tintColor}
           selectionColor={selectionColor}
           highlightColor={this.highlightColor}
@@ -115,6 +115,10 @@ export default class MDTextInput extends Component {
   }
 
   focus() {
-    this.refs["myinput"].focus();
+    this.input.focus();
+  }
+
+  blur() {
+    this.input.blur();
   }
 }

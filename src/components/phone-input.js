@@ -21,6 +21,7 @@ export default class PhoneInput extends Component {
       <MDTextInput
         {...mdInputProps}
 
+        ref={ref => this.input = ref}
         value={this.removeLastSeparator(value)}
         keyboardType="numeric"
         maxLength={15}
@@ -46,5 +47,13 @@ export default class PhoneInput extends Component {
       .replace(/\($/, "")
       .replace(/\)\s$/, "")
       .replace(/-$/,"");
+  }
+
+  focus() {
+    this.input.focus();
+  }
+
+  blur() {
+    this.input.blur();
   }
 }

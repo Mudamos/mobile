@@ -81,6 +81,8 @@ class SignInLayout extends ComponentWithKeyboardEvent {
                 value={this.state.email}
                 onChangeText={email => this.setState({ email })}
                 keyboardType="email-address"
+                onSubmitEditing={() => this.emailInput.blur()}
+                ref={ref => this.emailInput = ref}
               />
 
               <MDTextInput
@@ -88,6 +90,8 @@ class SignInLayout extends ComponentWithKeyboardEvent {
                 value={this.state.password}
                 password={true}
                 onChangeText={password => this.setState({ password })}
+                onSubmitEditing={() => this.passwordInput.blur()}
+                ref={ref => this.passwordInput = ref}
               />
             </View>
 

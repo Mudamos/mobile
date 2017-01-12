@@ -90,6 +90,8 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
                 onChangeText={name => this.setState({ name })}
                 hasError={!!errorForField("name", createErrors)}
                 hint={errorForField("name", createErrors)}
+                onSubmitEditing={() => this.nameInput.blur()}
+                ref={ref => this.nameInput = ref}
               />
 
               <MDTextInput
@@ -99,6 +101,8 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
                 hasError={!!errorForField("email", createErrors)}
                 hint={errorForField("email", createErrors)}
                 keyboardType="email-address"
+                onSubmitEditing={() => this.emailInput.blur()}
+                ref={ref => this.emailInput = ref}
               />
 
               <MDTextInput
@@ -108,6 +112,8 @@ export default class SignUpLayout extends ComponentWithKeyboardEvent {
                 password={true}
                 hasError={!!errorForField("password", createErrors)}
                 hint={errorForField("password", createErrors)}
+                onSubmitEditing={() => this.passwordInput.blur()}
+                ref={ref => this.passwordInput = ref}
               />
             </View>
 

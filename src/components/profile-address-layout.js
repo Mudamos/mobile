@@ -118,6 +118,8 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
                     onChangeZipCodeText={zipCode => this.setState({zipCode})}
                     placeholder={locale.zipCode}
                     mdContainerStyle={{marginHorizontal: 13}}
+                    onSubmitEditing={() => this.zipInput.blur()}
+                    ref={ref => this.zipInput = ref}
                   />
 
                   <FlatButton

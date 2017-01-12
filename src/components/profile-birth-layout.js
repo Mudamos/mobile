@@ -67,6 +67,8 @@ export default class ProfileBirthLayout extends ComponentWithKeyboardEvent {
               mdContainerStyle={{marginHorizontal: 13}}
               hasError={!!errorForField("birthday", errors)}
               hint={errorForField("birthday", errors)}
+              onSubmitEditing={() => this.birthInput.blur()}
+              ref={ref => this.birthInput = ref}
             />
 
             <FlatButton

@@ -72,6 +72,8 @@ export default class ProfileMissingFieldsLayout extends ComponentWithKeyboardEve
                 onChangeText={name => this.setState({ name })}
                 hasError={!!errorForField("name", errors)}
                 hint={errorForField("name", errors)}
+                onSubmitEditing={() => this.nameInput.blur()}
+                ref={ref => this.nameInput = ref}
               />
 
               {
@@ -83,6 +85,8 @@ export default class ProfileMissingFieldsLayout extends ComponentWithKeyboardEve
                     hasError={!!errorForField("email", errors)}
                     hint={errorForField("email", errors)}
                     keyboardType="email-address"
+                    onSubmitEditing={() => this.emailInput.blur()}
+                    ref={ref => this.emailInput = ref}
                   />
               }
             </View>
