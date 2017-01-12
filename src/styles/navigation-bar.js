@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: "row",
     height: 64,
   },
@@ -35,7 +34,8 @@ export default StyleSheet.create({
   },
   title: {
     color: "#fff",
-    fontWeight: "500",
-    fontSize: 16,
+    fontFamily: "roboto",
+    fontSize: 20,
+    textAlign: "center",
   },
 });

@@ -19,7 +19,7 @@ export default class BackButton extends Component {
 
   static defaultProps = {
     color: "#fff",
-    size: 20,
+    size: 26,
   }
 
   render() {

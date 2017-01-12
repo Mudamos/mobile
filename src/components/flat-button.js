@@ -12,7 +12,6 @@ export const textStyle = {
 export const buttonStyle = {
   borderRadius: 100,
   height: 42,
-  overflow: "hidden",
 };
 
 
@@ -36,11 +35,7 @@ export default class MyFlatButton extends Component {
   }
 
   renderButton() {
-    const { title } = this.props;
-
-    const Button = this.buttonClass()
-      .withText(title)
-      .build();
+    const Button = this.buttonClass().build();
 
     return <Button>{this.props.children}</Button>;
   }
@@ -64,7 +59,9 @@ export default class MyFlatButton extends Component {
     }
 
     if (enabled) {
-      button.withOnPress(onPress);
+      button
+        .withOnPress(onPress)
+        .withRippleColor("transparent"); // Disabling ripple effect as it does not work on android
     } else {
       button.withRippleColor("transparent")
         .withMaskEnabled(false)

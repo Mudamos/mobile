@@ -33,6 +33,14 @@ export default  (state = initialState, action) => {
           [payload.plipId]: true,
         },
       };
+    case "PLIP_REMOVE_JUST_SIGNED":
+      return {
+        ...state,
+        justSignedPlips: {
+          ...state.justSignedPlips,
+          [payload.plipId]: false,
+        },
+      };
     case "PLIP_USER_SIGN_INFO":
       return {
         ...state,

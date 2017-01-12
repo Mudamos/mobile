@@ -25,6 +25,7 @@ import PageLoader from "./page-loader";
 import RetryButton from "./retry-button";
 import PurpleFlatButton from "./purple-flat-button";
 import SignModal from "./plip-signed-modal";
+import SignedMessageView from "./signed-message-view";
 
 import styles, {
   HEADER_SCROLL_DISTANCE,
@@ -47,13 +48,14 @@ class PlipLayout extends Component {
     isSigning: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
-    navigationState: PropTypes.object.isRequired,
     openMenu: PropTypes.func.isRequired,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
     userSignDate: PropTypes.object,
     onPlipSign: PropTypes.func.isRequired,
+    onSignSuccessClose: PropTypes.func.isRequired,
+    onViewPlip: PropTypes.func.isRequired,
   };
 
   get plipName() {
@@ -100,6 +102,9 @@ class PlipLayout extends Component {
     // Handling the success modal after signing the plip. It should be just displayed once.
     if (nextProps.justSignedPlip && nextProps.justSignedPlip !== this.props.justSignedPlip) {
       this.setState({ showSignSuccess: true });
+    } else if (nextProps.justSignedPlip === false && this.state.showSignSuccess) {
+      // Handling the case the modal was displayed on another view and we need to dismiss it here
+      this.setState({ showSignSuccess: false });
     }
   }
 
@@ -151,16 +156,7 @@ class PlipLayout extends Component {
           <View style={styles.scrollViewContent}>
 
             <View style={styles.infoContainer}>
-              {
-                userSignDate &&
-                  <LinearGradient
-                    colors={["#00DB5E", "#00A79E"]}
-                    style={styles.signedMessageContainer}
-                  >
-                    <Text style={styles.projectSigned}>{locale.projectSigned}</Text>
-                    <Text style={styles.userSignDate} numberOfLines={2}>{userSignDate.format("DD/MM/YYYY HH:mm")}</Text>
-                  </LinearGradient>
-              }
+              {userSignDate && <SignedMessageView date={userSignDate} />}
 
               {
                 !userSignDate && plip &&
@@ -287,7 +283,7 @@ class PlipLayout extends Component {
   }
 
   renderFooterActions() {
-    const { plipSignInfo } = this.props;
+    const { plipSignInfo, onViewPlip, plip } = this.props;
 
     return (
       <LinearGradient
@@ -298,7 +294,7 @@ class PlipLayout extends Component {
         colors={["#9844ce", "#7E52D8"]}
       >
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => onViewPlip(plip)}
         >
           <View style={styles.actionRow}>
             <Icon
@@ -452,7 +448,7 @@ class PlipLayout extends Component {
   renderSignSuccess() {
     return (
       <SignModal
-        onClose={() => this.setState({ showSignSuccess: false })}
+        onClose={this.onModalSuccessClose.bind(this)}
       >
         <Text style={textStyles.modalTitle}>
           {locale.projectSignedYeah}
@@ -470,6 +466,13 @@ class PlipLayout extends Component {
   onPlipSign() {
     const { plip, onPlipSign } = this.props;
     onPlipSign(plip);
+  }
+
+  onModalSuccessClose() {
+    const { onSignSuccessClose, plip } = this.props;
+
+    this.setState({ showSignSuccess: false });
+    onSignSuccessClose(plip);
   }
 }
 

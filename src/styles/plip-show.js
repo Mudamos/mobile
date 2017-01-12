@@ -120,13 +120,6 @@ export default StyleSheet.create({
     paddingTop: 18,
     paddingBottom: 30,
   },
-  projectSigned: {
-    backgroundColor: "transparent",
-    color: "#fff",
-    fontFamily: "lato",
-    fontSize: 21,
-    fontWeight: "bold",
-  },
   remainingDays: {
     color: "#fff",
     fontFamily: "lato",
@@ -182,27 +175,10 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textAlign: "right",
   },
-  signedMessageContainer: {
-    alignItems: "center",
-    flex: 1,
-    flexDirection: "row",
-    height: 58,
-    justifyContent: "space-between",
-    padding: 12,
-  },
   subtitle: {
     color: "#fff",
     fontFamily: "roboto",
     fontSize: 22,
     textAlign: "left",
-  },
-  userSignDate: {
-    backgroundColor: "transparent",
-    color: "#fff",
-    fontFamily: "lato",
-    fontSize: 14,
-    fontWeight: "bold",
-    textAlign: "right",
-    width: 100,
   },
 })
