@@ -189,16 +189,32 @@ const logout = ({ client }) => authToken =>
       if (isDev) console.log("Logout failed, but skipping.");
     });
 
+const retrievePassword = ({ client }) => email =>
+  client
+    .use(serializeJson)
+    .post("/users/password/reset")
+    .send({ user: { email } })
+    .then(getData);
+
+const changeForgotPassword = ({ client }) => ({ code, password }) =>
+  client
+    .use(serializeJson)
+    .post("/users/password/update")
+    .send({ user: { password, pincode: code } })
+    .then(getData);
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
 
   return {
+    changeForgotPassword: changeForgotPassword({ client }),
     difficulty: fetchDifficulty({ client }),
     fbSignIn: fbSignIn({ client }),
     logout: logout({ client }),
     plipSignInfo: plipSignInfo({ client }),
     profile: profile({ client }),
+    retrievePassword: retrievePassword({ client }),
     saveBirthdate: saveBirthdate({ client }),
     saveDocuments: saveDocuments({ client }),
     savePhone: savePhone({ client }),

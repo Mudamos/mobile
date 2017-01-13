@@ -145,7 +145,7 @@ Atualmente temos somente a versão beta de distribuição.
 Para gerar o `.ipa`:
 
 ```
-$ npm run build-ios-beta
+$ npm run build-ios-beta -- -m <PATH_TO_THE_PROVISION_PROFILE>
 ```
 
 Para distruibuir, envie o `.ipa` gerado para o storage S3:

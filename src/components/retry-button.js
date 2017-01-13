@@ -32,7 +32,7 @@ class RetryButton extends FlatButton {
 
     return (
       <Button>
-        <View style={{ flex: 1, flexDirection: "row"}}>
+        <View style={styles.container}>
           <Icon name="error" size={24} color="#595959" style={[styles.icon, opacity]}/>
           <Text style={[styles.text, opacity]}>
             {locale.retry}

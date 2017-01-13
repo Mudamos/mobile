@@ -3,6 +3,7 @@ import { spawn } from "redux-saga/effects";
 import errorSaga from "./error";
 import facebookSaga from "./facebook";
 import authenticationSaga from "./authentication";
+import passwordSaga from "./password";
 import plipSaga from "./plip";
 import profileSaga from "./profile";
 import navigationSaga from "./navigation";
@@ -20,6 +21,7 @@ export default function* rootSaga({
   yield spawn(navigationSaga, { mobileApi, sessionStore });
   yield spawn(facebookSaga, { sessionStore, mobileApi });
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
+  yield spawn(passwordSaga, { mobileApi, sessionStore });
   yield spawn(plipSaga, { mobileApi, mudamosWebApi, walletStore });
   yield spawn(profileSaga, { mobileApi, sessionStore });
   yield spawn(errorSaga);
