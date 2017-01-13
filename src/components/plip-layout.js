@@ -53,6 +53,7 @@ class PlipLayout extends Component {
     plipSignInfo: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
     userSignDate: PropTypes.object,
+    onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
@@ -315,7 +316,7 @@ class PlipLayout extends Component {
         <View style={styles.hairline} />
 
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={this.onOpenDocument.bind(this)}
         >
           <View style={styles.actionRow}>
             <Icon
@@ -461,6 +462,11 @@ class PlipLayout extends Component {
         </Text>
       </SignModal>
     );
+  }
+
+  onOpenDocument() {
+    const { plip, onOpenURL } = this.props;
+    onOpenURL(plip.documentUrl);
   }
 
   onPlipSign() {
