@@ -8,6 +8,8 @@ import sceneStyle from "./styles/scene-default";
 import { isDev } from "./utils";
 
 import {
+  ChangeForgotPasswordContainer,
+  ForgotPasswordContainer,
   PlipContainer,
   PlipViewerContainer,
   ProfileAddressContainer,
@@ -76,6 +78,10 @@ const scenes = Actions.create(
 
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
     <Scene key="signUp" component={SignUpContainer} hideNavBar={true} title="Identificação" />
+
+    <Scene key="forgotPassword" component={ForgotPasswordContainer} hideNavBar={true} />
+    <Scene key="changeForgotPassword" component={ChangeForgotPasswordContainer} hideNavBar={true} />
+
     <Scene key="profileMissingFields" component={ProfileMissingFieldsContainer} hideNavBar={true} title="Confirme suas informações" />
     <Scene key="profileBirth" component={ProfileBirthContainer} hideNavBar={true} title="Data de Nascimento" />
     <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />

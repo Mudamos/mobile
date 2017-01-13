@@ -12,42 +12,44 @@ import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
 import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
+import CodeInput from "./code-input";
 import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import FlatButton from "./flat-button";
-import FBLoginButton from "./fb-login-button";
+
+import { errorForField } from "../utils";
 
 import locale from "../locales/pt-BR";
 
-import styles from "../styles/sign-in-layout";
+import styles from "../styles/change-forgot-password-layout";
 
 
-class SignInLayout extends ComponentWithKeyboardEvent {
+export default class ChangeForgotPasswordLayout extends ComponentWithKeyboardEvent {
   state = {};
 
   static propTypes = {
-    isLoggingIn: PropTypes.bool,
+    errors: PropTypes.array,
+    isSaving: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
-    onFacebookLogin: PropTypes.func.isRequired,
-    onForgotPassword: PropTypes.func.isRequired,
-    onSignIn: PropTypes.func.isRequired,
+    onResendCode: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
   }
 
   get validForm() {
-    return [
-      this.state.email,
-      this.state.password,
-    ].every(v => v);
+    const code = this.state.code || "";
+    const codeSize = 5;
+    return !!this.state.password && code.length === codeSize;
   }
 
-  get signInEnabled() {
+  get formEnabled() {
     return this.validForm && !this.state.hasKeyboard;
   }
 
   render() {
     const {
-      isLoggingIn,
+      errors,
+      isSaving,
       onBack,
-      onForgotPassword,
+      onResendCode,
     } = this.props;
 
     return (
@@ -56,7 +58,7 @@ class SignInLayout extends ComponentWithKeyboardEvent {
           <KeyboardAwareScrollView
             bounces={false}
             showsVerticalScrollIndicator={false}
-            style={styles.scrollView}
+            style={styles.full}
           >
             <HeaderLogo />
 
@@ -66,75 +68,65 @@ class SignInLayout extends ComponentWithKeyboardEvent {
             />
 
             <Text style={styles.headerTitle}>
-              {locale.signInTitle}
+              {locale.changeForgotPasswordTitle}
             </Text>
 
-            {this.renderFBLogin()}
-
-            <View style={styles.separatorContainer}>
-              <View style={styles.separatorLine} />
-              <Text style={styles.separatorText}>ou</Text>
-              <View style={styles.separatorLine} />
-            </View>
+            <Text style={[styles.actionText, styles.highMargin]}>
+              {locale.typeCode}
+            </Text>
 
             <View style={styles.inputContainer}>
-              <MDTextInput
-                placeholder={locale.email}
-                value={this.state.email}
-                onChangeText={email => this.setState({ email })}
-                keyboardType="email-address"
-                onSubmitEditing={() => this.emailInput.blur()}
-                ref={ref => this.emailInput = ref}
+              <CodeInput
+                value={this.state.code}
+                onChangeCodeText={code => this.setState({code})}
+                keyboardType="numeric"
+                length={5}
+                mdContainerStyle={{marginHorizontal: 13}}
+                onSubmitEditing={() => this.codeInput.blur()}
+                ref={ref => this.codeInput = ref}
               />
+
+              <Text style={[styles.actionText, styles.highMargin]}>
+                {locale.enterNewPassword}
+              </Text>
 
               <MDTextInput
                 placeholder={locale.password}
                 value={this.state.password}
-                password={true}
                 onChangeText={password => this.setState({ password })}
+                password={true}
+                hasError={!!errorForField("password", errors)}
+                hint={errorForField("password", errors)}
                 onSubmitEditing={() => this.passwordInput.blur()}
                 ref={ref => this.passwordInput = ref}
               />
             </View>
 
             <FlatButton
-              title={locale.getIn.toUpperCase()}
-              enabled={this.signInEnabled}
+              title={locale.change.toUpperCase()}
+              enabled={this.formEnabled}
               onPress={this.onSubmit.bind(this)}
               style={{marginHorizontal: 20, marginTop: 20}}
             />
 
             <Text
-              style={styles.forgotPassword}
-              onPress={onForgotPassword}
+              style={styles.resendCode}
+              onPress={onResendCode}
             >
-              {locale.forgotPassword}
+              {locale.resendCode.toUpperCase()}
             </Text>
           </KeyboardAwareScrollView>
         </Layout>
 
-        <PageLoader isVisible={isLoggingIn} />
+        <PageLoader isVisible={isSaving} />
       </View>
     );
   }
 
-  renderFBLogin() {
-    const { onFacebookLogin } = this.props;
-
-    return (
-      <FBLoginButton
-        onPress={onFacebookLogin}
-        style={{marginHorizontal: 20, marginTop: 24}}
-      />
-    );
-  }
-
   onSubmit() {
-    const { email, password } = this.state;
-    const { onSignIn } = this.props;
+    const { code, password } = this.state;
+    const { onSave } = this.props;
 
-    onSignIn(email, password);
+    onSave({code, password});
   }
 }
-
-export default SignInLayout;
