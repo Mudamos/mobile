@@ -72,6 +72,7 @@ const defineErrorType = err => {
     ...err,
     json,
     type: data.type || "unknown",
+    errorCode: data.errorCode,
     userMessage: json.status === "fail" && data.message,
     validations: data.validations,
   });

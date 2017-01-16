@@ -160,7 +160,7 @@ function* sendPhoneValidation({ mobileApi }) {
       Toast.show(`CODE: ${response}`);
 
       yield put(sendingPhoneValidation(false));
-      yield put(phoneValidationSent());
+      yield put(phoneValidationSent(true));
     } catch (e) {
       logError(e, { tag: "sendPhoneValidation" });
 
@@ -203,6 +203,8 @@ function* savePhoneProfile({ mobileApi }) {
       yield put(updatedUserProfile({ user, profileComplete: response.complete }));
       yield put(savingProfile(false));
       yield put(profileStateMachine());
+
+      yield put(phoneValidationSent(false)); // Clear for future validation
     } catch (e) {
       logError(e, { tag: "verifyCode" });
 

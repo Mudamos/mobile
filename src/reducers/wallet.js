@@ -4,6 +4,11 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case "PROFILE_INVALIDATE_PHONE":
+      return {
+        ...state,
+        hasWallet: false,
+      };
     case "WALLET_CREATING":
       return {
         ...state,

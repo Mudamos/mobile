@@ -13,6 +13,7 @@ import {
   fetchingPlips,
   fetchingPlipSignInfo,
   fetchingUserSignInfo,
+  invalidatePhone,
   isSigningPlip,
   navigate,
   plipsFetched,
@@ -21,6 +22,7 @@ import {
   plipSignError,
   plipSignInfoFetched,
   plipUserSignInfo,
+  profileStateMachine,
   setCurrentPlip,
   unauthorized,
 } from "../actions";
@@ -108,7 +110,7 @@ function* fetchPlipSignInfo({ mobileApi, plipId }) {
   }
 }
 
-function* signPlip({ mobileApi, walletStore }) {
+function* signPlip({ mobileApi, walletStore, apiError }) {
   yield takeLatest("PLIP_SIGN", function* ({ payload }) {
     try {
       const { plip } = payload;
@@ -133,15 +135,29 @@ function* signPlip({ mobileApi, walletStore }) {
 
       if (isDev) console.log("Block:", block);
 
-      const apiResult = yield call(mobileApi.signPlip, authToken, {
-        petitionId: plip.id,
-        block,
-      });
+      try {
+        const apiResult = yield call(mobileApi.signPlip, authToken, {
+          petitionId: plip.id,
+          block,
+        });
 
-      if (isDev) console.log("Sign api result:", apiResult);
+        if (isDev) console.log("Sign api result:", apiResult);
 
-      yield put(plipUserSignInfo({ plipId: plip.id, info: apiResult.signMessage }));
-      yield put(plipJustSigned({ plipId: plip.id })); //Marks the flow end
+        yield put(plipUserSignInfo({ plipId: plip.id, info: apiResult.signMessage }));
+        yield put(plipJustSigned({ plipId: plip.id })); //Marks the flow end
+      } catch (e) {
+        logError(e);
+        if (isDev) console.log("is wallet invalid?", apiError.isInvalidWallet(e), e.errorCode, e);
+
+        if (apiError.isInvalidWallet(e)) {
+          yield put(invalidatePhone());
+          yield put(profileStateMachine());
+
+          return
+        }
+
+        throw e;
+      }
     } catch(e) {
       logError(e);
       if (isUnauthorized(e)) return yield put(unauthorized());
@@ -153,7 +169,7 @@ function* signPlip({ mobileApi, walletStore }) {
   });
 }
 
-export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore }) {
+export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError }) {
   yield spawn(fetchPlips, { mobileApi, mudamosWebApi });
-  yield spawn(signPlip, { mobileApi, walletStore });
+  yield spawn(signPlip, { mobileApi, walletStore, apiError });
 }
