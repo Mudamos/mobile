@@ -52,6 +52,7 @@ class Container extends Component {
     plipSignInfo: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
     userSignDate: PropTypes.object,
+    onChangePassword: PropTypes.func.isRequired,
     onFetchProfile: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
@@ -60,6 +61,17 @@ class Container extends Component {
     onSignSuccessClose: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
+
+  get menuEntries() {
+    const {
+      onChangePassword,
+    } = this.props;
+
+    return [
+      { icon: "account-circle", title: locale.menu.editProfile, action: () => {} },
+      { icon: "lock", title: locale.menu.changePassword, action: onChangePassword },
+    ];
+  }
 
   componentWillMount() {
     if (isDev) Toast.show("Plip componentWillMount");
@@ -107,6 +119,8 @@ class Container extends Component {
         currentUser={currentUser}
         isFetchingProfile={isFetchingProfile}
         onLogout={onLogout}
+
+        menuEntries={this.menuEntries}
       />
     );
   }
@@ -157,6 +171,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   retryPlip: () => dispatch(fetchPlips()),
+  onChangePassword: () => dispatch(navigate("changePassword")),
   onFetchProfile: () => dispatch(fetchProfile()),
   onLogout: () => dispatch(logout()),
   onOpenURL: url => dispatch(openURL(url)),

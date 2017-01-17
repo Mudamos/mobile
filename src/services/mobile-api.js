@@ -204,11 +204,19 @@ const changeForgotPassword = ({ client }) => ({ code, password }) =>
     .send({ user: { password, pincode: code } })
     .then(getData);
 
+const changePassword = ({ client }) => (authToken, { currentPassword, newPassword }) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/users/password/update")
+    .send({ user: { currentPassword, newPassword } })
+    .then(getData);
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
 
   return {
+    changePassword: changePassword({ client }),
     changeForgotPassword: changeForgotPassword({ client }),
     difficulty: fetchDifficulty({ client }),
     fbSignIn: fbSignIn({ client }),

@@ -13,6 +13,21 @@ export const retrievePasswordError = hasRetrieveError => ({
   payload: { hasRetrieveError },
 });
 
+export const changePassword = ({ currentPassword, newPassword }) => ({
+  type: "PASSWORD_CHANGE",
+  payload: { currentPassword, newPassword },
+});
+
+export const changingPassword = isChanging => ({
+  type: "PASSWORD_CHANGING",
+  payload: { isChanging },
+});
+
+export const changePasswordError = error => ({
+  type: "PASSWORD_CHANGE_ERROR",
+  payload: { error },
+});
+
 export const changeForgotPassword = ({ code, password }) => ({
   type: "PASSWORD_CHANGE_FORGOT",
   payload: { code, password },
