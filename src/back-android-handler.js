@@ -1,5 +1,9 @@
 import { Actions } from "react-native-router-flux";
 
+import {
+  clearProfileSaveErrors,
+} from "./actions";
+
 import { isDev } from "./utils";
 
 const defaultBackAction = () => {
@@ -21,6 +25,9 @@ export default store => () => {
   if (isDev) console.log("Current scene key: ", currentKey);
 
   switch (currentKey) {
+    case "profileUpdate":
+      store.dispatch(clearProfileSaveErrors());
+      return defaultBackAction();
     case "profileAddress":
     case "profileBirth":
     case "profileDocuments":

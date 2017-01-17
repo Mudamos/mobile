@@ -211,6 +211,13 @@ const changePassword = ({ client }) => (authToken, { currentPassword, newPasswor
     .send({ user: { currentPassword, newPassword } })
     .then(getData);
 
+const updateProfile = ({ client }) => (authToken, { birthdate, name, zipCode }) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/users/profile/update")
+    .send({ user: { birthday: birthdate, name, zipcode: zipCode }})
+    .then(getData);
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
@@ -234,6 +241,7 @@ export default function MobileApi(host) {
     signIn: signIn({ client }),
     signUp: signUp({ client }),
     signPlip: signPlip({ client }),
+    updateProfile: updateProfile({ client }),
     userSignInfo: userSignInfo({ client }),
   };
 }

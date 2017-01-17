@@ -25,6 +25,8 @@ import { isUnauthorized, logError } from "../utils";
 
 import Toast from "react-native-simple-toast";
 
+import locale from "../locales/pt-BR";
+
 
 function* saveMainProfile({ mobileApi, sessionStore }) {
   yield takeLatest("PROFILE_SAVE_MAIN", function* ({ payload }) {
@@ -217,6 +219,33 @@ function* savePhoneProfile({ mobileApi }) {
   });
 }
 
+function* updateProfile({ mobileApi }) {
+  yield takeLatest("PROFILE_UPDATE", function* ({ payload }) {
+    try {
+      const { birthdate, name, zipCode } = payload;
+
+      yield put(savingProfile(true));
+
+      const authToken = yield select(currentAuthToken);
+      const response = yield call(mobileApi.updateProfile, authToken, { birthdate, name, zipCode });
+
+      const user = User.fromJson(response.user);
+
+      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(savingProfile(false));
+      yield call([Toast, Toast.show], locale.profileUpdated);
+    } catch (e) {
+      logError(e, { tag: "updateProfile" });
+
+      yield put(savingProfile(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized());
+
+      yield put(saveUserProfileError(e));
+    }
+  });
+}
+
 
 export function* fetchProfile({ mobileApi }) {
   try {
@@ -253,6 +282,7 @@ export function* fetchProfileSaga({ mobileApi }) {
 
 export default function* profileSaga({ mobileApi, sessionStore }) {
   yield spawn(saveMainProfile, { mobileApi, sessionStore });
+  yield spawn(updateProfile, { mobileApi });
   yield spawn(saveBirthdateProfile, { mobileApi });
   yield spawn(saveZipCodeProfile, { mobileApi });
   yield spawn(saveDocumentsProfile, { mobileApi });

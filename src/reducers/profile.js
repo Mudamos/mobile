@@ -49,6 +49,8 @@ export default (state = initialState, action) => {
       };
     case "PROFILE_USER_SAVE_FAILURE":
       return { ...state, errors: payload.error.validations };
+    case "PROFILE_CLEAR_SAVE_ERRORS":
+      return { ...state, errors: null };
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,

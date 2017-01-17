@@ -50,6 +50,8 @@ export const zipCodeMask = text => StringMask.apply(text, "00000-000");
 
 export const toISODate = (value, format = "DD/MM/YYYY") => moment(value, format).format("YYYY-MM-DD");
 
+export const fromISODate = value => moment(value, "YYYY-MM-DD").format("DD/MM/YYYY");
+
 export const extractNumbers = text => (String(text).match(/\d+/g) || []).join("");
 
 export const formatNumber = (value, locale = DEFAULT_LOCALE) => {
