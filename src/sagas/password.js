@@ -1,7 +1,10 @@
 import { takeLatest } from "redux-saga";
 import { call, put, spawn, select } from "redux-saga/effects";
 
-import { logError } from "../utils";
+import {
+  isUnauthorized,
+  logError,
+} from "../utils";
 
 import {
   changingPassword,
@@ -13,6 +16,7 @@ import {
   profileStateMachine,
   retrievingPassword,
   retrievePasswordError,
+  unauthorized,
   updatedUserProfile,
 } from "../actions";
 
@@ -61,6 +65,7 @@ function* changePassword({ mobileApi }) {
       yield call([Toast, Toast.show], locale.passwordChangedSuccessfully);
     } catch(e) {
       logError(e);
+      if (isUnauthorized(e)) return yield put(unauthorized());
 
       yield put(changingPassword(false));
       yield put(changePasswordError(e));
