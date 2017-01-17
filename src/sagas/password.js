@@ -1,9 +1,11 @@
 import { takeLatest } from "redux-saga";
-import { call, put, spawn } from "redux-saga/effects";
+import { call, put, spawn, select } from "redux-saga/effects";
 
 import { logError } from "../utils";
 
 import {
+  changingPassword,
+  changePasswordError,
   changingForgotPassword,
   changeForgotPasswordError,
   logginSucceeded,
@@ -13,6 +15,10 @@ import {
   retrievePasswordError,
   updatedUserProfile,
 } from "../actions";
+
+import {
+  currentAuthToken,
+} from "../selectors";
 
 import { User } from "../models";
 
@@ -36,6 +42,28 @@ function* retrievePassword({ mobileApi }) {
       yield put(retrievePasswordError(true));
     } finally {
       yield put(retrievingPassword(false));
+    }
+  });
+}
+
+function* changePassword({ mobileApi }) {
+  yield takeLatest("PASSWORD_CHANGE", function* ({ payload }) {
+    try {
+      const { currentPassword, newPassword } = payload;
+
+      yield put(changingPassword(true));
+
+      const authToken = yield select(currentAuthToken);
+      yield call(mobileApi.changePassword, authToken, { currentPassword, newPassword });
+
+      yield put(changingPassword(false));
+
+      yield call([Toast, Toast.show], locale.passwordChangedSuccessfully);
+    } catch(e) {
+      logError(e);
+
+      yield put(changingPassword(false));
+      yield put(changePasswordError(e));
     }
   });
 }
@@ -71,5 +99,6 @@ function* changeForgotPassword({ mobileApi, sessionStore }) {
 
 export default function* passwordSaga({ mobileApi, sessionStore }) {
   yield spawn(retrievePassword, { mobileApi });
+  yield spawn(changePassword, { mobileApi });
   yield spawn(changeForgotPassword, { mobileApi, sessionStore });
 }

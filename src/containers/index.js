@@ -1,4 +1,5 @@
 export { default as ChangeForgotPasswordContainer } from "./change-forgot-password";
+export { default as ChangePasswordContainer } from "./change-password";
 export { default as ForgotPasswordContainer } from "./forgot-password";
 export { default as PlipContainer } from "./show-plip";
 export { default as PlipViewerContainer } from "./plip-viewer";

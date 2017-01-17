@@ -23,15 +23,9 @@ export default class Menu extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
     isFetchingProfile: PropTypes.bool,
+    menuEntries: PropTypes.array.isRequired,
     onLogout: PropTypes.func.isRequired,
   };
-
-  get menuEntries() {
-    return [
-      { icon: "account-circle", title: locale.menu.editProfile },
-      { icon: "lock", title: locale.menu.changePassword },
-    ];
-  }
 
   componentWillMount() {
     this.dataSource = new ListView.DataSource({
@@ -39,8 +33,16 @@ export default class Menu extends Component {
     });
 
     this.setState({
-      entries: this.dataSource.cloneWithRows(this.menuEntries),
+      entries: this.dataSource.cloneWithRows(this.props.menuEntries),
     });
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.menuEntries !== undefined) {
+      this.setState({
+        entries: this.dataSource.cloneWithRows(newProps.menuEntries),
+      });
+    }
   }
 
   render() {
@@ -112,7 +114,7 @@ export default class Menu extends Component {
   }
 
   menuSelected(entry) {
-    console.log("entry", entry);
+    entry.action();
   }
 
   renderFooter() {
