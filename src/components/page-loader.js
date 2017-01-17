@@ -16,11 +16,11 @@ class PageLoader extends Component {
   }
 
   static defaultProps = {
-    color: "#CCCCCC",
+    color: "#FFFFFF",
     containerBackgroundColor: "rgba(0, 0, 0, .6)",
     isVisible: false,
     size: 100,
-    type: "ThreeBounce",
+    type: "9CubeGrid",
   }
 
   render() {
