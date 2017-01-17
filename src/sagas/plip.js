@@ -1,4 +1,4 @@
-import { takeLatest } from "redux-saga";
+import { takeEvery, takeLatest } from "redux-saga";
 import { call, spawn, put, select } from "redux-saga/effects";
 
 import {
@@ -110,6 +110,17 @@ function* fetchPlipSignInfo({ mobileApi, plipId }) {
   }
 }
 
+function* fetchPlipSignInfoSaga({ mobileApi }) {
+  yield takeEvery("PLIP_JUST_SIGNED", function* ({ payload }) {
+    try {
+      const { plipId } = payload;
+      yield call(fetchPlipSignInfo, { mobileApi, plipId });
+    } catch(e) {
+      logError(e);
+    }
+  });
+}
+
 function* signPlip({ mobileApi, walletStore, apiError }) {
   yield takeLatest("PLIP_SIGN", function* ({ payload }) {
     try {
@@ -172,4 +183,5 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
 export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError }) {
   yield spawn(fetchPlips, { mobileApi, mudamosWebApi });
   yield spawn(signPlip, { mobileApi, walletStore, apiError });
+  yield spawn(fetchPlipSignInfoSaga, { mobileApi });
 }
