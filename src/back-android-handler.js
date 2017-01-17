@@ -1,6 +1,8 @@
 import { Actions } from "react-native-router-flux";
 
 import {
+  clearChangeForgotPasswordError,
+  clearChangePasswordError,
   clearProfileSaveErrors,
 } from "./actions";
 
@@ -25,7 +27,14 @@ export default store => () => {
   if (isDev) console.log("Current scene key: ", currentKey);
 
   switch (currentKey) {
+    case "changeForgotPassword":
+      store.dispatch(clearChangeForgotPasswordError());
+      return defaultBackAction();
+    case "changePassword":
+      store.dispatch(clearChangePasswordError());
+      return defaultBackAction();
     case "profileUpdate":
+    case "signUp":
       store.dispatch(clearProfileSaveErrors());
       return defaultBackAction();
     case "profileAddress":

@@ -42,3 +42,11 @@ export const changeForgotPasswordError = error => ({
   type: "PASSWORD_CHANGE_FORGOT_ERROR",
   payload: { error },
 });
+
+export const clearChangeForgotPasswordError = () => ({
+  type: "PASSWORD_CLEAR_CHANGE_FORGOT_ERROR",
+});
+
+export const clearChangePasswordError = () => ({
+  type: "PASSWORD_CLEAR_CHANGE_ERROR",
+});

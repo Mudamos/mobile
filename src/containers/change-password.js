@@ -4,6 +4,7 @@ import ChangePasswordLayout from "../components/change-password-layout";
 
 import {
   changePassword,
+  clearChangePasswordError,
   navigateBack,
 } from "../actions";
 
@@ -19,7 +20,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onBack: () => dispatch(navigateBack()),
+  onBack: () => {
+    dispatch(clearChangePasswordError());
+    dispatch(navigateBack());
+  },
   onSave: ({ currentPassword, newPassword }) => dispatch(changePassword({ currentPassword, newPassword })),
 });
 

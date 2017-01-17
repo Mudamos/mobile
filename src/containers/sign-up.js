@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import SignUpLayout from "../components/sign-up-layout";
 
 import {
+  clearProfileSaveErrors,
   facebookUserLogIn,
   navigate,
   navigateBack,
@@ -23,7 +24,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onBack: () => dispatch(navigateBack()),
+  onBack: () => {
+    dispatch(clearProfileSaveErrors());
+    dispatch(navigateBack());
+  },
   onCreate: ({ name, email, password }) => dispatch(profileSaveMain({ name, email, password })),
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
   onSignIn: () => dispatch(navigate("signIn")),
