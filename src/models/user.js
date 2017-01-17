@@ -15,6 +15,10 @@ export default class User {
     this.zipCode = attrs.zipCode;
   }
 
+  clone() {
+    return User.fromJson(this.toJson());
+  }
+
   toJson() {
     const mobileJson = this.mobile ? this.mobile.toJson() : {};
     const walletJson = this.wallet ? this.wallet.toJson() : {};

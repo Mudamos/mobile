@@ -12,8 +12,9 @@ export const isFetchingProfile = isFetching => ({
   payload: { isFetching },
 });
 
-export const phoneValidationSent = () => ({
+export const phoneValidationSent = hasSent => ({
   type: "PROFILE_PHONE_VALIDATION_SENT",
+  payload: { hasSent },
 });
 
 export const profileSaveMain = ({ name, email, password }) => ({
@@ -69,4 +70,8 @@ export const sendingPhoneValidationError = error => ({
 export const savePhone = ({ phone, code }) => ({
   type: "PROFILE_SAVE_PHONE",
   payload: { phone, code },
+});
+
+export const invalidatePhone = () => ({
+  type: "PROFILE_INVALIDATE_PHONE",
 });

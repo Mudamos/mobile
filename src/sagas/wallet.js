@@ -33,6 +33,8 @@ function* createWallet({ mobileApi, walletStore }) {
       const valid = yield call(walletStore.valid, user.voteCard);
 
       if (!valid) {
+        if (isDev) console.log("Will create new wallet");
+
         const seed = yield call(walletStore.create, user.voteCard);
 
         const authToken = yield select(currentAuthToken);
@@ -67,8 +69,19 @@ function* hasLocalWallet({ walletStore }) {
   });
 }
 
+function* invalidateWallet({ walletStore }) {
+  yield takeEvery("PROFILE_INVALIDATE_PHONE", function* () {
+    try {
+      yield call(walletStore.destroy);
+    } catch (e) {
+      logError(e, { tag: "invalidateWallet"});
+    }
+  });
+}
+
 
 export default function* walletSaga({ mobileApi, walletStore }) {
   yield spawn(createWallet, { mobileApi, walletStore });
   yield spawn(hasLocalWallet, { walletStore });
+  yield spawn(invalidateWallet, { walletStore });
 }

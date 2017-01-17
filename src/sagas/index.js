@@ -13,6 +13,7 @@ import linkingSaga from "./linking";
 import walletSaga from "./wallet";
 
 export default function* rootSaga({
+  apiError,
   mudamosWebApi,
   mobileApi,
   sessionStore,
@@ -22,7 +23,7 @@ export default function* rootSaga({
   yield spawn(facebookSaga, { sessionStore, mobileApi });
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
   yield spawn(passwordSaga, { mobileApi, sessionStore });
-  yield spawn(plipSaga, { mobileApi, mudamosWebApi, walletStore });
+  yield spawn(plipSaga, { apiError, mobileApi, mudamosWebApi, walletStore });
   yield spawn(profileSaga, { mobileApi, sessionStore });
   yield spawn(errorSaga);
   yield spawn(sessionSaga, { mobileApi, sessionStore });

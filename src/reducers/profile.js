@@ -1,5 +1,14 @@
 const initialState = {};
 
+const invalidateMobileStatus = currentUser => {
+  if (!currentUser) return currentUser;
+
+  const newUser = currentUser.clone();
+  newUser.mobile.status = false;
+
+  return newUser;
+};
+
 export default (state = initialState, action) => {
   const { type, payload } = action;
 
@@ -8,6 +17,11 @@ export default (state = initialState, action) => {
       return { ...state, isFetching: payload.isFetching };
     case "PROFILE_FETCHING_ERROR":
       return { ...state, profileFetchError: payload.profileFetchError };
+    case "PROFILE_INVALIDATE_PHONE":
+      return {
+        ...state,
+        currentUser: invalidateMobileStatus(state.currentUser),
+      };
     case "PROFILE_SAVING":
       return { ...state, isSaving: payload.isSaving, errors: null };
     case "PROFILE_SENDING_PHONE_VALIDATION":
@@ -25,7 +39,7 @@ export default (state = initialState, action) => {
     case "PROFILE_PHONE_VALIDATION_SENT":
       return {
         ...state,
-        hasSentPhoneValidation: true,
+        hasSentPhoneValidation: payload.hasSent,
       };
     case "PROFILE_USER_UPDATED":
       return {
