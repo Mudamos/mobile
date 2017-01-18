@@ -13,6 +13,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isChanging: payload.isChanging,
+        changeErrors: null,
       };
     case "PASSWORD_CHANGING_FORGOT":
       return {
