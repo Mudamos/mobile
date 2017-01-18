@@ -56,6 +56,7 @@ export default class ChangeForgotPasswordLayout extends ComponentWithKeyboardEve
       <View style={styles.container}>
         <Layout>
           <KeyboardAwareScrollView
+            automaticallyAdjustContentInsets={false}
             bounces={false}
             showsVerticalScrollIndicator={false}
             style={styles.full}

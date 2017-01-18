@@ -59,6 +59,7 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
       <View style={styles.container}>
         <Layout>
           <KeyboardAwareScrollView
+            automaticallyAdjustContentInsets={false}
             style={styles.scrollView}
             bounces={false}
             showsVerticalScrollIndicator={false}

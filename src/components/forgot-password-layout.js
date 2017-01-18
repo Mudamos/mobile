@@ -49,6 +49,7 @@ export default class ForgotPasswordLayout extends ComponentWithKeyboardEvent {
       <View style={styles.container}>
         <Layout>
           <KeyboardAwareScrollView
+            automaticallyAdjustContentInsets={false}
             bounces={false}
             showsVerticalScrollIndicator={false}
             style={styles.full}
