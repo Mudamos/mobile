@@ -75,3 +75,12 @@ export const savePhone = ({ phone, code }) => ({
 export const invalidatePhone = () => ({
   type: "PROFILE_INVALIDATE_PHONE",
 });
+
+export const profileUpdate = ({ birthdate, name, zipCode }) => ({
+  type: "PROFILE_UPDATE",
+  payload: { birthdate, name, zipCode },
+});
+
+export const clearProfileSaveErrors = () => ({
+  type: "PROFILE_CLEAR_SAVE_ERRORS",
+});

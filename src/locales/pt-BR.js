@@ -44,6 +44,8 @@ const translations = {
   petitionEnded: "Encerrado",
   phoneHeaderTitle: "Informe seu celular",
   phoneSubtitle: "Um código de confirmação será enviado via SMS",
+  profileUpdated: "Perfil atualizado!",
+  profileUpdateTitle: "Editar perfil",
   projectSigned: "Projeto Assinado",
   projectSignedCongratulations: "Parabéns, você assinou o projeto de lei",
   projectSignedYeah: "Projeto assinado!",

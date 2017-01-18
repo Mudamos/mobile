@@ -9,8 +9,14 @@ import {
 
 import {
   changeForgotPassword,
+  clearChangeForgotPasswordError,
   navigateBack,
 } from "../actions";
+
+const clearErrorsAndGoBack = dispatch => {
+  dispatch(clearChangeForgotPasswordError());
+  dispatch(navigateBack());
+};
 
 const mapStateToProps = state => ({
   errors: getChangeForgotPasswordErrors(state),
@@ -18,8 +24,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onBack: () => dispatch(navigateBack()),
-  onResendCode: () => dispatch(navigateBack()),
+  onBack: () => clearErrorsAndGoBack(dispatch),
+  onResendCode: () => clearErrorsAndGoBack(dispatch),
   onSave: ({ code, password }) => dispatch(changeForgotPassword({ code, password })),
 });
 

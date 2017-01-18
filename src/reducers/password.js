@@ -25,10 +25,20 @@ export default (state = initialState, action) => {
         ...state,
         changeErrors: payload.error.validations,
       };
+    case "PASSWORD_CLEAR_CHANGE_ERROR":
+      return {
+        ...state,
+        changeErrors: null,
+      };
     case "PASSWORD_CHANGE_FORGOT_ERROR":
       return {
         ...state,
         changeForgotErrors: payload.error.validations,
+      };
+    case "PASSWORD_CLEAR_CHANGE_FORGOT_ERROR":
+      return {
+        ...state,
+        changeForgotErrors: null,
       };
     case "SESSION_CLEAR_SESSION":
       return {

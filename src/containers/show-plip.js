@@ -58,6 +58,7 @@ class Container extends Component {
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
     onPlipsFetch: PropTypes.func.isRequired,
+    onProfileEdit: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
@@ -65,10 +66,11 @@ class Container extends Component {
   get menuEntries() {
     const {
       onChangePassword,
+      onProfileEdit,
     } = this.props;
 
     return [
-      { icon: "account-circle", title: locale.menu.editProfile, action: () => {} },
+      { icon: "account-circle", title: locale.menu.editProfile, action: onProfileEdit },
       { icon: "lock", title: locale.menu.changePassword, action: onChangePassword },
     ];
   }
@@ -177,6 +179,7 @@ const mapDispatchToProps = dispatch => ({
   onOpenURL: url => dispatch(openURL(url)),
   onPlipsFetch: () => dispatch(fetchPlips()),
   onPlipSign: plip => onPlipSign({ dispatch, plip }),
+  onProfileEdit: () => dispatch(navigate("profileUpdate")),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
   onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),
 });

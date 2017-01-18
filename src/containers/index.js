@@ -10,4 +10,5 @@ export { default as ProfileAddressContainer } from "./profile-address";
 export { default as ProfileDocumentsContainer } from "./profile-documents";
 export { default as ProfileMissingFieldsContainer } from "./profile-missing-fields";
 export { default as ProfilePhoneContainer } from "./profile-phone";
+export { default as ProfileUpdateContainer } from "./profile-update";
 export { default as ProfileWalletContainer } from "./profile-wallet";
