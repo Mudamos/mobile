@@ -55,6 +55,7 @@ export default class ProfileMissingFieldsLayout extends ComponentWithKeyboardEve
       <View style={styles.container}>
         <Layout>
           <KeyboardAwareScrollView
+            automaticallyAdjustContentInsets={false}
             bounces={false}
             showsVerticalScrollIndicator={false}
             style={styles.scrollView}

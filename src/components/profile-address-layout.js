@@ -85,6 +85,7 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
           { location && this.renderResults() }
 
           <KeyboardAwareScrollView
+            automaticallyAdjustContentInsets={false}
             style={styles.scrollView}
             bounces={false}
             showsVerticalScrollIndicator={false}
