@@ -141,10 +141,16 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
 
       const difficulty = yield call(mobileApi.difficulty, authToken);
       const seed = yield call(walletStore.retrieve, user.voteCard);
+      if (isDev) console.log("Acquired seed", seed);
+
       const message = buildSignMessage({ user, plip });
+      if (isDev) console.log("Sign message built:", message);
       const block = LibCrypto.signMessage(seed, message, difficulty);
 
-      if (isDev) console.log("Block:", block);
+      if (isDev) {
+        console.log("Block:", block);
+        console.log("Will call sign plip api");
+      }
 
       try {
         const apiResult = yield call(mobileApi.signPlip, authToken, {
