@@ -4949,6 +4949,10 @@ react-native-router-flux:
     react-native-tabs "^1.0.9"
     react-static-container "1.0.1"
 
+react-native-share@1.0.17:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.0.17.tgz#1a2bcc9fa70d61e66119c5474a56ba8b46a511f1"
+
 react-native-simple-toast:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/react-native-simple-toast/-/react-native-simple-toast-0.0.5.tgz#8530a9d0696613ad25bc5d4283f1e3c541ec2bc4"

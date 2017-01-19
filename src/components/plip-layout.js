@@ -14,6 +14,7 @@ import {
 } from "../utils";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
+import Ionicon from "react-native-vector-icons/Ionicons";
 
 import LinearGradient from "react-native-linear-gradient";
 
@@ -55,6 +56,7 @@ class PlipLayout extends Component {
     userSignDate: PropTypes.object,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
@@ -91,6 +93,13 @@ class PlipLayout extends Component {
     const end = moment(plip.cycle.finalDate);
 
     return end.diff(start, "days");
+  }
+
+  get callToAction() {
+    const { plip } = this.props;
+    if (!plip) return;
+
+    return (plip.callToAction || "").toUpperCase();
   }
 
   componentWillMount() {
@@ -162,7 +171,7 @@ class PlipLayout extends Component {
               {
                 !userSignDate && plip &&
                   <PurpleFlatButton
-                    title={plip.callToAction}
+                    title={this.callToAction}
                     onPress={this.onPlipSign.bind(this)}
                     style={{marginHorizontal: 20}}
                     textStyle={{fontSize: 19, fontFamily: "lato"}}
@@ -355,6 +364,7 @@ class PlipLayout extends Component {
     const {
       errorFetchingPlips,
       isFetchingPlip,
+      plip,
     } = this.props;
 
     const finalNavColor = "rgba(71, 57, 121, 1)";
@@ -376,7 +386,22 @@ class PlipLayout extends Component {
         }]}
         leftView={this.renderMenuButton()}
         middleView={this.renderLogo()}
+        rightView={plip ? this.renderShareButton() : null}
       />
+    );
+  }
+
+  renderShareButton() {
+    const { plip, onShare } = this.props;
+
+    return (
+      <TouchableOpacity onPress={() => onShare(plip)}>
+        <Ionicon
+          name="md-share-alt"
+          size={24}
+          color="#fff"
+        />
+      </TouchableOpacity>
     );
   }
 
@@ -386,7 +411,6 @@ class PlipLayout extends Component {
     return isUserLoggedIn ? (
       <TouchableOpacity
         onPress={openMenu}
-        style={styles.menuButton}
       >
         <Icon
           name="dehaze"

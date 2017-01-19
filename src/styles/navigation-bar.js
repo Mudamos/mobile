@@ -17,6 +17,7 @@ export default StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "transparent",
+    paddingLeft: 10,
   },
   middle: {
     flex: 3,
@@ -31,6 +32,7 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     backgroundColor: "transparent",
+    paddingRight: 10,
   },
   title: {
     color: "#fff",

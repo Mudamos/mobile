@@ -8,6 +8,7 @@ import locale from "../locales/pt-BR";
 import {
   navigateBack,
   removeJustSignedPlip,
+  sharePlip,
   signPlip,
 } from "../actions";
 
@@ -43,6 +44,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onBack: () => dispatch(navigateBack()),
   onPlipSign: plip => onPlipSign({ dispatch, plip }),
+  onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
 });
 

@@ -13,6 +13,7 @@ import {
   navigate,
   openURL,
   removeJustSignedPlip,
+  sharePlip,
   signPlip,
 } from "../actions";
 
@@ -59,6 +60,7 @@ class Container extends Component {
     onPlipSign: PropTypes.func.isRequired,
     onPlipsFetch: PropTypes.func.isRequired,
     onProfileEdit: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
@@ -180,6 +182,7 @@ const mapDispatchToProps = dispatch => ({
   onPlipsFetch: () => dispatch(fetchPlips()),
   onPlipSign: plip => onPlipSign({ dispatch, plip }),
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
+  onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
   onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),
 });

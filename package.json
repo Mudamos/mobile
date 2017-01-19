@@ -43,6 +43,7 @@
     "react-native-material-kit": "git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25",
     "react-native-randombytes": "^2.2.0",
     "react-native-router-flux": "^3.37.0",
+    "react-native-share": "1.0.17",
     "react-native-simple-toast": "^0.0.5",
     "react-native-spinkit": "^0.1.5",
     "react-native-vector-icons": "^3.0.0",

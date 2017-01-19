@@ -73,6 +73,7 @@ const translations = {
     loginError: "Houve um erro ao efetuar o login. Tente novamente.",
     openURLError: "Não foi possível abrir a url",
     passwordRetrieveError: "Houve um erro ao tentar enviar o código. Tente novamente",
+    shareLinkError: "Houve um erro ao tentar compartilhar. Tente novamente.",
     signPlipError: "Houve um erro ao efetuar sua assinatura. Tente novamente.",
     walletCreationError: "Houve um erro ao preparar algumas informações para suas assinaturas.",
   },

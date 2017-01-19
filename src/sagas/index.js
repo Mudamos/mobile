@@ -8,6 +8,7 @@ import plipSaga from "./plip";
 import profileSaga from "./profile";
 import navigationSaga from "./navigation";
 import sessionSaga from "./session";
+import shareSaga from "./share";
 import addressSaga from "./address";
 import linkingSaga from "./linking";
 import walletSaga from "./wallet";
@@ -27,6 +28,7 @@ export default function* rootSaga({
   yield spawn(profileSaga, { mobileApi, sessionStore });
   yield spawn(errorSaga);
   yield spawn(sessionSaga, { mobileApi, sessionStore });
+  yield spawn(shareSaga);
   yield spawn(addressSaga, { mobileApi });
   yield spawn(linkingSaga);
   yield spawn(walletSaga, { mobileApi, walletStore });
