@@ -4322,9 +4322,9 @@ ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
 
-mudamos-libcrypto@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/mudamos-libcrypto/-/mudamos-libcrypto-0.6.1.tgz#56c24437eae06f5239662a9d82841845e6abe0b5"
+mudamos-libcrypto@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/mudamos-libcrypto/-/mudamos-libcrypto-0.6.3.tgz#c99fd494d037f35d6c45bd1ee97b5f6fd1c482dd"
   dependencies:
     assert "^1.4.1"
     babel-preset-es2015 "^6.18.0"

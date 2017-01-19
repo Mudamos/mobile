@@ -49,8 +49,10 @@ export default root => {
   const retrieve = password => {
     return storage.fetch(key)
       .then(encryptedSeed => {
+        if (isDev) console.log("Retrieved encrypted wallet key:", encryptedSeed);
         if (!encryptedSeed) return;
 
+        if (isDev) console.log("Will decrypt with:", password);
         return crypto.decrypt(encryptedSeed, password);
       });
   };
