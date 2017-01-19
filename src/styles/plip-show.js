@@ -97,11 +97,6 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textAlign: "left",
   },
-  menuButton: {
-    position: "absolute",
-    top: 30,
-    left: 16,
-  },
   navigationBar: {
     position: "absolute",
     top: 0,

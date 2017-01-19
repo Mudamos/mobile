@@ -45,6 +45,8 @@ function appError({ type, payload }) {
       return showToast(locale.errors.passwordRetrieveError);
     case "PLIP_SIGN_ERROR":
       return showToast(locale.errors.signPlipError);
+    case "SHARE_LINK_ERROR":
+      return showToast(locale.errors.shareLinkError);
     case "PASSWORD_CHANGE_FORGOT_ERROR":
     case "PROFILE_SENDING_PHONE_VALIDATION_ERROR":
     case "PROFILE_USER_SAVE_FAILURE":

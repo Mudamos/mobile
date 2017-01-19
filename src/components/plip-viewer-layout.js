@@ -3,8 +3,11 @@ import React, { Component, PropTypes }  from "react";
 import {
   ScrollView,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
+
+import Ionicon from "react-native-vector-icons/Ionicons";
 
 import Layout from "./layout";
 import NavigationBar from "./navigation-bar";
@@ -34,12 +37,20 @@ export default class PlipViewerLayout extends Component {
     userSignDate: PropTypes.object,
     onBack: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
   };
 
   get plipName() {
     const { plip } = this.props;
     return plip.phase.name;
+  }
+
+  get callToAction() {
+    const { plip } = this.props;
+    if (!plip) return;
+
+    return (plip.callToAction || "").toUpperCase();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -95,7 +106,7 @@ export default class PlipViewerLayout extends Component {
         {
           !userSignDate && plip &&
             <PurpleFlatButton
-              title={plip.callToAction}
+              title={this.callToAction}
               onPress={this.onPlipSign.bind(this)}
               style={signButtonStyle}
               textStyle={{fontSize: 19, fontFamily: "lato"}}
@@ -113,7 +124,22 @@ export default class PlipViewerLayout extends Component {
         containerStyle={styles.navigationBar}
         leftView={<BackButton onPress={onBack} />}
         title={this.plipName}
+        rightView={this.renderShareButton()}
       />
+    );
+  }
+
+  renderShareButton() {
+    const { plip, onShare } = this.props;
+
+    return (
+      <TouchableOpacity onPress={() => onShare(plip)}>
+        <Ionicon
+          name="md-share-alt"
+          size={24}
+          color="#fff"
+        />
+      </TouchableOpacity>
     );
   }
 
