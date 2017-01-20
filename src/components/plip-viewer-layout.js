@@ -19,8 +19,8 @@ import BackButton from "./back-button";
 import SignedMessageView from "./signed-message-view";
 
 import styles from "../styles/plip-viewer-layout";
-
 import textStyles from "../styles/text";
+import plipHtmlStyles from "../styles/plip-html-styles";
 
 import locale from "../locales/pt-BR";
 
@@ -100,7 +100,10 @@ export default class PlipViewerLayout extends Component {
           bounces={false}
           showsVerticalScrollIndicator={false}
         >
-          <MarkdownView content={plip.content} />
+          <MarkdownView
+            content={plip.content}
+            contentContainerStyle={plipHtmlStyles}
+          />
         </ScrollView>
 
         {

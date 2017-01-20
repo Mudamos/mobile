@@ -2,6 +2,7 @@ export * from "./address";
 export * from "./authentication";
 export * from "./facebook";
 export * from "./linking";
+export * from "./local-storage";
 export * from "./navigation";
 export * from "./password";
 export * from "./plip";

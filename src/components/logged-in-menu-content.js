@@ -46,46 +46,47 @@ export default class Menu extends Component {
   }
 
   render() {
-    const {
-      currentUser,
-      isFetchingProfile,
-    } = this.props;
-
     return (
       <View style={styles.container}>
-        {currentUser && this.renderContent()}
-        {isFetchingProfile && this.renderWhenLoading()}
-      </View>
-    );
-  }
-
-  renderContent() {
-    const { currentUser } = this.props;
-
-    return (
-      <View style={styles.contentContainer}>
-        <Text style={styles.userName}>
-          {currentUser.name}
-        </Text>
-
-        <Text style={styles.darkSmallText}>
-          {currentUser.email}
-        </Text>
-
+        {this.renderHeader()}
         {this.renderTable()}
         {this.renderFooter()}
       </View>
     );
   }
 
+  renderHeader() {
+    const { currentUser, isFetchingProfile } = this.props;
+
+    return (
+      <View style={styles.full}>
+        {
+          !isFetchingProfile && currentUser &&
+            <View style={styles.full}>
+              <Text style={styles.userName}>
+                {currentUser.name}
+              </Text>
+
+              <Text style={styles.darkSmallText}>
+                {currentUser.email}
+              </Text>
+            </View>
+        }
+
+        { isFetchingProfile && this.renderLoader() }
+      </View>
+    );
+  }
+
   renderTable() {
     return (
-      <ListView
-        bounces={false}
-        style={styles.menuList}
-        dataSource={this.state.entries}
-        renderRow={this.renderMenuEntry.bind(this)}
-      />
+      <View style={styles.menuListContainer}>
+        <ListView
+          bounces={false}
+          dataSource={this.state.entries}
+          renderRow={this.renderMenuEntry.bind(this)}
+        />
+      </View>
     );
   }
 
@@ -118,6 +119,11 @@ export default class Menu extends Component {
   }
 
   renderFooter() {
+    const { isFetchingProfile } = this.props;
+    return isFetchingProfile ? null : this.renderEnabledFooter();
+  }
+
+  renderEnabledFooter() {
     const { onLogout } = this.props;
 
     return (
@@ -139,22 +145,18 @@ export default class Menu extends Component {
     );
   }
 
-  renderWhenLoading() {
+  renderLoader() {
     return (
-      <View style={{flex: 1 }}>
-        <View style={styles.loader}>
-          <Spinner
-            color="#FFFFFF"
-            isVisible={true}
-            type="Bounce"
-            size={50}
-          />
-          <Text style={styles.loaderText}>
-            {locale.loading}
-          </Text>
-        </View>
-
-        {this.renderFooter()}
+      <View style={styles.loader}>
+        <Spinner
+          color="#FFFFFF"
+          isVisible={true}
+          type="Bounce"
+          size={50}
+        />
+        <Text style={styles.loaderText}>
+          {locale.loading}
+        </Text>
       </View>
     );
   }

@@ -1,6 +1,11 @@
 import React, { Component, PropTypes } from "react";
-import { Alert } from "react-native";
+import { Alert, View } from "react-native";
 import { connect } from "react-redux";
+
+import {
+  prop,
+  sortBy,
+} from "ramda";
 
 import { isDev, moment } from "../utils";
 
@@ -15,6 +20,7 @@ import {
   removeJustSignedPlip,
   sharePlip,
   signPlip,
+  userFirstTimeDone,
 } from "../actions";
 
 import {
@@ -23,6 +29,7 @@ import {
   isFetchingPlips,
   isFetchingProfile,
   isSigningPlip,
+  isUserFirstTime,
   isUserLoggedIn,
   findCurrentPlip,
   getPlipSignInfo,
@@ -33,12 +40,20 @@ import {
 import PlipLayout from "../components/plip-layout";
 import Menu from "../components/side-menu";
 import LoggedInMenu from "../components/logged-in-menu-content";
+import SimpleModal from "../components/simple-modal";
+import MarkdownView from "../containers/markdown-view";
 
 import Toast from "react-native-simple-toast";
+import aboutHtmlStyles from "../styles/about-html-styles";
+
+
+const sortMenuEntries = entries => sortBy(prop("position"), entries);
+
 
 class Container extends Component {
   state = {
     menuOpen: false,
+    showAboutModal: false,
   };
 
   static propTypes = {
@@ -47,6 +62,7 @@ class Container extends Component {
     isFetchingPlip: PropTypes.bool.isRequired,
     isFetchingProfile: PropTypes.bool,
     isSigning: PropTypes.bool,
+    isUserFirstTime: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
     plip: PropTypes.object,
@@ -55,6 +71,7 @@ class Container extends Component {
     userSignDate: PropTypes.object,
     onChangePassword: PropTypes.func.isRequired,
     onFetchProfile: PropTypes.func.isRequired,
+    onFirstTimeModalClose: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
@@ -67,19 +84,32 @@ class Container extends Component {
 
   get menuEntries() {
     const {
+      isFetchingProfile,
       onChangePassword,
       onProfileEdit,
     } = this.props;
 
-    return [
-      { icon: "account-circle", title: locale.menu.editProfile, action: onProfileEdit },
-      { icon: "lock", title: locale.menu.changePassword, action: onChangePassword },
+    const entries = [
+      { icon: "info", title: locale.menu.about, action: this.onAbout.bind(this), position: 2 },
     ];
+
+    if (!isFetchingProfile) {
+      entries.push({ icon: "account-circle", title: locale.menu.editProfile, action: onProfileEdit, position: 0 });
+      entries.push({ icon: "lock", title: locale.menu.changePassword, action: onChangePassword, position: 1 });
+    }
+
+    return sortMenuEntries(entries);
   }
 
   componentWillMount() {
     if (isDev) Toast.show("Plip componentWillMount");
     this.props.onPlipsFetch();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isUserFirstTime === true && !this.state.showAboutModal) {
+      this.setState({ showAboutModal: true });
+    }
   }
 
   render() {
@@ -103,11 +133,27 @@ class Container extends Component {
   }
 
   renderPage() {
+    const { showAboutModal } = this.state;
+
     return (
-      <PlipLayout
-        {...this.props}
-        openMenu={this.openMenu.bind(this)}
-      />
+      <View style={{flex: 1}}>
+        <PlipLayout
+          {...this.props}
+          openMenu={this.openMenu.bind(this)}
+        />
+
+        {
+          showAboutModal &&
+            <SimpleModal
+              onClose={this.onFirstTimeModalClose.bind(this)}
+            >
+              <MarkdownView
+                content={locale.markdown.aboutBody}
+                contentContainerStyle={aboutHtmlStyles}
+              />
+            </SimpleModal>
+        }
+      </View>
     );
   }
 
@@ -134,6 +180,21 @@ class Container extends Component {
 
     this.setState({ menuOpen: true });
     onFetchProfile();
+  }
+
+  closeMenu() {
+    this.setState({ menuOpen: false });
+  }
+
+  onAbout() {
+    this.closeMenu();
+    this.setState({ showAboutModal: true });
+  }
+
+  onFirstTimeModalClose() {
+    const { onFirstTimeModalClose } = this.props;
+    onFirstTimeModalClose();
+    this.setState({ showAboutModal: false });
   }
 }
 
@@ -165,6 +226,7 @@ const mapStateToProps = state => {
     isFetchingPlip: isFetchingPlips(state),
     isFetchingProfile: isFetchingProfile(state),
     isSigning: isSigningPlip(state),
+    isUserFirstTime: isUserFirstTime(state),
     isUserLoggedIn: isUserLoggedIn(state),
     plip: findCurrentPlip(state),
     justSignedPlip: hasUserJustSignedPlip(state),
@@ -177,6 +239,7 @@ const mapDispatchToProps = dispatch => ({
   retryPlip: () => dispatch(fetchPlips()),
   onChangePassword: () => dispatch(navigate("changePassword")),
   onFetchProfile: () => dispatch(fetchProfile()),
+  onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
   onLogout: () => dispatch(logout()),
   onOpenURL: url => dispatch(openURL(url)),
   onPlipsFetch: () => dispatch(fetchPlips()),

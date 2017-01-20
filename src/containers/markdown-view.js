@@ -4,9 +4,33 @@ import { View, Text } from "react-native";
 
 import { connect } from "react-redux";
 
+import { deepMerge } from "../utils";
+
 import marked from "marked";
 
 import HTMLBox from "../components/html-box";
+
+import defaultHtmlStyles from "../styles/default-html-styles";
+
+
+const defaultProps = {
+  content: "",
+  contentContainerStyle: defaultHtmlStyles,
+  renderers: {
+    blockquote: (attributes, children, passProps) => {
+      const Blockquote = (
+        <View style={passProps.htmlStyles.blockquote}>
+          <Text>
+            {children}
+          </Text>
+        </View>
+      );
+
+      return Blockquote;
+    },
+  },
+};
+
 
 class MarkdownView extends Component {
   static propTypes = {
@@ -15,29 +39,10 @@ class MarkdownView extends Component {
     renderers: PropTypes.object,
   }
 
-  static defaultProps = {
-    content: "",
-    contentContainerStyle: {
-      blockquote: {
-        borderLeftWidth: 3,
-        borderLeftColor: "lightgray",
-        paddingLeft: 10,
-      },
-    },
-    renderers: {
-      blockquote: (attributes, children, passProps) => ((
-        <View style={passProps.htmlStyles.blockquote}>
-          <Text>
-            {children}
-          </Text>
-        </View>
-      )),
-    },
-  }
-
   render() {
-    const html = marked(this.props.content);
-    const { renderers, contentContainerStyle } = this.props;
+    const props = deepMerge(defaultProps, this.props);
+    const html = marked(props.content);
+    const { renderers, contentContainerStyle } = props;
 
     return (
       <HTMLBox
