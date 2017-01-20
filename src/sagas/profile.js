@@ -44,7 +44,7 @@ function* saveMainProfile({ mobileApi, sessionStore }) {
 
       const user = User.fromJson(response.user);
 
-      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(updatedUserProfile({ user }));
 
       // Maybe the user was creating for the first time the account
       // or they were already logged in. Nevertheless log them again.
@@ -75,7 +75,7 @@ function* saveBirthdateProfile({ mobileApi }) {
 
       const user = User.fromJson(response.user);
 
-      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
       yield put(profileStateMachine());
     } catch (e) {
@@ -102,7 +102,7 @@ function* saveZipCodeProfile({ mobileApi }) {
 
       const user = User.fromJson(response.user);
 
-      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
       yield put(profileStateMachine());
     } catch (e) {
@@ -129,7 +129,7 @@ function* saveDocumentsProfile({ mobileApi }) {
 
       const user = User.fromJson(response.user);
 
-      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
       yield put(profileStateMachine());
     } catch (e) {
@@ -202,7 +202,7 @@ function* savePhoneProfile({ mobileApi }) {
 
       const user = User.fromJson(response.user);
 
-      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
       yield put(profileStateMachine());
 
@@ -231,7 +231,7 @@ function* updateProfile({ mobileApi }) {
 
       const user = User.fromJson(response.user);
 
-      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
       yield call([Toast, Toast.show], locale.profileUpdated);
     } catch (e) {
@@ -261,7 +261,7 @@ export function* fetchProfile({ mobileApi }) {
     const response = yield call(mobileApi.profile, authToken);
     user = User.fromJson(response.user);
 
-    yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+    yield put(updatedUserProfile({ user }));
 
     return user;
   } finally {

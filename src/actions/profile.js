@@ -42,9 +42,9 @@ export const sendingPhoneValidation = isSendingValidation => ({
   payload: { isSendingValidation },
 });
 
-export const updatedUserProfile = ({ user , profileComplete }) => ({
+export const updatedUserProfile = ({ user }) => ({
   type: "PROFILE_USER_UPDATED",
-  payload: { currentUser: user, isProfileComplete: profileComplete },
+  payload: { currentUser: user },
 });
 
 export const saveUserProfileError = error => ({

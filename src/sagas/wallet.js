@@ -41,7 +41,7 @@ function* createWallet({ mobileApi, walletStore }) {
         const response = yield call(mobileApi.saveWallet, authToken, seed.publicKey);
         const newUser = User.fromJson(response.user);
 
-        yield put(updatedUserProfile({ user: newUser, profileComplete: response.complete }));
+        yield put(updatedUserProfile({ user: newUser }));
       } else {
         if (isDev) console.log("Valid seed");
       }
@@ -74,7 +74,7 @@ function* invalidateWallet({ walletStore }) {
     try {
       yield call(walletStore.destroy);
     } catch (e) {
-      logError(e, { tag: "invalidateWallet"});
+      logError(e, { tag: "invalidateWallet" });
     }
   });
 }
