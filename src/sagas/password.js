@@ -83,7 +83,7 @@ function* changeForgotPassword({ mobileApi, sessionStore }) {
 
       const user = User.fromJson(response.user);
 
-      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(updatedUserProfile({ user }));
 
       const accessToken = { token: response.accessToken };
       yield call(sessionStore.persist, accessToken);
@@ -95,7 +95,7 @@ function* changeForgotPassword({ mobileApi, sessionStore }) {
       logError(e);
 
       yield put(changingForgotPassword(false));
-      yield put(updatedUserProfile({ user: null, profileComplete: false }));
+      yield put(updatedUserProfile({ user: null }));
       yield put(changeForgotPasswordError(e));
     }
   });

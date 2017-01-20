@@ -12,7 +12,6 @@ import { logout } from "./session";
 import {
   isAddressProfileComplete,
   isDocumentsProfileComplete,
-  isProfileComplete,
   isMainProfileComplete,
   isBirthProfileComplete,
   isPhoneProfileComplete,
@@ -85,25 +84,20 @@ export function* profileScreenForCurrentUser() {
   const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
   const showPlipKey = "showPlip";
 
-  if (yield select(isProfileComplete)) {
-    return { key: showPlipKey, type: "reset" };
-  } else {
-    const screensDone = [
-      yield select(isMainProfileComplete),
-      yield select(isBirthProfileComplete),
-      yield select(isAddressProfileComplete),
-      yield select(isDocumentsProfileComplete),
-      yield select(isPhoneProfileComplete),
-      yield select(isWalletProfileComplete),
-    ];
+  const screensDone = [
+    yield select(isMainProfileComplete),
+    yield select(isBirthProfileComplete),
+    yield select(isAddressProfileComplete),
+    yield select(isDocumentsProfileComplete),
+    yield select(isPhoneProfileComplete),
+    yield select(isWalletProfileComplete),
+  ];
 
-    const goToScreen = firstScreenNotDone(screensDone);
+  const goToScreen = firstScreenNotDone(screensDone);
 
-    if (goToScreen) return { key: goToScreen };
+  if (goToScreen) return { key: goToScreen };
 
-    // TODO: for now, as we should not reach this.
-    return { key: showPlipKey, type: "reset" };
-  }
+  return { key: showPlipKey, type: "reset" };
 }
 
 export default function* navigationSaga({ mobileApi, sessionStore }) {

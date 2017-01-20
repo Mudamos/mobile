@@ -46,7 +46,7 @@ function* login({ mobileApi, sessionStore }) {
       const response = yield call(mobileApi.profile, appAuth.token);
       const user = User.fromJson(response.user);
 
-      yield put(updatedUserProfile({ user, profileComplete: response.complete }));
+      yield put(updatedUserProfile({ user }));
       yield put(profileStateMachine({ type: "reset" }));
     } catch(e) {
       logError(e);
