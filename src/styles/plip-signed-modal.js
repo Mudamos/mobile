@@ -6,4 +6,7 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     marginTop: 43,
   },
+  marginLeft: {
+    marginLeft: 24,
+  },
 });

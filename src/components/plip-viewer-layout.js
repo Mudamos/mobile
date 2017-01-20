@@ -144,9 +144,12 @@ export default class PlipViewerLayout extends Component {
   }
 
   renderSignSuccess() {
+    const { plip, onShare } = this.props;
+
     return (
       <SignModal
         onClose={this.onModalSuccessClose.bind(this)}
+        onShare={() => onShare(plip)}
       >
         <Text style={textStyles.modalTitle}>
           {locale.projectSignedYeah}
