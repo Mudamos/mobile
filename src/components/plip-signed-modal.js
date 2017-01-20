@@ -17,10 +17,11 @@ import textStyles from "../styles/text";
 export default class PlipSignedModal extends Modal {
   static propTypes = {
     onClose: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
   };
 
   renderFooter() {
-    const { onClose } = this.props;
+    const { onClose, onShare } = this.props;
 
     return (
       <View style={styles.footer}>
@@ -29,6 +30,13 @@ export default class PlipSignedModal extends Modal {
           onPress={() => this.hideAnimated(onClose)}
         >
           {locale.close.toUpperCase()}
+        </Text>
+
+        <Text
+          style={[textStyles.modalLink, styles.marginLeft]}
+          onPress={onShare}
+        >
+          {locale.share.toUpperCase()}
         </Text>
       </View>
     );

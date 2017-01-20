@@ -56,6 +56,7 @@ const translations = {
   search: "buscar",
   sendCode: "Enviar código",
   sendSMSCode: "Enviar código via SMS",
+  share: "Compartilhar",
   signatures: "Assinaturas",
   signInTitle: "Login",
   signUpTitle: "Ajude a construir soluções para desafios públicos de maneira aberta e participativa",

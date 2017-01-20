@@ -364,7 +364,6 @@ class PlipLayout extends Component {
     const {
       errorFetchingPlips,
       isFetchingPlip,
-      plip,
     } = this.props;
 
     const finalNavColor = "rgba(71, 57, 121, 1)";
@@ -386,7 +385,7 @@ class PlipLayout extends Component {
         }]}
         leftView={this.renderMenuButton()}
         middleView={this.renderLogo()}
-        rightView={plip ? this.renderShareButton() : null}
+        rightView={!errorFetchingPlips && !isFetchingPlip ? this.renderShareButton() : null}
       />
     );
   }
@@ -471,9 +470,12 @@ class PlipLayout extends Component {
   }
 
   renderSignSuccess() {
+    const { plip, onShare } = this.props;
+
     return (
       <SignModal
         onClose={this.onModalSuccessClose.bind(this)}
+        onShare={() => onShare(plip)}
       >
         <Text style={textStyles.modalTitle}>
           {locale.projectSignedYeah}
