@@ -10,6 +10,8 @@ import {
 import Spinner from "react-native-spinkit";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+import HeaderLogo from "./header-logo";
+
 import styles from "../styles/logged-in-menu";
 
 import locale from "../locales/pt-BR";
@@ -61,7 +63,7 @@ export default class Menu extends Component {
     return (
       <View style={styles.full}>
         {
-          !isFetchingProfile && currentUser &&
+          currentUser &&
             <View style={styles.full}>
               <Text style={styles.userName}>
                 {currentUser.name}
@@ -72,6 +74,8 @@ export default class Menu extends Component {
               </Text>
             </View>
         }
+
+        { !currentUser && <HeaderLogo /> }
 
         { isFetchingProfile && this.renderLoader() }
       </View>
@@ -119,8 +123,8 @@ export default class Menu extends Component {
   }
 
   renderFooter() {
-    const { isFetchingProfile } = this.props;
-    return isFetchingProfile ? null : this.renderEnabledFooter();
+    const { isFetchingProfile, currentUser } = this.props;
+    return isFetchingProfile || !currentUser ? null : this.renderEnabledFooter();
   }
 
   renderEnabledFooter() {

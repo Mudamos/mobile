@@ -79,11 +79,13 @@ class Container extends Component {
     onProfileEdit: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
+    onSignUp: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
 
   get menuEntries() {
     const {
+      currentUser,
       isFetchingProfile,
       onChangePassword,
       onProfileEdit,
@@ -93,9 +95,13 @@ class Container extends Component {
       { icon: "info", title: locale.menu.about, action: this.onAbout.bind(this), position: 2 },
     ];
 
-    if (!isFetchingProfile) {
+    if (!isFetchingProfile && currentUser) {
       entries.push({ icon: "account-circle", title: locale.menu.editProfile, action: onProfileEdit, position: 0 });
       entries.push({ icon: "lock", title: locale.menu.changePassword, action: onChangePassword, position: 1 });
+    }
+
+    if (!currentUser) {
+      entries.push({ icon: "person", title: locale.getIn, action: this.onSignUp.bind(this), position: 0});
     }
 
     return sortMenuEntries(entries);
@@ -113,12 +119,6 @@ class Container extends Component {
   }
 
   render() {
-    const { isUserLoggedIn } = this.props;
-
-    return isUserLoggedIn ? this.renderWithMenu() : this.renderPage();
-  }
-
-  renderWithMenu() {
     const { menuOpen: open } = this.state;
 
     return (
@@ -193,8 +193,16 @@ class Container extends Component {
 
   onFirstTimeModalClose() {
     const { onFirstTimeModalClose } = this.props;
+
     onFirstTimeModalClose();
     this.setState({ showAboutModal: false });
+  }
+
+  onSignUp() {
+    const { onSignUp } = this.props;
+
+    onSignUp();
+    this.closeMenu();
   }
 }
 
@@ -247,6 +255,7 @@ const mapDispatchToProps = dispatch => ({
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
   onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
+  onSignUp: () => dispatch(navigate("signUp")),
   onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),
 });
 
