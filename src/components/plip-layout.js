@@ -405,9 +405,9 @@ class PlipLayout extends Component {
   }
 
   renderMenuButton() {
-    const { isUserLoggedIn, openMenu } = this.props;
+    const { openMenu } = this.props;
 
-    return isUserLoggedIn ? (
+    return (
       <TouchableOpacity
         onPress={openMenu}
       >
@@ -417,7 +417,7 @@ class PlipLayout extends Component {
           color="#fff"
         />
       </TouchableOpacity>
-    ) : null;
+    );
   }
 
   renderLogo() {

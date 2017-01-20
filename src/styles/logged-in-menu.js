@@ -15,7 +15,11 @@ export default StyleSheet.create({
     fontSize: 11,
     textAlign: "center",
   },
-  menuList: {
+  full: {
+    flex: 1,
+  },
+  menuListContainer: {
+    flex: 3,
     marginTop: 60,
   },
   userName: {
@@ -51,7 +55,6 @@ export default StyleSheet.create({
   },
   loader: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
   },
   loaderText: {

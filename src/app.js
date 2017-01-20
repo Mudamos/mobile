@@ -26,6 +26,7 @@ import {
 
 import {
   existsLocalWallet,
+  fetchIsUserFirstTime,
   fetchSession,
 } from "./actions";
 
@@ -37,6 +38,7 @@ import SessionManager from "./services/session";
 import WalletManager from "./services/wallet";
 import MobileApi from "./services/mobile-api";
 import ApiError from "./services/api-error";
+import LocalStorage from "./services/local-storage";
 
 import reducer from "./reducers";
 import sagas from "./sagas";
@@ -71,6 +73,7 @@ const store = isDev ?
 
 const sessionStore = SessionManager("@Mudamos");
 const walletStore = WalletManager("@Mudamos");
+const localStorage = LocalStorage("@Mudamos");
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -99,6 +102,7 @@ const scenes = Actions.create(
 
 sagaRunner.run(sagas, {
   apiError: ApiError(),
+  localStorage,
   mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
   mobileApi: MobileApi(Config.MOBILE_API_URL),
   sessionStore,
@@ -107,6 +111,7 @@ sagaRunner.run(sagas, {
 
 store.dispatch(fetchSession());
 store.dispatch(existsLocalWallet());
+store.dispatch(fetchIsUserFirstTime());
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 

@@ -10,6 +10,8 @@ import {
 import Spinner from "react-native-spinkit";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+import HeaderLogo from "./header-logo";
+
 import styles from "../styles/logged-in-menu";
 
 import locale from "../locales/pt-BR";
@@ -46,46 +48,49 @@ export default class Menu extends Component {
   }
 
   render() {
-    const {
-      currentUser,
-      isFetchingProfile,
-    } = this.props;
-
     return (
       <View style={styles.container}>
-        {currentUser && this.renderContent()}
-        {isFetchingProfile && this.renderWhenLoading()}
-      </View>
-    );
-  }
-
-  renderContent() {
-    const { currentUser } = this.props;
-
-    return (
-      <View style={styles.contentContainer}>
-        <Text style={styles.userName}>
-          {currentUser.name}
-        </Text>
-
-        <Text style={styles.darkSmallText}>
-          {currentUser.email}
-        </Text>
-
+        {this.renderHeader()}
         {this.renderTable()}
         {this.renderFooter()}
       </View>
     );
   }
 
+  renderHeader() {
+    const { currentUser, isFetchingProfile } = this.props;
+
+    return (
+      <View style={styles.full}>
+        {
+          currentUser &&
+            <View style={styles.full}>
+              <Text style={styles.userName}>
+                {currentUser.name}
+              </Text>
+
+              <Text style={styles.darkSmallText}>
+                {currentUser.email}
+              </Text>
+            </View>
+        }
+
+        { !currentUser && <HeaderLogo /> }
+
+        { isFetchingProfile && this.renderLoader() }
+      </View>
+    );
+  }
+
   renderTable() {
     return (
-      <ListView
-        bounces={false}
-        style={styles.menuList}
-        dataSource={this.state.entries}
-        renderRow={this.renderMenuEntry.bind(this)}
-      />
+      <View style={styles.menuListContainer}>
+        <ListView
+          bounces={false}
+          dataSource={this.state.entries}
+          renderRow={this.renderMenuEntry.bind(this)}
+        />
+      </View>
     );
   }
 
@@ -118,6 +123,11 @@ export default class Menu extends Component {
   }
 
   renderFooter() {
+    const { isFetchingProfile, currentUser } = this.props;
+    return isFetchingProfile || !currentUser ? null : this.renderEnabledFooter();
+  }
+
+  renderEnabledFooter() {
     const { onLogout } = this.props;
 
     return (
@@ -139,22 +149,18 @@ export default class Menu extends Component {
     );
   }
 
-  renderWhenLoading() {
+  renderLoader() {
     return (
-      <View style={{flex: 1 }}>
-        <View style={styles.loader}>
-          <Spinner
-            color="#FFFFFF"
-            isVisible={true}
-            type="Bounce"
-            size={50}
-          />
-          <Text style={styles.loaderText}>
-            {locale.loading}
-          </Text>
-        </View>
-
-        {this.renderFooter()}
+      <View style={styles.loader}>
+        <Spinner
+          color="#FFFFFF"
+          isVisible={true}
+          type="Bounce"
+          size={50}
+        />
+        <Text style={styles.loaderText}>
+          {locale.loading}
+        </Text>
       </View>
     );
   }

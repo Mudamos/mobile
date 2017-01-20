@@ -11,10 +11,12 @@ import sessionSaga from "./session";
 import shareSaga from "./share";
 import addressSaga from "./address";
 import linkingSaga from "./linking";
+import localStorageSaga from "./local-storage";
 import walletSaga from "./wallet";
 
 export default function* rootSaga({
   apiError,
+  localStorage,
   mudamosWebApi,
   mobileApi,
   sessionStore,
@@ -31,5 +33,6 @@ export default function* rootSaga({
   yield spawn(shareSaga);
   yield spawn(addressSaga, { mobileApi });
   yield spawn(linkingSaga);
+  yield spawn(localStorageSaga, { localStorage });
   yield spawn(walletSaga, { mobileApi, walletStore });
 }

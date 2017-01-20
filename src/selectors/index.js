@@ -1,4 +1,5 @@
 export * from "./address";
+export * from "./local-storage";
 export * from "./password";
 export * from "./profile";
 export * from "./plip";

@@ -2,6 +2,7 @@ import {
   find,
   head,
   is,
+  mergeWith,
   propEq,
 } from "ramda";
 
@@ -58,3 +59,5 @@ export const formatNumber = (value, locale = DEFAULT_LOCALE) => {
   numeral.locale(locale);
   return numeral(value).format("0,0");
 }
+
+export const deepMerge = (a, b) => is(Object, a) && is(Object, b) ? mergeWith(deepMerge, a, b) : b;
