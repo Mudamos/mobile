@@ -344,7 +344,7 @@ class PlipLayout extends Component {
               {
                 plipSignInfo && plipSignInfo.updatedAt &&
                   <Text style={styles.actionSubtitle}>
-                    Atualizado em: {plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss")}
+                    Registrada em: {plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss")}
                   </Text>
               }
             </View>
