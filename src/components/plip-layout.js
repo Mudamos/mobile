@@ -89,10 +89,15 @@ class PlipLayout extends Component {
     const { plip } = this.props;
     if (!plip) return;
 
-    const start = moment(plip.cycle.initialDate);
+    const start = moment();
     const end = moment(plip.cycle.finalDate);
 
     return end.diff(start, "days");
+  }
+
+  get signatureEnabled() {
+    const daysLeft = this.daysLeft;
+    return !!daysLeft;
   }
 
   get callToAction() {
@@ -169,7 +174,7 @@ class PlipLayout extends Component {
               {userSignDate && <SignedMessageView date={userSignDate} />}
 
               {
-                !userSignDate && plip &&
+                !userSignDate && plip && this.signatureEnabled &&
                   <PurpleFlatButton
                     title={this.callToAction}
                     onPress={this.onPlipSign.bind(this)}
