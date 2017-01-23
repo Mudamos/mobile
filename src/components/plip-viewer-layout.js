@@ -7,6 +7,8 @@ import {
   View,
 } from "react-native";
 
+import { moment } from "../utils";
+
 import Ionicon from "react-native-vector-icons/Ionicons";
 
 import Layout from "./layout";
@@ -51,6 +53,21 @@ export default class PlipViewerLayout extends Component {
     if (!plip) return;
 
     return (plip.callToAction || "").toUpperCase();
+  }
+
+  get daysLeft() {
+    const { plip } = this.props;
+    if (!plip) return;
+
+    const start = moment();
+    const end = moment(plip.cycle.finalDate);
+
+    return end.diff(start, "days");
+  }
+
+  get signatureEnabled() {
+    const daysLeft = this.daysLeft;
+    return !!daysLeft;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -107,7 +124,7 @@ export default class PlipViewerLayout extends Component {
         </ScrollView>
 
         {
-          !userSignDate && plip &&
+          !userSignDate && plip && this.signatureEnabled &&
             <PurpleFlatButton
               title={this.callToAction}
               onPress={this.onPlipSign.bind(this)}
