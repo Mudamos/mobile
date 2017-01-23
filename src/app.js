@@ -22,6 +22,7 @@ import {
   ProfileWalletContainer,
   SignInContainer,
   SignUpContainer,
+  WebViewContainer,
 } from "./containers";
 
 import {
@@ -97,6 +98,8 @@ const scenes = Actions.create(
     <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
     <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
     <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
+
+    <Scene key="webView" component={WebViewContainer} hideNavBar={true} />
   </Scene>
 );
 

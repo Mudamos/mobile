@@ -2,10 +2,10 @@ import { connect } from "react-redux";
 
 import ProfileDocumentsLayout from "../components/profile-documents-layout";
 
-import { extractNumbers } from "../utils";
+import { extractNumbers, fromISODate } from "../utils";
 
 import {
-  openURL,
+  navigate,
   saveProfileDocuments,
 } from "../actions";
 
@@ -15,12 +15,23 @@ import {
   profileSaveErrors,
 } from "../selectors";
 
-const TSE_URL = "http://www.tse.jus.br/eleitor/servicos/situacao-eleitoral/consulta-por-nome";
+const TSE_URL = "http://apps.tse.jus.br/saae/consultaNomeDataNascimento.do";
+
+const webViewProps = user => ({
+  source: { uri: TSE_URL },
+  injectedJavaScript: `
+    (function() {
+      document.getElementsByName("nomeEleitor")[0].value = "${user.name}";
+      document.getElementsByName("dataNascimento")[0].value = "${fromISODate(user.birthdate)}";
+    })();
+  `,
+});
 
 const mapStateToProps = state => {
   const user = currentUser(state);
 
   return {
+    currentUser: user,
     previousCpf: user ? user.cpf : null,
     previousVoteCard: user ? user.voteCard : null,
     errors: profileSaveErrors(state),
@@ -34,7 +45,15 @@ const mapDispatchToProps = dispatch => ({
       cpf: extractNumbers(cpf),
       voteCard: extractNumbers(voteCard),
     })),
-  onTSERequested: () => dispatch(openURL(TSE_URL)),
+  onTSERequested: currentUser => dispatch(navigate("webView", webViewProps(currentUser))),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileDocumentsLayout);
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+
+  onTSERequested: () => dispatchProps.onTSERequested(stateProps.currentUser),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ProfileDocumentsLayout);

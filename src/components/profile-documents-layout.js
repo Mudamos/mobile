@@ -2,6 +2,7 @@ import React, { PropTypes } from "react";
 
 import {
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
@@ -103,12 +104,11 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
                 ref={ref => this.cardInput = ref}
               />
 
-              <Text
-                onPress={onTSERequested}
-                style={styles.cantRememberVoteCard}
-              >
-                {locale.cantRememberVoteCard}
-              </Text>
+              <TouchableOpacity onPress={onTSERequested}>
+                <Text style={styles.cantRememberVoteCard}>
+                  {locale.cantRememberVoteCard}
+                </Text>
+              </TouchableOpacity>
             </View>
 
             <FlatButton
