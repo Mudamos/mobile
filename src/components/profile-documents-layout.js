@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 import {
   Text,
@@ -6,8 +6,8 @@ import {
   View,
 } from "react-native";
 
-import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import Layout from "./purple-layout";
+import ScrollView from "./scroll-view";
 import HeaderLogo from "./header-logo";
 import CpfInput from "./cpf-input";
 import VoteCardInput from "./vote-card-input";
@@ -23,9 +23,7 @@ import { errorForField } from "../utils";
 
 import locale from "../locales/pt-BR";
 
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
-export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
+export default class ProfileDocumentsLayout extends Component {
   state = {
     cpf: this.props.previousCpf,
     voteCard: this.props.previousVoteCard,
@@ -49,7 +47,7 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
   }
 
   get saveEnabled() {
-    return this.validForm && !this.state.hasKeyboard;
+    return this.validForm;
   }
 
   render() {
@@ -64,12 +62,7 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
     return (
       <View style={styles.container}>
         <Layout>
-          <KeyboardAwareScrollView
-            automaticallyAdjustContentInsets={false}
-            style={styles.scrollView}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-          >
+          <ScrollView>
             <HeaderLogo />
 
             <Text style={styles.headerTitle}>
@@ -118,7 +111,7 @@ export default class ProfileDocumentsLayout extends ComponentWithKeyboardEvent {
               style={{marginHorizontal: 20, marginTop: 20}}
             />
 
-          </KeyboardAwareScrollView>
+          </ScrollView>
         </Layout>
 
         {

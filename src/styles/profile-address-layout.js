@@ -31,7 +31,6 @@ export default StyleSheet.create({
     zIndex: 10,
   },
   scrollView: {
-    flex: 1,
     marginHorizontal: 20,
   },
   subHeader: StyleSheet.flatten([

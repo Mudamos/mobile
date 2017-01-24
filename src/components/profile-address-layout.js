@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 import {
   Text,
@@ -9,28 +9,24 @@ import styles from "../styles/profile-address-layout";
 
 import MapView, { Marker } from "react-native-maps";
 
-import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import Layout from "./purple-layout";
-
+import ScrollView from "./scroll-view";
 import BackButton from "./back-button";
-
-import locale from "../locales/pt-BR";
-
 import ZipCodeInput from "./zip-code-input";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
 import LinearGradient from "react-native-linear-gradient";
-
 import HeaderLogo from "./header-logo";
 import FlatButton from "./flat-button";
 import PurpleFlatButton from "./purple-flat-button";
 import PageLoader from"./page-loader";
 
+import locale from "../locales/pt-BR";
+
+
 const LATITUDE_DELTA = 0.015;
 const LONGITUDE_DELTA = 0.0121;
 
 
-export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
+export default class ProfileAddressLayout extends Component {
 
   state = {
     zipCode: null,
@@ -50,7 +46,7 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
   }
 
   get searchEnabled() {
-    return this.validSearch && !this.state.hasKeyboard;
+    return this.validSearch;
   }
 
   get locationAddress() {
@@ -84,12 +80,7 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
         <Layout contentStyle={styles.layoutContentStyle}>
           { location && this.renderResults() }
 
-          <KeyboardAwareScrollView
-            automaticallyAdjustContentInsets={false}
-            style={styles.scrollView}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-          >
+          <ScrollView style={styles.scrollView}>
             <HeaderLogo />
             {
               location &&
@@ -139,7 +130,7 @@ export default class ProfileAddressLayout extends ComponentWithKeyboardEvent {
                 </Text>
             }
 
-          </KeyboardAwareScrollView>
+          </ScrollView>
 
         </Layout>
 

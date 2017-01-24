@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 import {
   Text,
@@ -7,8 +7,8 @@ import {
 
 import { errorForField } from "../utils";
 
-import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import Layout from "./purple-layout";
+import ScrollView from "./scroll-view";
 import HeaderLogo from "./header-logo";
 import PhoneInput from "./phone-input";
 import FlatButton from "./flat-button";
@@ -19,9 +19,7 @@ import styles from "../styles/profile-phone-layout";
 
 import locale from "../locales/pt-BR";
 
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
-export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
+export default class ProfilePhoneLayout extends Component {
   state = {
     code: null,
     phone: this.props.phone,
@@ -39,13 +37,13 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
 
   get sendEnabled() {
     const phone = this.state.phone || "";
-    return phone.length >= 14 && !this.state.hasKeyboard;
+    return phone.length >= 14;
   }
 
   get verifyEnabled() {
     const code = this.state.code || "";
     const codeSize = 5;
-    return code.length === codeSize && !this.state.hasKeyboard;
+    return code.length === codeSize;
   }
 
   render() {
@@ -58,17 +56,12 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
     return (
       <View style={styles.container}>
         <Layout>
-          <KeyboardAwareScrollView
-            automaticallyAdjustContentInsets={false}
-            style={styles.scrollView}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-          >
+          <ScrollView style={styles.scrollView}>
             <HeaderLogo />
 
             { !hasSentValidation && this.renderPhoneForm() }
             { hasSentValidation && this.renderCodeForm() }
-          </KeyboardAwareScrollView>
+          </ScrollView>
         </Layout>
 
         <PageLoader isVisible={isSending || isVerifying} />
@@ -77,7 +70,6 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
   }
 
   renderPhoneForm() {
-
     const {
       sendErrors,
     } = this.props;
@@ -153,7 +145,6 @@ export default class ProfilePhoneLayout extends ComponentWithKeyboardEvent {
         >
           {locale.resendCode.toUpperCase()}
         </Text>
-
       </View>
     );
   }

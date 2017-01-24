@@ -6,6 +6,7 @@ def pods
   pod "FBSDKCoreKit"
   pod "FBSDKShareKit"
   pod "FBSDKLoginKit"
+  pod "IQKeyboardManager"
 end
 
 target "MudamosMobile" do

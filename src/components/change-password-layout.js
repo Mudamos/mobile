@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 import {
   Text,
@@ -6,14 +6,12 @@ import {
 } from "react-native";
 
 import Layout from "./purple-layout";
+import ScrollView from "./scroll-view";
 import HeaderLogo from "./header-logo";
 import MDTextInput from "./md-text-input";
 import PageLoader from "./page-loader";
 import BackButton from "./back-button";
-import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import FlatButton from "./flat-button";
-
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import locale from "../locales/pt-BR";
 import { errorForField } from "../utils";
@@ -21,7 +19,7 @@ import { errorForField } from "../utils";
 import styles from "../styles/change-password-layout";
 
 
-export default class ChangePasswordLayout extends ComponentWithKeyboardEvent {
+export default class ChangePasswordLayout extends Component {
   state = {}
 
   static propTypes = {
@@ -39,7 +37,7 @@ export default class ChangePasswordLayout extends ComponentWithKeyboardEvent {
   }
 
   get formEnabled() {
-    return this.validForm && !this.state.hasKeyboard;
+    return this.validForm;
   }
 
   render() {
@@ -52,12 +50,7 @@ export default class ChangePasswordLayout extends ComponentWithKeyboardEvent {
     return (
       <View style={styles.container}>
         <Layout>
-          <KeyboardAwareScrollView
-            automaticallyAdjustContentInsets={false}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-            style={styles.scrollView}
-          >
+          <ScrollView>
             <HeaderLogo />
 
             <BackButton
@@ -99,7 +92,7 @@ export default class ChangePasswordLayout extends ComponentWithKeyboardEvent {
               onPress={this.submit.bind(this)}
               style={{marginHorizontal: 20, marginTop: 20}}
             />
-          </KeyboardAwareScrollView>
+          </ScrollView>
         </Layout>
 
         <PageLoader isVisible={isSaving} />

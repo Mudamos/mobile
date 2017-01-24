@@ -1,18 +1,17 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 import {
+  TouchableOpacity,
   Text,
   View,
 } from "react-native";
 
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
 import Layout from "./purple-layout";
+import ScrollView from "./scroll-view";
 import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
 import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
-import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import FlatButton from "./flat-button";
 
 import locale from "../locales/pt-BR";
@@ -20,7 +19,7 @@ import locale from "../locales/pt-BR";
 import styles from "../styles/forgot-password-layout";
 
 
-export default class ForgotPasswordLayout extends ComponentWithKeyboardEvent {
+export default class ForgotPasswordLayout extends Component {
   state = {};
 
   static propTypes = {
@@ -35,7 +34,7 @@ export default class ForgotPasswordLayout extends ComponentWithKeyboardEvent {
   }
 
   get formEnabled() {
-    return this.validForm && !this.state.hasKeyboard;
+    return this.validForm;
   }
 
   render() {
@@ -48,12 +47,7 @@ export default class ForgotPasswordLayout extends ComponentWithKeyboardEvent {
     return (
       <View style={styles.container}>
         <Layout>
-          <KeyboardAwareScrollView
-            automaticallyAdjustContentInsets={false}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-            style={styles.full}
-          >
+          <ScrollView>
             <HeaderLogo />
 
             <BackButton
@@ -83,13 +77,12 @@ export default class ForgotPasswordLayout extends ComponentWithKeyboardEvent {
               style={{marginHorizontal: 20, marginTop: 20}}
             />
 
-            <Text
-              style={styles.hasCode}
-              onPress={onHasCode}
-            >
-              {locale.alreadyHavePasswordCode.toUpperCase()}
-            </Text>
-          </KeyboardAwareScrollView>
+            <TouchableOpacity onPress={onHasCode}>
+              <Text style={styles.hasCode}>
+                {locale.alreadyHavePasswordCode.toUpperCase()}
+              </Text>
+            </TouchableOpacity>
+          </ScrollView>
         </Layout>
 
         <PageLoader isVisible={isSaving} />

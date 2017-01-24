@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 import {
   Text,
@@ -9,10 +9,8 @@ import styles from "../styles/profile-birth-layout";
 
 import { errorForField } from "../utils";
 
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
-import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import Layout from "./purple-layout";
+import ScrollView from "./scroll-view";
 import HeaderLogo from "./header-logo";
 import DateInput from "./date-input";
 import FlatButton from "./flat-button";
@@ -21,7 +19,7 @@ import PageLoader from "./page-loader";
 import locale from "../locales/pt-BR";
 
 
-export default class ProfileBirthLayout extends ComponentWithKeyboardEvent {
+export default class ProfileBirthLayout extends Component {
   state = {}
 
   static propTypes = {
@@ -36,7 +34,7 @@ export default class ProfileBirthLayout extends ComponentWithKeyboardEvent {
   }
 
   get formEnabled() {
-    return this.valid && !this.state.hasKeyboard;
+    return this.valid;
   }
 
   render() {
@@ -49,12 +47,7 @@ export default class ProfileBirthLayout extends ComponentWithKeyboardEvent {
     return (
       <View style={styles.container}>
         <Layout>
-          <KeyboardAwareScrollView
-            automaticallyAdjustContentInsets={false}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-            style={styles.scrollView}
-          >
+          <ScrollView style={styles.scrollView}>
             <HeaderLogo />
 
             <Text style={styles.headerTitle}>
@@ -78,7 +71,7 @@ export default class ProfileBirthLayout extends ComponentWithKeyboardEvent {
               onPress={() => onSave(this.state.birthdate)}
               style={{marginTop: 20}}
             />
-          </KeyboardAwareScrollView>
+          </ScrollView>
         </Layout>
 
         <PageLoader isVisible={isSaving} />

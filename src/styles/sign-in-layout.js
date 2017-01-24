@@ -29,9 +29,6 @@ export default StyleSheet.create({
   inputContainer: {
     marginHorizontal: 33,
   },
-  scrollView: {
-    flex: 1,
-  },
   separatorContainer: {
     alignItems: "center",
     flexDirection: "row",

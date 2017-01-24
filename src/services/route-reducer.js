@@ -1,3 +1,4 @@
+import { Keyboard } from "react-native";
 import { Reducer } from "react-native-router-flux";
 
 import { navigationHappened } from "../actions";
@@ -11,6 +12,7 @@ export default store => params => {
 
     if (sceneKey) {
       store.dispatch(navigationHappened({ sceneKey }));
+      Keyboard.dismiss();
     }
 
     return defaultReducer(state, action);
