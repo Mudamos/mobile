@@ -5,7 +5,8 @@ import {
   shareLinkError,
 } from "../actions";
 
-import { logError } from "../utils";
+import { hashtagfy, logError } from "../utils";
+import locale from "../locales/pt-BR";
 
 import Share from "react-native-share";
 
@@ -37,8 +38,12 @@ function* sharePlip() {
 
       const shareOptions = {
         url: plip.plipUrl,
-        message: plip.phase.name,
         subject: plip.callToAction,
+        message: locale.shareMessage({
+          description: plip.phase.description,
+          name: plip.phase.name,
+          hashtag: hashtagfy("Mudamos", plip.phase.name),
+        }),
       };
 
       yield call(shareLink, shareOptions);
