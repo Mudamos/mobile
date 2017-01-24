@@ -17,7 +17,7 @@ import {
 
 class Container extends Component {
   static propTypes = {
-    alertRevalidate: PropTypes.bool,
+    alertRevalidate: PropTypes.bool, // Navigation injected
     onCreateWallet: PropTypes.func.isRequired,
 
     ...WalletLayout.propTypes,
