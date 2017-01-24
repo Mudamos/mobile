@@ -19,7 +19,7 @@ class PageLoader extends Component {
     color: "#FFFFFF",
     containerBackgroundColor: "rgba(0, 0, 0, .6)",
     isVisible: false,
-    size: 100,
+    size: 70,
     type: "9CubeGrid",
   }
 
