@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 
+import { Alert } from "react-native";
+
 import WalletLayout from "../components/profile-wallet-layout";
+import locale from "../locales/pt-BR";
 
 import {
   createWallet,
@@ -14,11 +17,24 @@ import {
 
 class Container extends Component {
   static propTypes = {
+    alertRevalidate: PropTypes.bool,
     onCreateWallet: PropTypes.func.isRequired,
+
+    ...WalletLayout.propTypes,
+  }
+
+  static defaultProps = {
+    alertRevalidate: false,
   }
 
   componentWillMount() {
-    this.props.onCreateWallet(); // Fire the wallet creation
+    const { alertRevalidate, onCreateWallet } = this.props;
+
+    if (alertRevalidate) {
+      this.fireAlertRevalidate();
+    } else {
+      onCreateWallet(); // Fire the wallet creation
+    }
   }
 
   render() {
@@ -26,6 +42,18 @@ class Container extends Component {
       <WalletLayout
         {...this.props}
       />
+    );
+  }
+
+  fireAlertRevalidate() {
+    const { onCreateWallet } = this.props;
+
+    Alert.alert(
+      locale.revalidation,
+      locale.revalidationExplanation,
+      [
+        { text: locale.ok, onPress: onCreateWallet },
+      ],
     );
   }
 }

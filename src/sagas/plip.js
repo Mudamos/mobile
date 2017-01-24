@@ -53,7 +53,7 @@ export function* fetchPlips({ mobileApi, mudamosWebApi }) {
       yield put(fetchingPlips(true));
 
       // TODO: remove the user sign info from here.
-      // For now we can easily to this because of the MVP
+      // For now we can easily do this because of the MVP
       // Later we need to fire another action.
       //
       // This helps now because we can handle the error in a single
@@ -139,13 +139,15 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
 
       const authToken = yield select(currentAuthToken);
 
-      const difficulty = yield call(mobileApi.difficulty, authToken);
       const seed = yield call(walletStore.retrieve, user.voteCard);
       if (isDev) console.log("Acquired seed", seed);
+      if (!seed) return yield call(invalidateWalletAndNavigate, { alertRevalidate: true });
+
+      const difficulty = yield call(mobileApi.difficulty, authToken);
 
       const message = buildSignMessage({ user, plip });
       if (isDev) console.log("Sign message built:", message);
-      const block = LibCrypto.signMessage(seed, message, difficulty);
+      const block = yield call([LibCrypto, LibCrypto.signMessage], seed, message, difficulty);
 
       if (isDev) {
         console.log("Block:", block);
@@ -166,12 +168,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
         logError(e);
         if (isDev) console.log("is wallet invalid?", apiError.isInvalidWallet(e), e.errorCode, e);
 
-        if (apiError.isInvalidWallet(e)) {
-          yield put(invalidatePhone());
-          yield put(profileStateMachine());
-
-          return
-        }
+        if (apiError.isInvalidWallet(e)) return yield call(invalidateWalletAndNavigate, { alertRevalidate: true });
 
         throw e;
       }
@@ -184,6 +181,11 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       yield put(isSigningPlip(false));
     }
   });
+}
+
+function* invalidateWalletAndNavigate(params = {}) {
+  yield put(invalidatePhone());
+  yield put(profileStateMachine(params));
 }
 
 export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError }) {
