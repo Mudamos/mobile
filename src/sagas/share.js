@@ -42,7 +42,7 @@ function* sharePlip() {
         message: locale.shareMessage({
           description: plip.phase.description,
           name: plip.phase.name,
-          hashtags: hashtagfy(plip.phase.name),
+          hashtag: hashtagfy("Mudamos", plip.phase.name),
         }),
       };
 

@@ -89,4 +89,6 @@ export const removeSpaces = text => text.replace(/\s/g, "");
 
 export const removeHyphens = text => text.replace(/-/g, "");
 
-export const hashtagfy = text => "#" + pipe(stripAccents, capitalizeWords, removeSpaces, removeHyphens)(text);
+export const hashtagfy = (...texts) => texts
+  .map(text => "#" + pipe(stripAccents, capitalizeWords, removeSpaces, removeHyphens)(text))
+  .join(" ");

@@ -61,7 +61,7 @@ const translations = {
   sendCode: "Enviar código",
   sendSMSCode: "Enviar código via SMS",
   share: "Compartilhar",
-  shareMessage: ({description, name, hashtags}) => `${description}! vote no ${name} e construa um Brasil melhor. #Mudamos ${hashtags}`,
+  shareMessage: ({description, name, hashtag}) => `${description}! vote no ${name} e construa um Brasil melhor. ${hashtag}`,
   signatures: "Assinaturas",
   signInTitle: "Login",
   signUpTitle: "Ajude a construir soluções para desafios públicos de maneira aberta e participativa",
