@@ -55,7 +55,7 @@ const translations = {
   resendCode: "Reenviar código",
   retry: "Tentar novamente",
   revalidation: "Revalidação",
-  revalidationExplanation: "Desculpe, mas parece que alguma coisa no ato da sua assinatura não funcinou como o esperado. Por isso, precisamos revalidar o seu cadastro.",
+  revalidationExplanation: "Desculpe, mas parece que alguma coisa no ato da sua assinatura não funcionou como o esperado. Por isso, precisamos revalidar o seu cadastro.",
   save: "Salvar",
   search: "buscar",
   sendCode: "Enviar código",
