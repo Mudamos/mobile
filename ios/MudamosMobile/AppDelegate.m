@@ -13,6 +13,7 @@
 #import "RCTRootView.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "IQKeyboardManager.h"
 
 @implementation AppDelegate
 
@@ -33,6 +34,8 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemText = @"OK";
 
   //return YES;
   return [[FBSDKApplicationDelegate sharedInstance] application:application

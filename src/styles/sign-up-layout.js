@@ -37,9 +37,6 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  scrollView: {
-    flex: 1,
-  },
   separatorContainer: {
     alignItems: "center",
     flexDirection: "row",

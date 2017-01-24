@@ -20,7 +20,4 @@ export default StyleSheet.create({
   inputContainer: {
     marginHorizontal: 33,
   },
-  scrollView: {
-    flex: 1,
-  },
 });

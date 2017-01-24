@@ -26,7 +26,6 @@ export default StyleSheet.create({
     marginTop: 24,
   },
   scrollView: {
-    flex: 1,
     marginHorizontal: 20,
   },
   subHeader: StyleSheet.flatten([

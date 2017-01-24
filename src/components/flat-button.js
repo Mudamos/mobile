@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from "react";
+import { Keyboard } from "react-native";
 
 import { MKButton } from "react-native-material-kit";
 
@@ -17,6 +18,7 @@ export const buttonStyle = {
 
 export default class MyFlatButton extends Component {
   static propTypes = {
+    dismissKeyboardOnPress: PropTypes.bool,
     style: PropTypes.object,
     textStyle: PropTypes.object,
     title: PropTypes.string,
@@ -25,6 +27,7 @@ export default class MyFlatButton extends Component {
   }
 
   static defaultProps = {
+    dismissKeyboardOnPress: true,
     enabled: true,
     textStyle: {},
     style: {},
@@ -43,7 +46,6 @@ export default class MyFlatButton extends Component {
   buttonClass() {
     const {
       enabled,
-      onPress,
       style,
       title,
     } = this.props;
@@ -60,7 +62,7 @@ export default class MyFlatButton extends Component {
 
     if (enabled) {
       button
-        .withOnPress(onPress)
+        .withOnPress(this.onPress.bind(this))
         .withRippleColor("transparent"); // Disabling ripple effect as it does not work on android
     } else {
       button.withRippleColor("transparent")
@@ -70,5 +72,12 @@ export default class MyFlatButton extends Component {
     }
 
     return button;
+  }
+
+  onPress() {
+    const { dismissKeyboardOnPress, onPress } = this.props;
+
+    if (dismissKeyboardOnPress) Keyboard.dismiss();
+    onPress();
   }
 }

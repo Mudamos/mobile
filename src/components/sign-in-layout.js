@@ -1,18 +1,17 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 import {
+  TouchableOpacity,
   Text,
   View,
 } from "react-native";
 
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
 import Layout from "./purple-layout";
+import ScrollView from "./scroll-view";
 import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
 import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
-import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import FlatButton from "./flat-button";
 import FBLoginButton from "./fb-login-button";
 
@@ -21,7 +20,7 @@ import locale from "../locales/pt-BR";
 import styles from "../styles/sign-in-layout";
 
 
-class SignInLayout extends ComponentWithKeyboardEvent {
+class SignInLayout extends Component {
   state = {};
 
   static propTypes = {
@@ -40,7 +39,7 @@ class SignInLayout extends ComponentWithKeyboardEvent {
   }
 
   get signInEnabled() {
-    return this.validForm && !this.state.hasKeyboard;
+    return this.validForm;
   }
 
   render() {
@@ -53,12 +52,7 @@ class SignInLayout extends ComponentWithKeyboardEvent {
     return (
       <View style={styles.container}>
         <Layout>
-          <KeyboardAwareScrollView
-            automaticallyAdjustContentInsets={false}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-            style={styles.scrollView}
-          >
+          <ScrollView>
             <HeaderLogo />
 
             <BackButton
@@ -105,13 +99,12 @@ class SignInLayout extends ComponentWithKeyboardEvent {
               style={{marginHorizontal: 20, marginTop: 20}}
             />
 
-            <Text
-              style={styles.forgotPassword}
-              onPress={onForgotPassword}
-            >
-              {locale.forgotPassword}
-            </Text>
-          </KeyboardAwareScrollView>
+            <TouchableOpacity onPress={onForgotPassword}>
+              <Text style={styles.forgotPassword}>
+                {locale.forgotPassword}
+              </Text>
+            </TouchableOpacity>
+          </ScrollView>
         </Layout>
 
         <PageLoader isVisible={isLoggingIn} />

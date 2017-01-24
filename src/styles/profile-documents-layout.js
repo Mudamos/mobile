@@ -18,7 +18,4 @@ export default StyleSheet.create({
     textStyles.header,
     { marginBottom: 8 },
   ]),
-  scrollView: {
-    flex: 1,
-  },
 });

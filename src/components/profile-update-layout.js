@@ -1,18 +1,16 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 import {
   Text,
   View,
 } from "react-native";
 
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
 import Layout from "./purple-layout";
+import ScrollView from "./scroll-view";
 import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
 import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
-import ComponentWithKeyboardEvent from "./component-with-keyboard-event";
 import FlatButton from "./flat-button";
 import DateInput from "./date-input";
 import ZipCodeInput from "./zip-code-input";
@@ -24,7 +22,7 @@ import { errorForField } from "../utils";
 import styles from "../styles/profile-update-layout";
 
 
-export default class ProfileUpdateLayout extends ComponentWithKeyboardEvent {
+export default class ProfileUpdateLayout extends Component {
   state = {
     birthdate: this.props.previousBirthdate,
     name: this.props.previousName,
@@ -54,7 +52,7 @@ export default class ProfileUpdateLayout extends ComponentWithKeyboardEvent {
   }
 
   get formEnabled() {
-    return this.validForm && !this.state.hasKeyboard;
+    return this.validForm;
   }
 
   render() {
@@ -67,12 +65,7 @@ export default class ProfileUpdateLayout extends ComponentWithKeyboardEvent {
     return (
       <View style={styles.container}>
         <Layout>
-          <KeyboardAwareScrollView
-            automaticallyAdjustContentInsets={false}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-            style={styles.scrollView}
-          >
+          <ScrollView>
             <HeaderLogo />
 
             <BackButton
@@ -123,7 +116,7 @@ export default class ProfileUpdateLayout extends ComponentWithKeyboardEvent {
               onPress={this.onSubmit.bind(this)}
               style={{marginHorizontal: 20, marginTop: 20}}
             />
-          </KeyboardAwareScrollView>
+          </ScrollView>
         </Layout>
 
         <PageLoader isVisible={isSaving} />
