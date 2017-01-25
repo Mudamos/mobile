@@ -452,6 +452,7 @@ class PlipLayout extends Component {
           }]}
         />
         <Animated.Text
+          numberOfLines={1}
           style={[styles.headerTitle, {
             opacity: titleOpacity,
           }]}

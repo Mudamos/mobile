@@ -61,7 +61,7 @@ export default StyleSheet.create({
     alignSelf: "center",
     color: "#fff",
     fontFamily: "roboto",
-    fontSize: 20,
+    fontSize: 24,
     position: "absolute",
     top: 28,
     left: 0,
