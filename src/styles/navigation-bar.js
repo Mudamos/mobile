@@ -37,7 +37,7 @@ export default StyleSheet.create({
   title: {
     color: "#fff",
     fontFamily: "roboto",
-    fontSize: 20,
+    fontSize: 24,
     textAlign: "center",
   },
 });
