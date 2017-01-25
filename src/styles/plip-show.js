@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export const IMAGE_HEIGHT = 380;
 export const SMALL_ANIM_OFFSET = 50;
@@ -172,8 +172,16 @@ export default StyleSheet.create({
   },
   subtitle: {
     color: "#fff",
-    fontFamily: "roboto",
     fontSize: 22,
     textAlign: "left",
+
+    ...Platform.select({
+      ios: {
+        fontFamily: "roboto-light",
+      },
+      android: {
+        fontFamily: "roboto_light",
+      },
+    }),
   },
 })
