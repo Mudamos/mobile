@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   backButton: {
@@ -13,11 +13,18 @@ export default StyleSheet.create({
   headerTitle: {
     alignSelf: "center",
     color: "#fff",
-    fontFamily: "roboto",
-    fontWeight: "300",
     fontSize: 20,
     marginHorizontal: 12,
     textAlign: "center",
+
+    ...Platform.select({
+      ios: {
+        fontFamily: "roboto-light",
+      },
+      android: {
+        fontFamily: "roboto_light",
+      },
+    }),
   },
   inputContainer: {
     marginHorizontal: 33,
