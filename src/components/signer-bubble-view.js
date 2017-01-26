@@ -42,7 +42,7 @@ export default class SignerBubbleView extends Component {
 
     return (
       <View style={[styles.container, style]}>
-        {profiles.map(user => this.renderHead(user))}
+        {profiles.map(this.renderHead)}
         {this.renderExceeding()}
       </View>
     );
