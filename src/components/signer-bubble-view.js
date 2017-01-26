@@ -52,7 +52,7 @@ export default class SignerBubbleView extends Component {
     return (
       <NetworkImage
         key={`bubble-head-${user.id}`}
-        source={{uri: facebookPicURI({ id: user.id, type: "normal" })}}
+        source={{uri: facebookPicURI({ id: user.id, type: "small" })}}
         style={styles.bubble}
       />
     );

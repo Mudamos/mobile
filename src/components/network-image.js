@@ -83,7 +83,7 @@ export default class NetworkImage extends Component {
       .then(() => this.setState({ loading: false }))
       .catch(e => {
         if (e && e.isCanceled) return;
-        this.setState({ loading: false })
+        this.setState({ loading: false });
       });
   }
 
