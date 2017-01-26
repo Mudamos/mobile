@@ -95,7 +95,7 @@ class PlipLayout extends Component {
     const start = moment();
     const end = moment(plip.cycle.finalDate);
 
-    return end.diff(start, "days");
+    return Math.max(0, end.diff(start, "days"));
   }
 
   get signatureEnabled() {
