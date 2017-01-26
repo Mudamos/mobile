@@ -94,3 +94,20 @@ export const hashtagfy = (...texts) => texts
   .join(" ");
 
 export const facebookPicURI = ({ id, type = "normal" }) => `https://graph.facebook.com/${id}/picture?type=${type}`;
+
+export const cancelablePromise = promise => {
+  let hasCanceled = false;
+
+  const wrappedPromise = new Promise((resolve, reject) =>
+    promise
+      .then(val => hasCanceled ? reject({ isCanceled: true }) : resolve(val))
+      .catch(e => hasCanceled ? reject({ isCanceled: true }) : reject(e))
+  );
+
+  return {
+    promise: wrappedPromise,
+    cancel() {
+      hasCanceled = true;
+    },
+  };
+};
