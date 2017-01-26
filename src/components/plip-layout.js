@@ -27,6 +27,7 @@ import RetryButton from "./retry-button";
 import PurpleFlatButton from "./purple-flat-button";
 import SignModal from "./plip-signed-modal";
 import SignedMessageView from "./signed-message-view";
+import SignerBubbleView from "./signer-bubble-view";
 
 import styles, {
   HEADER_SCROLL_DISTANCE,
@@ -53,6 +54,8 @@ class PlipLayout extends Component {
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
+    signers: PropTypes.array,
+    signersTotal: PropTypes.number,
     userSignDate: PropTypes.object,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
@@ -150,6 +153,8 @@ class PlipLayout extends Component {
   renderMainContent() {
     const {
       plip,
+      signers,
+      signersTotal,
       userSignDate,
     } = this.props;
 
@@ -189,6 +194,20 @@ class PlipLayout extends Component {
 
                 {this.renderSignaturesCount()}
               </View>
+            </View>
+
+            <View style={styles.full}>
+              <View style={styles.signersFakeTop} />
+              <View style={styles.signersFakeBottom} />
+
+              {
+                signers &&
+                  <SignerBubbleView
+                    users={signers}
+                    total={signersTotal}
+                    style={styles.signersBubble}
+                  />
+              }
             </View>
 
             {this.renderPresentation()}

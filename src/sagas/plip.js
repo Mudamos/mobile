@@ -12,6 +12,7 @@ import {
 import {
   fetchingPlips,
   fetchingPlipSignInfo,
+  fetchingShortPlipSigners,
   fetchingUserSignInfo,
   invalidatePhone,
   isSigningPlip,
@@ -24,6 +25,7 @@ import {
   plipUserSignInfo,
   profileStateMachine,
   setCurrentPlip,
+  shortPlipSigners,
   unauthorized,
 } from "../actions";
 
@@ -85,7 +87,28 @@ function* fetchPlipRelatedInfo({ mobileApi, plipId }) {
   yield [
     willFetchUserInfo ? call(fetchUserSignInfo, { mobileApi, plipId }) : Promise.resolve(),
     call(fetchPlipSignInfo, { mobileApi, plipId }),
+    plipId ? call(fetchShortSigners, { mobileApi, plipId }) : Promise.resolve(),
   ];
+}
+
+function* fetchShortSigners({ mobileApi, plipId }) {
+  try {
+    yield put(fetchingShortPlipSigners(true));
+    const loggedIn = yield select(isUserLoggedIn);
+    let signers;
+
+    if (loggedIn) {
+      const authToken = yield select(currentAuthToken);
+      signers = yield call(mobileApi.fetchShortPlipSigners, authToken, { plipId });
+    } else {
+      signers = yield call(mobileApi.fetchOfflineShortPlipSigners, { plipId });
+    }
+
+    const { users, total } = signers;
+    yield put(shortPlipSigners({ users, total }));
+  } finally {
+    yield put(fetchingShortPlipSigners(false));
+  }
 }
 
 function* fetchUserSignInfo({ mobileApi, plipId }) {

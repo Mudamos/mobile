@@ -12,6 +12,16 @@ export const fetchingPlips = isFetching => ({
   payload: { isFetching },
 });
 
+export const fetchingShortPlipSigners = isFetching => ({
+  type: "PLIP_FETCHING_SHORT_SIGNERS",
+  payload: { isFetching },
+});
+
+export const shortPlipSigners = ({ users, total }) => ({
+  type: "PLIP_SHORT_SIGNERS",
+  payload: { users, total },
+});
+
 export const plipsFetched = plips => ({
   type: "PLIPS_FETCHED",
   payload: { plips },

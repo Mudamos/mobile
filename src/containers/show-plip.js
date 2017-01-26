@@ -32,6 +32,7 @@ import {
   isUserFirstTime,
   isUserLoggedIn,
   findCurrentPlip,
+  getCurrentPlipShortSignersInfo,
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
   hasUserJustSignedPlip,
@@ -68,6 +69,8 @@ class Container extends Component {
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
     retryPlip: PropTypes.func.isRequired,
+    signers: PropTypes.array,
+    signersTotal: PropTypes.number,
     userSignDate: PropTypes.object,
     onChangePassword: PropTypes.func.isRequired,
     onFetchProfile: PropTypes.func.isRequired,
@@ -228,6 +231,8 @@ const mapStateToProps = state => {
     };
   }
 
+  const currentPlipShortSignersInfo = getCurrentPlipShortSignersInfo(state);
+
   return {
     currentUser: getCurrentUser(state),
     errorFetchingPlips: errorFetchingPlips(state),
@@ -239,6 +244,8 @@ const mapStateToProps = state => {
     plip: findCurrentPlip(state),
     justSignedPlip: hasUserJustSignedPlip(state),
     plipSignInfo: plipSignInfo,
+    signers: currentPlipShortSignersInfo.users,
+    signersTotal: currentPlipShortSignersInfo.total,
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
 }

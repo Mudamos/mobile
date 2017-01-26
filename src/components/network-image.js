@@ -1,5 +1,11 @@
 import React, { Component, PropTypes } from "react";
-import { Animated, ActivityIndicator } from "react-native";
+import {
+  Animated,
+  ActivityIndicator,
+  Image,
+} from "react-native";
+
+import { cancelablePromise } from "../utils";
 
 import styles from "../styles/network-image";
 
@@ -7,6 +13,8 @@ export default class NetworkImage extends Component {
   static propTypes = {
     children: PropTypes.node,
     loaderColor: PropTypes.string,
+
+    ...Image.propStyles,
   };
 
   static defaultProps = {
@@ -17,24 +25,69 @@ export default class NetworkImage extends Component {
     loading: false,
   };
 
+  componentWillMount() {
+    const { source } = this.props;
+
+    if (source && source.uri) {
+      this.prefetch(source.uri);
+    }
+  }
+
+  componentWillUnmount() {
+    this.cancelPrefetch();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const newUri = nextProps.source && nextProps.source.uri;
+
+    if (!newUri && this.state.loading) {
+      this.cancelPrefetch();
+      return this.setState({ loading: false });
+    }
+
+    const oldUri = this.props.source && this.props.source.uri;
+
+    if (newUri !== oldUri) {
+      this.prefetch(newUri);
+    }
+  }
+
   renderLoading() {
-    if (!this.state.loading) return null;
+    const { loaderColor, style } = this.props;
 
     return (
-      <ActivityIndicator style={styles.loader} color={this.props.loaderColor} />
+      <Animated.View style={[style]}>
+        <ActivityIndicator style={styles.loader} color={loaderColor} />
+      </Animated.View>
     );
   }
 
   render() {
+    if (this.state.loading) return this.renderLoading();
+
     return (
       <Animated.Image
         {...this.props}
-        onLoadStart={() => this.setState({ loading: true })}
-        onError={() => this.setState({ loading: false })}
-        onLoad={() => this.setState({ loading: false })}>
+      >
         {this.props.children}
-        {this.renderLoading()}
       </Animated.Image>
     );
+  }
+
+  prefetch(uri) {
+    this.setState({ loading: true });
+    this.cancelPrefetch();
+
+    this.prefetchTask = cancelablePromise(Image.prefetch(uri));
+    this.prefetchTask.promise
+      .then(() => this.setState({ loading: false }))
+      .catch(e => {
+        if (e && e.isCanceled) return;
+        this.setState({ loading: false });
+      });
+  }
+
+  cancelPrefetch() {
+    if (this.prefetchTask) this.prefetchTask.cancel();
   }
 }
