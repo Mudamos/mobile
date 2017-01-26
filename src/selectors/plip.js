@@ -23,7 +23,7 @@ export const hasUserJustSignedPlip = state => {
   return currentPlip && state.plip.justSignedPlips[currentPlip.id];
 }
 
-export const getCurrentPlipShorSignersInfo = state => ({
+export const getCurrentPlipShortSignersInfo = state => ({
   users: state.plip.shortSigners,
   total: state.plip.shortSignersTotal,
 });

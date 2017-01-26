@@ -82,10 +82,10 @@ export function* fetchPlips({ mobileApi, mudamosWebApi }) {
 
 function* fetchPlipRelatedInfo({ mobileApi, plipId }) {
   const loggedIn = yield select(isUserLoggedIn);
-  const willUserPlipInfo = loggedIn && plipId;
+  const willFetchUserInfo = loggedIn && plipId;
 
   yield [
-    willUserPlipInfo ? call(fetchUserSignInfo, { mobileApi, plipId }) : Promise.resolve(),
+    willFetchUserInfo ? call(fetchUserSignInfo, { mobileApi, plipId }) : Promise.resolve(),
     call(fetchPlipSignInfo, { mobileApi, plipId }),
     plipId ? call(fetchShortSigners, { mobileApi, plipId }) : Promise.resolve(),
   ];

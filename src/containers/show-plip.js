@@ -32,7 +32,7 @@ import {
   isUserFirstTime,
   isUserLoggedIn,
   findCurrentPlip,
-  getCurrentPlipShorSignersInfo,
+  getCurrentPlipShortSignersInfo,
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
   hasUserJustSignedPlip,
@@ -231,7 +231,7 @@ const mapStateToProps = state => {
     };
   }
 
-  const currentPlipShorSignersInfo = getCurrentPlipShorSignersInfo(state);
+  const currentPlipShortSignersInfo = getCurrentPlipShortSignersInfo(state);
 
   return {
     currentUser: getCurrentUser(state),
@@ -244,8 +244,8 @@ const mapStateToProps = state => {
     plip: findCurrentPlip(state),
     justSignedPlip: hasUserJustSignedPlip(state),
     plipSignInfo: plipSignInfo,
-    signers: currentPlipShorSignersInfo.users,
-    signersTotal: currentPlipShorSignersInfo.total,
+    signers: currentPlipShortSignersInfo.users,
+    signersTotal: currentPlipShortSignersInfo.total,
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
 }
