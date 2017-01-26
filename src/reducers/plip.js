@@ -41,6 +41,12 @@ export default  (state = initialState, action) => {
           [payload.plipId]: false,
         },
       };
+    case "PLIP_SHORT_SIGNERS":
+      return {
+        ...state,
+        shortSigners: payload.users,
+        shortSignersTotal: payload.total,
+      };
     case "PLIP_USER_SIGN_INFO":
       return {
         ...state,

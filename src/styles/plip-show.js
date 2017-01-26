@@ -112,7 +112,6 @@ export default StyleSheet.create({
   presentationContainer: {
     backgroundColor: "#fff",
     paddingHorizontal: 15,
-    paddingTop: 18,
     paddingBottom: 30,
   },
   remainingDays: {
@@ -126,7 +125,6 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 20,
-    paddingBottom: 20,
     paddingHorizontal: 12,
   },
   remainingDaysSubtitle: {
@@ -169,6 +167,20 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "right",
+  },
+  signersBubble: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 10,
+  },
+  signersFakeBottom: {
+    backgroundColor: "#fff",
+    height: 20,
+  },
+  signersFakeTop: {
+    backgroundColor: "#000",
+    height: 20,
   },
   subtitle: {
     color: "#fff",

@@ -218,6 +218,24 @@ const updateProfile = ({ client }) => (authToken, { birthdate, name, zipCode }) 
     .send({ user: { birthday: birthdate, name, zipcode: zipCode }})
     .then(getData);
 
+const signersMock = {
+  users: [
+    { id: "100001186389695" },
+    { id: "100000705552701" },
+    { id: "100002574100907" },
+    { id: "100002288677508" },
+    { id: "100000612067398" },
+    { id: "100003004382131" },
+  ],
+  total: 30,
+};
+
+// eslint-disable-next-line no-unused-vars
+const fetchShortPlipSigners = ({ client }) => (authToken, { plipId }) => new Promise.resolve(signersMock);
+
+// eslint-disable-next-line no-unused-vars
+const fetchOfflineShortPlipSigners = ({ client }) => ({ plipId }) => new Promise.resolve(signersMock);
+
 
 export default function MobileApi(host) {
   const client = requester({ host });
@@ -227,6 +245,8 @@ export default function MobileApi(host) {
     changeForgotPassword: changeForgotPassword({ client }),
     difficulty: fetchDifficulty({ client }),
     fbSignIn: fbSignIn({ client }),
+    fetchOfflineShortPlipSigners: fetchOfflineShortPlipSigners({ client }),
+    fetchShortPlipSigners: fetchShortPlipSigners({ client }),
     logout: logout({ client }),
     plipSignInfo: plipSignInfo({ client }),
     profile: profile({ client }),

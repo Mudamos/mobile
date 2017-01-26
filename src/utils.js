@@ -92,3 +92,5 @@ export const removeHyphens = text => text.replace(/-/g, "");
 export const hashtagfy = (...texts) => texts
   .map(text => "#" + pipe(stripAccents, capitalizeWords, removeSpaces, removeHyphens)(text))
   .join(" ");
+
+export const facebookPicURI = ({ id, type = "normal" }) => `https://graph.facebook.com/${id}/picture?type=${type}`;
