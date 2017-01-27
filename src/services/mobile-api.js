@@ -258,10 +258,10 @@ const signersMock = {
 };
 
 // eslint-disable-next-line no-unused-vars
-const fetchPlipSigners = ({ client }) => (authToken, { plipId }) => new Promise(resolve => setTimeout(() => resolve(signersMock), 500));
+const fetchPlipSigners = ({ client }) => (authToken, { plipId }) => new Promise(resolve => setTimeout(() => resolve(signersMock), 1000));
 
 // eslint-disable-next-line no-unused-vars
-const fetchOfflinePlipSigners = ({ client }) => ({ plipId }) => new Promise(resolve => setTimeout(() => resolve(signersMock), 500));
+const fetchOfflinePlipSigners = ({ client }) => ({ plipId }) => new Promise(resolve => setTimeout(() => resolve(signersMock), 1000));
 
 
 export default function MobileApi(host) {
