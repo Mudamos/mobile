@@ -37,7 +37,7 @@ const translations = {
     changePassword: "Alterar senha",
     editProfile: "Editar perfil",
   },
-  name: "Nome",
+  name: "Nome completo",
   newPassword: "Nova senha",
   ok: "Ok",
   password: "Senha",
