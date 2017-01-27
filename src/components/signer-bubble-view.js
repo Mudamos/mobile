@@ -8,8 +8,6 @@ import {
   View,
 } from "react-native";
 
-import { facebookPicURI } from "../utils";
-
 import NetworkImage from "./network-image";
 import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/signer-bubble-view";
@@ -55,7 +53,7 @@ export default class SignerBubbleView extends Component {
     const image = (
       <NetworkImage
         key={`bubble-head-${user.id}`}
-        source={{uri: facebookPicURI({ id: user.id, type: "small" })}}
+        source={{uri: user.pictureUrl}}
         style={styles.bubble}
       />
     );

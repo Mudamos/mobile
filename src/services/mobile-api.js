@@ -218,15 +218,14 @@ const updateProfile = ({ client }) => (authToken, { birthdate, name, zipCode }) 
     .send({ user: { birthday: birthdate, name, zipcode: zipCode }})
     .then(getData);
 
-// TODO: receive picture url
 const signersShortMock = {
   users: [
-    { id: "100001186389695" },
-    { id: "100000705552701" },
-    { id: "100002574100907" },
-    { id: "100002288677508" },
-    { id: "100000612067398" },
-    { id: "100003004382131" },
+    { id: "100001186389695", pictureUrl: "https://graph.facebook.com/100001186389695/picture?type=small" },
+    { id: "100000705552701", pictureUrl: "https://graph.facebook.com/100000705552701/picture?type=small" },
+    { id: "100002574100907", pictureUrl: "https://graph.facebook.com/100002574100907/picture?type=small" },
+    { id: "100002288677508", pictureUrl: "https://graph.facebook.com/100002288677508/picture?type=small" },
+    { id: "100000612067398", pictureUrl: "https://graph.facebook.com/100000612067398/picture?type=small" },
+    { id: "100003004382131", pictureUrl: "https://graph.facebook.com/100003004382131/picture?type=small" },
   ],
   total: 30,
 };
