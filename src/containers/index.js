@@ -12,4 +12,5 @@ export { default as ProfileMissingFieldsContainer } from "./profile-missing-fiel
 export { default as ProfilePhoneContainer } from "./profile-phone";
 export { default as ProfileUpdateContainer } from "./profile-update";
 export { default as ProfileWalletContainer } from "./profile-wallet";
+export { default as SignersContainer } from "./signers";
 export { default as WebViewContainer } from "./web-view";

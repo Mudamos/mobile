@@ -27,3 +27,9 @@ export const getCurrentPlipShortSignersInfo = state => ({
   users: state.plip.shortSigners,
   total: state.plip.shortSignersTotal,
 });
+
+export const isFetchingPlipSigners = state => state.plip.isFetchingSigners;
+
+export const getPlipSigners = state => state.plip.signers;
+
+export const hasSignersFetchError = state => state.plip.signersFetchError;

@@ -89,6 +89,7 @@ export default class Menu extends Component {
           bounces={false}
           dataSource={this.state.entries}
           renderRow={this.renderMenuEntry.bind(this)}
+          style={styles.full}
         />
       </View>
     );

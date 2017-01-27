@@ -11,6 +11,8 @@ import {
 
 import {
   fetchingPlips,
+  fetchingPlipSigners,
+  fetchPlipSignersError,
   fetchingPlipSignInfo,
   fetchingShortPlipSigners,
   fetchingUserSignInfo,
@@ -20,6 +22,7 @@ import {
   plipsFetched,
   plipsFetchError,
   plipJustSigned,
+  plipSigners,
   plipSignError,
   plipSignInfoFetched,
   plipUserSignInfo,
@@ -144,6 +147,34 @@ function* fetchPlipSignInfoSaga({ mobileApi }) {
   });
 }
 
+function* fetchPlipSignersSaga({ mobileApi }) {
+  yield takeLatest("PLIP_FETCH_SIGNERS", function* ({ payload }) {
+    try {
+      const { plipId } = payload;
+
+      yield put(fetchingPlipSigners(true));
+      const loggedIn = yield select(isUserLoggedIn);
+      let signers;
+
+      if (loggedIn) {
+        const authToken = yield select(currentAuthToken);
+        signers = yield call(mobileApi.fetchPlipSigners, authToken, { plipId });
+      } else {
+        signers = yield call(mobileApi.fetchOfflinePlipSigners, { plipId });
+      }
+
+      yield put(plipSigners({ signers: signers.users }));
+      yield put(fetchingPlipSigners(false));
+    } catch (e) {
+      logError(e);
+
+      yield put(fetchingPlipSigners(false));
+      if (isUnauthorized(e)) return yield put(unauthorized());
+      yield put(fetchPlipSignersError(e));
+    }
+  });
+}
+
 function* signPlip({ mobileApi, walletStore, apiError }) {
   yield takeLatest("PLIP_SIGN", function* ({ payload }) {
     try {
@@ -215,4 +246,5 @@ export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiEr
   yield spawn(fetchPlips, { mobileApi, mudamosWebApi });
   yield spawn(signPlip, { mobileApi, walletStore, apiError });
   yield spawn(fetchPlipSignInfoSaga, { mobileApi });
+  yield spawn(fetchPlipSignersSaga, { mobileApi });
 }

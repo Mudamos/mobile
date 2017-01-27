@@ -218,7 +218,8 @@ const updateProfile = ({ client }) => (authToken, { birthdate, name, zipCode }) 
     .send({ user: { birthday: birthdate, name, zipcode: zipCode }})
     .then(getData);
 
-const signersMock = {
+// TODO: receive picture url
+const signersShortMock = {
   users: [
     { id: "100001186389695" },
     { id: "100000705552701" },
@@ -231,10 +232,37 @@ const signersMock = {
 };
 
 // eslint-disable-next-line no-unused-vars
-const fetchShortPlipSigners = ({ client }) => (authToken, { plipId }) => new Promise.resolve(signersMock);
+const fetchShortPlipSigners = ({ client }) => (authToken, { plipId }) => new Promise.resolve(signersShortMock);
 
 // eslint-disable-next-line no-unused-vars
-const fetchOfflineShortPlipSigners = ({ client }) => ({ plipId }) => new Promise.resolve(signersMock);
+const fetchOfflineShortPlipSigners = ({ client }) => ({ plipId }) => new Promise.resolve(signersShortMock);
+
+const signersMock = {
+  users: {
+    "Seus amigos": [
+      { id: "100001186389695", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100001186389695/picture?type=normal" },
+      { id: "100000705552701", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100000705552701/picture?type=normal" },
+      { id: "100002574100907", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100002574100907/picture?type=normal" },
+      { id: "100002288677508", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100002288677508/picture?type=normal" },
+      { id: "100000612067398", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100000612067398/picture?type=normal" },
+      { id: "100003004382131", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100003004382131/picture?type=normal" },
+    ],
+    "Outros": [
+      { id: "100001186389695", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100001186389695/picture?type=normal" },
+      { id: "100000705552701", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100000705552701/picture?type=normal" },
+      { id: "100002574100907", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100002574100907/picture?type=normal" },
+      { id: "100002288677508", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100002288677508/picture?type=normal" },
+      { id: "100000612067398", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100000612067398/picture?type=normal" },
+      { id: "100003004382131", name: "Guilherme Mello", signedAt: "2017-01-23 08:00:00", pictureUrl: "https://graph.facebook.com/100003004382131/picture?type=normal" },
+    ],
+  },
+};
+
+// eslint-disable-next-line no-unused-vars
+const fetchPlipSigners = ({ client }) => (authToken, { plipId }) => new Promise(resolve => setTimeout(() => resolve(signersMock), 500));
+
+// eslint-disable-next-line no-unused-vars
+const fetchOfflinePlipSigners = ({ client }) => ({ plipId }) => new Promise(resolve => setTimeout(() => resolve(signersMock), 500));
 
 
 export default function MobileApi(host) {
@@ -245,6 +273,8 @@ export default function MobileApi(host) {
     changeForgotPassword: changeForgotPassword({ client }),
     difficulty: fetchDifficulty({ client }),
     fbSignIn: fbSignIn({ client }),
+    fetchOfflinePlipSigners: fetchOfflinePlipSigners({ client }),
+    fetchPlipSigners: fetchPlipSigners({ client }),
     fetchOfflineShortPlipSigners: fetchOfflineShortPlipSigners({ client }),
     fetchShortPlipSigners: fetchShortPlipSigners({ client }),
     logout: logout({ client }),

@@ -41,6 +41,32 @@ export default  (state = initialState, action) => {
           [payload.plipId]: false,
         },
       };
+    case "PLIP_FETCHING_SIGNERS":
+      return {
+        ...state,
+        isFetchingSigners: payload.isFetching,
+        signersFetchError: false,
+      };
+    case "PLIP_SIGNERS":
+      return {
+        ...state,
+        signers: payload.signers,
+      };
+    case "PLIP_FETCH_SIGNERS_ERROR":
+      return {
+        ...state,
+        signersFetchError: true,
+      };
+    case "PLIP_CLEAR_SIGNERS":
+      return {
+        ...state,
+        signers: null,
+      };
+    case "PLIP_CLEAR_SIGNERS_ERROR":
+      return {
+        ...state,
+        signersFetchError: false,
+      };
     case "PLIP_SHORT_SIGNERS":
       return {
         ...state,

@@ -3,6 +3,8 @@ import { Actions } from "react-native-router-flux";
 import {
   clearChangeForgotPasswordError,
   clearChangePasswordError,
+  clearPlipSigners,
+  clearPlipSignersError,
   clearProfileSaveErrors,
 } from "./actions";
 
@@ -34,6 +36,10 @@ export default store => () => {
       store.dispatch(clearChangePasswordError());
       return defaultBackAction();
     case "profileUpdate":
+    case "signers":
+      store.dispatch(clearPlipSigners());
+      store.dispatch(clearPlipSignersError());
+      return defaultBackAction();
     case "signUp":
       store.dispatch(clearProfileSaveErrors());
       return defaultBackAction();
