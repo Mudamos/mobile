@@ -63,6 +63,7 @@ const translations = {
   share: "Compartilhar",
   shareMessage: ({description, name, hashtag}) => `${description}! vote no ${name} e construa um Brasil melhor. ${hashtag}`,
   signatures: "Assinaturas",
+  signersTitle: "Assinantes",
   signInTitle: "Login",
   signUpTitle: "Ajude a construir soluções para desafios públicos de maneira aberta e participativa",
   typeCode: "Informe o código",

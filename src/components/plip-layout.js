@@ -57,6 +57,7 @@ class PlipLayout extends Component {
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     userSignDate: PropTypes.object,
+    onOpenSigners: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
@@ -206,6 +207,7 @@ class PlipLayout extends Component {
                     users={signers}
                     total={signersTotal}
                     style={styles.signersBubble}
+                    onPress={this.onOpenSigners.bind(this)}
                   />
               }
             </View>
@@ -530,6 +532,11 @@ class PlipLayout extends Component {
 
     this.setState({ showSignSuccess: false });
     onSignSuccessClose(plip);
+  }
+
+  onOpenSigners() {
+    const { plip, onOpenSigners } = this.props;
+    onOpenSigners(plip.id);
   }
 }
 

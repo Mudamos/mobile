@@ -3,11 +3,10 @@ import React, { Component, PropTypes } from "react";
 import { clamp } from "ramda";
 
 import {
+  TouchableOpacity,
   Text,
   View,
 } from "react-native";
-
-import { facebookPicURI } from "../utils";
 
 import NetworkImage from "./network-image";
 import LinearGradient from "react-native-linear-gradient";
@@ -20,6 +19,7 @@ export default class SignerBubbleView extends Component {
     style: View.propTypes.style,
     total: PropTypes.number.isRequired,
     users: PropTypes.array.isRequired,
+    onPress: PropTypes.func,
   }
 
   static defaultProps = {
@@ -42,28 +42,38 @@ export default class SignerBubbleView extends Component {
 
     return (
       <View style={[styles.container, style]}>
-        {profiles.map(this.renderHead)}
+        {profiles.map(this.renderHead.bind(this))}
         {this.renderExceeding()}
       </View>
     );
   }
 
   renderHead(user) {
-    return (
+    const { onPress } = this.props;
+    const image = (
       <NetworkImage
         key={`bubble-head-${user.id}`}
-        source={{uri: facebookPicURI({ id: user.id, type: "small" })}}
+        source={{uri: user.pictureUrl}}
         style={styles.bubble}
       />
     );
+
+    return onPress ?
+      <TouchableOpacity
+        onPress={onPress}
+        key={`bubble-head-touch-${user.id}`}>
+          {image}
+      </TouchableOpacity> :
+      image;
   }
 
   renderExceeding() {
+    const { onPress } = this.props;
     const exceeding = this.exceedingTotal;
 
     if (!exceeding) return null;
 
-    return (
+    const bubble = (
       <LinearGradient
         start={[0.0, 0.25]}
         end={[0.7, 1.0]}
@@ -76,5 +86,9 @@ export default class SignerBubbleView extends Component {
         </Text>
       </LinearGradient>
     );
+
+    return onPress ?
+      <TouchableOpacity onPress={onPress}>{bubble}</TouchableOpacity> :
+      bubble;
   }
 }
