@@ -21,8 +21,11 @@ const webViewProps = user => ({
   source: { uri: TSE_URL },
   injectedJavaScript: `
     (function() {
-      document.getElementsByName("nomeEleitor")[0].value = "${user.name}";
-      document.getElementsByName("dataNascimento")[0].value = "${fromISODate(user.birthdate)}";
+      var nameField = document.getElementsByName("nomeEleitor")[0];
+      var birthField = document.getElementsByName("dataNascimento")[0];
+
+      if (!nameField.value) nameField.value = "${user.name}";
+      if (!birthField.value) birthField.value = "${fromISODate(user.birthdate)}";
     })();
   `,
 });
