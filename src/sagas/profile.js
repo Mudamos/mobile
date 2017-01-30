@@ -21,7 +21,7 @@ import {
   User,
 } from "../models";
 
-import { isUnauthorized, logError } from "../utils";
+import { isDev, isUnauthorized, logError } from "../utils";
 
 import Toast from "react-native-simple-toast";
 
@@ -149,17 +149,17 @@ function* sendPhoneValidation({ mobileApi }) {
     try {
       const { phone } = payload;
 
-      // Maybe this should be dispatched by the container
       yield put(savingProfile(false));
 
       yield put(sendingPhoneValidation(true));
 
       const authToken = yield select(currentAuthToken);
-      // TODO: there is no need to fetch the response.
-      // For now we need it so we can see the code generated
       const response = yield call(mobileApi.sendPhoneValidation, authToken, phone);
-      console.log("[PIN CODE]", response);
-      Toast.show(`CODE: ${response}`);
+
+      if (isDev) {
+        console.log("[PIN CODE]", response);
+        Toast.show(`CODE: ${response}`);
+      }
 
       yield put(sendingPhoneValidation(false));
       yield put(phoneValidationSent(true));
