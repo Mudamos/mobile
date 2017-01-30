@@ -11,7 +11,7 @@ import {
 } from "react-native-material-kit";
 
 const selectionColor = "rgba(255, 255, 255, 0.5)";
-const errorColor = "#d50000";
+const errorColor = "#ffff00";
 const whiteTransparent = "rgba(255,255,255,0.7)";
 
 const style = StyleSheet.create({
@@ -23,7 +23,6 @@ const style = StyleSheet.create({
     fontFamily: "roboto",
     fontSize: 10,
     color: "#fff",
-    opacity: 0.7,
     marginTop: 3,
   },
   errorText: {
