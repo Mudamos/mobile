@@ -107,7 +107,7 @@ class Container extends Component {
       }
     }
 
-    if (!currentUser) {
+    if (!isFetchingProfile && !currentUser) {
       entries.push({ icon: "person", title: locale.getIn, action: this.onSignUp.bind(this), position: 0});
     }
 
