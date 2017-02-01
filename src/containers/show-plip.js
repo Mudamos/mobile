@@ -101,10 +101,13 @@ class Container extends Component {
 
     if (!isFetchingProfile && currentUser) {
       entries.push({ icon: "account-circle", title: locale.menu.editProfile, action: onProfileEdit, position: 0 });
-      entries.push({ icon: "lock", title: locale.menu.changePassword, action: onChangePassword, position: 1 });
+
+      if (currentUser.isAppUser) {
+        entries.push({ icon: "lock", title: locale.menu.changePassword, action: onChangePassword, position: 1 });
+      }
     }
 
-    if (!currentUser) {
+    if (!isFetchingProfile && !currentUser) {
       entries.push({ icon: "person", title: locale.getIn, action: this.onSignUp.bind(this), position: 0});
     }
 
