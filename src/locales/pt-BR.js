@@ -26,6 +26,7 @@ const translations = {
   facebookLogin: "Entrar com Facebook",
   forgotPassword: "Esqueceu a senha?",
   forgotPasswordTitle: "Esqueci minha senha",
+  forward: "Avançar",
   getIn: "Entrar",
   gotIt: "entendi",
   hasAnAccountAlready: "Já tem uma conta?",
