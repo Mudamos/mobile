@@ -79,7 +79,7 @@ export default class Modal extends Component {
         </Image>
 
         <View style={styles.contentContainer}>
-          <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+          <ScrollView bounces={false}>
             {this.props.children}
           </ScrollView>
 
