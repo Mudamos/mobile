@@ -56,8 +56,8 @@ export default class MDTextInput extends Component {
     placeholderTextColor: whiteTransparent,
     tintColor: "rgba(255,255,255,0.7)",
     floatingLabelFont: {
-      fontSize: 10,
-      fontWeight: "200",
+      fontFamily: "roboto",
+      fontSize: 14,
     },
     selectionColor: selectionColor,
     style: style.textFieldStyle,
