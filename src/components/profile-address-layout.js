@@ -115,7 +115,7 @@ export default class ProfileAddressLayout extends Component {
                   />
 
                   <FlatButton
-                    title={locale.search.toUpperCase()}
+                    title={locale.forward.toUpperCase()}
                     enabled={this.searchEnabled}
                     onPress={this.onSearch.bind(this)}
                     style={{marginTop: 20}}
