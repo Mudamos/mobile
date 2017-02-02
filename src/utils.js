@@ -2,9 +2,11 @@ import {
   find,
   head,
   is,
+  isNil,
   mergeWith,
   pipe,
   propEq,
+  reject,
 } from "ramda";
 
 import { UnauthorizedError } from "./models/net-error";
@@ -25,6 +27,8 @@ moment.locale(DEFAULT_LOCALE);
 
 export { moment };
 
+const toLogTag = (...tags) => compact(tags).map(t => `[${t}]`).join(" ");
+
 export const isUnauthorized = error => error instanceof UnauthorizedError;
 
 export const isString = is(String);
@@ -34,7 +38,11 @@ export const first = list => head(list || []);
 // eslint-disable-next-line no-undef
 export const isDev = __DEV__;
 
-export const logError = (error, { tag } = {}) => isDev && console.log(tag ? `[${tag}] ` : "", error.message, error.stack, error);
+export const compact = list => reject(isNil, list);
+
+export const log = (message, { level = "DEBUG", tag } = {}, ...args) => isDev && console.log(toLogTag(level, tag), message, ...args);
+
+export const logError = (error, { tag } = {}) => log(error.message, { level: "ERROR", tag }, error.stack, error);
 
 export const toCredential = (email, password) => new Buffer(`${email}:${password}`).toString("base64");
 
