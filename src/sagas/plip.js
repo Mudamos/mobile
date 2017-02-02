@@ -234,6 +234,11 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
 
         if (apiError.isInvalidWallet(e)) return yield call(invalidateWalletAndNavigate, { alertRevalidate: true });
 
+        if (apiError.isErrorAlreadySigned(e)) {
+          if (isDev) console.log("User already signed the plip. No op.");
+          return;
+        }
+
         throw e;
       }
     } catch(e) {
