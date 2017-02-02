@@ -8,6 +8,7 @@ import {
   navigate,
   navigateBack,
   profileSaveMain,
+  signingPlip,
 } from "../actions";
 
 import {
@@ -26,6 +27,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onBack: () => {
     dispatch(clearProfileSaveErrors());
+    dispatch(signingPlip(null)); // Clear the user plip sign intention if they gave up
     dispatch(navigateBack());
   },
   onCreate: ({ name, email, password }) => dispatch(profileSaveMain({ name, email, password })),
