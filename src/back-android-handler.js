@@ -6,6 +6,7 @@ import {
   clearPlipSigners,
   clearPlipSignersError,
   clearProfileSaveErrors,
+  signingPlip,
 } from "./actions";
 
 import { isDev } from "./utils";
@@ -42,6 +43,7 @@ export default store => () => {
       return defaultBackAction();
     case "signUp":
       store.dispatch(clearProfileSaveErrors());
+      store.dispatch(signingPlip(null));
       return defaultBackAction();
     case "profileAddress":
     case "profileBirth":
