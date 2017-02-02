@@ -28,6 +28,11 @@ export default (state = initialState, action) => {
         ...state,
         hasSentPhoneValidation: payload.hasSent,
       };
+    case "PROFILE_PHONE_JUST_VALIDATED":
+      return {
+        ...state,
+        phoneJustValidated: payload.validated,
+      };
     case "PROFILE_USER_UPDATED":
       return {
         ...state,
@@ -46,6 +51,7 @@ export default (state = initialState, action) => {
         errors: null,
         isSendingPhoneValidation: false,
         hasSentPhoneValidation: false,
+        phoneJustValidated: false,
         profileFetchError: false,
         sendValidationErrors: null,
       };

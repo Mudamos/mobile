@@ -77,8 +77,8 @@ export function* profileScreenForCurrentUser() {
     "profileBirth",
     "profileAddress",
     "profileDocuments",
-    "profilePhone",
     "profileWallet",
+    "profilePhone",
   ];
 
   const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
@@ -89,8 +89,8 @@ export function* profileScreenForCurrentUser() {
     yield select(isBirthProfileComplete),
     yield select(isAddressProfileComplete),
     yield select(isDocumentsProfileComplete),
-    yield select(isPhoneProfileComplete),
     yield select(isWalletProfileComplete),
+    yield select(isPhoneProfileComplete),
   ];
 
   const goToScreen = firstScreenNotDone(screensDone);

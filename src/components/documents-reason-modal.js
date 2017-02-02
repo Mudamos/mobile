@@ -2,6 +2,7 @@ import React, { PropTypes } from "react";
 
 import {
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
@@ -24,12 +25,11 @@ export default class DocumentsReasonModal extends Modal {
 
     return (
       <View style={styles.footer}>
-        <Text
-          style={textStyles.modalLink}
-          onPress={() => this.hideAnimated(onAcknowledge)}
-        >
-          {locale.gotIt.toUpperCase()}
-        </Text>
+        <TouchableOpacity onPress={() => this.hideAnimated(onAcknowledge)}>
+          <Text style={textStyles.modalLink}>
+            {locale.gotIt.toUpperCase()}
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }

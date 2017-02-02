@@ -2,6 +2,7 @@ import React, { PropTypes } from "react";
 
 import {
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
@@ -24,12 +25,11 @@ export default class SimpleModal extends Modal {
 
     return (
       <View style={styles.footer}>
-        <Text
-          style={textStyles.modalLink}
-          onPress={() => this.hideAnimated(onClose)}
-        >
-          {locale.close.toUpperCase()}
-        </Text>
+        <TouchableOpacity onPress={() => this.hideAnimated(onClose)}>
+          <Text style={textStyles.modalLink}>
+            {locale.close.toUpperCase()}
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
