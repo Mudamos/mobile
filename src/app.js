@@ -27,7 +27,6 @@ import {
 } from "./containers";
 
 import {
-  existsLocalWallet,
   fetchIsUserFirstTime,
   fetchSession,
 } from "./actions";
@@ -115,7 +114,6 @@ sagaRunner.run(sagas, {
 });
 
 store.dispatch(fetchSession());
-store.dispatch(existsLocalWallet());
 store.dispatch(fetchIsUserFirstTime());
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene

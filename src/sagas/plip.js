@@ -43,6 +43,7 @@ import {
 
 import { fetchProfile } from "./profile";
 import { profileScreenForCurrentUser } from "./navigation";
+import { validateLocalWallet } from "./wallet";
 
 import LibCrypto from "mudamos-libcrypto";
 
@@ -194,6 +195,12 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       const user = yield call(fetchProfile, { mobileApi });
 
       if (!user) return yield put(navigate("signUp"));
+
+      const validWallet = yield call(validateLocalWallet, { walletStore });
+      if (!validWallet) {
+        if (isDev) console.log("Local wallet is invalid");
+        return yield call(invalidateWalletAndNavigate, { alertRevalidate: true });
+      }
 
       // Check profile completion
       const { key: screenKey } = yield call(profileScreenForCurrentUser);

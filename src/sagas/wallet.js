@@ -29,12 +29,12 @@ function* createWallet({ mobileApi, walletStore }) {
     try {
       yield put(creatingWallet(true));
 
-      const user = yield select(currentUser);
-      const valid = yield call(walletStore.valid, user.voteCard);
+      const valid = yield call(validateLocalWallet, { walletStore });
 
       if (!valid) {
         if (isDev) console.log("Will create new wallet");
 
+        const user = yield select(currentUser);
         const seed = yield call(walletStore.create, user.voteCard);
 
         const authToken = yield select(currentAuthToken);
@@ -60,6 +60,18 @@ function* createWallet({ mobileApi, walletStore }) {
       yield put(createWalletError(e));
     }
   });
+}
+
+export function* validateLocalWallet({ walletStore }) {
+  const user = yield select(currentUser);
+  const valid = user && (yield call(walletStore.valid, user.voteCard));
+
+  if (isDev) console.log("Is local wallet valid?", valid);
+
+  if (!valid) yield call(walletStore.destroy);
+  yield put(walletAvailable(valid));
+
+  return valid;
 }
 
 function* hasLocalWallet({ walletStore }) {
