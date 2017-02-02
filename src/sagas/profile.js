@@ -6,6 +6,7 @@ import {
   isFetchingProfile,
   savingProfile,
   updatedUserProfile,
+  phoneJustValidated,
   phoneValidationSent,
   profileStateMachine,
   saveUserProfileError,
@@ -204,9 +205,8 @@ function* savePhoneProfile({ mobileApi }) {
 
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
-      yield put(profileStateMachine());
 
-      yield put(phoneValidationSent(false)); // Clear for future validation
+      yield put(phoneJustValidated(true));
     } catch (e) {
       logError(e, { tag: "verifyCode" });
 

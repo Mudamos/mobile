@@ -72,6 +72,11 @@ export const savePhone = ({ phone, code }) => ({
   payload: { phone, code },
 });
 
+export const phoneJustValidated = validated => ({
+  type: "PROFILE_PHONE_JUST_VALIDATED",
+  payload: { validated },
+})
+
 export const invalidatePhone = () => ({
   type: "PROFILE_INVALIDATE_PHONE",
 });

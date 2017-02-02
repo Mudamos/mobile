@@ -14,8 +14,10 @@ import PhoneInput from "./phone-input";
 import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
 import CodeInput from "./code-input";
+import SimpleModal from "./simple-modal";
 
 import styles from "../styles/profile-phone-layout";
+import textStyles from "../styles/text";
 
 import locale from "../locales/pt-BR";
 
@@ -23,15 +25,18 @@ export default class ProfilePhoneLayout extends Component {
   state = {
     code: null,
     phone: this.props.phone,
+    showSignUpSuccess: false,
   }
 
   static propTypes = {
     hasSentValidation: PropTypes.bool,
     isSending: PropTypes.bool,
+    isValidated: PropTypes.bool,
     isVerifying: PropTypes.bool,
     phone: PropTypes.string,
     sendErrors: PropTypes.array,
     onPhoneGiven: PropTypes.func.isRequired,
+    onSignUpFinish: PropTypes.func.isRequired,
     onVerifyCode: PropTypes.func.isRequired,
   }
 
@@ -46,12 +51,20 @@ export default class ProfilePhoneLayout extends Component {
     return code.length === codeSize;
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.isValidated && !this.state.showSignUpSuccess) {
+      this.setState({ showSignUpSuccess: true });
+    }
+  }
+
   render() {
     const {
       hasSentValidation,
       isSending,
       isVerifying,
     } = this.props;
+
+    const { showSignUpSuccess } = this.state;
 
     return (
       <View style={styles.container}>
@@ -63,6 +76,8 @@ export default class ProfilePhoneLayout extends Component {
             { hasSentValidation && this.renderCodeForm() }
           </ScrollView>
         </Layout>
+
+        {showSignUpSuccess && this.renderSignUpSuccess()}
 
         <PageLoader isVisible={isSending || isVerifying} />
       </View>
@@ -147,6 +162,27 @@ export default class ProfilePhoneLayout extends Component {
         </Text>
       </View>
     );
+  }
+
+  renderSignUpSuccess() {
+    return (
+      <SimpleModal onClose={this.onSuccessClose.bind(this)}>
+        <Text style={textStyles.modalTitle}>
+          {locale.congratulations}
+        </Text>
+
+        <Text style={textStyles.modalText}>
+          {locale.signupSuccessModalText}
+        </Text>
+      </SimpleModal>
+    );
+  }
+
+  onSuccessClose() {
+    const { onSignUpFinish } = this.props;
+
+    this.setState({ showSignUpSuccess: false });
+    onSignUpFinish();
   }
 
   resend() {
