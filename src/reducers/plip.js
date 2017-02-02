@@ -101,9 +101,15 @@ export default  (state = initialState, action) => {
         ...state,
         errorFetchingPlips: true,
       };
+    case "PLIP_SIGNING_PLIP":
+      return {
+        ...state,
+        currentSigningPlip: payload.plip,
+      };
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,
+        currentSigningPlip: null,
         userSignInfo: {},
         justSignedPlips: {},
       };

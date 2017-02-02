@@ -104,3 +104,8 @@ export const clearPlipSigners = () => ({
 export const clearPlipSignersError = () => ({
   type: "PLIP_CLEAR_SIGNERS_ERROR",
 });
+
+export const signingPlip = plip => ({
+  type: "PLIP_SIGNING_PLIP",
+  payload: { plip },
+});

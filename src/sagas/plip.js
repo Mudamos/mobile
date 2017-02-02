@@ -28,6 +28,8 @@ import {
   plipUserSignInfo,
   profileStateMachine,
   setCurrentPlip,
+  signPlip as signPlipAction,
+  signingPlip,
   shortPlipSigners,
   unauthorized,
 } from "../actions";
@@ -36,6 +38,7 @@ import {
   currentAuthToken,
   findPlips,
   isUserLoggedIn,
+  wasUserSiginingBefore,
 } from "../selectors";
 
 import { fetchProfile } from "./profile";
@@ -69,6 +72,11 @@ export function* fetchPlips({ mobileApi, mudamosWebApi }) {
       yield put(setCurrentPlip(currentPlip));
 
       yield call(fetchPlipRelatedInfo, { mobileApi, plipId: currentPlip && currentPlip.id });
+
+      if (yield select(wasUserSiginingBefore)) {
+        // Instantly try to sign the plip after loading the page
+        yield put(signPlipAction({ plip: currentPlip }));
+      }
 
       yield put(fetchingPlips(false));
     } catch(e) {
@@ -179,6 +187,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
   yield takeLatest("PLIP_SIGN", function* ({ payload }) {
     try {
       const { plip } = payload;
+      yield put(signingPlip(plip));
 
       yield put(isSigningPlip(true));
 
@@ -218,6 +227,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
 
         yield put(plipUserSignInfo({ plipId: plip.id, info: apiResult.signMessage }));
         yield put(plipJustSigned({ plipId: plip.id })); //Marks the flow end
+        yield put(signingPlip(null));
       } catch (e) {
         logError(e);
         if (isDev) console.log("is wallet invalid?", apiError.isInvalidWallet(e), e.errorCode, e);
@@ -231,6 +241,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       if (isUnauthorized(e)) return yield put(unauthorized());
 
       yield put(plipSignError(e));
+      yield put(signingPlip(null));
     } finally {
       yield put(isSigningPlip(false));
     }

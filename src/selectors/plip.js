@@ -33,3 +33,7 @@ export const isFetchingPlipSigners = state => state.plip.isFetchingSigners;
 export const getPlipSigners = state => state.plip.signers;
 
 export const hasSignersFetchError = state => state.plip.signersFetchError;
+
+export const getCurrentSigningPlip = state => state.plip.currentSigningPlip;
+
+export const wasUserSiginingBefore = state => findCurrentPlip(state) && getCurrentSigningPlip(state);
