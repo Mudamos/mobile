@@ -94,6 +94,7 @@ class Container extends Component {
     const {
       currentUser,
       isFetchingProfile,
+      isUserLoggedIn,
       onChangePassword,
       onProfileEdit,
     } = this.props;
@@ -110,7 +111,7 @@ class Container extends Component {
       }
     }
 
-    if (!isFetchingProfile && !currentUser) {
+    if (!isFetchingProfile && !currentUser && !isUserLoggedIn) {
       entries.push({ icon: "person", title: locale.getIn, action: this.onSignUp.bind(this), position: 0});
     }
 
@@ -129,12 +130,15 @@ class Container extends Component {
   }
 
   render() {
+    const { onFetchProfile } = this.props;
     const { menuOpen: open } = this.state;
 
     return (
       <Menu
         open={open}
         content={this.renderMenuContent()}
+        onOpenStart={onFetchProfile}
+        onOpen={() => this.setState({ menuOpen: true })}
         onClose={() => this.setState({ menuOpen: false })}
       >
         {this.renderPage()}

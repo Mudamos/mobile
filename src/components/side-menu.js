@@ -24,6 +24,7 @@ export default class Menu extends Component {
     tapToClose: true,
     type: "static",
     openDrawerOffset: 100,
+    panOpenMask: 100,
     tweenHandler: Drawer.tweenPresets.parallax,
   };
 
