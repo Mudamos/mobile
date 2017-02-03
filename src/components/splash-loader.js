@@ -32,8 +32,8 @@ const SplashLoader = props => {
     <PageLoader
       {...props}
 
-      afterChildren={loading}
-      beforeChildren={logo}
+      prepend={logo}
+      append={loading}
     />
   );
 }

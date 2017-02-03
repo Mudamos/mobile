@@ -8,10 +8,10 @@ import styles from "../styles/page-loader";
 
 class PageLoader extends Component {
   static propTypes = {
-    afterChildren: PropTypes.node,
-    beforeChildren: PropTypes.node,
+    append: PropTypes.node,
     color: PropTypes.string,
     isVisible: PropTypes.bool,
+    prepend: PropTypes.node,
     size: PropTypes.number,
     style: View.propTypes.style,
     type: PropTypes.string,
@@ -26,9 +26,11 @@ class PageLoader extends Component {
 
   render() {
     const {
+      append,
       size,
       color,
       isVisible,
+      prepend,
       style,
       type,
     } = this.props;
@@ -37,12 +39,14 @@ class PageLoader extends Component {
 
     return (
       <View style={[styles.container, style]}>
-        {this.props.beforeChildren}
+        {prepend}
+
         <Spinner color={color}
           isVisible={isVisible}
           type={type}
           size={size}/>
-        {this.props.afterChildren}
+
+        {append}
       </View>
     );
   }
