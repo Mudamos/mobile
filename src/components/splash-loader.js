@@ -24,7 +24,7 @@ SplashLoader.propTypes = {
 };
 
 SplashLoader.defaultProps = {
-  containerBackgroundColor: "#883DE1",
+  style: styles.container,
 };
 
 export default SplashLoader;

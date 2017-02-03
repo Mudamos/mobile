@@ -4,21 +4,20 @@ import { View } from "react-native";
 
 import Spinner from "react-native-spinkit";
 
-import style from "../styles/page-loader";
+import styles from "../styles/page-loader";
 
 class PageLoader extends Component {
   static propTypes = {
     children: PropTypes.node,
     color: PropTypes.string,
-    containerBackgroundColor: PropTypes.string,
     isVisible: PropTypes.bool,
     size: PropTypes.number,
+    style: View.propTypes.style,
     type: PropTypes.string,
   }
 
   static defaultProps = {
     color: "#FFFFFF",
-    containerBackgroundColor: "rgba(0, 0, 0, .6)",
     isVisible: false,
     size: 70,
     type: "9CubeGrid",
@@ -26,17 +25,17 @@ class PageLoader extends Component {
 
   render() {
     const {
-      containerBackgroundColor,
       size,
       color,
       isVisible,
+      style,
       type,
     } = this.props;
 
     if (!isVisible) return (<View/>);
 
     return (
-      <View style={[style.container, { backgroundColor: containerBackgroundColor }]}>
+      <View style={[styles.container, style]}>
         <Spinner color={color}
           isVisible={isVisible}
           type={type}
