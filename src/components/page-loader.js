@@ -8,6 +8,7 @@ import style from "../styles/page-loader";
 
 class PageLoader extends Component {
   static propTypes = {
+    children: PropTypes.node,
     color: PropTypes.string,
     containerBackgroundColor: PropTypes.string,
     isVisible: PropTypes.bool,
@@ -40,6 +41,7 @@ class PageLoader extends Component {
           isVisible={isVisible}
           type={type}
           size={size}/>
+        {this.props.children}
       </View>
     );
   }
