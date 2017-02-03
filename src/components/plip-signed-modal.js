@@ -1,44 +1,50 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 import {
   Text,
-  View,
 } from "react-native";
 
 
-import Modal from "./modal";
+import SimpleModal from "./simple-modal";
+import PurpleFlatButton from "./purple-flat-button";
 
 import locale from "../locales/pt-BR";
 
-import styles from "../styles/plip-signed-modal";
 import textStyles from "../styles/text";
 
 
-export default class PlipSignedModal extends Modal {
+export default class PlipSignedModal extends Component {
   static propTypes = {
+    plipName: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
   };
 
-  renderFooter() {
-    const { onClose, onShare } = this.props;
+  render() {
+    const {
+      plipName,
+      onClose,
+      onShare,
+    } = this.props;
 
     return (
-      <View style={styles.footer}>
-        <Text
-          style={textStyles.modalLink}
-          onPress={() => this.hideAnimated(onClose)}
-        >
-          {locale.close.toUpperCase()}
+      <SimpleModal onClose={onClose}>
+        <Text style={textStyles.modalTitle}>
+          {locale.projectSignedYeah}
         </Text>
 
-        <Text
-          style={[textStyles.modalLink, styles.marginLeft]}
-          onPress={onShare}
-        >
-          {locale.share.toUpperCase()}
+        <Text style={textStyles.modalText}>
+          {
+            `${locale.projectSignedCongratulations} "${plipName}"!`
+          }
         </Text>
-      </View>
+
+        <PurpleFlatButton
+          title={locale.share.toUpperCase()}
+          onPress={onShare}
+          style={{marginTop: 40}}
+        />
+      </SimpleModal>
     );
   }
 }

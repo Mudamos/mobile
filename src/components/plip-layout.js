@@ -34,8 +34,6 @@ import styles, {
   SMALL_ANIM_OFFSET,
 } from "../styles/plip-show";
 
-import textStyles from "../styles/text";
-
 import locale from "../locales/pt-BR";
 
 
@@ -501,19 +499,10 @@ class PlipLayout extends Component {
 
     return (
       <SignModal
-        onClose={this.onModalSuccessClose.bind(this)}
+        plipName={this.plipName}
         onShare={() => onShare(plip)}
-      >
-        <Text style={textStyles.modalTitle}>
-          {locale.projectSignedYeah}
-        </Text>
-
-        <Text style={textStyles.modalText}>
-          {
-            `${locale.projectSignedCongratulations} "${this.plipName}"!`
-          }
-        </Text>
-      </SignModal>
+        onClose={this.onModalSuccessClose.bind(this)}
+      />
     );
   }
 
