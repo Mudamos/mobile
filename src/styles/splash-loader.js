@@ -12,4 +12,7 @@ export default StyleSheet.create({
     marginTop: 40,
     textAlign: "center",
   },
+  logo: {
+    marginBottom: 80,
+  },
 });

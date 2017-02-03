@@ -8,7 +8,8 @@ import styles from "../styles/page-loader";
 
 class PageLoader extends Component {
   static propTypes = {
-    children: PropTypes.node,
+    afterChildren: PropTypes.node,
+    beforeChildren: PropTypes.node,
     color: PropTypes.string,
     isVisible: PropTypes.bool,
     size: PropTypes.number,
@@ -36,11 +37,12 @@ class PageLoader extends Component {
 
     return (
       <View style={[styles.container, style]}>
+        {this.props.beforeChildren}
         <Spinner color={color}
           isVisible={isVisible}
           type={type}
           size={size}/>
-        {this.props.children}
+        {this.props.afterChildren}
       </View>
     );
   }
