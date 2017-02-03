@@ -1,7 +1,6 @@
 import React from "react";
-import {
-  Text,
-} from "react-native";
+
+import * as Animatable from "react-native-animatable";
 
 import PageLoader from "./page-loader";
 
@@ -12,9 +11,14 @@ import styles from "../styles/splash-loader";
 const SplashLoader = props => {
   return (
     <PageLoader {...props}>
-      <Text style={styles.loading}>
+      <Animatable.Text
+        animation="pulse"
+        easing="ease-out"
+        iterationCount="infinite"
+        style={styles.loading}
+      >
         {locale.loading}
-      </Text>
+      </Animatable.Text>
     </PageLoader>
   );
 }
