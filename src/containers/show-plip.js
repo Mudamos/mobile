@@ -24,6 +24,7 @@ import {
 } from "../actions";
 
 import {
+  isAppReady,
   errorFetchingPlips,
   currentUser as getCurrentUser,
   isFetchingPlips,
@@ -39,6 +40,7 @@ import {
 } from "../selectors";
 
 import PlipLayout from "../components/plip-layout";
+import SplashLoader from "../components/splash-loader";
 import Menu from "../components/side-menu";
 import LoggedInMenu from "../components/logged-in-menu-content";
 import SimpleModal from "../components/simple-modal";
@@ -60,6 +62,7 @@ class Container extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
+    isAppReady: PropTypes.bool,
     isFetchingPlip: PropTypes.bool.isRequired,
     isFetchingProfile: PropTypes.bool,
     isSigning: PropTypes.bool,
@@ -135,6 +138,7 @@ class Container extends Component {
         onClose={() => this.setState({ menuOpen: false })}
       >
         {this.renderPage()}
+        {this.renderFirstTimeLoader()}
       </Menu>
     );
   }
@@ -162,6 +166,11 @@ class Container extends Component {
         }
       </View>
     );
+  }
+
+  renderFirstTimeLoader() {
+    const { isAppReady } = this.props;
+    return <SplashLoader isVisible={!isAppReady} />
   }
 
   renderMenuContent() {
@@ -240,6 +249,7 @@ const mapStateToProps = state => {
   return {
     currentUser: getCurrentUser(state),
     errorFetchingPlips: errorFetchingPlips(state),
+    isAppReady: isAppReady(state),
     isFetchingPlip: isFetchingPlips(state),
     isFetchingProfile: isFetchingProfile(state),
     isSigning: isSigningPlip(state),

@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
+import app from "./app";
 import facebook from "./facebook";
 import localStorage from "./local-storage";
 import password from "./password";
@@ -11,6 +12,7 @@ import address from "./address";
 import wallet from "./wallet";
 
 export default combineReducers({
+  app,
   facebook,
   localStorage,
   password,

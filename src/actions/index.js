@@ -1,4 +1,5 @@
 export * from "./address";
+export * from "./app";
 export * from "./authentication";
 export * from "./facebook";
 export * from "./linking";

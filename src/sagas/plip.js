@@ -10,6 +10,7 @@ import {
 } from "../utils";
 
 import {
+  appReady,
   fetchingPlips,
   fetchingPlipSigners,
   fetchPlipSignersError,
@@ -88,6 +89,8 @@ export function* fetchPlips({ mobileApi, mudamosWebApi }) {
       if (isUnauthorized(e)) return yield put(unauthorized());
 
       yield put(plipsFetchError(e));
+    } finally {
+      yield put(appReady(true));
     }
   });
 }
