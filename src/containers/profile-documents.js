@@ -2,7 +2,11 @@ import { connect } from "react-redux";
 
 import ProfileDocumentsLayout from "../components/profile-documents-layout";
 
-import { extractNumbers, fromISODate } from "../utils";
+import {
+  cpfMask,
+  extractNumbers,
+  voteCardMask,
+} from "../utils";
 
 import {
   navigate,
@@ -11,43 +15,22 @@ import {
 
 import {
   currentUser,
+  getSearchedVoteCardId,
   isSavingProfile,
   profileSaveErrors,
 } from "../selectors";
 
-const TSE_URL = "http://apps.tse.jus.br/saae/consultaNomeDataNascimento.do";
-
-const webViewProps = user => ({
-  source: { uri: TSE_URL },
-  injectedJavaScript: `
-    (function() {
-      function fillOutForm() {
-        var nameField = document.getElementsByName("nomeEleitor")[0];
-        var birthField = document.getElementsByName("dataNascimento")[0];
-        if (nameField && !nameField.value) nameField.value = "${user.name}";
-        if (birthField && !birthField.value) birthField.value = "${fromISODate(user.birthdate)}";
-      }
-
-      function removePrint() {
-        var printBtn = document.getElementById("botoes_index_certidao");
-        if (printBtn) printBtn.remove();
-      }
-
-      fillOutForm();
-      removePrint();
-    })();
-  `,
-});
 
 const mapStateToProps = state => {
   const user = currentUser(state);
 
   return {
     currentUser: user,
-    previousCpf: user ? user.cpf : null,
-    previousVoteCard: user ? user.voteCard : null,
+    previousCpf: user ? cpfMask(user.cpf) : null,
+    previousVoteCard: user ? voteCardMask(user.voteCard) : null,
     errors: profileSaveErrors(state),
     isSaving: isSavingProfile(state),
+    searchedVoteCardId: voteCardMask(getSearchedVoteCardId(state)),
   };
 };
 
@@ -57,15 +40,8 @@ const mapDispatchToProps = dispatch => ({
       cpf: extractNumbers(cpf),
       voteCard: extractNumbers(voteCard),
     })),
-  onTSERequested: currentUser => dispatch(navigate("webView", webViewProps(currentUser))),
+  onTSERequested: () => dispatch(navigate("tse")),
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
 
-  onTSERequested: () => dispatchProps.onTSERequested(stateProps.currentUser),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ProfileDocumentsLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileDocumentsLayout);
