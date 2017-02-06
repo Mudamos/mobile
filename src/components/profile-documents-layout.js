@@ -28,6 +28,7 @@ export default class ProfileDocumentsLayout extends Component {
     cpf: this.props.previousCpf,
     voteCard: this.props.previousVoteCard,
     reasonEnabled: false,
+    searchedVoteCardId: null,
   }
 
   static propTypes = {
@@ -35,6 +36,7 @@ export default class ProfileDocumentsLayout extends Component {
     isSaving: PropTypes.bool,
     previousCpf: PropTypes.string,
     previousVoteCard: PropTypes.string,
+    searchedVoteCardId: PropTypes.string,
     onSave: PropTypes.func.isRequired,
     onTSERequested: PropTypes.func.isRequired,
   }
@@ -48,6 +50,14 @@ export default class ProfileDocumentsLayout extends Component {
 
   get saveEnabled() {
     return this.validForm;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { searchedVoteCardId } = nextProps;
+
+    if (searchedVoteCardId && !this.state.searchedVoteCardId) {
+      this.setState({ searchedVoteCardId, voteCard: searchedVoteCardId });
+    }
   }
 
   render() {

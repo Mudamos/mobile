@@ -23,7 +23,7 @@ import {
   SignersContainer,
   SignInContainer,
   SignUpContainer,
-  WebViewContainer,
+  TSEContainer,
 } from "./containers";
 
 import {
@@ -100,7 +100,7 @@ const scenes = Actions.create(
     <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
     <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
 
-    <Scene key="webView" component={WebViewContainer} hideNavBar={true} />
+    <Scene key="tse" component={TSEContainer} hideNavBar={true} />
   </Scene>
 );
 

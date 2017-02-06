@@ -14,6 +14,7 @@ import {
   sendingPhoneValidationError,
   logginSucceeded,
   unauthorized,
+  voteCardIdAcquired,
 } from "../actions";
 
 import { currentAuthToken, currentUser } from "../selectors";
@@ -141,6 +142,9 @@ function* saveDocumentsProfile({ mobileApi }) {
       if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
 
       yield put(saveUserProfileError(e));
+    } finally {
+      // Cleanup data
+      yield put(voteCardIdAcquired(null));
     }
   });
 }

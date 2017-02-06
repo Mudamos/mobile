@@ -43,3 +43,5 @@ export const isPhoneProfileComplete = state => {
 export const isWalletProfileComplete = state => !!state.wallet.hasWallet;
 
 export const wasPhoneValidated = state => state.profile.phoneJustValidated;
+
+export const getSearchedVoteCardId = state => state.profile.voteCardId;

@@ -42,6 +42,8 @@ export default (state = initialState, action) => {
       return { ...state, errors: payload.error.validations };
     case "PROFILE_CLEAR_SAVE_ERRORS":
       return { ...state, errors: null };
+    case "PROFILE_VOTE_CARD_ID_ACQUIRED":
+      return { ...state, voteCardId: payload.voteCardId };
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,
@@ -54,6 +56,7 @@ export default (state = initialState, action) => {
         phoneJustValidated: false,
         profileFetchError: false,
         sendValidationErrors: null,
+        voteCardId: null,
       };
     default:
       return state;

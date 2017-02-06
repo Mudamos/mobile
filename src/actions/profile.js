@@ -89,3 +89,8 @@ export const profileUpdate = ({ birthdate, name, zipCode }) => ({
 export const clearProfileSaveErrors = () => ({
   type: "PROFILE_CLEAR_SAVE_ERRORS",
 });
+
+export const voteCardIdAcquired = voteCardId => ({
+  type: "PROFILE_VOTE_CARD_ID_ACQUIRED",
+  payload: { voteCardId },
+});
