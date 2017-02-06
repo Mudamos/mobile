@@ -76,7 +76,7 @@ const jsCode = user => {
           var label = labels[i];
           if (isVoteCardLabel(label.textContent)) {
             var voteCardId = getVoteCardIdFromLabel(label);
-            return voteCardId;
+            if (voteCardId) return voteCardId;
           }
         }
       }
