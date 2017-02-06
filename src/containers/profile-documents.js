@@ -21,11 +21,20 @@ const webViewProps = user => ({
   source: { uri: TSE_URL },
   injectedJavaScript: `
     (function() {
-      var nameField = document.getElementsByName("nomeEleitor")[0];
-      var birthField = document.getElementsByName("dataNascimento")[0];
+      function fillOutForm() {
+        var nameField = document.getElementsByName("nomeEleitor")[0];
+        var birthField = document.getElementsByName("dataNascimento")[0];
+        if (nameField && !nameField.value) nameField.value = "${user.name}";
+        if (birthField && !birthField.value) birthField.value = "${fromISODate(user.birthdate)}";
+      }
 
-      if (!nameField.value) nameField.value = "${user.name}";
-      if (!birthField.value) birthField.value = "${fromISODate(user.birthdate)}";
+      function removePrint() {
+        var printBtn = document.getElementById("botoes_index_certidao");
+        if (printBtn) printBtn.remove();
+      }
+
+      fillOutForm();
+      removePrint();
     })();
   `,
 });
