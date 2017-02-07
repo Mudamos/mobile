@@ -116,8 +116,7 @@ export default class SignersLayout extends Component {
       <View style={styles.retryContainer}>
         <RetryButton
           onPress={onRetry}
-          backgroundColor="#ddd"
-          style={{marginHorizontal: 20}}
+          style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
         />
       </View>
     );
