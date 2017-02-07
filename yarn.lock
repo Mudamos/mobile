@@ -5386,6 +5386,10 @@ rn-nodeify@^7.0.1:
     semver "^5.0.1"
     xtend "^4.0.0"
 
+rn-viewpager@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/rn-viewpager/-/rn-viewpager-1.1.4.tgz#04ce247d3f594e54e5adeeb2ecd537866ba5ee85"
+
 rndm@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/rndm/-/rndm-1.2.0.tgz#f33fe9cfb52bbfd520aa18323bc65db110a1b76c"
