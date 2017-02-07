@@ -11,6 +11,7 @@ export const textStyle = {
 };
 
 export const buttonStyle = {
+  backgroundColor: "#fff",
   borderRadius: 100,
   height: 42,
 };
@@ -50,10 +51,12 @@ export default class MyFlatButton extends Component {
       title,
     } = this.props;
 
+    const mergedStyle = { ...buttonStyle, ...style };
+
     const button = MKButton.flatButton()
-      .withBackgroundColor("#fff")
-      .withMaskBorderRadius(100)
-      .withStyle({ ...buttonStyle, ...style })
+      .withBackgroundColor(mergedStyle.backgroundColor)
+      .withMaskBorderRadius(mergedStyle.borderRadius)
+      .withStyle(mergedStyle)
       .withTextStyle({ ...textStyle, ...this.props.textStyle });
 
     if (title) {

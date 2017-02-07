@@ -12,7 +12,7 @@ export default class TransparentFlatButton extends FlatButton {
 
     const button = this.buttonClass()
       .withBackgroundColor("transparent")
-      .withStyle({ ...buttonStyle, borderColor: "#fff", borderWidth: 1, ...style })
+      .withStyle({ ...buttonStyle, backgroundColor: "transparent", borderColor: "#fff", borderWidth: 1, ...style })
       .withTextStyle({ ...textStyle, color: "#fff", ...this.props.textStyle });
 
     if (!enabled) {
