@@ -80,7 +80,7 @@ const translations = {
   tseTutorial4: "Tenha certeza de preencher o seu nome completo, tal como em seu documento.",
   tseTutorial5: "Agora, clique em",
   tseTutorial6: "Este passo ajuda o Tribunal Superior Eleitoral a evitar a consulta por programas automáticos.",
-  tseTutorial7: "Responda todas as purguntas, como selecionar placas de rua, fachadas de lojas, etc.",
+  tseTutorial7: "Responda todas as perguntas, como selecionar placas de rua, fachadas de lojas, etc.",
   tseTutorial8: "Uma vez completada essa etapa clique em",
   tseTutorial9: "O seu título de eleitor deve ser preenchido automaticamente em seu cadastro!",
   typeCode: "Informe o código",
