@@ -10,6 +10,9 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  cantRememberVoteCardContainer: {
+    marginVertical: 20,
+  },
   container: {
     backgroundColor: "transparent",
     flex: 1,
