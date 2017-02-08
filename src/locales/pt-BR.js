@@ -19,6 +19,7 @@ const translations = {
   currentPassword: "Senha atual",
   documentsHeaderTitle: "Informe seus documentos",
   documentsReasonExplained: "Porque aqui sua assinatura tem validade legal. Ela vai propor oficialmente um projeto de lei. Diferente de outros sites de “assinaturas”, o nosso é para valer! Todos os dados são confidenciais e mantidos em regime de total privacidade. Somos uma das organizações que mais defendem a segurança e privacidade de dados no mundo e faremos isso também com os seus dados.",
+  dontRememberZipCode: "Não lembra do seu CEP?",
   downloadPDF: "Baixe o PDF da proposta",
   doYouWantToSign: "Deseja assinar o projeto de lei",
   email: "E-mail",

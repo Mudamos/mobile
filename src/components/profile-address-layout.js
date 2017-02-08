@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 
 import {
+  TouchableOpacity,
   Text,
   View,
 } from "react-native";
@@ -37,6 +38,7 @@ export default class ProfileAddressLayout extends Component {
     isSearching: PropTypes.bool,
     location: PropTypes.object,
     onClearLocation: PropTypes.func.isRequired,
+    onDontKnowZipCode: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
   }
@@ -73,6 +75,7 @@ export default class ProfileAddressLayout extends Component {
       isSaving,
       isSearching,
       location,
+      onDontKnowZipCode,
     } = this.props;
 
     return (
@@ -113,6 +116,12 @@ export default class ProfileAddressLayout extends Component {
                     onSubmitEditing={() => this.zipInput.blur()}
                     ref={ref => this.zipInput = ref}
                   />
+
+                  <TouchableOpacity onPress={onDontKnowZipCode} style={styles.dontRememberZipCodeContainer}>
+                    <Text style={styles.dontRememberZipCode}>
+                      {locale.dontRememberZipCode}
+                    </Text>
+                  </TouchableOpacity>
 
                   <FlatButton
                     title={locale.forward.toUpperCase()}
