@@ -2,6 +2,10 @@ import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 
 import {
+  reject,
+} from "ramda";
+
+import {
   ListView,
 } from "react-native";
 
@@ -63,10 +67,12 @@ class Container extends Component {
   }
 }
 
+const removeEmptySections = users => reject(v => !v || !v.length, users || {});
+
 const mapStateToProps = state => ({
   hasError: hasSignersFetchError(state),
   isFetching: isFetchingPlipSigners(state),
-  users: getPlipSigners(state),
+  users: removeEmptySections(getPlipSigners(state)),
 });
 
 const mapDispatchToProps = dispatch => ({
