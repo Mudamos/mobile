@@ -166,7 +166,7 @@ export default class ProfileAddressLayout extends Component {
 
         <PurpleFlatButton
           title={locale.confirm.toUpperCase()}
-          onPress={() => onSave(location.zipcode)}
+          onPress={() => onSave(location)}
           style={{
             position: "absolute",
             bottom: 30,

@@ -95,12 +95,12 @@ function* saveBirthdateProfile({ mobileApi }) {
 function* saveZipCodeProfile({ mobileApi }) {
   yield takeLatest("PROFILE_SAVE_ZIP_CODE", function* ({ payload }) {
     try {
-      const { zipCode } = payload;
+      const { location } = payload;
 
       yield put(savingProfile(true));
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.saveZipCode, authToken, zipCode);
+      const response = yield call(mobileApi.saveZipCode, authToken, location.toJson());
 
       const user = User.fromJson(response.user);
 

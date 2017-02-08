@@ -15,6 +15,9 @@ import {
   logError,
 } from "../utils";
 
+import { Address } from "../models";
+
+
 function* searchZipCode({ mobileApi }) {
   yield takeLatest("ADDRESS_ZIP_CODE_SEARCH", function* ({ payload }) {
     try {
@@ -25,7 +28,7 @@ function* searchZipCode({ mobileApi }) {
       const authToken = yield select(currentAuthToken);
       const response = yield call(mobileApi.searchZipCode, authToken, zipCode);
 
-      yield put(addressFound(response));
+      yield put(addressFound(Address.fromJson(response)));
       yield put(addressZipCodeSearching(false));
     } catch(e) {
       logError(e, { tag: "searchZipCode" });

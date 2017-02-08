@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClearLocation: () => dispatch(addressClear()),
-  onSave: zipCode => dispatch(saveZipCode(zipCode)),
+  onSave: location => dispatch(saveZipCode(location)),
   onSearch: zipCode => dispatch(addressZipCodeSearch(extractNumbers(zipCode))),
 })
 
