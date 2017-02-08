@@ -131,7 +131,7 @@ export default class TSELayout extends Component {
         <Image
           source={require("../images/TSE-name-birth-field.png")}
           resizeMode="contain"
-          style={[styles.mediumVMargin, { width }]}
+          style={[styles.mediumVMargin, styles.full, { width, height: null }]}
         />
 
         <View style={[styles.hPadded]}>
@@ -153,7 +153,7 @@ export default class TSELayout extends Component {
         <Image
           source={require("../images/TSE-not-robot.png")}
           resizeMode="contain"
-          style={[styles.mediumVMargin, { height: 100, width }]}
+          style={[styles.mediumVMargin, styles.full, { width, height: null }]}
         />
 
         <View style={[styles.hPadded]}>
@@ -164,8 +164,7 @@ export default class TSELayout extends Component {
   }
 
   renderStep3() {
-    const { height, width } = Dimensions.get("window");
-    const imgHeight = Math.round((height * 40) / 100);
+    const { width } = Dimensions.get("window");
 
     return (
       <View style={[styles.page]}>
@@ -176,7 +175,7 @@ export default class TSELayout extends Component {
         <Image
           source={require("../images/TSE-questions.png")}
           resizeMode="contain"
-          style={[styles.mediumVMargin, styles.full, { maxHeight: imgHeight, width }]}
+          style={[styles.mediumVMargin, styles.full, { width, height: null }]}
         />
       </View>
     );
@@ -194,7 +193,7 @@ export default class TSELayout extends Component {
         <Image
           source={require("../images/TSE-done.png")}
           resizeMode="contain"
-          style={[styles.smallVMargin, { height: 150, width }]}
+          style={[styles.smallVMargin, styles.full, { width, height: null }]}
         />
 
         <View style={[styles.hPadded]}>
