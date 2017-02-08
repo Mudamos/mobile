@@ -100,7 +100,7 @@ const scenes = Actions.create(
     <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
     <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
 
-    <Scene key="tse" component={TSEContainer} hideNavBar={true} />
+    <Scene key="tse" component={TSEContainer} hideNavBar={true} direction="vertical" />
   </Scene>
 );
 

@@ -487,8 +487,7 @@ class PlipLayout extends Component {
       <View style={styles.retryContainer}>
         <RetryButton
           onPress={this.props.retryPlip}
-          backgroundColor="#ddd"
-          style={{marginHorizontal: 20}}
+          style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
         />
       </View>
     );

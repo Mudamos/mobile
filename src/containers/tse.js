@@ -15,7 +15,7 @@ import {
   logError,
 } from "../utils";
 
-import WebViewLayout from "../components/web-view-layout";
+import TSELayout from "../components/tse-layout";
 
 
 const TSE_URL = "http://apps.tse.jus.br/saae/consultaNomeDataNascimento.do";
@@ -131,4 +131,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(WebViewLayout);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(TSELayout);

@@ -107,7 +107,7 @@ export default class ProfileDocumentsLayout extends Component {
                 ref={ref => this.cardInput = ref}
               />
 
-              <TouchableOpacity onPress={onTSERequested}>
+              <TouchableOpacity onPress={onTSERequested} style={styles.cantRememberVoteCardContainer}>
                 <Text style={styles.cantRememberVoteCard}>
                   {locale.cantRememberVoteCard}
                 </Text>

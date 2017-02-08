@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React from "react";
 
 import {
   Text,
@@ -13,19 +13,12 @@ import locale from "../locales/pt-BR";
 
 
 class RetryButton extends FlatButton {
-  static propTypes = {
-    backgroundColor: PropTypes.string,
-  };
-
   renderButton() {
     const {
-      backgroundColor,
       enabled,
     } = this.props;
 
     const builder = this.buttonClass().withText("");
-
-    if (backgroundColor) builder.withBackgroundColor(backgroundColor);
 
     const Button = builder.build();
     const opacity = enabled ? styles.enabled : styles.disabled;
