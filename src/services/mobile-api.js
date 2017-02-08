@@ -125,11 +125,11 @@ const searchZipCode = ({ client }) => (authToken, zipCode) =>
     .get(`/address/search/${zipCode}`)
     .then(getData);
 
-const saveZipCode = ({ client }) => (authToken, zipCode) =>
+const saveZipCode = ({ client }) => (authToken, location) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
     .post("/profile/zipcode")
-    .send({ user: { zipcode: zipCode }})
+    .send({ user: location })
     .then(getData);
 
 const saveDocuments = ({ client }) => (authToken, { cpf, voteCard }) =>

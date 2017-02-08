@@ -141,6 +141,7 @@ export default class ProfileAddressLayout extends Component {
 
   renderResults() {
     const { location, onSave } = this.props;
+    const { latitude, longitude } = location;
 
     return (
       <View style={styles.mapContainer}>
@@ -151,14 +152,14 @@ export default class ProfileAddressLayout extends Component {
         </LinearGradient>
         <MapView style={styles.map}
           initialRegion={{
-            latitude: location.lat,
-            longitude: location.lng,
+            latitude,
+            longitude,
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }}
         >
           <Marker
-            coordinate={{latitude: location.lat, longitude: location.lng}}
+            coordinate={{latitude, longitude}}
             title={this.locationTitle}
             description={this.locationDescription}
           />
@@ -166,7 +167,7 @@ export default class ProfileAddressLayout extends Component {
 
         <PurpleFlatButton
           title={locale.confirm.toUpperCase()}
-          onPress={() => onSave(location.zipcode)}
+          onPress={() => onSave(location)}
           style={{
             position: "absolute",
             bottom: 30,

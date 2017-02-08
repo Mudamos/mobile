@@ -52,9 +52,9 @@ export const saveUserProfileError = error => ({
   payload: { error },
 });
 
-export const saveZipCode = zipCode => ({
+export const saveZipCode = location => ({
   type: "PROFILE_SAVE_ZIP_CODE",
-  payload: { zipCode },
+  payload: { location },
 });
 
 export const sendPhoneValidation = phone => ({

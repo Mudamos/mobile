@@ -1,3 +1,4 @@
+export { default as Address } from "./address";
 export { default as Device } from "./device";
 export { default as Mobile } from "./mobile";
 export { default as ProfileType } from "./profile-type";
