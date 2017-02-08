@@ -7,6 +7,7 @@ import { extractNumbers } from "../utils";
 import {
   addressClear,
   addressZipCodeSearch,
+  openURL,
   saveZipCode,
 } from "../actions";
 
@@ -16,6 +17,7 @@ import {
   isSavingProfile,
 } from "../selectors";
 
+const CORREIOS_URL = "http://m.correios.com.br/movel/buscaCep.do";
 
 const mapStateToProps = state => ({
   isSearching: isSearchingZipCode(state),
@@ -25,6 +27,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClearLocation: () => dispatch(addressClear()),
+  onDontKnowZipCode: () => dispatch(openURL(CORREIOS_URL)),
   onSave: location => dispatch(saveZipCode(location)),
   onSearch: zipCode => dispatch(addressZipCodeSearch(extractNumbers(zipCode))),
 })

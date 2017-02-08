@@ -6,6 +6,7 @@ export default StyleSheet.create({
   cantRememberVoteCard: {
     alignSelf: "center",
     color: "#fff",
+    fontFamily: "roboto",
     fontSize: 14,
     fontWeight: "bold",
     textAlign: "center",
