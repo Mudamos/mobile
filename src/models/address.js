@@ -5,8 +5,8 @@ export default class Address {
     this.state = attrs.state;
     this.uf = attrs.uf;
     this.city = attrs.city;
-    this.lat = attrs.lat;
-    this.lng = attrs.lng;
+    this.latitude = attrs.latitude;
+    this.longitude = attrs.longitude;
     this.zipCode = attrs.zipCode;
   }
 
@@ -17,8 +17,8 @@ export default class Address {
       state: this.state,
       uf: this.uf,
       city: this.city,
-      lat: this.lat,
-      lng: this.lng,
+      lat: this.latitude,
+      lng: this.longitude,
       zipcode: this.zipCode,
     }
   }
@@ -30,8 +30,8 @@ export default class Address {
       state: json.state,
       uf: json.uf,
       city: json.city,
-      lat: json.lat,
-      lng: json.lng,
+      latitude: json.lat,
+      longitude: json.lng,
       zipCode: json.zipcode,
     });
   }
