@@ -19,7 +19,7 @@ const translations = {
   cpf: "cpf",
   currentPassword: "Senha atual",
   documentsHeaderTitle: "Informe seus documentos",
-  documentsReasonExplained: "Porque aqui sua assinatura tem validade legal. Ela vai propor oficialmente um projeto de lei. Diferente de outros sites de “assinaturas”, o nosso é para valer! Todos os dados são confidenciais e mantidos em regime de total privacidade. Somos uma das organizações que mais defendem a segurança e privacidade de dados no mundo e faremos isso também com os seus dados.",
+  documentsReasonExplained: "Para garantir que sua assinatura tenha validade legal. A câmara e assembléias de deputados estabelecem que o nome, data de nascimento, cidade e um identificador único (título eleitoral ou CPF) são os dos para verificar uma assinatura. Diferente de outros sites de assinaturas de petições, onde apenas seu nome e email são suficientes para manifestar seu interesse, nós queremos ir além e apresentar um projeto de lei com assinaturas legais!",
   dontRememberZipCode: "Não lembra do seu CEP?",
   downloadPDF: "Baixe o PDF da proposta",
   doYouWantToSign: "Deseja assinar o projeto de lei",

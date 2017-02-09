@@ -16,6 +16,10 @@ export default StyleSheet.create({
     fontWeight: "500",
     color: "#9013FE",
   },
+  modalLinkContainer: {
+    paddingVertical: 20,
+    paddingHorizontal: 40,
+  },
   modalText: {
     fontFamily: "roboto",
     fontSize: 16,
