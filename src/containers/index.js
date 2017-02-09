@@ -7,6 +7,7 @@ export { default as SignInContainer } from "./sign-in";
 export { default as SignUpContainer } from "./sign-up";
 export { default as ProfileBirthContainer } from "./profile-birth";
 export { default as ProfileAddressContainer } from "./profile-address";
+export { default as ProfileAddressConfirmContainer } from "./profile-address-confirm";
 export { default as ProfileDocumentsContainer } from "./profile-documents";
 export { default as ProfileMissingFieldsContainer } from "./profile-missing-fields";
 export { default as ProfilePhoneContainer } from "./profile-phone";

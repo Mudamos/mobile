@@ -14,6 +14,7 @@ import {
   PlipContainer,
   PlipViewerContainer,
   ProfileAddressContainer,
+  ProfileAddressConfirmContainer,
   ProfileBirthContainer,
   ProfileDocumentsContainer,
   ProfileMissingFieldsContainer,
@@ -96,6 +97,7 @@ const scenes = Actions.create(
     <Scene key="profileMissingFields" component={ProfileMissingFieldsContainer} hideNavBar={true} title="Confirme suas informações" />
     <Scene key="profileBirth" component={ProfileBirthContainer} hideNavBar={true} title="Data de Nascimento" />
     <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
+    <Scene key="profileAddressConfirm" component={ProfileAddressConfirmContainer} hideNavBar={true} title="CEP" />
     <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
     <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
     <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />

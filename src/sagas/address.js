@@ -5,6 +5,7 @@ import {
   addressZipCodeSearching,
   addressZipCodeSearchError,
   addressFound,
+  navigate,
   unauthorized,
 } from "../actions";
 
@@ -30,6 +31,7 @@ function* searchZipCode({ mobileApi }) {
 
       yield put(addressFound(Address.fromJson(response)));
       yield put(addressZipCodeSearching(false));
+      yield put(navigate("profileAddressConfirm"));
     } catch(e) {
       logError(e, { tag: "searchZipCode" });
 

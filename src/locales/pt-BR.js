@@ -1,4 +1,5 @@
 const translations = {
+  addressConfirmHeader: "Confirme sua localização",
   addressSearchHeader: "Informe seu CEP",
   alreadyHavePasswordCode: "Já possuo um código",
   back: "voltar",
