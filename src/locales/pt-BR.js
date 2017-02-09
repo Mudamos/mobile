@@ -2,7 +2,7 @@ const translations = {
   addressSearchHeader: "Informe seu CEP",
   alreadyHavePasswordCode: "Já possuo um código",
   back: "voltar",
-  birthdate: "Data de Nascimento",
+  birthdate: "Data de nascimento",
   birthdayHeaderTitle: "Informe sua data de nascimento",
   cancel: "Cancelar",
   cantRememberVoteCard: "Não lembra do seu título?",
