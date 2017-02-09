@@ -115,7 +115,7 @@ export default class ProfileDocumentsLayout extends Component {
             </View>
 
             <FlatButton
-              title={locale.confirm.toUpperCase()}
+              title={locale.forward.toUpperCase()}
               enabled={this.saveEnabled}
               onPress={this.onSave.bind(this)}
               style={{marginHorizontal: 20, marginTop: 20}}

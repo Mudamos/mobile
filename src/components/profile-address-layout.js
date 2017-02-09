@@ -175,7 +175,7 @@ export default class ProfileAddressLayout extends Component {
         </MapView>
 
         <PurpleFlatButton
-          title={locale.confirm.toUpperCase()}
+          title={locale.forward.toUpperCase()}
           onPress={() => onSave(location)}
           style={{
             position: "absolute",

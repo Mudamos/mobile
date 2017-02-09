@@ -148,7 +148,7 @@ export default class ProfilePhoneLayout extends Component {
         />
 
         <FlatButton
-          title={locale.verify.toUpperCase()}
+          title={locale.forward.toUpperCase()}
           enabled={this.verifyEnabled}
           onPress={this.onVerifyCode.bind(this)}
           style={{marginTop: 20}}

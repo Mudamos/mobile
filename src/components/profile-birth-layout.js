@@ -66,7 +66,7 @@ export default class ProfileBirthLayout extends Component {
             />
 
             <FlatButton
-              title={locale.confirm.toUpperCase()}
+              title={locale.forward.toUpperCase()}
               enabled={this.formEnabled}
               onPress={() => onSave(this.state.birthdate)}
               style={{marginTop: 20}}
