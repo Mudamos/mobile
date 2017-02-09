@@ -42,6 +42,7 @@ const style = StyleSheet.create({
 
 export default class MDTextInput extends Component {
   static propTypes = {
+    error: PropTypes.string,
     hasError: PropTypes.bool,
     hint: PropTypes.string,
     mdContainerStyle: PropTypes.object,
@@ -72,10 +73,14 @@ export default class MDTextInput extends Component {
     return (this.props.hasError && errorColor) || this.props.tintColor;
   }
 
+  get errorOrHint() {
+    const { error, hasError, hint } = this.props;
+    return hasError ? error : hint;
+  }
+
   render() {
     const {
       hasError,
-      hint,
       mdContainerStyle,
       mdErrorTextStyle,
       mdHintTextStyle,
@@ -104,9 +109,9 @@ export default class MDTextInput extends Component {
         />
 
         {
-          hint &&
+          this.errorOrHint &&
             <Text style={[style.hint, mdHintTextStyle, hasError && style.errorText, hasError && mdErrorTextStyle]}>
-              {hint}
+              {this.errorOrHint}
             </Text>
         }
       </View>

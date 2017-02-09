@@ -104,7 +104,8 @@ export default class ProfilePhoneLayout extends Component {
           onChangePhoneText={phone => this.setState({phone})}
           placeholder={locale.mobile}
           hasError={!!errorForField("number", sendErrors)}
-          hint={errorForField("number", sendErrors)}
+          error={errorForField("number", sendErrors)}
+          hint="Ex: (99) 99999-9999"
           mdContainerStyle={{marginHorizontal: 13}}
           onSubmitEditing={() => this.phoneInput.blur()}
           ref={ref => this.phoneInput = ref}

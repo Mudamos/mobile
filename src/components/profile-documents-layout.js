@@ -91,7 +91,8 @@ export default class ProfileDocumentsLayout extends Component {
                 onChangeCpfText={cpf => this.setState({cpf})}
                 placeholder={locale.cpf.toUpperCase()}
                 hasError={!!errorForField("cpf", errors)}
-                hint={errorForField("cpf", errors)}
+                error={errorForField("cpf", errors)}
+                hint="Ex: 999.999.999-99"
                 onSubmitEditing={() => this.cpfInput.blur()}
                 ref={ref => this.cpfInput = ref}
               />
@@ -102,7 +103,8 @@ export default class ProfileDocumentsLayout extends Component {
                 placeholder={locale.voteCard}
                 mdContainerStyle={{marginVertical: 20}}
                 hasError={!!errorForField("voteidcard", errors)}
-                hint={errorForField("voteidcard", errors)}
+                error={errorForField("voteidcard", errors)}
+                hint="Ex: 9999.9999.9999"
                 onSubmitEditing={() => this.cardInput.blur()}
                 ref={ref => this.cardInput = ref}
               />
