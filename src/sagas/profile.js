@@ -198,7 +198,7 @@ function* savePhoneProfile({ mobileApi }) {
           pinCode: code,
           number: phone,
 
-          // mock
+          // TODO: Remove mock
           imei: "300988605208167",
           brand: "samsung",
           model: "J5",

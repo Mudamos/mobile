@@ -23,6 +23,9 @@ import textStyles from "../styles/text";
 
 import locale from "../locales/pt-BR";
 
+const CODE_LENGTH = 5;
+
+
 export default class ProfilePhoneCodeLayout extends Component {
   state = {
     code: null,
@@ -30,6 +33,7 @@ export default class ProfilePhoneCodeLayout extends Component {
   }
 
   static propTypes = {
+    hasError: PropTypes.bool,
     isResending: PropTypes.bool,
     isValidated: PropTypes.bool,
     isVerifying: PropTypes.bool,
@@ -90,7 +94,11 @@ export default class ProfilePhoneCodeLayout extends Component {
   }
 
   renderCodeForm() {
-    const { phone, onBack } = this.props;
+    const {
+      hasError,
+      phone,
+      onBack,
+    } = this.props;
 
     return (
       <View style={styles.full}>
@@ -115,18 +123,23 @@ export default class ProfilePhoneCodeLayout extends Component {
           value={this.state.code}
           onChangeCodeText={code => this.setState({code})}
           keyboardType="numeric"
-          length={5}
+          length={CODE_LENGTH}
           mdContainerStyle={{marginHorizontal: 13}}
+          onFocus={this.onCodeInputFocus.bind(this)}
           onSubmitEditing={() => this.codeInput.blur()}
+          onCodeTyped={this.onSubmit.bind(this)}
           ref={ref => this.codeInput = ref}
         />
 
-        <FlatButton
-          title={locale.forward.toUpperCase()}
-          enabled={this.verifyEnabled}
-          onPress={this.onVerifyCode.bind(this)}
-          style={{marginTop: 20}}
-        />
+        {
+          hasError &&
+            <FlatButton
+              title={locale.forward.toUpperCase()}
+              enabled={this.verifyEnabled}
+              onPress={this.onVerifyCode.bind(this)}
+              style={{marginTop: 20}}
+            />
+        }
 
         <TouchableOpacity onPress={this.onResend.bind(this)}>
           <Text style={styles.resendLink}>
@@ -163,10 +176,20 @@ export default class ProfilePhoneCodeLayout extends Component {
     onResend(phone);
   }
 
-  onVerifyCode() {
-    const { onVerifyCode } = this.props;
-    const { code, phone } = this.state;
-
+  onVerifyCode(code = this.state.code) {
+    const { phone, onVerifyCode } = this.props;
     onVerifyCode({ code, phone });
+  }
+
+  onCodeInputFocus() {
+    const { code } = this.state;
+    if (code && code.length === CODE_LENGTH) {
+      this.setState({ code: null });
+    }
+  }
+
+  onSubmit(code) {
+    this.codeInput.blur();
+    this.onVerifyCode(code);
   }
 }

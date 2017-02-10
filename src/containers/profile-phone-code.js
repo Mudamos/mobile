@@ -13,11 +13,13 @@ import {
 import {
   isSavingProfile,
   isSendingPhoneValidation,
+  hasProfileSaveErrors,
   wasPhoneValidated,
 } from "../selectors";
 
 
 const mapStateToProps = state => ({
+  hasError: hasProfileSaveErrors(state),
   isResending: isSendingPhoneValidation(state),
   isValidated: wasPhoneValidated(state),
   isVerifying: isSavingProfile(state),

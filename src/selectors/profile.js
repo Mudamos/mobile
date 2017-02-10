@@ -11,6 +11,8 @@ export const currentUser = state => state.profile.currentUser;
 
 export const profileSaveErrors = state => state.profile.errors;
 
+export const hasProfileSaveErrors = state => state.profile.hasError;
+
 export const profileSendPhoneValidationErrors = state => state.profile.sendValidationErrors;
 
 export const isMainProfileComplete = state => {

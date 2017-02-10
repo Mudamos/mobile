@@ -15,6 +15,7 @@ export default class CodeInput extends Component {
     marginFromCode: PropTypes.number,
     value: PropTypes.string,
     onChangeCodeText: PropTypes.func.isRequired,
+    onCodeTyped: PropTypes.func,
   }
 
   static defaultProps = {
@@ -104,9 +105,13 @@ export default class CodeInput extends Component {
   }
 
   onChangeText(text) {
-    const { onChangeCodeText } = this.props;
+    const { length, onChangeCodeText, onCodeTyped } = this.props;
 
     onChangeCodeText(text)
+
+    if (onCodeTyped && text && text.length === length) {
+      onCodeTyped(text);
+    }
   }
 
   focus() {
