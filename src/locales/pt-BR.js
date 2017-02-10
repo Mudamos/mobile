@@ -11,7 +11,7 @@ const translations = {
   changeForgotPasswordTitle: "Alterar senha",
   changePasswordTitle: "Alterar senha",
   close: "Fechar",
-  codeHasBeenSentToPhone: "Um código foi enviado para seu celular",
+  codeHasBeenSentToPhone: "Seu código de confirmação foi enviado por SMS para o número",
   codeSent: "Código enviado",
   confirm: "Confirmar",
   confirmInformation: "Confirme suas informações",
@@ -51,7 +51,8 @@ const translations = {
   performLogin: "Faça o login",
   petitionEnded: "Encerrado",
   phoneHeaderTitle: "Informe seu celular",
-  phoneSubtitle: "Um código de confirmação será enviado via SMS",
+  phoneSubtitle: "Um código de confirmação será enviado por SMS",
+  phoneValidationCodeSent: "Código enviado!",
   profileUpdated: "Perfil atualizado!",
   profileUpdateTitle: "Editar perfil",
   projectSigned: "Projeto Assinado",
@@ -86,13 +87,14 @@ const translations = {
   tseTutorial7: "Responda todas as perguntas, como selecionar placas de rua, fachada de lojas, etc.",
   tseTutorial8: "Uma vez completada essa etapa clique em",
   tseTutorial9: "O seu título de eleitor será preenchido automaticamente em seu cadastro!",
-  typeCode: "Informe o código",
+  typeCode: "Digite o código de 5 dígitos",
   verify: "Verificar",
   voteCard: "Título de Eleitor",
   voterBirthDay: "Data de nascimento",
   voterName: "Nome do eleitor",
   whyRequestDocuments: "Por que pedimos estes dados?",
   whyRequestDocumentsAlternative: "Por que pedimos seus documentos?",
+  wrongNumber: "Número errado?",
   yes: "Sim",
   zipCode: "CEP",
   zipCodeReason: "Não precisamos saber o seu endereço específico, apenas uma localização aproximada de onde você mora",
@@ -123,7 +125,7 @@ Acreditamos que o smartphone é a melhor forma de garantir a individualidade da 
 Para garantir que sua assinatura tenha validade legal. A câmara e assembléias de deputados estabelecem que o nome, data de nascimento, cidade e um identificador único (título eleitoral ou CPF) são os dos para verificar uma assinatura. Diferente de outros sites de assinaturas de petições, onde apenas seu nome e email são suficientes para manifestar seu interesse, nós queremos ir além e apresentar um projeto de lei com assinaturas legais!
 
 ## Quem vai ter acesso aos meus dados?
-Tratamos todos os dados que recebemos de você com sigilo. Contudo, alguns dados precisam ser acessíveis para que todos possam verificar a transparência do processo. Seu nome, sua cidade e seu título de eleitor precisam, de acordo com as regras das casas legislativas, serão apresentados com sua assinatura. Isso sempre foi assim. Quando publicarmos algo, seremos responsáveis com sua privacidade, não expondo nenhum dado sensível seu, ao mesmo tempo garantimos que governo e sociedade civil possam verificar os dados.`
+Tratamos todos os dados que recebemos de você com sigilo. Contudo, alguns dados precisam ser acessíveis para que todos possam verificar a transparência do processo. Seu nome, sua cidade e seu título de eleitor precisam, de acordo com as regras das casas legislativas, serão apresentados com sua assinatura. Isso sempre foi assim. Quando publicarmos algo, seremos responsáveis com sua privacidade, não expondo nenhum dado sensível seu, ao mesmo tempo garantimos que governo e sociedade civil possam verificar os dados.`,
 };
 
 translations.markdown = markdown;

@@ -6,8 +6,8 @@ import {
   isFetchingProfile,
   savingProfile,
   updatedUserProfile,
+  navigate,
   phoneJustValidated,
-  phoneValidationSent,
   profileStateMachine,
   saveUserProfileError,
   sendingPhoneValidation,
@@ -152,7 +152,7 @@ function* saveDocumentsProfile({ mobileApi }) {
 function* sendPhoneValidation({ mobileApi }) {
   yield takeLatest("PROFILE_SEND_PHONE_VALIDATION", function* ({ payload }) {
     try {
-      const { phone } = payload;
+      const { phone, shouldNavigate } = payload;
 
       yield put(savingProfile(false));
 
@@ -167,7 +167,12 @@ function* sendPhoneValidation({ mobileApi }) {
       }
 
       yield put(sendingPhoneValidation(false));
-      yield put(phoneValidationSent(true));
+
+      if (shouldNavigate) {
+        yield put(navigate("profilePhoneCode", { phone }));
+      } else {
+        yield call([Toast, Toast.show], locale.phoneValidationCodeSent);
+      }
     } catch (e) {
       logError(e, { tag: "sendPhoneValidation" });
 

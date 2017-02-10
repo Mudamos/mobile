@@ -10,6 +10,14 @@ export default StyleSheet.create({
     color: "#fff",
     alignSelf: "center",
   },
+  link: {
+    textAlign: "center",
+    fontFamily: "roboto",
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#fff",
+    alignSelf: "center",
+  },
   modalLink: {
     fontFamily: "roboto",
     fontSize: 14,

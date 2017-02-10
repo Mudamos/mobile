@@ -15,18 +15,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isSendingPhoneValidation: payload.isSendingValidation,
-        hasSentPhoneValidation: false,
         sendValidationErrors: null,
       };
     case "PROFILE_SENDING_PHONE_VALIDATION_ERROR":
       return {
         ...state,
         sendValidationErrors: payload.error.validations,
-      };
-    case "PROFILE_PHONE_VALIDATION_SENT":
-      return {
-        ...state,
-        hasSentPhoneValidation: payload.hasSent,
       };
     case "PROFILE_PHONE_JUST_VALIDATED":
       return {
@@ -52,7 +46,6 @@ export default (state = initialState, action) => {
         isSaving: false,
         errors: null,
         isSendingPhoneValidation: false,
-        hasSentPhoneValidation: false,
         phoneJustValidated: false,
         profileFetchError: false,
         sendValidationErrors: null,

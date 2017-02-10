@@ -19,6 +19,7 @@ import {
   ProfileDocumentsContainer,
   ProfileMissingFieldsContainer,
   ProfilePhoneContainer,
+  ProfilePhoneCodeContainer,
   ProfileUpdateContainer,
   ProfileWalletContainer,
   SignersContainer,
@@ -100,6 +101,7 @@ const scenes = Actions.create(
     <Scene key="profileAddressConfirm" component={ProfileAddressConfirmContainer} hideNavBar={true} title="CEP" />
     <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
     <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
+    <Scene key="profilePhoneCode" component={ProfilePhoneCodeContainer} hideNavBar={true} title="Telefone" />
     <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
 
     <Scene key="tse" component={TSEContainer} hideNavBar={true} direction="vertical" />

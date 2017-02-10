@@ -1,8 +1,6 @@
 import { User } from "../models";
 
 
-export const hasSentPhoneValidation = state => state.profile.hasSentPhoneValidation;
-
 export const isFetchingProfile = state => state.profile.isFetching;
 
 export const isSavingProfile = state => state.profile.isSaving;
