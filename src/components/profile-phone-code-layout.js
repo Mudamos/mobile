@@ -46,8 +46,7 @@ export default class ProfilePhoneCodeLayout extends Component {
 
   get verifyEnabled() {
     const code = this.state.code || "";
-    const codeSize = 5;
-    return code.length === codeSize;
+    return code.length === CODE_LENGTH;
   }
 
   componentWillReceiveProps(nextProps) {
