@@ -109,7 +109,7 @@ const translations = {
 };
 
 const markdown = {
-  aboutBody: `# Aplicativo Mudamos permite assinatura de projetos de lei de iniciativa popular, pelo celular
+  aboutBody: `# Aplicativo Mudamos permite assinatura de projetos de lei de iniciativa popular pelo celular
 ## O que é um projeto de lei de iniciativa popular?
 Os projetos de lei de iniciativa popular estão previstos na Constituição brasileira e são a forma direta da população participar na construção de leis. Qualquer cidadão pode propor leis de iniciativa popular, desde que consiga um número mínimo de assinaturas apoiando o projeto. Em cidades pequenas, 1.500 assinaturas coletadas já são suficientes para promover mudanças, como alterar a remuneração de vereadores, ou modificar como o lixo da cidade é tratado, por exemplo.
 
@@ -123,7 +123,7 @@ Acreditamos que o smartphone é a melhor forma de garantir a individualidade da 
 Para garantir que sua assinatura tenha validade legal. A câmara e assembléias de deputados estabelecem que o nome, data de nascimento, cidade e um identificador único (título eleitoral ou CPF) são os dos para verificar uma assinatura. Diferente de outros sites de assinaturas de petições, onde apenas seu nome e email são suficientes para manifestar seu interesse, nós queremos ir além e apresentar um projeto de lei com assinaturas legais!
 
 ## Quem vai ter acesso aos meus dados?
-Tratamos todos os dados que recebemos de você com sigilo. Contudo, alguns dados precisam ser publicados na Internet, para que todos possam verificar a transparência do processo. Seu nome, sua data de aniversário, sua cidade e seu CPF/Título eleitoral precisam, de acordo com as regras das casas legislativas, serem públicos. Isso sempre foi assim. O que faremos é publicar esses dados com responsabilidade, usando regras de semi-anonimização quando possível para garantir que governo e sociedade civil possam verificar os dados, mas aumentando sua privacidade online.`,
+Tratamos todos os dados que recebemos de você com sigilo. Contudo, alguns dados precisam ser acessíveis para que todos possam verificar a transparência do processo. Seu nome, sua cidade e seu título de eleitor precisam, de acordo com as regras das casas legislativas, serão apresentados com sua assinatura. Isso sempre foi assim. Quando publicarmos algo, seremos responsáveis com sua privacidade, não expondo nenhum dado sensível seu, ao mesmo tempo garantimos que governo e sociedade civil possam verificar os dados.`
 };
 
 translations.markdown = markdown;
