@@ -83,7 +83,7 @@ export default class ProfileUpdateLayout extends Component {
                 value={this.state.name}
                 onChangeText={name => this.setState({ name })}
                 hasError={!!errorForField("name", errors)}
-                hint={errorForField("name", errors)}
+                error={errorForField("name", errors)}
                 onSubmitEditing={() => this.nameInput.blur()}
                 ref={ref => this.nameInput = ref}
               />
@@ -93,7 +93,8 @@ export default class ProfileUpdateLayout extends Component {
                 value={this.state.birthdate}
                 onChangeDateText={birthdate => this.setState({ birthdate })}
                 hasError={!!errorForField("birthday", errors)}
-                hint={errorForField("birthday", errors)}
+                error={errorForField("birthday", errors)}
+                hint="Ex: 31/12/1980"
                 onSubmitEditing={() => this.birthInput.blur()}
                 ref={ref => this.birthInput = ref}
               />
@@ -103,7 +104,8 @@ export default class ProfileUpdateLayout extends Component {
                 onChangeZipCodeText={zipCode => this.setState({zipCode})}
                 placeholder={locale.zipCode}
                 hasError={!!errorForField("zipcode", errors)}
-                hint={errorForField("zipcode", errors)}
+                error={errorForField("zipcode", errors)}
+                hint="Ex: 00000-000"
                 onSubmitEditing={() => this.zipInput.blur()}
                 ref={ref => this.zipInput = ref}
               />

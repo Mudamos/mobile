@@ -84,7 +84,7 @@ export default class SignUpLayout extends Component {
                 value={this.state.name}
                 onChangeText={name => this.setState({ name })}
                 hasError={!!errorForField("name", createErrors)}
-                hint={errorForField("name", createErrors)}
+                error={errorForField("name", createErrors)}
                 onSubmitEditing={() => this.nameInput.blur()}
                 ref={ref => this.nameInput = ref}
               />
@@ -94,7 +94,7 @@ export default class SignUpLayout extends Component {
                 value={this.state.email}
                 onChangeText={email => this.setState({ email })}
                 hasError={!!errorForField("email", createErrors)}
-                hint={errorForField("email", createErrors)}
+                error={errorForField("email", createErrors)}
                 keyboardType="email-address"
                 onSubmitEditing={() => this.emailInput.blur()}
                 ref={ref => this.emailInput = ref}
@@ -106,7 +106,7 @@ export default class SignUpLayout extends Component {
                 onChangeText={password => this.setState({ password })}
                 password={true}
                 hasError={!!errorForField("password", createErrors)}
-                hint={errorForField("password", createErrors)}
+                error={errorForField("password", createErrors)}
                 onSubmitEditing={() => this.passwordInput.blur()}
                 ref={ref => this.passwordInput = ref}
               />

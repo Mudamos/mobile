@@ -1,50 +1,73 @@
-import React, { Component, PropTypes } from "react";
+import React, { PropTypes } from "react";
 
 import {
   Text,
+  View,
 } from "react-native";
 
 
 import SimpleModal from "./simple-modal";
-import PurpleFlatButton from "./purple-flat-button";
+import ModalLink from "./modal-link-button";
 
 import locale from "../locales/pt-BR";
 
 import textStyles from "../styles/text";
+import styles from "../styles/plip-signed-modal";
 
 
-export default class PlipSignedModal extends Component {
+class MyModal extends SimpleModal {
   static propTypes = {
-    plipName: PropTypes.string.isRequired,
-    onClose: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
   };
 
-  render() {
-    const {
-      plipName,
-      onClose,
-      onShare,
-    } = this.props;
+  renderFooter() {
+    const { onClose, onShare } = this.props;
 
     return (
-      <SimpleModal onClose={onClose}>
-        <Text style={textStyles.modalTitle}>
-          {locale.projectSignedYeah}
-        </Text>
-
-        <Text style={textStyles.modalText}>
-          {
-            `${locale.projectSignedCongratulations} "${plipName}"!`
-          }
-        </Text>
-
-        <PurpleFlatButton
-          title={locale.share.toUpperCase()}
-          onPress={onShare}
-          style={{marginTop: 40}}
+      <View style={styles.footer}>
+        <ModalLink
+          title={locale.close.toUpperCase()}
+          onPress={() => this.hideAnimated(onClose)}
+          containerStyle={styles.modalLink}
         />
-      </SimpleModal>
+
+        <ModalLink
+          title={locale.shareAlt.toUpperCase()}
+          onPress={onShare}
+          containerStyle={styles.modalLink}
+        />
+      </View>
     );
   }
 }
+
+const PlipSignedModal = props => {
+  const {
+    plipName,
+    onClose,
+    onShare,
+  } = props;
+
+  return (
+    <MyModal
+      onClose={onClose}
+      onShare={onShare}
+    >
+      <Text style={textStyles.modalTitle}>
+        {locale.projectSignedYeah}
+      </Text>
+
+      <Text style={textStyles.modalText}>
+        {locale.projectSignedCongratulations({ plipName })}
+      </Text>
+    </MyModal>
+  );
+};
+
+
+PlipSignedModal.propTypes = {
+  plipName: PropTypes.string.isRequired,
+  ...MyModal.propTypes,
+};
+
+export default PlipSignedModal;

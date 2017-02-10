@@ -12,7 +12,8 @@ export default StyleSheet.create({
     textAlign: "center",
   },
   cantRememberVoteCardContainer: {
-    marginVertical: 20,
+    marginTop: 10,
+    marginBottom: 5,
   },
   container: {
     backgroundColor: "transparent",
@@ -20,6 +21,19 @@ export default StyleSheet.create({
   },
   headerTitle: StyleSheet.flatten([
     textStyles.header,
-    { marginBottom: 8 },
   ]),
+  inputContainer: {
+    marginHorizontal: 33,
+  },
+  whyDocumentsContainer: {
+    margin: 20,
+  },
+  whyDocumentsText: {
+    alignSelf: "center",
+    color: "#fff",
+    fontFamily: "roboto",
+    fontSize: 14,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
 });

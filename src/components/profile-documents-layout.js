@@ -12,7 +12,6 @@ import HeaderLogo from "./header-logo";
 import CpfInput from "./cpf-input";
 import VoteCardInput from "./vote-card-input";
 import FlatButton from "./flat-button";
-import TransparentFlatButton from "./transparent-flat-button";
 import PageLoader from "./page-loader";
 import Modal from "./documents-reason-modal";
 
@@ -79,30 +78,14 @@ export default class ProfileDocumentsLayout extends Component {
               {locale.documentsHeaderTitle}
             </Text>
 
-            <TransparentFlatButton
-              title={locale.whyRequestDocuments}
-              onPress={() => this.setState({ reasonEnabled: true })}
-              style={{marginHorizontal: 20}}
-            />
-
-            <View style={{marginHorizontal: 33, marginTop: 5}}>
-              <CpfInput
-                value={this.state.cpf}
-                onChangeCpfText={cpf => this.setState({cpf})}
-                placeholder={locale.cpf.toUpperCase()}
-                hasError={!!errorForField("cpf", errors)}
-                hint={errorForField("cpf", errors)}
-                onSubmitEditing={() => this.cpfInput.blur()}
-                ref={ref => this.cpfInput = ref}
-              />
-
+            <View style={styles.inputContainer}>
               <VoteCardInput
                 value={this.state.voteCard}
                 onChangeVoteCardText={voteCard => this.setState({voteCard})}
                 placeholder={locale.voteCard}
-                mdContainerStyle={{marginVertical: 20}}
                 hasError={!!errorForField("voteidcard", errors)}
-                hint={errorForField("voteidcard", errors)}
+                error={errorForField("voteidcard", errors)}
+                hint="Ex: 9999.9999.9999"
                 onSubmitEditing={() => this.cardInput.blur()}
                 ref={ref => this.cardInput = ref}
               />
@@ -112,15 +95,32 @@ export default class ProfileDocumentsLayout extends Component {
                   {locale.cantRememberVoteCard}
                 </Text>
               </TouchableOpacity>
+
+              <CpfInput
+                value={this.state.cpf}
+                onChangeCpfText={cpf => this.setState({cpf})}
+                placeholder={locale.cpf.toUpperCase()}
+                hasError={!!errorForField("cpf", errors)}
+                error={errorForField("cpf", errors)}
+                hint="Ex: 999.999.999-99"
+                onSubmitEditing={() => this.cpfInput.blur()}
+                ref={ref => this.cpfInput = ref}
+              />
             </View>
 
             <FlatButton
-              title={locale.confirm.toUpperCase()}
+              title={locale.forward.toUpperCase()}
               enabled={this.saveEnabled}
               onPress={this.onSave.bind(this)}
               style={{marginHorizontal: 20, marginTop: 20}}
             />
 
+            <TouchableOpacity
+              onPress={() => this.setState({ reasonEnabled: true })}
+              style={styles.whyDocumentsContainer}
+            >
+              <Text style={styles.whyDocumentsText}>{locale.whyRequestDocuments}</Text>
+            </TouchableOpacity>
           </ScrollView>
         </Layout>
 

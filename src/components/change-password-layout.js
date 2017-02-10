@@ -69,7 +69,7 @@ export default class ChangePasswordLayout extends Component {
                 onChangeText={currentPassword => this.setState({ currentPassword })}
                 password={true}
                 hasError={!!errorForField("currentPassword", errors)}
-                hint={errorForField("currentPassword", errors)}
+                error={errorForField("currentPassword", errors)}
                 onSubmitEditing={() => this.currentPasswordInput.blur()}
                 ref={ref => this.currentPasswordInput = ref}
               />
@@ -80,7 +80,7 @@ export default class ChangePasswordLayout extends Component {
                 onChangeText={newPassword => this.setState({ newPassword })}
                 password={true}
                 hasError={!!errorForField("newPassword", errors)}
-                hint={errorForField("newPassword", errors)}
+                error={errorForField("newPassword", errors)}
                 onSubmitEditing={() => this.newPasswordInput.blur()}
                 ref={ref => this.newPasswordInput = ref}
               />

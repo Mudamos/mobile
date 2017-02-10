@@ -91,7 +91,7 @@ export default class ChangeForgotPasswordLayout extends Component {
                 onChangeText={password => this.setState({ password })}
                 password={true}
                 hasError={!!errorForField("password", errors)}
-                hint={errorForField("password", errors)}
+                error={errorForField("password", errors)}
                 onSubmitEditing={() => this.passwordInput.blur()}
                 ref={ref => this.passwordInput = ref}
               />

@@ -1,8 +1,9 @@
 const translations = {
+  addressConfirmHeader: "Confirme sua localização",
   addressSearchHeader: "Informe seu CEP",
   alreadyHavePasswordCode: "Já possuo um código",
   back: "voltar",
-  birthdate: "Data de Nascimento",
+  birthdate: "Data de nascimento",
   birthdayHeaderTitle: "Informe sua data de nascimento",
   cancel: "Cancelar",
   cantRememberVoteCard: "Não lembra do seu título?",
@@ -10,7 +11,7 @@ const translations = {
   changeForgotPasswordTitle: "Alterar senha",
   changePasswordTitle: "Alterar senha",
   close: "Fechar",
-  codeHasBeenSentToPhone: "Um código foi enviado para seu celular",
+  codeHasBeenSentToPhone: "Seu código de confirmação foi enviado por SMS para o número",
   codeSent: "Código enviado",
   confirm: "Confirmar",
   confirmInformation: "Confirme suas informações",
@@ -18,7 +19,7 @@ const translations = {
   cpf: "cpf",
   currentPassword: "Senha atual",
   documentsHeaderTitle: "Informe seus documentos",
-  documentsReasonExplained: "Porque aqui sua assinatura tem validade legal. Ela vai propor oficialmente um projeto de lei. Diferente de outros sites de “assinaturas”, o nosso é para valer! Todos os dados são confidenciais e mantidos em regime de total privacidade. Somos uma das organizações que mais defendem a segurança e privacidade de dados no mundo e faremos isso também com os seus dados.",
+  documentsReasonExplained: "Para garantir que sua assinatura tenha validade legal. A câmara e assembléias de deputados estabelecem que o nome, data de nascimento, cidade e um identificador único (título eleitoral ou CPF) são os dos para verificar uma assinatura. Diferente de outros sites de assinaturas de petições, onde apenas seu nome e email são suficientes para manifestar seu interesse, nós queremos ir além e apresentar um projeto de lei com assinaturas legais!",
   dontRememberZipCode: "Não lembra do seu CEP?",
   downloadPDF: "Baixe o PDF da proposta",
   doYouWantToSign: "Deseja assinar o projeto de lei",
@@ -50,11 +51,12 @@ const translations = {
   performLogin: "Faça o login",
   petitionEnded: "Encerrado",
   phoneHeaderTitle: "Informe seu celular",
-  phoneSubtitle: "Um código de confirmação será enviado via SMS",
+  phoneSubtitle: "Um código de confirmação será enviado por SMS",
+  phoneValidationCodeSent: "Código enviado!",
   profileUpdated: "Perfil atualizado!",
   profileUpdateTitle: "Editar perfil",
   projectSigned: "Projeto Assinado",
-  projectSignedCongratulations: "Parabéns, você assinou o projeto de lei",
+  projectSignedCongratulations: ({ plipName }) => `Você agora é parte da mudança, faça ela ser ainda maior.\n\nPara alcançarmos o número mínimo de assinaturas para que essa proposta vire um projeto de lei, precisamos que você convença mais pessoas a assinarem também. Compartilhe e convide seus amigos e familiares a assinarem.\n\nO projeto "${plipName}" precisa de você!`,
   projectSignedYeah: "Projeto assinado!",
   readFullText: "Leia o texto\ncompleto",
   resendCode: "Reenviar código",
@@ -64,8 +66,9 @@ const translations = {
   save: "Salvar",
   search: "buscar",
   sendCode: "Enviar código",
-  sendSMSCode: "Enviar código via SMS",
+  sendSMSCode: "Enviar código por SMS",
   share: "Compartilhar",
+  shareAlt: "Compartilhe",
   shareMessage: ({description, name, hashtag}) => `${description}! vote no ${name} e construa um Brasil melhor. ${hashtag}`,
   signatures: "Assinaturas",
   signupSuccessModalText: "Seu celular foi validado e agora você já pode assinar projetos de lei de iniciativa popular.",
@@ -84,13 +87,14 @@ const translations = {
   tseTutorial7: "Responda todas as perguntas, como selecionar placas de rua, fachada de lojas, etc.",
   tseTutorial8: "Uma vez completada essa etapa clique em",
   tseTutorial9: "O seu título de eleitor será preenchido automaticamente em seu cadastro!",
-  typeCode: "Informe o código",
+  typeCode: "Digite o código de 5 dígitos",
   verify: "Verificar",
   voteCard: "Título de Eleitor",
   voterBirthDay: "Data de nascimento",
   voterName: "Nome do eleitor",
   whyRequestDocuments: "Por que pedimos estes dados?",
   whyRequestDocumentsAlternative: "Por que pedimos seus documentos?",
+  wrongNumber: "Número errado?",
   yes: "Sim",
   zipCode: "CEP",
   zipCodeReason: "Não precisamos saber o seu endereço específico, apenas uma localização aproximada de onde você mora",
@@ -107,7 +111,7 @@ const translations = {
 };
 
 const markdown = {
-  aboutBody: `# Aplicativo Mudamos permite assinatura de projetos de lei de iniciativa popular, pelo celular
+  aboutBody: `# Aplicativo Mudamos permite assinatura de projetos de lei de iniciativa popular pelo celular
 ## O que é um projeto de lei de iniciativa popular?
 Os projetos de lei de iniciativa popular estão previstos na Constituição brasileira e são a forma direta da população participar na construção de leis. Qualquer cidadão pode propor leis de iniciativa popular, desde que consiga um número mínimo de assinaturas apoiando o projeto. Em cidades pequenas, 1.500 assinaturas coletadas já são suficientes para promover mudanças, como alterar a remuneração de vereadores, ou modificar como o lixo da cidade é tratado, por exemplo.
 
@@ -121,7 +125,7 @@ Acreditamos que o smartphone é a melhor forma de garantir a individualidade da 
 Para garantir que sua assinatura tenha validade legal. A câmara e assembléias de deputados estabelecem que o nome, data de nascimento, cidade e um identificador único (título eleitoral ou CPF) são os dos para verificar uma assinatura. Diferente de outros sites de assinaturas de petições, onde apenas seu nome e email são suficientes para manifestar seu interesse, nós queremos ir além e apresentar um projeto de lei com assinaturas legais!
 
 ## Quem vai ter acesso aos meus dados?
-Tratamos todos os dados que recebemos de você com sigilo. Contudo, alguns dados precisam ser publicados na Internet, para que todos possam verificar a transparência do processo. Seu nome, sua data de aniversário, sua cidade e seu CPF/Título eleitoral precisam, de acordo com as regras das casas legislativas, serem públicos. Isso sempre foi assim. O que faremos é publicar esses dados com responsabilidade, usando regras de semi-anonimização quando possível para garantir que governo e sociedade civil possam verificar os dados, mas aumentando sua privacidade online.`,
+Tratamos todos os dados que recebemos de você com sigilo. Contudo, alguns dados precisam ser acessíveis para que todos possam verificar a transparência do processo. Seu nome, sua cidade e seu título de eleitor precisam, de acordo com as regras das casas legislativas, serão apresentados com sua assinatura. Isso sempre foi assim. Quando publicarmos algo, seremos responsáveis com sua privacidade, não expondo nenhum dado sensível seu, ao mesmo tempo garantimos que governo e sociedade civil possam verificar os dados.`,
 };
 
 translations.markdown = markdown;

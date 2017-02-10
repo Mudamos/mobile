@@ -1,18 +1,16 @@
 import React, { PropTypes } from "react";
 
 import {
-  Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 
 
 import Modal from "./modal";
+import ModalLink from "./modal-link-button";
 
 import locale from "../locales/pt-BR";
 
 import styles from "../styles/simple-modal";
-import textStyles from "../styles/text";
 
 
 export default class SimpleModal extends Modal {
@@ -25,11 +23,10 @@ export default class SimpleModal extends Modal {
 
     return (
       <View style={styles.footer}>
-        <TouchableOpacity onPress={() => this.hideAnimated(onClose)}>
-          <Text style={textStyles.modalLink}>
-            {locale.close.toUpperCase()}
-          </Text>
-        </TouchableOpacity>
+        <ModalLink
+          title={locale.close.toUpperCase()}
+          onPress={() => this.hideAnimated(onClose)}
+        />
       </View>
     );
   }

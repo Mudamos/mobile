@@ -60,13 +60,14 @@ export default class ProfileBirthLayout extends Component {
               onChangeDateText={birthdate => this.setState({ birthdate })}
               mdContainerStyle={{marginHorizontal: 13}}
               hasError={!!errorForField("birthday", errors)}
-              hint={errorForField("birthday", errors)}
+              error={errorForField("birthday", errors)}
+              hint="Ex: 31/12/1980"
               onSubmitEditing={() => this.birthInput.blur()}
               ref={ref => this.birthInput = ref}
             />
 
             <FlatButton
-              title={locale.confirm.toUpperCase()}
+              title={locale.forward.toUpperCase()}
               enabled={this.formEnabled}
               onPress={() => onSave(this.state.birthdate)}
               style={{marginTop: 20}}

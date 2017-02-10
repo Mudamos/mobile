@@ -10,23 +10,17 @@ export default (state = initialState, action) => {
     case "PROFILE_FETCHING_ERROR":
       return { ...state, profileFetchError: payload.profileFetchError };
     case "PROFILE_SAVING":
-      return { ...state, isSaving: payload.isSaving, errors: null };
+      return { ...state, isSaving: payload.isSaving, errors: null, hasError: false };
     case "PROFILE_SENDING_PHONE_VALIDATION":
       return {
         ...state,
         isSendingPhoneValidation: payload.isSendingValidation,
-        hasSentPhoneValidation: false,
         sendValidationErrors: null,
       };
     case "PROFILE_SENDING_PHONE_VALIDATION_ERROR":
       return {
         ...state,
         sendValidationErrors: payload.error.validations,
-      };
-    case "PROFILE_PHONE_VALIDATION_SENT":
-      return {
-        ...state,
-        hasSentPhoneValidation: payload.hasSent,
       };
     case "PROFILE_PHONE_JUST_VALIDATED":
       return {
@@ -39,9 +33,9 @@ export default (state = initialState, action) => {
         currentUser: payload.currentUser,
       };
     case "PROFILE_USER_SAVE_FAILURE":
-      return { ...state, errors: payload.error.validations };
+      return { ...state, errors: payload.error.validations, hasError: !!payload.error };
     case "PROFILE_CLEAR_SAVE_ERRORS":
-      return { ...state, errors: null };
+      return { ...state, errors: null, hasError: false };
     case "PROFILE_VOTE_CARD_ID_ACQUIRED":
       return { ...state, voteCardId: payload.voteCardId };
     case "SESSION_CLEAR_SESSION":
@@ -51,8 +45,8 @@ export default (state = initialState, action) => {
         isFetching: false,
         isSaving: false,
         errors: null,
+        hasError: false,
         isSendingPhoneValidation: false,
-        hasSentPhoneValidation: false,
         phoneJustValidated: false,
         profileFetchError: false,
         sendValidationErrors: null,

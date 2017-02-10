@@ -12,11 +12,6 @@ export const isFetchingProfile = isFetching => ({
   payload: { isFetching },
 });
 
-export const phoneValidationSent = hasSent => ({
-  type: "PROFILE_PHONE_VALIDATION_SENT",
-  payload: { hasSent },
-});
-
 export const profileSaveMain = ({ name, email, password }) => ({
   type: "PROFILE_SAVE_MAIN",
   payload: { name, email, password },
@@ -57,9 +52,9 @@ export const saveZipCode = location => ({
   payload: { location },
 });
 
-export const sendPhoneValidation = phone => ({
+export const sendPhoneValidation = ({ phone, shouldNavigate = false })  => ({
   type: "PROFILE_SEND_PHONE_VALIDATION",
-  payload: { phone },
+  payload: { phone, shouldNavigate },
 });
 
 export const sendingPhoneValidationError = error => ({

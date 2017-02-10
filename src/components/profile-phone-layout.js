@@ -13,31 +13,23 @@ import HeaderLogo from "./header-logo";
 import PhoneInput from "./phone-input";
 import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
-import CodeInput from "./code-input";
-import SimpleModal from "./simple-modal";
+import NavigationBar from "./navigation-bar";
 
 import styles from "../styles/profile-phone-layout";
-import textStyles from "../styles/text";
 
 import locale from "../locales/pt-BR";
 
 export default class ProfilePhoneLayout extends Component {
   state = {
-    code: null,
     phone: this.props.phone,
-    showSignUpSuccess: false,
   }
 
   static propTypes = {
-    hasSentValidation: PropTypes.bool,
     isSending: PropTypes.bool,
     isValidated: PropTypes.bool,
-    isVerifying: PropTypes.bool,
     phone: PropTypes.string,
     sendErrors: PropTypes.array,
     onPhoneGiven: PropTypes.func.isRequired,
-    onSignUpFinish: PropTypes.func.isRequired,
-    onVerifyCode: PropTypes.func.isRequired,
   }
 
   get sendEnabled() {
@@ -45,41 +37,21 @@ export default class ProfilePhoneLayout extends Component {
     return phone.length >= 14;
   }
 
-  get verifyEnabled() {
-    const code = this.state.code || "";
-    const codeSize = 5;
-    return code.length === codeSize;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.isValidated && !this.state.showSignUpSuccess) {
-      this.setState({ showSignUpSuccess: true });
-    }
-  }
-
   render() {
     const {
-      hasSentValidation,
       isSending,
-      isVerifying,
     } = this.props;
-
-    const { showSignUpSuccess } = this.state;
 
     return (
       <View style={styles.container}>
         <Layout>
+          {this.renderNavBar()}
           <ScrollView style={styles.scrollView}>
-            <HeaderLogo />
-
-            { !hasSentValidation && this.renderPhoneForm() }
-            { hasSentValidation && this.renderCodeForm() }
+            {this.renderPhoneForm()}
           </ScrollView>
         </Layout>
 
-        {showSignUpSuccess && this.renderSignUpSuccess()}
-
-        <PageLoader isVisible={isSending || isVerifying} />
+        <PageLoader isVisible={isSending} />
       </View>
     );
   }
@@ -104,7 +76,8 @@ export default class ProfilePhoneLayout extends Component {
           onChangePhoneText={phone => this.setState({phone})}
           placeholder={locale.mobile}
           hasError={!!errorForField("number", sendErrors)}
-          hint={errorForField("number", sendErrors)}
+          error={errorForField("number", sendErrors)}
+          hint="Ex: (99) 99999-9999"
           mdContainerStyle={{marginHorizontal: 13}}
           onSubmitEditing={() => this.phoneInput.blur()}
           ref={ref => this.phoneInput = ref}
@@ -120,74 +93,13 @@ export default class ProfilePhoneLayout extends Component {
     );
   }
 
-  renderCodeForm() {
-    const { phone } = this.state;
-
+  renderNavBar() {
     return (
-      <View style={{flex: 1}}>
-        <Text style={styles.subHeader}>
-          {locale.codeHasBeenSentToPhone}
-        </Text>
-
-        <Text style={styles.phoneText}>
-          { phone }
-        </Text>
-
-        <Text style={styles.typeCodeText}>
-          {locale.typeCode}
-        </Text>
-
-        <CodeInput
-          value={this.state.code}
-          onChangeCodeText={code => this.setState({code})}
-          keyboardType="numeric"
-          length={5}
-          mdContainerStyle={{marginHorizontal: 13}}
-          onSubmitEditing={() => this.codeInput.blur()}
-          ref={ref => this.codeInput = ref}
-        />
-
-        <FlatButton
-          title={locale.verify.toUpperCase()}
-          enabled={this.verifyEnabled}
-          onPress={this.onVerifyCode.bind(this)}
-          style={{marginTop: 20}}
-        />
-
-        <Text
-          onPress={this.resend.bind(this)}
-          style={styles.resendLink}
-        >
-          {locale.resendCode.toUpperCase()}
-        </Text>
-      </View>
+      <NavigationBar
+        containerStyle={styles.navigationBar}
+        middleView={<HeaderLogo />}
+      />
     );
-  }
-
-  renderSignUpSuccess() {
-    return (
-      <SimpleModal onClose={this.onSuccessClose.bind(this)}>
-        <Text style={textStyles.modalTitle}>
-          {locale.congratulations}
-        </Text>
-
-        <Text style={textStyles.modalText}>
-          {locale.signupSuccessModalText}
-        </Text>
-      </SimpleModal>
-    );
-  }
-
-  onSuccessClose() {
-    const { onSignUpFinish } = this.props;
-
-    this.setState({ showSignUpSuccess: false });
-    onSignUpFinish();
-  }
-
-  resend() {
-    this.setState({ code: "" });
-    this.onSend();
   }
 
   onSend() {
@@ -195,12 +107,5 @@ export default class ProfilePhoneLayout extends Component {
     const { phone } = this.state;
 
     onPhoneGiven(phone);
-  }
-
-  onVerifyCode() {
-    const { onVerifyCode } = this.props;
-    const { code, phone } = this.state;
-
-    onVerifyCode({ code, phone });
   }
 }
