@@ -20,6 +20,10 @@ export default StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 40,
   },
+  modalLinkContainerShort: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
   modalText: {
     fontFamily: "roboto",
     fontSize: 16,
