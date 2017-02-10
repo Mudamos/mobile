@@ -66,7 +66,7 @@ const translations = {
   save: "Salvar",
   search: "buscar",
   sendCode: "Enviar código",
-  sendSMSCode: "Enviar código via SMS",
+  sendSMSCode: "Enviar código por SMS",
   share: "Compartilhar",
   shareAlt: "Compartilhe",
   shareMessage: ({description, name, hashtag}) => `${description}! vote no ${name} e construa um Brasil melhor. ${hashtag}`,
