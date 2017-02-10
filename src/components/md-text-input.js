@@ -73,7 +73,7 @@ export default class MDTextInput extends Component {
     return (this.props.hasError && errorColor) || this.props.tintColor;
   }
 
-  get errorOrHint() {
+  get message() {
     const { error, hasError, hint } = this.props;
     return hasError ? error : hint;
   }
@@ -109,9 +109,9 @@ export default class MDTextInput extends Component {
         />
 
         {
-          this.errorOrHint &&
+          this.message &&
             <Text style={[style.hint, mdHintTextStyle, hasError && style.errorText, hasError && mdErrorTextStyle]}>
-              {this.errorOrHint}
+              {this.message}
             </Text>
         }
       </View>
