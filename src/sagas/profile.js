@@ -185,7 +185,7 @@ function* sendPhoneValidation({ mobileApi }) {
   });
 }
 
-function* savePhoneProfile({ mobileApi }) {
+function* savePhoneProfile({ mobileApi, DeviceInfo }) {
   yield takeLatest("PROFILE_SAVE_PHONE", function* ({ payload }) {
     try {
       const { code, phone } = payload;
@@ -198,13 +198,7 @@ function* savePhoneProfile({ mobileApi }) {
           pinCode: code,
           number: phone,
 
-          // TODO: Remove mock
-          imei: "300988605208167",
-          brand: "samsung",
-          model: "J5",
-          so: "android",
-          soVersion: "6.0.1",
-          screenSize: "320x480",
+          ...DeviceInfo.info().toJson(),
         },
       };
 
@@ -290,13 +284,13 @@ export function* fetchProfileSaga({ mobileApi }) {
   });
 }
 
-export default function* profileSaga({ mobileApi, sessionStore }) {
+export default function* profileSaga({ mobileApi, DeviceInfo, sessionStore }) {
   yield spawn(saveMainProfile, { mobileApi, sessionStore });
   yield spawn(updateProfile, { mobileApi });
   yield spawn(saveBirthdateProfile, { mobileApi });
   yield spawn(saveZipCodeProfile, { mobileApi });
   yield spawn(saveDocumentsProfile, { mobileApi });
   yield spawn(sendPhoneValidation, { mobileApi });
-  yield spawn(savePhoneProfile, { mobileApi });
+  yield spawn(savePhoneProfile, { mobileApi, DeviceInfo });
   yield spawn(fetchProfileSaga, { mobileApi });
 }

@@ -42,6 +42,7 @@ import WalletManager from "./services/wallet";
 import MobileApi from "./services/mobile-api";
 import ApiError from "./services/api-error";
 import LocalStorage from "./services/local-storage";
+import DeviceInfo from "./services/device-info";
 
 import reducer from "./reducers";
 import sagas from "./sagas";
@@ -110,6 +111,7 @@ const scenes = Actions.create(
 
 sagaRunner.run(sagas, {
   apiError: ApiError(),
+  DeviceInfo,
   localStorage,
   mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
   mobileApi: MobileApi(Config.MOBILE_API_URL),
