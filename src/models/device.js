@@ -10,6 +10,19 @@ export default class Device {
     this.userAgent = attrs.userAgent;
   }
 
+  toJson() {
+    return {
+      brand: this.brand,
+      deviceId: this.deviceId,
+      deviceUniqueId: this.deviceUniqueId,
+      manufacturer: this.manufacturer,
+      model: this.model,
+      systemName: this.systemName,
+      systemVersion: this.systemVersion,
+      userAgent: this.userAgent,
+    };
+  }
+
   toString() {
     return [
       this.brand,
