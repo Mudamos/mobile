@@ -15,6 +15,7 @@ import HeaderLogo from "./header-logo";
 import DateInput from "./date-input";
 import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
+import NavigationBar from "./navigation-bar";
 
 import locale from "../locales/pt-BR";
 
@@ -48,7 +49,7 @@ export default class ProfileBirthLayout extends Component {
       <View style={styles.container}>
         <Layout>
           <ScrollView style={styles.scrollView}>
-            <HeaderLogo />
+            {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
               {locale.birthdayHeaderTitle}
@@ -77,6 +78,14 @@ export default class ProfileBirthLayout extends Component {
 
         <PageLoader isVisible={isSaving} />
       </View>
+    );
+  }
+
+  renderNavBar() {
+    return (
+      <NavigationBar
+        middleView={<HeaderLogo />}
+      />
     );
   }
 }

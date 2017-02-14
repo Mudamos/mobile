@@ -27,7 +27,6 @@ export default class WebViewLayout extends Component {
 
   render() {
     const {
-      onBack,
       ...webViewProps
     } = this.props;
 
@@ -36,12 +35,7 @@ export default class WebViewLayout extends Component {
     return (
       <View style={styles.container}>
         <Layout>
-          <NavigationBar
-            containerStyle={styles.navigationBar}
-
-            leftView={<BackButton onPress={onBack} />}
-            middleView={<HeaderLogo />}
-          />
+          {this.renderNavBar()}
 
           <WebView
             {...webViewProps}
@@ -52,6 +46,16 @@ export default class WebViewLayout extends Component {
         <PageLoader isVisible={loading} />
 
       </View>
+    );
+  }
+
+  renderNavBar() {
+    const { onBack } = this.props;
+    return (
+      <NavigationBar
+        leftView={<BackButton onPress={onBack} />}
+        middleView={<HeaderLogo />}
+      />
     );
   }
 

@@ -66,9 +66,8 @@ export default class ProfilePhoneCodeLayout extends Component {
     return (
       <View style={styles.container}>
         <Layout>
-          {this.renderNavBar()}
-
-          <ScrollView style={styles.scrollView}>
+          <ScrollView>
+            {this.renderNavBar()}
             {this.renderCodeForm()}
           </ScrollView>
         </Layout>
@@ -82,10 +81,8 @@ export default class ProfilePhoneCodeLayout extends Component {
 
   renderNavBar() {
     const { onBack } = this.props;
-
     return (
       <NavigationBar
-        containerStyle={styles.navigationBar}
         leftView={<BackButton onPress={onBack} />}
         middleView={<HeaderLogo />}
       />
@@ -100,7 +97,7 @@ export default class ProfilePhoneCodeLayout extends Component {
     } = this.props;
 
     return (
-      <View style={styles.full}>
+      <View style={styles.contentContainer}>
         <Text style={styles.subHeader}>
           {locale.codeHasBeenSentToPhone}
         </Text>

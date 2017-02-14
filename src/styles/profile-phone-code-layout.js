@@ -7,6 +7,10 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
     flex: 1,
   },
+  contentContainer: {
+    flex: 1,
+    marginHorizontal: 20,
+  },
   full: {
     flex: 1,
   },
@@ -17,9 +21,6 @@ export default StyleSheet.create({
   link: StyleSheet.flatten([
     textStyles.link,
   ]),
-  navigationBar: {
-    height: 70,
-  },
   phoneInfoContainer: {
     flexDirection: "row",
     justifyContent: "center",
@@ -28,9 +29,6 @@ export default StyleSheet.create({
     textStyles.link,
     { marginTop: 24 },
   ]),
-  scrollView: {
-    marginHorizontal: 20,
-  },
   subHeader: StyleSheet.flatten([
     textStyles.subtitle,
     { marginBottom: 5 },

@@ -7,6 +7,10 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
     flex: 1,
   },
+  contentContainer: {
+    marginHorizontal: 20,
+    marginTop: 12,
+  },
   full: {
     flex: 1,
   },
@@ -14,12 +18,6 @@ export default StyleSheet.create({
     textStyles.header,
     { marginBottom: 8 },
   ]),
-  navigationBar: {
-    height: 70,
-  },
-  scrollView: {
-    marginHorizontal: 20,
-  },
   subHeader: StyleSheet.flatten([
     textStyles.subtitle,
     { marginBottom: 5 },

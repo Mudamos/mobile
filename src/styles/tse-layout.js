@@ -31,9 +31,6 @@ export default StyleSheet.create({
   mediumVMargin: {
     marginVertical: 20,
   },
-  navigationBar: {
-    height: 70,
-  },
   reference: {
     fontStyle: "italic",
   },

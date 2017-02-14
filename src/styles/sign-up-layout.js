@@ -1,11 +1,6 @@
 import { Platform, StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  backButton: {
-    position: "absolute",
-    top: 20,
-    left: 16,
-  },
   container: {
     backgroundColor: "transparent",
     flex: 1,
@@ -15,6 +10,7 @@ export default StyleSheet.create({
     color: "#fff",
     fontSize: 20,
     marginHorizontal: 12,
+    marginTop: 12,
     textAlign: "center",
 
     ...Platform.select({

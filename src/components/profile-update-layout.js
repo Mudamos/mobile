@@ -14,6 +14,7 @@ import MDTextInput from "./md-text-input";
 import FlatButton from "./flat-button";
 import DateInput from "./date-input";
 import ZipCodeInput from "./zip-code-input";
+import NavigationBar from "./navigation-bar";
 
 import locale from "../locales/pt-BR";
 
@@ -59,19 +60,13 @@ export default class ProfileUpdateLayout extends Component {
     const {
       errors,
       isSaving,
-      onBack,
     } = this.props;
 
     return (
       <View style={styles.container}>
         <Layout>
           <ScrollView>
-            <HeaderLogo />
-
-            <BackButton
-              containerStyle={styles.backButton}
-              onPress={onBack}
-            />
+            {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
               {locale.profileUpdateTitle}
@@ -123,6 +118,16 @@ export default class ProfileUpdateLayout extends Component {
 
         <PageLoader isVisible={isSaving} />
       </View>
+    );
+  }
+
+  renderNavBar() {
+    const { onBack } = this.props;
+    return (
+      <NavigationBar
+        leftView={<BackButton onPress={onBack} />}
+        middleView={<HeaderLogo />}
+      />
     );
   }
 

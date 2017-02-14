@@ -45,8 +45,8 @@ export default class ProfilePhoneLayout extends Component {
     return (
       <View style={styles.container}>
         <Layout>
-          {this.renderNavBar()}
-          <ScrollView style={styles.scrollView}>
+          <ScrollView>
+            {this.renderNavBar()}
             {this.renderPhoneForm()}
           </ScrollView>
         </Layout>
@@ -62,7 +62,7 @@ export default class ProfilePhoneLayout extends Component {
     } = this.props;
 
     return (
-      <View>
+      <View style={styles.contentContainer}>
         <Text style={styles.headerTitle}>
           {locale.phoneHeaderTitle}
         </Text>
@@ -96,7 +96,6 @@ export default class ProfilePhoneLayout extends Component {
   renderNavBar() {
     return (
       <NavigationBar
-        containerStyle={styles.navigationBar}
         middleView={<HeaderLogo />}
       />
     );

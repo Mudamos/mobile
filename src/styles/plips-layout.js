@@ -6,7 +6,6 @@ export default StyleSheet.create({
   },
   navigationBar: {
     backgroundColor: "#883DE1",
-    height: 84,
   },
   retryContainer: {
     flex: 1,

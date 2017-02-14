@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   headerTitle: StyleSheet.flatten([
     textStyles.header,
-    { marginBottom: 8 },
+    { marginBottom: 8, marginTop: 12 },
   ]),
   inputContainer: {
     marginHorizontal: 33,

@@ -10,7 +10,6 @@ export default StyleSheet.create({
   },
   navigationBar: {
     backgroundColor: "rgb(71, 57, 121)",
-    height: 85,
   },
   scrollView: {
     flex: 1,
