@@ -30,6 +30,7 @@ export default class PlipsLayout extends Component {
     openMenu: PropTypes.func.isRequired,
     plipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     onFetchPlips: PropTypes.func.isRequired,
+    onGoToPlip: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
   }
@@ -80,15 +81,21 @@ export default class PlipsLayout extends Component {
     );
   }
 
-  renderRow(plip) {
+  renderRow(plip, section, row, highlightRow) {
+    const { onGoToPlip } = this.props;
+
     return (
-      <View style={styles.tableRow}>
-        <View style={styles.full}>
-          <Text style={styles.userName}>
-            {plip.phase.name}
-          </Text>
-        </View>
-      </View>
+      <TouchableOpacity
+        onPress={() => {
+          highlightRow(section, row);
+          onGoToPlip(plip);
+        }}
+        style={styles.tableRow}
+      >
+        <Text style={styles.userName}>
+          {plip.phase.name}
+        </Text>
+      </TouchableOpacity>
     );
   }
 

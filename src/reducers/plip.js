@@ -7,8 +7,6 @@ export default  (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case "PLIP_SET_CURRENT_PLIP":
-      return { ...state, currentPlip: payload.currentPlip };
     case "PLIPS_FETCHED":
       return {
         ...state,
@@ -125,12 +123,38 @@ export default  (state = initialState, action) => {
         ...state,
         currentSigningPlip: payload.plip,
       };
+    case "PLIP_FETCHING_PLIP_RELATED_INFO":
+      return {
+        ...state,
+        isFetchingPlipRelatedInfo: payload.isFetching,
+        fetchPlipRelatedInfoError: null,
+      };
+    case "PLIP_FETCH_PLIP_RELATED_INFO_ERROR":
+      return {
+        ...state,
+        fetchPlipRelatedInfoError: true,
+      };
+    case "PLIP_CLEAR_INFO":
+      return {
+        ...state,
+
+        fetchPlipRelatedInfoError: null,
+        justSignedPlips: {},
+        plipSignInfo: null,
+        shortSigners: null,
+        shortSignersTotal: null,
+        userSignInfo: {},
+      };
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,
         currentSigningPlip: null,
+        fetchPlipRelatedInfoError: null,
         userSignInfo: {},
         justSignedPlips: {},
+        shortSigners: null,
+        shortSignersTotal: null,
+        plipSignInfo: null,
       };
     default:
       return state;

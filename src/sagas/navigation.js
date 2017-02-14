@@ -3,7 +3,7 @@ import { call, fork, put, spawn, select } from "redux-saga/effects";
 
 import { Actions } from "react-native-router-flux";
 
-import { isDev } from "../utils";
+import { homeSceneKey, isDev } from "../utils";
 
 import { findIndex } from "ramda";
 
@@ -82,8 +82,6 @@ export function* profileScreenForCurrentUser() {
   ];
 
   const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
-  const showPlipKey = "showPlip";
-
   const screensDone = [
     yield select(isMainProfileComplete),
     yield select(isBirthProfileComplete),
@@ -97,7 +95,7 @@ export function* profileScreenForCurrentUser() {
 
   if (goToScreen) return { key: goToScreen };
 
-  return { key: showPlipKey, type: "reset" };
+  return { key: homeSceneKey, type: "reset" };
 }
 
 export default function* navigationSaga({ mobileApi, sessionStore }) {

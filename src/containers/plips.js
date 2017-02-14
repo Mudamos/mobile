@@ -37,6 +37,7 @@ import {
   findPlips,
   getCurrentPlipsPage,
   getNextPlipsPage,
+  getCurrentSigningPlip,
 } from "../selectors";
 
 import PlipsLayout from "../components/plips-layout";
@@ -65,6 +66,7 @@ class Container extends Component {
 
   static propTypes = {
     currentPage: PropTypes.number,
+    currentSigningPlip: PropTypes.object,
     currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
     isAppReady: PropTypes.bool,
@@ -80,6 +82,7 @@ class Container extends Component {
     onFetchPlipsNextPage: PropTypes.func.isRequired,
     onFetchProfile: PropTypes.func.isRequired,
     onFirstTimeModalClose: PropTypes.func.isRequired,
+    onGoToPlip: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
     onPlipsFetch: PropTypes.func.isRequired,
     onProfileEdit: PropTypes.func.isRequired,
@@ -117,8 +120,25 @@ class Container extends Component {
   }
 
   componentWillMount() {
+    const {
+      currentSigningPlip,
+      plips,
+      onGoToPlip,
+      onPlipsFetch,
+    } = this.props;
+
     if (isDev) Toast.show("PlipsList componentWillMount");
-    this.props.onPlipsFetch();
+
+    if (!plips || !plips.length) {
+      onPlipsFetch();
+    }
+
+    if (currentSigningPlip) {
+      // For reason, the router is not done loading the current screen
+      // and will dispatch the current view after this.
+      // It's like only the navigation controller was loaded.
+      setTimeout(() => onGoToPlip(currentSigningPlip), 500);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -251,6 +271,7 @@ class Container extends Component {
 const mapStateToProps = state => {
   return {
     currentPage: getCurrentPlipsPage(state),
+    currentSigningPlip: getCurrentSigningPlip(state),
     currentUser: getCurrentUser(state),
     errorFetchingPlips: errorFetchingPlips(state),
     isAppReady: isAppReady(state),
@@ -271,6 +292,7 @@ const mapDispatchToProps = dispatch => ({
   onFetchPlipsNextPage: ({ page }) => dispatch(fetchPlipsNextPage({ page })),
   onFetchProfile: () => dispatch(fetchProfile()),
   onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
+  onGoToPlip: plip => dispatch(navigate("showPlip", { plip })),
   onLogout: () => dispatch(logout()),
   onPlipsFetch: () => dispatch(fetchPlips()),
   onProfileEdit: () => dispatch(navigate("profileUpdate")),

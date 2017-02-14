@@ -2,6 +2,7 @@ import { takeEvery, takeLatest } from "redux-saga";
 import { call, spawn, put, select } from "redux-saga/effects";
 
 import {
+  homeSceneKey,
   isDev,
   isUnauthorized,
   logError,
@@ -11,8 +12,10 @@ import {
 import {
   appReady,
   plipsFetchPlipsNextPageError,
+  fetchPlipRelatedInfoError,
   fetchingNextPlipsPage,
   fetchingPlips,
+  fetchingPlipRelatedInfo,
   fetchingPlipSigners,
   fetchPlipSignersError,
   fetchingPlipSignInfo,
@@ -32,6 +35,7 @@ import {
   plipSignInfoFetched,
   plipUserSignInfo,
   profileStateMachine,
+  signPlip as signPlipAction,
   signingPlip,
   shortPlipSigners,
   unauthorized,
@@ -39,6 +43,7 @@ import {
 
 import {
   currentAuthToken,
+  getCurrentSigningPlip,
   isUserLoggedIn,
 } from "../selectors";
 
@@ -115,15 +120,34 @@ export function* refreshPlips({ mudamosWebApi }) {
   });
 }
 
-function* fetchPlipRelatedInfo({ mobileApi, plipId }) {
-  const loggedIn = yield select(isUserLoggedIn);
-  const willFetchUserInfo = loggedIn && plipId;
+function* fetchPlipRelatedInfo({ mobileApi }) {
+  yield takeLatest("PLIP_FETCH_PLIP_RELATED_INFO", function* ({ payload }) {
+    try {
+      yield put(fetchingPlipRelatedInfo(true));
+      const { plipId } = payload;
+      const loggedIn = yield select(isUserLoggedIn);
 
-  yield [
-    willFetchUserInfo ? call(fetchUserSignInfo, { mobileApi, plipId }) : Promise.resolve(),
-    call(fetchPlipSignInfo, { mobileApi, plipId }),
-    plipId ? call(fetchShortSigners, { mobileApi, plipId }) : Promise.resolve(),
-  ];
+      yield [
+        loggedIn ? call(fetchUserSignInfo, { mobileApi, plipId }) : Promise.resolve(),
+        call(fetchPlipSignInfo, { mobileApi, plipId }),
+        call(fetchShortSigners, { mobileApi, plipId }),
+      ];
+
+      yield put(fetchingPlipRelatedInfo(false));
+
+      const currentSigningPlip = yield select(getCurrentSigningPlip);
+      if (currentSigningPlip) {
+        // Instantly try to sign the plip after loading the page
+        yield put(signPlipAction({ plip: currentSigningPlip }));
+      }
+    } catch (e) {
+      logError(e);
+      if (isUnauthorized(e)) return yield put(unauthorized());
+
+      yield put(fetchingPlipRelatedInfo(false));
+      yield put(fetchPlipRelatedInfoError(e));
+    }
+  });
 }
 
 function* fetchShortSigners({ mobileApi, plipId }) {
@@ -168,11 +192,14 @@ function* fetchPlipSignInfo({ mobileApi, plipId }) {
   }
 }
 
-function* fetchPlipSignInfoSaga({ mobileApi }) {
+function* updatePlipSignInfoSaga({ mobileApi }) {
   yield takeEvery("PLIP_JUST_SIGNED", function* ({ payload }) {
     try {
       const { plipId } = payload;
-      yield call(fetchPlipSignInfo, { mobileApi, plipId });
+      yield [
+        call(fetchPlipSignInfo, { mobileApi, plipId }),
+        call(fetchShortSigners, { mobileApi, plipId }),
+      ];
     } catch(e) {
       logError(e);
     }
@@ -228,7 +255,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       // Check profile completion
       const { key: screenKey } = yield call(profileScreenForCurrentUser);
 
-      if (screenKey !== "showPlip") return yield put(navigate(screenKey, { type: "reset" }));
+      if (screenKey !== homeSceneKey) return yield put(navigate(screenKey, { type: "reset" }));
 
       const authToken = yield select(currentAuthToken);
 
@@ -293,6 +320,7 @@ export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiEr
   yield spawn(refreshPlips, { mudamosWebApi });
   yield spawn(fetchPlipsNextPageSaga, { mudamosWebApi });
   yield spawn(signPlip, { mobileApi, walletStore, apiError });
-  yield spawn(fetchPlipSignInfoSaga, { mobileApi });
+  yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
+  yield spawn(fetchPlipRelatedInfo, { mobileApi });
 }

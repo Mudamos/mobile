@@ -28,6 +28,7 @@ import PurpleFlatButton from "./purple-flat-button";
 import SignModal from "./plip-signed-modal";
 import SignedMessageView from "./signed-message-view";
 import SignerBubbleView from "./signer-bubble-view";
+import BackButton from "./back-button";
 
 import styles, {
   HEADER_SCROLL_DISTANCE,
@@ -43,18 +44,17 @@ class PlipLayout extends Component {
   };
 
   static propTypes = {
-    errorFetchingPlips: PropTypes.bool,
-    isFetchingPlip: PropTypes.bool.isRequired,
+    errorFetching: PropTypes.bool,
+    isFetchingPlipRelatedInfo: PropTypes.bool,
     isSigning: PropTypes.bool,
-    isUserLoggedIn: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
-    openMenu: PropTypes.func.isRequired,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
-    retryPlip: PropTypes.func.isRequired,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     userSignDate: PropTypes.object,
+    onBack: PropTypes.func.isRequired,
+    onFetchPlipRelatedInfo: PropTypes.func.isRequired,
     onOpenSigners: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
@@ -127,9 +127,9 @@ class PlipLayout extends Component {
 
   render() {
     const {
-      isFetchingPlip,
+      isFetchingPlipRelatedInfo,
       isSigning,
-      errorFetchingPlips,
+      errorFetching,
     } = this.props;
 
     const { showSignSuccess } = this.state;
@@ -137,14 +137,14 @@ class PlipLayout extends Component {
     return (
       <View style={[styles.container]}>
         <Layout>
-          { errorFetchingPlips && this.renderRetry() }
-          { !errorFetchingPlips && !isFetchingPlip && this.renderMainContent() }
+          { errorFetching && this.renderRetry() }
+          { !errorFetching && !isFetchingPlipRelatedInfo && this.renderMainContent() }
           { this.renderNavBar() }
         </Layout>
 
         {showSignSuccess && this.renderSignSuccess()}
 
-        <PageLoader isVisible={isFetchingPlip || isSigning} />
+        <PageLoader isVisible={isFetchingPlipRelatedInfo || isSigning} />
       </View>
     );
   }
@@ -386,8 +386,9 @@ class PlipLayout extends Component {
 
   renderNavBar() {
     const {
-      errorFetchingPlips,
-      isFetchingPlip,
+      errorFetching,
+      isFetchingPlipRelatedInfo,
+      onBack,
     } = this.props;
 
     const finalNavColor = "rgba(71, 57, 121, 1)";
@@ -397,7 +398,7 @@ class PlipLayout extends Component {
       extrapolate: "clamp",
     });
 
-    if (errorFetchingPlips || isFetchingPlip) {
+    if (errorFetching || isFetchingPlipRelatedInfo) {
       // Forces nav bar color
       navColorOpacity = finalNavColor;
     }
@@ -407,9 +408,9 @@ class PlipLayout extends Component {
         containerStyle={[styles.navigationBar, {
           backgroundColor: navColorOpacity,
         }]}
-        leftView={this.renderMenuButton()}
+        leftView={<BackButton onPress={onBack} />}
         middleView={this.renderLogo()}
-        rightView={!errorFetchingPlips && !isFetchingPlip ? this.renderShareButton() : null}
+        rightView={!errorFetching && !isFetchingPlipRelatedInfo ? this.renderShareButton() : null}
       />
     );
   }
@@ -421,22 +422,6 @@ class PlipLayout extends Component {
       <TouchableOpacity onPress={() => onShare(plip)}>
         <Ionicon
           name="md-share-alt"
-          size={24}
-          color="#fff"
-        />
-      </TouchableOpacity>
-    );
-  }
-
-  renderMenuButton() {
-    const { openMenu } = this.props;
-
-    return (
-      <TouchableOpacity
-        onPress={openMenu}
-      >
-        <Icon
-          name="dehaze"
           size={24}
           color="#fff"
         />
@@ -466,7 +451,7 @@ class PlipLayout extends Component {
     return (
       <View style={styles.logoContainer}>
         <HeaderLogo
-          imgStyle={[styles.logo, {
+          imgStyle={[{
             opacity: logoOpacity,
           }]}
         />
@@ -483,10 +468,11 @@ class PlipLayout extends Component {
   }
 
   renderRetry() {
+    const { plip, onFetchPlipRelatedInfo } = this.props;
     return (
       <View style={styles.retryContainer}>
         <RetryButton
-          onPress={this.props.retryPlip}
+          onPress={() => onFetchPlipRelatedInfo(plip.id)}
           style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
         />
       </View>

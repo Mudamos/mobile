@@ -1,7 +1,4 @@
-
 export const findPlips = state => state.plip.plips;
-
-export const findCurrentPlip = state => state.plip.currentPlip;
 
 export const isFetchingPlips = state => !!state.plip.isFetchingPlips;
 
@@ -15,15 +12,9 @@ export const getUserSignInfo = state => state.plip.userSignInfo;
 
 export const getPlipSignInfo = state => state.plip.plipSignInfo;
 
-export const getUserCurrentPlipSignInfo = state => {
-  const currentPlip = findCurrentPlip(state);
-  return currentPlip && state.plip.userSignInfo[currentPlip.id];
-}
+export const getUserCurrentPlipSignInfo = (state, plipId) => state.plip.userSignInfo[plipId];
 
-export const hasUserJustSignedPlip = state => {
-  const currentPlip = findCurrentPlip(state);
-  return currentPlip && state.plip.justSignedPlips[currentPlip.id];
-}
+export const hasUserJustSignedPlip = (state, plipId) => state.plip.justSignedPlips[plipId];
 
 export const getCurrentPlipShortSignersInfo = state => ({
   users: state.plip.shortSigners,
@@ -38,10 +29,14 @@ export const hasSignersFetchError = state => state.plip.signersFetchError;
 
 export const getCurrentSigningPlip = state => state.plip.currentSigningPlip;
 
-export const wasUserSiginingBefore = state => findCurrentPlip(state) && getCurrentSigningPlip(state);
+export const wasUserSiginingBefore = state => getCurrentSigningPlip(state);
 
 export const getCurrentPlipsPage = state => state.plip.currentPlipsPage;
 
 export const getNextPlipsPage = state => state.plip.nextPlipsPage;
 
 export const isFetchingNextPlipsPage = state => state.plip.isFetchingNextPlipsPage;
+
+export const isFetchingPlipRelatedInfo = state => state.plip.isFetchingPlipRelatedInfo;
+
+export const fetchPlipRelatedInfoError = state => state.plip.fetchPlipRelatedInfoError;

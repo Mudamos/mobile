@@ -1,38 +1,27 @@
 import React, { Component, PropTypes } from "react";
-import { Alert, View } from "react-native";
+import { Alert } from "react-native";
 import { connect } from "react-redux";
 
-import {
-  prop,
-  sortBy,
-} from "ramda";
-
-import { isDev, moment } from "../utils";
+import { moment } from "../utils";
 
 import locale from "../locales/pt-BR";
 
 import {
-  fetchProfile,
+  clearPlipInfo,
   fetchPlips,
-  logout,
+  fetchPlipRelatedInfo,
   navigate,
+  navigateBack,
   openURL,
   removeJustSignedPlip,
   sharePlip,
   signPlip,
-  userFirstTimeDone,
 } from "../actions";
 
 import {
-  isAppReady,
-  errorFetchingPlips,
-  currentUser as getCurrentUser,
-  isFetchingPlips,
-  isFetchingProfile,
+  fetchPlipRelatedInfoError,
+  isFetchingPlipRelatedInfo,
   isSigningPlip,
-  isUserFirstTime,
-  isUserLoggedIn,
-  findCurrentPlip,
   getCurrentPlipShortSignersInfo,
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
@@ -40,189 +29,40 @@ import {
 } from "../selectors";
 
 import PlipLayout from "../components/plip-layout";
-import SplashLoader from "../components/splash-loader";
-import Menu from "../components/side-menu";
-import LoggedInMenu from "../components/logged-in-menu-content";
-import SimpleModal from "../components/simple-modal";
-import MarkdownView from "../containers/markdown-view";
-
-import Toast from "react-native-simple-toast";
-import aboutHtmlStyles from "../styles/about-html-styles";
-
-
-const sortMenuEntries = entries => sortBy(prop("position"), entries);
 
 
 class Container extends Component {
-  state = {
-    menuOpen: false,
-    showAboutModal: false,
-  };
-
   static propTypes = {
-    currentUser: PropTypes.object,
-    errorFetchingPlips: PropTypes.bool,
-    isAppReady: PropTypes.bool,
-    isFetchingPlip: PropTypes.bool.isRequired,
-    isFetchingProfile: PropTypes.bool,
+    errorFetching: PropTypes.bool,
+    isFetchingPlipRelatedInfo: PropTypes.bool,
     isSigning: PropTypes.bool,
-    isUserFirstTime: PropTypes.bool,
-    isUserLoggedIn: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
-    plip: PropTypes.object,
+    plip: PropTypes.object, // Navigation injected
     plipSignInfo: PropTypes.object,
-    retryPlip: PropTypes.func.isRequired,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     userSignDate: PropTypes.object,
-    onChangePassword: PropTypes.func.isRequired,
-    onFetchProfile: PropTypes.func.isRequired,
-    onFirstTimeModalClose: PropTypes.func.isRequired,
-    onLogout: PropTypes.func.isRequired,
+    onBack: PropTypes.func.isRequired,
+    onFetchPlipRelatedInfo: PropTypes.func.isRequired,
     onOpenSigners: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
-    onPlipsFetch: PropTypes.func.isRequired,
-    onProfileEdit: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
-    onSignUp: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
 
-  get menuEntries() {
-    const {
-      currentUser,
-      isFetchingProfile,
-      isUserLoggedIn,
-      onChangePassword,
-      onProfileEdit,
-    } = this.props;
-
-    const entries = [
-      { icon: "info", title: locale.menu.about, action: this.onAbout.bind(this), position: 2 },
-    ];
-
-    if (!isFetchingProfile && currentUser) {
-      entries.push({ icon: "account-circle", title: locale.menu.editProfile, action: onProfileEdit, position: 0 });
-
-      if (currentUser.isAppUser) {
-        entries.push({ icon: "lock", title: locale.menu.changePassword, action: onChangePassword, position: 1 });
-      }
-    }
-
-    if (!isFetchingProfile && !currentUser && !isUserLoggedIn) {
-      entries.push({ icon: "person", title: locale.getIn, action: this.onSignUp.bind(this), position: 0});
-    }
-
-    return sortMenuEntries(entries);
-  }
-
   componentWillMount() {
-    if (isDev) Toast.show("Plip componentWillMount");
-    this.props.onPlipsFetch();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isUserFirstTime === true && !this.state.showAboutModal) {
-      this.setState({ showAboutModal: true });
-    }
+    const { plip, onFetchPlipRelatedInfo } = this.props;
+    onFetchPlipRelatedInfo(plip.id);
   }
 
   render() {
-    const { onFetchProfile } = this.props;
-    const { menuOpen: open } = this.state;
-
     return (
-      <Menu
-        open={open}
-        content={this.renderMenuContent()}
-        onOpenStart={onFetchProfile}
-        onOpen={() => this.setState({ menuOpen: true })}
-        onClose={() => this.setState({ menuOpen: false })}
-      >
-        {this.renderPage()}
-        {this.renderFirstTimeLoader()}
-      </Menu>
-    );
-  }
-
-  renderPage() {
-    const { showAboutModal } = this.state;
-
-    return (
-      <View style={{flex: 1}}>
-        <PlipLayout
-          {...this.props}
-          openMenu={this.openMenu.bind(this)}
-        />
-
-        {
-          showAboutModal &&
-            <SimpleModal
-              onClose={this.onFirstTimeModalClose.bind(this)}
-            >
-              <MarkdownView
-                content={locale.markdown.aboutBody}
-                contentContainerStyle={aboutHtmlStyles}
-              />
-            </SimpleModal>
-        }
-      </View>
-    );
-  }
-
-  renderFirstTimeLoader() {
-    const { isAppReady } = this.props;
-    return <SplashLoader isVisible={!isAppReady} />
-  }
-
-  renderMenuContent() {
-    const {
-      currentUser,
-      isFetchingProfile,
-      onLogout,
-    } = this.props;
-
-    return (
-      <LoggedInMenu
-        currentUser={currentUser}
-        isFetchingProfile={isFetchingProfile}
-        onLogout={onLogout}
-
-        menuEntries={this.menuEntries}
+      <PlipLayout
+        {...this.props}
       />
     );
-  }
-
-  openMenu() {
-    const { onFetchProfile } = this.props;
-
-    this.setState({ menuOpen: true });
-    onFetchProfile();
-  }
-
-  closeMenu() {
-    this.setState({ menuOpen: false });
-  }
-
-  onAbout() {
-    this.closeMenu();
-    this.setState({ showAboutModal: true });
-  }
-
-  onFirstTimeModalClose() {
-    const { onFirstTimeModalClose } = this.props;
-
-    onFirstTimeModalClose();
-    this.setState({ showAboutModal: false });
-  }
-
-  onSignUp() {
-    const { onSignUp } = this.props;
-
-    onSignUp();
-    this.closeMenu();
   }
 }
 
@@ -237,8 +77,8 @@ const onPlipSign = ({ dispatch, plip }) => {
   )
 };
 
-const mapStateToProps = state => {
-  const userSignInfo = getUserCurrentPlipSignInfo(state);
+const mapStateToProps = (state, ownProps) => {
+  const userSignInfo = getUserCurrentPlipSignInfo(state, ownProps.plip.id);
   let plipSignInfo = getPlipSignInfo(state);
 
   if (plipSignInfo) {
@@ -251,16 +91,10 @@ const mapStateToProps = state => {
   const currentPlipShortSignersInfo = getCurrentPlipShortSignersInfo(state);
 
   return {
-    currentUser: getCurrentUser(state),
-    errorFetchingPlips: errorFetchingPlips(state),
-    isAppReady: isAppReady(state),
-    isFetchingPlip: isFetchingPlips(state),
-    isFetchingProfile: isFetchingProfile(state),
+    errorFetching: fetchPlipRelatedInfoError(state),
+    isFetchingPlipRelatedInfo: isFetchingPlipRelatedInfo(state),
     isSigning: isSigningPlip(state),
-    isUserFirstTime: isUserFirstTime(state),
-    isUserLoggedIn: isUserLoggedIn(state),
-    plip: findCurrentPlip(state),
-    justSignedPlip: hasUserJustSignedPlip(state),
+    justSignedPlip: hasUserJustSignedPlip(state, ownProps.plip.id),
     plipSignInfo: plipSignInfo,
     signers: currentPlipShortSignersInfo.users,
     signersTotal: currentPlipShortSignersInfo.total,
@@ -269,19 +103,17 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  retryPlip: () => dispatch(fetchPlips()),
-  onChangePassword: () => dispatch(navigate("changePassword")),
-  onFetchProfile: () => dispatch(fetchProfile()),
-  onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
-  onLogout: () => dispatch(logout()),
+  onBack: () => {
+    dispatch(clearPlipInfo());
+    dispatch(navigateBack());
+  },
+  onFetchPlipRelatedInfo: plipId => dispatch(fetchPlipRelatedInfo(plipId)),
   onOpenSigners: plipId => dispatch(navigate("signers", { plipId })),
   onOpenURL: url => dispatch(openURL(url)),
-  onPlipsFetch: () => dispatch(fetchPlips()),
   onPlipSign: plip => onPlipSign({ dispatch, plip }),
-  onProfileEdit: () => dispatch(navigate("profileUpdate")),
+  onRetryRelatedInfo: () => dispatch(fetchPlips()),
   onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
-  onSignUp: () => dispatch(navigate("signUp")),
   onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),
 });
 

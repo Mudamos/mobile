@@ -2,11 +2,6 @@ export const fetchPlips = () => ({
   type: "FETCH_PLIPS",
 });
 
-export const setCurrentPlip = currentPlip => ({
-  type: "PLIP_SET_CURRENT_PLIP",
-  payload: { currentPlip },
-});
-
 export const fetchingPlips = isFetching => ({
   type: "PLIPS_FETCHING",
   payload: { isFetching },
@@ -142,4 +137,23 @@ export const clearPlipSignersError = () => ({
 export const signingPlip = plip => ({
   type: "PLIP_SIGNING_PLIP",
   payload: { plip },
+});
+
+export const fetchPlipRelatedInfo = plipId => ({
+  type: "PLIP_FETCH_PLIP_RELATED_INFO",
+  payload: { plipId },
+});
+
+export const fetchPlipRelatedInfoError = error => ({
+  type: "PLIP_FETCH_PLIP_RELATED_INFO_ERROR",
+  payload: { error },
+});
+
+export const fetchingPlipRelatedInfo = isFetching => ({
+  type: "PLIP_FETCHING_PLIP_RELATED_INFO",
+  payload: { isFetching },
+});
+
+export const clearPlipInfo = () => ({
+  type: "PLIP_CLEAR_INFO",
 });

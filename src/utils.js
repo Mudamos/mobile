@@ -33,6 +33,8 @@ export const isUnauthorized = error => error instanceof UnauthorizedError;
 
 export const isString = is(String);
 
+export const homeSceneKey = "plipsNav";
+
 export const first = list => head(list || []);
 
 // eslint-disable-next-line no-undef
