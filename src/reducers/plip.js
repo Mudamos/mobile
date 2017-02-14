@@ -13,6 +13,15 @@ export default  (state = initialState, action) => {
       return {
         ...state,
         plips: payload.plips,
+        currentPlipsPage: payload.page,
+        nextPlipsPage: payload.nextPage,
+      };
+    case "PLIPS_APPEND_PLIPS":
+      return {
+        ...state,
+        plips: (state.plips || []).concat(payload.plips),
+        currentPlipsPage: payload.page,
+        nextPlipsPage: payload.nextPage,
       };
     case "PLIPS_FETCHING":
       return {
@@ -20,6 +29,16 @@ export default  (state = initialState, action) => {
         isFetchingPlips: payload.isFetching,
         errorFetchingPlips: false,
     };
+    case "PLIPS_FETCHING_NEXT_PLIPS_PAGE":
+      return {
+        ...state,
+        isFetchingNextPlipsPage: payload.isFetching,
+      };
+    case "PLIPS_REFRESHING_PLIPS":
+      return {
+        ...state,
+        isRefreshingPlips: payload.isRefreshing,
+      };
     case "PLIP_SIGNING":
       return {
         ...state,

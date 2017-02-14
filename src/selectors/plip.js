@@ -5,6 +5,8 @@ export const findCurrentPlip = state => state.plip.currentPlip;
 
 export const isFetchingPlips = state => !!state.plip.isFetchingPlips;
 
+export const isRefreshingPlips = state => !!state.plip.isRefreshingPlips;
+
 export const isSigningPlip = state => state.plip.isSigning;
 
 export const errorFetchingPlips = state => state.plip.errorFetchingPlips;
@@ -37,3 +39,9 @@ export const hasSignersFetchError = state => state.plip.signersFetchError;
 export const getCurrentSigningPlip = state => state.plip.currentSigningPlip;
 
 export const wasUserSiginingBefore = state => findCurrentPlip(state) && getCurrentSigningPlip(state);
+
+export const getCurrentPlipsPage = state => state.plip.currentPlipsPage;
+
+export const getNextPlipsPage = state => state.plip.nextPlipsPage;
+
+export const isFetchingNextPlipsPage = state => state.plip.isFetchingNextPlipsPage;

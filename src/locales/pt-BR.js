@@ -100,6 +100,7 @@ const translations = {
   zipCodeReason: "Não precisamos saber o seu endereço específico, apenas uma localização aproximada de onde você mora",
   errors: {
     facebookLoginError: "Não foi possível conectar-se ao facebook.",
+    fetchPlips: "Não foi possível carregar as informações",
     genericError: "Algo deu errado, tente novamente em alguns segundos.",
     loginError: "Não foi possível realizar o login.",
     openURLError: "Não foi possível recuperar o endereço solicitado.",

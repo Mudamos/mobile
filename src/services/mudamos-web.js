@@ -24,6 +24,19 @@ const requester = ({ host }) => {
   return builder;
 };
 
+const buildQueryString = params =>
+  Object
+    .keys(params)
+    .map(k => {
+        if (Array.isArray(params[k])) {
+            return params[k]
+                .map(val => `${encodeURIComponent(k)}[]=${encodeURIComponent(val)}`)
+                .join("&")
+        }
+
+        return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`
+    })
+    .join("&")
 
 const handleResponseError = res => res
   .then(rejectErrorResponses)
@@ -44,8 +57,6 @@ const rejectErrorResponses = res => deserialize(res)
 
 const deserialize = res => res.json().then(camelizeKeys);
 
-const getData = ({ json }) => json.data;
-
 const defineErrorType = err => {
   const json = err.json || {};
   const data = json.data || {};
@@ -53,8 +64,17 @@ const defineErrorType = err => {
   return Promise.reject({ ...err, json, type: data.type || "unknown" });
 };
 
+const getPagination = ({ response, ...args }) => ({
+  page: parseInt(response.headers.get("X-Page") || 1, 10),
+  nextPage: parseInt(response.headers.get("X-Next-Page"), 10) || null,
 
-const listPlips = ({ get }) => () => get("/api/v2/plips").then(getData).then(json => json.plips);
+  ...args,
+});
+
+
+const listPlips = ({ get }) => ({ page }) => get(`/api/v2/plips?${buildQueryString({ page })}`)
+  .then(getPagination)
+  .then(({ json, page, nextPage }) => ({ plips: json.data.plips, page, nextPage }))
 
 export default function MudamosWebApi(host) {
   const client = requester({ host });

@@ -2,6 +2,7 @@ export { default as ChangeForgotPasswordContainer } from "./change-forgot-passwo
 export { default as ChangePasswordContainer } from "./change-password";
 export { default as ForgotPasswordContainer } from "./forgot-password";
 export { default as PlipContainer } from "./show-plip";
+export { default as PlipsContainer } from "./plips";
 export { default as PlipViewerContainer } from "./plip-viewer";
 export { default as SignInContainer } from "./sign-in";
 export { default as SignUpContainer } from "./sign-up";
