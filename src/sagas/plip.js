@@ -142,10 +142,11 @@ function* fetchPlipRelatedInfo({ mobileApi }) {
       }
     } catch (e) {
       logError(e);
-      if (isUnauthorized(e)) return yield put(unauthorized());
 
       yield put(fetchingPlipRelatedInfo(false));
       yield put(fetchPlipRelatedInfoError(e));
+
+      if (isUnauthorized(e)) return yield put(unauthorized());
     }
   });
 }
@@ -228,8 +229,9 @@ function* fetchPlipSignersSaga({ mobileApi }) {
       logError(e);
 
       yield put(fetchingPlipSigners(false));
-      if (isUnauthorized(e)) return yield put(unauthorized());
       yield put(fetchPlipSignersError(e));
+
+      if (isUnauthorized(e)) return yield put(unauthorized());
     }
   });
 }
