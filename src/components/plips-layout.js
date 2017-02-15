@@ -17,6 +17,8 @@ import PageLoader from "./page-loader";
 import NavigationBar from "./navigation-bar";
 import RetryButton from "./retry-button";
 import HeaderLogo from "./header-logo";
+import NetworkImage from "./network-image";
+import LinearGradient from "react-native-linear-gradient";
 
 import styles from "../styles/plips-layout";
 
@@ -66,6 +68,7 @@ export default class PlipsLayout extends Component {
 
     return (
       <ListView
+        style={styles.listView}
         automaticallyAdjustContentInsets={false}
         enableEmptySections={true}
         onEndReached={onFetchPlips}
@@ -107,9 +110,25 @@ export default class PlipsLayout extends Component {
         }}
         style={styles.tableRow}
       >
-        <Text style={styles.userName}>
-          {plip.phase.name}
-        </Text>
+        <View style={styles.full}>
+          <NetworkImage
+            source={{uri: this.plipImage(plip)}}
+            resizeMode="cover"
+            style={styles.plipImage}
+          >
+            <LinearGradient
+              colors={["rgba(0,0,0,0)", "rgba(0,0,0,0.5)", "rgba(0,0,0,.7)"]}
+              locations={[0.3, 0.7, 1]}
+              style={styles.imageOverlay}
+            >
+              <View style={styles.titleContainer}>
+                <Text style={styles.plipTitle}>
+                  {plip.phase.name}
+                </Text>
+              </View>
+            </LinearGradient>
+          </NetworkImage>
+        </View>
       </TouchableOpacity>
     );
   }
@@ -162,5 +181,9 @@ export default class PlipsLayout extends Component {
 
   formatDate(date) {
     return moment(date).format("DD/MM/YYYY");
+  }
+
+  plipImage(plip) {
+    return plip.cycle && plip.cycle.pictures && plip.cycle.pictures.original;
   }
 }
