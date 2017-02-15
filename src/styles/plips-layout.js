@@ -7,6 +7,17 @@ export default StyleSheet.create({
   navigationBar: {
     backgroundColor: "#883DE1",
   },
+  noProjects: {
+    color: "#595959",
+    fontFamily: "roboto",
+    fontSize: 14,
+    textAlign: "center",
+  },
+  noProjectsHeader: {
+    flex: 1,
+    height: 100,
+    justifyContent: "center",
+  },
   retryContainer: {
     flex: 1,
     justifyContent: "center",

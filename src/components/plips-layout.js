@@ -20,6 +20,8 @@ import HeaderLogo from "./header-logo";
 
 import styles from "../styles/plips-layout";
 
+import locale from "../locales/pt-BR";
+
 
 export default class PlipsLayout extends Component {
   static propTypes = {
@@ -69,6 +71,7 @@ export default class PlipsLayout extends Component {
         onEndReached={onFetchPlips}
         onEndReachedThreshold={300}
         dataSource={plipsDataSource}
+        renderHeader={this.renderHeader.bind(this)}
         renderRow={this.renderRow.bind(this)}
         renderSeparator={this.renderSeparator.bind(this)}
         refreshControl={
@@ -78,6 +81,18 @@ export default class PlipsLayout extends Component {
           />
         }
       />
+    );
+  }
+
+  renderHeader() {
+    const { plipsDataSource } = this.props;
+    if (plipsDataSource.getRowCount() > 0) return null;
+
+    return (
+      <View style={styles.noProjectsHeader}>
+        <Text style={styles.noProjects}>{locale.noProjectsFound}</Text>
+        <Text style={styles.noProjects}>{locale.pullToRefresh}</Text>
+      </View>
     );
   }
 
