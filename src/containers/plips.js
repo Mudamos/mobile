@@ -121,9 +121,7 @@ class Container extends Component {
 
   componentWillMount() {
     const {
-      currentSigningPlip,
       plips,
-      onGoToPlip,
       onPlipsFetch,
     } = this.props;
 
@@ -132,6 +130,13 @@ class Container extends Component {
     if (!plips || !plips.length) {
       onPlipsFetch();
     }
+  }
+
+  componentDidMount() {
+    const {
+      currentSigningPlip,
+      onGoToPlip,
+    } = this.props;
 
     if (currentSigningPlip) {
       // For reason, the router is not done loading the current screen
