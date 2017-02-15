@@ -14,6 +14,7 @@ import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
 import CodeInput from "./code-input";
 import FlatButton from "./flat-button";
+import NavigationBar from "./navigation-bar";
 
 import { errorForField } from "../utils";
 
@@ -47,7 +48,6 @@ export default class ChangeForgotPasswordLayout extends Component {
     const {
       errors,
       isSaving,
-      onBack,
       onResendCode,
     } = this.props;
 
@@ -55,12 +55,7 @@ export default class ChangeForgotPasswordLayout extends Component {
       <View style={styles.container}>
         <Layout>
           <ScrollView>
-            <HeaderLogo />
-
-            <BackButton
-              containerStyle={styles.backButton}
-              onPress={onBack}
-            />
+            {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
               {locale.changeForgotPasswordTitle}
@@ -114,6 +109,16 @@ export default class ChangeForgotPasswordLayout extends Component {
 
         <PageLoader isVisible={isSaving} />
       </View>
+    );
+  }
+
+  renderNavBar() {
+    const { onBack } = this.props;
+    return (
+      <NavigationBar
+        leftView={<BackButton onPress={onBack} />}
+        middleView={<HeaderLogo />}
+      />
     );
   }
 

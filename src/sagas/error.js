@@ -47,6 +47,9 @@ function appError({ type, payload }) {
       return showToast(locale.errors.signPlipError);
     case "PLIP_FETCH_SIGNERS_ERROR":
       return showToast(locale.errors.genericError);
+    case "PLIPS_FETCH_PLIPS_NEXT_PAGE_ERROR":
+    case "PLIPS_REFRESH_ERROR":
+      return showToast(locale.errors.fetchPlips);
     case "SHARE_LINK_ERROR":
       return showToast(locale.errors.shareLinkError);
     case "PASSWORD_CHANGE_FORGOT_ERROR":

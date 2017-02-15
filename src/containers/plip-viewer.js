@@ -31,12 +31,12 @@ const onPlipSign = ({ dispatch, plip }) => {
   )
 };
 
-const mapStateToProps = state => {
-  const userSignInfo = getUserCurrentPlipSignInfo(state);
+const mapStateToProps = (state, ownProps) => {
+  const userSignInfo = getUserCurrentPlipSignInfo(state, ownProps.plip.id);
 
   return {
     isSigning: isSigningPlip(state),
-    justSignedPlip: hasUserJustSignedPlip(state),
+    justSignedPlip: hasUserJustSignedPlip(state, ownProps.plip.id),
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
 }

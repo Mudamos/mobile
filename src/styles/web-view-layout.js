@@ -6,7 +6,4 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
     flex: 1,
   },
-  navigationBar: {
-    height: 70,
-  },
 });

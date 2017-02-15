@@ -242,7 +242,7 @@ function* updateProfile({ mobileApi }) {
 
       yield put(savingProfile(false));
 
-      if (isUnauthorized(e)) return yield put(unauthorized());
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
 
       yield put(saveUserProfileError(e));
     }

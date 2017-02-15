@@ -41,41 +41,14 @@ export default class ProfileAddressLayout extends Component {
   render() {
     const {
       isSearching,
-      onDontKnowZipCode,
     } = this.props;
 
     return (
       <View style={styles.container}>
         <Layout>
-          {this.renderNavBar()}
-
-          <ScrollView style={styles.scrollView}>
-            <Text style={styles.headerTitle}>
-              {locale.addressSearchHeader}
-            </Text>
-
-            <ZipCodeInput
-              value={this.state.zipCode}
-              hint="Ex: 00000-000"
-              onChangeZipCodeText={zipCode => this.setState({zipCode})}
-              placeholder={locale.zipCode}
-              mdContainerStyle={{marginHorizontal: 13}}
-              onSubmitEditing={() => this.zipInput.blur()}
-              ref={ref => this.zipInput = ref}
-            />
-
-            <TouchableOpacity onPress={onDontKnowZipCode} style={styles.dontRememberZipCodeContainer}>
-              <Text style={styles.dontRememberZipCode}>
-                {locale.dontRememberZipCode}
-              </Text>
-            </TouchableOpacity>
-
-            <FlatButton
-              title={locale.forward.toUpperCase()}
-              enabled={this.searchEnabled}
-              onPress={this.onSearch.bind(this)}
-              style={{marginTop: 20}}
-            />
+          <ScrollView>
+            {this.renderNavBar()}
+            {this.renderContent()}
           </ScrollView>
         </Layout>
 
@@ -84,10 +57,46 @@ export default class ProfileAddressLayout extends Component {
     );
   }
 
+  renderContent() {
+    const {
+      onDontKnowZipCode,
+    } = this.props;
+
+    return (
+      <View style={styles.contentContainer}>
+        <Text style={styles.headerTitle}>
+          {locale.addressSearchHeader}
+        </Text>
+
+        <ZipCodeInput
+          value={this.state.zipCode}
+          hint="Ex: 00000-000"
+          onChangeZipCodeText={zipCode => this.setState({zipCode})}
+          placeholder={locale.zipCode}
+          mdContainerStyle={{marginHorizontal: 13}}
+          onSubmitEditing={() => this.zipInput.blur()}
+          ref={ref => this.zipInput = ref}
+        />
+
+        <TouchableOpacity onPress={onDontKnowZipCode} style={styles.dontRememberZipCodeContainer}>
+          <Text style={styles.dontRememberZipCode}>
+            {locale.dontRememberZipCode}
+          </Text>
+        </TouchableOpacity>
+
+        <FlatButton
+          title={locale.forward.toUpperCase()}
+          enabled={this.searchEnabled}
+          onPress={this.onSearch.bind(this)}
+          style={{marginTop: 20}}
+        />
+      </View>
+    );
+  }
+
   renderNavBar() {
     return (
       <NavigationBar
-        containerStyle={styles.navigationBar}
         middleView={<HeaderLogo />}
       />
     );

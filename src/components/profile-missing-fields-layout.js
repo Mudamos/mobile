@@ -11,6 +11,7 @@ import HeaderLogo from "./header-logo";
 import MDTextInput from "./md-text-input";
 import PageLoader from "./page-loader";
 import FlatButton from "./flat-button";
+import NavigationBar from "./navigation-bar";
 
 import locale from "../locales/pt-BR";
 import { errorForField } from "../utils";
@@ -53,7 +54,7 @@ export default class ProfileMissingFieldsLayout extends Component {
       <View style={styles.container}>
         <Layout>
           <ScrollView>
-            <HeaderLogo />
+            {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
               {locale.confirmInformation}
@@ -96,6 +97,14 @@ export default class ProfileMissingFieldsLayout extends Component {
 
         <PageLoader isVisible={isSaving} />
       </View>
+    );
+  }
+
+  renderNavBar() {
+    return (
+      <NavigationBar
+        middleView={<HeaderLogo />}
+      />
     );
   }
 

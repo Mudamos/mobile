@@ -2,14 +2,43 @@ export const fetchPlips = () => ({
   type: "FETCH_PLIPS",
 });
 
-export const setCurrentPlip = currentPlip => ({
-  type: "PLIP_SET_CURRENT_PLIP",
-  payload: { currentPlip },
-});
-
 export const fetchingPlips = isFetching => ({
   type: "PLIPS_FETCHING",
   payload: { isFetching },
+});
+
+export const refreshPlips = () => ({
+  type: "PLIPS_REFRESH_PLIPS",
+});
+
+export const isRefreshingPlips = isRefreshing => ({
+  type: "PLIPS_REFRESHING_PLIPS",
+  payload: { isRefreshing },
+});
+
+export const plipsRefreshError = error => ({
+  type: "PLIPS_REFRESH_ERROR",
+  payload: { error },
+});
+
+export const fetchPlipsNextPage = ({ page }) => ({
+  type: "PLIPS_FETCH_PLIPS_NEXT_PAGE",
+  payload: { page },
+});
+
+export const plipsFetchPlipsNextPageError = error => ({
+  type: "PLIPS_FETCH_PLIPS_NEXT_PAGE_ERROR",
+  payload: { error },
+});
+
+export const fetchingNextPlipsPage = isFetching => ({
+  type: "PLIPS_FETCHING_NEXT_PLIPS_PAGE",
+  payload: { isFetching },
+});
+
+export const plipsAppendPlips = ({ plips, page, nextPage }) => ({
+  type: "PLIPS_APPEND_PLIPS",
+  payload: { plips, page, nextPage },
 });
 
 export const fetchingShortPlipSigners = isFetching => ({
@@ -37,9 +66,9 @@ export const fetchPlipSigners = plipId => ({
   payload: { plipId },
 });
 
-export const plipsFetched = plips => ({
+export const plipsFetched = ({ plips, page, nextPage }) => ({
   type: "PLIPS_FETCHED",
-  payload: { plips },
+  payload: { plips, page, nextPage },
 });
 
 export const signPlip = ({ plip }) => ({
@@ -108,4 +137,23 @@ export const clearPlipSignersError = () => ({
 export const signingPlip = plip => ({
   type: "PLIP_SIGNING_PLIP",
   payload: { plip },
+});
+
+export const fetchPlipRelatedInfo = plipId => ({
+  type: "PLIP_FETCH_PLIP_RELATED_INFO",
+  payload: { plipId },
+});
+
+export const fetchPlipRelatedInfoError = error => ({
+  type: "PLIP_FETCH_PLIP_RELATED_INFO_ERROR",
+  payload: { error },
+});
+
+export const fetchingPlipRelatedInfo = isFetching => ({
+  type: "PLIP_FETCHING_PLIP_RELATED_INFO",
+  payload: { isFetching },
+});
+
+export const clearPlipInfo = () => ({
+  type: "PLIP_CLEAR_INFO",
 });

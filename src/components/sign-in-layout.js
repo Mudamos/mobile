@@ -14,6 +14,7 @@ import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
 import FlatButton from "./flat-button";
 import FBLoginButton from "./fb-login-button";
+import NavigationBar from "./navigation-bar";
 
 import locale from "../locales/pt-BR";
 
@@ -45,7 +46,6 @@ class SignInLayout extends Component {
   render() {
     const {
       isLoggingIn,
-      onBack,
       onForgotPassword,
     } = this.props;
 
@@ -53,12 +53,7 @@ class SignInLayout extends Component {
       <View style={styles.container}>
         <Layout>
           <ScrollView>
-            <HeaderLogo />
-
-            <BackButton
-              containerStyle={styles.backButton}
-              onPress={onBack}
-            />
+            {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
               {locale.signInTitle}
@@ -109,6 +104,16 @@ class SignInLayout extends Component {
 
         <PageLoader isVisible={isLoggingIn} />
       </View>
+    );
+  }
+
+  renderNavBar() {
+    const { onBack } = this.props;
+    return (
+      <NavigationBar
+        leftView={<BackButton onPress={onBack} />}
+        middleView={<HeaderLogo />}
+      />
     );
   }
 

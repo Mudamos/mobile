@@ -7,12 +7,19 @@ export default  (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case "PLIP_SET_CURRENT_PLIP":
-      return { ...state, currentPlip: payload.currentPlip };
     case "PLIPS_FETCHED":
       return {
         ...state,
         plips: payload.plips,
+        currentPlipsPage: payload.page,
+        nextPlipsPage: payload.nextPage,
+      };
+    case "PLIPS_APPEND_PLIPS":
+      return {
+        ...state,
+        plips: (state.plips || []).concat(payload.plips),
+        currentPlipsPage: payload.page,
+        nextPlipsPage: payload.nextPage,
       };
     case "PLIPS_FETCHING":
       return {
@@ -20,6 +27,16 @@ export default  (state = initialState, action) => {
         isFetchingPlips: payload.isFetching,
         errorFetchingPlips: false,
     };
+    case "PLIPS_FETCHING_NEXT_PLIPS_PAGE":
+      return {
+        ...state,
+        isFetchingNextPlipsPage: payload.isFetching,
+      };
+    case "PLIPS_REFRESHING_PLIPS":
+      return {
+        ...state,
+        isRefreshingPlips: payload.isRefreshing,
+      };
     case "PLIP_SIGNING":
       return {
         ...state,
@@ -106,10 +123,33 @@ export default  (state = initialState, action) => {
         ...state,
         currentSigningPlip: payload.plip,
       };
+    case "PLIP_FETCHING_PLIP_RELATED_INFO":
+      return {
+        ...state,
+        isFetchingPlipRelatedInfo: payload.isFetching,
+        fetchPlipRelatedInfoError: null,
+      };
+    case "PLIP_FETCH_PLIP_RELATED_INFO_ERROR":
+      return {
+        ...state,
+        fetchPlipRelatedInfoError: true,
+      };
+    case "PLIP_CLEAR_INFO":
+      return {
+        ...state,
+
+        currentSigningPlip: null,
+        fetchPlipRelatedInfoError: null,
+        justSignedPlips: {},
+        plipSignInfo: null,
+        shortSigners: null,
+        shortSignersTotal: null,
+        userSignInfo: {},
+      };
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,
-        currentSigningPlip: null,
+        fetchPlipRelatedInfoError: null,
         userSignInfo: {},
         justSignedPlips: {},
       };

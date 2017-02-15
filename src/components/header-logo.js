@@ -5,8 +5,6 @@ import { Animated, StyleSheet } from "react-native";
 const style = StyleSheet.create({
   image: {
     alignSelf: "center",
-    marginTop: 12,
-    marginBottom: 16,
   },
 });
 

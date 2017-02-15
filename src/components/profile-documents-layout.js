@@ -14,6 +14,7 @@ import VoteCardInput from "./vote-card-input";
 import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
 import Modal from "./documents-reason-modal";
+import NavigationBar from "./navigation-bar";
 
 import styles from "../styles/profile-documents-layout";
 import textStyles from "../styles/text";
@@ -72,7 +73,7 @@ export default class ProfileDocumentsLayout extends Component {
       <View style={styles.container}>
         <Layout>
           <ScrollView>
-            <HeaderLogo />
+            {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
               {locale.documentsHeaderTitle}
@@ -142,6 +143,14 @@ export default class ProfileDocumentsLayout extends Component {
         <PageLoader isVisible={isSaving} />
 
       </View>
+    );
+  }
+
+  renderNavBar() {
+    return (
+      <NavigationBar
+        middleView={<HeaderLogo />}
+      />
     );
   }
 

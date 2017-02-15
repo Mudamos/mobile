@@ -12,6 +12,7 @@ import {
   ChangePasswordContainer,
   ForgotPasswordContainer,
   PlipContainer,
+  PlipsContainer,
   PlipViewerContainer,
   ProfileAddressContainer,
   ProfileAddressConfirmContainer,
@@ -81,8 +82,9 @@ const localStorage = LocalStorage("@Mudamos");
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="showPlip" initial={true} type="reset" hideNavBar={true}>
-      <Scene key="plipPage" initial={true} component={PlipContainer} hideNavBar={true} />
+    <Scene key="plipsNav" initial={true} type="reset" hideNavBar={true}>
+      <Scene key="plipsList" initial={true} component={PlipsContainer} hideNavBar={true} />
+      <Scene key="showPlip" component={PlipContainer} hideNavBar={true} />
       <Scene key="plipViewer" component={PlipViewerContainer} hideNavBar={true} title="Texto do projeto"/>
       <Scene key="signers" component={SignersContainer} hideNavBar={true} />
     </Scene>

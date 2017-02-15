@@ -63,7 +63,7 @@ export default StyleSheet.create({
     fontFamily: "roboto",
     fontSize: 24,
     position: "absolute",
-    top: 28,
+    top: 16,
     left: 0,
     right: 0,
     textAlign: "center",
@@ -79,9 +79,6 @@ export default StyleSheet.create({
   infoContainer: {
     flex: 1,
     backgroundColor: "#000",
-  },
-  logo: {
-    marginTop: 20,
   },
   logoContainer: {
     backgroundColor: "transparent",
@@ -102,7 +99,6 @@ export default StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    height: 85,
   },
   presentation: {
     color: "#313131",

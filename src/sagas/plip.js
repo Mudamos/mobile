@@ -2,7 +2,7 @@ import { takeEvery, takeLatest } from "redux-saga";
 import { call, spawn, put, select } from "redux-saga/effects";
 
 import {
-  first,
+  homeSceneKey,
   isDev,
   isUnauthorized,
   logError,
@@ -11,24 +11,30 @@ import {
 
 import {
   appReady,
+  plipsFetchPlipsNextPageError,
+  fetchPlipRelatedInfoError,
+  fetchingNextPlipsPage,
   fetchingPlips,
+  fetchingPlipRelatedInfo,
   fetchingPlipSigners,
   fetchPlipSignersError,
   fetchingPlipSignInfo,
   fetchingShortPlipSigners,
   fetchingUserSignInfo,
   invalidatePhone,
+  isRefreshingPlips,
   isSigningPlip,
   navigate,
+  plipsAppendPlips,
   plipsFetched,
   plipsFetchError,
   plipJustSigned,
+  plipsRefreshError,
   plipSigners,
   plipSignError,
   plipSignInfoFetched,
   plipUserSignInfo,
   profileStateMachine,
-  setCurrentPlip,
   signPlip as signPlipAction,
   signingPlip,
   shortPlipSigners,
@@ -37,9 +43,8 @@ import {
 
 import {
   currentAuthToken,
-  findPlips,
+  getCurrentSigningPlip,
   isUserLoggedIn,
-  wasUserSiginingBefore,
 } from "../selectors";
 
 import { fetchProfile } from "./profile";
@@ -57,37 +62,18 @@ const buildSignMessage = ({ user, plip }) => [
   plip.id,
 ].join(";");
 
-export function* fetchPlips({ mobileApi, mudamosWebApi }) {
+export function* fetchPlipsSaga({ mudamosWebApi }) {
   yield takeLatest("FETCH_PLIPS", function* () {
     try {
       yield put(fetchingPlips(true));
-
-      // TODO: remove the user sign info from here.
-      // For now we can easily do this because of the MVP
-      // Later we need to fire another action.
-      //
-      // This helps now because we can handle the error in a single
-      // point of failure.
-      const plips = (yield select(findPlips)) || (yield call(mudamosWebApi.listPlips));
-      yield put(plipsFetched(plips));
-      const currentPlip = first(plips);
-      yield put(setCurrentPlip(currentPlip));
-
-      yield call(fetchPlipRelatedInfo, { mobileApi, plipId: currentPlip && currentPlip.id });
-
-      if (yield select(wasUserSiginingBefore)) {
-        // Instantly try to sign the plip after loading the page
-        yield put(signPlipAction({ plip: currentPlip }));
-      }
+      const response = yield call(fetchPlips, { mudamosWebApi });
+      yield put(plipsFetched(response));
 
       yield put(fetchingPlips(false));
-    } catch(e) {
+    } catch (e) {
       logError(e);
 
       yield put(fetchingPlips(false));
-
-      if (isUnauthorized(e)) return yield put(unauthorized());
-
       yield put(plipsFetchError(e));
     } finally {
       yield put(appReady(true));
@@ -95,15 +81,74 @@ export function* fetchPlips({ mobileApi, mudamosWebApi }) {
   });
 }
 
-function* fetchPlipRelatedInfo({ mobileApi, plipId }) {
-  const loggedIn = yield select(isUserLoggedIn);
-  const willFetchUserInfo = loggedIn && plipId;
+export function* fetchPlipsNextPageSaga({ mudamosWebApi }) {
+  yield takeLatest("PLIPS_FETCH_PLIPS_NEXT_PAGE", function* ({ payload }) {
+    try {
+      const { page } = payload;
 
-  yield [
-    willFetchUserInfo ? call(fetchUserSignInfo, { mobileApi, plipId }) : Promise.resolve(),
-    call(fetchPlipSignInfo, { mobileApi, plipId }),
-    plipId ? call(fetchShortSigners, { mobileApi, plipId }) : Promise.resolve(),
-  ];
+      yield put(fetchingNextPlipsPage(true));
+      const response = yield call(fetchPlips, { page, mudamosWebApi });
+
+      yield put(plipsAppendPlips(response));
+    } catch (e) {
+      logError(e);
+
+      yield put(plipsFetchPlipsNextPageError(e));
+    } finally {
+      yield put(fetchingNextPlipsPage(false));
+    }
+  });
+}
+
+function* fetchPlips({ mudamosWebApi, page = 1 }) {
+  return yield call(mudamosWebApi.listPlips, { page });
+}
+
+export function* refreshPlips({ mudamosWebApi }) {
+  yield takeLatest("PLIPS_REFRESH_PLIPS", function* () {
+    try {
+      yield put(isRefreshingPlips(true));
+      const response = yield call(fetchPlips, { page: 1, mudamosWebApi });
+      yield put(plipsFetched(response));
+    } catch (e) {
+      logError(e);
+
+      yield put(plipsRefreshError(e));
+    } finally {
+      yield put(isRefreshingPlips(false));
+    }
+  });
+}
+
+function* fetchPlipRelatedInfo({ mobileApi }) {
+  yield takeLatest("PLIP_FETCH_PLIP_RELATED_INFO", function* ({ payload }) {
+    try {
+      yield put(fetchingPlipRelatedInfo(true));
+      const { plipId } = payload;
+      const loggedIn = yield select(isUserLoggedIn);
+
+      yield [
+        loggedIn ? call(fetchUserSignInfo, { mobileApi, plipId }) : Promise.resolve(),
+        call(fetchPlipSignInfo, { mobileApi, plipId }),
+        call(fetchShortSigners, { mobileApi, plipId }),
+      ];
+
+      yield put(fetchingPlipRelatedInfo(false));
+
+      const currentSigningPlip = yield select(getCurrentSigningPlip);
+      if (currentSigningPlip) {
+        // Instantly try to sign the plip after loading the page
+        yield put(signPlipAction({ plip: currentSigningPlip }));
+      }
+    } catch (e) {
+      logError(e);
+
+      yield put(fetchingPlipRelatedInfo(false));
+      yield put(fetchPlipRelatedInfoError(e));
+
+      if (isUnauthorized(e)) return yield put(unauthorized());
+    }
+  });
 }
 
 function* fetchShortSigners({ mobileApi, plipId }) {
@@ -148,11 +193,14 @@ function* fetchPlipSignInfo({ mobileApi, plipId }) {
   }
 }
 
-function* fetchPlipSignInfoSaga({ mobileApi }) {
+function* updatePlipSignInfoSaga({ mobileApi }) {
   yield takeEvery("PLIP_JUST_SIGNED", function* ({ payload }) {
     try {
       const { plipId } = payload;
-      yield call(fetchPlipSignInfo, { mobileApi, plipId });
+      yield [
+        call(fetchPlipSignInfo, { mobileApi, plipId }),
+        call(fetchShortSigners, { mobileApi, plipId }),
+      ];
     } catch(e) {
       logError(e);
     }
@@ -181,8 +229,9 @@ function* fetchPlipSignersSaga({ mobileApi }) {
       logError(e);
 
       yield put(fetchingPlipSigners(false));
-      if (isUnauthorized(e)) return yield put(unauthorized());
       yield put(fetchPlipSignersError(e));
+
+      if (isUnauthorized(e)) return yield put(unauthorized());
     }
   });
 }
@@ -208,7 +257,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       // Check profile completion
       const { key: screenKey } = yield call(profileScreenForCurrentUser);
 
-      if (screenKey !== "showPlip") return yield put(navigate(screenKey, { type: "reset" }));
+      if (screenKey !== homeSceneKey) return yield put(navigate(screenKey, { type: "reset" }));
 
       const authToken = yield select(currentAuthToken);
 
@@ -269,8 +318,11 @@ function* invalidateWalletAndNavigate(params = {}) {
 }
 
 export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError }) {
-  yield spawn(fetchPlips, { mobileApi, mudamosWebApi });
+  yield spawn(fetchPlipsSaga, { mudamosWebApi });
+  yield spawn(refreshPlips, { mudamosWebApi });
+  yield spawn(fetchPlipsNextPageSaga, { mudamosWebApi });
   yield spawn(signPlip, { mobileApi, walletStore, apiError });
-  yield spawn(fetchPlipSignInfoSaga, { mobileApi });
+  yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
+  yield spawn(fetchPlipRelatedInfo, { mobileApi });
 }

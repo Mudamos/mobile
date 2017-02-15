@@ -54,10 +54,6 @@ export default class TSELayout extends Component {
 
   render() {
     const {
-      onBack,
-    } = this.props;
-
-    const {
       tutorialDone,
     } = this.state;
 
@@ -65,12 +61,7 @@ export default class TSELayout extends Component {
     return (
       <View style={styles.container}>
         <Layout>
-          <NavigationBar
-            containerStyle={styles.navigationBar}
-
-            leftView={<BackButton onPress={onBack} />}
-            middleView={<HeaderLogo />}
-          />
+          {this.renderNavBar()}
 
           {tutorialDone ? this.renderWebView() : this.renderPager()}
         </Layout>
@@ -78,6 +69,16 @@ export default class TSELayout extends Component {
         <PageLoader isVisible={this.loadingWebView} />
 
       </View>
+    );
+  }
+
+  renderNavBar() {
+    const { onBack } = this.props;
+    return (
+      <NavigationBar
+        leftView={<BackButton onPress={onBack} />}
+        middleView={<HeaderLogo />}
+      />
     );
   }
 

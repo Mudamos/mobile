@@ -7,6 +7,10 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
     flex: 1,
   },
+  contentContainer: {
+    marginHorizontal: 20,
+    marginTop: 12,
+  },
   dontRememberZipCode: {
     alignSelf: "center",
     color: "#fff",
@@ -22,10 +26,4 @@ export default StyleSheet.create({
     textStyles.header,
     { marginBottom: 8 },
   ]),
-  navigationBar: {
-    height: 70,
-  },
-  scrollView: {
-    marginHorizontal: 20,
-  },
 });

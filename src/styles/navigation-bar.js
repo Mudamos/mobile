@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     flexDirection: "row",
-    height: 64,
+    height: 88,
+    paddingTop: 20,
   },
   bar: {
     flex: 1,

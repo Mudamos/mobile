@@ -13,6 +13,7 @@ import PageLoader from "./page-loader";
 import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
 import FlatButton from "./flat-button";
+import NavigationBar from "./navigation-bar";
 
 import locale from "../locales/pt-BR";
 
@@ -40,7 +41,6 @@ export default class ForgotPasswordLayout extends Component {
   render() {
     const {
       isSaving,
-      onBack,
       onHasCode,
     } = this.props;
 
@@ -48,12 +48,7 @@ export default class ForgotPasswordLayout extends Component {
       <View style={styles.container}>
         <Layout>
           <ScrollView>
-            <HeaderLogo />
-
-            <BackButton
-              containerStyle={styles.backButton}
-              onPress={onBack}
-            />
+            {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
               {locale.forgotPasswordTitle}
@@ -87,6 +82,16 @@ export default class ForgotPasswordLayout extends Component {
 
         <PageLoader isVisible={isSaving} />
       </View>
+    );
+  }
+
+  renderNavBar() {
+    const { onBack } = this.props;
+    return (
+      <NavigationBar
+        leftView={<BackButton onPress={onBack} />}
+        middleView={<HeaderLogo />}
+      />
     );
   }
 

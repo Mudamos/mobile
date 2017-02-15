@@ -95,7 +95,6 @@ export default class ProfileAddressConfirmLayout extends Component {
 
     return (
       <NavigationBar
-        containerStyle={styles.navigationBar}
         leftView={<BackButton onPress={onBack} />}
         middleView={<HeaderLogo />}
       />

@@ -65,7 +65,7 @@ function* changePassword({ mobileApi }) {
       yield call([Toast, Toast.show], locale.passwordChangedSuccessfully);
     } catch(e) {
       logError(e);
-      if (isUnauthorized(e)) return yield put(unauthorized());
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
 
       yield put(changingPassword(false));
       yield put(changePasswordError(e));

@@ -44,6 +44,7 @@ const translations = {
   name: "Nome completo",
   newPassword: "Nova senha",
   next: "Próximo",
+  noProjectsFound: "Nenhum projeto encontrado",
   ok: "Ok",
   okIGotIt: "Ok, entendi",
   password: "Senha",
@@ -58,6 +59,7 @@ const translations = {
   projectSigned: "Projeto Assinado",
   projectSignedCongratulations: ({ plipName }) => `Você agora é parte da mudança, faça ela ser ainda maior.\n\nPara alcançarmos o número mínimo de assinaturas para que essa proposta vire um projeto de lei, precisamos que você convença mais pessoas a assinarem também. Compartilhe e convide seus amigos e familiares a assinarem.\n\nO projeto "${plipName}" precisa de você!`,
   projectSignedYeah: "Projeto assinado!",
+  pullToRefresh: "Puxe para atualizar",
   readFullText: "Leia o texto\ncompleto",
   resendCode: "Reenviar código",
   retry: "Tentar novamente",
@@ -100,6 +102,7 @@ const translations = {
   zipCodeReason: "Não precisamos saber o seu endereço específico, apenas uma localização aproximada de onde você mora",
   errors: {
     facebookLoginError: "Não foi possível conectar-se ao facebook.",
+    fetchPlips: "Não foi possível carregar as informações",
     genericError: "Algo deu errado, tente novamente em alguns segundos.",
     loginError: "Não foi possível realizar o login.",
     openURLError: "Não foi possível recuperar o endereço solicitado.",

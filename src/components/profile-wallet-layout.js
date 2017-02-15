@@ -8,6 +8,7 @@ import Layout from "./purple-layout";
 import HeaderLogo from "./header-logo";
 import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
+import NavigationBar from "./navigation-bar";
 
 import locale from "../locales/pt-BR";
 
@@ -28,7 +29,7 @@ export default class ProfileWalletLayout extends Component {
     return (
       <View style={{flex: 1}}>
         <Layout>
-          <HeaderLogo />
+          {this.renderNavBar()}
 
           {
             hasError &&
@@ -45,6 +46,14 @@ export default class ProfileWalletLayout extends Component {
 
         <PageLoader isVisible={isCreatingWallet} />
       </View>
+    );
+  }
+
+  renderNavBar() {
+    return (
+      <NavigationBar
+        middleView={<HeaderLogo />}
+      />
     );
   }
 }

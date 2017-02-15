@@ -21,6 +21,7 @@ export default StyleSheet.create({
   },
   headerTitle: StyleSheet.flatten([
     textStyles.header,
+    { marginTop: 12 },
   ]),
   inputContainer: {
     marginHorizontal: 33,

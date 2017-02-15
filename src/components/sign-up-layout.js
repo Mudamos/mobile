@@ -14,6 +14,7 @@ import PageLoader from "./page-loader";
 import BackButton from "./back-button";
 import FlatButton from "./flat-button";
 import FBLoginButton from "./fb-login-button";
+import NavigationBar from "./navigation-bar";
 
 import locale from "../locales/pt-BR";
 import { errorForField } from "../utils";
@@ -51,7 +52,6 @@ export default class SignUpLayout extends Component {
       createErrors,
       isCreating,
       isLoggingIn,
-      onBack,
       onSignIn,
     } = this.props;
 
@@ -59,12 +59,7 @@ export default class SignUpLayout extends Component {
       <View style={styles.container}>
         <Layout>
           <ScrollView>
-            <HeaderLogo />
-
-            <BackButton
-              containerStyle={styles.backButton}
-              onPress={onBack}
-            />
+            {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
               {locale.signUpTitle}
@@ -137,6 +132,16 @@ export default class SignUpLayout extends Component {
 
         <PageLoader isVisible={isCreating || isLoggingIn} />
       </View>
+    );
+  }
+
+  renderNavBar() {
+    const { onBack } = this.props;
+    return (
+      <NavigationBar
+        leftView={<BackButton onPress={onBack} />}
+        middleView={<HeaderLogo />}
+      />
     );
   }
 

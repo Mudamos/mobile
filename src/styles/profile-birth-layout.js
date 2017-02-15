@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   headerTitle: StyleSheet.flatten([
     textStyles.header,
-    { marginBottom: 20 },
+    { marginBottom: 20, marginTop: 12 },
   ]),
   scrollView: {
     marginHorizontal: 20,
