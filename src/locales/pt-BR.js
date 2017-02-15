@@ -33,6 +33,7 @@ const translations = {
   getIn: "Entrar",
   gotIt: "entendi",
   hasAnAccountAlready: "Já tem uma conta?",
+  lastDay: "Último dia",
   loading: "Carregando...",
   logout: "Sair",
   mobile: "Celular",

@@ -94,12 +94,24 @@ class PlipLayout extends Component {
     const start = moment();
     const end = moment(plip.cycle.finalDate);
 
-    return Math.max(0, end.diff(start, "days"));
+    // No days left because there are no more seconds left
+    if (end.diff(start, "seconds") < 0) return;
+
+    return end.diff(start, "days");
   }
 
   get signatureEnabled() {
     const daysLeft = this.daysLeft;
-    return !!daysLeft;
+    return daysLeft != null && daysLeft >= 0;
+  }
+
+  get messageForDaysLeft() {
+    if (this.daysLeft > 0) {
+      const sufix = this.daysLeft > 1 ? "dias restantes" : "dia restante";
+      return `${formatNumber(this.daysLeft)} ${sufix}`;
+    } else if (this.daysLeft === 0) {
+      return locale.lastDay;
+    }
   }
 
   get callToAction() {
@@ -188,8 +200,8 @@ class PlipLayout extends Component {
               }
 
               <View style={styles.remainingDaysContainer}>
-                {!!this.daysLeft && this.renderDaysLeft()}
-                {!this.daysLeft && <Text style={styles.remainingDays}>{locale.petitionEnded}</Text>}
+                {this.signatureEnabled && this.renderDaysLeft()}
+                {!this.signatureEnabled && <Text style={styles.remainingDays}>{locale.petitionEnded}</Text>}
 
                 {this.renderSignaturesCount()}
               </View>
@@ -374,11 +386,9 @@ class PlipLayout extends Component {
   }
 
   renderDaysLeft() {
-    const message = this.daysLeft > 1 ? " dias restantes" : " dia restante";
-
     return (
       <View style={styles.full}>
-        <Text style={styles.remainingDays}>{formatNumber(this.daysLeft)}{message}</Text>
+        <Text style={styles.remainingDays}>{this.messageForDaysLeft}</Text>
         <Text style={styles.remainingDaysSubtitle}>para o encerramento</Text>
       </View>
     );
