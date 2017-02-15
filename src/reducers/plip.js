@@ -138,6 +138,7 @@ export default  (state = initialState, action) => {
       return {
         ...state,
 
+        currentSigningPlip: null,
         fetchPlipRelatedInfoError: null,
         justSignedPlips: {},
         plipSignInfo: null,
@@ -148,13 +149,9 @@ export default  (state = initialState, action) => {
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,
-        currentSigningPlip: null,
         fetchPlipRelatedInfoError: null,
         userSignInfo: {},
         justSignedPlips: {},
-        shortSigners: null,
-        shortSignersTotal: null,
-        plipSignInfo: null,
       };
     default:
       return state;
