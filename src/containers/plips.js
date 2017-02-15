@@ -139,9 +139,12 @@ class Container extends Component {
     } = this.props;
 
     if (currentSigningPlip) {
-      // For reason, the router is not done loading the current screen
+      // For some reason, the router is not done loading the current screen
       // and will dispatch the current view after this.
       // It's like only the navigation controller was loaded.
+      // The hack actually works without setting a waiting time,
+      // be here we give some window becuase we are not sure why this happens.
+      // `router-flux` issue?
       setTimeout(() => onGoToPlip(currentSigningPlip), 500);
     }
   }
