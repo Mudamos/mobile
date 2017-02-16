@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 
 import {
+  Keyboard,
   TouchableOpacity,
   Text,
   View,
@@ -169,6 +170,7 @@ export default class ProfilePhoneCodeLayout extends Component {
 
   onResend() {
     const { phone, onResend } = this.props;
+    Keyboard.dismiss();
     onResend(phone);
   }
 

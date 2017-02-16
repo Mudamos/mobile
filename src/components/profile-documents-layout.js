@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 
 import {
+  Keyboard,
   Text,
   TouchableOpacity,
   View,
@@ -117,7 +118,7 @@ export default class ProfileDocumentsLayout extends Component {
             />
 
             <TouchableOpacity
-              onPress={() => this.setState({ reasonEnabled: true })}
+              onPress={this.enableReason.bind(this)}
               style={styles.whyDocumentsContainer}
             >
               <Text style={styles.whyDocumentsText}>{locale.whyRequestDocuments}</Text>
@@ -159,5 +160,10 @@ export default class ProfileDocumentsLayout extends Component {
     const { cpf, voteCard } = this.state;
 
     onSave({ cpf, voteCard });
+  }
+
+  enableReason() {
+    Keyboard.dismiss();
+    this.setState({ reasonEnabled: true });
   }
 }
