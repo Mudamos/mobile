@@ -2,6 +2,7 @@ import farfetch, { prefix, requestLogger, responseLogger } from "farfetch";
 import { camelizeKeys } from "humps";
 
 import {
+  log,
   isDev,
   isUnauthorized,
   toCredential,
@@ -25,7 +26,10 @@ const requester = ({ host }) => {
     .use(req => req.set("Accept", "application/json"))
     .use((req, execute) => ({
       ...req,
-      execute: req => handleResponseError(execute(req)),
+      execute: req => {
+        log(req, { tag: "Request" });
+        return handleResponseError(execute(req));
+      },
     }));
 
   return builder;

@@ -25,6 +25,7 @@ export default class Menu extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
     isFetchingProfile: PropTypes.bool,
+    isUserLoggedIn: PropTypes.bool,
     menuEntries: PropTypes.array.isRequired,
     onLogout: PropTypes.func.isRequired,
   };
@@ -124,8 +125,8 @@ export default class Menu extends Component {
   }
 
   renderFooter() {
-    const { isFetchingProfile, currentUser } = this.props;
-    return isFetchingProfile || !currentUser ? null : this.renderEnabledFooter();
+    const { isFetchingProfile, isUserLoggedIn } = this.props;
+    return isFetchingProfile || !isUserLoggedIn ? null : this.renderEnabledFooter();
   }
 
   renderEnabledFooter() {

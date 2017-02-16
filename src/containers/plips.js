@@ -217,6 +217,7 @@ class Container extends Component {
     const {
       currentUser,
       isFetchingProfile,
+      isUserLoggedIn,
       onLogout,
     } = this.props;
 
@@ -224,6 +225,7 @@ class Container extends Component {
       <LoggedInMenu
         currentUser={currentUser}
         isFetchingProfile={isFetchingProfile}
+        isUserLoggedIn={isUserLoggedIn}
         onLogout={onLogout}
 
         menuEntries={this.menuEntries}
