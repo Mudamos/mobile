@@ -29,6 +29,7 @@
 		30910D199404C3C085B8EE95 /* Pods_MudamosMobileTagviewBeta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */; };
 		321F777C009E4EAD870F828D /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9BB36D0B0549BF80BA15B1 /* libBVLinearGradient.a */; };
 		400834B331534457AC160DEA /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8424FEEF17243CFB758995F /* libRNRandomBytes.a */; };
+		4622FF021E562C0400404C0D /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4622FEFC1E562BD900404C0D /* libReactNativePermissions.a */; };
 		4623C3E71E0081A800158849 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623C3E31E00818500158849 /* libRNDeviceInfo.a */; };
 		463C8ED11E0841D500E79749 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463C8EB71E08419900E79749 /* libBVLinearGradient.a */; };
 		463FA2B21E30E7830035B49D /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463FA2AF1E30E7310035B49D /* libRNShare.a */; };
@@ -36,6 +37,7 @@
 		4658C25A1DFF25020063E371 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46668FAD1DFB386E002ECF64 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4673AD161DF88AA100E81C9A /* libAirMaps.a */; };
 		46668FAE1DFB3875002ECF64 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
+		468B52A31E57273200A4E6B6 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */; };
 		46918CE11E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
 		46918CE21E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
 		46918CE31E26989000AF78FF /* pt_sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */; };
@@ -128,12 +130,14 @@
 		A582C3D9FA9E493FA165D256 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6E4E916C3B4AFEBB903B41 /* libRNSpinkit.a */; };
 		A987A82739134C549891CBB6 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 413B12353FD34D1C9F7FE084 /* Zocial.ttf */; };
 		AE65A15000BA4D24BE9384D3 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EBAE3E29553499CBB9730E7 /* MaterialIcons.ttf */; };
+		B88401E9361B4A92B9E464C9 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCA8BA48A81E4C2AB38DBFDB /* libReactNativePermissions.a */; };
 		B994268565B54407A5F37EDF /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE91C85ACE5E44DC89DDD281 /* libRNDeviceInfo.a */; };
 		B9DC8F78B14942C9AA8886FC /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52CFEA4AA81E45E9A3978748 /* SimpleLineIcons.ttf */; };
 		C4DC04054CD8457DBDF02C62 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC5D238E00C444189EA91E3 /* libRNVectorIcons.a */; };
 		C9AFB9662A2E495A8F9DC469 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F016C18A1E94D748F17680C /* Foundation.ttf */; };
 		CFDF383329294DF592208AB8 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D115F907C014FE4A318F416 /* libRCTFBSDK.a */; };
 		D255DBA5704D40A7AB44AB19 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B55C452B89744C8C88F648C4 /* libReactNativeConfig.a */; };
+		D2826D23B7EA43F593D2F889 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB5F27F75FA40E7B12ACE07 /* libReact Native Open Settings.a */; };
 		D3E5BB9F9F7942BAAFD16EF4 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F2DC68A75BF46FBBA40FCDC /* Octicons.ttf */; };
 		F424078D44A14BFBBE1D412B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B5E533F39E44066933C7E40 /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
@@ -209,6 +213,13 @@
 			remoteGlobalIDString = 15209BEF1D250F63000D0F44;
 			remoteInfo = LRDRCTSimpleToast;
 		};
+		4622FEFB1E562BD900404C0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0929CEFBA4ED4262920A7C2A /* ReactNativePermissions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9D23B34F1C767B80008B4819;
+			remoteInfo = ReactNativePermissions;
+		};
 		4623C3E21E00818500158849 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1BDA6C103B4A4B678E5DC06B /* RNDeviceInfo.xcodeproj */;
@@ -257,6 +268,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
 			remoteInfo = AirMaps;
+		};
+		468B52981E57272000A4E6B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4DD84D58E0F4CCBA2E32688 /* React Native Open Settings.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 190C8BAA1BEAADCC00CD505E;
+			remoteInfo = "React Native Open Settings";
 		};
 		46C0AB2B1DD5E40600447C6C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -355,6 +373,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* MudamosMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MudamosMobileTests.m; sourceTree = "<group>"; };
 		05CE97551B064F0BBF41E711 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		0929CEFBA4ED4262920A7C2A /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		0D705390BB914269AE72B86B /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		0F2DC68A75BF46FBBA40FCDC /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		1082FEFEA6B34CF8A23BF45D /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
@@ -404,6 +423,7 @@
 		46F35B571E269C800002728D /* roboto_thin_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_thin_italic.ttf; sourceTree = "<group>"; };
 		46F35B581E269C800002728D /* roboto_thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_thin.ttf; sourceTree = "<group>"; };
 		46F35B591E269C800002728D /* roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto.ttf; sourceTree = "<group>"; };
+		4DB5F27F75FA40E7B12ACE07 /* libReact Native Open Settings.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libReact Native Open Settings.a"; sourceTree = "<group>"; };
 		4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		52CFEA4AA81E45E9A3978748 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		58704BD66EA349B7BB79C7ED /* LRDRCTSimpleToast.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = LRDRCTSimpleToast.xcodeproj; path = "../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast.xcodeproj"; sourceTree = "<group>"; };
@@ -424,8 +444,10 @@
 		B55C452B89744C8C88F648C4 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		B5AA2BE2727F416DA6981B84 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
 		BB620C49F665BCB96048640D /* Pods-MudamosMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile.release.xcconfig"; sourceTree = "<group>"; };
+		BCA8BA48A81E4C2AB38DBFDB /* libReactNativePermissions.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativePermissions.a; sourceTree = "<group>"; };
 		CB358AEDAED7A7D4E7C8E06C /* Pods_MudamosMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF9BB36D0B0549BF80BA15B1 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
+		D4DD84D58E0F4CCBA2E32688 /* React Native Open Settings.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = "React Native Open Settings.xcodeproj"; path = "../node_modules/react-native-open-settings/React Native Open Settings.xcodeproj"; sourceTree = "<group>"; };
 		D782C177FC6040C8A34D9B30 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
 		D8424FEEF17243CFB758995F /* libRNRandomBytes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRandomBytes.a; sourceTree = "<group>"; };
 		DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -473,6 +495,8 @@
 				321F777C009E4EAD870F828D /* libBVLinearGradient.a in Frameworks */,
 				CFDF383329294DF592208AB8 /* libRCTFBSDK.a in Frameworks */,
 				A5018F06EEB84A608D7B07BC /* libRNShare.a in Frameworks */,
+				B88401E9361B4A92B9E464C9 /* libReactNativePermissions.a in Frameworks */,
+				D2826D23B7EA43F593D2F889 /* libReact Native Open Settings.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +504,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				468B52A31E57273200A4E6B6 /* libReact Native Open Settings.a in Frameworks */,
+				4622FF021E562C0400404C0D /* libReactNativePermissions.a in Frameworks */,
 				463FA2B21E30E7830035B49D /* libRNShare.a in Frameworks */,
 				4644560C1E1ECFD600AACF91 /* libRCTFBSDK.a in Frameworks */,
 				463C8ED11E0841D500E79749 /* libBVLinearGradient.a in Frameworks */,
@@ -618,6 +644,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		4622FEE11E562BD800404C0D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4622FEFC1E562BD900404C0D /* libReactNativePermissions.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4623C3C91E00818500158849 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -670,6 +704,14 @@
 			isa = PBXGroup;
 			children = (
 				4673AD161DF88AA100E81C9A /* libAirMaps.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		468B52811E57272000A4E6B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -774,6 +816,8 @@
 				6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */,
 				89A8D322C544414483346976 /* RCTFBSDK.xcodeproj */,
 				D782C177FC6040C8A34D9B30 /* RNShare.xcodeproj */,
+				0929CEFBA4ED4262920A7C2A /* ReactNativePermissions.xcodeproj */,
+				D4DD84D58E0F4CCBA2E32688 /* React Native Open Settings.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -992,12 +1036,20 @@
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
 				},
 				{
+					ProductGroup = 468B52811E57272000A4E6B6 /* Products */;
+					ProjectRef = D4DD84D58E0F4CCBA2E32688 /* React Native Open Settings.xcodeproj */;
+				},
+				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
 					ProductGroup = 46C0AB251DD5E40600447C6C /* Products */;
 					ProjectRef = 4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */;
+				},
+				{
+					ProductGroup = 4622FEE11E562BD800404C0D /* Products */;
+					ProjectRef = 0929CEFBA4ED4262920A7C2A /* ReactNativePermissions.xcodeproj */;
 				},
 				{
 					ProductGroup = 4623C3C91E00818500158849 /* Products */;
@@ -1093,6 +1145,13 @@
 			remoteRef = 460E7DCC1DF18C1100F86028 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4622FEFC1E562BD900404C0D /* libReactNativePermissions.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativePermissions.a;
+			remoteRef = 4622FEFB1E562BD900404C0D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4623C3E31E00818500158849 /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1140,6 +1199,13 @@
 			fileType = archive.ar;
 			path = libAirMaps.a;
 			remoteRef = 4673AD151DF88AA100E81C9A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libReact Native Open Settings.a";
+			remoteRef = 468B52981E57272000A4E6B6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		46C0AB2C1DD5E40600447C6C /* libRCTImage-tvOS.a */ = {
@@ -1561,6 +1627,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MudamosMobile.app/MudamosMobile";
@@ -1578,6 +1646,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1609,6 +1679,8 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
+					"$(SRCROOT)/../node_modules/react-native-open-settings",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1646,6 +1718,8 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
+					"$(SRCROOT)/../node_modules/react-native-open-settings",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1686,12 +1760,16 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
+					"$(SRCROOT)/../node_modules/react-native-open-settings",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1732,12 +1810,16 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
+					"$(SRCROOT)/../node_modules/react-native-open-settings",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1803,6 +1885,8 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
+					"$(SRCROOT)/../node_modules/react-native-open-settings",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1855,6 +1939,8 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
+					"$(SRCROOT)/../node_modules/react-native-open-settings",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -21,3 +21,8 @@ export const addressFound = location => ({
   type: "ADDRESS_FOUND",
   payload: { location },
 });
+
+export const addressZipCodeSearchWithCoords = ({ latitude, longitude }) => ({
+  type: "ADDRESS_ZIP_CODE_SEARCH_WITH_COORDS",
+  payload: { latitude, longitude },
+});

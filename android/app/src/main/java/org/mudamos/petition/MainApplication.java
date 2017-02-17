@@ -6,6 +6,8 @@ import android.util.Log;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.react.ReactApplication;
+import com.opensettings.OpenSettingsPackage;
+import com.joshblour.reactnativepermissions.ReactNativePermissionsPackage;
 import cl.json.RNSharePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -41,6 +43,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new OpenSettingsPackage(),
+            new ReactNativePermissionsPackage(),
             new RNSharePackage(),
             new FBSDKPackage(mCallbackManager),
             new LinearGradientPackage(),
