@@ -11,7 +11,7 @@ import {
 import { UnauthorizedError } from "../models/net-error";
 
 
-const requester = ({ host }) => {
+const requester = ({ host, version }) => {
   let builder = farfetch;
 
   if (isDev) {
@@ -20,8 +20,10 @@ const requester = ({ host }) => {
       .use(responseLogger());
   }
 
+  const fullURL = version ? `${host}/api/${version}` : host;
+
   builder = builder
-    .use(prefix(host))
+    .use(prefix(fullURL))
     .use(req => req.set("Content-Type", "application/json"))
     .use(req => req.set("Accept", "application/json"))
     .use((req, execute) => ({
@@ -244,7 +246,7 @@ const fetchOfflinePlipSigners = ({ client }) => ({ plipId }) =>
 
 
 export default function MobileApi(host) {
-  const client = requester({ host });
+  const client = requester({ host, version: "v1" });
 
   return {
     changePassword: changePassword({ client }),
