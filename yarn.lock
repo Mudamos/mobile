@@ -4931,6 +4931,14 @@ react-native-maps:
   dependencies:
     ramda "~0.21.0"
 
+react-native-open-settings@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-open-settings/-/react-native-open-settings-0.0.3.tgz#a0896f9e87b95cf45beb1c89953580fa0c0c01d8"
+
+react-native-permissions@0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-0.2.5.tgz#81c3adbb09d9edb6ae320d458ca9c021e03a5aba"
+
 react-native-randombytes@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-native-randombytes/-/react-native-randombytes-2.2.0.tgz#93099cd7f93b1b228bbd380617e8bbf0d73c4cfb"

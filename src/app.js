@@ -30,6 +30,8 @@ import {
 } from "./containers";
 
 import {
+  appDidMount,
+  appWillUnmount,
   fetchIsUserFirstTime,
   fetchSession,
 } from "./actions";
@@ -42,8 +44,10 @@ import SessionManager from "./services/session";
 import WalletManager from "./services/wallet";
 import MobileApi from "./services/mobile-api";
 import ApiError from "./services/api-error";
-import LocalStorage from "./services/local-storage";
+import { defaultStorage } from "./services/local-storage";
 import DeviceInfo from "./services/device-info";
+import PermissionService from "./services/permission";
+import LocationService from "./services/location";
 
 import reducer from "./reducers";
 import sagas from "./sagas";
@@ -78,7 +82,7 @@ const store = isDev ?
 
 const sessionStore = SessionManager("@Mudamos");
 const walletStore = WalletManager("@Mudamos");
-const localStorage = LocalStorage("@Mudamos");
+const localStorage = defaultStorage();
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -115,8 +119,10 @@ sagaRunner.run(sagas, {
   apiError: ApiError(),
   DeviceInfo,
   localStorage,
+  locationService: LocationService,
   mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
   mobileApi: MobileApi(Config.MOBILE_API_URL),
+  permissionService: PermissionService(),
   sessionStore,
   walletStore,
 });
@@ -127,6 +133,14 @@ store.dispatch(fetchIsUserFirstTime());
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 
 export default class App extends Component {
+  componentDidMount() {
+    store.dispatch(appDidMount());
+  }
+
+  componentWillUnmount() {
+    store.dispatch(appWillUnmount());
+  }
+
   render() {
     return (
       <Provider store={store}>

@@ -1,10 +1,11 @@
 import { takeLatest } from "redux-saga";
-import { fork, put, call, select } from "redux-saga/effects";
+import { spawn, put, call, select } from "redux-saga/effects";
 
 import {
   addressZipCodeSearching,
   addressZipCodeSearchError,
   addressFound,
+  clearLocation,
   navigate,
   unauthorized,
 } from "../actions";
@@ -13,6 +14,7 @@ import { currentAuthToken } from "../selectors";
 
 import {
   isUnauthorized,
+  log,
   logError,
 } from "../utils";
 
@@ -31,6 +33,7 @@ function* searchZipCode({ mobileApi }) {
 
       yield put(addressFound(Address.fromJson(response)));
       yield put(addressZipCodeSearching(false));
+      yield put(clearLocation());
       yield put(navigate("profileAddressConfirm"));
     } catch(e) {
       logError(e, { tag: "searchZipCode" });
@@ -44,6 +47,15 @@ function* searchZipCode({ mobileApi }) {
   });
 }
 
+// eslint-disable-next-line no-unused-vars
+function* searchZipCodeWithCoords({ mobileApi }) {
+  yield takeLatest("ADDRESS_ZIP_CODE_SEARCH_WITH_COORDS", function ({ payload }) {
+    const { latitude, longitude } = payload;
+    log(`Will search with lat: ${latitude} lng: ${longitude}`);
+  });
+}
+
 export default function* addressSaga({ mobileApi }) {
-  yield fork(searchZipCode, { mobileApi });
+  yield spawn(searchZipCode, { mobileApi });
+  yield spawn(searchZipCodeWithCoords, { mobileApi });
 }

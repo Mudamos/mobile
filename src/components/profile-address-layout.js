@@ -25,8 +25,10 @@ export default class ProfileAddressLayout extends Component {
   }
 
   static propTypes = {
+    isFetchingLocation: PropTypes.bool,
     isSearching: PropTypes.bool,
     onDontKnowZipCode: PropTypes.func.isRequired,
+    onRequestLocation: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
   }
 
@@ -38,8 +40,14 @@ export default class ProfileAddressLayout extends Component {
     return this.validSearch;
   }
 
+  componentDidMount() {
+    const { onRequestLocation } = this.props;
+    onRequestLocation({ message: locale.permissions.locationForZipCode });
+  }
+
   render() {
     const {
+      isFetchingLocation,
       isSearching,
     } = this.props;
 
@@ -52,7 +60,7 @@ export default class ProfileAddressLayout extends Component {
           </ScrollView>
         </Layout>
 
-        <PageLoader isVisible={isSearching} />
+        <PageLoader isVisible={isFetchingLocation || isSearching} />
       </View>
     );
   }

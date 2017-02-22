@@ -15,8 +15,12 @@ const fetch = (namespace, key) =>
 const destroy = (namespace, key) =>
   AsyncStorage.removeItem(buildKey(namespace, key));
 
-export default namespace => ({
+const service = namespace => ({
   store: curry(store)(namespace),
   fetch: curry(fetch)(namespace),
   destroy: curry(destroy)(namespace),
 });
+
+export const defaultStorage = () => service("@Mudamos");
+
+export default service;

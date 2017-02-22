@@ -41,6 +41,8 @@ function appError({ type, payload }) {
       return showToast(locale.errors.facebookLoginError);
     case "LINKING_OPEN_URL_ERROR":
       return showToast(locale.errors.openURLError);
+    case "LOCATION_FETCH_LOCATION_ERROR":
+      return showToast(locale.errors.locationError);
     case "PASSWORD_RETRIEVE_ERROR":
       return showToast(locale.errors.passwordRetrieveError);
     case "PLIP_SIGN_ERROR":
