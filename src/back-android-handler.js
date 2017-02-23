@@ -50,6 +50,7 @@ export default store => () => {
       store.dispatch(signingPlip(null));
       return defaultBackAction();
     case "profileAddress":
+    case "profileAvatar":
     case "profileBirth":
     case "profileDocuments":
     case "profileMissingFields":

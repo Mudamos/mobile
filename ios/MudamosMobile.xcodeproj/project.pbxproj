@@ -67,6 +67,7 @@
 		46CBB3721E268E52000B4F5A /* lato_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35F1E268E52000B4F5A /* lato_light.ttf */; };
 		46CBB3731E268E52000B4F5A /* lato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3601E268E52000B4F5A /* lato.ttf */; };
 		46CBB3741E268E52000B4F5A /* lato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3601E268E52000B4F5A /* lato.ttf */; };
+		46D05B531E5F073B00350745 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
 		46D30D7C1DE46B8400CE09C0 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46D30D7B1DE46B8400CE09C0 /* FacebookSDKStrings.bundle */; };
 		46ED2A6E1DF194E400B36CD0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		46ED2A6F1DF194E400B36CD0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -129,6 +130,7 @@
 		A5018F06EEB84A608D7B07BC /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AA2BE2727F416DA6981B84 /* libRNShare.a */; };
 		A582C3D9FA9E493FA165D256 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6E4E916C3B4AFEBB903B41 /* libRNSpinkit.a */; };
 		A987A82739134C549891CBB6 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 413B12353FD34D1C9F7FE084 /* Zocial.ttf */; };
+		AC342FDED7B646099A9A63A1 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 621C3D10CAD54FC5982F12BB /* libRNImagePicker.a */; };
 		AE65A15000BA4D24BE9384D3 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EBAE3E29553499CBB9730E7 /* MaterialIcons.ttf */; };
 		B88401E9361B4A92B9E464C9 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCA8BA48A81E4C2AB38DBFDB /* libReactNativePermissions.a */; };
 		B994268565B54407A5F37EDF /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE91C85ACE5E44DC89DDD281 /* libRNDeviceInfo.a */; };
@@ -332,6 +334,13 @@
 			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
 			remoteInfo = ReactNativeConfig;
 		};
+		46D05B4D1E5F071300350745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
+		};
 		46DBF0451DE386CF006B43B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 05CE97551B064F0BBF41E711 /* RNVectorIcons.xcodeproj */;
@@ -428,7 +437,9 @@
 		52CFEA4AA81E45E9A3978748 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		58704BD66EA349B7BB79C7ED /* LRDRCTSimpleToast.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = LRDRCTSimpleToast.xcodeproj; path = "../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast.xcodeproj"; sourceTree = "<group>"; };
 		5CA59394A12E918879BC09D5 /* Pods-MudamosMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTests/Pods-MudamosMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
+		621C3D10CAD54FC5982F12BB /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7C6E4E916C3B4AFEBB903B41 /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		7D115F907C014FE4A318F416 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
@@ -497,6 +508,7 @@
 				A5018F06EEB84A608D7B07BC /* libRNShare.a in Frameworks */,
 				B88401E9361B4A92B9E464C9 /* libReactNativePermissions.a in Frameworks */,
 				D2826D23B7EA43F593D2F889 /* libReact Native Open Settings.a in Frameworks */,
+				AC342FDED7B646099A9A63A1 /* libRNImagePicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +516,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46D05B531E5F073B00350745 /* libRNImagePicker.a in Frameworks */,
 				468B52A31E57273200A4E6B6 /* libReact Native Open Settings.a in Frameworks */,
 				4622FF021E562C0400404C0D /* libReactNativePermissions.a in Frameworks */,
 				463FA2B21E30E7830035B49D /* libRNShare.a in Frameworks */,
@@ -724,6 +737,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		46D05B301E5F071300350745 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				46D05B4E1E5F071300350745 /* libRNImagePicker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		46DBF0301DE386CF006B43B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -818,6 +839,7 @@
 				D782C177FC6040C8A34D9B30 /* RNShare.xcodeproj */,
 				0929CEFBA4ED4262920A7C2A /* ReactNativePermissions.xcodeproj */,
 				D4DD84D58E0F4CCBA2E32688 /* React Native Open Settings.xcodeproj */,
+				76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1056,6 +1078,10 @@
 					ProjectRef = 1BDA6C103B4A4B678E5DC06B /* RNDeviceInfo.xcodeproj */;
 				},
 				{
+					ProductGroup = 46D05B301E5F071300350745 /* Products */;
+					ProjectRef = 76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */;
+				},
+				{
 					ProductGroup = 4658C23C1DFF24EA0063E371 /* Products */;
 					ProjectRef = A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */;
 				},
@@ -1262,6 +1288,13 @@
 			fileType = archive.ar;
 			path = libReactNativeConfig.a;
 			remoteRef = 46C0AB471DD5E40600447C6C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		46D05B4E1E5F071300350745 /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = 46D05B4D1E5F071300350745 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		46DBF0461DE386CF006B43B5 /* libRNVectorIcons.a */ = {
@@ -1629,6 +1662,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MudamosMobile.app/MudamosMobile";
@@ -1646,6 +1680,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1681,6 +1716,7 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1720,6 +1756,7 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1762,12 +1799,14 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1812,12 +1851,14 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1887,6 +1928,7 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1941,6 +1983,7 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

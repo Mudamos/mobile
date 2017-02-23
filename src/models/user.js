@@ -1,3 +1,4 @@
+import Image from "./image";
 import Mobile from "./mobile";
 import ProfileType from "./profile-type";
 import Wallet from "./wallet";
@@ -6,6 +7,8 @@ import Wallet from "./wallet";
 export default class User {
   constructor(attrs = {}) {
     this.id = attrs.id;
+    this.avatar = attrs.avatar;
+    this.hasCustomAvatar = attrs.hasCustomAvatar;
     this.birthdate = attrs.birthdate;
     this.cpf = attrs.cpf;
     this.email = attrs.email;
@@ -32,6 +35,8 @@ export default class User {
   toJson() {
     const mobileJson = this.mobile ? this.mobile.toJson() : {};
     const walletJson = this.wallet ? this.wallet.toJson() : {};
+    const avatarJson = this.avatar ? this.avatar.toJson() : {};
+    const { profilePicture } = avatarJson;
 
     return {
       userId: this.id,
@@ -42,6 +47,8 @@ export default class User {
       userCpf: this.cpf,
       userZipcode: this.zipCode,
       userBirthday: this.birthdate,
+      hasCustomAvatar: this.hasCustomAvatar,
+      profilePicture,
 
       ...mobileJson,
       ...walletJson,
@@ -49,8 +56,14 @@ export default class User {
   }
 
   static fromJson(json = {}) {
+    const avatar = Image.fromJson({
+      url: json.profilePicture,
+    });
+
     return new User({
       id: json.userId,
+      avatar,
+      hasCustomAvatar: json.hasCustomAvatar,
       birthdate: json.userBirthday,
       cpf: json.userCpf,
       email: json.profileEmail,

@@ -40,6 +40,11 @@ export const isPhoneProfileComplete = state => {
   return currentUser.mobile.status;
 }
 
+export const isAvatarProfileComplete = state => {
+  const currentUser = state.profile.currentUser || new User();
+  return currentUser.hasCustomAvatar;
+}
+
 export const isWalletProfileComplete = state => !!state.wallet.hasWallet;
 
 export const wasPhoneValidated = state => state.profile.phoneJustValidated;
