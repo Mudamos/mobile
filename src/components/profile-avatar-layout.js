@@ -28,6 +28,7 @@ export default class ProfileAvatarLayout extends Component {
 
   static propTypes = {
     onRequestAvatarPermission: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -58,7 +59,7 @@ export default class ProfileAvatarLayout extends Component {
             <View style={styles.full}>
               <FlatButton
                 title={locale.forward.toUpperCase()}
-                onPress={() => {}}
+                onPress={this.onSubmit.bind(this)}
                 style={{marginHorizontal: 20, marginTop: 20}}
               />
           </View>
@@ -101,5 +102,11 @@ export default class ProfileAvatarLayout extends Component {
         },
       });
     });
+  }
+
+  onSubmit() {
+    const { onSubmit } = this.props;
+    const { avatar } = this.state;
+    onSubmit({ avatar });
   }
 }

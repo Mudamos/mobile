@@ -89,3 +89,18 @@ export const voteCardIdAcquired = voteCardId => ({
   type: "PROFILE_VOTE_CARD_ID_ACQUIRED",
   payload: { voteCardId },
 });
+
+export const profileSaveAvatar ({ avatar, shouldNavigate = true }) => ({
+  type: "PROFILE_SAVE_AVATAR",
+  payload: { avatar, shouldNavigate },
+});
+
+export const savingAvatar isSaving => ({
+  type: "PROFILE_SAVING_AVATAR",
+  payload: { isSaving },
+});
+
+export const saveAvatarError = error => ({
+  type: "PROFILE_SAVE_AVATAR_ERROR",
+  payload: { error },
+});

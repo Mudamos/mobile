@@ -38,6 +38,8 @@ export default (state = initialState, action) => {
       return { ...state, errors: null, hasError: false };
     case "PROFILE_VOTE_CARD_ID_ACQUIRED":
       return { ...state, voteCardId: payload.voteCardId };
+    case "PROFILE_SAVING_AVATAR":
+      return { ...state, isSaving: payload.isSaving };
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,

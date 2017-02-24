@@ -244,6 +244,47 @@ const fetchOfflinePlipSigners = ({ client }) => ({ plipId }) =>
     .get(`/petition/${plipId}/true/votes/friends`)
     .then(getData);
 
+const upload = ({ endpoint }) => (authToken, { contentType, name, uri }) => {
+  let progressListener = identity;
+  const request = new XMLHttpRequest;
+
+  const promise = new Promise((resolve, reject) => {
+    const data = new FormData;
+    //data.append("file", { uri, name, type: contentType });
+    data.append("file", { uri });
+
+    request.open("POST", endpoint, true);
+    request.setRequestHeader("Authorization", `Bearer ${authToken}`);
+
+    request.upload.addEventListener("progress", event => {
+      if (event.lengthComputable) {
+        progressListener(event.loaded / event.total);
+      }
+    });
+
+    request.addEventListener("load", () => {
+      debugger
+      resolve(JSON.parse(request.response));
+    });
+
+    request.addEventListener("error", reject);
+
+    request.send(data);
+  });
+
+  const uploader = {
+    then: (...args) => promise.then(...args),
+    catch: (...args) => promise.catch(...args),
+    cancel: () => request.abort(),
+    progress: listener => {
+      progressListener = listener;
+      return uploader;
+    },
+  };
+
+  return uploader;
+};
+
 
 export default function MobileApi(host) {
   const client = requester({ host, version: "v1" });
@@ -261,6 +302,7 @@ export default function MobileApi(host) {
     plipSignInfo: plipSignInfo({ client }),
     profile: profile({ client }),
     retrievePassword: retrievePassword({ client }),
+    saveAvatar: upload({ endpoint: `${host}/api/v1` }),
     saveBirthdate: saveBirthdate({ client }),
     saveDocuments: saveDocuments({ client }),
     savePhone: savePhone({ client }),

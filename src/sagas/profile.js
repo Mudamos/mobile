@@ -10,6 +10,8 @@ import {
   phoneJustValidated,
   profileStateMachine,
   saveUserProfileError,
+  savingAvatar,
+  saveAvatarError
   sendingPhoneValidation,
   sendingPhoneValidationError,
   logginSucceeded,
@@ -218,6 +220,40 @@ function* savePhoneProfile({ mobileApi, DeviceInfo }) {
       if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
 
       yield put(saveUserProfileError(e));
+    }
+  });
+}
+
+function* saveAvatarProfile({ mobileApi }) {
+  yield takeLatest("PROFILE_SAVE_AVATAR", function* ({ payload }) {
+    try {
+      const { avatar, shouldNavigate } = payload;
+
+      yield put(savingAvatar(true));
+
+      const authToken = yield select(currentAuthToken);
+      const response = yield call(mobileApi.saveAvatar, authToken, {
+        avatar: avatar ? avatar.uri : null,
+      });
+
+      const user = User.fromJson(response.user);
+
+      yield put(updatedUserProfile({ user }));
+      yield put(savingAvatar(false));
+
+      if (shouldNavigate)
+        yield put(profileStateMachine());
+      else {
+        yield call([Toast, Toast.show], locale.avatarSaved);
+      }
+    } catch (e) {
+      logError(e, { tag: "saveAvatarProfile" });
+
+      yield put(savingAvatar(false));
+
+      if (shouldNavigate && isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
+      yield put(saveAvatarError(e));
     }
   });
 }
