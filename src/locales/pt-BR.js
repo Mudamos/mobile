@@ -54,7 +54,7 @@ const translations = {
   passwordChangedSuccessfully: "Senha alterada com sucesso!",
   performLogin: "Faça o login",
   permissions: {
-    locationForZipCode: "Necessária para buscarmos seu CEP",
+    locationForZipCode: "Para facilitar a busca do seu CEP",
   },
   petitionEnded: "Encerrado",
   phoneHeaderTitle: "Informe seu celular",

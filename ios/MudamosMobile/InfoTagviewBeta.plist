@@ -61,7 +61,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Usamos sua localização para buscarmos seu CEP</string>
+	<string>Compartilhar sua localização permite buscar automaticamente seu CEP</string>
   <key>NSBluetoothPeripheralUsageDescription</key>
   <string>Não pedimos essa permissão</string>
   <key>NSCalendarsUsageDescription</key>
