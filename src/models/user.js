@@ -8,7 +8,7 @@ export default class User {
   constructor(attrs = {}) {
     this.id = attrs.id;
     this.avatar = attrs.avatar;
-    this.hasCustomAvatar = attrs.hasCustomAvatar;
+    this.hasSavedAvatar = attrs.hasSavedAvatar;
     this.birthdate = attrs.birthdate;
     this.cpf = attrs.cpf;
     this.email = attrs.email;
@@ -47,7 +47,7 @@ export default class User {
       userCpf: this.cpf,
       userZipcode: this.zipCode,
       userBirthday: this.birthdate,
-      hasCustomAvatar: this.hasCustomAvatar,
+      hasSavedAvatar: this.hasSavedAvatar,
       profilePicture,
 
       ...mobileJson,
@@ -63,7 +63,7 @@ export default class User {
     return new User({
       id: json.userId,
       avatar,
-      hasCustomAvatar: json.hasCustomAvatar,
+      hasSavedAvatar: json.hasSavedAvatar,
       birthdate: json.userBirthday,
       cpf: json.userCpf,
       email: json.profileEmail,

@@ -42,7 +42,7 @@ export const isPhoneProfileComplete = state => {
 
 export const isAvatarProfileComplete = state => {
   const currentUser = state.profile.currentUser || new User();
-  return currentUser.hasCustomAvatar;
+  return currentUser.hasSavedAvatar;
 }
 
 export const isSavingAvatar = state => state.profile.isSavingAvatar;
