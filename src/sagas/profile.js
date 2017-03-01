@@ -1,6 +1,8 @@
 import { takeLatest } from "redux-saga";
 import { call, put, spawn, select } from "redux-saga/effects";
 
+import { monitorUpload } from "./upload";
+
 import {
   fetchingProfileError,
   isFetchingProfile,
@@ -11,7 +13,7 @@ import {
   profileStateMachine,
   saveUserProfileError,
   savingAvatar,
-  saveAvatarError
+  saveAvatarError,
   sendingPhoneValidation,
   sendingPhoneValidationError,
   logginSucceeded,
@@ -25,7 +27,7 @@ import {
   User,
 } from "../models";
 
-import { isDev, isUnauthorized, logError } from "../utils";
+import { isDev, isUnauthorized, log, logError } from "../utils";
 
 import Toast from "react-native-simple-toast";
 
@@ -87,7 +89,7 @@ function* saveBirthdateProfile({ mobileApi }) {
 
       yield put(savingProfile(false));
 
-      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
       yield put(saveUserProfileError(e));
     }
@@ -226,16 +228,30 @@ function* savePhoneProfile({ mobileApi, DeviceInfo }) {
 
 function* saveAvatarProfile({ mobileApi }) {
   yield takeLatest("PROFILE_SAVE_AVATAR", function* ({ payload }) {
-    try {
-      const { avatar, shouldNavigate } = payload;
+    const { avatar = {}, shouldNavigate } = payload;
 
+    try {
       yield put(savingAvatar(true));
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.saveAvatar, authToken, {
-        avatar: avatar ? avatar.uri : null,
+      const avatarPayload = {
+        ...avatar,
+      };
+
+      yield call(monitorUpload, mobileApi.saveAvatar(authToken, avatarPayload), function ({ type, payload: uploadPayload }) {
+        switch (type) {
+          case "UPLOAD_PROGRESS":
+            log(`upload progress ${uploadPayload}`);
+            break;
+          case "UPLOAD_FINISHED":
+            log("upload finished", uploadPayload)
+            break;
+          case "UPLOAD_FAILED":
+            throw uploadPayload;
+        }
       });
 
+      const response = yield call(mobileApi.profile, authToken);
       const user = User.fromJson(response.user);
 
       yield put(updatedUserProfile({ user }));
@@ -251,7 +267,7 @@ function* saveAvatarProfile({ mobileApi }) {
 
       yield put(savingAvatar(false));
 
-      if (shouldNavigate && isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+      if (shouldNavigate && isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
       yield put(saveAvatarError(e));
     }
@@ -323,6 +339,7 @@ export function* fetchProfileSaga({ mobileApi }) {
 export default function* profileSaga({ mobileApi, DeviceInfo, sessionStore }) {
   yield spawn(saveMainProfile, { mobileApi, sessionStore });
   yield spawn(updateProfile, { mobileApi });
+  yield spawn(saveAvatarProfile, { mobileApi });
   yield spawn(saveBirthdateProfile, { mobileApi });
   yield spawn(saveZipCodeProfile, { mobileApi });
   yield spawn(saveDocumentsProfile, { mobileApi });

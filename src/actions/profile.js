@@ -90,12 +90,12 @@ export const voteCardIdAcquired = voteCardId => ({
   payload: { voteCardId },
 });
 
-export const profileSaveAvatar ({ avatar, shouldNavigate = true }) => ({
+export const profileSaveAvatar = ({ avatar, shouldNavigate = true }) => ({
   type: "PROFILE_SAVE_AVATAR",
   payload: { avatar, shouldNavigate },
 });
 
-export const savingAvatar isSaving => ({
+export const savingAvatar = isSaving => ({
   type: "PROFILE_SAVING_AVATAR",
   payload: { isSaving },
 });

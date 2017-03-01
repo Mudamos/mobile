@@ -45,6 +45,8 @@ export const isAvatarProfileComplete = state => {
   return currentUser.hasCustomAvatar;
 }
 
+export const isSavingAvatar = state => state.profile.isSavingAvatar;
+
 export const isWalletProfileComplete = state => !!state.wallet.hasWallet;
 
 export const wasPhoneValidated = state => state.profile.phoneJustValidated;

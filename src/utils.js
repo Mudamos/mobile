@@ -3,6 +3,7 @@ import {
   head,
   is,
   isNil,
+  last,
   mergeWith,
   pipe,
   propEq,
@@ -32,6 +33,8 @@ const toLogTag = (...tags) => compact(tags).map(t => `[${t}]`).join(" ");
 export const isUnauthorized = error => error instanceof UnauthorizedError;
 
 export const isString = is(String);
+
+export const baseName = file => last(file.split("/"));
 
 export const homeSceneKey = "plipsNav";
 

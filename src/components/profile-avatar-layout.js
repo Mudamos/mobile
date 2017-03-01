@@ -18,7 +18,7 @@ import locale from "../locales/pt-BR";
 
 import styles from "../styles/profile-avatar-layout";
 
-import { log } from "../utils";
+import { baseName, log } from "../utils";
 
 
 export default class ProfileAvatarLayout extends Component {
@@ -27,6 +27,7 @@ export default class ProfileAvatarLayout extends Component {
   }
 
   static propTypes = {
+    isSavingAvatar: PropTypes.bool,
     onRequestAvatarPermission: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
   }
@@ -37,6 +38,7 @@ export default class ProfileAvatarLayout extends Component {
   }
 
   render() {
+    const { isSavingAvatar } = this.props;
     const { avatar } = this.state;
 
     return (
@@ -66,7 +68,7 @@ export default class ProfileAvatarLayout extends Component {
           </View>
         </Layout>
 
-        <PageLoader isVisible={false} />
+        <PageLoader isVisible={isSavingAvatar} />
       </View>
     );
   }
@@ -94,11 +96,14 @@ export default class ProfileAvatarLayout extends Component {
       if (!response.uri) return;
 
       const uri = response.uri;
+      const name = baseName(uri);
       log(uri, { tag: "avatar uri" });
 
       this.setState({
         avatar: {
           uri,
+          name,
+          contentType: "image/jpeg",
         },
       });
     });

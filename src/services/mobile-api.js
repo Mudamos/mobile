@@ -3,10 +3,13 @@ import { camelizeKeys } from "humps";
 
 import {
   log,
+  logError as logErrorUtil,
   isDev,
   isUnauthorized,
   toCredential,
 } from "../utils";
+
+import { identity } from "ramda";
 
 import { UnauthorizedError } from "../models/net-error";
 
@@ -250,8 +253,13 @@ const upload = ({ endpoint }) => (authToken, { contentType, name, uri }) => {
 
   const promise = new Promise((resolve, reject) => {
     const data = new FormData;
-    //data.append("file", { uri, name, type: contentType });
-    data.append("file", { uri });
+    log(`Will upload ${uri}`);
+
+    if (uri) {
+      data.append("file", { uri, name, type: contentType });
+    }
+
+    data.append("nonce", new Date().toISOString());
 
     request.open("POST", endpoint, true);
     request.setRequestHeader("Authorization", `Bearer ${authToken}`);
@@ -263,8 +271,17 @@ const upload = ({ endpoint }) => (authToken, { contentType, name, uri }) => {
     });
 
     request.addEventListener("load", () => {
-      debugger
-      resolve(JSON.parse(request.response));
+      if (request.status === 401) {
+        return reject(new UnauthorizedError(request.response));
+      }
+
+      try {
+        const json = JSON.parse(request.response);
+        return json.status !== "success" ? reject(json) : resolve(json);
+      } catch (error) {
+        logErrorUtil(error);
+        reject(error);
+      }
     });
 
     request.addEventListener("error", reject);
