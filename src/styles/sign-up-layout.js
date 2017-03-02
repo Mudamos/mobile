@@ -62,6 +62,6 @@ export default StyleSheet.create({
     textAlign: "center",
   },
   signInContainer: {
-    marginTop: 10,
+    marginVertical: 10,
   },
 });

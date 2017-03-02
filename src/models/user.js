@@ -15,6 +15,7 @@ export default class User {
     this.mobile = attrs.mobile || new Mobile();
     this.name = attrs.name;
     this.profileType = attrs.profileType;
+    this.termsAccepted = attrs.termsAccepted;
     this.voteCard = attrs.voteCard;
     this.wallet = attrs.wallet || new Wallet();
     this.zipCode = attrs.zipCode;
@@ -49,6 +50,7 @@ export default class User {
       userBirthday: this.birthdate,
       hasSavedAvatar: this.hasSavedAvatar,
       profilePicture,
+      termsAccepted: this.termsAccepted,
 
       ...mobileJson,
       ...walletJson,
@@ -70,6 +72,7 @@ export default class User {
       mobile: Mobile.fromJson(json),
       name: json.userName,
       profileType: json.profileType,
+      termsAccepted: json.termsAccepted,
       voteCard: json.userVoteidcard,
       wallet: Wallet.fromJson(json),
       zipCode: json.userZipcode,
