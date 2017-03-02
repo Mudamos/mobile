@@ -13,6 +13,7 @@ import {
   isAddressProfileComplete,
   isDocumentsProfileComplete,
   isMainProfileComplete,
+  isAvatarProfileComplete,
   isBirthProfileComplete,
   isPhoneProfileComplete,
   isWalletProfileComplete,
@@ -74,6 +75,7 @@ function* userProfileNavigator() {
 export function* profileScreenForCurrentUser() {
   const screenKeys = [
     "profileMissingFields",
+    "profileAvatar",
     "profileBirth",
     "profileAddress",
     "profileDocuments",
@@ -84,6 +86,7 @@ export function* profileScreenForCurrentUser() {
   const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
   const screensDone = [
     yield select(isMainProfileComplete),
+    yield select(isAvatarProfileComplete),
     yield select(isBirthProfileComplete),
     yield select(isAddressProfileComplete),
     yield select(isDocumentsProfileComplete),

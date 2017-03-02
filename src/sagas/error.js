@@ -52,6 +52,8 @@ function appError({ type, payload }) {
     case "PLIPS_FETCH_PLIPS_NEXT_PAGE_ERROR":
     case "PLIPS_REFRESH_ERROR":
       return showToast(locale.errors.fetchPlips);
+    case "PROFILE_SAVE_AVATAR_ERROR":
+      return showToast(locale.errors.saveAvatar);
     case "SHARE_LINK_ERROR":
       return showToast(locale.errors.shareLinkError);
     case "PASSWORD_CHANGE_FORGOT_ERROR":

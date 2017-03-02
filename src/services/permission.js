@@ -30,26 +30,28 @@ const presentRationale = (permission, { message }) => new Promise((resolve) => {
   }, 500);
 });
 
-const onPermissionRequest = (response, { permission, message }) => {
+const onPermissionRequest = (response, { permission, message, rationale }) => {
   log(response, { tag: ["requestPermission", permission]});
 
   if (isAuthorized(response)) return AUTHORIZED;
+  if (!rationale) return DENIED;
 
   return presentRationale(permission, { message });
 };
 
-const requestPermission = (permission, { message }) =>
+const requestPermission = (permission, { message, rationale = true } = {}) =>
   Permissions
     .requestPermission(permission)
-      .then(response => onPermissionRequest(response, { permission, message }))
+      .then(response => onPermissionRequest(response, { permission, message, rationale }))
 
 const checkStatus = permission =>
   Permissions
     .getPermissionStatus(permission)
 
 const service = () => ({
-  checkStatus: checkStatus,
-  requestPermission: requestPermission,
+  checkStatus,
+  presentRationale,
+  requestPermission,
 });
 
 export default service;
