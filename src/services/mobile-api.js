@@ -141,11 +141,11 @@ const saveZipCode = ({ client }) => (authToken, location) =>
     .send({ user: location })
     .then(getData);
 
-const saveDocuments = ({ client }) => (authToken, { cpf, voteCard }) =>
+const saveDocuments = ({ client }) => (authToken, { cpf, voteCard, termsAccepted }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
     .post("/profile/documents")
-    .send({ user: { cpf, voteidcard: voteCard }})
+    .send({ user: { cpf, voteidcard: voteCard, termsAccepted }})
     .then(getData);
 
 const savePhone = ({ client }) => (authToken, payload) =>

@@ -1,3 +1,4 @@
+import Config from "react-native-config";
 import { connect } from "react-redux";
 
 import ProfileDocumentsLayout from "../components/profile-documents-layout";
@@ -10,6 +11,7 @@ import {
 
 import {
   navigate,
+  openURL,
   saveProfileDocuments,
 } from "../actions";
 
@@ -20,6 +22,7 @@ import {
   profileSaveErrors,
 } from "../selectors";
 
+const TERMS_OF_USE_URL = Config.MUDAMOS_WEB_API_URL + "/institucional/termos-de-uso";
 
 const mapStateToProps = state => {
   const user = currentUser(state);
@@ -35,12 +38,14 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onSave: ({ cpf, voteCard }) =>
+  onSave: ({ cpf, voteCard, termsAccepted }) =>
     dispatch(saveProfileDocuments({
       cpf: extractNumbers(cpf),
       voteCard: extractNumbers(voteCard),
+      termsAccepted,
     })),
   onTSERequested: () => dispatch(navigate("tse")),
+  onTermsRequested: () => dispatch(openURL(TERMS_OF_USE_URL)),
 });
 
 

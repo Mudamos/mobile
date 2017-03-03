@@ -16,6 +16,7 @@ import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
 import Modal from "./documents-reason-modal";
 import NavigationBar from "./navigation-bar";
+import Checkbox from "./white-flat-checkbox";
 
 import styles from "../styles/profile-documents-layout";
 import textStyles from "../styles/text";
@@ -30,6 +31,7 @@ export default class ProfileDocumentsLayout extends Component {
     voteCard: this.props.previousVoteCard,
     reasonEnabled: false,
     searchedVoteCardId: null,
+    termsAccepted: false,
   }
 
   static propTypes = {
@@ -40,6 +42,7 @@ export default class ProfileDocumentsLayout extends Component {
     searchedVoteCardId: PropTypes.string,
     onSave: PropTypes.func.isRequired,
     onTSERequested: PropTypes.func.isRequired,
+    onTermsRequested: PropTypes.func.isRequired,
   }
 
   get validForm() {
@@ -50,7 +53,7 @@ export default class ProfileDocumentsLayout extends Component {
   }
 
   get saveEnabled() {
-    return this.validForm;
+    return this.validForm && this.state.termsAccepted;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -65,6 +68,7 @@ export default class ProfileDocumentsLayout extends Component {
     const {
       errors,
       isSaving,
+      onTermsRequested,
       onTSERequested,
     } = this.props;
 
@@ -108,6 +112,25 @@ export default class ProfileDocumentsLayout extends Component {
                 onSubmitEditing={() => this.cpfInput.blur()}
                 ref={ref => this.cpfInput = ref}
               />
+
+              <View
+                style={styles.termsContainer}
+              >
+                <Checkbox
+                  checked={this.state.termsAccepted}
+                  onCheckedChange={({ checked }) => this.setState({ termsAccepted: checked })}
+                />
+
+                <Text style={styles.terms}>
+                  {locale.readAndAgreedWithTermsPrefix}
+                </Text>
+
+                <TouchableOpacity
+                  onPress={onTermsRequested}
+                >
+                  <Text style={[styles.terms, styles.termsOfUse]}>{locale.termsOfUse.toUpperCase()}</Text>
+                </TouchableOpacity>
+              </View>
             </View>
 
             <FlatButton
@@ -157,9 +180,9 @@ export default class ProfileDocumentsLayout extends Component {
 
   onSave() {
     const { onSave } = this.props;
-    const { cpf, voteCard } = this.state;
+    const { cpf, voteCard, termsAccepted } = this.state;
 
-    onSave({ cpf, voteCard });
+    onSave({ cpf, voteCard, termsAccepted });
   }
 
   enableReason() {

@@ -26,6 +26,22 @@ export default StyleSheet.create({
   inputContainer: {
     marginHorizontal: 33,
   },
+  terms: {
+    color: "#fff",
+    fontFamily: "roboto",
+    fontSize: 13,
+  },
+  termsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+  termsOfUse: {
+    fontWeight: "bold",
+    marginTop: 1,
+    marginLeft: 2,
+  },
   whyDocumentsContainer: {
     margin: 20,
   },

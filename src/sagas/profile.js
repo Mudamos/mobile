@@ -126,12 +126,12 @@ function* saveZipCodeProfile({ mobileApi }) {
 function* saveDocumentsProfile({ mobileApi }) {
   yield takeLatest("PROFILE_SAVE_DOCUMENTS", function* ({ payload }) {
     try {
-      const { cpf, voteCard } = payload;
+      const { cpf, voteCard, termsAccepted } = payload;
 
       yield put(savingProfile(true));
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.saveDocuments, authToken, { cpf, voteCard });
+      const response = yield call(mobileApi.saveDocuments, authToken, { cpf, voteCard, termsAccepted });
 
       const user = User.fromJson(response.user);
 
