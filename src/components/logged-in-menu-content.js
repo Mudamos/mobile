@@ -9,10 +9,13 @@ import {
 
 import Spinner from "react-native-spinkit";
 import Icon from "react-native-vector-icons/MaterialIcons";
-
 import HeaderLogo from "./header-logo";
+import Avatar from "./avatar";
+
+import ImagePicker from "react-native-image-picker";
 
 import styles from "../styles/logged-in-menu";
+import { baseName, log } from "../utils";
 
 import locale from "../locales/pt-BR";
 
@@ -20,6 +23,7 @@ import locale from "../locales/pt-BR";
 export default class Menu extends Component {
   state = {
     entries: [],
+    newAvatar: null,
   };
 
   static propTypes = {
@@ -27,6 +31,7 @@ export default class Menu extends Component {
     isFetchingProfile: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     menuEntries: PropTypes.array.isRequired,
+    onAvatarChanged: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
   };
 
@@ -48,6 +53,14 @@ export default class Menu extends Component {
     }
   }
 
+  get avatar() {
+    const { currentUser } = this.props;
+    const { newAvatar } = this.state;
+
+    if (newAvatar) return newAvatar;
+    if (currentUser && currentUser.avatar.url) return { uri: currentUser.avatar.url };
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -65,14 +78,23 @@ export default class Menu extends Component {
       <View style={styles.full}>
         {
           currentUser &&
-            <View style={styles.full}>
-              <Text style={styles.userName}>
-                {currentUser.name}
-              </Text>
+            <View style={styles.profileInfoContainer}>
+              <Avatar
+                source={this.avatar}
+                onPress={this.selectAvatar.bind(this)}
+                size={56}
+                avatarStyle={styles.avatar}
+              />
 
-              <Text style={styles.darkSmallText}>
-                {currentUser.email}
-              </Text>
+              <View style={styles.userNameContainer}>
+                <Text style={styles.userName}>
+                  {currentUser.name}
+                </Text>
+
+                <Text style={styles.darkSmallText}>
+                  {currentUser.email}
+                </Text>
+              </View>
             </View>
         }
 
@@ -165,5 +187,37 @@ export default class Menu extends Component {
         </Text>
       </View>
     );
+  }
+
+  selectAvatar() {
+    const { onAvatarChanged } = this.props;
+
+    ImagePicker.showImagePicker({
+      title: locale.chooseAvatar,
+      cancelButtonTitle: locale.cancel,
+      takePhotoButtonTitle: locale.takePhoto,
+      chooseFromLibraryButtonTitle: locale.openGallery,
+      mediaType: "photo",
+      storageOptions: {
+        skipBackup: true,
+      },
+      allowsEditing: true,
+    }, response => {
+      if (!response.uri) return;
+
+      const uri = response.uri;
+      const name = baseName(uri);
+      log(uri, { tag: "avatar uri" });
+
+      const newAvatar = {
+        uri,
+        name,
+        contentType: "image/jpeg",
+      };
+
+      this.setState({ newAvatar });
+
+      onAvatarChanged(newAvatar);
+    });
   }
 }

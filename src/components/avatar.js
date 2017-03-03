@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 
 import {
+  View,
   TouchableOpacity,
 } from "react-native";
 
@@ -11,6 +12,7 @@ import styles from "../styles/avatar";
 
 export default class Avatar extends Component {
   static propTypes = {
+    avatarStyle: View.propTypes.style,
     defaultPicture: PropTypes.any,
     size: PropTypes.number,
     source: PropTypes.object,
@@ -29,6 +31,7 @@ export default class Avatar extends Component {
 
   render() {
     const {
+      avatarStyle,
       size,
       onPress,
     } = this.props;
@@ -44,7 +47,7 @@ export default class Avatar extends Component {
             borderRadius: size / 2,
             width: size,
             height: size,
-          }]}
+          }, avatarStyle]}
         />
       </TouchableOpacity>
     );
