@@ -31,6 +31,7 @@ export default class Menu extends Component {
     isFetchingProfile: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     menuEntries: PropTypes.array.isRequired,
+    onAvatarChanged: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
   };
 
@@ -189,6 +190,8 @@ export default class Menu extends Component {
   }
 
   selectAvatar() {
+    const { onAvatarChanged } = this.props;
+
     ImagePicker.showImagePicker({
       title: locale.chooseAvatar,
       cancelButtonTitle: locale.cancel,
@@ -206,13 +209,15 @@ export default class Menu extends Component {
       const name = baseName(uri);
       log(uri, { tag: "avatar uri" });
 
-      this.setState({
-        newAvatar: {
-          uri,
-          name,
-          contentType: "image/jpeg",
-        },
-      });
+      const newAvatar = {
+        uri,
+        name,
+        contentType: "image/jpeg",
+      };
+
+      this.setState({ newAvatar });
+
+      onAvatarChanged(newAvatar);
     });
   }
 }

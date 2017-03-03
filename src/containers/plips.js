@@ -20,6 +20,7 @@ import {
   fetchPlipsNextPage,
   logout,
   navigate,
+  profileSaveAvatar,
   refreshPlips,
   userFirstTimeDone,
 } from "../actions";
@@ -78,6 +79,7 @@ class Container extends Component {
     isUserLoggedIn: PropTypes.bool,
     nextPage: PropTypes.number,
     plips: PropTypes.array,
+    onAvatarChanged: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
     onFetchProfile: PropTypes.func.isRequired,
@@ -218,6 +220,7 @@ class Container extends Component {
       currentUser,
       isFetchingProfile,
       isUserLoggedIn,
+      onAvatarChanged,
       onLogout,
     } = this.props;
 
@@ -226,6 +229,7 @@ class Container extends Component {
         currentUser={currentUser}
         isFetchingProfile={isFetchingProfile}
         isUserLoggedIn={isUserLoggedIn}
+        onAvatarChanged={onAvatarChanged}
         onLogout={onLogout}
 
         menuEntries={this.menuEntries}
@@ -297,6 +301,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  onAvatarChanged: avatar => dispatch(profileSaveAvatar({ avatar, shouldNavigate: false })),
   onRetryPlips: () => dispatch(fetchPlips()),
   onChangePassword: () => dispatch(navigate("changePassword")),
   onFetchPlipsNextPage: ({ page }) => dispatch(fetchPlipsNextPage({ page })),
