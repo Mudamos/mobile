@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  avatar: {
+    borderColor: "transparent",
+  },
   container: {
     backgroundColor: "transparent",
     flex: 1,
@@ -13,7 +16,6 @@ export default StyleSheet.create({
     color: "rgba(255,255,255,0.5)",
     fontFamily: "roboto",
     fontSize: 11,
-    textAlign: "center",
   },
   full: {
     flex: 1,
@@ -22,11 +24,21 @@ export default StyleSheet.create({
     flex: 3,
     marginTop: 60,
   },
+  profileInfoContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 10,
+  },
+  userNameContainer: {
+    flex: 1,
+    marginLeft: 8,
+  },
   userName: {
     color: "#fff",
     fontFamily: "roboto",
     fontSize: 16,
-    textAlign: "center",
   },
   rowContainer: {
     height: 60,
