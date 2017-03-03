@@ -32,7 +32,6 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
   },
   userNameContainer: {
-    flex: 1,
     marginLeft: 8,
   },
   userName: {
