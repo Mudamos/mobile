@@ -9,16 +9,18 @@ import {
 
 import {
   isSavingAvatar,
+  getCurrentUserAvatar,
 } from "../selectors";
 
 
 const mapStateToProps = state => ({
   isSavingAvatar: isSavingAvatar(state),
+  currentAvatar: getCurrentUserAvatar(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   onRequestAvatarPermission: () => dispatch(requestAvatarAccess()),
-  onSubmit: ({ avatar }) => dispatch(profileSaveAvatar({ avatar })),
+  onSubmit: ({ avatar, oldAvatarURL }) => dispatch(profileSaveAvatar({ avatar, oldAvatarURL })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileAvatarLayout);

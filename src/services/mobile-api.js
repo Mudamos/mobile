@@ -247,7 +247,7 @@ const fetchOfflinePlipSigners = ({ client }) => ({ plipId }) =>
     .get(`/petition/${plipId}/true/votes/friends`)
     .then(getData);
 
-const upload = ({ endpoint }) => (authToken, { contentType, name, uri }) => {
+const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatarURL }) => {
   let progressListener = identity;
   const request = new XMLHttpRequest;
 
@@ -260,6 +260,10 @@ const upload = ({ endpoint }) => (authToken, { contentType, name, uri }) => {
     }
 
     data.append("nonce", new Date().toISOString());
+
+    if (oldAvatarURL) {
+      data.append("avatar_url", oldAvatarURL);
+    }
 
     request.open("POST", endpoint, true);
     request.setRequestHeader("Authorization", `Bearer ${authToken}`);
@@ -319,7 +323,7 @@ export default function MobileApi(host) {
     plipSignInfo: plipSignInfo({ client }),
     profile: profile({ client }),
     retrievePassword: retrievePassword({ client }),
-    saveAvatar: upload({ endpoint: `${host}/api/v1` }),
+    saveAvatar: upload({ endpoint: `${host}/api/v1/profile/photo` }),
     saveBirthdate: saveBirthdate({ client }),
     saveDocuments: saveDocuments({ client }),
     savePhone: savePhone({ client }),
