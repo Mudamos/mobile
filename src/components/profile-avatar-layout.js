@@ -11,6 +11,7 @@ import PageLoader from "./page-loader";
 import FlatButton from "./flat-button";
 import NavigationBar from "./navigation-bar";
 import Avatar from "./avatar";
+import AvatarModel from "../models/image";
 
 import ImagePicker from "react-native-image-picker";
 
@@ -23,10 +24,12 @@ import { baseName, log } from "../utils";
 
 export default class ProfileAvatarLayout extends Component {
   state = {
-    avatar: null,
+    avatar: this.props.currentAvatar.url ? { uri: this.props.currentAvatar.url } : null,
+    oldAvatarURL: this.props.currentAvatar.url,
   }
 
   static propTypes = {
+    currentAvatar: PropTypes.instanceOf(AvatarModel).isRequired,
     isSavingAvatar: PropTypes.bool,
     onRequestAvatarPermission: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
@@ -111,7 +114,7 @@ export default class ProfileAvatarLayout extends Component {
 
   onSubmit() {
     const { onSubmit } = this.props;
-    const { avatar } = this.state;
-    onSubmit({ avatar });
+    const { avatar, oldAvatarURL } = this.state;
+    onSubmit({ avatar, oldAvatarURL });
   }
 }

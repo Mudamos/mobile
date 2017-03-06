@@ -228,15 +228,17 @@ function* savePhoneProfile({ mobileApi, DeviceInfo }) {
 
 function* saveAvatarProfile({ mobileApi }) {
   yield takeLatest("PROFILE_SAVE_AVATAR", function* ({ payload }) {
-    const { avatar = {}, shouldNavigate } = payload;
+    const { avatar = {}, oldAvatarURL, shouldNavigate } = payload;
 
     try {
       yield put(savingAvatar(true));
 
       const authToken = yield select(currentAuthToken);
-      const avatarPayload = {
-        ...avatar,
-      };
+      const avatarPayload = avatar && avatar.uri && avatar.uri !== oldAvatarURL ?
+        { ...avatar } :
+        { oldAvatarURL };
+
+      log(`avatar payload: ${JSON.stringify(avatarPayload)}`);
 
       yield call(monitorUpload, mobileApi.saveAvatar(authToken, avatarPayload), function ({ type, payload: uploadPayload }) {
         switch (type) {

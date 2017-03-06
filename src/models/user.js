@@ -8,7 +8,7 @@ export default class User {
   constructor(attrs = {}) {
     this.id = attrs.id;
     this.avatar = attrs.avatar;
-    this.hasSavedAvatar = true;
+    this.hasSavedAvatar = attrs.hasSavedAvatar;
     this.birthdate = attrs.birthdate;
     this.cpf = attrs.cpf;
     this.email = attrs.email;
