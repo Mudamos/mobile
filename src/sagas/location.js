@@ -1,5 +1,6 @@
 import { takeLatest } from "redux-saga";
 import { call, put, spawn } from "redux-saga/effects";
+import { Platform } from "react-native";
 
 import { log, logError } from "../utils";
 
@@ -25,11 +26,17 @@ function* location({ locationService, permissionService }) {
         return;
       }
 
-      const result = yield call(locationService.getCurrentPosition, {
-        enableHighAccuracy: true,
-        timeout: 30000,
-        maximumAge: 1000,
-      });
+      let locationOptions = {};
+
+      if (Platform.OS === "ios") {
+        locationOptions = {
+          enableHighAccuracy: true,
+          timeout: 30000,
+          maximumAge: 1000,
+        };
+      }
+
+      const result = yield call(locationService.getCurrentPosition, locationOptions);
 
       log(result);
 
