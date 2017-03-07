@@ -22,6 +22,7 @@ const CORREIOS_URL = "http://m.correios.com.br/movel/buscaCep.do";
 
 class Container extends Component {
   static propTypes = {
+    isSearching: PropTypes.bool,
     userLocation: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
@@ -30,7 +31,9 @@ class Container extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.userLocation && !this.props.userLocation) {
+    const isSearching = nextProps.isSearching || this.props.isSearching;
+
+    if (!isSearching && nextProps.userLocation && !this.props.userLocation) {
       this.props.onSearchZipCodeWithCoords(nextProps.userLocation);
     }
   }

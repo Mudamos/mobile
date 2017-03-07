@@ -42,6 +42,7 @@ function appError({ type, payload }) {
     case "LINKING_OPEN_URL_ERROR":
       return showToast(locale.errors.openURLError);
     case "LOCATION_FETCH_LOCATION_ERROR":
+    case "ADDRESS_REVERSE_ZIP_CODE_SEARCH_ERROR":
       return showToast(locale.errors.locationError);
     case "PASSWORD_RETRIEVE_ERROR":
       return showToast(locale.errors.passwordRetrieveError);

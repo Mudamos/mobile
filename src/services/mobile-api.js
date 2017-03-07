@@ -134,6 +134,11 @@ const searchZipCode = ({ client }) => (authToken, zipCode) =>
     .get(`/address/search/${zipCode}`)
     .then(getData);
 
+const reverseSearchZipCode = ({ client }) => (authToken, { latitude, longitude }) =>
+  authorizedClient(client, authToken)
+    .get(`/address/search/${latitude}/${longitude}/inverse`)
+    .then(getData);
+
 const saveZipCode = ({ client }) => (authToken, location) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
@@ -323,6 +328,7 @@ export default function MobileApi(host) {
     plipSignInfo: plipSignInfo({ client }),
     profile: profile({ client }),
     retrievePassword: retrievePassword({ client }),
+    reverseSearchZipCode: reverseSearchZipCode({ client }),
     saveAvatar: upload({ endpoint: `${host}/api/v1/profile/photo` }),
     saveBirthdate: saveBirthdate({ client }),
     saveDocuments: saveDocuments({ client }),
