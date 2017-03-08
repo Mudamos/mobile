@@ -62,7 +62,7 @@ class Container extends Component {
 
     plipsDataSource: new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
-    }).cloneWithRows(this.props.plips || []),
+    }).cloneWithRows((this.props.plips || []).map((plip, index) => [plip, index])),
   };
 
   static propTypes = {
@@ -157,7 +157,7 @@ class Container extends Component {
     }
 
     this.setState({
-      plipsDataSource: this.state.plipsDataSource.cloneWithRows(nextProps.plips || []),
+      plipsDataSource: this.state.plipsDataSource.cloneWithRows((nextProps.plips || []).map((plip, index) => [plip, index])),
     });
   }
 
