@@ -1,5 +1,5 @@
 import { takeLatest } from "redux-saga";
-import { call, fork, put } from "redux-saga/effects";
+import { call, fork, put, select } from "redux-saga/effects";
 
 import { AccessToken, LoginManager } from "react-native-fbsdk";
 
@@ -13,6 +13,8 @@ import {
   profileStateMachine,
   clearSession,
 } from "../actions";
+
+import { getCurrentSigningPlip } from "../selectors";
 
 import { User } from "../models";
 import { logError } from "../utils";
@@ -36,7 +38,10 @@ function* login({ mobileApi, sessionStore }) {
       yield put(facebookUserLoggedIn(tokenData));
 
       const fbToken = tokenData.accessToken.toString();
-      const token =  yield call(mobileApi.fbSignIn, fbToken);
+      const currentSigningPlip = yield select(getCurrentSigningPlip);
+      const plipId = currentSigningPlip ? currentSigningPlip.id : null;
+
+      const token =  yield call(mobileApi.fbSignIn, fbToken, plipId);
       const appAuth = { token };
 
       yield call(sessionStore.persist, appAuth);

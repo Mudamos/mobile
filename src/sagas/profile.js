@@ -21,7 +21,11 @@ import {
   voteCardIdAcquired,
 } from "../actions";
 
-import { currentAuthToken, currentUser } from "../selectors";
+import {
+  currentAuthToken,
+  currentUser,
+  getCurrentSigningPlip,
+} from "../selectors";
 
 import {
   User,
@@ -46,7 +50,14 @@ function* saveMainProfile({ mobileApi, sessionStore }) {
       yield put(savingProfile(true));
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.signUp, authToken, apiPayload);
+
+      let plipId;
+      if (!authToken) {
+        const currentSigningPlip = yield select(getCurrentSigningPlip);
+        if (currentSigningPlip) plipId = currentSigningPlip.id;
+      }
+
+      const response = yield call(mobileApi.signUp, authToken, apiPayload, plipId);
 
       const user = User.fromJson(response.user);
 
