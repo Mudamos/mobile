@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>pt</string>
+	<key>CFBundleDisplayName</key>
+	<string>Mudamos</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -23,14 +25,14 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1804378059818637</string>
+				<string>fb1802796723310104</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>1804378059818637</string>
+	<string>1802796723310104</string>
 	<key>FacebookDisplayName</key>
 	<string>Mudamos</string>
 	<key>LSApplicationQueriesSchemes</key>
