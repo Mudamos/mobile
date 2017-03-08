@@ -92,12 +92,21 @@ const authorizedClient = (client, token) =>
     .use(req => req.set("Authorization", `Bearer ${token}`));
 
 
-const fbSignIn = ({ client }) => fbToken =>
-  client
+const fbSignIn = ({ client }) => (fbToken, plipId = null) => {
+  let requester = client
     .use(req => req.set("access_token", fbToken))
-    .post("/auth/facebook/token")
-      .then(getData)
-      .then(json => json.accessToken);
+    .post("/auth/facebook/token");
+
+  if (plipId) {
+    requester = requester
+      .use(serializeJson)
+      .send({ petition: { versionId: plipId } });
+  }
+
+  return requester
+    .then(getData)
+    .then(json => json.accessToken);
+};
 
 const signIn = ({ client }) => (email, password) =>
   client
@@ -107,13 +116,18 @@ const signIn = ({ client }) => (email, password) =>
     .then(getData)
     .then(json => json.accessToken);
 
-const signUp = ({ client }) => (authToken, payload) => {
+const signUp = ({ client }) => (authToken, payload, plipId = null) => {
   const api =  authToken ? authorizedClient(client, authToken) : client;
+  const requestPayload = { user: payload };
+
+  if (plipId) {
+    requestPayload.petition = { versionId: plipId };
+  }
 
   return api
     .use(serializeJson)
     .post("/users/sign_up")
-    .send({ user: payload })
+    .send(requestPayload)
     .then(getData);
 };
 
