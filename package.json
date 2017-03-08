@@ -10,6 +10,7 @@
     "test": "mocha --compilers js:babel-core/register --require spec/support.js 'spec/**/*.spec.js'",
     "build-ios-beta": " ipa build -w ios/MudamosMobile.xcworkspace -s 'MudamosMobileBeta' -d ios/ipa --ipa MudamosTagviewBeta.ipa",
     "build-android-beta": "ENVFILE=.env.beta android/gradlew -p android assembleMudamosBetaRelease",
+    "build-android-production": "ENVFILE=.env.production android/gradlew -p android assembleProductionRelease",
     "distribute-ios-beta": "ipa distribute:s3 -b mudamos-mobile-beta -f ios/ipa/MudamosTagviewBeta.ipa",
     "postinstall": "./node_modules/.bin/rn-nodeify --install vm,buffer,stream,events,crypto,assert,process,react-native-randombytes,react-native-crypto --hack"
   },

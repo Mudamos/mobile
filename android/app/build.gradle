@@ -102,6 +102,7 @@ android {
     }
     signingConfigs {
       release
+      production
     }
     splits {
         abi {
@@ -123,11 +124,11 @@ android {
         }
     }
 
-    // Default release signin configs
+    // Default release signing configs
     def Properties props = new Properties()
     def propFile = file('../keystores/mudamos-publishing-qa.properties')
     if (propFile.canRead()) {
-        println "Will load realease properties"
+        println "Will load QA realease properties"
 
         props.load(new FileInputStream(propFile))
 
@@ -140,6 +141,26 @@ android {
             android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
             android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
             android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+        }
+    }
+
+    // Production signing configs
+    def Properties prodProps = new Properties()
+    def prodPropFile = file('../keystores/mudamos-production.properties')
+    if (prodPropFile.canRead()) {
+        println "Will load PRODUCTION realease properties"
+
+        prodProps.load(new FileInputStream(prodPropFile))
+
+        if (prodProps!=null && prodProps.containsKey('STORE_FILE') && prodProps.containsKey('STORE_PASSWORD') &&
+                prodProps.containsKey('KEY_ALIAS') && prodProps.containsKey('KEY_PASSWORD')) {
+
+            println "Release variables found"
+
+            android.signingConfigs.production.storeFile = file(prodProps['STORE_FILE'])
+            android.signingConfigs.production.storePassword = prodProps['STORE_PASSWORD']
+            android.signingConfigs.production.keyAlias = prodProps['KEY_ALIAS']
+            android.signingConfigs.production.keyPassword = prodProps['KEY_PASSWORD']
         }
     }
 
@@ -167,6 +188,12 @@ android {
             versionCode 1
             versionName "1.0-beta-mudamos"
             signingConfig signingConfigs.release
+        }
+        production {
+            applicationId = "org.mudamos.petition"
+            versionCode 1
+            versionName "1.0"
+            signingConfig signingConfigs.production
         }
     }
 }
