@@ -17,6 +17,11 @@ export const addressZipCodeSearchError = error => ({
   payload: { error },
 });
 
+export const addressReverseZipCodeSearchError = error => ({
+  type: "ADDRESS_REVERSE_ZIP_CODE_SEARCH_ERROR",
+  payload: { error },
+});
+
 export const addressFound = location => ({
   type: "ADDRESS_FOUND",
   payload: { location },

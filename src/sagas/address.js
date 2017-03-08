@@ -4,6 +4,7 @@ import { spawn, put, call, select } from "redux-saga/effects";
 import {
   addressZipCodeSearching,
   addressZipCodeSearchError,
+  addressReverseZipCodeSearchError,
   addressFound,
   clearLocation,
   navigate,
@@ -47,11 +48,30 @@ function* searchZipCode({ mobileApi }) {
   });
 }
 
-// eslint-disable-next-line no-unused-vars
 function* searchZipCodeWithCoords({ mobileApi }) {
-  yield takeLatest("ADDRESS_ZIP_CODE_SEARCH_WITH_COORDS", function ({ payload }) {
-    const { latitude, longitude } = payload;
-    log(`Will search with lat: ${latitude} lng: ${longitude}`);
+  yield takeLatest("ADDRESS_ZIP_CODE_SEARCH_WITH_COORDS", function* ({ payload }) {
+    try {
+      const { latitude, longitude } = payload;
+      log(`Will search with lat: ${latitude} lng: ${longitude}`);
+
+      yield put(addressZipCodeSearching(true));
+
+      const authToken = yield select(currentAuthToken);
+      const response = yield call(mobileApi.reverseSearchZipCode, authToken, { latitude, longitude });
+
+      yield put(addressFound(Address.fromJson(response)));
+      yield put(addressZipCodeSearching(false));
+      yield put(clearLocation());
+      yield put(navigate("profileAddressConfirm"));
+    } catch(e) {
+      logError(e, { tag: "searchZipCodeWithCoords" });
+
+      yield put(addressZipCodeSearching(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
+      yield put(addressReverseZipCodeSearchError(e));
+    }
   });
 }
 
