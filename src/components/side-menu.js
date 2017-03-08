@@ -25,6 +25,7 @@ export default class Menu extends Component {
     type: "static",
     openDrawerOffset: 100,
     panOpenMask: 100,
+    negotiatePan: true,
     tweenHandler: Drawer.tweenPresets.parallax,
   };
 
