@@ -55,7 +55,7 @@ export default StyleSheet.create({
   plipImage: {
     minWidth: windowWidth,
 
-    // We wan't to render the image as tall as possible, so we don't see its bounds when scrolling
+    // We want to render the image as tall as possible, so we don't see its bounds when scrolling
     height: windowHeight,
 
     // This is just to proper position the images up high
