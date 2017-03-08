@@ -163,11 +163,11 @@ export default class PlipsLayout extends Component {
 
           <View style={styles.plipTitleContainer}>
             <View style={styles.plipTitleInnerContainer}>
-              <Text style={styles.plipTitle}>
+              <Text style={styles.plipTitle} numberOfLines={3}>
                 {plip.phase.name}
               </Text>
 
-              <Text style={styles.plipSubtitle}>
+              <Text style={styles.plipSubtitle} numberOfLines={3}>
                 {plip.phase.description}
               </Text>
             </View>
