@@ -111,10 +111,12 @@ export default class PlipsLayout extends Component {
   }
 
   renderRow = ({ height, margin }) => ([plip, index], section, row, highlightRow) => {
-    const { onGoToPlip } = this.props;
+    const { onGoToPlip, plipsDataSource } = this.props;
 
     const totalHeight = height + margin;
     const scrollRange = totalHeight * (index - 1);
+
+    const shouldHideOverflow = index > 0 || plipsDataSource.getRowCount() === 1;
 
     // For some reason, Android crashes and a transform is applied
     // TODO: upgrade react-native and test again
@@ -130,7 +132,7 @@ export default class PlipsLayout extends Component {
           style={[styles.tableRow, {
             // We don't want to overflow the first row, so we can see the image
             // on ios during the bounce animation
-            overflow: index > 0 ? "hidden" : "visible",
+            overflow: shouldHideOverflow ? "hidden" : "visible",
 
             height,
             margin,
