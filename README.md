@@ -99,6 +99,8 @@ npm test
 
 ## Building
 
+As apps de produção usam o `.env.production`.
+
 ### Android
 
 Garanta que seu arquivo `.env` esteja configurado com as configurações do ambiente em questão.
@@ -110,6 +112,9 @@ Atualmente os seguintes *flavors* precisam das informações de configurações 
 - MudamosBeta
   - configurações em `./android/keystores/mudamos-publishing-qa.properties`
   - keystore em `android/keystores/mudamos-android-publishing.keystore`
+- Production
+  - configurações em `./android/keystores/mudamos-production.properties`
+  - keystore em `android/keystores/mudamos-production.keystore`
 
 Para gerar a apk:
 
@@ -124,6 +129,31 @@ Para gerar a versão de QA portanto:
 ```
 $ ENVFILE=.env.somenv android/gradlew -p android assembleMudamosBetaRelease
 ```
+
+ou simplesmente,
+
+```
+$ npm run --silent build-android-beta
+```
+
+Para gerar a versão de produção:
+
+Tenha certeza de possuir o arquivo `.properties` devidamente configurado, contendo:
+
+```
+STORE_FILE=../keystores/mudamos-production.keystore
+KEY_ALIAS=placeholder
+STORE_PASSWORD=placeholder
+KEY_PASSWORD=placeholder
+```
+
+e então:
+
+
+```
+$ npm run --silent build-android-production
+```
+
 
 ## Facebook Hash key (somente android)
 
@@ -140,7 +170,7 @@ Onde `<RELEASE_KEY_ALIAS>` é o alis encontrado no seu arquivo `.properties` e `
 
 ### iOS
 
-Atualmente temos somente a versão beta de distribuição.
+Para a versão beta:
 
 Para gerar o `.ipa`:
 
@@ -155,3 +185,5 @@ $ npm run distribute-ios-beta -- -a <AWS_ACCESS_KEY> -s <AWS_SECRET_ACCESS_KEY>
 ```
 
 Essas chaves podem ser obtidas com um responsável.
+
+Para a versão de produção use o xcode.

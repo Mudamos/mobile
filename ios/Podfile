@@ -27,3 +27,9 @@ target "MudamosMobileTagviewBeta" do
 
   pods
 end
+
+target "MudamosProduction" do
+  use_frameworks!
+
+  pods
+end
