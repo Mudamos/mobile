@@ -49,6 +49,7 @@ yarn-error.log
 
 # ENV
 .env
+.env.*
 envs
 
 .arcconfig
