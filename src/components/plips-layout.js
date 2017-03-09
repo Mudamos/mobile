@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 
 import {
+  Image,
   ListView,
   Platform,
   RefreshControl,
@@ -26,6 +27,7 @@ import RetryButton from "./retry-button";
 import HeaderLogo from "./header-logo";
 import NetworkImage from "./network-image";
 import LinearGradient from "react-native-linear-gradient";
+import FlatButton from "./flat-button";
 
 import styles from "../styles/plips-layout";
 
@@ -43,9 +45,20 @@ export default class PlipsLayout extends Component {
     openMenu: PropTypes.func.isRequired,
     plipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     onFetchPlips: PropTypes.func.isRequired,
+    onGoToMudamos: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
+  }
+
+  get hasPlips() {
+    const { plipsDataSource } = this.props;
+    return plipsDataSource.getRowCount() > 0;
+  }
+
+  get hasNoListYet() {
+    const { errorFetchingPlips, isFetchingPlips } = this.props;
+    return errorFetchingPlips || isFetchingPlips || !this.hasPlips;
   }
 
   render() {
@@ -56,8 +69,9 @@ export default class PlipsLayout extends Component {
 
     return (
       <View style={styles.full}>
-        <Layout contentStyle={styles.layoutContent}>
-          {!errorFetchingPlips && this.renderListView()}
+        <Layout contentStyle={{backgroundColor: this.hasNoListYet ? "white" : "black"}}>
+          {!errorFetchingPlips && this.hasPlips && this.renderListView()}
+          {!errorFetchingPlips && !isFetchingPlips && !this.hasPlips && this.renderNoPlips()}
           {errorFetchingPlips && this.renderRetry()}
           {this.renderNavBar()}
         </Layout>
@@ -85,7 +99,6 @@ export default class PlipsLayout extends Component {
         onEndReached={onFetchPlips}
         onEndReachedThreshold={300}
         dataSource={plipsDataSource}
-        renderHeader={this.renderHeader.bind(this)}
         renderRow={this.renderRow({ height: 333, margin: 0 })}
         refreshControl={
           <RefreshControl
@@ -95,18 +108,6 @@ export default class PlipsLayout extends Component {
           />
         }
       />
-    );
-  }
-
-  renderHeader() {
-    const { plipsDataSource } = this.props;
-    if (plipsDataSource.getRowCount() > 0) return null;
-
-    return (
-      <View style={styles.noProjectsHeader}>
-        <Text style={styles.noProjects}>{locale.noProjectsFound}</Text>
-        <Text style={styles.noProjects}>{locale.pullToRefresh}</Text>
-      </View>
     );
   }
 
@@ -179,17 +180,52 @@ export default class PlipsLayout extends Component {
     );
   }
 
+  renderNoPlips() {
+    const { onGoToMudamos } = this.props;
+
+    return (
+      <View style={styles.noProjectsContainer}>
+        <View style={styles.noProjectsInnerContainer}>
+          <Image
+            source={require("../images/plip-page.png")}
+            style={styles.noProjectsIcon}
+          />
+
+          <View>
+            <Text style={styles.noProjectsText}>{locale.noProjectsYet}</Text>
+            <Text style={styles.noProjectsText}>{locale.followUpOnTheWeb}</Text>
+            <TouchableOpacity onPress={onGoToMudamos}>
+              <Text style={styles.link}>mudamos.org</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <FlatButton
+          title={locale.openSite.toUpperCase()}
+          onPress={onGoToMudamos}
+          style={{backgroundColor: "#00c084" }}
+          textStyle={{color: "#fff"}}
+        />
+      </View>
+    );
+  }
+
   renderNavBar() {
+    const navBarBackgroundColor = this.hasNoListYet ? "#303030" : "transparent";
+
     return (
       <View style={styles.navigationBarContainer}>
         { /* This is the top screen gradient, to give the smearing effect */ }
-        <LinearGradient
-          colors={["rgba(0, 0, 0, 0.8)", "rgba(0, 0, 0, 0)"]}
-          style={styles.navigationBarGradient}
-        />
+        {
+          !this.hasNoListYet &&
+            <LinearGradient
+              colors={["rgba(0, 0, 0, 0.8)", "rgba(0, 0, 0, 0)"]}
+              style={styles.navigationBarGradient}
+            />
+        }
 
         <NavigationBar
-          containerStyle={styles.navigationBar}
+          containerStyle={[styles.navigationBar, { backgroundColor: navBarBackgroundColor }]}
           leftView={this.renderMenuButton()}
           middleView={this.renderLogo()}
         />

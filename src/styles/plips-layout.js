@@ -6,19 +6,25 @@ import {
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
+const NAV_BAR_HEIGHT = 88;
+
 
 export default StyleSheet.create({
   full: {
     flex: 1,
   },
-  layoutContent: {
-    backgroundColor: "black",
+  link: {
+    color: "#00c084",
+    fontFamily: "lato",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    textDecorationLine: "underline",
   },
   listView: {
     flex: 1,
   },
   navigationBar: {
-    backgroundColor: "transparent",
     position: "absolute",
     top: 0,
     left: 0,
@@ -26,7 +32,7 @@ export default StyleSheet.create({
   },
   navigationBarContainer: {
     backgroundColor: "transparent",
-    height: 88,
+    height: NAV_BAR_HEIGHT,
     position: "absolute",
     top: 0,
     left: 0,
@@ -35,22 +41,31 @@ export default StyleSheet.create({
   navigationBarGradient: {
     position: "absolute",
     flex: 1,
-    height: 88,
+    height: NAV_BAR_HEIGHT,
     top: 0,
     left: 0,
     right: 0,
   },
-  noProjects: {
-    color: "#fff",
-    fontFamily: "roboto",
-    fontSize: 14,
-    textAlign: "center",
-  },
-  noProjectsHeader: {
+  noProjectsContainer: {
     flex: 1,
-    height: 333,
-    justifyContent: "center",
+    justifyContent: "space-around",
+    marginTop: NAV_BAR_HEIGHT,
+    paddingHorizontal: 33,
+  },
+  noProjectsInnerContainer: {
     alignItems: "center",
+    justifyContent: "space-between",
+  },
+  noProjectsIcon: {
+    marginBottom: 25,
+    marginTop: 10,
+  },
+  noProjectsText: {
+    color: "#9a9a9a",
+    fontFamily: "lato",
+    fontSize: 18,
+    textAlign: "center",
+    marginBottom: 5,
   },
   plipImage: {
     minWidth: windowWidth,

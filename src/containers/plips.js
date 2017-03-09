@@ -10,7 +10,7 @@ import {
   sortBy,
 } from "ramda";
 
-import { isDev } from "../utils";
+import { isDev, MUDAMOS_WEB_SITE } from "../utils";
 
 import locale from "../locales/pt-BR";
 
@@ -20,6 +20,7 @@ import {
   fetchPlipsNextPage,
   logout,
   navigate,
+  openURL,
   profileSaveAvatar,
   refreshPlips,
   userFirstTimeDone,
@@ -307,6 +308,7 @@ const mapDispatchToProps = dispatch => ({
   onFetchPlipsNextPage: ({ page }) => dispatch(fetchPlipsNextPage({ page })),
   onFetchProfile: () => dispatch(fetchProfile()),
   onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
+  onGoToMudamos: () => dispatch(openURL(MUDAMOS_WEB_SITE)),
   onGoToPlip: plip => dispatch(navigate("showPlip", { plip })),
   onLogout: () => dispatch(logout()),
   onPlipsFetch: () => dispatch(fetchPlips()),
