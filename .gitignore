@@ -56,3 +56,4 @@ yarn-error.log
 android/keystores/*.keystore
 android/keystores/*.properties
 !android/keystores/debug.keystore.properties
+envs
