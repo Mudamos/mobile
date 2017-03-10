@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>pt</string>
 	<key>CFBundleDisplayName</key>
-	<string>MudamosBeta</string>
+	<string>MudamosBeta+</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -60,16 +60,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Não pedimos essa permissão</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Não pedimos essa permissão</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Para você tirar uma foto para seu avatar</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Compartilhar sua localização permite buscar automaticamente seu CEP</string>
-  <key>NSBluetoothPeripheralUsageDescription</key>
-  <string>Não pedimos essa permissão</string>
-  <key>NSCalendarsUsageDescription</key>
-  <string>Não pedimos essa permissão</string>
-  <key>NSCameraUsageDescription</key>
-  <string>Para você tirar uma foto para seu avatar</string>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>Para você escolher um avatar</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Para você escolher um avatar</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>pt_sans_bold.ttf</string>
