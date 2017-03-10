@@ -30,7 +30,7 @@ export { moment };
 
 const toLogTag = (...tags) => compact(tags).map(t => `[${t}]`).join(" ");
 
-export const MUDAMOS_WEB_SITE = "https://mudamos.org";
+export const MUDAMOS_WEB_SITE = "https://www.mudamos.org";
 
 export const isUnauthorized = error => error instanceof UnauthorizedError;
 
