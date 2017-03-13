@@ -7,8 +7,8 @@ const ShowVideoLayout = props => {
   const { videoId } = props;
 
   return (
-    <Layout contentStyle={{backgroundColor: "black"}}>
-      <Player videoId={videoId} style={{flex: 1}} />
+    <Layout contentStyle={{backgroundColor: "yellow"}}>
+      <Player videoId={videoId} style={{flex: 1, height: 300}} />
     </Layout>
   );
 };

@@ -26,17 +26,22 @@ export default class YouTubePlayer extends Component {
             padding: 0;
           }
 
+          body {
+            background-color: black;
+          }
+
           iframe {
             width: 100%;
             min-height: 100%;
           }
         </style>
 
-        <iframe src="${source}" id="player" frameborder="0" allowfullscreen></iframe>
+        <iframe width="200" height="300" playsinline src="${source}" frameborder="0" allowfullscreen></iframe>
 
         <script type="text/javascript">
-          var player = document.getElementById("player");
-          player.height = window.innerHeight;
+          setTimeout(function() {
+            var player = document.getElementById("player");
+          }, 1000);
         </script>
       </body>
     </html>
