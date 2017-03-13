@@ -29,6 +29,7 @@ import SignModal from "./plip-signed-modal";
 import SignedMessageView from "./signed-message-view";
 import SignerBubbleView from "./signer-bubble-view";
 import BackButton from "./back-button";
+import YouTube from "./you-tube";
 
 import styles, {
   HEADER_SCROLL_DISTANCE,
@@ -223,11 +224,21 @@ class PlipLayout extends Component {
             </View>
 
             {this.renderPresentation()}
+            {this.renderVideo()}
           </View>
 
           {this.renderFooterActions()}
         </ScrollView>
       </View>
+    );
+  }
+
+  renderVideo() {
+    return (
+      <YouTube
+        videoId="DGHOcL8LoMM"
+        style={styles.video}
+      />
     );
   }
 
