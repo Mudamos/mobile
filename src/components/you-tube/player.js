@@ -13,7 +13,7 @@ export default class YouTubePlayer extends Component {
   };
 
   render() {
-    const source = "https://www.youtube.com/embed/" + this.props.videoId;
+    const source = "https://www.youtube.com/embed/" + this.props.videoId + "?autoplay=1";
 
     const HTML = `
 
@@ -36,11 +36,12 @@ export default class YouTubePlayer extends Component {
           }
         </style>
 
-        <iframe width="200" height="300" playsinline src="${source}" frameborder="0" allowfullscreen></iframe>
+        <iframe src="${source}" id="player" frameborder="0" allowfullscreen></iframe>
 
         <script type="text/javascript">
           setTimeout(function() {
             var player = document.getElementById("player");
+            player.height = window.innerHeight;
           }, 1000);
         </script>
       </body>
@@ -51,7 +52,7 @@ export default class YouTubePlayer extends Component {
     return (
       <YouTubeWebView
         scrollEnabled={false}
-        source={{ html: HTML }}
+        source={{html: HTML}}
         style={this.props.style}
       />
     );

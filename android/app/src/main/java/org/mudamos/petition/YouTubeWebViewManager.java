@@ -1,6 +1,7 @@
 package org.mudamos.petition;
 
 import android.webkit.WebView;
+import android.webkit.GeolocationPermissions;
 
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.views.webview.ReactWebViewManager;
@@ -37,6 +38,14 @@ public class YouTubeWebViewManager extends ReactWebViewManager {
     @Override
     protected WebView createViewInstance(final ThemedReactContext reactContext) {
         final WebView webView = super.createViewInstance(reactContext);
+
+        webView.setWebChromeClient(new VideoWebChromeClient(reactContext.getCurrentActivity(), webView) {
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                callback.invoke(origin, true, false);
+            }
+        });
+
         webView.getSettings().setUseWideViewPort(true);
         runningWebViews.add(webView);
 
