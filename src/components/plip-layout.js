@@ -2,6 +2,7 @@ import React, { Component, PropTypes }  from "react";
 
 import {
   Animated,
+  Dimensions,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -234,10 +235,16 @@ class PlipLayout extends Component {
   }
 
   renderVideo() {
+    const { plip } = this.props;
+    if (!plip || !plip.videoId) return null;
+
+    const { width } = Dimensions.get("window");
+    const height = Math.floor(width * (360 /640));
+
     return (
       <YouTube
-        videoId="DGHOcL8LoMM"
-        style={styles.video}
+        videoId={plip.videoId}
+        style={[styles.video, { height }]}
       />
     );
   }
