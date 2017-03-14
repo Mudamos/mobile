@@ -30,7 +30,7 @@ export default class YouTube extends Component {
     const { navigate } = this.context;
 
     return (
-      <TouchableOpacity onPress={() => navigate("showVideo", { videoId })} style={style}>
+      <TouchableOpacity onPress={() => navigate("showVideo", { videoId })} style={[styles.container, style]}>
         <Image style={styles.thumb} source={{ uri: this.thumb }}/>
 
         <View style={styles.thumbOverlay}>

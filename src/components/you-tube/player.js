@@ -12,9 +12,11 @@ export default class YouTubePlayer extends Component {
     videoId: PropTypes.string.isRequired,
   };
 
-  render() {
-    const source = "https://www.youtube.com/embed/" + this.props.videoId + "?autoplay=1";
+  get source() {
+    return "https://www.youtube.com/embed/" + this.props.videoId + "?autoplay=1&modestbranding=1&showinfo=0&iv_load_policy=3&playsinline=0&rel=0";
+  }
 
+  render() {
     const HTML = `
 
     <html>
@@ -36,7 +38,7 @@ export default class YouTubePlayer extends Component {
           }
         </style>
 
-        <iframe src="${source}" id="player" frameborder="0" allowfullscreen></iframe>
+        <iframe src="${this.source}" id="player" frameborder="0" allowfullscreen></iframe>
 
         <script type="text/javascript">
           setTimeout(function() {

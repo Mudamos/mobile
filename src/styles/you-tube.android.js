@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  container: {
+    backgroundColor: "black",
+  },
   bigPlayButton: {
     alignItems: "center",
     backgroundColor: "red",
