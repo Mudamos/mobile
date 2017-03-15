@@ -18,11 +18,12 @@ import { getCurrentSigningPlip } from "../selectors";
 
 import { User } from "../models";
 import { logError } from "../utils";
+import { blockBuilder } from "./crypto";
 
 
 const facebookPermissions = ["public_profile", "email"];
 
-function* login({ mobileApi, sessionStore }) {
+function* login({ mobileApi, sessionStore, Crypto }) {
   yield takeLatest("FACEBOOK_USER_LOG_IN", function* () {
     try {
       const fbResult = yield call(LoginManager.logInWithReadPermissions, facebookPermissions);
@@ -40,8 +41,10 @@ function* login({ mobileApi, sessionStore }) {
       const fbToken = tokenData.accessToken.toString();
       const currentSigningPlip = yield select(getCurrentSigningPlip);
       const plipId = currentSigningPlip ? currentSigningPlip.id : null;
+      const message = fbToken;
+      const block = yield call(blockBuilder, { message, mobileApi, Crypto });
 
-      const token =  yield call(mobileApi.fbSignIn, fbToken, plipId);
+      const token =  yield call(mobileApi.fbSignIn, { fbToken, plipId, block });
       const appAuth = { token };
 
       yield call(sessionStore.persist, appAuth);
@@ -65,6 +68,6 @@ function* login({ mobileApi, sessionStore }) {
   });
 }
 
-export default function* facebookSaga({ mobileApi, sessionStore }) {
-  yield fork(login, { mobileApi, sessionStore });
+export default function* facebookSaga({ mobileApi, sessionStore, Crypto }) {
+  yield fork(login, { mobileApi, sessionStore, Crypto });
 }

@@ -265,7 +265,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       if (isDev) console.log("Acquired seed", seed);
       if (!seed) return yield call(invalidateWalletAndNavigate, { alertRevalidate: true });
 
-      const difficulty = yield call(mobileApi.difficulty, authToken);
+      const difficulty = yield call(mobileApi.difficulty);
 
       const message = buildSignMessage({ user, plip });
       if (isDev) console.log("Sign message built:", message);

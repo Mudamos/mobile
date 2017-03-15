@@ -92,18 +92,17 @@ const authorizedClient = (client, token) =>
     .use(req => req.set("Authorization", `Bearer ${token}`));
 
 
-const fbSignIn = ({ client }) => (fbToken, plipId = null) => {
+const fbSignIn = ({ client }) => ({ fbToken, plipId, block }) => {
   let requester = client
     .use(req => req.set("access_token", fbToken))
+    .use(serializeJson)
     .post("/auth/facebook/token");
 
-  if (plipId) {
-    requester = requester
-      .use(serializeJson)
-      .send({ petition: { versionId: plipId } });
-  }
+  const payload = { block };
+  if (plipId) payload.petition = { versionId: plipId };
 
   return requester
+    .send(payload)
     .then(getData)
     .then(json => json.accessToken);
 };
@@ -116,12 +115,16 @@ const signIn = ({ client }) => (email, password) =>
     .then(getData)
     .then(json => json.accessToken);
 
-const signUp = ({ client }) => (authToken, payload, plipId = null) => {
+const signUp = ({ client }) => (authToken, { user, plipId, block }) => {
   const api =  authToken ? authorizedClient(client, authToken) : client;
-  const requestPayload = { user: payload };
+  const requestPayload = { user };
 
   if (plipId) {
     requestPayload.petition = { versionId: plipId };
+  }
+
+  if (block) {
+    requestPayload.block = block;
   }
 
   return api
@@ -188,8 +191,8 @@ const saveWallet = ({ client }) => (authToken, walletKey) =>
     .send({ user: { walletKey }})
     .then(getData);
 
-const fetchDifficulty = ({ client }) => authToken =>
-  authorizedClient(client, authToken)
+const fetchDifficulty = ({ client }) => () =>
+  client
     .get("/config/difficulty")
     .then(getData)
     .then(data => parseInt(data.config.value, 10));
@@ -218,18 +221,18 @@ const logout = ({ client }) => authToken =>
       if (isDev) console.log("Logout failed, but skipping.");
     });
 
-const retrievePassword = ({ client }) => email =>
+const retrievePassword = ({ client }) => ({ email, block }) =>
   client
     .use(serializeJson)
     .post("/users/password/reset")
-    .send({ user: { email } })
+    .send({ user: { email }, block })
     .then(getData);
 
-const changeForgotPassword = ({ client }) => ({ code, password }) =>
+const changeForgotPassword = ({ client }) => ({ code, password, block }) =>
   client
     .use(serializeJson)
     .post("/users/password/update")
-    .send({ user: { password, pincode: code } })
+    .send({ user: { password, pincode: code }, block })
     .then(getData);
 
 const changePassword = ({ client }) => (authToken, { currentPassword, newPassword }) =>
@@ -327,34 +330,35 @@ const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatar
 
 
 export default function MobileApi(host) {
-  const client = requester({ host, version: "v1" });
+  const v1Client = requester({ host, version: "v1" });
+  const v2Client = requester({ host, version: "v2" });
 
   return {
-    changePassword: changePassword({ client }),
-    changeForgotPassword: changeForgotPassword({ client }),
-    difficulty: fetchDifficulty({ client }),
-    fbSignIn: fbSignIn({ client }),
-    fetchOfflinePlipSigners: fetchOfflinePlipSigners({ client }),
-    fetchPlipSigners: fetchPlipSigners({ client }),
-    fetchOfflineShortPlipSigners: fetchOfflineShortPlipSigners({ client }),
-    fetchShortPlipSigners: fetchShortPlipSigners({ client }),
-    logout: logout({ client }),
-    plipSignInfo: plipSignInfo({ client }),
-    profile: profile({ client }),
-    retrievePassword: retrievePassword({ client }),
-    reverseSearchZipCode: reverseSearchZipCode({ client }),
+    changePassword: changePassword({ client: v1Client }),
+    changeForgotPassword: changeForgotPassword({ client: v2Client }),
+    difficulty: fetchDifficulty({ client: v1Client }),
+    fbSignIn: fbSignIn({ client: v2Client }),
+    fetchOfflinePlipSigners: fetchOfflinePlipSigners({ client: v1Client }),
+    fetchPlipSigners: fetchPlipSigners({ client: v1Client }),
+    fetchOfflineShortPlipSigners: fetchOfflineShortPlipSigners({ client: v1Client }),
+    fetchShortPlipSigners: fetchShortPlipSigners({ client: v1Client }),
+    logout: logout({ client: v1Client }),
+    plipSignInfo: plipSignInfo({ client: v1Client }),
+    profile: profile({ client: v1Client }),
+    retrievePassword: retrievePassword({ client: v2Client }),
+    reverseSearchZipCode: reverseSearchZipCode({ client: v1Client }),
     saveAvatar: upload({ endpoint: `${host}/api/v1/profile/photo` }),
-    saveBirthdate: saveBirthdate({ client }),
-    saveDocuments: saveDocuments({ client }),
-    savePhone: savePhone({ client }),
-    saveWallet: saveWallet({ client }),
-    saveZipCode: saveZipCode({ client }),
-    searchZipCode: searchZipCode({ client }),
-    sendPhoneValidation: sendPhoneValidation({ client }),
-    signIn: signIn({ client }),
-    signUp: signUp({ client }),
-    signPlip: signPlip({ client }),
-    updateProfile: updateProfile({ client }),
-    userSignInfo: userSignInfo({ client }),
+    saveBirthdate: saveBirthdate({ client: v1Client }),
+    saveDocuments: saveDocuments({ client: v1Client }),
+    savePhone: savePhone({ client: v1Client }),
+    saveWallet: saveWallet({ client: v1Client }),
+    saveZipCode: saveZipCode({ client: v1Client }),
+    searchZipCode: searchZipCode({ client: v1Client }),
+    sendPhoneValidation: sendPhoneValidation({ client: v1Client }),
+    signIn: signIn({ client: v1Client }),
+    signUp: signUp({ client: v2Client }),
+    signPlip: signPlip({ client: v1Client }),
+    updateProfile: updateProfile({ client: v1Client }),
+    userSignInfo: userSignInfo({ client: v1Client }),
   };
 }

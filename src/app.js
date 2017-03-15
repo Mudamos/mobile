@@ -52,6 +52,7 @@ import { defaultStorage } from "./services/local-storage";
 import DeviceInfo from "./services/device-info";
 import PermissionService from "./services/permission";
 import LocationService from "./services/location";
+import Crypto from "./services/crypto";
 
 import reducer from "./reducers";
 import sagas from "./sagas";
@@ -123,6 +124,7 @@ const scenes = Actions.create(
 
 sagaRunner.run(sagas, {
   apiError: ApiError(),
+  Crypto,
   DeviceInfo,
   localStorage,
   locationService: LocationService,

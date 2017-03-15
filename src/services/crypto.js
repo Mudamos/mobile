@@ -31,9 +31,12 @@ const decrypt = (text, password) => {
   }
 }
 
+const sha256 = text => crypto.createHash("sha256").update(text, "utf8").digest().toString("hex");
+
 const myCrypto = {
-  encrypt: encrypt,
-  decrypt: decrypt,
+  encrypt,
+  decrypt,
+  sha256,
 };
 
 export default myCrypto;
