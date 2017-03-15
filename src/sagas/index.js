@@ -19,6 +19,7 @@ import walletSaga from "./wallet";
 
 export default function* rootSaga({
   apiError,
+  Crypto,
   DeviceInfo,
   localStorage,
   locationService,
@@ -30,12 +31,12 @@ export default function* rootSaga({
 }) {
   yield spawn(appStateSaga);
   yield spawn(navigationSaga, { mobileApi, sessionStore });
-  yield spawn(facebookSaga, { sessionStore, mobileApi });
+  yield spawn(facebookSaga, { sessionStore, mobileApi, Crypto });
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
-  yield spawn(passwordSaga, { mobileApi, sessionStore });
+  yield spawn(passwordSaga, { mobileApi, sessionStore, Crypto });
   yield spawn(permissionSaga, { permissionService });
   yield spawn(plipSaga, { apiError, mobileApi, mudamosWebApi, walletStore });
-  yield spawn(profileSaga, { mobileApi, DeviceInfo, sessionStore });
+  yield spawn(profileSaga, { mobileApi, DeviceInfo, sessionStore, Crypto });
   yield spawn(errorSaga);
   yield spawn(sessionSaga, { mobileApi, sessionStore });
   yield spawn(shareSaga);

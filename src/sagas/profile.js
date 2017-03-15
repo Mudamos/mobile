@@ -36,28 +36,31 @@ import { isDev, isUnauthorized, log, logError } from "../utils";
 import Toast from "react-native-simple-toast";
 
 import locale from "../locales/pt-BR";
+import { blockBuilder } from "./crypto";
 
 
-function* saveMainProfile({ mobileApi, sessionStore }) {
+function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
   yield takeLatest("PROFILE_SAVE_MAIN", function* ({ payload }) {
     try {
       const { name, email, password } = payload;
-      const apiPayload = { name };
+      const apiPayload = { user: { name } };
 
-      if (email) apiPayload.email = email;
-      if (password) apiPayload.password = password;
+      if (email) apiPayload.user.email = email;
+      if (password) apiPayload.user.password = password;
 
       yield put(savingProfile(true));
 
       const authToken = yield select(currentAuthToken);
 
-      let plipId;
       if (!authToken) {
         const currentSigningPlip = yield select(getCurrentSigningPlip);
-        if (currentSigningPlip) plipId = currentSigningPlip.id;
+        if (currentSigningPlip) apiPayload.plipId = currentSigningPlip.id;
+
+        const message = [apiPayload.user.name, apiPayload.user.email, apiPayload.user.password].join(";");
+        apiPayload.block = yield call(blockBuilder, { message, mobileApi, Crypto });
       }
 
-      const response = yield call(mobileApi.signUp, authToken, apiPayload, plipId);
+      const response = yield call(mobileApi.signUp, authToken, apiPayload);
 
       const user = User.fromJson(response.user);
 
@@ -349,8 +352,8 @@ export function* fetchProfileSaga({ mobileApi }) {
   });
 }
 
-export default function* profileSaga({ mobileApi, DeviceInfo, sessionStore }) {
-  yield spawn(saveMainProfile, { mobileApi, sessionStore });
+export default function* profileSaga({ mobileApi, DeviceInfo, sessionStore, Crypto }) {
+  yield spawn(saveMainProfile, { mobileApi, sessionStore, Crypto });
   yield spawn(updateProfile, { mobileApi });
   yield spawn(saveAvatarProfile, { mobileApi });
   yield spawn(saveBirthdateProfile, { mobileApi });
