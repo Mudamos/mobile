@@ -1,6 +1,6 @@
 import Config from "react-native-config";
 
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 
 import { Actions, Router, Scene } from "react-native-router-flux";
 import sceneStyle from "./styles/scene-default";
@@ -24,6 +24,7 @@ import {
   ProfilePhoneCodeContainer,
   ProfileUpdateContainer,
   ProfileWalletContainer,
+  ShowVideoContainer,
   SignersContainer,
   SignInContainer,
   SignUpContainer,
@@ -35,6 +36,8 @@ import {
   appWillUnmount,
   fetchIsUserFirstTime,
   fetchSession,
+  navigate,
+  navigateBack,
 } from "./actions";
 
 import routeReducer from "./services/route-reducer";
@@ -114,6 +117,7 @@ const scenes = Actions.create(
     <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
 
     <Scene key="tse" component={TSEContainer} hideNavBar={true} direction="vertical" />
+    <Scene key="showVideo" component={ShowVideoContainer} hideNavBar={true} direction="vertical" />
   </Scene>
 );
 
@@ -135,6 +139,18 @@ store.dispatch(fetchIsUserFirstTime());
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 
 export default class App extends Component {
+  static childContextTypes = {
+    navigate: PropTypes.func,
+    navigateBack: PropTypes.func,
+  }
+
+  getChildContext() {
+    return {
+      navigate: (...props) => store.dispatch(navigate(...props)),
+      navigateBack: () => store.dispatch(navigateBack()),
+    };
+  }
+
   componentDidMount() {
     store.dispatch(appDidMount());
   }

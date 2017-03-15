@@ -192,4 +192,9 @@ export default StyleSheet.create({
       },
     }),
   },
+  video: {
+    marginTop: 10,
+    marginBottom: 30,
+    height: 300,
+  },
 })

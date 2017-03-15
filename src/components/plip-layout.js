@@ -2,6 +2,7 @@ import React, { Component, PropTypes }  from "react";
 
 import {
   Animated,
+  Dimensions,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -29,6 +30,7 @@ import SignModal from "./plip-signed-modal";
 import SignedMessageView from "./signed-message-view";
 import SignerBubbleView from "./signer-bubble-view";
 import BackButton from "./back-button";
+import YouTube from "./you-tube";
 
 import styles, {
   HEADER_SCROLL_DISTANCE,
@@ -223,11 +225,27 @@ class PlipLayout extends Component {
             </View>
 
             {this.renderPresentation()}
+            {this.renderVideo()}
           </View>
 
           {this.renderFooterActions()}
         </ScrollView>
       </View>
+    );
+  }
+
+  renderVideo() {
+    const { plip } = this.props;
+    if (!plip || !plip.videoId) return null;
+
+    const { width } = Dimensions.get("window");
+    const height = Math.floor(width * (360 /640));
+
+    return (
+      <YouTube
+        videoId={plip.videoId}
+        style={[styles.video, { height }]}
+      />
     );
   }
 

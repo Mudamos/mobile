@@ -56,7 +56,8 @@ public class MainApplication extends Application implements ReactApplication {
             new MapsPackage(),
             new VectorIconsPackage(),
             new RNSpinkitPackage(),
-            new ReactNativeConfigPackage()
+            new ReactNativeConfigPackage(),
+            new YouTubeWebViewReactPackage()
       );
     }
   };
