@@ -58,12 +58,15 @@ export default class PlipViewerLayout extends Component {
     const start = moment();
     const end = moment(plip.cycle.finalDate);
 
+    // No days left because there are no more seconds left
+    if (end.diff(start, "seconds") < 0) return;
+
     return end.diff(start, "days");
   }
 
   get signatureEnabled() {
     const daysLeft = this.daysLeft;
-    return !!daysLeft;
+    return daysLeft != null && daysLeft >= 0;
   }
 
   componentWillReceiveProps(nextProps) {
