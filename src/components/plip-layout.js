@@ -133,9 +133,13 @@ export default class PlipLayout extends Component {
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
     const total = plip.signaturesRequired;
-    const progress = Math.floor(clamp(0, 1, count / total));
+    const progress = clamp(0, 1, count / total);
 
     return progress;
+  }
+
+  get progressPercentage() {
+    return Math.floor(this.plipProgress * 100);
   }
 
   componentWillMount() {
@@ -263,11 +267,9 @@ export default class PlipLayout extends Component {
   }
 
   renderTargetPercentage() {
-    const value = this.plipProgress * 100;
-
     return (
       <View style={styles.full}>
-        <Text style={styles.infoPercentageText}>{value}%</Text>
+        <Text style={styles.infoPercentageText}>{this.progressPercentage}%</Text>
         <Text style={styles.infoPercentageSubtitle}>da meta</Text>
       </View>
     );
