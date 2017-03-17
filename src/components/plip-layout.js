@@ -14,10 +14,13 @@ import {
   moment,
 } from "../utils";
 
+import { clamp } from "ramda";
+
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Ionicon from "react-native-vector-icons/Ionicons";
 
 import LinearGradient from "react-native-linear-gradient";
+import { MKProgress } from "react-native-material-kit";
 
 import Layout from "./layout";
 import HeaderLogo from "./header-logo";
@@ -40,7 +43,7 @@ import styles, {
 import locale from "../locales/pt-BR";
 
 
-class PlipLayout extends Component {
+export default class PlipLayout extends Component {
   state = {
     showSignSuccess: false,
   };
@@ -109,7 +112,7 @@ class PlipLayout extends Component {
 
   get messageForDaysLeft() {
     if (this.daysLeft > 0) {
-      const sufix = this.daysLeft > 1 ? "dias restantes" : "dia restante";
+      const sufix = this.daysLeft > 1 ? "dias" : "dia";
       return `${formatNumber(this.daysLeft)} ${sufix}`;
     } else if (this.daysLeft === 0) {
       return locale.lastDay;
@@ -121,6 +124,22 @@ class PlipLayout extends Component {
     if (!plip) return;
 
     return (plip.callToAction || "").toUpperCase();
+  }
+
+  get plipProgress() {
+    const { plip, plipSignInfo } = this.props;
+
+    if (!plip || !plip.signaturesRequired) return 0;
+
+    const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
+    const total = plip.signaturesRequired;
+    const progress = clamp(0, 1, count / total);
+
+    return progress;
+  }
+
+  get progressPercentage() {
+    return Math.floor(this.plipProgress * 100);
   }
 
   componentWillMount() {
@@ -188,41 +207,27 @@ class PlipLayout extends Component {
 
           <View style={styles.scrollViewContent}>
 
+            {this.renderProgress()}
+
             <View style={styles.infoContainer}>
-              {userSignDate && <SignedMessageView date={userSignDate} />}
-
-              {
-                !userSignDate && plip && this.signatureEnabled &&
-                  <PurpleFlatButton
-                    title={this.callToAction}
-                    onPress={this.onPlipSign.bind(this)}
-                    style={{marginHorizontal: 20}}
-                    textStyle={{fontSize: 19, fontFamily: "lato"}}
-                  />
-              }
-
-              <View style={styles.remainingDaysContainer}>
-                {this.signatureEnabled && this.renderDaysLeft()}
-                {!this.signatureEnabled && <Text style={styles.remainingDays}>{locale.petitionEnded}</Text>}
-
-                {this.renderSignaturesCount()}
-              </View>
+              {this.renderTargetPercentage()}
+              {this.renderSignaturesCount()}
+              {this.signatureEnabled && this.renderDaysLeft()}
+              {!this.signatureEnabled && this.renderPlipFinished()}
             </View>
 
-            <View style={styles.full}>
-              <View style={styles.signersFakeTop} />
-              <View style={styles.signersFakeBottom} />
+            {userSignDate && <SignedMessageView date={userSignDate} />}
+            {!userSignDate && plip && this.signatureEnabled && this.renderSignButton()}
 
-              {
-                signers &&
-                  <SignerBubbleView
-                    users={signers}
-                    total={signersTotal}
-                    style={styles.signersBubble}
-                    onPress={this.onOpenSigners.bind(this)}
-                  />
-              }
-            </View>
+            {
+              signers &&
+                <SignerBubbleView
+                  users={signers}
+                  total={signersTotal}
+                  style={styles.signersBubble}
+                  onPress={this.onOpenSigners.bind(this)}
+                />
+            }
 
             {this.renderPresentation()}
             {this.renderVideo()}
@@ -230,6 +235,52 @@ class PlipLayout extends Component {
 
           {this.renderFooterActions()}
         </ScrollView>
+      </View>
+    );
+  }
+
+  renderSignButton() {
+    return (
+      <View style={styles.full}>
+        <View style={styles.infoFakeTop} />
+        <View style={styles.infoFakeBottom} />
+
+        <PurpleFlatButton
+          title={this.callToAction}
+          onPress={this.onPlipSign.bind(this)}
+          style={signButtonStyle}
+          textStyle={{fontSize: 19, fontFamily: "lato"}}
+        />
+      </View>
+    );
+  }
+
+  renderProgress() {
+    return (
+      <MKProgress
+        style={styles.progress}
+        progressAniDuration={1000}
+        progressColor="#00db5e"
+        progress={this.plipProgress}
+      />
+    );
+  }
+
+  renderTargetPercentage() {
+    return (
+      <View style={styles.full}>
+        <Text style={styles.infoPercentageText}>{this.progressPercentage}%</Text>
+        <Text style={styles.infoPercentageSubtitle}>da meta</Text>
+      </View>
+    );
+  }
+
+  renderPlipFinished() {
+    return (
+      <View style={{flex: 0.7}}>
+        <View style={{flex: 1, justifyContent: "flex-end"}}>
+          <Text style={styles.infoTextSubtitle}>{locale.petitionEnded}</Text>
+        </View>
       </View>
     );
   }
@@ -319,16 +370,13 @@ class PlipLayout extends Component {
   }
 
   renderSignaturesCount() {
-    const { plip, plipSignInfo } = this.props;
-
-    if (!plip || !plip.signaturesRequired) return null;
+    const { plipSignInfo } = this.props;
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
-    const total = plip.signaturesRequired || 0;
     return (
-      <View style={styles.full}>
-        <Text style={styles.signaturesCount}>{formatNumber(count)} de {formatNumber(total)}</Text>
-        <Text style={styles.signatures}>{locale.signatures.toLowerCase()}</Text>
+      <View style={{ flex: 1.5 }}>
+        <Text style={styles.infoText}>{formatNumber(count)}</Text>
+        <Text style={styles.infoTextSubtitle}>já assinaram</Text>
       </View>
     );
   }
@@ -405,9 +453,9 @@ class PlipLayout extends Component {
 
   renderDaysLeft() {
     return (
-      <View style={styles.full}>
-        <Text style={styles.remainingDays}>{this.messageForDaysLeft}</Text>
-        <Text style={styles.remainingDaysSubtitle}>para o encerramento</Text>
+      <View style={{ flex: 2 }}>
+        <Text style={styles.infoText}>{this.messageForDaysLeft}</Text>
+        <Text style={styles.infoTextSubtitle}>para o encerramento</Text>
       </View>
     );
   }
@@ -542,4 +590,15 @@ class PlipLayout extends Component {
   }
 }
 
-export default PlipLayout
+const signButtonStyle = {
+  marginHorizontal: 20,
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  elevation: 5,
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.3,
+  shadowRadius: 4,
+};

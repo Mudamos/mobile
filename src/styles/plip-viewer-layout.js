@@ -16,8 +16,8 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
   },
   scrollViewContent: {
-    backgroundColor: "#fff",
+    backgroundColor: "transparent",
     marginHorizontal: 15,
-    marginTop: 20,
+    paddingVertical: 20,
   },
 });
