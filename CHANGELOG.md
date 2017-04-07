@@ -1,5 +1,6 @@
 # Next
 
+* [PR #282] Change some app texts
 * [PR #278] Change activity launch mode to singleTask
 
 ## [1.1.0] 24/03/2017
