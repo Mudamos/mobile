@@ -54,7 +54,7 @@ const PlipSignedModal = props => {
       onShare={onShare}
     >
       <Text style={textStyles.modalTitle}>
-        {locale.projectSignedYeah}
+        {locale.projectSignedYeah({ plipName })}
       </Text>
 
       <Text style={textStyles.modalText}>
