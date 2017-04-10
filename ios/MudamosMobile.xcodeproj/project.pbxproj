@@ -478,6 +478,7 @@
 		207C3AC18ADF55D82D20DF88 /* Pods-MudamosMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTests/Pods-MudamosMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTagviewBeta.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTagviewBeta/Pods-MudamosMobileTagviewBeta.release.xcconfig"; sourceTree = "<group>"; };
 		413B12353FD34D1C9F7FE084 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		462DE3E01E9C0D630075CAFC /* MudamosProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosProduction.entitlements; sourceTree = "<group>"; };
 		46439D881E709B03008577C0 /* MudamosProduction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosProduction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46439D891E709B03008577C0 /* InfoMudamosProduction.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = InfoMudamosProduction.plist; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/InfoMudamosProduction.plist"; sourceTree = "<absolute>"; };
 		46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold_italic.ttf; sourceTree = "<group>"; };
@@ -986,6 +987,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				462DE3E01E9C0D630075CAFC /* MudamosProduction.entitlements */,
 				46AA978D1E9BBCD200B76B3F /* MudamosMobileTagviewBeta.entitlements */,
 				13B07FAE1A68108700A75B9A /* MudamosMobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -1141,6 +1143,14 @@
 					};
 					46439D3C1E709B03008577C0 = {
 						DevelopmentTeam = YGK2CQTELW;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					46ED2A6B1DF194E400B36CD0 = {
 						DevelopmentTeam = T97PZRMFDE;
@@ -2073,6 +2083,8 @@
 			baseConfigurationReference = C31184017F8613138D7E49E4 /* Pods-MudamosProduction.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MudamosProduction.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = YGK2CQTELW;
@@ -2110,8 +2122,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "07c3eb38-8f9f-46ae-9437-da9443b7e5de";
-				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app dev";
+				PROVISIONING_PROFILE = "161e25e2-2e4a-4879-9720-472339b63b21";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app store (push enabled)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2121,6 +2133,7 @@
 			baseConfigurationReference = 5B984827EF456536636B8D2D /* Pods-MudamosProduction.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MudamosProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Instituto de Tecnologia e Sociedade (YGK2CQTELW)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YGK2CQTELW;
@@ -2158,7 +2171,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app store";
+				PROVISIONING_PROFILE = "161e25e2-2e4a-4879-9720-472339b63b21";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app store (push enabled)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
