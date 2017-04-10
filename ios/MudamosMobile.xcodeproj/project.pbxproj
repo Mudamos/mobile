@@ -484,6 +484,7 @@
 		46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold.ttf; sourceTree = "<group>"; };
 		46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_italic.ttf; sourceTree = "<group>"; };
 		46918CE01E26989000AF78FF /* pt_sans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans.ttf; sourceTree = "<group>"; };
+		46AA978D1E9BBCD200B76B3F /* MudamosMobileTagviewBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosMobileTagviewBeta.entitlements; sourceTree = "<group>"; };
 		46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InfoTagviewBeta.plist; path = MudamosMobile/InfoTagviewBeta.plist; sourceTree = "<group>"; };
 		46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato_black_italic.ttf; sourceTree = "<group>"; };
 		46CBB3581E268E52000B4F5A /* lato_black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato_black.ttf; sourceTree = "<group>"; };
@@ -985,6 +986,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				46AA978D1E9BBCD200B76B3F /* MudamosMobileTagviewBeta.entitlements */,
 				13B07FAE1A68108700A75B9A /* MudamosMobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MudamosMobileTests */,
@@ -1143,6 +1145,14 @@
 					46ED2A6B1DF194E400B36CD0 = {
 						DevelopmentTeam = T97PZRMFDE;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -2158,6 +2168,7 @@
 			baseConfigurationReference = FD315B732F68A52F03537566 /* Pods-MudamosMobileTagviewBeta.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MudamosMobileTagviewBeta.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -2202,8 +2213,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ed10aefe-30e8-4e1b-9646-19ad847002b7";
-				PROVISIONING_PROFILE_SPECIFIER = "Mudamos Mobile Development";
+				PROVISIONING_PROFILE = "32ba85ca-1842-4ff0-812a-da188cd64fa1";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos mobile development";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2213,8 +2224,9 @@
 			baseConfigurationReference = 245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MudamosMobileTagviewBeta.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mor & Dan Tecnologia Consultoria Empresarial Ltda (T97PZRMFDE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mor & Dan Tecnologia Consultoria Empresarial Ltda (T97PZRMFDE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T97PZRMFDE;
 				HEADER_SEARCH_PATHS = (
@@ -2256,6 +2268,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e8f8d87d-a287-469b-86f8-440faa15129b";
 				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: br.com.tagview.mudamosmobile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
