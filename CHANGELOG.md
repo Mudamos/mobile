@@ -1,5 +1,6 @@
 # Next
 
+* [PR #287] Handle empty reverse zip code search result
 * [PR #286] Add wrong zip code text
 
 ## [1.2.0] 07/04/2017
