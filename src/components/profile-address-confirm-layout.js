@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react";
 
 import {
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
@@ -61,6 +62,7 @@ export default class ProfileAddressConfirmLayout extends Component {
   render() {
     const {
       isSaving,
+      onBack,
     } = this.props;
 
     return (
@@ -77,9 +79,15 @@ export default class ProfileAddressConfirmLayout extends Component {
               {locale.zipCodeReason}
             </Text>
 
-            <Text style={styles.zipCode}>
-              {this.zipCode}
-            </Text>
+            <View style={styles.zipCodeContainer}>
+              <Text style={styles.zipCode}>
+                {this.zipCode}
+              </Text>
+
+              <TouchableOpacity onPress={onBack} style={styles.wrongZipCodeContainer}>
+                <Text style={styles.link}>{locale.wrongZipCode}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           { this.renderMap() }

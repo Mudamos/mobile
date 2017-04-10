@@ -1,5 +1,7 @@
 # Next
 
+* [PR #286] Add wrong zip code text
+
 ## [1.2.0] 07/04/2017
 
 * [PR #282] Change some app texts
