@@ -59,10 +59,13 @@ function* searchZipCodeWithCoords({ mobileApi }) {
       const authToken = yield select(currentAuthToken);
       const response = yield call(mobileApi.reverseSearchZipCode, authToken, { latitude, longitude });
 
-      yield put(addressFound(Address.fromJson(response)));
+      if (response && response.zipcode) {
+        yield put(addressFound(Address.fromJson(response)));
+        yield put(clearLocation());
+        yield put(navigate("profileAddressConfirm"));
+      }
+
       yield put(addressZipCodeSearching(false));
-      yield put(clearLocation());
-      yield put(navigate("profileAddressConfirm"));
     } catch(e) {
       logError(e, { tag: "searchZipCodeWithCoords" });
 
