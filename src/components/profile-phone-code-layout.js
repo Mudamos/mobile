@@ -105,10 +105,10 @@ export default class ProfilePhoneCodeLayout extends Component {
 
         <View style={styles.phoneInfoContainer}>
           <Text style={styles.phoneText}>
-            {phoneMask(phone)}
+            {phoneMask(phone)}.
           </Text>
           <TouchableOpacity onPress={onBack} style={styles.wrongNumberContainer}>
-            <Text style={styles.link}>{locale.wrongNumber.toLowerCase()}</Text>
+            <Text style={styles.link}>{locale.wrongNumber}</Text>
           </TouchableOpacity>
         </View>
 
