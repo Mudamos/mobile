@@ -14,6 +14,9 @@ export default StyleSheet.create({
     textStyles.header,
     { marginBottom: 8, marginTop: 12 },
   ]),
+  link: StyleSheet.flatten([
+    textStyles.link,
+  ]),
   map: {
     ...StyleSheet.absoluteFillObject,
   },
@@ -34,6 +37,11 @@ export default StyleSheet.create({
     textStyles.subtitle,
     { marginBottom: 5 },
   ]),
+  wrongZipCodeContainer: {
+    marginLeft: 10,
+    marginTop: 2,
+    justifyContent: "center",
+  },
   zipCode: {
     fontFamily: "roboto",
     fontSize: 20,
@@ -43,5 +51,9 @@ export default StyleSheet.create({
     alignSelf: "center",
     marginTop: 16,
     marginBottom: 14,
+  },
+  zipCodeContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });

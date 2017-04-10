@@ -115,6 +115,7 @@ const translations = {
   whyRequestDocuments: "Por que pedimos estes dados?",
   whyRequestDocumentsAlternative: "Por que pedimos seus documentos?",
   wrongNumber: "Número errado?",
+  wrongZipCode: "Não é seu CEP?",
   yes: "Sim",
   zipCode: "CEP",
   zipCodeReason: "Não precisamos saber o seu endereço específico, apenas uma localização aproximada de onde você mora",
