@@ -1,5 +1,6 @@
 # Next
 
+* [PR #292] Use the phase final date to compute the remaining days
 * [PR #290] Push message
 * [PR #287] Handle empty reverse zip code search result
 * [PR #286] Add wrong zip code text
