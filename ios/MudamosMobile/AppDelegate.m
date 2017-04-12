@@ -14,8 +14,11 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "IQKeyboardManager.h"
+#import "ReactNativeConfig.h"
 
 @implementation AppDelegate
+
+@synthesize oneSignal = _oneSignal;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -37,6 +40,10 @@
 
   [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemText = @"OK";
 
+  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+                                                         appId:[ReactNativeConfig envFor:@"ONESIGNAL_APP_ID"]
+                                                      settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNotification), kOSSettingsKeyAutoPrompt : @YES}];
+
   //return YES;
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
@@ -55,6 +62,10 @@
                                                         openURL:url
                                               sourceApplication:sourceApplication
                                                      annotation:annotation];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
+  [RCTOneSignal didReceiveRemoteNotification:notification];
 }
 
 @end

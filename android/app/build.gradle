@@ -97,6 +97,9 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
 
+        manifestPlaceholders = [onesignal_app_id: project.env.get("ONESIGNAL_APP_ID"),
+                                onesignal_google_project_number: project.env.get("ANDROID_PUSH_GOOGLE_SENDER_ID")]
+
         // react-native-config
         resValue "string", "build_config_package", "org.mudamos.petition"
     }
@@ -199,6 +202,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-onesignal')
     compile project(':react-native-image-picker')
     compile project(':react-native-open-settings')
     compile project(':react-native-permissions')

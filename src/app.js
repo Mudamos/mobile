@@ -5,6 +5,8 @@ import React, { Component, PropTypes } from "react";
 import { Actions, Router, Scene } from "react-native-router-flux";
 import sceneStyle from "./styles/scene-default";
 
+import OneSignal from "react-native-onesignal";
+
 import { isDev } from "./utils";
 
 import {
@@ -61,6 +63,9 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import createReduxLogger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
+
+
+OneSignal.inFocusDisplaying(2); // Show notification on drawer
 
 const sagaRunner = createSagaMiddleware();
 const logger = createReduxLogger({
