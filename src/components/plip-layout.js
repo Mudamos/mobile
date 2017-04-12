@@ -97,7 +97,7 @@ export default class PlipLayout extends Component {
     if (!plip) return;
 
     const start = moment();
-    const end = moment(plip.cycle.finalDate);
+    const end = moment(plip.phase.finalDate);
 
     // No days left because there are no more seconds left
     if (end.diff(start, "seconds") < 0) return;
