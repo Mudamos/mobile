@@ -10,8 +10,34 @@ const NAV_BAR_HEIGHT = 88;
 
 
 export default StyleSheet.create({
+  actionIcon: {
+    marginRight: 18,
+  },
+  actionTitle: {
+    color: "#fff",
+    flex: 3,
+    fontFamily: "lato",
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+  actionRow: {
+    backgroundColor: "transparent",
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 27,
+  },
+  footerContainer: {
+    flex: 1,
+    paddingHorizontal: 27,
+  },
   full: {
     flex: 1,
+  },
+  hairline: {
+    borderBottomColor: "rgba(255,255,255,0.23)",
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   link: {
     color: "#00c084",
@@ -113,6 +139,9 @@ export default StyleSheet.create({
   retryContainer: {
     flex: 1,
     justifyContent: "center",
+  },
+  rowContainer: {
+    backgroundColor: "black",
   },
   tableRow: {
     marginTop: 0,

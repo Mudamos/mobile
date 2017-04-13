@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 
-import { moment } from "../utils";
+import { moment, homeLinks } from "../utils";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -33,6 +33,8 @@ import styles from "../styles/plips-layout";
 
 import locale from "../locales/pt-BR";
 
+const LINKS_KEY = "LINKS";
+
 
 export default class PlipsLayout extends Component {
   driver = new ScrollDriver();
@@ -47,6 +49,7 @@ export default class PlipsLayout extends Component {
     onFetchPlips: PropTypes.func.isRequired,
     onGoToMudamos: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
+    onOpenURL: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
   }
@@ -114,18 +117,14 @@ export default class PlipsLayout extends Component {
   renderRow = ({ height, margin }) => ([plip, index], section, row, highlightRow) => {
     const { onGoToPlip, plipsDataSource } = this.props;
 
-    const totalHeight = height + margin;
-    const scrollRange = totalHeight * (index - 1);
-
     const shouldHideOverflow = index > 0 || plipsDataSource.getRowCount() === 1;
 
-    // For some reason, Android crashes and a transform is applied
-    // TODO: upgrade react-native and test again
-    const ParallaxView = Platform.OS == "ios" ? Parallax : View;
+    const isLink = plip.key === LINKS_KEY;
+    const TouchableView = isLink ? View : TouchableOpacity;
 
     return (
-      <View style={{backgroundColor: "black"}}>
-        <TouchableOpacity
+      <View style={styles.rowContainer}>
+        <TouchableView
           onPress={() => {
             highlightRow(section, row);
             onGoToPlip(plip);
@@ -139,46 +138,114 @@ export default class PlipsLayout extends Component {
             margin,
           }]}
         >
-          <ParallaxView
-            driver={this.driver}
-            scrollSpeed={0.7}
-            style={{alignItems: "center", justifyContent: "center"}}
-            header={index == 0 /* If this is not informed, Shouten will use the incorrect initial transform */}
-            extrapolation={{
-              // We must "divide" the scroll range into each PLIP,
-              // otherwise the accumulated error will cause layout break on long lists
-              inputRange: [scrollRange, scrollRange + totalHeight],
-            }}
-          >
-            <NetworkImage
-              source={{uri: this.plipImage(plip)}}
-              resizeMode="cover"
-              style={styles.plipImage}
-            />
-          </ParallaxView>
-
-          { /* This gradient improves the reading of the PLIP title and subtitle */ }
-          <LinearGradient
-            colors={["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.8)", "rgba(0, 0, 0, 1)"]}
-            locations={[0.5, 0.9, 1]}
-            style={styles.plipImageGradient}
-          />
-
-          <View style={styles.plipTitleContainer}>
-            <View style={styles.plipTitleInnerContainer}>
-              <Text style={styles.plipTitle} numberOfLines={3}>
-                {plip.phase.name}
-              </Text>
-
-              <Text style={styles.plipSubtitle} numberOfLines={3}>
-                {plip.phase.description}
-              </Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+          {isLink && this.renderRowLinks()}
+          {!isLink && this.renderRowPlip({ plip, index, height, margin })}
+        </TouchableView>
       </View>
     );
   }
+
+  renderRowLinks() {
+    const { mudamos, projectsReason } = homeLinks;
+    const { onOpenURL } = this.props;
+
+    return (
+      <LinearGradient
+        start={[0.0, 0.1]}
+        end={[0.5, 1.0]}
+        locations={[0, 0.5]}
+        style={styles.footerContainer}
+        colors={["#9844ce", "#7E52D8"]}
+      >
+        <TouchableOpacity
+          onPress={() => onOpenURL(mudamos.link) }
+          style={styles.full}
+        >
+          {this.renderLink({ ...mudamos, icon: "extension" })}
+        </TouchableOpacity>
+
+        <View style={styles.hairline} />
+
+        <TouchableOpacity
+          onPress={() => onOpenURL(projectsReason.link) }
+          style={styles.full}
+        >
+          {this.renderLink({ ...projectsReason, icon: "info" })}
+        </TouchableOpacity>
+
+      </LinearGradient>
+    );
+  }
+
+  renderLink({ title, icon }) {
+    return (
+      <View style={styles.actionRow}>
+        <Icon
+          name={icon}
+          size={40}
+          color="#fff"
+          style={styles.actionIcon}
+        />
+        <Text style={styles.actionTitle}>{title.toUpperCase()}</Text>
+        <Icon
+          name="chevron-right"
+          size={40}
+          color="#fff"
+        />
+      </View>
+    );
+  }
+
+  renderRowPlip({ plip, index, height, margin }) {
+    const totalHeight = height + margin;
+    const scrollRange = totalHeight * (index - 1);
+
+    // For some reason, Android crashes and a transform is applied
+    // TODO: upgrade react-native and test again
+    const ParallaxView = Platform.OS == "ios" ? Parallax : View;
+
+    return (
+      <View style={styles.full}>
+        <ParallaxView
+          driver={this.driver}
+          scrollSpeed={0.7}
+          style={{alignItems: "center", justifyContent: "center"}}
+          header={index == 0 /* If this is not informed, Shouten will use the incorrect initial transform */}
+          extrapolation={{
+            // We must "divide" the scroll range into each PLIP,
+            // otherwise the accumulated error will cause layout break on long lists
+            inputRange: [scrollRange, scrollRange + totalHeight],
+          }}
+        >
+          <NetworkImage
+            source={{uri: this.plipImage(plip)}}
+            resizeMode="cover"
+            style={styles.plipImage}
+          />
+        </ParallaxView>
+
+        { /* This gradient improves the reading of the PLIP title and subtitle */ }
+        <LinearGradient
+          colors={["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.8)", "rgba(0, 0, 0, 1)"]}
+          locations={[0.5, 0.9, 1]}
+          style={styles.plipImageGradient}
+        />
+
+        <View style={styles.plipTitleContainer}>
+          <View style={styles.plipTitleInnerContainer}>
+            <Text style={styles.plipTitle} numberOfLines={3}>
+              {plip.phase.name}
+            </Text>
+
+            <Text style={styles.plipSubtitle} numberOfLines={3}>
+              {plip.phase.description}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
 
   renderNoPlips() {
     const { onGoToMudamos } = this.props;
