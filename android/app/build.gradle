@@ -213,6 +213,12 @@ dependencies {
     compile project(':react-native-randombytes')
     compile project(':react-native-material-kit')
     compile project(':react-native-maps')
+    compile(project(':react-native-maps')) {
+      exclude group: 'com.google.android.gms', module: 'play-services-base'
+      exclude group: 'com.google.android.gms', module: 'play-services-maps'
+    }
+    compile 'com.google.android.gms:play-services-base:+'
+    compile 'com.google.android.gms:play-services-maps:+'
     compile project(':react-native-vector-icons')
     compile project(':react-native-spinkit')
     compile project(':react-native-config')
