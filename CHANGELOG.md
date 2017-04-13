@@ -1,5 +1,7 @@
 # Next
 
+* [PR #298] Fix incompatibility one signal vs maps
+
 ## [1.3.0] 13/04/2017
 
 * [PR #294] Add links to the plips list
