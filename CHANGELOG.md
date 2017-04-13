@@ -1,5 +1,7 @@
 # Next
 
+## [1.3.0] 13/04/2017
+
 * [PR #294] Add links to the plips list
 * [PR #292] Use the phase final date to compute the remaining days
 * [PR #290] Push message
