@@ -1,5 +1,7 @@
 # Next
 
+## [1.3.1] 13/04/2017
+
 * [PR #298] Fix incompatibility one signal vs maps
 
 ## [1.3.0] 13/04/2017
