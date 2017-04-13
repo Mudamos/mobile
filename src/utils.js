@@ -126,3 +126,8 @@ export const cancelablePromise = promise => {
     },
   };
 };
+
+export const homeLinks = {
+  mudamos: { title: "Conheça Mudamos+", link: "https://www.mudamos.org" },
+  projectsReason: { title: "Por que estes projetos de lei?", link: "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular" },
+};

@@ -67,6 +67,11 @@ export function* fetchPlipsSaga({ mudamosWebApi }) {
     try {
       yield put(fetchingPlips(true));
       const response = yield call(fetchPlips, { mudamosWebApi });
+
+      if (!response.nextPage && response.plips && response.plips.length) {
+        response.plips = [...response.plips, { key: "LINKS" }];
+      }
+
       yield put(plipsFetched(response));
 
       yield put(fetchingPlips(false));
@@ -89,6 +94,10 @@ export function* fetchPlipsNextPageSaga({ mudamosWebApi }) {
       yield put(fetchingNextPlipsPage(true));
       const response = yield call(fetchPlips, { page, mudamosWebApi });
 
+      if (!response.nextPage) {
+        response.plips = [...(response.plips || []), { key: "LINKS" }];
+      }
+
       yield put(plipsAppendPlips(response));
     } catch (e) {
       logError(e);
@@ -109,6 +118,11 @@ export function* refreshPlips({ mudamosWebApi }) {
     try {
       yield put(isRefreshingPlips(true));
       const response = yield call(fetchPlips, { page: 1, mudamosWebApi });
+
+      if (!response.nextPage && response.plips && response.plips.length) {
+        response.plips = [...response.plips, { key: "LINKS" }];
+      }
+
       yield put(plipsFetched(response));
     } catch (e) {
       logError(e);
