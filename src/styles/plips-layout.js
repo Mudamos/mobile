@@ -6,8 +6,6 @@ import {
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const NAV_BAR_HEIGHT = 88;
-
 
 export default StyleSheet.create({
   actionIcon: {
@@ -51,31 +49,11 @@ export default StyleSheet.create({
     flex: 1,
   },
   navigationBar: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-  },
-  navigationBarContainer: {
-    backgroundColor: "transparent",
-    height: NAV_BAR_HEIGHT,
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-  },
-  navigationBarGradient: {
-    position: "absolute",
-    flex: 1,
-    height: NAV_BAR_HEIGHT,
-    top: 0,
-    left: 0,
-    right: 0,
+    backgroundColor: "#883DE1",
   },
   noProjectsContainer: {
     flex: 1,
     justifyContent: "space-around",
-    marginTop: NAV_BAR_HEIGHT,
     paddingHorizontal: 33,
   },
   noProjectsInnerContainer: {
@@ -83,8 +61,7 @@ export default StyleSheet.create({
     justifyContent: "space-between",
   },
   noProjectsIcon: {
-    marginBottom: 25,
-    marginTop: 10,
+    marginVertical: 10,
   },
   noProjectsText: {
     color: "#9a9a9a",
@@ -145,5 +122,38 @@ export default StyleSheet.create({
   },
   tableRow: {
     marginTop: 0,
+  },
+  subTabContainer: {
+    height: 36,
+    backgroundColor: "#222",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  subItem: {
+    color: "#fff",
+    fontFamily: "lato",
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+  subTabItemContainer: {
+    borderRadius: 100,
+    backgroundColor: "rgba(70,70,70,0.51)",
+    flexDirection: "row",
+    paddingLeft: 10,
+    paddingRight: 5,
+    paddingVertical: 1,
+    alignItems: "center",
+  },
+  tabItem: {
+    fontFamily: "lato",
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+  tabsContainer: {
+    height: 36,
+    backgroundColor: "#292929",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
 });

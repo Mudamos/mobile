@@ -1,43 +1,126 @@
-export const fetchPlips = () => ({
-  type: "FETCH_PLIPS",
+export const fetchFilteredPlips = () => ({
+  type: "FETCH_FILTERED_PLIPS",
 });
 
-export const fetchingPlips = isFetching => ({
-  type: "PLIPS_FETCHING",
+export const fetchFilteredPlipsNextPage = () => ({
+  type: "FETCH_FILTERED_PLIPS_NEXT_PAGE",
+});
+
+export const refreshFilteredPlips = () => ({
+  type: "PLIPS_REFRESH_FILTERED_PLIPS",
+});
+
+export const fetchNationwidePlips = () => ({
+  type: "FETCH_NATIONWIDE_PLIPS",
+});
+
+export const fetchStatewidePlips = () => ({
+  type: "PLIPS_FETCH_STATEWIDE_PLIPS",
+});
+
+export const fetchCitywidePlips = () => ({
+  type: "PLIPS_FETCH_CITYWIDE_PLIPS",
+});
+
+export const changePlipsFilterScope = ({ scope }) => ({
+  type: "PLIPS_CHANGE_FILTER_SCOPE",
+  payload: { scope },
+});
+
+export const changePlipsFilterState = ({ state }) => ({
+  type: "PLIPS_CHANGE_FILTER_STATE",
+  payload: { state },
+});
+
+export const changePlipsFilterCity = ({ city }) => ({
+  type: "PLIPS_CHANGE_FILTER_CITY",
+  payload: { city },
+});
+
+export const fetchingNationwidePlips = isFetching => ({
+  type: "PLIPS_NATIONWIDE_FETCHING",
   payload: { isFetching },
 });
 
-export const refreshPlips = () => ({
-  type: "PLIPS_REFRESH_PLIPS",
+export const refreshNationwidePlips = () => ({
+  type: "PLIPS_REFRESH_NATIONWIDE_PLIPS",
 });
 
-export const isRefreshingPlips = isRefreshing => ({
-  type: "PLIPS_REFRESHING_PLIPS",
+export const refreshStatewidePlips = () => ({
+  type: "PLIPS_REFRESH_STATEWIDE_PLIPS",
+});
+
+export const refreshCitywidePlips = () => ({
+  type: "PLIPS_REFRESH_CITYWIDE_PLIPS",
+});
+
+export const isRefreshingNationwidePlips = isRefreshing => ({
+  type: "PLIPS_REFRESHING_NATIONWIDE_PLIPS",
   payload: { isRefreshing },
 });
 
-export const plipsRefreshError = error => ({
-  type: "PLIPS_REFRESH_ERROR",
+export const nationwidePlipsRefreshError = error => ({
+  type: "PLIPS_NATIONWIDE_REFRESH_ERROR",
   payload: { error },
 });
 
-export const fetchPlipsNextPage = ({ page }) => ({
-  type: "PLIPS_FETCH_PLIPS_NEXT_PAGE",
+export const statewidePlipsRefreshError = error => ({
+  type: "PLIPS_STATEWIDE_REFRESH_ERROR",
+  payload: { error },
+});
+
+export const citywidePlipsRefreshError = error => ({
+  type: "PLIPS_CITYWIDE_REFRESH_ERROR",
+  payload: { error },
+});
+
+export const fetchNationwidePlipsNextPage = ({ page }) => ({
+  type: "PLIPS_FETCH_NATIONWIDE_PLIPS_NEXT_PAGE",
   payload: { page },
 });
 
-export const plipsFetchPlipsNextPageError = error => ({
-  type: "PLIPS_FETCH_PLIPS_NEXT_PAGE_ERROR",
+export const fetchStatewidePlipsNextPage = ({ page }) => ({
+  type: "PLIPS_FETCH_STATEWIDE_PLIPS_NEXT_PAGE",
+  payload: { page },
+});
+
+export const fetchCitywidePlipsNextPage = ({ page }) => ({
+  type: "PLIPS_FETCH_CITYWIDE_PLIPS_NEXT_PAGE",
+  payload: { page },
+});
+
+export const plipsFetchNationwidePlipsNextPageError = error => ({
+  type: "PLIPS_FETCH_NATIONWIDE_PLIPS_NEXT_PAGE_ERROR",
   payload: { error },
 });
 
-export const fetchingNextPlipsPage = isFetching => ({
-  type: "PLIPS_FETCHING_NEXT_PLIPS_PAGE",
+export const plipsFetchStatewidePlipsNextPageError = error => ({
+  type: "PLIPS_FETCH_STATEWIDE_PLIPS_NEXT_PAGE_ERROR",
+  payload: { error },
+});
+
+export const plipsFetchCitywidePlipsNextPageError = error => ({
+  type: "PLIPS_FETCH_CITYWIDE_PLIPS_NEXT_PAGE_ERROR",
+  payload: { error },
+});
+
+export const fetchingNextNationwidePlipsPage = isFetching => ({
+  type: "PLIPS_FETCHING_NEXT_NATIONWIDE_PLIPS_PAGE",
   payload: { isFetching },
 });
 
-export const plipsAppendPlips = ({ plips, page, nextPage }) => ({
-  type: "PLIPS_APPEND_PLIPS",
+export const plipsAppendNationwidePlips = ({ plips, page, nextPage }) => ({
+  type: "PLIPS_APPEND_NATIONWIDE_PLIPS",
+  payload: { plips, page, nextPage },
+});
+
+export const plipsAppendStatewidePlips = ({ plips, page, nextPage }) => ({
+  type: "PLIPS_APPEND_STATEWIDE_PLIPS",
+  payload: { plips, page, nextPage },
+});
+
+export const plipsAppendCitywidePlips = ({ plips, page, nextPage }) => ({
+  type: "PLIPS_APPEND_CITYWIDE_PLIPS",
   payload: { plips, page, nextPage },
 });
 
@@ -66,8 +149,18 @@ export const fetchPlipSigners = plipId => ({
   payload: { plipId },
 });
 
-export const plipsFetched = ({ plips, page, nextPage }) => ({
-  type: "PLIPS_FETCHED",
+export const nationwidePlipsFetched = ({ plips, page, nextPage }) => ({
+  type: "PLIPS_NATIONWIDE_FETCHED",
+  payload: { plips, page, nextPage },
+});
+
+export const statewidePlipsFetched = ({ plips, page, nextPage }) => ({
+  type: "PLIPS_STATEWIDE_FETCHED",
+  payload: { plips, page, nextPage },
+});
+
+export const citywidePlipsFetched = ({ plips, page, nextPage }) => ({
+  type: "PLIPS_CITYWIDE_FETCHED",
   payload: { plips, page, nextPage },
 });
 
@@ -101,8 +194,18 @@ export const fetchPlipSignersError = error => ({
   payload: { error },
 });
 
-export const plipsFetchError = error => ({
-  type: "ERROR_FETCHING_PLIPS",
+export const plipsNationwideFetchError = error => ({
+  type: "ERROR_FETCHING_NATIONWIDE_PLIPS",
+  payload: { error },
+});
+
+export const plipsStatewideFetchError = error => ({
+  type: "ERROR_FETCHING_STATEWIDE_PLIPS",
+  payload: { error },
+});
+
+export const plipsCitywideFetchError = error => ({
+  type: "ERROR_FETCHING_CITYWIDE_PLIPS",
   payload: { error },
 });
 

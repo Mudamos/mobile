@@ -1,5 +1,6 @@
 import farfetch, { prefix, requestLogger, responseLogger } from "farfetch";
 import { camelizeKeys } from "humps";
+import { isNil, not } from "ramda";
 
 import { isDev } from "../utils";
 
@@ -28,6 +29,7 @@ const buildQueryString = params =>
   Object
     .keys(params)
     .map(k => {
+        if (isNil(params[k])) return null;
         if (Array.isArray(params[k])) {
             return params[k]
                 .map(val => `${encodeURIComponent(k)}[]=${encodeURIComponent(val)}`)
@@ -36,6 +38,7 @@ const buildQueryString = params =>
 
         return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`
     })
+    .filter(value => not(isNil(value)))
     .join("&")
 
 const handleResponseError = res => res
@@ -72,7 +75,7 @@ const getPagination = ({ response, ...args }) => ({
 });
 
 
-const listPlips = ({ get }) => ({ page }) => get(`/api/v2/plips?${buildQueryString({ page })}`)
+const listPlips = ({ get }) => ({ page, uf, cityId }) => get(`/api/v2/plips?${buildQueryString({ page, uf, city_id: cityId })}`)
   .then(getPagination)
   .then(({ json, page, nextPage }) => ({ plips: json.data.plips, page, nextPage }))
 

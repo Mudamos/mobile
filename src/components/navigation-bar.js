@@ -15,6 +15,7 @@ class NavigationBar extends Component {
     middleView: PropTypes.node,
     rightView: PropTypes.node,
     title: PropTypes.string,
+    titleStyle: Text.propTypes.style,
   }
 
   setNativeProps(nativeProps) {
@@ -28,6 +29,7 @@ class NavigationBar extends Component {
       leftView,
       rightView,
       middleView,
+      titleStyle,
     } = this.props;
 
     return (
@@ -40,7 +42,7 @@ class NavigationBar extends Component {
           {
             middleView ?
               middleView :
-              <Text numberOfLines={1} style={style.title}>{title}</Text>
+              <Text numberOfLines={1} style={[style.title, titleStyle]}>{title}</Text>
           }
           </View>
           <View style={style.right}>

@@ -12,6 +12,7 @@ import { isDev } from "./utils";
 import {
   ChangeForgotPasswordContainer,
   ChangePasswordContainer,
+  CityFilterContainer,
   ForgotPasswordContainer,
   PlipContainer,
   PlipsContainer,
@@ -30,6 +31,7 @@ import {
   SignersContainer,
   SignInContainer,
   SignUpContainer,
+  StateFilterContainer,
   TSEContainer,
 } from "./containers";
 
@@ -37,10 +39,12 @@ import {
   appDidMount,
   appWillUnmount,
   fetchIsUserFirstTime,
+  fetchFilteredPlips,
   fetchSession,
   navigate,
   navigateBack,
 } from "./actions";
+
 
 import routeReducer from "./services/route-reducer";
 import backAndroidHandler from "./back-android-handler";
@@ -55,6 +59,8 @@ import DeviceInfo from "./services/device-info";
 import PermissionService from "./services/permission";
 import LocationService from "./services/location";
 import Crypto from "./services/crypto";
+
+import * as repositories from "./repositories";
 
 import reducer from "./reducers";
 import sagas from "./sagas";
@@ -101,6 +107,8 @@ const scenes = Actions.create(
       <Scene key="showPlip" component={PlipContainer} hideNavBar={true} />
       <Scene key="plipViewer" component={PlipViewerContainer} hideNavBar={true} title="Texto do projeto"/>
       <Scene key="signers" component={SignersContainer} hideNavBar={true} />
+      <Scene key="stateFilter" component={StateFilterContainer} hideNavBar={true} />
+      <Scene key="cityFilter" component={CityFilterContainer} hideNavBar={true} />
     </Scene>
 
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
@@ -136,6 +144,7 @@ sagaRunner.run(sagas, {
   mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
   mobileApi: MobileApi(Config.MOBILE_API_URL),
   permissionService: PermissionService(),
+  repositories,
   sessionStore,
   walletStore,
 });
@@ -160,6 +169,7 @@ export default class App extends Component {
 
   componentDidMount() {
     store.dispatch(appDidMount());
+    store.dispatch(fetchFilteredPlips());
   }
 
   componentWillUnmount() {
