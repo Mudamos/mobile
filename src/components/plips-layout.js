@@ -48,7 +48,10 @@ const LINKS_KEY = "LINKS";
 
 
 export default class PlipsLayout extends Component {
-  driver = new ScrollDriver();
+  nationwideDriver = new ScrollDriver();
+  statewideDriver = new ScrollDriver();
+  citywideDriver = new ScrollDriver();
+
   state = {
     tabsArrowAnimation: new Animated.Value(0),
   };
@@ -152,7 +155,11 @@ export default class PlipsLayout extends Component {
 
     if (!this.isNationwideFilter) return null;
 
-    const onScroll = event => this.nationwideScroll = event.nativeEvent.contentOffset;
+    const onScroll = event => {
+      this.nationwideScroll = event.nativeEvent.contentOffset;
+      this.nationwideDriver.scrollViewProps.onScroll(event);
+    };
+
     const scrollTo = this.nationwideScroll;
 
     return this.renderScopeContent({
@@ -162,6 +169,7 @@ export default class PlipsLayout extends Component {
       dataSource,
       onScroll,
       scrollTo,
+      driver: this.nationwideDriver,
     });
   }
 
@@ -175,7 +183,10 @@ export default class PlipsLayout extends Component {
 
     if (!this.isStatewideFilter) return null;
 
-    const onScroll = event => this.statewideScroll = event.nativeEvent.contentOffset;
+    const onScroll = event => {
+      this.statewideScroll = event.nativeEvent.contentOffset;
+      this.statewideDriver.scrollViewProps.onScroll(event);
+    };
     const scrollTo = this.statewideScroll;
 
     return this.renderScopeContent({
@@ -185,6 +196,7 @@ export default class PlipsLayout extends Component {
       dataSource,
       onScroll,
       scrollTo,
+      driver: this.statewideDriver,
     });
   }
 
@@ -198,7 +210,10 @@ export default class PlipsLayout extends Component {
 
     if (!this.isCitywideFilter) return null;
 
-    const onScroll = event => this.citywideScroll = event.nativeEvent.contentOffset;
+    const onScroll = event => {
+      this.citywideScroll = event.nativeEvent.contentOffset;
+      this.citywideDriver.scrollViewProps.onScroll(event);
+    };
     const scrollTo = this.citywideScroll;
 
     return this.renderScopeContent({
@@ -208,10 +223,11 @@ export default class PlipsLayout extends Component {
       dataSource,
       onScroll,
       scrollTo,
+      driver: this.citywideDriver,
     });
   }
 
-  renderScopeContent({ dataSource, error, isFetching, isRefreshing, onScroll, scrollTo }) {
+  renderScopeContent({ dataSource, error, isFetching, isRefreshing, onScroll, scrollTo, driver }) {
     const { filters } = this.props;
     const hasRows = dataSource.getRowCount() > 0;
     const hasNoListYet = error || isFetching || !hasRows;
@@ -235,6 +251,7 @@ export default class PlipsLayout extends Component {
               isRefreshing,
               onScroll,
               scrollTo,
+              driver,
             })
         }
 
@@ -257,7 +274,7 @@ export default class PlipsLayout extends Component {
     );
   }
 
-  renderListView({ dataSource, isRefreshing, onScroll, scrollTo }) {
+  renderListView({ dataSource, isRefreshing, onScroll, scrollTo, driver }) {
     const {
       onFetchPlipsNextPage,
       onRefresh,
@@ -265,7 +282,7 @@ export default class PlipsLayout extends Component {
 
     return (
       <MyListView
-        {...this.driver.scrollViewProps}
+        {...driver.scrollViewProps}
 
         scrollTo={scrollTo}
         style={styles.listView}
@@ -274,9 +291,8 @@ export default class PlipsLayout extends Component {
         onEndReached={onFetchPlipsNextPage}
         onEndReachedThreshold={300}
         dataSource={dataSource}
-        renderRow={this.renderRow({ height: 333, margin: 0 })}
+        renderRow={this.renderRow({ height: 333, margin: 0, dataSource, driver })}
         onScroll={onScroll}
-        scrollEventThrottle={1000}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshing}
@@ -288,10 +304,10 @@ export default class PlipsLayout extends Component {
     );
   }
 
-  renderRow = ({ height, margin }) => ([plip, index], section, row, highlightRow) => {
-    const { onGoToPlip, nationwidePlipsDataSource } = this.props;
+  renderRow = ({ height, margin, dataSource, driver }) => ([plip, index], section, row, highlightRow) => {
+    const { onGoToPlip } = this.props;
 
-    const shouldHideOverflow = index > 0 || nationwidePlipsDataSource.getRowCount() === 1;
+    const shouldHideOverflow = index > 0 || dataSource.getRowCount() === 1;
 
     const isLink = plip.key === LINKS_KEY;
     const TouchableView = isLink ? View : TouchableOpacity;
@@ -313,7 +329,7 @@ export default class PlipsLayout extends Component {
           }]}
         >
           {isLink && this.renderRowLinks()}
-          {!isLink && this.renderRowPlip({ plip, index, height, margin })}
+          {!isLink && this.renderRowPlip({ plip, index, height, margin, driver })}
         </TouchableView>
       </View>
     );
@@ -370,7 +386,7 @@ export default class PlipsLayout extends Component {
     );
   }
 
-  renderRowPlip({ plip, index, height, margin }) {
+  renderRowPlip({ plip, index, height, margin, driver }) {
     const totalHeight = height + margin;
     const scrollRange = totalHeight * (index - 1);
 
@@ -381,7 +397,7 @@ export default class PlipsLayout extends Component {
     return (
       <View style={styles.full}>
         <ParallaxView
-          driver={this.driver}
+          driver={driver}
           scrollSpeed={0.7}
           style={{alignItems: "center", justifyContent: "center"}}
           header={index == 0 /* If this is not informed, Shouten will use the incorrect initial transform */}

@@ -19,14 +19,16 @@ export default class MyListView extends Component {
   static defaultProps = { ...ListView.defaultProps }
 
   render() {
-    const { scrollTo } = this.props;
+    const { scrollTo, onLayout } = this.props;
 
     return (
       <ListView
         {...this.props}
         ref={ref => this.ref = ref}
 
-        onLayout={() => {
+        onLayout={(...args) => {
+          if(onLayout) onLayout(...args);
+
           if (this.state.isFirstRender && scrollTo && this.ref) {
             this.ref.scrollTo(scrollTo);
             this.setState({ isFirstRender: false })
