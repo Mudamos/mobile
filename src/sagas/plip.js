@@ -1,6 +1,8 @@
 import { takeEvery, takeLatest } from "redux-saga";
 import { cancelled, call, spawn, put, select } from "redux-saga/effects";
 
+import { pluck, zip } from "ramda";
+
 import {
   homeSceneKey,
   isDev,
@@ -30,6 +32,7 @@ import {
   fetchingPlipRelatedInfo,
   fetchingPlipSigners,
   fetchPlipSignersError,
+  fetchPlipsSignInfo,
   fetchingPlipSignInfo,
   fetchingShortPlipSigners,
   fetchingUserSignInfo,
@@ -44,6 +47,7 @@ import {
   plipsNationwideFetchError,
   plipsStatewideFetchError,
   plipsCitywideFetchError,
+  plipsSingInfoFetched,
   plipJustSigned,
   nationwidePlipsRefreshError,
   statewidePlipsRefreshError,
@@ -175,6 +179,10 @@ export function* fetchNationWidePlipsSaga({ mudamosWebApi }) {
       yield put(fetchingNationwidePlips(true));
       const response = yield call(fetchPlips, { mudamosWebApi });
 
+      if (response.plips) {
+        yield put(fetchPlipsSignInfo({ plipIds: pluck("id", response.plips) }))
+      }
+
       if (!response.nextPage && response.plips && response.plips.length) {
         response.plips = [...response.plips, { key: "LINKS" }];
       }
@@ -201,6 +209,10 @@ function* fetchNationwidePlipsNextPageSaga({ mudamosWebApi }) {
       yield put(fetchingNextNationwidePlipsPage(true));
       const response = yield call(fetchPlips, { page, mudamosWebApi });
 
+      if (response.plips) {
+        yield put(fetchPlipsSignInfo({ plipIds: pluck("id", response.plips) }))
+      }
+
       if (!response.nextPage) {
         response.plips = [...(response.plips || []), { key: "LINKS" }];
       }
@@ -221,6 +233,10 @@ function* refreshNationwidePlipsSaga({ mudamosWebApi }) {
     try {
       yield put(isRefreshingNationwidePlips(true));
       const response = yield call(fetchPlips, { page: 1, mudamosWebApi });
+
+      if (response.plips) {
+        yield put(fetchPlipsSignInfo({ plipIds: pluck("id", response.plips) }))
+      }
 
       if (!response.nextPage && response.plips && response.plips.length) {
         response.plips = [...response.plips, { key: "LINKS" }];
@@ -250,6 +266,10 @@ function* fetchStatewidePlipsSaga({ mudamosWebApi }) {
         uf: filters.state.uf,
       });
 
+      if (response.plips) {
+        yield put(fetchPlipsSignInfo({ plipIds: pluck("id", response.plips) }))
+      }
+
       if (!response.nextPage && response.plips && response.plips.length) {
         response.plips = [...response.plips, { key: "LINKS" }];
       }
@@ -276,6 +296,10 @@ function* fetchStatewidePlipsNextPageSaga({ mudamosWebApi }) {
         page,
         uf: filters.state.uf,
       });
+
+      if (response.plips) {
+        yield put(fetchPlipsSignInfo({ plipIds: pluck("id", response.plips) }))
+      }
 
       if (!response.nextPage) {
         response.plips = [...(response.plips || []), { key: "LINKS" }];
@@ -304,6 +328,10 @@ function* refreshStatewidePlipsSaga({ mudamosWebApi }) {
         uf: filters.state.uf,
       });
 
+      if (response.plips) {
+        yield put(fetchPlipsSignInfo({ plipIds: pluck("id", response.plips) }))
+      }
+
       if (!response.nextPage && response.plips && response.plips.length) {
         response.plips = [...response.plips, { key: "LINKS" }];
       }
@@ -329,6 +357,10 @@ function* fetchCitywidePlipsSaga({ mudamosWebApi }) {
         mudamosWebApi,
         cityId: filters.city.id,
       });
+
+      if (response.plips) {
+        yield put(fetchPlipsSignInfo({ plipIds: pluck("id", response.plips) }))
+      }
 
       if (!response.nextPage && response.plips && response.plips.length) {
         response.plips = [...response.plips, { key: "LINKS" }];
@@ -357,6 +389,10 @@ function* fetchCitywidePlipsNextPageSaga({ mudamosWebApi }) {
         cityId: filters.city.id,
       });
 
+      if (response.plips) {
+        yield put(fetchPlipsSignInfo({ plipIds: pluck("id", response.plips) }))
+      }
+
       if (!response.nextPage) {
         response.plips = [...(response.plips || []), { key: "LINKS" }];
       }
@@ -383,6 +419,10 @@ function* refreshCitywidePlipsSaga({ mudamosWebApi }) {
         page: 1,
         cityId: filters.city.id,
       });
+
+      if (response.plips) {
+        yield put(fetchPlipsSignInfo({ plipIds: pluck("id", response.plips) }))
+      }
 
       if (!response.nextPage && response.plips && response.plips.length) {
         response.plips = [...response.plips, { key: "LINKS" }];
@@ -614,6 +654,23 @@ function* invalidateWalletAndNavigate(params = {}) {
   yield put(profileStateMachine(params));
 }
 
+function* fetchPlipsSignInfoSaga({ mobileApi }) {
+  yield takeEvery("PLIP_FETCH_PLIPS_SIGN_INFO", function* ({ payload }) {
+    try {
+      const { plipIds } = payload;
+      const results = yield plipIds.map(id => call(mobileApi.plipSignInfo, id))
+
+      const signInfo = zip(plipIds, results).reduce((memo, [id, result]) => {
+        memo[id] = result.info;
+        return memo;
+      }, {});
+      yield put(plipsSingInfoFetched({ signInfo }));
+    } catch(e) {
+      logError(e, { tag: "fetchPlipsSignInfoSaga" });
+    }
+  });
+}
+
 export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError }) {
   yield spawn(fetchFilteredPlips);
   yield spawn(fetchFilteredPlipsNextPage);
@@ -633,4 +690,5 @@ export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiEr
   yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
   yield spawn(fetchPlipRelatedInfo, { mobileApi });
+  yield spawn(fetchPlipsSignInfoSaga, { mobileApi });
 }

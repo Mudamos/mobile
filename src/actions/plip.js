@@ -214,6 +214,11 @@ export const plipUserSignInfo = ({ plipId, info }) => ({
   payload: { plipId, info },
 });
 
+export const fetchPlipsSignInfo = ({ plipIds }) => ({
+  type: "PLIP_FETCH_PLIPS_SIGN_INFO",
+  payload: { plipIds },
+});
+
 export const fetchingPlipSignInfo = isFetchingPlipSignInfo => ({
   type: "PLIP_FETCHING_PLIP_SIGN_INFO",
   payload: { isFetchingPlipSignInfo },
@@ -259,4 +264,9 @@ export const fetchingPlipRelatedInfo = isFetching => ({
 
 export const clearPlipInfo = () => ({
   type: "PLIP_CLEAR_INFO",
+});
+
+export const plipsSingInfoFetched = ({ signInfo }) => ({
+  type: "PLIP_PLIPS_SIGN_INFO_FETCHED",
+  payload: { signInfo },
 });

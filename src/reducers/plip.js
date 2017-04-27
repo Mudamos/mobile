@@ -8,6 +8,7 @@ const initialState = {
   plipsFilters: {
     scope: NATIONWIDE_SCOPE,
   },
+  plipsSignInfo: {},
 };
 
 export default  (state = initialState, action) => {
@@ -253,6 +254,11 @@ export default  (state = initialState, action) => {
       return {
         ...state,
         plipsFilters: { ...state.plipsFilters, city: payload.city },
+      };
+    case "PLIP_PLIPS_SIGN_INFO_FETCHED":
+      return {
+        ...state,
+        plipsSignInfo: { ...state.plipsSignInfo, ...payload.signInfo },
       };
     case "PLIP_CLEAR_INFO":
       return {
