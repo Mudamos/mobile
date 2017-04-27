@@ -1,7 +1,11 @@
 import { takeEvery, takeLatest } from "redux-saga";
 import { cancelled, call, spawn, put, select } from "redux-saga/effects";
 
-import { pluck, zip } from "ramda";
+import {
+  isNil,
+  pluck,
+  zip,
+} from "ramda";
 
 import {
   homeSceneKey,
@@ -32,7 +36,6 @@ import {
   fetchingPlipRelatedInfo,
   fetchingPlipSigners,
   fetchPlipSignersError,
-  fetchPlipsSignInfo,
   fetchingPlipSignInfo,
   fetchingShortPlipSigners,
   fetchingUserSignInfo,
@@ -82,6 +85,8 @@ import { profileScreenForCurrentUser } from "./navigation";
 import { validateLocalWallet } from "./wallet";
 
 import LibCrypto from "mudamos-libcrypto";
+
+const isNotNil = x => !isNil(x);
 
 const buildSignMessage = ({ user, plip }) => [
   user.name,
@@ -396,13 +401,8 @@ function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
 
 /*
  * After fetching or refreshing we must add the plips links accordingly.
- * Some post actions are also fired
  */
-function* processPlipsResponse({ plips, nextPage }) {
-  if (plips) {
-    yield put(fetchPlipsSignInfo({ plipIds: pluck("id", plips) }));
-  }
-
+function processPlipsResponse({ plips, nextPage }) {
   // Add the mudamos links to the end only if there are plips
   if (!nextPage && plips && plips.length) {
     return [...plips, { key: "LINKS" }];
@@ -413,16 +413,11 @@ function* processPlipsResponse({ plips, nextPage }) {
 
 /*
  * After fetching the next page we must add the plips links accordingly.
- * Some post actions are also fired
  */
-function* processPlipsResponseForNextPage({ plips, nextPage }) {
-  if (plips) {
-    yield put(fetchPlipsSignInfo({ plipIds: pluck("id", plips) }));
-  }
-
+function processPlipsResponseForNextPage({ plips, nextPage }) {
   // Add the mudamos links to the end
   if (!nextPage) {
-    return [...(response.plips || []), { key: "LINKS" }];
+    return [...(plips || []), { key: "LINKS" }];
   }
 
   return plips;
@@ -626,9 +621,21 @@ function* invalidateWalletAndNavigate(params = {}) {
 }
 
 function* fetchPlipsSignInfoSaga({ mobileApi }) {
-  yield takeEvery("PLIP_FETCH_PLIPS_SIGN_INFO", function* ({ payload }) {
+  const actions = [
+    "PLIPS_NATIONWIDE_FETCHED",
+    "PLIPS_STATEWIDE_FETCHED",
+    "PLIPS_CITYWIDE_FETCHED",
+    "PLIPS_APPEND_NATIONWIDE_PLIPS",
+    "PLIPS_APPEND_STATEWIDE_PLIPS",
+    "PLIPS_APPEND_CITYWIDE_PLIPS",
+  ];
+
+  yield takeEvery(actions, function* ({ payload }) {
     try {
-      const { plipIds } = payload;
+      const { plips } = payload;
+      const plipIds = pluck("id", plips || []).filter(isNotNil);
+      if (!plipIds.length) return;
+
       const results = yield plipIds.map(id => call(mobileApi.plipSignInfo, id))
 
       const signInfo = zip(plipIds, results).reduce((memo, [id, result]) => {
