@@ -15,30 +15,37 @@ import { isDev, MUDAMOS_WEB_SITE } from "../utils";
 import locale from "../locales/pt-BR";
 
 import {
+  changePlipsFilterScope,
   fetchProfile,
-  fetchPlips,
-  fetchPlipsNextPage,
+  fetchFilteredPlips,
+  fetchFilteredPlipsNextPage,
   logout,
   navigate,
   openURL,
   profileSaveAvatar,
-  refreshPlips,
+  refreshFilteredPlips,
   userFirstTimeDone,
 } from "../actions";
 
 import {
   isAppReady,
-  errorFetchingPlips,
+  errorFetchingNationwidePlips,
+  errorFetchingStatewidePlips,
+  errorFetchingCitywidePlips,
   currentUser as getCurrentUser,
-  isFetchingPlips,
-  isFetchingNextPlipsPage,
+  getPlipsFilters,
+  isFetchingNationwidePlips,
+  isFetchingStatewidePlips,
+  isFetchingCitywidePlips,
   isFetchingProfile,
-  isRefreshingPlips,
+  isRefreshingNationwidePlips,
+  isRefreshingStatewidePlips,
+  isRefreshingCitywidePlips,
   isUserFirstTime,
   isUserLoggedIn,
-  findPlips,
-  getCurrentPlipsPage,
-  getNextPlipsPage,
+  findNationwidePlips,
+  findStatewidePlips,
+  findCitywidePlips,
   getCurrentSigningPlip,
 } from "../selectors";
 
@@ -61,25 +68,24 @@ class Container extends Component {
     menuOpen: false,
     showAboutModal: false,
 
-    plipsDataSource: new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    }).cloneWithRows((this.props.plips || []).map((plip, index) => [plip, index])),
+    nationwidePlipsDataSource: this.cloneRows({ dataSource: this.dataSource(), plips: this.props.nationwidePlips }),
+    statewidePlipsDataSource: this.cloneRows({ dataSource: this.dataSource(), plips: this.props.statewidePlips }),
+    citywidePlipsDataSource: this.cloneRows({ dataSource: this.dataSource(), plips: this.props.citywidePlips }),
   };
 
   static propTypes = {
-    currentPage: PropTypes.number,
+    citywidePlips: PropTypes.array,
     currentSigningPlip: PropTypes.object,
     currentUser: PropTypes.object,
-    errorFetchingPlips: PropTypes.bool,
+    errorFetchingNationwidePlips: PropTypes.bool,
     isAppReady: PropTypes.bool,
-    isFetchingNextPlipsPage: PropTypes.bool,
-    isFetchingPlips: PropTypes.bool.isRequired,
+    isFetchingNationwidePlips: PropTypes.bool.isRequired,
     isFetchingProfile: PropTypes.bool,
-    isRefreshing: PropTypes.bool,
+    isRefreshingNationwide: PropTypes.bool,
     isUserFirstTime: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
-    nextPage: PropTypes.number,
-    plips: PropTypes.array,
+    nationwidePlips: PropTypes.array,
+    statewidePlips: PropTypes.array,
     onAvatarChanged: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
@@ -88,7 +94,6 @@ class Container extends Component {
     onGoToPlip: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
-    onPlipsFetch: PropTypes.func.isRequired,
     onProfileEdit: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
@@ -124,16 +129,7 @@ class Container extends Component {
   }
 
   componentWillMount() {
-    const {
-      plips,
-      onPlipsFetch,
-    } = this.props;
-
     if (isDev) Toast.show("PlipsList componentWillMount");
-
-    if (!plips || !plips.length) {
-      onPlipsFetch();
-    }
   }
 
   componentDidMount() {
@@ -158,8 +154,16 @@ class Container extends Component {
       this.setState({ showAboutModal: true });
     }
 
+    const {
+      nationwidePlipsDataSource,
+      statewidePlipsDataSource,
+      citywidePlipsDataSource,
+    } = this.state;
+
     this.setState({
-      plipsDataSource: this.state.plipsDataSource.cloneWithRows((nextProps.plips || []).map((plip, index) => [plip, index])),
+      nationwidePlipsDataSource: this.cloneRows({ dataSource: nationwidePlipsDataSource, plips: nextProps.nationwidePlips }),
+      statewidePlipsDataSource: this.cloneRows({ dataSource: statewidePlipsDataSource, plips: nextProps.statewidePlips }),
+      citywidePlipsDataSource: this.cloneRows({ dataSource: citywidePlipsDataSource, plips: nextProps.citywidePlips }),
     });
   }
 
@@ -183,7 +187,9 @@ class Container extends Component {
 
   renderPage() {
     const {
-      plipsDataSource,
+      nationwidePlipsDataSource,
+      statewidePlipsDataSource,
+      citywidePlipsDataSource,
       showAboutModal,
     } = this.state;
 
@@ -193,8 +199,9 @@ class Container extends Component {
           {...this.props}
 
           openMenu={this.openMenu.bind(this)}
-          plipsDataSource={plipsDataSource}
-          onFetchPlips={this.onFetchPlipsNextPage.bind(this)}
+          nationwidePlipsDataSource={nationwidePlipsDataSource}
+          statewidePlipsDataSource={statewidePlipsDataSource}
+          citywidePlipsDataSource={citywidePlipsDataSource}
         />
 
         {
@@ -269,54 +276,58 @@ class Container extends Component {
     this.closeMenu();
   }
 
-  onFetchPlipsNextPage() {
-    const {
-      isFetchingPlips,
-      isFetchingNextPlipsPage,
-      isRefreshing,
-      nextPage,
-      onFetchPlipsNextPage,
-    } = this.props;
+  dataSource() {
+    return new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    })
+  }
 
-    if (nextPage && !isFetchingNextPlipsPage && !isFetchingPlips && !isRefreshing) {
-      onFetchPlipsNextPage({ page: nextPage });
-    }
+  cloneRows({ dataSource, plips }) {
+    return dataSource.cloneWithRows((plips || []).map((plip, index) => [plip, index]))
   }
 }
 
 const mapStateToProps = state => {
   return {
-    currentPage: getCurrentPlipsPage(state),
     currentSigningPlip: getCurrentSigningPlip(state),
     currentUser: getCurrentUser(state),
-    errorFetchingPlips: errorFetchingPlips(state),
+    errorFetchingNationwidePlips: errorFetchingNationwidePlips(state),
+    errorFetchingStatewidePlips: errorFetchingStatewidePlips(state),
+    errorFetchingCitywidePlips: errorFetchingCitywidePlips(state),
+    filters: getPlipsFilters(state),
     isAppReady: isAppReady(state),
-    isFetchingPlips: isFetchingPlips(state),
-    isFetchingNextPlipsPage: isFetchingNextPlipsPage(state),
+    isFetchingNationwidePlips: isFetchingNationwidePlips(state),
+    isFetchingStatewidePlips: isFetchingStatewidePlips(state),
+    isFetchingCitywidePlips: isFetchingCitywidePlips(state),
     isFetchingProfile: isFetchingProfile(state),
-    isRefreshing: isRefreshingPlips(state),
+    isRefreshingNationwide: isRefreshingNationwidePlips(state),
+    isRefreshingStatewide: isRefreshingStatewidePlips(state),
+    isRefreshingCitywide: isRefreshingCitywidePlips(state),
     isUserFirstTime: isUserFirstTime(state),
     isUserLoggedIn: isUserLoggedIn(state),
-    plips: findPlips(state),
-    nextPage: getNextPlipsPage(state),
+    nationwidePlips: findNationwidePlips(state),
+    statewidePlips: findStatewidePlips(state),
+    citywidePlips: findCitywidePlips(state),
   };
 }
 
 const mapDispatchToProps = dispatch => ({
   onAvatarChanged: avatar => dispatch(profileSaveAvatar({ avatar, shouldNavigate: false })),
-  onRetryPlips: () => dispatch(fetchPlips()),
+  onRetryPlips: () => dispatch(fetchFilteredPlips()),
   onChangePassword: () => dispatch(navigate("changePassword")),
-  onFetchPlipsNextPage: ({ page }) => dispatch(fetchPlipsNextPage({ page })),
+  onChangeScope: ({ scope }) => dispatch(changePlipsFilterScope({ scope })),
+  onFetchPlipsNextPage: () => dispatch(fetchFilteredPlipsNextPage()),
   onFetchProfile: () => dispatch(fetchProfile()),
   onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
   onGoToMudamos: () => dispatch(openURL(MUDAMOS_WEB_SITE)),
   onGoToPlip: plip => dispatch(navigate("showPlip", { plip })),
   onLogout: () => dispatch(logout()),
   onOpenURL: url => dispatch(openURL(url)),
-  onPlipsFetch: () => dispatch(fetchPlips()),
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
-  onRefresh: () => dispatch(refreshPlips()),
+  onRefresh: () => dispatch(refreshFilteredPlips()),
   onSignUp: () => dispatch(navigate("signUp")),
+  onSelectCityFilter: () => dispatch(navigate("cityFilter")),
+  onSelectStateFilter: () => dispatch(navigate("stateFilter")),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

@@ -8,7 +8,6 @@ import locale from "../locales/pt-BR";
 
 import {
   clearPlipInfo,
-  fetchPlips,
   fetchPlipRelatedInfo,
   navigate,
   navigateBack,
@@ -111,7 +110,6 @@ const mapDispatchToProps = dispatch => ({
   onOpenSigners: plipId => dispatch(navigate("signers", { plipId })),
   onOpenURL: url => dispatch(openURL(url)),
   onPlipSign: plip => onPlipSign({ dispatch, plip }),
-  onRetryRelatedInfo: () => dispatch(fetchPlips()),
   onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
   onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),

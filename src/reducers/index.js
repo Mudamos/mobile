@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 
 import app from "./app";
 import appState from "./app-state";
+import city from "./city";
 import facebook from "./facebook";
 import localStorage from "./local-storage";
 import location from "./location";
@@ -10,6 +11,7 @@ import permission from "./permission";
 import plip from "./plip";
 import profile from "./profile";
 import session from "./session";
+import state from "./state";
 import navigation from "./navigation";
 import address from "./address";
 import wallet from "./wallet";
@@ -17,6 +19,7 @@ import wallet from "./wallet";
 export default combineReducers({
   app,
   appState,
+  city,
   facebook,
   localStorage,
   location,
@@ -25,6 +28,7 @@ export default combineReducers({
   profile,
   plip,
   session,
+  state,
   navigation,
   address,
   wallet,

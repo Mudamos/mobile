@@ -10,6 +10,8 @@ import {
   reject,
 } from "ramda";
 
+import statesData from "./states.json";
+
 import { UnauthorizedError } from "./models/net-error";
 
 import { Buffer } from "buffer";
@@ -31,6 +33,18 @@ export { moment };
 const toLogTag = (...tags) => compact(tags).map(t => `[${t}]`).join(" ");
 
 export const MUDAMOS_WEB_SITE = "https://www.mudamos.org";
+
+export const NATIONWIDE_SCOPE = "nationwide";
+
+export const STATEWIDE_SCOPE = "statewide";
+
+export const CITYWIDE_SCOPE = "citywide";
+
+export const isNationwideScope = scope => scope === NATIONWIDE_SCOPE;
+
+export const isStatewideScope = scope => scope === STATEWIDE_SCOPE;
+
+export const isCitywideScope = scope => scope === CITYWIDE_SCOPE;
 
 export const isUnauthorized = error => error instanceof UnauthorizedError;
 
@@ -131,3 +145,7 @@ export const homeLinks = {
   mudamos: { title: "Conheça Mudamos+", link: "https://www.mudamos.org" },
   projectsReason: { title: "Por que estes projetos de lei?", link: "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular" },
 };
+
+export const findStateByUF = uf => find(propEq("uf", uf), statesData.states);
+
+export const findStateNameByUF = uf => (findStateByUF(uf) || {}).name;

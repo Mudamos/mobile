@@ -1,6 +1,7 @@
 export * from "./address";
 export * from "./app";
 export * from "./app-state";
+export * from "./city";
 export * from "./local-storage";
 export * from "./location";
 export * from "./password";
@@ -9,4 +10,5 @@ export * from "./profile";
 export * from "./plip";
 export * from "./facebook";
 export * from "./session";
+export * from "./state";
 export * from "./wallet";

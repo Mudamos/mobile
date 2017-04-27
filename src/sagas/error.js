@@ -50,8 +50,12 @@ function appError({ type, payload }) {
       return showToast(locale.errors.signPlipError);
     case "PLIP_FETCH_SIGNERS_ERROR":
       return showToast(locale.errors.genericError);
-    case "PLIPS_FETCH_PLIPS_NEXT_PAGE_ERROR":
-    case "PLIPS_REFRESH_ERROR":
+    case "PLIPS_FETCH_NATIONWIDE_PLIPS_NEXT_PAGE_ERROR":
+    case "PLIPS_FETCH_STATEWIDE_PLIPS_NEXT_PAGE_ERROR":
+    case "PLIPS_FETCH_CITYWIDE_PLIPS_NEXT_PAGE_ERROR":
+    case "PLIPS_NATIONWIDE_REFRESH_ERROR":
+    case "PLIPS_STATEWIDE_REFRESH_ERROR":
+    case "PLIPS_CITYWIDE_REFRESH_ERROR":
       return showToast(locale.errors.fetchPlips);
     case "PROFILE_SAVE_AVATAR_ERROR":
       return showToast(locale.errors.saveAvatar);
