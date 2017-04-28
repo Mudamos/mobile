@@ -1,5 +1,5 @@
 import { takeEvery, takeLatest } from "redux-saga";
-import { cancelled, call, spawn, put, select } from "redux-saga/effects";
+import { cancelled, call, spawn, put, select, fork } from "redux-saga/effects";
 
 import {
   isNil,
@@ -694,8 +694,8 @@ export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiEr
   yield spawn(fetchNationwidePlipsNextPageSaga, { mudamosWebApi });
   yield spawn(fetchStatewidePlipsNextPageSaga, { mudamosWebApi });
   yield spawn(fetchCitywidePlipsNextPageSaga, { mudamosWebApi });
-  yield spawn(fetchStoredPlipsFilters, { localStorage });
-  yield spawn(changePlipsFilter, { localStorage });
+  yield fork(fetchStoredPlipsFilters, { localStorage });
+  yield fork(changePlipsFilter, { localStorage });
   yield spawn(changePlipsFilterState);
   yield spawn(changePlipsFilterCity);
   yield spawn(signPlip, { mobileApi, walletStore, apiError });
