@@ -240,6 +240,11 @@ export default  (state = initialState, action) => {
         ...state,
         fetchPlipRelatedInfoError: true,
       };
+    case "PLIPS_REPLACE_PLIPS_FILTERS":
+      return {
+        ...state,
+        plipsFilters: { ...state.plipsFilters, state: payload.state, city: payload.city },
+      };
     case "PLIPS_CHANGE_FILTER_SCOPE":
       return {
         ...state,

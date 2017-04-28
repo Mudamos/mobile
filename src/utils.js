@@ -1,5 +1,8 @@
 import {
+  apply,
+  filter,
   find,
+  fromPairs,
   head,
   is,
   isNil,
@@ -8,6 +11,7 @@ import {
   pipe,
   propEq,
   reject,
+  toPairs,
 } from "ramda";
 
 import statesData from "./states.json";
@@ -148,6 +152,11 @@ export const homeLinks = {
   projectsReason: { title: "Por que estes projetos de lei?", link: "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular" },
 };
 
+export const siteLinks = {
+  homeLinks,
+  sendYourIdea: "https://www.mudamos.org/envie-sua-ideia",
+};
+
 export const findStateByUF = uf => find(propEq("uf", uf), statesData.states);
 
 export const findStateNameByUF = uf => (findStateByUF(uf) || {}).name;
@@ -166,3 +175,11 @@ export const signatureEnabled = ({ finalDate }) => {
   const days = remainingDays({ date: finalDate });
   return days != null && days >= 0;
 };
+
+export const filterWithKeys = (pred, obj) => pipe(
+  toPairs,
+  filter(apply(pred)),
+  fromPairs
+)(obj);
+
+export const pickObjNonNilValues = obj => filterWithKeys((_, val) => !isNil(val), obj);

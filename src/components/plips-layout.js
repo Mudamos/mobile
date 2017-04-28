@@ -16,7 +16,7 @@ import {
 
 import {
   moment,
-  homeLinks,
+  siteLinks,
   NATIONWIDE_SCOPE,
   STATEWIDE_SCOPE,
   CITYWIDE_SCOPE,
@@ -56,6 +56,8 @@ export default class PlipsLayout extends Component {
   citywideDriver = new ScrollDriver();
 
   state = {
+    shouldFetchFirstTimeStatePlips: true,
+    shouldFetchFirstTimeCityPlips: true,
     tabsArrowAnimation: new Animated.Value(0),
   };
 
@@ -87,8 +89,8 @@ export default class PlipsLayout extends Component {
     plipsSignInfo: PropTypes.object.isRequired,
     statewidePlipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     onChangeScope: PropTypes.func.isRequired,
+    onFetchPlips: PropTypes.func.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
-    onGoToMudamos: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
@@ -123,13 +125,41 @@ export default class PlipsLayout extends Component {
       filters: nextFilters,
       onSelectCityFilter,
       onSelectStateFilter,
+      onFetchPlips,
+      citywidePlipsDataSource,
+      statewidePlipsDataSource,
     } = nextProps;
 
+    const {
+      shouldFetchFirstTimeCityPlips,
+      shouldFetchFirstTimeStatePlips,
+    } = this.state;
+
     if (nextFilters.scope !== this.props.filters.scope) {
-      if (nextFilters.scope === STATEWIDE_SCOPE && !nextFilters.state) {
-        onSelectStateFilter();
-      } else if (nextFilters.scope === CITYWIDE_SCOPE && !nextFilters.city) {
-        onSelectCityFilter();
+
+      if (nextFilters.scope === STATEWIDE_SCOPE) {
+        this.setState({ shouldFetchFirstTimeStatePlips: false });
+
+        if (!nextFilters.state) {
+          onSelectStateFilter();
+        } else if (statewidePlipsDataSource.getRowCount() == 0 && shouldFetchFirstTimeStatePlips) {
+          // If the filter was loaded say because of async storage
+          // the state filter will be present but we would have no plips.
+          // In this case we must fetch them.
+          // We cannot only check if the rows are empty because we should not
+          // fetch if the user is switching back to a filter which a fetch has already
+          // been fired.
+          onFetchPlips();
+        }
+
+      } else if (nextFilters.scope === CITYWIDE_SCOPE) {
+        this.setState({ shouldFetchFirstTimeCityPlips: false });
+
+        if (!nextFilters.city) {
+          onSelectCityFilter();
+        } else if (citywidePlipsDataSource.getRowCount() == 0 && shouldFetchFirstTimeCityPlips) {
+          onFetchPlips();
+        }
       }
     }
   }
@@ -340,7 +370,7 @@ export default class PlipsLayout extends Component {
   }
 
   renderRowLinks() {
-    const { mudamos, projectsReason } = homeLinks;
+    const { mudamos, projectsReason } = siteLinks.homeLinks;
     const { onOpenURL } = this.props;
 
     return (
@@ -456,7 +486,7 @@ export default class PlipsLayout extends Component {
   }
 
   renderNoPlips() {
-    const { onGoToMudamos } = this.props;
+    const { onOpenURL } = this.props;
 
     return (
       <View style={styles.noProjectsContainer}>
@@ -466,18 +496,12 @@ export default class PlipsLayout extends Component {
             style={styles.noProjectsIcon}
           />
 
-          <View>
-            <Text style={styles.noProjectsText}>{locale.noProjectsYet}</Text>
-            <Text style={styles.noProjectsText}>{locale.followUpOnTheWeb}</Text>
-            <TouchableOpacity onPress={onGoToMudamos}>
-              <Text style={styles.link}>mudamos.org</Text>
-            </TouchableOpacity>
-          </View>
+          <Text style={styles.noProjectsText}>{locale.noProjectsYet}</Text>
         </View>
 
         <FlatButton
-          title={locale.openSite.toUpperCase()}
-          onPress={onGoToMudamos}
+          title={locale.sendYourIdea.toUpperCase()}
+          onPress={() => onOpenURL(siteLinks.sendYourIdea)}
           style={{backgroundColor: "#00c084" }}
           textStyle={{color: "#fff"}}
         />

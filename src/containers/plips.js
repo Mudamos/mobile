@@ -10,7 +10,7 @@ import {
   sortBy,
 } from "ramda";
 
-import { isDev, MUDAMOS_WEB_SITE } from "../utils";
+import { isDev } from "../utils";
 
 import locale from "../locales/pt-BR";
 
@@ -315,13 +315,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onAvatarChanged: avatar => dispatch(profileSaveAvatar({ avatar, shouldNavigate: false })),
+  onFetchPlips: () => dispatch(fetchFilteredPlips()),
   onRetryPlips: () => dispatch(fetchFilteredPlips()),
   onChangePassword: () => dispatch(navigate("changePassword")),
   onChangeScope: ({ scope }) => dispatch(changePlipsFilterScope({ scope })),
   onFetchPlipsNextPage: () => dispatch(fetchFilteredPlipsNextPage()),
   onFetchProfile: () => dispatch(fetchProfile()),
   onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
-  onGoToMudamos: () => dispatch(openURL(MUDAMOS_WEB_SITE)),
   onGoToPlip: plip => dispatch(navigate("showPlip", { plip })),
   onLogout: () => dispatch(logout()),
   onOpenURL: url => dispatch(openURL(url)),
