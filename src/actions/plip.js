@@ -265,3 +265,12 @@ export const plipsSingInfoFetched = ({ signInfo }) => ({
   type: "PLIP_PLIPS_SIGN_INFO_FETCHED",
   payload: { signInfo },
 });
+
+export const fetchStoredPlipsFilters = () => ({
+  type: "PLIPS_FETCH_STORED_FILTERS",
+});
+
+export const replacePlipsFilters = ({ state, city }) => ({
+  type: "PLIPS_REPLACE_PLIPS_FILTERS",
+  payload: { state, city },
+});

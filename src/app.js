@@ -41,6 +41,7 @@ import {
   fetchIsUserFirstTime,
   fetchFilteredPlips,
   fetchSession,
+  fetchStoredPlipsFilters,
   navigate,
   navigateBack,
 } from "./actions";
@@ -151,6 +152,7 @@ sagaRunner.run(sagas, {
 
 store.dispatch(fetchSession());
 store.dispatch(fetchIsUserFirstTime());
+store.dispatch(fetchStoredPlipsFilters());
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 

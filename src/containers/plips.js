@@ -315,6 +315,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onAvatarChanged: avatar => dispatch(profileSaveAvatar({ avatar, shouldNavigate: false })),
+  onFetchPlips: () => dispatch(fetchFilteredPlips()),
   onRetryPlips: () => dispatch(fetchFilteredPlips()),
   onChangePassword: () => dispatch(navigate("changePassword")),
   onChangeScope: ({ scope }) => dispatch(changePlipsFilterScope({ scope })),

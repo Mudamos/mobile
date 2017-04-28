@@ -1,5 +1,8 @@
 import {
+  apply,
+  filter,
   find,
+  fromPairs,
   head,
   is,
   isNil,
@@ -8,6 +11,7 @@ import {
   pipe,
   propEq,
   reject,
+  toPairs,
 } from "ramda";
 
 import statesData from "./states.json";
@@ -171,3 +175,11 @@ export const signatureEnabled = ({ finalDate }) => {
   const days = remainingDays({ date: finalDate });
   return days != null && days >= 0;
 };
+
+export const filterWithKeys = (pred, obj) => pipe(
+  toPairs,
+  filter(apply(pred)),
+  fromPairs
+)(obj);
+
+export const pickObjNonNilValues = obj => filterWithKeys((_, val) => !isNil(val), obj);

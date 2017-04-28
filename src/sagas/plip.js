@@ -8,6 +8,7 @@ import {
 } from "ramda";
 
 import {
+  pickObjNonNilValues,
   homeSceneKey,
   isDev,
   isUnauthorized,
@@ -63,6 +64,7 @@ import {
   refreshNationwidePlips,
   refreshStatewidePlips,
   refreshCitywidePlips,
+  replacePlipsFilters,
   signPlip as signPlipAction,
   signingPlip,
   shortPlipSigners,
@@ -395,6 +397,36 @@ function* changePlipsFilterCity() {
   });
 }
 
+function* changePlipsFilter({ localStorage }) {
+  const actions = ["PLIPS_CHANGE_FILTER_STATE", "PLIPS_CHANGE_FILTER_CITY"];
+  yield takeEvery(actions, function* () {
+    try {
+      const { state, city } = yield select(getPlipsFilters);
+      const filters = pickObjNonNilValues({ state, city });
+
+      yield call(localStorage.store, "plipsFilters", filters);
+    } catch(e) {
+      logError(e);
+      if (isDev) throw e;
+    }
+  });
+}
+
+function* fetchStoredPlipsFilters({ localStorage }) {
+  yield takeLatest("PLIPS_FETCH_STORED_FILTERS", function* () {
+    try {
+      const filters = yield call(localStorage.fetch, "plipsFilters");
+
+      if (filters) {
+        yield put(replacePlipsFilters(filters));
+      }
+    } catch(e) {
+      logError(e);
+      if (isDev) throw e;
+    }
+  });
+}
+
 function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
   return yield call(mudamosWebApi.listPlips, { page, uf, cityId });
 }
@@ -649,7 +681,7 @@ function* fetchPlipsSignInfoSaga({ mobileApi }) {
   });
 }
 
-export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError }) {
+export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError, localStorage }) {
   yield spawn(fetchFilteredPlips);
   yield spawn(fetchFilteredPlipsNextPage);
   yield spawn(refreshFilteredPlips);
@@ -662,6 +694,8 @@ export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiEr
   yield spawn(fetchNationwidePlipsNextPageSaga, { mudamosWebApi });
   yield spawn(fetchStatewidePlipsNextPageSaga, { mudamosWebApi });
   yield spawn(fetchCitywidePlipsNextPageSaga, { mudamosWebApi });
+  yield spawn(fetchStoredPlipsFilters, { localStorage });
+  yield spawn(changePlipsFilter, { localStorage });
   yield spawn(changePlipsFilterState);
   yield spawn(changePlipsFilterCity);
   yield spawn(signPlip, { mobileApi, walletStore, apiError });

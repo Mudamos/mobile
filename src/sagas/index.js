@@ -40,7 +40,7 @@ export default function* rootSaga({
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
   yield spawn(passwordSaga, { mobileApi, sessionStore, Crypto });
   yield spawn(permissionSaga, { permissionService });
-  yield spawn(plipSaga, { apiError, mobileApi, mudamosWebApi, walletStore });
+  yield spawn(plipSaga, { apiError, localStorage, mobileApi, mudamosWebApi, walletStore });
   yield spawn(preNavigationActions);
   yield spawn(profileSaga, { mobileApi, DeviceInfo, sessionStore, Crypto });
   yield spawn(stateSaga, { repositories });
