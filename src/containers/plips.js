@@ -10,7 +10,7 @@ import {
   sortBy,
 } from "ramda";
 
-import { isDev, MUDAMOS_WEB_SITE } from "../utils";
+import { isDev } from "../utils";
 
 import locale from "../locales/pt-BR";
 
@@ -321,7 +321,6 @@ const mapDispatchToProps = dispatch => ({
   onFetchPlipsNextPage: () => dispatch(fetchFilteredPlipsNextPage()),
   onFetchProfile: () => dispatch(fetchProfile()),
   onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
-  onGoToMudamos: () => dispatch(openURL(MUDAMOS_WEB_SITE)),
   onGoToPlip: plip => dispatch(navigate("showPlip", { plip })),
   onLogout: () => dispatch(logout()),
   onOpenURL: url => dispatch(openURL(url)),
