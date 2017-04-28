@@ -1,5 +1,6 @@
 # Next
 
+* [PR #307] Add plip metrics info to the plips scene
 * [PR #304] Add plips scope filter
 
 ## [1.3.1] 13/04/2017

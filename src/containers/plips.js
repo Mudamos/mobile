@@ -46,6 +46,7 @@ import {
   findNationwidePlips,
   findStatewidePlips,
   findCitywidePlips,
+  findPlipsSignInfo,
   getCurrentSigningPlip,
 } from "../selectors";
 
@@ -308,6 +309,7 @@ const mapStateToProps = state => {
     nationwidePlips: findNationwidePlips(state),
     statewidePlips: findStatewidePlips(state),
     citywidePlips: findCitywidePlips(state),
+    plipsSignInfo: findPlipsSignInfo(state),
   };
 }
 

@@ -112,3 +112,5 @@ export const getCitywidePlipsLoadState = state => {
 
   return result;
 };
+
+export const findPlipsSignInfo = state => state.plip.plipsSignInfo;

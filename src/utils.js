@@ -56,6 +56,8 @@ export const homeSceneKey = "plipsNav";
 
 export const first = list => head(list || []);
 
+export const findByStrIndex = (index, object) => (object || {})[String(index)];
+
 // eslint-disable-next-line no-undef
 export const isDev = __DEV__;
 
@@ -149,3 +151,18 @@ export const homeLinks = {
 export const findStateByUF = uf => find(propEq("uf", uf), statesData.states);
 
 export const findStateNameByUF = uf => (findStateByUF(uf) || {}).name;
+
+export const remainingDays = ({ date }) => {
+  const start = moment();
+  const end = moment(date);
+
+  // No days left because there are no more seconds left
+  if (end.diff(start, "seconds") < 0) return;
+
+  return end.diff(start, "days");
+};
+
+export const signatureEnabled = ({ finalDate }) => {
+  const days = remainingDays({ date: finalDate });
+  return days != null && days >= 0;
+};

@@ -20,10 +20,12 @@ import {
   NATIONWIDE_SCOPE,
   STATEWIDE_SCOPE,
   CITYWIDE_SCOPE,
+  findByStrIndex,
 } from "../utils";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+import * as Animatable from "react-native-animatable";
 import {
   Parallax,
   ScrollDriver,
@@ -39,6 +41,7 @@ import FlatButton from "./flat-button";
 import Collapsable from "./collapsable";
 import MyListView from "./list-view";
 import Triangle from "./triangle";
+import MetricsInfo from "./plip/metrics-info";
 
 import styles from "../styles/plips-layout";
 
@@ -81,6 +84,7 @@ export default class PlipsLayout extends Component {
     isRefreshingStatewide: PropTypes.bool,
     nationwidePlipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     openMenu: PropTypes.func.isRequired,
+    plipsSignInfo: PropTypes.object.isRequired,
     statewidePlipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     onChangeScope: PropTypes.func.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
@@ -387,6 +391,9 @@ export default class PlipsLayout extends Component {
   }
 
   renderRowPlip({ plip, index, height, margin, driver }) {
+    const { plipsSignInfo } = this.props;
+    const plipSignInfo = findByStrIndex(plip.id, plipsSignInfo);
+
     const totalHeight = height + margin;
     const scrollRange = totalHeight * (index - 1);
 
@@ -417,7 +424,7 @@ export default class PlipsLayout extends Component {
         { /* This gradient improves the reading of the PLIP title and subtitle */ }
         <LinearGradient
           colors={["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.8)", "rgba(0, 0, 0, 1)"]}
-          locations={[0.5, 0.9, 1]}
+          locations={[0.3, 0.7, 1]}
           style={styles.plipImageGradient}
         />
 
@@ -431,7 +438,19 @@ export default class PlipsLayout extends Component {
               {plip.phase.description}
             </Text>
           </View>
+
+          {
+            !!plipSignInfo &&
+              <Animatable.View animation="fadeInUp" easing="ease">
+                <MetricsInfo
+                  signaturesRequired={plip.signaturesRequired}
+                  signaturesCount={plipSignInfo.signaturesCount}
+                  finalDate={plip.phase.finalDate}
+                />
+              </Animatable.View>
+          }
         </View>
+
       </View>
     );
   }
