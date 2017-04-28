@@ -61,7 +61,8 @@ export default StyleSheet.create({
     justifyContent: "space-between",
   },
   noProjectsIcon: {
-    marginVertical: 10,
+    marginTop: 10,
+    marginBottom: 25,
   },
   noProjectsText: {
     color: "#9a9a9a",
