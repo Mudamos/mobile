@@ -154,7 +154,7 @@ export const homeLinks = {
 
 export const siteLinks = {
   homeLinks,
-  sendYourIdea: "https://www.mudamos.org/envie-sua-idea",
+  sendYourIdea: "https://www.mudamos.org/envie-sua-ideia",
 };
 
 export const findStateByUF = uf => find(propEq("uf", uf), statesData.states);
