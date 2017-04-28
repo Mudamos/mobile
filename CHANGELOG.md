@@ -1,5 +1,7 @@
 # Next
 
+* [PR #311] Fix side menu overflow when the user has a long name or email
+* [PR #310] Persist the plips filters
 * [PR #307] Add plip metrics info to the plips scene
 * [PR #304] Add plips scope filter
 
