@@ -34,6 +34,7 @@ import {
   errorFetchingCitywidePlips,
   currentUser as getCurrentUser,
   getPlipsFilters,
+  getUserSignInfo,
   isFetchingNationwidePlips,
   isFetchingStatewidePlips,
   isFetchingCitywidePlips,
@@ -315,6 +316,7 @@ const mapStateToProps = state => {
     statewidePlips: findStatewidePlips(state),
     citywidePlips: findCitywidePlips(state),
     plipsSignInfo: findPlipsSignInfo(state),
+    userSignInfo: getUserSignInfo(state),
   };
 }
 

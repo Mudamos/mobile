@@ -7,6 +7,7 @@ import {
   Easing,
   Image,
   ListView,
+  Platform,
   RefreshControl,
   TouchableOpacity,
   Text,
@@ -19,7 +20,6 @@ import {
   NATIONWIDE_SCOPE,
   STATEWIDE_SCOPE,
   CITYWIDE_SCOPE,
-  findByStrIndex,
 } from "../utils";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -78,6 +78,7 @@ export default class PlipsLayout extends Component {
     openMenu: PropTypes.func.isRequired,
     plipsSignInfo: PropTypes.object.isRequired,
     statewidePlipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
+    userSignInfo: PropTypes.object.isRequired,
     onChangeScope: PropTypes.func.isRequired,
     onFetchPlips: PropTypes.func.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
@@ -342,8 +343,13 @@ export default class PlipsLayout extends Component {
   }
 
   renderRowPlip({ plip }) {
-    const { plipsSignInfo, onGoToPlip } = this.props;
-    const plipSignInfo = findByStrIndex(plip.id, plipsSignInfo);
+    const { plipsSignInfo, userSignInfo, onGoToPlip } = this.props;
+    const plipSignInfo = plipsSignInfo[plip.id];
+    const plipUserSignInfo = userSignInfo[plip.id];
+    const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
+
+    // Not every animation seem to work on both platforms
+    const AnimatableView = Platform.OS === "ios" ? Animatable.View : View;
 
     return (
       <View style={styles.plipRow}>
@@ -396,6 +402,18 @@ export default class PlipsLayout extends Component {
                   finalDate={plip.phase.finalDate}
                 />
               </Animatable.View>
+          }
+
+          {
+            hasSigned &&
+              <AnimatableView animation="zoomIn" easing="ease-in-out-sine" style={styles.signedContainer} duration={2000}>
+                <LinearGradient
+                  colors={["#00DB5E", "#00A79E"]}
+                  style={styles.signedGradient}
+                >
+                  <Text style={styles.signedText}>{locale.signed}</Text>
+                </LinearGradient>
+              </AnimatableView>
           }
 
           <Image source={require("../images/plips-top-left.png")} style={{position: "absolute", top: 0, left: 0}} />

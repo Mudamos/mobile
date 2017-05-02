@@ -134,7 +134,7 @@ export default StyleSheet.create({
     marginBottom: 25,
     borderRadius: 3,
     backgroundColor: "#F9F9F9",
-    elevation: 3,
+    elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.3,
@@ -142,6 +142,25 @@ export default StyleSheet.create({
   },
   tableRow: {
     marginTop: 0,
+  },
+  signedContainer: {
+    position: "absolute",
+    top: 20,
+    right: -45,
+  },
+  signedGradient: {
+    paddingVertical: 2,
+    paddingHorizontal: 10,
+    width: 150,
+    justifyContent: "center",
+    alignItems: "center",
+    transform: [{rotate: "45deg"}],
+  },
+  signedText: {
+    color: "white",
+    fontFamily: "lato",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   subTabContainer: {
     height: 36,

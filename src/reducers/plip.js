@@ -275,7 +275,6 @@ export default  (state = initialState, action) => {
         plipSignInfo: null,
         shortSigners: null,
         shortSignersTotal: null,
-        userSignInfo: {},
       };
     case "SESSION_CLEAR_SESSION":
       return {

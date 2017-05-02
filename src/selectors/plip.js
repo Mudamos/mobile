@@ -1,8 +1,17 @@
+import { concatLists } from "../utils";
+
 export const findNationwidePlips = state => state.plip.nationwidePlips;
 
 export const findStatewidePlips = state => state.plip.statewidePlips;
 
 export const findCitywidePlips = state => state.plip.citywidePlips;
+
+export const allScopedPlips = state =>
+  concatLists(
+    findNationwidePlips(state),
+    findStatewidePlips(state),
+    findCitywidePlips(state),
+  );
 
 export const isFetchingNationwidePlips = state => !!state.plip.isFetchingNationwidePlips;
 

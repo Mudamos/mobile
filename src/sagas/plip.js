@@ -73,6 +73,7 @@ import {
 } from "../actions";
 
 import {
+  allScopedPlips,
   currentAuthToken,
   getCurrentSigningPlip,
   getPlipsFilters,
@@ -618,7 +619,8 @@ function* invalidateWalletAndNavigate(params = {}) {
   yield put(profileStateMachine(params));
 }
 
-function* fetchPlipsSignInfoSaga({ mobileApi }) {
+
+function* fetchPlipsRelatedInfoSaga({ mobileApi }) {
   const actions = [
     "PLIPS_NATIONWIDE_FETCHED",
     "PLIPS_STATEWIDE_FETCHED",
@@ -634,15 +636,53 @@ function* fetchPlipsSignInfoSaga({ mobileApi }) {
       const plipIds = pluck("id", plips || []).filter(isNotNil);
       if (!plipIds.length) return;
 
-      const results = yield plipIds.map(id => call(mobileApi.plipSignInfo, id))
-
-      const signInfo = zip(plipIds, results).reduce((memo, [id, result]) => {
-        memo[id] = result.info;
-        return memo;
-      }, {});
-      yield put(plipsSingInfoFetched({ signInfo }));
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
     } catch(e) {
-      logError(e, { tag: "fetchPlipsSignInfoSaga" });
+      logError(e, { tag: "fetchPlipsRelatedInfoSaga" });
+    }
+  });
+}
+
+function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
+  try {
+    if (!plipIds || !plipIds.length) return;
+
+    const loggedIn = yield select(isUserLoggedIn);
+
+    const [plipSignResults] = yield [
+      call(fetchPlipsSignInfo, { mobileApi, plipIds }),
+      loggedIn ? call(fetchPlipsUserSignInfo, { mobileApi, plipIds }) : Promise.resolve(),
+    ];
+
+    const signInfo = zip(plipIds, plipSignResults).reduce((memo, [id, result]) => {
+      memo[id] = result.info;
+      return memo;
+    }, {});
+
+    yield put(plipsSingInfoFetched({ signInfo }));
+  } catch(e) {
+    logError(e, { tag: "fetchPlipsRelatedInfo" });
+  }
+}
+
+function* fetchPlipsSignInfo({ mobileApi, plipIds }) {
+  return yield plipIds.map(id => call(mobileApi.plipSignInfo, id));
+}
+
+function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
+  return yield plipIds.map(plipId => call(fetchUserSignInfo, { mobileApi, plipId }));
+}
+
+function* loadStorePlipsInfo({ mobileApi }) {
+  yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
+    try {
+      const plips = yield select(allScopedPlips);
+      const plipIds = pluck("id", plips || []).filter(isNotNil);
+      if (!plipIds.length) return;
+
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+    } catch(e) {
+      logError(e, { tag: "loadStorePlipsInfo" });
     }
   });
 }
@@ -668,5 +708,6 @@ export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiEr
   yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
   yield spawn(fetchPlipRelatedInfo, { mobileApi });
-  yield spawn(fetchPlipsSignInfoSaga, { mobileApi });
+  yield spawn(fetchPlipsRelatedInfoSaga, { mobileApi });
+  yield fork(loadStorePlipsInfo, { mobileApi });
 }

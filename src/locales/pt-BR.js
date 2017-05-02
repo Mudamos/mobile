@@ -93,6 +93,7 @@ const translations = {
   shareMessage: ({description, name, hashtag}) => `${description}! vote no ${name} e construa um Brasil melhor. ${hashtag}`,
   signatures: "Assinaturas",
   signupSuccessModalText: "Seu celular foi validado e agora você já pode assinar projetos de lei de iniciativa popular.",
+  signed: "Assinado",
   signersTitle: "Assinantes",
   signInTitle: "Login",
   signUpTitle: "Ajude a construir soluções para desafios públicos de maneira aberta e participativa",

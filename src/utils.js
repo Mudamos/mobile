@@ -1,5 +1,6 @@
 import {
   apply,
+  concat,
   filter,
   find,
   fromPairs,
@@ -10,8 +11,10 @@ import {
   mergeWith,
   pipe,
   propEq,
+  reduce,
   reject,
   toPairs,
+  unapply,
 } from "ramda";
 
 import statesData from "./states.json";
@@ -183,3 +186,5 @@ export const filterWithKeys = (pred, obj) => pipe(
 )(obj);
 
 export const pickObjNonNilValues = obj => filterWithKeys((_, val) => !isNil(val), obj);
+
+export const concatLists = unapply(reduce((acc, list) => concat(acc, list || []), []));
