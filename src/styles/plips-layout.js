@@ -4,7 +4,7 @@ import {
   StyleSheet,
 } from "react-native";
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth } = Dimensions.get("window");
 
 const textShadow = {
   textShadowColor: "rgba(0,0,0, 1)",
@@ -104,6 +104,12 @@ export default StyleSheet.create({
     lineHeight: 60,
     marginVertical: 10,
     ...textShadow,
+  },
+  plipRow: {
+    flex: 1,
+    overflow: "hidden",
+    borderRadius: 3,
+    backgroundColor: "#F9F9F9",
   },
   plipSubtitle: {
     color: "#fff",

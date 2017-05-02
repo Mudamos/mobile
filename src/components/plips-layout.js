@@ -7,9 +7,7 @@ import {
   Easing,
   Image,
   ListView,
-  Platform,
   RefreshControl,
-  StyleSheet,
   TouchableOpacity,
   Text,
   View,
@@ -44,8 +42,6 @@ import MetricsInfo from "./plip/metrics-info";
 import styles from "../styles/plips-layout";
 
 import locale from "../locales/pt-BR";
-
-const LINKS_KEY = "LINKS";
 
 
 export default class PlipsLayout extends Component {
@@ -252,7 +248,6 @@ export default class PlipsLayout extends Component {
   renderScopeContent({ dataSource, error, isFetching, isRefreshing, onScroll, scrollTo }) {
     const { filters } = this.props;
     const hasRows = dataSource.getRowCount() > 0;
-    const hasNoListYet = error || isFetching || !hasRows;
     const shouldShowNoPlips =
       !error &&
       !isFetching &&
@@ -312,7 +307,7 @@ export default class PlipsLayout extends Component {
         onEndReachedThreshold={300}
         scrollEventThrottle={500}
         dataSource={dataSource}
-        renderRow={this.renderRow({ height: 360, margin: 0, dataSource })}
+        renderRow={this.renderRow({ height: 360, margin: 0 })}
         onScroll={onScroll}
         refreshControl={
           <RefreshControl
@@ -325,7 +320,7 @@ export default class PlipsLayout extends Component {
     );
   }
 
-  renderRow = ({ height, margin, dataSource }) => ([plip, index], section, row, highlightRow) => {
+  renderRow = ({ height, margin }) => ([plip], section, row, highlightRow) => {
     const { onGoToPlip } = this.props;
 
     return (
@@ -340,69 +335,18 @@ export default class PlipsLayout extends Component {
             margin,
           }]}
         >
-          {this.renderRowPlip({ plip, index, height, margin })}
+          {this.renderRowPlip({ plip, height, margin })}
         </TouchableOpacity>
       </View>
     );
   }
 
-  renderRowLinks() {
-    const { mudamos, projectsReason } = siteLinks.homeLinks;
-    const { onOpenURL } = this.props;
-
-    return (
-      <LinearGradient
-        start={[0.0, 0.1]}
-        end={[0.5, 1.0]}
-        locations={[0, 0.5]}
-        style={styles.footerContainer}
-        colors={["#9844ce", "#7E52D8"]}
-      >
-        <TouchableOpacity
-          onPress={() => onOpenURL(mudamos.link) }
-          style={styles.full}
-        >
-          {this.renderLink({ ...mudamos, icon: "extension" })}
-        </TouchableOpacity>
-
-        <View style={styles.hairline} />
-
-        <TouchableOpacity
-          onPress={() => onOpenURL(projectsReason.link) }
-          style={styles.full}
-        >
-          {this.renderLink({ ...projectsReason, icon: "info" })}
-        </TouchableOpacity>
-
-      </LinearGradient>
-    );
-  }
-
-  renderLink({ title, icon }) {
-    return (
-      <View style={styles.actionRow}>
-        <Icon
-          name={icon}
-          size={40}
-          color="#fff"
-          style={styles.actionIcon}
-        />
-        <Text style={styles.actionTitle}>{title.toUpperCase()}</Text>
-        <Icon
-          name="chevron-right"
-          size={40}
-          color="#fff"
-        />
-      </View>
-    );
-  }
-
-  renderRowPlip({ plip, index }) {
+  renderRowPlip({ plip }) {
     const { plipsSignInfo, onGoToPlip } = this.props;
     const plipSignInfo = findByStrIndex(plip.id, plipsSignInfo);
 
     return (
-      <View style={[styles.full, { overflow: "hidden", borderRadius: 3, backgroundColor: "#F9F9F9"}]}>
+      <View style={styles.plipRow}>
         <NetworkImage
           source={{uri: this.plipImage(plip)}}
           resizeMode="cover"
