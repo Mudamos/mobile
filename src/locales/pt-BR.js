@@ -42,6 +42,7 @@ const translations = {
   loading: "Carregando...",
   logout: "Sair",
   mobile: "Celular",
+  moreDetails: "Mais detalhes",
   menu: {
     about: "Sobre",
     changePassword: "Alterar senha",

@@ -9,6 +9,7 @@ import {
   ListView,
   Platform,
   RefreshControl,
+  StyleSheet,
   TouchableOpacity,
   Text,
   View,
@@ -26,10 +27,6 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import * as Animatable from "react-native-animatable";
-import {
-  Parallax,
-  ScrollDriver,
-} from "@shoutem/animation";
 
 import Layout from "./layout";
 import NavigationBar from "./navigation-bar";
@@ -38,6 +35,7 @@ import HeaderLogo from "./header-logo";
 import NetworkImage from "./network-image";
 import LinearGradient from "react-native-linear-gradient";
 import FlatButton from "./flat-button";
+import TransparentFlatButton from "./transparent-flat-button";
 import Collapsable from "./collapsable";
 import MyListView from "./list-view";
 import Triangle from "./triangle";
@@ -51,10 +49,6 @@ const LINKS_KEY = "LINKS";
 
 
 export default class PlipsLayout extends Component {
-  nationwideDriver = new ScrollDriver();
-  statewideDriver = new ScrollDriver();
-  citywideDriver = new ScrollDriver();
-
   state = {
     shouldFetchFirstTimeStatePlips: true,
     shouldFetchFirstTimeCityPlips: true,
@@ -191,7 +185,6 @@ export default class PlipsLayout extends Component {
 
     const onScroll = event => {
       this.nationwideScroll = event.nativeEvent.contentOffset;
-      this.nationwideDriver.scrollViewProps.onScroll(event);
     };
 
     const scrollTo = this.nationwideScroll;
@@ -203,7 +196,6 @@ export default class PlipsLayout extends Component {
       dataSource,
       onScroll,
       scrollTo,
-      driver: this.nationwideDriver,
     });
   }
 
@@ -219,7 +211,6 @@ export default class PlipsLayout extends Component {
 
     const onScroll = event => {
       this.statewideScroll = event.nativeEvent.contentOffset;
-      this.statewideDriver.scrollViewProps.onScroll(event);
     };
     const scrollTo = this.statewideScroll;
 
@@ -230,7 +221,6 @@ export default class PlipsLayout extends Component {
       dataSource,
       onScroll,
       scrollTo,
-      driver: this.statewideDriver,
     });
   }
 
@@ -246,7 +236,6 @@ export default class PlipsLayout extends Component {
 
     const onScroll = event => {
       this.citywideScroll = event.nativeEvent.contentOffset;
-      this.citywideDriver.scrollViewProps.onScroll(event);
     };
     const scrollTo = this.citywideScroll;
 
@@ -257,11 +246,10 @@ export default class PlipsLayout extends Component {
       dataSource,
       onScroll,
       scrollTo,
-      driver: this.citywideDriver,
     });
   }
 
-  renderScopeContent({ dataSource, error, isFetching, isRefreshing, onScroll, scrollTo, driver }) {
+  renderScopeContent({ dataSource, error, isFetching, isRefreshing, onScroll, scrollTo }) {
     const { filters } = this.props;
     const hasRows = dataSource.getRowCount() > 0;
     const hasNoListYet = error || isFetching || !hasRows;
@@ -277,7 +265,7 @@ export default class PlipsLayout extends Component {
 
 
     return (
-      <View style={{flex: 1, backgroundColor: hasNoListYet ? "white" : "black" }}>
+      <View style={{flex: 1, backgroundColor: "#F9F9F9" }}>
         {
           !error && hasRows &&
             this.renderListView({
@@ -285,7 +273,6 @@ export default class PlipsLayout extends Component {
               isRefreshing,
               onScroll,
               scrollTo,
-              driver,
             })
         }
 
@@ -308,7 +295,7 @@ export default class PlipsLayout extends Component {
     );
   }
 
-  renderListView({ dataSource, isRefreshing, onScroll, scrollTo, driver }) {
+  renderListView({ dataSource, isRefreshing, onScroll, scrollTo }) {
     const {
       onFetchPlipsNextPage,
       onRefresh,
@@ -316,16 +303,16 @@ export default class PlipsLayout extends Component {
 
     return (
       <MyListView
-        {...driver.scrollViewProps}
-
         scrollTo={scrollTo}
         style={styles.listView}
+        contentContainerStyle={styles.listViewContent}
         automaticallyAdjustContentInsets={false}
         enableEmptySections={true}
         onEndReached={onFetchPlipsNextPage}
         onEndReachedThreshold={300}
+        scrollEventThrottle={500}
         dataSource={dataSource}
-        renderRow={this.renderRow({ height: 333, margin: 0, dataSource, driver })}
+        renderRow={this.renderRow({ height: 360, margin: 0, dataSource })}
         onScroll={onScroll}
         refreshControl={
           <RefreshControl
@@ -338,33 +325,23 @@ export default class PlipsLayout extends Component {
     );
   }
 
-  renderRow = ({ height, margin, dataSource, driver }) => ([plip, index], section, row, highlightRow) => {
+  renderRow = ({ height, margin, dataSource }) => ([plip, index], section, row, highlightRow) => {
     const { onGoToPlip } = this.props;
-
-    const shouldHideOverflow = index > 0 || dataSource.getRowCount() === 1;
-
-    const isLink = plip.key === LINKS_KEY;
-    const TouchableView = isLink ? View : TouchableOpacity;
 
     return (
       <View style={styles.rowContainer}>
-        <TouchableView
+        <TouchableOpacity
           onPress={() => {
             highlightRow(section, row);
             onGoToPlip(plip);
           }}
           style={[styles.tableRow, {
-            // We don't want to overflow the first row, so we can see the image
-            // on ios during the bounce animation
-            overflow: shouldHideOverflow ? "hidden" : "visible",
-
-            height,
+            minHeight: height,
             margin,
           }]}
         >
-          {isLink && this.renderRowLinks()}
-          {!isLink && this.renderRowPlip({ plip, index, height, margin, driver })}
-        </TouchableView>
+          {this.renderRowPlip({ plip, index, height, margin })}
+        </TouchableOpacity>
       </View>
     );
   }
@@ -420,54 +397,51 @@ export default class PlipsLayout extends Component {
     );
   }
 
-  renderRowPlip({ plip, index, height, margin, driver }) {
-    const { plipsSignInfo } = this.props;
+  renderRowPlip({ plip, index }) {
+    const { plipsSignInfo, onGoToPlip } = this.props;
     const plipSignInfo = findByStrIndex(plip.id, plipsSignInfo);
 
-    const totalHeight = height + margin;
-    const scrollRange = totalHeight * (index - 1);
-
-    // For some reason, Android crashes and a transform is applied
-    // TODO: upgrade react-native and test again
-    const ParallaxView = Platform.OS == "ios" ? Parallax : View;
-
     return (
-      <View style={styles.full}>
-        <ParallaxView
-          driver={driver}
-          scrollSpeed={0.7}
-          style={{alignItems: "center", justifyContent: "center"}}
-          header={index == 0 /* If this is not informed, Shouten will use the incorrect initial transform */}
-          extrapolation={{
-            // We must "divide" the scroll range into each PLIP,
-            // otherwise the accumulated error will cause layout break on long lists
-            inputRange: [scrollRange, scrollRange + totalHeight],
-          }}
-        >
-          <NetworkImage
-            source={{uri: this.plipImage(plip)}}
-            resizeMode="cover"
-            style={styles.plipImage}
-          />
-        </ParallaxView>
+      <View style={[styles.full, { overflow: "hidden", borderRadius: 3, backgroundColor: "#F9F9F9"}]}>
+        <NetworkImage
+          source={{uri: this.plipImage(plip)}}
+          resizeMode="cover"
+          style={styles.plipImage}
+        />
 
         { /* This gradient improves the reading of the PLIP title and subtitle */ }
         <LinearGradient
-          colors={["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.8)", "rgba(0, 0, 0, 1)"]}
-          locations={[0.3, 0.7, 1]}
+          colors={["rgba(0, 0, 0, .3)", "rgba(0, 0, 0, 0.3)", "rgba(0, 0, 0, .7)"]}
+          locations={[0, 0.7, 1]}
           style={styles.plipImageGradient}
         />
 
         <View style={styles.plipTitleContainer}>
           <View style={styles.plipTitleInnerContainer}>
-            <Text style={styles.plipTitle} numberOfLines={3}>
+            <Text style={styles.plipTitle}>
               {plip.phase.name}
             </Text>
 
-            <Text style={styles.plipSubtitle} numberOfLines={3}>
+            <Text style={styles.plipSubtitle}>
               {plip.phase.description}
             </Text>
           </View>
+
+          <TransparentFlatButton
+            title={locale.moreDetails.toUpperCase()}
+            onPress={() => onGoToPlip(plip)}
+            style={{
+              height: 30,
+              marginHorizontal: 20,
+              marginTop: 55,
+              marginBottom: 25,
+            }}
+            textStyle={{
+              textShadowColor: "rgba(0,0,0, 1)",
+              textShadowOffset: { width: 1, height: 1 },
+              textShadowRadius: 1,
+            }}
+          />
 
           {
             !!plipSignInfo &&
@@ -479,6 +453,11 @@ export default class PlipsLayout extends Component {
                 />
               </Animatable.View>
           }
+
+          <Image source={require("../images/plips-top-left.png")} style={{position: "absolute", top: 0, left: 0}} />
+          <Image source={require("../images/plips-bottom-right.png")} style={{position: "absolute", bottom: 0, right: 0}} />
+          <Image source={require("../images/plips-bottom-left.png")} style={{position: "absolute", bottom: 0, left: 0}} />
+          <Image source={require("../images/plips-top-right.png")} style={{position: "absolute", top: 0, right: 0}} />
         </View>
 
       </View>
@@ -593,7 +572,7 @@ export default class PlipsLayout extends Component {
         <Icon
           name="arrow-drop-down"
           size={20}
-          color="rgba(255,255,255,0.3)"
+          color="#8934E5"
         />
       </TouchableOpacity>
     );
@@ -673,11 +652,11 @@ export default class PlipsLayout extends Component {
 }
 
 const TabItem = ({ selected, title, onPress }) => {
-  const opacity = selected ? 1 : 0.43;
+  const color = selected ? "#8934E5"  : "#AAAAAA";
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <Text style={[styles.tabItem, { color: `rgba(255, 255, 255, ${opacity})` }]}>
+      <Text style={[styles.tabItem, { color }]}>
         {title}
       </Text>
     </TouchableOpacity>
