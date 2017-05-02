@@ -75,7 +75,7 @@ export default class Menu extends Component {
     const { currentUser, isFetchingProfile } = this.props;
 
     return (
-      <View style={styles.full}>
+      <View>
         {
           currentUser &&
             <View style={styles.profileInfoContainer}>
@@ -87,11 +87,11 @@ export default class Menu extends Component {
               />
 
               <View style={styles.userNameContainer}>
-                <Text style={styles.userName}>
+                <Text style={styles.userName} numberOfLines={2}>
                   {currentUser.name}
                 </Text>
 
-                <Text style={styles.darkSmallText}>
+                <Text style={styles.darkSmallText} numberOfLines={2}>
                   {currentUser.email}
                 </Text>
               </View>

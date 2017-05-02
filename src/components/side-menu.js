@@ -23,7 +23,7 @@ export default class Menu extends Component {
   static defaultProps = {
     tapToClose: true,
     type: "static",
-    openDrawerOffset: 100,
+    openDrawerOffset: 0.2,
     panOpenMask: 100,
     negotiatePan: true,
     tweenHandler: Drawer.tweenPresets.parallax,

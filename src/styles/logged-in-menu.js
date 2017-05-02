@@ -25,13 +25,13 @@ export default StyleSheet.create({
     marginTop: 60,
   },
   profileInfoContainer: {
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
   },
   userNameContainer: {
+    flex: 1,
     marginLeft: 8,
   },
   userName: {
