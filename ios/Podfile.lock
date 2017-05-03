@@ -11,6 +11,30 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.14.0):
     - FBSDKCoreKit
+  - Firebase/Analytics (3.3.0):
+    - FirebaseAnalytics (= 3.2.1)
+  - Firebase/Core (3.3.0):
+    - Firebase/Analytics (= 3.3.0)
+  - Firebase/Crash (3.3.0):
+    - Firebase/Analytics (= 3.3.0)
+    - FirebaseCrash (= 1.0.6)
+  - FirebaseAnalytics (3.2.1):
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleUtilities (~> 1.3)
+  - FirebaseCrash (1.0.6):
+    - FirebaseAnalytics (~> 3.0)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
+  - FirebaseInstanceID (1.0.7)
+  - GoogleInterchangeUtilities (1.2.1):
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleSymbolUtilities (1.1.1)
+  - GoogleUtilities (1.3.1):
+    - GoogleSymbolUtilities (~> 1.0)
   - IQKeyboardManager (4.0.4)
 
 DEPENDENCIES:
@@ -18,6 +42,8 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - Firebase/Core
+  - Firebase/Crash
   - IQKeyboardManager
 
 SPEC CHECKSUMS:
@@ -25,8 +51,15 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
   FBSDKShareKit: e8e5d4ccef69b41132fe33acda26db1e33143e33
+  Firebase: 6250071f0e2440a5c4c67b8cb6b868f868237ac3
+  FirebaseAnalytics: 0fd6532cb2c3d03cd5cf26ad295ccb091efd3104
+  FirebaseCrash: 899d0abc23b411d01087094e3da24527eaecabf7
+  FirebaseInstanceID: a9d923f3d0b6fbf9fac89310860357aaadc34be5
+  GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
+  GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
+  GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   IQKeyboardManager: 4a6f83b540283c2645aaeba2bd8dc0f09b5c77f8
 
-PODFILE CHECKSUM: c5e9ee0d406664f4d141392c0b9fcb5128dc0c42
+PODFILE CHECKSUM: aa6557c8b3697c2ea3d8dbb1dbb30f090edbbe28
 
 COCOAPODS: 1.1.1

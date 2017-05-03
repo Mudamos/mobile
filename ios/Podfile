@@ -7,6 +7,8 @@ def pods
   pod "FBSDKShareKit"
   pod "FBSDKLoginKit"
   pod "IQKeyboardManager"
+  pod "Firebase/Core"
+  pod "Firebase/Crash"
 end
 
 target "MudamosMobile" do

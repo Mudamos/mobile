@@ -202,6 +202,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-firebase-crash-report')
     compile project(':react-native-onesignal')
     compile project(':react-native-image-picker')
     compile project(':react-native-open-settings')
@@ -217,8 +218,8 @@ dependencies {
       exclude group: 'com.google.android.gms', module: 'play-services-base'
       exclude group: 'com.google.android.gms', module: 'play-services-maps'
     }
-    compile 'com.google.android.gms:play-services-base:+'
-    compile 'com.google.android.gms:play-services-maps:+'
+    compile 'com.google.android.gms:play-services-base:10.2.4'
+    compile 'com.google.android.gms:play-services-maps:10.2.4'
     compile project(':react-native-vector-icons')
     compile project(':react-native-spinkit')
     compile project(':react-native-config')
@@ -233,3 +234,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'
