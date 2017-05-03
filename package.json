@@ -37,6 +37,7 @@
     "react-native": "0.37.0",
     "react-native-action-button": "^2.0.15",
     "react-native-animatable": "^1.1.0",
+    "react-native-animate-number": "^0.1.2",
     "react-native-config": "^0.1.2",
     "react-native-crypto": "^2.0.1",
     "react-native-device-info": "https://github.com/guimello/react-native-device-info",

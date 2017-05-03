@@ -19,7 +19,10 @@ import {
 import locale from "../../locales/pt-BR";
 
 import { MKProgress } from "react-native-material-kit";
+import AnimateNumber from "react-native-animate-number";
 
+// slow start, slow end
+const timingFunction = (interval, progress) => interval * (1 - Math.sin(Math.PI*progress)) * 10;
 
 const plipProgress = ({ signaturesRequired, signaturesCount }) => {
   if (!signaturesRequired || signaturesRequired == 0 || !signaturesCount) {
@@ -100,9 +103,17 @@ Progress.propTypes = {
 };
 
 const TargetPercentage = ({ signaturesRequired, signaturesCount }) => {
+  const percentage = progressPercentage({ signaturesRequired, signaturesCount });
+
   return (
     <View style={styles.full}>
-      <Text style={styles.infoPercentageText}>{progressPercentage({ signaturesRequired, signaturesCount })}%</Text>
+      <AnimateNumber
+        value={percentage}
+        countBy={2}
+        timing={timingFunction}
+        formatter={val => `${val}%`}
+        style={styles.infoPercentageText}
+      />
       <Text style={styles.infoPercentageSubtitle}>da meta</Text>
     </View>
   );
@@ -118,7 +129,12 @@ const SignaturesCount = ({ signaturesCount }) => {
 
   return (
     <View style={{ flex: 1.5 }}>
-      <Text style={styles.infoText}>{formatNumber(count)}</Text>
+      <AnimateNumber
+        value={count}
+        timing={timingFunction}
+        formatter={formatNumber}
+        style={styles.infoText}
+      />
       <Text style={styles.infoTextSubtitle}>já assinaram</Text>
     </View>
   );
