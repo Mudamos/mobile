@@ -359,10 +359,23 @@ export default class PlipLayout extends Component {
             }]}
           >
             <LinearGradient
-              colors={["rgba(0,0,0,0)", "rgba(0,0,0,0.7)", "rgba(0,0,0,1)"]}
-              locations={[0.5, 0.7, 1]}
-              style={styles.full}
+              colors={["rgba(0, 0, 0, .4)", "rgba(0, 0, 0, .2)", "rgba(0, 0, 0, 0)"]}
+              locations={[0, 0.3, 0.8]}
+              style={styles.fullGradient}
             />
+
+            <LinearGradient
+              colors={["rgba(0,0,0,0)", "rgba(0,0,0,0.4)", "rgba(0,0,0,.6)"]}
+              locations={[0.5, 0.7, 1]}
+              style={styles.fullGradient}
+            />
+
+            <LinearGradient
+              colors={["rgba(0, 0, 0, .2)", "rgba(0, 0, 0, .2)"]}
+              locations={[0, 1]}
+              style={styles.fullGradient}
+            />
+
           </Animated.View>
         </NetworkImage>
       </View>

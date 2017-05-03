@@ -12,6 +12,12 @@ const IMAGE_HEIGHT_WITH_LEAK = IMAGE_HEIGHT + (HEADER_OFFSET * 2);
 const SIGN_BUTTON_HEIGHT = 42;
 const SIGN_BUTTON_SHADOW_OFFSET = 10;
 
+const textShadow = {
+  textShadowColor: "rgba(0,0,0, 1)",
+  textShadowOffset: { width: 1, height: 1 },
+  textShadowRadius: 1,
+};
+
 const infoText = {
   color: "#fff",
   fontFamily: "lato",
@@ -67,6 +73,9 @@ export default StyleSheet.create({
   },
   full: {
     flex: 1,
+  },
+  fullGradient: {
+    ...StyleSheet.absoluteFillObject,
   },
   hairline: {
     borderBottomColor: "rgba(255,255,255,0.23)",
@@ -136,6 +145,7 @@ export default StyleSheet.create({
     fontSize: 48,
     fontWeight: "bold",
     textAlign: "left",
+    ...textShadow,
   },
   navigationBar: {
     position: "absolute",
@@ -187,6 +197,7 @@ export default StyleSheet.create({
     color: "#fff",
     fontSize: 22,
     textAlign: "left",
+    ...textShadow,
 
     ...Platform.select({
       ios: {
@@ -196,6 +207,9 @@ export default StyleSheet.create({
         fontFamily: "roboto_light",
       },
     }),
+  },
+  textShadow: {
+    ...textShadow,
   },
   video: {
     marginTop: 10,
