@@ -19,7 +19,10 @@ import {
 import locale from "../../locales/pt-BR";
 
 import { MKProgress } from "react-native-material-kit";
+import AnimateNumber from "react-native-animate-number";
 
+// slow start, slow end
+const timingFunction = (interval, progress) => interval * (1 - Math.sin(Math.PI*progress)) * 10;
 
 const plipProgress = ({ signaturesRequired, signaturesCount }) => {
   if (!signaturesRequired || signaturesRequired == 0 || !signaturesCount) {
@@ -63,14 +66,14 @@ const MetricsInfo = ({ signaturesRequired, signaturesCount, finalDate }) => {
   const enabled = signatureEnabled({ finalDate });
   return (
     <View>
-      <Progress signaturesRequired={signaturesRequired} signaturesCount={signaturesCount} />
-
       <View style={styles.infoContainer}>
         <TargetPercentage signaturesRequired={signaturesRequired} signaturesCount={signaturesCount} />
         <SignaturesCount signaturesCount={signaturesCount} />
         {enabled && <RemainingDays finalDate={finalDate} />}
         {!enabled && renderPlipFinished()}
       </View>
+
+      <Progress signaturesRequired={signaturesRequired} signaturesCount={signaturesCount} />
     </View>
   );
 };
@@ -100,9 +103,17 @@ Progress.propTypes = {
 };
 
 const TargetPercentage = ({ signaturesRequired, signaturesCount }) => {
+  const percentage = progressPercentage({ signaturesRequired, signaturesCount });
+
   return (
     <View style={styles.full}>
-      <Text style={styles.infoPercentageText}>{progressPercentage({ signaturesRequired, signaturesCount })}%</Text>
+      <AnimateNumber
+        value={percentage}
+        countBy={2}
+        timing={timingFunction}
+        formatter={val => `${val}%`}
+        style={styles.infoPercentageText}
+      />
       <Text style={styles.infoPercentageSubtitle}>da meta</Text>
     </View>
   );
@@ -118,7 +129,12 @@ const SignaturesCount = ({ signaturesCount }) => {
 
   return (
     <View style={{ flex: 1.5 }}>
-      <Text style={styles.infoText}>{formatNumber(count)}</Text>
+      <AnimateNumber
+        value={count}
+        timing={timingFunction}
+        formatter={formatNumber}
+        style={styles.infoText}
+      />
       <Text style={styles.infoTextSubtitle}>já assinaram</Text>
     </View>
   );
@@ -142,16 +158,24 @@ RemainingDays.propTypes = {
 };
 
 
+const textShadow = {
+  textShadowColor: "rgba(0,0,0, 1)",
+  textShadowOffset: { width: 1, height: 1 },
+  textShadowRadius: 1,
+};
+
 const infoText = {
   color: "#fff",
   fontFamily: "lato",
   fontSize: 24,
+  ...textShadow,
 };
 
 const infoTextSubtitle = {
-  color: "#c7c7c7",
+  color: "rgba(255,255,255, 0.60)",
   fontFamily: "lato",
   fontSize: 13,
+  ...textShadow,
 };
 
 const styles = StyleSheet.create({
@@ -159,21 +183,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   infoContainer: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: 20,
+    backgroundColor: "transparent",
   },
   infoPercentageText: {
     ...infoText,
-    color: "#00db5e",
+    color: "#fff",
     fontWeight: "bold",
   },
   infoPercentageSubtitle: {
     ...infoTextSubtitle,
-    color: "#00db5e",
   },
   infoText: {
     ...infoText,
@@ -182,7 +206,7 @@ const styles = StyleSheet.create({
     ...infoTextSubtitle,
   },
   progress: {
-    height: 14,
+    height: 7,
     backgroundColor: "#484848",
   },
 });

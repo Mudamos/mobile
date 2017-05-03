@@ -4,8 +4,13 @@ import {
   StyleSheet,
 } from "react-native";
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth } = Dimensions.get("window");
 
+const textShadow = {
+  textShadowColor: "rgba(0,0,0, 1)",
+  textShadowOffset: { width: 1, height: 1 },
+  textShadowRadius: 1,
+};
 
 export default StyleSheet.create({
   actionIcon: {
@@ -47,6 +52,10 @@ export default StyleSheet.create({
   },
   listView: {
     flex: 1,
+    paddingTop: 5,
+  },
+  listViewContent: {
+    paddingHorizontal: 10,
   },
   navigationBar: {
     backgroundColor: "#883DE1",
@@ -73,22 +82,14 @@ export default StyleSheet.create({
   },
   plipImage: {
     minWidth: windowWidth,
-
-    // We want to render the image as tall as possible, so we don't see its bounds when scrolling
-    height: windowHeight,
-
-    // This is just to proper position the images up high
-    marginBottom: 100,
+    ...StyleSheet.absoluteFillObject,
   },
   plipImageGradient: {
     ...StyleSheet.absoluteFillObject,
   },
   plipTitleContainer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
     backgroundColor: "transparent",
+    flex: 1,
   },
   plipTitleInnerContainer: {
     flex: 1,
@@ -100,10 +101,21 @@ export default StyleSheet.create({
     fontFamily: "pt sans",
     fontSize: 48,
     fontWeight: "bold",
+    lineHeight: 60,
+    marginVertical: 10,
+    ...textShadow,
+  },
+  plipRow: {
+    flex: 1,
+    overflow: "hidden",
+    borderRadius: 3,
+    backgroundColor: "#F9F9F9",
   },
   plipSubtitle: {
     color: "#fff",
     fontSize: 22,
+    lineHeight: 30,
+    ...textShadow,
 
     ...Platform.select({
       ios: {
@@ -119,26 +131,52 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   rowContainer: {
-    backgroundColor: "black",
+    marginBottom: 25,
+    borderRadius: 3,
+    backgroundColor: "#F9F9F9",
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
   tableRow: {
     marginTop: 0,
   },
+  signedContainer: {
+    position: "absolute",
+    top: 20,
+    right: -45,
+  },
+  signedGradient: {
+    paddingVertical: 2,
+    paddingHorizontal: 10,
+    width: 150,
+    justifyContent: "center",
+    alignItems: "center",
+    transform: [{rotate: "45deg"}],
+  },
+  signedText: {
+    color: "white",
+    fontFamily: "lato",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
   subTabContainer: {
     height: 36,
-    backgroundColor: "#222",
+    backgroundColor: "#F9F9F9",
     alignItems: "center",
     justifyContent: "center",
   },
   subItem: {
-    color: "#fff",
+    color: "#8934E5",
     fontFamily: "lato",
     fontSize: 12,
     fontWeight: "bold",
   },
   subTabItemContainer: {
     borderRadius: 100,
-    backgroundColor: "rgba(70,70,70,0.51)",
+    backgroundColor: "#F3F3F3",
     flexDirection: "row",
     paddingLeft: 10,
     paddingRight: 5,
@@ -152,7 +190,7 @@ export default StyleSheet.create({
   },
   tabsContainer: {
     height: 36,
-    backgroundColor: "#292929",
+    backgroundColor: "#F3F3F3",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",

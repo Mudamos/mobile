@@ -7,7 +7,7 @@ export default StyleSheet.create({
   container: {
     backgroundColor: "transparent",
     flex: 1,
-    paddingTop: 80,
+    paddingTop: 60,
   },
   contentContainer: {
     flex: 1,
@@ -22,7 +22,7 @@ export default StyleSheet.create({
   },
   menuListContainer: {
     flex: 3,
-    marginTop: 60,
+    marginTop: 50,
   },
   profileInfoContainer: {
     flexDirection: "row",

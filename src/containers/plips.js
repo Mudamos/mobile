@@ -10,7 +10,7 @@ import {
   sortBy,
 } from "ramda";
 
-import { isDev } from "../utils";
+import { isDev, siteLinks } from "../utils";
 
 import locale from "../locales/pt-BR";
 
@@ -34,6 +34,7 @@ import {
   errorFetchingCitywidePlips,
   currentUser as getCurrentUser,
   getPlipsFilters,
+  getUserSignInfo,
   isFetchingNationwidePlips,
   isFetchingStatewidePlips,
   isFetchingCitywidePlips,
@@ -107,11 +108,16 @@ class Container extends Component {
       isFetchingProfile,
       isUserLoggedIn,
       onChangePassword,
+      onOpenURL,
       onProfileEdit,
     } = this.props;
 
+    const { mudamos, projectsReason } = siteLinks.homeLinks;
+
     const entries = [
-      { icon: "info", title: locale.menu.about, action: this.onAbout.bind(this), position: 2 },
+      { icon: "extension", title: mudamos.title, action: () => onOpenURL(mudamos.link), position: 2 },
+      { icon: "help", title: projectsReason.title, action: () => onOpenURL(projectsReason.link), position: 3 },
+      { icon: "info", title: locale.menu.about, action: this.onAbout.bind(this), position: 4 },
     ];
 
     if (!isFetchingProfile && currentUser) {
@@ -310,6 +316,7 @@ const mapStateToProps = state => {
     statewidePlips: findStatewidePlips(state),
     citywidePlips: findCitywidePlips(state),
     plipsSignInfo: findPlipsSignInfo(state),
+    userSignInfo: getUserSignInfo(state),
   };
 }
 

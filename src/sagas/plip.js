@@ -73,6 +73,7 @@ import {
 } from "../actions";
 
 import {
+  allScopedPlips,
   currentAuthToken,
   getCurrentSigningPlip,
   getPlipsFilters,
@@ -186,9 +187,7 @@ export function* fetchNationWidePlipsSaga({ mudamosWebApi }) {
       yield put(fetchingNationwidePlips(true));
       const response = yield call(fetchPlips, { mudamosWebApi });
 
-      response.plips = yield call(processPlipsResponse, response);
       yield put(nationwidePlipsFetched(response));
-
       yield put(fetchingNationwidePlips(false));
     } catch (e) {
       logError(e);
@@ -209,7 +208,6 @@ function* fetchNationwidePlipsNextPageSaga({ mudamosWebApi }) {
       yield put(fetchingNextNationwidePlipsPage(true));
       const response = yield call(fetchPlips, { page, mudamosWebApi });
 
-      response.plips = yield call(processPlipsResponseForNextPage, response);
       yield put(plipsAppendNationwidePlips(response));
     } catch (e) {
       logError(e);
@@ -227,7 +225,6 @@ function* refreshNationwidePlipsSaga({ mudamosWebApi }) {
       yield put(isRefreshingNationwidePlips(true));
       const response = yield call(fetchPlips, { page: 1, mudamosWebApi });
 
-      response.plips = yield call(processPlipsResponse, response);
       yield put(nationwidePlipsFetched(response));
     } catch (e) {
       logError(e);
@@ -252,7 +249,6 @@ function* fetchStatewidePlipsSaga({ mudamosWebApi }) {
         uf: filters.state.uf,
       });
 
-      response.plips = yield call(processPlipsResponse, response);
       yield put(statewidePlipsFetched(response));
     } catch (e) {
       logError(e);
@@ -276,7 +272,6 @@ function* fetchStatewidePlipsNextPageSaga({ mudamosWebApi }) {
         uf: filters.state.uf,
       });
 
-      response.plips = yield call(processPlipsResponseForNextPage, response);
       yield put(plipsAppendStatewidePlips(response));
     } catch (e) {
       logError(e);
@@ -300,7 +295,6 @@ function* refreshStatewidePlipsSaga({ mudamosWebApi }) {
         uf: filters.state.uf,
       });
 
-      response.plips = yield call(processPlipsResponse, response);
       yield put(statewidePlipsFetched(response));
     } catch (e) {
       logError(e);
@@ -323,7 +317,6 @@ function* fetchCitywidePlipsSaga({ mudamosWebApi }) {
         cityId: filters.city.id,
       });
 
-      response.plips = yield call(processPlipsResponse, response);
       yield put(citywidePlipsFetched(response));
     } catch (e) {
       logError(e);
@@ -347,7 +340,6 @@ function* fetchCitywidePlipsNextPageSaga({ mudamosWebApi }) {
         cityId: filters.city.id,
       });
 
-      response.plips = yield call(processPlipsResponseForNextPage, response);
       yield put(plipsAppendCitywidePlips(response));
     } catch (e) {
       logError(e);
@@ -371,7 +363,6 @@ function* refreshCitywidePlipsSaga({ mudamosWebApi }) {
         cityId: filters.city.id,
       });
 
-      response.plips = yield call(processPlipsResponse, response);
       yield put(citywidePlipsFetched(response));
     } catch (e) {
       logError(e);
@@ -429,30 +420,6 @@ function* fetchStoredPlipsFilters({ localStorage }) {
 
 function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
   return yield call(mudamosWebApi.listPlips, { page, uf, cityId });
-}
-
-/*
- * After fetching or refreshing we must add the plips links accordingly.
- */
-function processPlipsResponse({ plips, nextPage }) {
-  // Add the mudamos links to the end only if there are plips
-  if (!nextPage && plips && plips.length) {
-    return [...plips, { key: "LINKS" }];
-  }
-
-  return plips;
-}
-
-/*
- * After fetching the next page we must add the plips links accordingly.
- */
-function processPlipsResponseForNextPage({ plips, nextPage }) {
-  // Add the mudamos links to the end
-  if (!nextPage) {
-    return [...(plips || []), { key: "LINKS" }];
-  }
-
-  return plips;
 }
 
 function* fetchPlipRelatedInfo({ mobileApi }) {
@@ -652,7 +619,8 @@ function* invalidateWalletAndNavigate(params = {}) {
   yield put(profileStateMachine(params));
 }
 
-function* fetchPlipsSignInfoSaga({ mobileApi }) {
+
+function* fetchPlipsRelatedInfoSaga({ mobileApi }) {
   const actions = [
     "PLIPS_NATIONWIDE_FETCHED",
     "PLIPS_STATEWIDE_FETCHED",
@@ -668,15 +636,53 @@ function* fetchPlipsSignInfoSaga({ mobileApi }) {
       const plipIds = pluck("id", plips || []).filter(isNotNil);
       if (!plipIds.length) return;
 
-      const results = yield plipIds.map(id => call(mobileApi.plipSignInfo, id))
-
-      const signInfo = zip(plipIds, results).reduce((memo, [id, result]) => {
-        memo[id] = result.info;
-        return memo;
-      }, {});
-      yield put(plipsSingInfoFetched({ signInfo }));
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
     } catch(e) {
-      logError(e, { tag: "fetchPlipsSignInfoSaga" });
+      logError(e, { tag: "fetchPlipsRelatedInfoSaga" });
+    }
+  });
+}
+
+function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
+  try {
+    if (!plipIds || !plipIds.length) return;
+
+    const loggedIn = yield select(isUserLoggedIn);
+
+    const [plipSignResults] = yield [
+      call(fetchPlipsSignInfo, { mobileApi, plipIds }),
+      loggedIn ? call(fetchPlipsUserSignInfo, { mobileApi, plipIds }) : Promise.resolve(),
+    ];
+
+    const signInfo = zip(plipIds, plipSignResults).reduce((memo, [id, result]) => {
+      memo[id] = result.info;
+      return memo;
+    }, {});
+
+    yield put(plipsSingInfoFetched({ signInfo }));
+  } catch(e) {
+    logError(e, { tag: "fetchPlipsRelatedInfo" });
+  }
+}
+
+function* fetchPlipsSignInfo({ mobileApi, plipIds }) {
+  return yield plipIds.map(id => call(mobileApi.plipSignInfo, id));
+}
+
+function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
+  return yield plipIds.map(plipId => call(fetchUserSignInfo, { mobileApi, plipId }));
+}
+
+function* loadStorePlipsInfo({ mobileApi }) {
+  yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
+    try {
+      const plips = yield select(allScopedPlips);
+      const plipIds = pluck("id", plips || []).filter(isNotNil);
+      if (!plipIds.length) return;
+
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+    } catch(e) {
+      logError(e, { tag: "loadStorePlipsInfo" });
     }
   });
 }
@@ -702,5 +708,6 @@ export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiEr
   yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
   yield spawn(fetchPlipRelatedInfo, { mobileApi });
-  yield spawn(fetchPlipsSignInfoSaga, { mobileApi });
+  yield spawn(fetchPlipsRelatedInfoSaga, { mobileApi });
+  yield fork(loadStorePlipsInfo, { mobileApi });
 }
