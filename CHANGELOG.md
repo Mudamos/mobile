@@ -1,5 +1,7 @@
 # Next
 
+* [PR #319] Add firebase crash library
+  - Follow the readme info on this PR. Google services json/plist config
 * [PR #317] Add gradient to the plip show and improve share message
 * [PR #316] New plips design
 * [PR #311] Fix side menu overflow when the user has a long name or email
