@@ -90,7 +90,7 @@ const translations = {
   sendYourIdea: "Envie sua ideia!",
   share: "Compartilhar",
   shareAlt: "Compartilhe",
-  shareMessage: ({description, name, hashtag}) => `${description}! vote no ${name} e construa um Brasil melhor. ${hashtag}`,
+  shareMessage: ({description, name, hashtag}) => `${description}! Assine ${name} e construa um Brasil melhor. ${hashtag}`,
   signatures: "Assinaturas",
   signupSuccessModalText: "Seu celular foi validado e agora você já pode assinar projetos de lei de iniciativa popular.",
   signed: "Assinado",

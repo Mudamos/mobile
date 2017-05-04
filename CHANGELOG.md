@@ -1,5 +1,6 @@
 # Next
 
+* [PR #317] Add gradient to the plip show and improve share message
 * [PR #316] New plips design
 * [PR #311] Fix side menu overflow when the user has a long name or email
 * [PR #310] Persist the plips filters
