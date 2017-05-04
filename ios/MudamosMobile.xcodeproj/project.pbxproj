@@ -38,6 +38,7 @@
 		4632073B1EBA7D0800778DCC /* google in Resources */ = {isa = PBXBuildFile; fileRef = 463207391EBA7D0800778DCC /* google */; };
 		4632073C1EBA7D0800778DCC /* google in Resources */ = {isa = PBXBuildFile; fileRef = 463207391EBA7D0800778DCC /* google */; };
 		463C8ED11E0841D500E79749 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463C8EB71E08419900E79749 /* libBVLinearGradient.a */; };
+		463D557B1EBB9E1700D1D8C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */; };
 		463FA2B21E30E7830035B49D /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463FA2AF1E30E7310035B49D /* libRNShare.a */; };
 		46439D3F1E709B03008577C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		46439D401E709B03008577C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -497,6 +498,7 @@
 		413B12353FD34D1C9F7FE084 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		462DE3E01E9C0D630075CAFC /* MudamosProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosProduction.entitlements; sourceTree = "<group>"; };
 		463207391EBA7D0800778DCC /* google */ = {isa = PBXFileReference; lastKnownFileType = folder; path = google; sourceTree = "<group>"; };
+		463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46439D881E709B03008577C0 /* MudamosProduction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosProduction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46439D891E709B03008577C0 /* InfoMudamosProduction.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = InfoMudamosProduction.plist; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/InfoMudamosProduction.plist"; sourceTree = "<absolute>"; };
 		46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold_italic.ttf; sourceTree = "<group>"; };
@@ -1019,6 +1021,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */,
 				46C00F0F1EBB56FA006F17F1 /* GoogleService-Info.plist */,
 				46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */,
 				463207391EBA7D0800778DCC /* google */,
@@ -1639,6 +1642,7 @@
 				46439D691E709B03008577C0 /* EvilIcons.ttf in Resources */,
 				46439D6A1E709B03008577C0 /* lato_hairline_italic.ttf in Resources */,
 				46439D6B1E709B03008577C0 /* roboto_black_italic.ttf in Resources */,
+				463D557B1EBB9E1700D1D8C1 /* GoogleService-Info.plist in Resources */,
 				46439D6C1E709B03008577C0 /* FontAwesome.ttf in Resources */,
 				46439D6D1E709B03008577C0 /* Foundation.ttf in Resources */,
 				46439D6E1E709B03008577C0 /* roboto_italic.ttf in Resources */,
