@@ -125,6 +125,8 @@ Obtenha com um responsável o arquivo `google-services.json` e adicione na pasta
   - adicionar em `android/app/src/development/`
 - mudamosBeta
   - adicionar em `android/app/src/mudamosBeta/`
+- production
+  - adicionar em `android/app/src/production/`
 
 #### Para gerar a apk:
 
@@ -188,8 +190,8 @@ Obtenha com um responsável o arquivo `GoogleService-Info.plist` e adicione na p
   - adicionar em `ios/google/development/`
 - MudamosMobileBeta
   - adicionar em `ios/google/mudamos-beta/`
-
-
+- MudamosMobileProduction
+  - adicionar em `ios/google/production/`
 
 #### Para gerar o `.ipa`:
 
