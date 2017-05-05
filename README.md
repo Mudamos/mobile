@@ -32,11 +32,12 @@ Agora instale os seguintes pacotes da SDK:
 * Android SDK Platform 24
 * Android Support Repository, revision 38
 * Google Repository, revision 36
+* Google Play Services, revision 39
 
 Abaixo está uma forma de instalar as dependências sendo elas algumas mais atuais (não ainda testadas). Lembre-se que vc pode usar manualmente o SD Manager do android.
 
 ```
-$ android update sdk --all --no-ui --filter tools,platform-tools,build-tools-23.0.1,android-24,extra-android-support,extra-android-m2repository,extra-google-m2repository
+$ android update sdk --all --no-ui --filter tools,platform-tools,build-tools-23.0.1,android-24,extra-android-support,extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services
 ```
 
 ### iOS
@@ -116,7 +117,18 @@ Atualmente os seguintes *flavors* precisam das informações de configurações 
   - configurações em `./android/keystores/mudamos-production.properties`
   - keystore em `android/keystores/mudamos-production.keystore`
 
-Para gerar a apk:
+#### Firebase config file
+
+Obtenha com um responsável o arquivo `google-services.json` e adicione na pasta do flavor correspondente:
+
+- development
+  - adicionar em `android/app/src/development/`
+- mudamosBeta
+  - adicionar em `android/app/src/mudamosBeta/`
+- production
+  - adicionar em `android/app/src/production/`
+
+#### Para gerar a apk:
 
 ```
 $ ENVFILE=.env.somenv android/gradlew -p android assemble{Flavor}{Env}
@@ -170,9 +182,20 @@ Onde `<RELEASE_KEY_ALIAS>` é o alis encontrado no seu arquivo `.properties` e `
 
 ### iOS
 
-Para a versão beta:
+#### Firebase config file
 
-Para gerar o `.ipa`:
+Obtenha com um responsável o arquivo `GoogleService-Info.plist` e adicione na pasta do target correspondente:
+
+- MudamosMobile (development)
+  - adicionar em `ios/google/development/`
+- MudamosMobileBeta
+  - adicionar em `ios/google/mudamos-beta/`
+- MudamosMobileProduction
+  - adicionar em `ios/google/production/`
+
+#### Para gerar o `.ipa`:
+
+Versão beta:
 
 ```
 $ npm run build-ios-beta -- -m <PATH_TO_THE_PROVISION_PROFILE>

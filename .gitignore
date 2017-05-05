@@ -58,3 +58,9 @@ envs
 android/keystores/*.keystore
 android/keystores/*.properties
 !android/keystores/debug.keystore.properties
+
+# Google config
+ios/google/*/GoogleService-Info.plist
+android/app/src/development/google-services.json
+android/app/src/mudamosBeta/google-services.json
+android/app/src/production/google-services.json

@@ -4934,6 +4934,10 @@ react-native-fence-html:
     htmlparser2 "^3.9.0"
     stream "0.0.2"
 
+react-native-firebase-crash-report@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-firebase-crash-report/-/react-native-firebase-crash-report-1.1.1.tgz#bb7cb0e11dc3b0124eea2a195dd0098e1f25ca0f"
+
 react-native-image-picker@0.24.0:
   version "0.24.0"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.24.0.tgz#39b56894e6e9947a11a53815f4d474c1f319f479"

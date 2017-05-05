@@ -15,6 +15,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "IQKeyboardManager.h"
 #import "ReactNativeConfig.h"
+@import Firebase;
 
 @implementation AppDelegate
 
@@ -37,6 +38,8 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  [FIRApp configure];
 
   [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemText = @"OK";
 
