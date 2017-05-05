@@ -24,6 +24,7 @@ import {
   openURL,
   profileSaveAvatar,
   refreshFilteredPlips,
+  tellAFriend,
   userFirstTimeDone,
 } from "../actions";
 
@@ -100,6 +101,7 @@ class Container extends Component {
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
     onSignUp: PropTypes.func.isRequired,
+    onTellAFriend: PropTypes.func.isRequired,
   };
 
   get menuEntries() {
@@ -110,6 +112,7 @@ class Container extends Component {
       onChangePassword,
       onOpenURL,
       onProfileEdit,
+      onTellAFriend,
     } = this.props;
 
     const { mudamos, projectsReason } = siteLinks.homeLinks;
@@ -118,6 +121,7 @@ class Container extends Component {
       { icon: "extension", title: mudamos.title, action: () => onOpenURL(mudamos.link), position: 2 },
       { icon: "help", title: projectsReason.title, action: () => onOpenURL(projectsReason.link), position: 3 },
       { icon: "info", title: locale.menu.about, action: this.onAbout.bind(this), position: 4 },
+      { icon: "favorite", title: locale.menu.tellAFriend, action: onTellAFriend, position: 5 },
     ];
 
     if (!isFetchingProfile && currentUser) {
@@ -337,6 +341,7 @@ const mapDispatchToProps = dispatch => ({
   onSignUp: () => dispatch(navigate("signUp")),
   onSelectCityFilter: () => dispatch(navigate("cityFilter")),
   onSelectStateFilter: () => dispatch(navigate("stateFilter")),
+  onTellAFriend: () => dispatch(tellAFriend()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);
