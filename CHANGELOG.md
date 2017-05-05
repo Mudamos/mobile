@@ -1,5 +1,6 @@
 # Next
 
+* [PR #320] Add “tell a friend” menu share option
 * [PR #319] Add firebase crash library
   - Follow the readme info on this PR. Google services json/plist config
 * [PR #317] Add gradient to the plip show and improve share message
