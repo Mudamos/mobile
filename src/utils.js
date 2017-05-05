@@ -41,6 +41,8 @@ const toLogTag = (...tags) => compact(tags).map(t => `[${t}]`).join(" ");
 
 export const MUDAMOS_WEB_SITE = "https://www.mudamos.org";
 
+export const MUDAMOS_APP_SITE = "https://app.mudamos.org";
+
 export const NATIONWIDE_SCOPE = "nationwide";
 
 export const STATEWIDE_SCOPE = "statewide";
@@ -188,3 +190,5 @@ export const filterWithKeys = (pred, obj) => pipe(
 export const pickObjNonNilValues = obj => filterWithKeys((_, val) => !isNil(val), obj);
 
 export const concatLists = unapply(reduce((acc, list) => concat(acc, list || []), []));
+
+export const randomItem = list => list[Math.floor(Math.random() * list.length)];

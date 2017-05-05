@@ -1,11 +1,19 @@
 import { takeEvery } from "redux-saga";
-import { call, put, spawn } from "redux-saga/effects";
+import { call, put, spawn, fork } from "redux-saga/effects";
+
+import { keys } from "ramda";
 
 import {
   shareLinkError,
 } from "../actions";
 
-import { hashtagfy, logError } from "../utils";
+import {
+  MUDAMOS_APP_SITE,
+  hashtagfy,
+  log,
+  logError,
+  randomItem,
+} from "../utils";
 import locale from "../locales/pt-BR";
 
 import Share from "react-native-share";
@@ -57,8 +65,30 @@ function* sharePlip() {
   });
 }
 
+function* tellAFriend() {
+  yield takeEvery("SHARE_TELL_A_FRIEND", function* () {
+    try {
+      const ids = keys(locale.tellAFriendMessages);
+      const randomId = randomItem(ids);
+      const url = `${MUDAMOS_APP_SITE}/?${randomId}`;
+      const message = locale.tellAFriendMessages[randomId];
+      const shareOptions = { url, message };
+
+      log(`Sharing: ${JSON.stringify(shareOptions)}`);
+      yield call(shareLink, shareOptions);
+    } catch (e) {
+      logError(e);
+
+      if (e.error !== SHARE_CANCEL_ERROR_MESSAGE) {
+        yield put(shareLinkError(e));
+      }
+    }
+  });
+}
+
 
 export default function* shareSaga() {
   yield spawn(shareLinkSaga);
   yield spawn(sharePlip);
+  yield fork(tellAFriend);
 }

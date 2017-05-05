@@ -12,3 +12,7 @@ export const sharePlip = plip => ({
   type: "SHARE_PLIP",
   payload: { plip },
 });
+
+export const tellAFriend = () => ({
+  type: "SHARE_TELL_A_FRIEND",
+});
