@@ -115,13 +115,14 @@ class Container extends Component {
       onTellAFriend,
     } = this.props;
 
-    const { mudamos, projectsReason } = siteLinks.homeLinks;
+    const { mudamos, projectsReason, help } = siteLinks.homeLinks;
 
     const entries = [
       { icon: "extension", title: mudamos.title, action: () => onOpenURL(mudamos.link), position: 2 },
       { icon: "help", title: projectsReason.title, action: () => onOpenURL(projectsReason.link), position: 3 },
-      { icon: "info", title: locale.menu.about, action: this.onAbout.bind(this), position: 4 },
-      { icon: "favorite", title: locale.menu.tellAFriend, action: onTellAFriend, position: 5 },
+      { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout.bind(this), position: 4 },
+      { icon: "info", title: help.title, action: () => onOpenURL(help.link), position: 5 },
+      { icon: "favorite", title: locale.menu.tellAFriend, action: onTellAFriend, position: 6 },
     ];
 
     if (!isFetchingProfile && currentUser) {
