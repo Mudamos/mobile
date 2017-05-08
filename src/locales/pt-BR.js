@@ -44,7 +44,7 @@ const translations = {
   mobile: "Celular",
   moreDetails: "Mais detalhes",
   menu: {
-    about: "Sobre",
+    about: "Sobre o aplicativo",
     changePassword: "Alterar senha",
     editProfile: "Editar perfil",
     tellAFriend: "Contar para um amigo",
