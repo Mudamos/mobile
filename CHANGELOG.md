@@ -1,5 +1,6 @@
 # Next
 
+* [PR #324] Change menu text items
 * [PR #321] Add “help” menu option
 * [PR #320] Add “tell a friend” menu share option
 * [PR #319] Add firebase crash library
