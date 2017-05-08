@@ -153,7 +153,7 @@ export const cancelablePromise = promise => {
 };
 
 export const homeLinks = {
-  mudamos: { title: "Conheça Mudamos+", link: "https://www.mudamos.org" },
+  mudamos: { title: "Conheça a Mudamos", link: "https://www.mudamos.org" },
   projectsReason: { title: "Por que estes projetos de lei?", link: "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular" },
   help: { title: "Ajuda", link: "https://www.mudamos.org/ajuda" },
 };
