@@ -167,14 +167,14 @@ const textShadow = {
 const infoText = {
   color: "#fff",
   fontFamily: "lato",
-  fontSize: 24,
+  fontSize: 19,
   ...textShadow,
 };
 
 const infoTextSubtitle = {
   color: "rgba(255,255,255, 0.60)",
   fontFamily: "lato",
-  fontSize: 13,
+  fontSize: 12,
   ...textShadow,
 };
 
