@@ -9,6 +9,7 @@ def pods
   pod "IQKeyboardManager"
   pod "Firebase/Core"
   pod "Firebase/Crash"
+  pod "Firebase/RemoteConfig"
 end
 
 target "MudamosMobile" do
