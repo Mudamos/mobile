@@ -220,6 +220,7 @@ dependencies {
     }
     compile 'com.google.android.gms:play-services-base:10.2.4'
     compile 'com.google.android.gms:play-services-maps:10.2.4'
+    compile 'com.google.firebase:firebase-config:10.2.4'
     compile project(':react-native-vector-icons')
     compile project(':react-native-spinkit')
     compile project(':react-native-config')
