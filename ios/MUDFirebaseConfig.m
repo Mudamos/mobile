@@ -30,6 +30,11 @@
   if (self) {
     _remoteConfig = [FIRRemoteConfig remoteConfig];
 
+    #ifdef DEBUG
+      FIRRemoteConfigSettings *remoteConfigSettings = [[FIRRemoteConfigSettings alloc] initWithDeveloperModeEnabled:YES];
+      _remoteConfig.configSettings = remoteConfigSettings;
+    #endif
+
     [self setDefaults];
     [self fetchConfig];
   }
@@ -43,7 +48,12 @@
 }
 
 - (void)fetchConfig {
-  [self.remoteConfig fetchWithCompletionHandler:^(FIRRemoteConfigFetchStatus status, NSError *error) {
+  long expirationDuration = 3600;
+  if (self.remoteConfig.configSettings.isDeveloperModeEnabled) {
+    expirationDuration = 0;
+  }
+
+  [self.remoteConfig fetchWithExpirationDuration:expirationDuration completionHandler:^(FIRRemoteConfigFetchStatus status, NSError *error) {
     if (status == FIRRemoteConfigFetchStatusSuccess) {
       RCTLog(@"Firebase remote config fetched");
       [self.remoteConfig activateFetched];
