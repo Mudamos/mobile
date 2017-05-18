@@ -3,7 +3,6 @@ import android.support.annotation.NonNull;
 
 import java.util.Map;
 import java.util.HashMap;
-import com.airbnb.android.react.maps.BuildConfig;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
@@ -14,6 +13,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 
+import org.mudamos.petition.BuildConfig;
+
 
 /**
  * Created by guimello on 5/17/17.
@@ -22,11 +23,13 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 public class Config {
     private FirebaseRemoteConfig remoteConfig;
 
+    private boolean DEV_MODE = BuildConfig.DEV_MODE.equals("true");
+
     public Config() {
         remoteConfig = FirebaseRemoteConfig.getInstance();
 
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-                .setDeveloperModeEnabled(BuildConfig.DEBUG)
+                .setDeveloperModeEnabled(DEV_MODE)
                 .build();
 
         remoteConfig.setConfigSettings(configSettings);
