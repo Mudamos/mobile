@@ -54,7 +54,7 @@ const messageForDaysLeft = ({ finalDate }) => {
 
 const renderPlipFinished = () => {
   return (
-    <View style={{flex: 0.7}}>
+    <View>
       <View style={{flex: 1, justifyContent: "flex-end"}}>
         <Text style={styles.infoTextSubtitle}>{locale.petitionEnded}</Text>
       </View>
@@ -106,7 +106,7 @@ const TargetPercentage = ({ signaturesRequired, signaturesCount }) => {
   const percentage = progressPercentage({ signaturesRequired, signaturesCount });
 
   return (
-    <View style={styles.full}>
+    <View>
       <AnimateNumber
         value={percentage}
         countBy={2}
@@ -114,7 +114,7 @@ const TargetPercentage = ({ signaturesRequired, signaturesCount }) => {
         formatter={val => `${val}%`}
         style={styles.infoPercentageText}
       />
-      <Text style={styles.infoPercentageSubtitle}>da meta</Text>
+      <Text style={styles.infoPercentageSubtitle}>da meta atual</Text>
     </View>
   );
 };
@@ -128,7 +128,7 @@ const SignaturesCount = ({ signaturesCount }) => {
   const count = signaturesCount || 0;
 
   return (
-    <View style={{ flex: 1.5 }}>
+    <View>
       <AnimateNumber
         value={count}
         timing={timingFunction}
@@ -146,7 +146,7 @@ SignaturesCount.propTypes = {
 
 const RemainingDays = ({ finalDate }) => {
   return (
-    <View style={{ flex: 2 }}>
+    <View>
       <Text style={styles.infoText}>{messageForDaysLeft({ finalDate })}</Text>
       <Text style={styles.infoTextSubtitle}>para o encerramento</Text>
     </View>
@@ -184,9 +184,9 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 15,
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    paddingHorizontal: 12,
     paddingTop: 10,
     paddingBottom: 20,
     backgroundColor: "transparent",
