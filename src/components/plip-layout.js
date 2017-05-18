@@ -210,10 +210,14 @@ export default class PlipLayout extends Component {
             {this.renderProgress()}
 
             <View style={styles.infoContainer}>
-              {this.renderTargetPercentage()}
-              {this.renderSignaturesCount()}
-              {this.signatureEnabled && this.renderDaysLeft()}
-              {!this.signatureEnabled && this.renderPlipFinished()}
+              <View style={styles.infoContainerRow}>
+                {this.renderTargetPercentage()}
+                {this.renderSignaturesCount()}
+                {this.signatureEnabled && this.renderDaysLeft()}
+                {!this.signatureEnabled && this.renderPlipFinished()}
+              </View>
+
+              <Text style={styles.finalGoalText}>* Nossa meta final é de {formatNumber(plip.totalSignaturesRequired)} assinaturas</Text>
             </View>
 
             {userSignDate && <SignedMessageView date={userSignDate} />}
@@ -268,16 +272,16 @@ export default class PlipLayout extends Component {
 
   renderTargetPercentage() {
     return (
-      <View style={styles.full}>
+      <View>
         <Text style={styles.infoPercentageText}>{this.progressPercentage}%</Text>
-        <Text style={styles.infoPercentageSubtitle}>da meta</Text>
+        <Text style={styles.infoPercentageSubtitle}>da meta atual *</Text>
       </View>
     );
   }
 
   renderPlipFinished() {
     return (
-      <View style={{flex: 0.7}}>
+      <View>
         <View style={{flex: 1, justifyContent: "flex-end"}}>
           <Text style={styles.infoTextSubtitle}>{locale.petitionEnded}</Text>
         </View>
@@ -387,7 +391,7 @@ export default class PlipLayout extends Component {
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
     return (
-      <View style={{ flex: 1.5 }}>
+      <View>
         <Text style={styles.infoText}>{formatNumber(count)}</Text>
         <Text style={styles.infoTextSubtitle}>já assinaram</Text>
       </View>
@@ -466,7 +470,7 @@ export default class PlipLayout extends Component {
 
   renderDaysLeft() {
     return (
-      <View style={{ flex: 2 }}>
+      <View>
         <Text style={styles.infoText}>{this.messageForDaysLeft}</Text>
         <Text style={styles.infoTextSubtitle}>para o encerramento</Text>
       </View>

@@ -21,13 +21,13 @@ const textShadow = {
 const infoText = {
   color: "#fff",
   fontFamily: "lato",
-  fontSize: 24,
+  fontSize: 20,
 };
 
 const infoTextSubtitle = {
   color: "#c7c7c7",
   fontFamily: "lato",
-  fontSize: 13,
+  fontSize: 12,
 };
 
 
@@ -67,6 +67,12 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
+  finalGoalText: {
+    marginTop: 10,
+    textAlign: "right",
+
+    ...infoTextSubtitle,
+  },
   footerContainer: {
     flex: 1,
     paddingHorizontal: 27,
@@ -101,13 +107,14 @@ export default StyleSheet.create({
     height: IMAGE_HEIGHT_WITH_LEAK,
   },
   infoContainer: {
-    flex: 1,
     backgroundColor: "#000",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 15,
+    paddingHorizontal: 12,
     paddingVertical: 10,
+  },
+  infoContainerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
   },
   infoPercentageText: {
     ...infoText,
