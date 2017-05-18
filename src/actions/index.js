@@ -3,6 +3,7 @@ export * from "./app";
 export * from "./authentication";
 export * from "./city";
 export * from "./facebook";
+export * from "./feature";
 export * from "./linking";
 export * from "./location";
 export * from "./local-storage";

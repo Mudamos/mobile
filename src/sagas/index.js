@@ -4,6 +4,7 @@ import appStateSaga from "./app-state";
 import citySaga from "./city";
 import errorSaga from "./error";
 import facebookSaga from "./facebook";
+import featureSaga from "./feature";
 import authenticationSaga from "./authentication";
 import passwordSaga from "./password";
 import permissionSaga from "./permission";
@@ -29,6 +30,7 @@ export default function* rootSaga({
   mudamosWebApi,
   mobileApi,
   permissionService,
+  RemoteConfigService,
   repositories,
   sessionStore,
   walletStore,
@@ -37,6 +39,7 @@ export default function* rootSaga({
   yield spawn(citySaga, { repositories });
   yield spawn(navigationSaga, { mobileApi, sessionStore });
   yield spawn(facebookSaga, { sessionStore, mobileApi, Crypto });
+  yield spawn(featureSaga, { RemoteConfigService });
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
   yield spawn(passwordSaga, { mobileApi, sessionStore, Crypto });
   yield spawn(permissionSaga, { permissionService });

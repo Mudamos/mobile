@@ -2,6 +2,7 @@ export * from "./address";
 export * from "./app";
 export * from "./app-state";
 export * from "./city";
+export * from "./feature";
 export * from "./local-storage";
 export * from "./location";
 export * from "./password";
