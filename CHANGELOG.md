@@ -1,5 +1,7 @@
 # Next
 
+* [PR #337] Add the final goal info as a metric
+
 ## [1.4.0] 08/05/2017
 
 * [PR #324] Change menu text items
