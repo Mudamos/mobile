@@ -62,15 +62,26 @@ const renderPlipFinished = () => {
   );
 };
 
-const MetricsInfo = ({ signaturesRequired, signaturesCount, finalDate }) => {
-  const enabled = signatureEnabled({ finalDate });
+const MetricsInfo = ({
+  isRemainingDaysEnabled,
+  signaturesRequired,
+  signaturesCount,
+  finalDate,
+}) => {
+  const canSign = signatureEnabled({ finalDate });
+
   return (
     <View>
       <View style={styles.infoContainer}>
         <TargetPercentage signaturesRequired={signaturesRequired} signaturesCount={signaturesCount} />
-        <SignaturesCount signaturesCount={signaturesCount} />
-        {enabled && <RemainingDays finalDate={finalDate} />}
-        {!enabled && renderPlipFinished()}
+        <SignaturesCount
+          canSign={canSign}
+          signaturesCount={signaturesCount}
+          signaturesRequired={signaturesRequired}
+          showGoal={canSign && !isRemainingDaysEnabled}
+        />
+        {canSign && isRemainingDaysEnabled && <RemainingDays finalDate={finalDate} />}
+        {!canSign && renderPlipFinished()}
       </View>
 
       <Progress signaturesRequired={signaturesRequired} signaturesCount={signaturesCount} />
@@ -79,9 +90,10 @@ const MetricsInfo = ({ signaturesRequired, signaturesCount, finalDate }) => {
 };
 
 MetricsInfo.propTypes = {
-  finalDate: PropTypes.string,
+  finalDate: PropTypes.string.isRequired,
+  isRemainingDaysEnabled: PropTypes.bool,
   signaturesCount: PropTypes.number.isRequired,
-  signaturesRequired: PropTypes.number,
+  signaturesRequired: PropTypes.number.isRequired,
 };
 
 export default MetricsInfo;
@@ -98,8 +110,8 @@ const Progress = ({ signaturesRequired, signaturesCount }) => {
 };
 
 Progress.propTypes = {
-  signaturesCount: PropTypes.number,
-  signaturesRequired: PropTypes.number,
+  signaturesCount: PropTypes.number.isRequired,
+  signaturesRequired: PropTypes.number.isRequired,
 };
 
 const TargetPercentage = ({ signaturesRequired, signaturesCount }) => {
@@ -120,28 +132,44 @@ const TargetPercentage = ({ signaturesRequired, signaturesCount }) => {
 };
 
 TargetPercentage.propTypes = {
-  signaturesCount: PropTypes.number,
-  signaturesRequired: PropTypes.number,
+  signaturesCount: PropTypes.number.isRequired,
+  signaturesRequired: PropTypes.number.isRequired,
 };
 
-const SignaturesCount = ({ signaturesCount }) => {
-  const count = signaturesCount || 0;
+const SignaturesCount = ({ canSign, showGoal, signaturesCount, signaturesRequired }) => {
+  const count = signaturesCount;
+  const goal = signaturesRequired;
+
+  const CountView = () =>
+    <AnimateNumber
+      value={count}
+      timing={timingFunction}
+      formatter={formatNumber}
+      style={styles.infoText}
+    />;
 
   return (
-    <View>
-      <AnimateNumber
-        value={count}
-        timing={timingFunction}
-        formatter={formatNumber}
-        style={styles.infoText}
-      />
-      <Text style={styles.infoTextSubtitle}>já assinaram</Text>
+    <View style={[(showGoal ? { marginLeft: 5 } : {})]}>
+      {
+        showGoal &&
+          <View style={{flexDirection: "row", alignItems: "flex-start"}}>
+            <CountView />
+            <Text style={[styles.infoTextSubtitle, { alignSelf: "center", marginLeft: 5 }]}>de</Text>
+            <Text style={[styles.infoText, { marginLeft: 5 }]}>{formatNumber(goal)}</Text>
+          </View>
+      }
+
+      {!showGoal && <CountView />}
+      <Text style={styles.infoTextSubtitle}>{canSign ? "já assinaram" : "assinaram"}</Text>
     </View>
   );
 };
 
 SignaturesCount.propTypes = {
-  signaturesCount: PropTypes.number,
+  canSign: PropTypes.bool,
+  showGoal: PropTypes.bool,
+  signaturesCount: PropTypes.number.isRequired,
+  signaturesRequired: PropTypes.number.isRequired,
 };
 
 const RemainingDays = ({ finalDate }) => {
@@ -154,7 +182,7 @@ const RemainingDays = ({ finalDate }) => {
 };
 
 RemainingDays.propTypes = {
-  finalDate: PropTypes.string,
+  finalDate: PropTypes.string.isRequired,
 };
 
 

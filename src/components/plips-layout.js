@@ -37,7 +37,7 @@ import TransparentFlatButton from "./transparent-flat-button";
 import Collapsable from "./collapsable";
 import MyListView from "./list-view";
 import Triangle from "./triangle";
-import MetricsInfo from "./plip/metrics-info";
+import MetricsInfo from "../containers/plip/metrics-info";
 
 import styles from "../styles/plips-layout";
 
