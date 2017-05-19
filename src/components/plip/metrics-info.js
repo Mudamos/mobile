@@ -65,22 +65,35 @@ const MetricsInfo = ({
   isRemainingDaysEnabled,
   signaturesRequired,
   signaturesCount,
+  totalSignaturesRequired,
   finalDate,
 }) => {
   const canSign = signatureEnabled({ finalDate });
+  const showGoal = canSign && !isRemainingDaysEnabled;
 
   return (
     <View>
       <View style={styles.infoContainer}>
-        <TargetPercentage signaturesRequired={signaturesRequired} signaturesCount={signaturesCount} />
-        <SignaturesCount
-          canSign={canSign}
-          signaturesCount={signaturesCount}
-          signaturesRequired={signaturesRequired}
-          showGoal={canSign && !isRemainingDaysEnabled}
-        />
-        {canSign && isRemainingDaysEnabled && <RemainingDays finalDate={finalDate} />}
-        {!canSign && renderPlipFinished()}
+        <View style={styles.infoContainerRow}>
+          <TargetPercentage
+            signaturesRequired={signaturesRequired}
+            signaturesCount={signaturesCount}
+            append={showGoal ? "*" : ""}
+          />
+          <SignaturesCount
+            canSign={canSign}
+            signaturesCount={signaturesCount}
+            signaturesRequired={signaturesRequired}
+            showGoal={showGoal}
+          />
+          {canSign && isRemainingDaysEnabled && <RemainingDays finalDate={finalDate} />}
+          {!canSign && renderPlipFinished()}
+        </View>
+
+        {
+          showGoal &&
+            <Text style={styles.finalGoalText}>* Nossa meta final é de {formatNumber(totalSignaturesRequired)} assinaturas</Text>
+        }
       </View>
 
       <Progress signaturesRequired={signaturesRequired} signaturesCount={signaturesCount} />
@@ -93,6 +106,7 @@ MetricsInfo.propTypes = {
   isRemainingDaysEnabled: PropTypes.bool,
   signaturesCount: PropTypes.number.isRequired,
   signaturesRequired: PropTypes.number.isRequired,
+  totalSignaturesRequired: PropTypes.number.isRequired,
 };
 
 export default MetricsInfo;
@@ -113,7 +127,7 @@ Progress.propTypes = {
   signaturesRequired: PropTypes.number.isRequired,
 };
 
-const TargetPercentage = ({ signaturesRequired, signaturesCount }) => {
+const TargetPercentage = ({ append, signaturesRequired, signaturesCount }) => {
   const percentage = progressPercentage({ signaturesRequired, signaturesCount });
 
   return (
@@ -125,12 +139,13 @@ const TargetPercentage = ({ signaturesRequired, signaturesCount }) => {
         formatter={val => `${val}%`}
         style={styles.infoPercentageText}
       />
-      <Text style={styles.infoPercentageSubtitle}>da meta atual</Text>
+      <Text style={styles.infoPercentageSubtitle}>da meta atual{append}</Text>
     </View>
   );
 };
 
 TargetPercentage.propTypes = {
+  append: PropTypes.string,
   signaturesCount: PropTypes.number.isRequired,
   signaturesRequired: PropTypes.number.isRequired,
 };
@@ -206,17 +221,25 @@ const infoTextSubtitle = {
 };
 
 const styles = StyleSheet.create({
+  finalGoalText: {
+    marginTop: 10,
+    textAlign: "right",
+
+    ...infoTextSubtitle,
+  },
   full: {
     flex: 1,
   },
   infoContainer: {
+    paddingHorizontal: 12,
+    paddingTop: 10,
+    paddingBottom: 15,
+    backgroundColor: "transparent",
+  },
+  infoContainerRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    paddingHorizontal: 12,
-    paddingTop: 10,
-    paddingBottom: 20,
-    backgroundColor: "transparent",
   },
   infoPercentageText: {
     ...infoText,
