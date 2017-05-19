@@ -11,6 +11,7 @@ import {
 } from "ramda";
 
 import {
+  countTimingFunction,
   formatNumber,
   remainingDays,
   signatureEnabled,
@@ -21,8 +22,6 @@ import locale from "../../locales/pt-BR";
 import { MKProgress } from "react-native-material-kit";
 import AnimateNumber from "react-native-animate-number";
 
-// slow start, slow end
-const timingFunction = (interval, progress) => interval * (1 - Math.sin(Math.PI*progress)) * 10;
 
 const plipProgress = ({ signaturesRequired, signaturesCount }) => {
   if (!signaturesRequired || signaturesRequired == 0 || !signaturesCount) {
@@ -122,7 +121,7 @@ const TargetPercentage = ({ signaturesRequired, signaturesCount }) => {
       <AnimateNumber
         value={percentage}
         countBy={2}
-        timing={timingFunction}
+        timing={countTimingFunction}
         formatter={val => `${val}%`}
         style={styles.infoPercentageText}
       />
@@ -143,7 +142,7 @@ const SignaturesCount = ({ canSign, showGoal, signaturesCount, signaturesRequire
   const CountView = () =>
     <AnimateNumber
       value={count}
-      timing={timingFunction}
+      timing={countTimingFunction}
       formatter={formatNumber}
       style={styles.infoText}
     />;
