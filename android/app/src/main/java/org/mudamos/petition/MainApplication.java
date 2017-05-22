@@ -6,6 +6,7 @@ import android.util.Log;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.react.ReactApplication;
+import io.fullstack.firestack.FirestackPackage;
 import com.ianlin.RNFirebaseCrashReport.RNFirebaseCrashReportPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -48,6 +49,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FirestackPackage(),
             new RNFirebaseCrashReportPackage(),
             new ReactNativeOneSignalPackage(),
             new ImagePickerPackage(),
