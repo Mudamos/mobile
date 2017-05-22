@@ -39,6 +39,7 @@ import {
   appDidMount,
   appWillUnmount,
   fetchIsUserFirstTime,
+  fetchFeatureToggles,
   fetchFilteredPlips,
   fetchSession,
   fetchStoredPlipsFilters,
@@ -60,6 +61,7 @@ import DeviceInfo from "./services/device-info";
 import PermissionService from "./services/permission";
 import LocationService from "./services/location";
 import Crypto from "./services/crypto";
+import RemoteConfigService from "./services/remote-config";
 
 import * as repositories from "./repositories";
 
@@ -145,6 +147,7 @@ sagaRunner.run(sagas, {
   mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
   mobileApi: MobileApi(Config.MOBILE_API_URL),
   permissionService: PermissionService(),
+  RemoteConfigService,
   repositories,
   sessionStore,
   walletStore,
@@ -153,6 +156,7 @@ sagaRunner.run(sagas, {
 store.dispatch(fetchSession());
 store.dispatch(fetchIsUserFirstTime());
 store.dispatch(fetchStoredPlipsFilters());
+store.dispatch(fetchFeatureToggles());
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 

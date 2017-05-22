@@ -26,6 +26,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
+import org.mudamos.petition.firebase.FirebasePackage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,7 +63,8 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new RNSpinkitPackage(),
             new ReactNativeConfigPackage(),
-            new YouTubeWebViewReactPackage()
+            new YouTubeWebViewReactPackage(),
+            new FirebasePackage()
       );
     }
   };

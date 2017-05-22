@@ -20,6 +20,7 @@ import {
 import {
   fetchPlipRelatedInfoError,
   isFetchingPlipRelatedInfo,
+  isRemainingDaysEnabled,
   isSigningPlip,
   getCurrentPlipShortSignersInfo,
   getPlipSignInfo,
@@ -92,6 +93,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     errorFetching: fetchPlipRelatedInfoError(state),
     isFetchingPlipRelatedInfo: isFetchingPlipRelatedInfo(state),
+    isRemainingDaysEnabled: isRemainingDaysEnabled(state),
     isSigning: isSigningPlip(state),
     justSignedPlip: hasUserJustSignedPlip(state, ownProps.plip.id),
     plipSignInfo: plipSignInfo,

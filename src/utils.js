@@ -193,3 +193,6 @@ export const pickObjNonNilValues = obj => filterWithKeys((_, val) => !isNil(val)
 export const concatLists = unapply(reduce((acc, list) => concat(acc, list || []), []));
 
 export const randomItem = list => list[Math.floor(Math.random() * list.length)];
+
+// slow start, slow end
+export const countTimingFunction = (interval, progress) => interval * (1 - Math.sin(Math.PI*progress)) * 10;

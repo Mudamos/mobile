@@ -1,5 +1,8 @@
 # Next
 
+* [PR #338] Remote config remaining days
+  - Confgure Firebase Remote Config
+    - `plip_remaining_days_enabled` to `true`
 * [PR #337] Add the final goal info as a metric
 
 ## [1.4.0] 08/05/2017

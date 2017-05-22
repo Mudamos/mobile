@@ -37,7 +37,7 @@ import TransparentFlatButton from "./transparent-flat-button";
 import Collapsable from "./collapsable";
 import MyListView from "./list-view";
 import Triangle from "./triangle";
-import MetricsInfo from "./plip/metrics-info";
+import MetricsInfo from "../containers/plip/metrics-info";
 
 import styles from "../styles/plips-layout";
 
@@ -47,6 +47,7 @@ import locale from "../locales/pt-BR";
 export default class PlipsLayout extends Component {
   state = {
     shouldFetchFirstTimeStatePlips: true,
+    isRemainingDaysEnabled: PropTypes.bool,
     shouldFetchFirstTimeCityPlips: true,
     tabsArrowAnimation: new Animated.Value(0),
   };
@@ -399,6 +400,7 @@ export default class PlipsLayout extends Component {
                 <MetricsInfo
                   signaturesRequired={plip.signaturesRequired}
                   signaturesCount={plipSignInfo.signaturesCount}
+                  totalSignaturesRequired={plip.totalSignaturesRequired}
                   finalDate={plip.phase.finalDate}
                 />
               </Animatable.View>

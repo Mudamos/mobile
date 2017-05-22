@@ -18,6 +18,9 @@ PODS:
   - Firebase/Crash (3.3.0):
     - Firebase/Analytics (= 3.3.0)
     - FirebaseCrash (= 1.0.6)
+  - Firebase/RemoteConfig (3.3.0):
+    - Firebase/Analytics (= 3.3.0)
+    - FirebaseRemoteConfig (= 1.1.1)
   - FirebaseAnalytics (3.2.1):
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
@@ -30,8 +33,18 @@ PODS:
     - GoogleSymbolUtilities (~> 1.0)
     - GoogleUtilities (~> 1.0)
   - FirebaseInstanceID (1.0.7)
+  - FirebaseRemoteConfig (1.1.1):
+    - FirebaseAnalytics (~> 3.2)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleIPhoneUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleUtilities (~> 1.3)
   - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
+  - GoogleIPhoneUtilities (1.2.1):
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
   - GoogleSymbolUtilities (1.1.1)
   - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
@@ -44,6 +57,7 @@ DEPENDENCIES:
   - FBSDKShareKit
   - Firebase/Core
   - Firebase/Crash
+  - Firebase/RemoteConfig
   - IQKeyboardManager
 
 SPEC CHECKSUMS:
@@ -55,11 +69,13 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 0fd6532cb2c3d03cd5cf26ad295ccb091efd3104
   FirebaseCrash: 899d0abc23b411d01087094e3da24527eaecabf7
   FirebaseInstanceID: a9d923f3d0b6fbf9fac89310860357aaadc34be5
+  FirebaseRemoteConfig: 3260ced812d2adcbb9bcefe0dc78fdce7b8090e6
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
+  GoogleIPhoneUtilities: 63f25e93a3ddcb66884d182aab3a660d98f1479b
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   IQKeyboardManager: 4a6f83b540283c2645aaeba2bd8dc0f09b5c77f8
 
-PODFILE CHECKSUM: aa6557c8b3697c2ea3d8dbb1dbb30f090edbbe28
+PODFILE CHECKSUM: f19d5dffd0a35c9105efa3c6d713296b02a6f2f2
 
 COCOAPODS: 1.1.1

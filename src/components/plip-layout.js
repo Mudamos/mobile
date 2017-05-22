@@ -51,6 +51,7 @@ export default class PlipLayout extends Component {
   static propTypes = {
     errorFetching: PropTypes.bool,
     isFetchingPlipRelatedInfo: PropTypes.bool,
+    isRemainingDaysEnabled: PropTypes.bool,
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
     plip: PropTypes.object,
@@ -108,6 +109,11 @@ export default class PlipLayout extends Component {
   get signatureEnabled() {
     const daysLeft = this.daysLeft;
     return daysLeft != null && daysLeft >= 0;
+  }
+
+  get showCurrentGoal() {
+    const { isRemainingDaysEnabled } = this.props;
+    return this.signatureEnabled && !isRemainingDaysEnabled;
   }
 
   get messageForDaysLeft() {
@@ -184,6 +190,7 @@ export default class PlipLayout extends Component {
 
   renderMainContent() {
     const {
+      isRemainingDaysEnabled,
       plip,
       signers,
       signersTotal,
@@ -213,7 +220,7 @@ export default class PlipLayout extends Component {
               <View style={styles.infoContainerRow}>
                 {this.renderTargetPercentage()}
                 {this.renderSignaturesCount()}
-                {this.signatureEnabled && this.renderDaysLeft()}
+                {this.signatureEnabled && isRemainingDaysEnabled && this.renderDaysLeft()}
                 {!this.signatureEnabled && this.renderPlipFinished()}
               </View>
 
@@ -387,13 +394,26 @@ export default class PlipLayout extends Component {
   }
 
   renderSignaturesCount() {
-    const { plipSignInfo } = this.props;
-
+    const { plip, plipSignInfo } = this.props;
+    const { signaturesRequired: goal } = plip;
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
+
+    const CountView = () =>
+      <Text style={styles.infoText}>{formatNumber(count)}</Text>
+
     return (
-      <View>
-        <Text style={styles.infoText}>{formatNumber(count)}</Text>
-        <Text style={styles.infoTextSubtitle}>já assinaram</Text>
+      <View style={[(this.showCurrentGoal ? { marginLeft: 5 } : {})]}>
+        {
+          this.showCurrentGoal &&
+            <View style={{flexDirection: "row", alignItems: "flex-start"}}>
+              <CountView />
+              <Text style={[styles.infoTextSubtitle, { alignSelf: "center", marginLeft: 5 }]}>de</Text>
+              <Text style={[styles.infoText, { marginLeft: 5 }]}>{formatNumber(goal)}</Text>
+            </View>
+        }
+
+        {!this.showCurrentGoal && <CountView />}
+        <Text style={styles.infoTextSubtitle}>{this.signatureEnabled ? "já assinaram" : "assinaram"}</Text>
       </View>
     );
   }

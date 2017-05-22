@@ -4,6 +4,7 @@ import app from "./app";
 import appState from "./app-state";
 import city from "./city";
 import facebook from "./facebook";
+import feature from "./feature";
 import localStorage from "./local-storage";
 import location from "./location";
 import password from "./password";
@@ -21,6 +22,7 @@ export default combineReducers({
   appState,
   city,
   facebook,
+  feature,
   localStorage,
   location,
   password,

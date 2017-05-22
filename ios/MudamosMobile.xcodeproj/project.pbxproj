@@ -109,6 +109,9 @@
 		4658C25A1DFF25020063E371 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46668FAD1DFB386E002ECF64 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4673AD161DF88AA100E81C9A /* libAirMaps.a */; };
 		46668FAE1DFB3875002ECF64 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
+		4675EBF31ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
+		4675EBF41ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
+		4675EBF51ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
 		468261211EBA7E330044D471 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
 		468261421EBA7E3C0044D471 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
 		468B52A31E57273200A4E6B6 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */; };
@@ -145,6 +148,9 @@
 		46CBB3741E268E52000B4F5A /* lato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3601E268E52000B4F5A /* lato.ttf */; };
 		46D05B531E5F073B00350745 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
 		46D30D7C1DE46B8400CE09C0 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46D30D7B1DE46B8400CE09C0 /* FacebookSDKStrings.bundle */; };
+		46E7BBC41ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
+		46E7BBC51ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
+		46E7BBC61ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
 		46ED2A6E1DF194E400B36CD0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		46ED2A6F1DF194E400B36CD0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		46ED2A711DF194E400B36CD0 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -501,6 +507,8 @@
 		463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46439D881E709B03008577C0 /* MudamosProduction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosProduction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46439D891E709B03008577C0 /* InfoMudamosProduction.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = InfoMudamosProduction.plist; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/InfoMudamosProduction.plist"; sourceTree = "<absolute>"; };
+		4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDFirebaseConfig.m; sourceTree = "<group>"; };
+		4675EBF61ECCB947004C8A69 /* MUDFirebaseConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUDFirebaseConfig.h; sourceTree = "<group>"; };
 		46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold_italic.ttf; sourceTree = "<group>"; };
 		46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold.ttf; sourceTree = "<group>"; };
 		46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_italic.ttf; sourceTree = "<group>"; };
@@ -521,6 +529,8 @@
 		46CBB3601E268E52000B4F5A /* lato.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato.ttf; sourceTree = "<group>"; };
 		46D30D7B1DE46B8400CE09C0 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		46DE63581DE469430031B576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		46E7BBA11ECCBFD0001D1720 /* MUDFirebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUDFirebase.h; sourceTree = "<group>"; };
+		46E7BBC31ECCC026001D1720 /* MUDFirebase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDFirebase.m; sourceTree = "<group>"; };
 		46ED2A941DF194E400B36CD0 /* MudamosMobileTagviewBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosMobileTagviewBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46F35B4E1E269C800002728D /* roboto_black_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_black_italic.ttf; sourceTree = "<group>"; };
 		46F35B4F1E269C800002728D /* roboto_black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_black.ttf; sourceTree = "<group>"; };
@@ -774,6 +784,7 @@
 		13B07FAE1A68108700A75B9A /* MudamosMobile */ = {
 			isa = PBXGroup;
 			children = (
+				4675EBD01ECCB8BF004C8A69 /* MUDFirebase */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -882,6 +893,17 @@
 				4673AD161DF88AA100E81C9A /* libAirMaps.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4675EBD01ECCB8BF004C8A69 /* MUDFirebase */ = {
+			isa = PBXGroup;
+			children = (
+				4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */,
+				4675EBF61ECCB947004C8A69 /* MUDFirebaseConfig.h */,
+				46E7BBA11ECCBFD0001D1720 /* MUDFirebase.h */,
+				46E7BBC31ECCC026001D1720 /* MUDFirebase.m */,
+			);
+			name = MUDFirebase;
 			sourceTree = "<group>";
 		};
 		468B52811E57272000A4E6B6 /* Products */ = {
@@ -1958,6 +1980,8 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				4675EBF31ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
+				46E7BBC41ECCC026001D1720 /* MUDFirebase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1967,6 +1991,8 @@
 			files = (
 				46439D3F1E709B03008577C0 /* AppDelegate.m in Sources */,
 				46439D401E709B03008577C0 /* main.m in Sources */,
+				4675EBF51ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
+				46E7BBC61ECCC026001D1720 /* MUDFirebase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1976,6 +2002,8 @@
 			files = (
 				46ED2A6E1DF194E400B36CD0 /* AppDelegate.m in Sources */,
 				46ED2A6F1DF194E400B36CD0 /* main.m in Sources */,
+				4675EBF41ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
+				46E7BBC51ECCC026001D1720 /* MUDFirebase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
