@@ -13,6 +13,7 @@ import preNavigationActions from "./pre-navigation-actions";
 import profileSaga from "./profile";
 import stateSaga from "./state";
 import navigationSaga from "./navigation";
+import remoteConfigSaga from "./remote-config";
 import sessionSaga from "./session";
 import shareSaga from "./share";
 import addressSaga from "./address";
@@ -48,6 +49,7 @@ export default function* rootSaga({
   yield spawn(profileSaga, { mobileApi, DeviceInfo, sessionStore, Crypto });
   yield spawn(stateSaga, { repositories });
   yield spawn(errorSaga);
+  yield spawn(remoteConfigSaga, { RemoteConfigService });
   yield spawn(sessionSaga, { mobileApi, sessionStore });
   yield spawn(shareSaga);
   yield spawn(addressSaga, { mobileApi });

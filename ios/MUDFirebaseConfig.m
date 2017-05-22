@@ -43,8 +43,13 @@
 }
 
 - (void)setDefaults {
-  [self.remoteConfig setDefaults:@{@"plip_remaining_days_enabled": @"true"
-                                   }];
+  [self.remoteConfig setDefaults:@{
+    @"plip_remaining_days_enabled": @"true",
+    @"link_get_to_know_mudamos": @"https://www.mudamos.org",
+    @"link_help": @"https://www.mudamos.org/ajuda",
+    @"link_send_your_idea": @"https://www.mudamos.org/envie-sua-ideia",
+    @"link_why_projects": @"https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular"
+  }];
 }
 
 - (void)fetchConfig {

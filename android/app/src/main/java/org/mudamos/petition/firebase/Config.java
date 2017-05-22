@@ -40,6 +40,10 @@ public class Config {
     private void setDefaults() {
         Map<String, Object> defaults = new HashMap<>();
         defaults.put("plip_remaining_days_enabled", true);
+        defaults.put("link_get_to_know_mudamos", "https://www.mudamos.org");
+        defaults.put("link_help", "https://www.mudamos.org/ajuda");
+        defaults.put("link_send_your_idea", "https://www.mudamos.org/envie-sua-ideia");
+        defaults.put("link_why_projects", "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular");
 
         remoteConfig.setDefaults(defaults);
     }

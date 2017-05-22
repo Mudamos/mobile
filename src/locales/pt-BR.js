@@ -39,6 +39,12 @@ const translations = {
   gotIt: "entendi",
   hasAnAccountAlready: "Já tem uma conta?",
   lastDay: "Último dia",
+  links: {
+    getToKnowMudamos: "Conheça a Mudamos",
+    help: "Ajuda",
+    sendYourIdea: "Envie sua ideia!",
+    whyProjectsLink: "Por que estes projetos de lei?",
+  },
   loading: "Carregando...",
   logout: "Sair",
   mobile: "Celular",

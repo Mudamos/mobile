@@ -10,6 +10,7 @@ export * from "./permission";
 export * from "./profile";
 export * from "./plip";
 export * from "./facebook";
+export * from "./remote-config";
 export * from "./session";
 export * from "./state";
 export * from "./wallet";
