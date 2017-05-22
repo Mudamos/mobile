@@ -1,5 +1,11 @@
 # Next
 
+* [PR #339] Remote config app links
+  - Confgure Firebase Remote Config
+    - `link_why_projects` to `https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular`
+    - `link_get_to_know_mudamos` to `https://www.mudamos.org`
+    - `link_help` to `https://www.mudamos.org/ajuda`
+    - `link_send_your_idea` to `https://www.mudamos.org/envie-sua-ideia`
 * [PR #338] Remote config remaining days
   - Confgure Firebase Remote Config
     - `plip_remaining_days_enabled` to `true`
