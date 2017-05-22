@@ -10,7 +10,7 @@ import {
   sortBy,
 } from "ramda";
 
-import { isDev, siteLinks } from "../utils";
+import { isDev } from "../utils";
 
 import locale from "../locales/pt-BR";
 
@@ -119,8 +119,6 @@ class Container extends Component {
       onProfileEdit,
       onTellAFriend,
     } = this.props;
-
-    const { mudamos, projectsReason, help } = siteLinks.homeLinks;
 
     const entries = [
       { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout.bind(this), position: 2 },

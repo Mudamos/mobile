@@ -16,7 +16,6 @@ import {
 
 import {
   moment,
-  siteLinks,
   NATIONWIDE_SCOPE,
   STATEWIDE_SCOPE,
   CITYWIDE_SCOPE,

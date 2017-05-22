@@ -152,17 +152,6 @@ export const cancelablePromise = promise => {
   };
 };
 
-export const homeLinks = {
-  mudamos: { title: "Conheça a Mudamos", link: "https://www.mudamos.org" },
-  projectsReason: { title: "Por que estes projetos de lei?", link: "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular" },
-  help: { title: "Ajuda", link: "https://www.mudamos.org/ajuda" },
-};
-
-export const siteLinks = {
-  homeLinks,
-  sendYourIdea: "https://www.mudamos.org/envie-sua-ideia",
-};
-
 export const findStateByUF = uf => find(propEq("uf", uf), statesData.states);
 
 export const findStateNameByUF = uf => (findStateByUF(uf) || {}).name;
