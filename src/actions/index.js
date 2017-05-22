@@ -12,6 +12,7 @@ export * from "./password";
 export * from "./permission";
 export * from "./plip";
 export * from "./profile";
+export * from "./remote-config";
 export * from "./session";
 export * from "./share";
 export * from "./state";

@@ -16,7 +16,6 @@ import {
 
 import {
   moment,
-  siteLinks,
   NATIONWIDE_SCOPE,
   STATEWIDE_SCOPE,
   CITYWIDE_SCOPE,
@@ -42,6 +41,7 @@ import MetricsInfo from "../containers/plip/metrics-info";
 import styles from "../styles/plips-layout";
 
 import locale from "../locales/pt-BR";
+import { RemoteLinksType } from "../prop-types/remote-config";
 
 
 export default class PlipsLayout extends Component {
@@ -78,6 +78,7 @@ export default class PlipsLayout extends Component {
     nationwidePlipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     openMenu: PropTypes.func.isRequired,
     plipsSignInfo: PropTypes.object.isRequired,
+    remoteLinks: RemoteLinksType,
     statewidePlipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     userSignInfo: PropTypes.object.isRequired,
     onChangeScope: PropTypes.func.isRequired,
@@ -429,7 +430,7 @@ export default class PlipsLayout extends Component {
   }
 
   renderNoPlips() {
-    const { onOpenURL } = this.props;
+    const { onOpenURL, remoteLinks } = this.props;
 
     return (
       <View style={styles.noProjectsContainer}>
@@ -443,8 +444,8 @@ export default class PlipsLayout extends Component {
         </View>
 
         <FlatButton
-          title={locale.sendYourIdea.toUpperCase()}
-          onPress={() => onOpenURL(siteLinks.sendYourIdea)}
+          title={locale.links.sendYourIdea.toUpperCase()}
+          onPress={() => onOpenURL(remoteLinks.sendYourIdea)}
           style={{backgroundColor: "#00c084" }}
           textStyle={{color: "#fff"}}
         />

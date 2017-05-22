@@ -11,6 +11,7 @@ import password from "./password";
 import permission from "./permission";
 import plip from "./plip";
 import profile from "./profile";
+import remoteConfig from "./remote-config";
 import session from "./session";
 import state from "./state";
 import navigation from "./navigation";
@@ -29,6 +30,7 @@ export default combineReducers({
   permission,
   profile,
   plip,
+  remoteConfig,
   session,
   state,
   navigation,

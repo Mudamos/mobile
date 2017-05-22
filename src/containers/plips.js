@@ -10,7 +10,7 @@ import {
   sortBy,
 } from "ramda";
 
-import { isDev, siteLinks } from "../utils";
+import { isDev } from "../utils";
 
 import locale from "../locales/pt-BR";
 
@@ -45,6 +45,7 @@ import {
   isRefreshingCitywidePlips,
   isUserFirstTime,
   isUserLoggedIn,
+  findRemoteLinks,
   findNationwidePlips,
   findStatewidePlips,
   findCitywidePlips,
@@ -61,6 +62,8 @@ import MarkdownView from "../containers/markdown-view";
 
 import Toast from "react-native-simple-toast";
 import aboutHtmlStyles from "../styles/about-html-styles";
+
+import { RemoteLinksType } from "../prop-types/remote-config";
 
 
 const sortMenuEntries = entries => sortBy(prop("position"), entries);
@@ -88,6 +91,7 @@ class Container extends Component {
     isUserFirstTime: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     nationwidePlips: PropTypes.array,
+    remoteLinks: RemoteLinksType,
     statewidePlips: PropTypes.array,
     onAvatarChanged: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
@@ -109,19 +113,18 @@ class Container extends Component {
       currentUser,
       isFetchingProfile,
       isUserLoggedIn,
+      remoteLinks,
       onChangePassword,
       onOpenURL,
       onProfileEdit,
       onTellAFriend,
     } = this.props;
 
-    const { mudamos, projectsReason, help } = siteLinks.homeLinks;
-
     const entries = [
       { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout.bind(this), position: 2 },
-      { icon: "help", title: projectsReason.title, action: () => onOpenURL(projectsReason.link), position: 3 },
-      { icon: "extension", title: mudamos.title, action: () => onOpenURL(mudamos.link), position: 4 },
-      { icon: "info", title: help.title, action: () => onOpenURL(help.link), position: 5 },
+      { icon: "help", title: locale.links.whyProjectsLink, action: () => onOpenURL(remoteLinks.whyProjectsLink), position: 3 },
+      { icon: "extension", title: locale.links.getToKnowMudamos, action: () => onOpenURL(remoteLinks.getToKnowMudamos), position: 4 },
+      { icon: "info", title: locale.links.help, action: () => onOpenURL(remoteLinks.help), position: 5 },
       { icon: "favorite", title: locale.menu.tellAFriend, action: onTellAFriend, position: 6 },
     ];
 
@@ -318,6 +321,7 @@ const mapStateToProps = state => {
     isUserFirstTime: isUserFirstTime(state),
     isUserLoggedIn: isUserLoggedIn(state),
     nationwidePlips: findNationwidePlips(state),
+    remoteLinks: findRemoteLinks(state),
     statewidePlips: findStatewidePlips(state),
     citywidePlips: findCitywidePlips(state),
     plipsSignInfo: findPlipsSignInfo(state),
