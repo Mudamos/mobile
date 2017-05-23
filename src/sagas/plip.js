@@ -43,6 +43,7 @@ import {
   invalidatePhone,
   isRefreshingNationwidePlips,
   isSigningPlip,
+  logEvent,
   navigate,
   plipsAppendNationwidePlips,
   plipsAppendStatewidePlips,
@@ -548,7 +549,10 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
 
       const user = yield call(fetchProfile, { mobileApi });
 
-      if (!user) return yield put(navigate("signUp"));
+      if (!user) {
+        yield put(logEvent({ name: "signup_through_sign_button" }));
+        return yield put(navigate("signUp"));
+      }
 
       const validWallet = yield call(validateLocalWallet, { walletStore });
       if (!validWallet) {

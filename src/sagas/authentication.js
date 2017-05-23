@@ -9,6 +9,7 @@ import {
   updatedUserProfile,
   profileStateMachine,
   clearSession,
+  logEvent,
 } from "../actions";
 
 import { User } from "../models";
@@ -33,6 +34,7 @@ function* login({ mobileApi, sessionStore }) {
 
       yield put(updatedUserProfile({ user }));
       yield put(profileStateMachine({ type: "reset" }));
+      yield put(logEvent({ name: "app_login" }));
     } catch(e) {
       if (isDev) console.log("API Error: ", e.message, e.stack);
 

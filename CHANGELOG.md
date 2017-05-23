@@ -1,5 +1,6 @@
 # Next
 
+* [PR #340] Track user interaction using Firebase Analytics
 * [PR #339] Remote config app links
   - Confgure Firebase Remote Config
     - `link_why_projects` to `https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular`

@@ -202,6 +202,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-firestack')
     compile project(':react-native-firebase-crash-report')
     compile project(':react-native-onesignal')
     compile project(':react-native-image-picker')
