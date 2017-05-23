@@ -1,5 +1,6 @@
 import { spawn } from "redux-saga/effects";
 
+import analyticsSaga from "./analytics";
 import appStateSaga from "./app-state";
 import citySaga from "./city";
 import errorSaga from "./error";
@@ -23,6 +24,7 @@ import locationSaga from "./location";
 import walletSaga from "./wallet";
 
 export default function* rootSaga({
+  analytics,
   apiError,
   Crypto,
   DeviceInfo,
@@ -36,6 +38,7 @@ export default function* rootSaga({
   sessionStore,
   walletStore,
 }) {
+  yield spawn(analyticsSaga, { analytics });
   yield spawn(appStateSaga);
   yield spawn(citySaga, { repositories });
   yield spawn(navigationSaga, { mobileApi, sessionStore });

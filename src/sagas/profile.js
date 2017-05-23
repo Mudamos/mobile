@@ -19,6 +19,7 @@ import {
   logginSucceeded,
   unauthorized,
   voteCardIdAcquired,
+  logEvent,
 } from "../actions";
 
 import {
@@ -74,6 +75,7 @@ function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
 
       yield put(savingProfile(false));
       yield put(profileStateMachine());
+      yield put(logEvent({ name: "app_signup" }));
     } catch(e) {
       logError(e, { tag: "saveMainProfile" });
 
@@ -98,6 +100,7 @@ function* saveBirthdateProfile({ mobileApi }) {
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
       yield put(profileStateMachine());
+      yield put(logEvent({ name: "completed_birthday" }));
     } catch (e) {
       logError(e, { tag: "saveBirthdateProfile" });
 
@@ -125,6 +128,7 @@ function* saveZipCodeProfile({ mobileApi }) {
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
       yield put(profileStateMachine());
+      yield put(logEvent({ name: "completed_zip_code" }));
     } catch (e) {
       logError(e, { tag: "saveZipCodeProfile" });
 
@@ -152,6 +156,7 @@ function* saveDocumentsProfile({ mobileApi }) {
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
       yield put(profileStateMachine());
+      yield put(logEvent({ name: "completed_documents" }));
     } catch (e) {
       logError(e, { tag: "saveDocumentsProfile" });
 
@@ -191,6 +196,8 @@ function* sendPhoneValidation({ mobileApi }) {
       } else {
         yield call([Toast, Toast.show], locale.phoneValidationCodeSent);
       }
+
+      yield put(logEvent({ name: "phone_validation_sent" }));
     } catch (e) {
       logError(e, { tag: "sendPhoneValidation" });
 
@@ -228,6 +235,7 @@ function* savePhoneProfile({ mobileApi, DeviceInfo }) {
       yield put(savingProfile(false));
 
       yield put(phoneJustValidated(true));
+      yield put(logEvent({ name: "completed_phone_validation" }));
     } catch (e) {
       logError(e, { tag: "verifyCode" });
 
@@ -278,6 +286,8 @@ function* saveAvatarProfile({ mobileApi }) {
       else {
         yield call([Toast, Toast.show], locale.avatarSaved);
       }
+
+      yield put(logEvent({ name: "completed_avatar" }));
     } catch (e) {
       logError(e, { tag: "saveAvatarProfile" });
 

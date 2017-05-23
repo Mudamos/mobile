@@ -63,6 +63,7 @@ import PermissionService from "./services/permission";
 import LocationService from "./services/location";
 import Crypto from "./services/crypto";
 import RemoteConfigService from "./services/remote-config";
+import Analytics from "./services/analytics";
 
 import * as repositories from "./repositories";
 
@@ -140,6 +141,7 @@ const scenes = Actions.create(
 );
 
 sagaRunner.run(sagas, {
+  analytics: Analytics(),
   apiError: ApiError(),
   Crypto,
   DeviceInfo,

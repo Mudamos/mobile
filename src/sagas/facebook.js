@@ -12,6 +12,7 @@ import {
   updatedUserProfile,
   profileStateMachine,
   clearSession,
+  logEvent,
 } from "../actions";
 
 import { getCurrentSigningPlip } from "../selectors";
@@ -56,6 +57,8 @@ function* login({ mobileApi, sessionStore, Crypto }) {
 
       yield put(updatedUserProfile({ user }));
       yield put(profileStateMachine({ type: "reset" }));
+
+      yield put(logEvent({ name: "facebook_login" }));
     } catch(e) {
       logError(e);
 
