@@ -4,7 +4,7 @@ import {
 
 import Firestack from "react-native-firestack";
 
-const logEvent = (firestack, { name, extraData }) => firestack.analytics.logEventWithName(name, extraData);
+const logEvent = (firestack, { name, extraData }) => firestack.analytics.logEventWithName(name, (extraData || {}));
 
 const service = options => {
   const firestack = new Firestack(options);
