@@ -1,5 +1,6 @@
 # Next
 
+* [PR #342] Pin gms and firebase android dependencies
 * [PR #340] Track user interaction using Firebase Analytics
 * [PR #339] Remote config app links
   - Confgure Firebase Remote Config

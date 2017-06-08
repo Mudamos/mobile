@@ -202,9 +202,19 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-firestack')
-    compile project(':react-native-firebase-crash-report')
-    compile project(':react-native-onesignal')
+    compile(project(':react-native-firestack')){
+      exclude group: 'com.google.android.gms'
+      exclude group: 'com.google.firebase'
+    }
+
+    compile(project(':react-native-firebase-crash-report')){
+      exclude group: 'com.google.firebase'
+    }
+
+    compile(project(':react-native-onesignal')){
+      exclude group: 'com.google.android.gms'
+    }
+
     compile project(':react-native-image-picker')
     compile project(':react-native-open-settings')
     compile project(':react-native-permissions')
@@ -214,14 +224,29 @@ dependencies {
     compile project(':react-native-device-info')
     compile project(':react-native-randombytes')
     compile project(':react-native-material-kit')
-    compile project(':react-native-maps')
+
     compile(project(':react-native-maps')) {
-      exclude group: 'com.google.android.gms', module: 'play-services-base'
-      exclude group: 'com.google.android.gms', module: 'play-services-maps'
+      exclude group: 'com.google.android.gms'
     }
+
     compile 'com.google.android.gms:play-services-base:10.2.4'
+    compile 'com.google.android.gms:play-services-analytics:10.2.4'
+    compile 'com.google.android.gms:play-services-gcm:10.2.4'
+    compile 'com.google.android.gms:play-services-location:10.2.4'
     compile 'com.google.android.gms:play-services-maps:10.2.4'
+
+    // Most of theses dependencies are here because of the firestack dependency
+    // always check required dependencies on the react-native-{project}/android/build.gradle
+    // in order to sync when removing dependencies
+    compile 'com.google.firebase:firebase-core:10.2.4'
+    compile 'com.google.firebase:firebase-auth:10.2.4'
+    compile 'com.google.firebase:firebase-analytics:10.2.4'
     compile 'com.google.firebase:firebase-config:10.2.4'
+    compile 'com.google.firebase:firebase-crash:10.2.4'
+    compile 'com.google.firebase:firebase-database:10.2.4'
+    compile 'com.google.firebase:firebase-storage:10.2.4'
+    compile 'com.google.firebase:firebase-messaging:10.2.4'
+
     compile project(':react-native-vector-icons')
     compile project(':react-native-spinkit')
     compile project(':react-native-config')
