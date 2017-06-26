@@ -1,5 +1,7 @@
 # Next
 
+## [1.5.0] 21/06/2017
+
 * [PR #342] Pin gms and firebase android dependencies
 * [PR #340] Track user interaction using Firebase Analytics
 * [PR #339] Remote config app links
