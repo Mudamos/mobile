@@ -1,5 +1,10 @@
 # Next
 
+* [PR #350] Validate user address when signing plips
+  - Confgure Firebase Remote Config
+    - `ineligible_to_sign_citywide_plip_reason` to `Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do município para o qual a lei se destina.`
+    - `ineligible_to_sign_statewide_plip_reason` to `Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do estado para o qual a lei se destina.`
+
 ## [1.5.0] 21/06/2017
 
 * [PR #342] Pin gms and firebase android dependencies
