@@ -1,3 +1,4 @@
+import { Alert } from "react-native";
 import { takeEvery, takeLatest } from "redux-saga";
 import { cancelled, call, spawn, put, select, fork } from "redux-saga/effects";
 
@@ -82,6 +83,7 @@ import {
   getStatewidePlipsLoadState,
   getCitywidePlipsLoadState,
   isUserLoggedIn,
+  getIneligiblePlipReasonForScope,
 } from "../selectors";
 
 import { fetchProfile } from "./profile";
@@ -571,6 +573,20 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       if (isDev) console.log("Acquired seed", seed);
       if (!seed) return yield call(invalidateWalletAndNavigate, { alertRevalidate: true });
 
+      const isElegible = yield call(eligibleToSignPlip, { user, plip });
+
+      if (!isElegible) {
+        const reason = yield select(getIneligiblePlipReasonForScope(plip.scopeCoverage.scope));
+
+        Alert.alert(
+          null,
+          reason,
+          [{ text: "OK" }]
+        );
+
+        return;
+      }
+
       const difficulty = yield call(mobileApi.difficulty);
 
       const message = buildSignMessage({ user, plip });
@@ -689,6 +705,20 @@ function* loadStorePlipsInfo({ mobileApi }) {
       logError(e, { tag: "loadStorePlipsInfo" });
     }
   });
+}
+
+function eligibleToSignPlip({ plip, user }) {
+  const { scope, uf, city } = plip.scopeCoverage;
+  const { uf: userUF, city: userCityName } = user.address;
+
+  const matchUF = () => userUF.toLowerCase() === uf.toLowerCase();
+  const matchCity = () => userUF.toLowerCase() === city.uf.toLowerCase() && userCityName.toLowerCase() === city.name.toLowerCase();
+
+  switch (scope) {
+    case NATIONWIDE_SCOPE: return true;
+    case STATEWIDE_SCOPE: return !userUF || matchUF();
+    case CITYWIDE_SCOPE: return !userCityName || !userUF || matchCity();
+  }
 }
 
 export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError, localStorage }) {

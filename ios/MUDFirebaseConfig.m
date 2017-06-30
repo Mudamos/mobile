@@ -48,7 +48,9 @@
     @"link_get_to_know_mudamos": @"https://www.mudamos.org",
     @"link_help": @"https://www.mudamos.org/ajuda",
     @"link_send_your_idea": @"https://www.mudamos.org/envie-sua-ideia",
-    @"link_why_projects": @"https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular"
+    @"link_why_projects": @"https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular",
+    @"ineligible_to_sign_citywide_plip_reason": @"Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do município para o qual a lei se destina.",
+    @"ineligible_to_sign_statewide_plip_reason": @"Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do estado para o qual a lei se destina."
   }];
 }
 
