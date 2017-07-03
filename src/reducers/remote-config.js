@@ -9,6 +9,10 @@ const initialState = {
     sendYourIdea: "https://www.mudamos.org/envie-sua-ideia",
     whyProjectsLink: "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular",
   },
+  config: {
+    ineligibleToSignCitywidePlipReason: "Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do município para o qual a lei se destina.",
+    ineligibleToSignStatewidePlipReason: "Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do estado para o qual a lei se destina.",
+  },
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -21,6 +25,18 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         links: {
           ...state.links,
+          ...values,
+        },
+      };
+    }
+    case "REMOTE_CONFIG_FETCHED": {
+      const { config } = payload;
+      const values = extractValue(config);
+
+      return {
+        ...state,
+        config: {
+          ...state.config,
           ...values,
         },
       };

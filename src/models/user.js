@@ -1,3 +1,4 @@
+import Address from "./address";
 import Image from "./image";
 import Mobile from "./mobile";
 import ProfileType from "./profile-type";
@@ -7,6 +8,7 @@ import Wallet from "./wallet";
 export default class User {
   constructor(attrs = {}) {
     this.id = attrs.id;
+    this.address = attrs.address || new Address();
     this.avatar = attrs.avatar;
     this.hasSavedAvatar = attrs.hasSavedAvatar;
     this.birthdate = attrs.birthdate;
@@ -52,6 +54,13 @@ export default class User {
       profilePicture,
       termsAccepted: this.termsAccepted,
 
+      userDistrict: this.address.district,
+      userState: this.address.state,
+      userUf: this.address.uf,
+      userCity: this.address.city,
+      userLat: this.address.latitude,
+      userLng: this.address.longitude,
+
       ...mobileJson,
       ...walletJson,
     }
@@ -62,8 +71,19 @@ export default class User {
       url: json.profilePicture,
     });
 
+    const address = Address.fromJson({
+      district: json.userDistrict,
+      state: json.userState,
+      uf: json.userUf,
+      city: json.userCity,
+      lat: json.userLat,
+      lng: json.userLng,
+      zipcode: json.userZipcode,
+    });
+
     return new User({
       id: json.userId,
+      address,
       avatar,
       hasSavedAvatar: json.hasSavedAvatar,
       birthdate: json.userBirthday,

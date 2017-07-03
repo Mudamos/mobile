@@ -2,10 +2,15 @@ import { takeLatest } from "redux-saga";
 import { call, fork, put } from "redux-saga/effects";
 
 import {
+  toPairs,
+} from "ramda";
+
+import {
   logError,
 } from "../utils";
 
 import {
+  remoteConfigFetched,
   remoteLinksFetched,
 } from "../actions";
 
@@ -15,6 +20,11 @@ const REMOTE_LINK_NAMES = [
   "link_send_your_idea",
   "link_why_projects",
 ];
+
+const OTHER_CONFIGS = {
+  ineligible_to_sign_citywide_plip_reason: "asString",
+  ineligible_to_sign_statewide_plip_reason: "asString",
+};
 
 function* fetchLinks({ RemoteConfigService }) {
   yield takeLatest("REMOTE_CONFIG_FETCH_LINKS", function* () {
@@ -40,6 +50,27 @@ function* fetchLinks({ RemoteConfigService }) {
   });
 }
 
+function* fetchRemoteConfigs({ RemoteConfigService }) {
+  yield takeLatest("REMOTE_CONFIG_FETCH_ALL", function* () {
+    try {
+      const [
+        ineligibleToSignCitywidePlipReason,
+        ineligibleToSignStatewidePlipReason,
+      ] = yield toPairs(OTHER_CONFIGS).map(([name, type]) => call(RemoteConfigService[type], name));
+
+      const config = {
+        ineligibleToSignCitywidePlipReason,
+        ineligibleToSignStatewidePlipReason,
+      };
+
+      yield put(remoteConfigFetched(config));
+    } catch(e) {
+      logError(e, { tag: "fetchRemoteConfigs" });
+    }
+  });
+}
+
 export default function* remoteConfigSaga({ RemoteConfigService }) {
   yield fork(fetchLinks, { RemoteConfigService });
+  yield fork(fetchRemoteConfigs, { RemoteConfigService });
 }

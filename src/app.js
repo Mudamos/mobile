@@ -41,6 +41,7 @@ import {
   fetchIsUserFirstTime,
   fetchFeatureToggles,
   fetchFilteredPlips,
+  fetchRemoteConfig,
   fetchRemoteLinks,
   fetchSession,
   fetchStoredPlipsFilters,
@@ -161,6 +162,7 @@ store.dispatch(fetchIsUserFirstTime());
 store.dispatch(fetchStoredPlipsFilters());
 store.dispatch(fetchFeatureToggles());
 store.dispatch(fetchRemoteLinks());
+store.dispatch(fetchRemoteConfig());
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 

@@ -357,6 +357,7 @@ export function* fetchProfileSaga({ mobileApi }) {
       yield call(fetchProfile, { mobileApi });
     } catch (e) {
       if (isUnauthorized(e)) return yield put(unauthorized());
+      logError(e);
       yield put(fetchingProfileError(true));
     }
   });
