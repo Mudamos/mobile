@@ -12,6 +12,22 @@ const textShadow = {
   textShadowRadius: 1,
 };
 
+const plipSubtitle = {
+  color: "#fff",
+  fontSize: 22,
+  lineHeight: 30,
+  ...textShadow,
+
+  ...Platform.select({
+    ios: {
+      fontFamily: "roboto-light",
+    },
+    android: {
+      fontFamily: "roboto_light",
+    },
+  }),
+};
+
 export default StyleSheet.create({
   actionIcon: {
     marginRight: 18,
@@ -111,20 +127,11 @@ export default StyleSheet.create({
     borderRadius: 3,
     backgroundColor: "#F9F9F9",
   },
-  plipSubtitle: {
-    color: "#fff",
-    fontSize: 22,
-    lineHeight: 30,
-    ...textShadow,
-
-    ...Platform.select({
-      ios: {
-        fontFamily: "roboto-light",
-      },
-      android: {
-        fontFamily: "roboto_light",
-      },
-    }),
+  plipSubtitle,
+  plipScope: {
+    ...plipSubtitle,
+    fontSize: 14,
+    marginTop: 8,
   },
   retryContainer: {
     flex: 1,

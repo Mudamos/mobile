@@ -19,6 +19,7 @@ import {
   NATIONWIDE_SCOPE,
   STATEWIDE_SCOPE,
   CITYWIDE_SCOPE,
+  findStateByUF,
 } from "../utils";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -377,6 +378,10 @@ export default class PlipsLayout extends Component {
             <Text style={styles.plipSubtitle}>
               {plip.phase.description}
             </Text>
+
+            <Text style={styles.plipScope}>
+              {this.scopeCoverageTitle(plip)}
+            </Text>
           </View>
 
           <TransparentFlatButton
@@ -427,6 +432,14 @@ export default class PlipsLayout extends Component {
 
       </View>
     );
+  }
+
+  scopeCoverageTitle(plip) {
+    switch(plip.scopeCoverage.scope) {
+      case NATIONWIDE_SCOPE: return "PL Nacional";
+      case STATEWIDE_SCOPE: return `PL Estadual: ${findStateByUF(plip.scopeCoverage.uf).name}`;
+      case CITYWIDE_SCOPE: return `PL Municipal: ${plip.scopeCoverage.city.name}, ${plip.scopeCoverage.city.uf}`;
+    }
   }
 
   renderNoPlips() {
