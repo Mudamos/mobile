@@ -1,5 +1,6 @@
 # Next
 
+* [PR #351] Add scope coverage info to the plip card
 * [PR #350] Validate user address when signing plips
   - Confgure Firebase Remote Config
     - `ineligible_to_sign_citywide_plip_reason` to `Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do município para o qual a lei se destina.`
