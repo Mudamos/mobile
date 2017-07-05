@@ -22,6 +22,7 @@ const REMOTE_LINK_NAMES = [
 ];
 
 const OTHER_CONFIGS = {
+  authenticated_signers_button_title: "asString",
   ineligible_to_sign_citywide_plip_reason: "asString",
   ineligible_to_sign_statewide_plip_reason: "asString",
 };
@@ -54,11 +55,13 @@ function* fetchRemoteConfigs({ RemoteConfigService }) {
   yield takeLatest("REMOTE_CONFIG_FETCH_ALL", function* () {
     try {
       const [
+        authenticatedSignersButtonTitle,
         ineligibleToSignCitywidePlipReason,
         ineligibleToSignStatewidePlipReason,
       ] = yield toPairs(OTHER_CONFIGS).map(([name, type]) => call(RemoteConfigService[type], name));
 
       const config = {
+        authenticatedSignersButtonTitle,
         ineligibleToSignCitywidePlipReason,
         ineligibleToSignStatewidePlipReason,
       };

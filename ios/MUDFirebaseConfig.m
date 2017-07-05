@@ -44,6 +44,7 @@
 
 - (void)setDefaults {
   [self.remoteConfig setDefaults:@{
+    @"authenticated_signers_button_title": @"Lista de assinantes e outras informações",
     @"plip_remaining_days_enabled": @"true",
     @"link_get_to_know_mudamos": @"https://www.mudamos.org",
     @"link_help": @"https://www.mudamos.org/ajuda",
