@@ -39,6 +39,7 @@ public class Config {
 
     private void setDefaults() {
         Map<String, Object> defaults = new HashMap<>();
+        defaults.put("authenticated_signers_button_title", "Lista de assinantes e outras informações");
         defaults.put("plip_remaining_days_enabled", true);
         defaults.put("link_get_to_know_mudamos", "https://www.mudamos.org");
         defaults.put("link_help", "https://www.mudamos.org/ajuda");

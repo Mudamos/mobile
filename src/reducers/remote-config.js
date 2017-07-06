@@ -10,6 +10,7 @@ const initialState = {
     whyProjectsLink: "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular",
   },
   config: {
+    authenticatedSignersButtonTitle: "Lista de assinantes e outras informações",
     ineligibleToSignCitywidePlipReason: "Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do município para o qual a lei se destina.",
     ineligibleToSignStatewidePlipReason: "Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do estado para o qual a lei se destina.",
   },

@@ -1,5 +1,8 @@
 # Next
 
+* [PR #353] Add new action button with authenticated singers link
+  - Confgure Firebase Remote Config
+    - `authenticated_signers_button_title` to `Lista de assinantes e outras informações`
 * [PR #351] Add scope coverage info to the plip card
 * [PR #350] Validate user address when signing plips
   - Confgure Firebase Remote Config

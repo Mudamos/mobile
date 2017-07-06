@@ -56,6 +56,9 @@ export default class PlipLayout extends Component {
     justSignedPlip: PropTypes.bool,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
+    remoteConfig: PropTypes.shape({
+      authenticatedSignersButtonTitle: PropTypes.string,
+    }),
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     userSignDate: PropTypes.object,
@@ -432,7 +435,13 @@ export default class PlipLayout extends Component {
   }
 
   renderFooterActions() {
-    const { plipSignInfo, onViewPlip, plip } = this.props;
+    const {
+      plipSignInfo,
+      onViewPlip,
+      plip,
+      remoteConfig,
+      onOpenURL,
+    } = this.props;
 
     return (
       <LinearGradient
@@ -482,6 +491,27 @@ export default class PlipLayout extends Component {
                   </Text>
               }
             </View>
+          </View>
+        </TouchableOpacity>
+
+        <View style={styles.hairline} />
+
+        <TouchableOpacity
+          onPress={() => onOpenURL(plip.plipUrl)}
+        >
+          <View style={styles.actionRow}>
+            <Icon
+              name="create"
+              size={40}
+              color="#fff"
+              style={styles.actionIcon}
+            />
+            <Text style={styles.actionTitle}>{remoteConfig.authenticatedSignersButtonTitle.toUpperCase()}</Text>
+            <Icon
+              name="chevron-right"
+              size={40}
+              color="#fff"
+            />
           </View>
         </TouchableOpacity>
       </LinearGradient>

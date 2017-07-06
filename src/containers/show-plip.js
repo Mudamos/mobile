@@ -26,6 +26,7 @@ import {
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
   hasUserJustSignedPlip,
+  listRemoteConfig,
 } from "../selectors";
 
 import PlipLayout from "../components/plip-layout";
@@ -97,6 +98,7 @@ const mapStateToProps = (state, ownProps) => {
     isSigning: isSigningPlip(state),
     justSignedPlip: hasUserJustSignedPlip(state, ownProps.plip.id),
     plipSignInfo: plipSignInfo,
+    remoteConfig: listRemoteConfig(state),
     signers: currentPlipShortSignersInfo.users,
     signersTotal: currentPlipShortSignersInfo.total,
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),

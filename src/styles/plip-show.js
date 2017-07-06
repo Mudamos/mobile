@@ -39,7 +39,7 @@ export default StyleSheet.create({
     color: "#fff",
     flex: 3,
     fontFamily: "lato",
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: "bold",
   },
   actionRow: {
