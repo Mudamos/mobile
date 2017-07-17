@@ -14,13 +14,23 @@ import {
   currentAuthToken,
 } from "../selectors";
 
-function* fetchSession({ sessionStore }) {
+import { logError } from "../utils";
+
+export function* fetchSession({ sessionStore }) {
+  try {
+    const user = yield call(sessionStore.retrieve);
+    yield put(logginSucceeded(user));
+  } catch(e) {
+    logError(e);
+  }
+}
+
+function* fetchSessionSaga({ sessionStore }) {
   yield takeLatest("SESSION_FETCH_SESSION", function* () {
     try {
-      const user = yield call(sessionStore.retrieve);
-      yield put(logginSucceeded(user));
+      yield call(fetchSession, { sessionStore });
     } catch(e) {
-      if(isDev) console.log(e.message);
+      logError(e);
     }
   });
 }
@@ -45,7 +55,7 @@ export function* logout({ mobileApi, sessionStore }) {
 }
 
 export default function* sessionSaga({ mobileApi, sessionStore }) {
-  yield fork(fetchSession, { sessionStore });
+  yield fork(fetchSessionSaga, { sessionStore });
 
   yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
     yield fork(logoutSaga, { mobileApi, sessionStore });

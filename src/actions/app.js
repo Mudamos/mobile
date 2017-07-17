@@ -19,3 +19,6 @@ export const appWillUnmount = () => ({
   type: "APP_WILL_UNMOUNT",
 });
 
+export const appSetup = () => ({
+  type: "SETUP",
+});

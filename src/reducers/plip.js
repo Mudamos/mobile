@@ -1,135 +1,41 @@
-import {
-  NATIONWIDE_SCOPE,
-} from "../utils";
-
 const initialState = {
   userSignInfo: {},
   justSignedPlips: {},
-  plipsFilters: {
-    scope: NATIONWIDE_SCOPE,
-  },
   plipsSignInfo: {},
+  errorFetchingPlips: false,
+  isFetchingPlips: false,
+  isRefreshingPlips: false,
 };
 
 export default  (state = initialState, action) => {
+  if (!action) return state;
+
   const { type, payload } = action;
 
   switch (type) {
-    case "PLIPS_NATIONWIDE_FETCHED":
+    case "PLIPS_FETCHING": {
       return {
         ...state,
-        nationwidePlips: payload.plips,
-        currentNationwidePlipsPage: payload.page,
-        nextNationwidePlipsPage: payload.nextPage,
+        isFetchingPlips: payload.isFetching,
+        errorFetchingPlips: false,
       };
-    case "PLIPS_STATEWIDE_FETCHED":
+    }
+    case "ERROR_FETCHING_PLIPS":
       return {
         ...state,
-        statewidePlips: payload.plips,
-        currentStatewidePlipsPage: payload.page,
-        nextStatewidePlipsPage: payload.nextPage,
-        isFetchingStatewidePlips: false,
-        isRefreshingStatewidePlips: false,
+        errorFetchingPlips: true,
       };
-    case "PLIPS_CITYWIDE_FETCHED":
+    case "PLIPS_FETCHED":
       return {
         ...state,
-        citywidePlips: payload.plips,
-        currentCitywidePlipsPage: payload.page,
-        nextCitywidePlipsPage: payload.nextPage,
-        isFetchingCitywidePlips: false,
-        isRefreshingCitywidePlips: false,
+        plips: payload.plips,
+        currentPlipsPage: payload.page,
+        nextPlipsPage: payload.nextPage,
       };
-    case "PLIPS_APPEND_NATIONWIDE_PLIPS":
+    case "PLIPS_REFRESHING_PLIPS":
       return {
         ...state,
-        nationwidePlips: (state.nationwidePlips || []).concat(payload.plips),
-        currentNationwidePlipsPage: payload.page,
-        nextNationwidePlipsPage: payload.nextPage,
-      };
-    case "PLIPS_APPEND_STATEWIDE_PLIPS":
-      return {
-        ...state,
-        statewidePlips: (state.statewidePlips || []).concat(payload.plips),
-        currentStatewidePlipsPage: payload.page,
-        nextStatewidePlipsPage: payload.nextPage,
-        isFetchingNextStatewidePlipsPage: false,
-      };
-    case "PLIPS_APPEND_CITYWIDE_PLIPS":
-      return {
-        ...state,
-        citywidePlips: (state.citywidePlips || []).concat(payload.plips),
-        currentCitywidePlipsPage: payload.page,
-        nextCitywidePlipsPage: payload.nextPage,
-        isFetchingNextCitywidePlipsPage: false,
-      };
-    case "PLIPS_NATIONWIDE_FETCHING":
-      return {
-        ...state,
-        isFetchingNationwidePlips: payload.isFetching,
-        errorFetchingNationwidePlips: false,
-    };
-    case "PLIPS_FETCHING_NEXT_NATIONWIDE_PLIPS_PAGE":
-      return {
-        ...state,
-        isFetchingNextNationwidePlipsPage: payload.isFetching,
-      };
-    case "PLIPS_FETCH_STATEWIDE_PLIPS_NEXT_PAGE":
-      return {
-        ...state,
-        isFetchingNextStatewidePlipsPage: true,
-      };
-    case "PLIPS_FETCH_CITYWIDE_PLIPS_NEXT_PAGE":
-      return {
-        ...state,
-        isFetchingNextCitywidePlipsPage: true,
-      };
-    case "PLIPS_FETCH_STATEWIDE_PLIPS_NEXT_PAGE_ERROR":
-      return {
-        ...state,
-        isFetchingNextStatewidePlipsPage: false,
-      };
-    case "PLIPS_FETCH_CITYWIDE_PLIPS_NEXT_PAGE_ERROR":
-      return {
-        ...state,
-        isFetchingNextCitywidePlipsPage: false,
-      };
-    case "PLIPS_REFRESHING_NATIONWIDE_PLIPS":
-      return {
-        ...state,
-        isRefreshingNationwidePlips: payload.isRefreshing,
-      };
-    case "PLIPS_REFRESH_STATEWIDE_PLIPS":
-      return {
-        ...state,
-        isRefreshingStatewidePlips: true,
-      };
-    case "PLIPS_REFRESH_CITYWIDE_PLIPS":
-      return {
-        ...state,
-        isRefreshingCitywidePlips: true,
-      };
-    case "PLIPS_STATEWIDE_REFRESH_ERROR":
-      return {
-        ...state,
-        isRefreshingStatewidePlips: false,
-      };
-    case "PLIPS_CITYWIDE_REFRESH_ERROR":
-      return {
-        ...state,
-        isRefreshingCitywidePlips: false,
-      };
-    case "PLIPS_FETCH_STATEWIDE_PLIPS":
-      return {
-        ...state,
-        isFetchingStatewidePlips: true,
-        errorFetchingStatewidePlips: false,
-      };
-    case "PLIPS_FETCH_CITYWIDE_PLIPS":
-      return {
-        ...state,
-        isFetchingCitywidePlips: true,
-        errorFetchingCitywidePlips: false,
+        isRefreshingPlips: payload.isRefreshing,
       };
     case "PLIP_SIGNING":
       return {
@@ -207,23 +113,6 @@ export default  (state = initialState, action) => {
         ...state,
         isFetchingPlipSignInfo: payload.isFetchingPlipSignInfo,
       };
-    case "ERROR_FETCHING_NATIONWIDE_PLIPS":
-      return {
-        ...state,
-        errorFetchingNationwidePlips: true,
-      };
-    case "ERROR_FETCHING_STATEWIDE_PLIPS":
-      return {
-        ...state,
-        errorFetchingStatewidePlips: true,
-        isFetchingStatewidePlips: false,
-      };
-    case "ERROR_FETCHING_CITYWIDE_PLIPS":
-      return {
-        ...state,
-        errorFetchingCitywidePlips: true,
-        isFetchingCitywidePlips: false,
-      };
     case "PLIP_SIGNING_PLIP":
       return {
         ...state,
@@ -239,26 +128,6 @@ export default  (state = initialState, action) => {
       return {
         ...state,
         fetchPlipRelatedInfoError: true,
-      };
-    case "PLIPS_REPLACE_PLIPS_FILTERS":
-      return {
-        ...state,
-        plipsFilters: { ...state.plipsFilters, state: payload.state, city: payload.city },
-      };
-    case "PLIPS_CHANGE_FILTER_SCOPE":
-      return {
-        ...state,
-        plipsFilters: { ...state.plipsFilters, scope: payload.scope },
-      };
-    case "PLIPS_CHANGE_FILTER_STATE":
-      return {
-        ...state,
-        plipsFilters: { ...state.plipsFilters, state: payload.state },
-      };
-    case "PLIPS_CHANGE_FILTER_CITY":
-      return {
-        ...state,
-        plipsFilters: { ...state.plipsFilters, city: payload.city },
       };
     case "PLIP_PLIPS_SIGN_INFO_FETCHED":
       return {

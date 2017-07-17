@@ -6,7 +6,11 @@ const initialState = {
   plipRemainingDaysEnabled: true,
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, action) => {
+  if (!action) return state;
+
+  const { type, payload } = action;
+
   switch (type) {
     case "FEATURE_FETCHED_FEATURE_TOGGLES": {
       const { features } = payload;

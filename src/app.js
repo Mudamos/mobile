@@ -38,13 +38,6 @@ import {
 import {
   appDidMount,
   appWillUnmount,
-  fetchIsUserFirstTime,
-  fetchFeatureToggles,
-  fetchFilteredPlips,
-  fetchRemoteConfig,
-  fetchRemoteLinks,
-  fetchSession,
-  fetchStoredPlipsFilters,
   navigate,
   navigateBack,
 } from "./actions";
@@ -157,13 +150,6 @@ sagaRunner.run(sagas, {
   walletStore,
 });
 
-store.dispatch(fetchSession());
-store.dispatch(fetchIsUserFirstTime());
-store.dispatch(fetchStoredPlipsFilters());
-store.dispatch(fetchFeatureToggles());
-store.dispatch(fetchRemoteLinks());
-store.dispatch(fetchRemoteConfig());
-
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 
 export default class App extends Component {
@@ -181,7 +167,6 @@ export default class App extends Component {
 
   componentDidMount() {
     store.dispatch(appDidMount());
-    store.dispatch(fetchFilteredPlips());
   }
 
   componentWillUnmount() {

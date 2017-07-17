@@ -15,41 +15,30 @@ import { isDev } from "../utils";
 import locale from "../locales/pt-BR";
 
 import {
-  changePlipsFilterScope,
   fetchProfile,
-  fetchFilteredPlips,
-  fetchFilteredPlipsNextPage,
+  fetchPlips,
   logEvent,
   logout,
   navigate,
   openURL,
   profileSaveAvatar,
-  refreshFilteredPlips,
+  refreshPlips,
   tellAFriend,
   userFirstTimeDone,
 } from "../actions";
 
 import {
   isAppReady,
-  errorFetchingNationwidePlips,
-  errorFetchingStatewidePlips,
-  errorFetchingCitywidePlips,
+  isFetchingPlips,
+  isRefreshingPlips,
+  errorFetchingPlips,
   currentUser as getCurrentUser,
-  getPlipsFilters,
   getUserSignInfo,
-  isFetchingNationwidePlips,
-  isFetchingStatewidePlips,
-  isFetchingCitywidePlips,
   isFetchingProfile,
-  isRefreshingNationwidePlips,
-  isRefreshingStatewidePlips,
-  isRefreshingCitywidePlips,
   isUserFirstTime,
   isUserLoggedIn,
+  findPlips,
   findRemoteLinks,
-  findNationwidePlips,
-  findStatewidePlips,
-  findCitywidePlips,
   findPlipsSignInfo,
   getCurrentSigningPlip,
 } from "../selectors";
@@ -75,28 +64,23 @@ class Container extends Component {
     menuOpen: false,
     showAboutModal: false,
 
-    nationwidePlipsDataSource: this.cloneRows({ dataSource: this.dataSource(), plips: this.props.nationwidePlips }),
-    statewidePlipsDataSource: this.cloneRows({ dataSource: this.dataSource(), plips: this.props.statewidePlips }),
-    citywidePlipsDataSource: this.cloneRows({ dataSource: this.dataSource(), plips: this.props.citywidePlips }),
+    plipsDataSource: this.cloneRows({ dataSource: this.dataSource(), plips: this.props.plips }),
   };
 
   static propTypes = {
-    citywidePlips: PropTypes.array,
     currentSigningPlip: PropTypes.object,
     currentUser: PropTypes.object,
-    errorFetchingNationwidePlips: PropTypes.bool,
+    errorFetchingPlips: PropTypes.bool,
     isAppReady: PropTypes.bool,
-    isFetchingNationwidePlips: PropTypes.bool.isRequired,
+    isFetchingPlips: PropTypes.bool.isRequired,
     isFetchingProfile: PropTypes.bool,
-    isRefreshingNationwide: PropTypes.bool,
+    isRefreshing: PropTypes.bool,
     isUserFirstTime: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
-    nationwidePlips: PropTypes.array,
+    plips: PropTypes.array,
     remoteLinks: RemoteLinksType,
-    statewidePlips: PropTypes.array,
     onAvatarChanged: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
-    onFetchPlipsNextPage: PropTypes.func.isRequired,
     onFetchProfile: PropTypes.func.isRequired,
     onFirstTimeModalClose: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
@@ -170,15 +154,11 @@ class Container extends Component {
     }
 
     const {
-      nationwidePlipsDataSource,
-      statewidePlipsDataSource,
-      citywidePlipsDataSource,
+      plipsDataSource,
     } = this.state;
 
     this.setState({
-      nationwidePlipsDataSource: this.cloneRows({ dataSource: nationwidePlipsDataSource, plips: nextProps.nationwidePlips }),
-      statewidePlipsDataSource: this.cloneRows({ dataSource: statewidePlipsDataSource, plips: nextProps.statewidePlips }),
-      citywidePlipsDataSource: this.cloneRows({ dataSource: citywidePlipsDataSource, plips: nextProps.citywidePlips }),
+      plipsDataSource: this.cloneRows({ dataSource: plipsDataSource, plips: nextProps.plips }),
     });
   }
 
@@ -202,9 +182,7 @@ class Container extends Component {
 
   renderPage() {
     const {
-      nationwidePlipsDataSource,
-      statewidePlipsDataSource,
-      citywidePlipsDataSource,
+      plipsDataSource,
       showAboutModal,
     } = this.state;
 
@@ -214,9 +192,7 @@ class Container extends Component {
           {...this.props}
 
           openMenu={this.openMenu.bind(this)}
-          nationwidePlipsDataSource={nationwidePlipsDataSource}
-          statewidePlipsDataSource={statewidePlipsDataSource}
-          citywidePlipsDataSource={citywidePlipsDataSource}
+          plipsDataSource={plipsDataSource}
         />
 
         {
@@ -321,24 +297,15 @@ const mapStateToProps = state => {
   return {
     currentSigningPlip: getCurrentSigningPlip(state),
     currentUser: getCurrentUser(state),
-    errorFetchingNationwidePlips: errorFetchingNationwidePlips(state),
-    errorFetchingStatewidePlips: errorFetchingStatewidePlips(state),
-    errorFetchingCitywidePlips: errorFetchingCitywidePlips(state),
-    filters: getPlipsFilters(state),
+    errorFetchingPlips: errorFetchingPlips(state),
     isAppReady: isAppReady(state),
-    isFetchingNationwidePlips: isFetchingNationwidePlips(state),
-    isFetchingStatewidePlips: isFetchingStatewidePlips(state),
-    isFetchingCitywidePlips: isFetchingCitywidePlips(state),
+    isFetchingPlips: isFetchingPlips(state),
     isFetchingProfile: isFetchingProfile(state),
-    isRefreshingNationwide: isRefreshingNationwidePlips(state),
-    isRefreshingStatewide: isRefreshingStatewidePlips(state),
-    isRefreshingCitywide: isRefreshingCitywidePlips(state),
+    isRefreshingPlips: isRefreshingPlips(state),
     isUserFirstTime: isUserFirstTime(state),
     isUserLoggedIn: isUserLoggedIn(state),
-    nationwidePlips: findNationwidePlips(state),
+    plips: findPlips(state),
     remoteLinks: findRemoteLinks(state),
-    statewidePlips: findStatewidePlips(state),
-    citywidePlips: findCitywidePlips(state),
     plipsSignInfo: findPlipsSignInfo(state),
     userSignInfo: getUserSignInfo(state),
   };
@@ -346,11 +313,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onAvatarChanged: avatar => dispatch(profileSaveAvatar({ avatar, shouldNavigate: false })),
-  onFetchPlips: () => dispatch(fetchFilteredPlips()),
-  onRetryPlips: () => dispatch(fetchFilteredPlips()),
+  onRetryPlips: () => dispatch(fetchPlips()),
   onChangePassword: () => dispatch(navigate("changePassword")),
-  onChangeScope: ({ scope }) => dispatch(changePlipsFilterScope({ scope })),
-  onFetchPlipsNextPage: () => dispatch(fetchFilteredPlipsNextPage()),
   onFetchProfile: () => dispatch(fetchProfile()),
   onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
   onGoToPlip: plip => dispatch(navigate("showPlip", { plip })),
@@ -358,10 +322,8 @@ const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch(logout()),
   onOpenURL: url => dispatch(openURL(url)),
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
-  onRefresh: () => dispatch(refreshFilteredPlips()),
+  onRefresh: () => dispatch(refreshPlips()),
   onSignUp: () => dispatch(navigate("signUp")),
-  onSelectCityFilter: () => dispatch(navigate("cityFilter")),
-  onSelectStateFilter: () => dispatch(navigate("stateFilter")),
   onTellAFriend: () => dispatch(tellAFriend()),
 });
 
