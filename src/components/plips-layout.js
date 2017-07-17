@@ -133,18 +133,18 @@ export default class PlipsLayout extends Component {
           <RefreshControl
             refreshing={isRefreshingPlips}
             onRefresh={onRefresh}
-            tintColor="white"
+            tintColor="black"
           />
         }
       />
     );
   }
 
-  renderRow = ({ height, margin }) => ([plip], section, row, highlightRow) => {
+  renderRow = ({ height, margin }) => ([plip, index], section, row, highlightRow) => {
     const { onGoToPlip } = this.props;
 
     return (
-      <View style={styles.rowContainer}>
+      <View style={[styles.rowContainer, index === 0 ? styles.firstRowContainer : {}]}>
         <TouchableOpacity
           onPress={() => {
             highlightRow(section, row);
