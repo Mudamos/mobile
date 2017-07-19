@@ -117,8 +117,8 @@ function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
 function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
   // Because we are ordering client side, we must fetch "all" plips
   const limit = 100;
-  const all = true;
-  return yield call(mudamosWebApi.listPlips, { all, page, limit, uf, cityId });
+  const scope = "all";
+  return yield call(mudamosWebApi.listPlips, { scope, page, limit, uf, cityId });
 }
 
 function* fetchPlipRelatedInfo({ mobileApi }) {
