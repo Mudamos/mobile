@@ -51,6 +51,7 @@ import {
 
 import {
   currentAuthToken,
+  findPlips,
   getCurrentSigningPlip,
   isUserLoggedIn,
   getIneligiblePlipReasonForScope,
@@ -365,6 +366,20 @@ function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
   return yield plipIds.map(plipId => call(fetchUserSignInfo, { mobileApi, plipId }));
 }
 
+function* loadStorePlipsInfo({ mobileApi }) {
+  yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
+    try {
+      const plips = yield select(findPlips);
+      const plipIds = (plips || []).map(prop("id"));
+      if (!plipIds.length) return;
+
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+    } catch(e) {
+      logError(e, { tag: "loadStorePlipsInfo" });
+    }
+  });
+}
+
 function eligibleToSignPlip({ plip, user }) {
   const { scope, uf, city } = plip.scopeCoverage;
   const { uf: userUF, city: userCityName } = user.address;
@@ -386,4 +401,5 @@ export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiEr
   yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
   yield spawn(fetchPlipRelatedInfo, { mobileApi });
+  yield fork(loadStorePlipsInfo, { mobileApi });
 }
