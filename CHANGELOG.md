@@ -1,5 +1,6 @@
 # Next
 
+* [PR #357] Add “Proponha um PL” menu item
 * [PR #353] Add new action button with authenticated singers link
   - Confgure Firebase Remote Config
     - `authenticated_signers_button_title` to `Lista de assinantes e outras informações`
