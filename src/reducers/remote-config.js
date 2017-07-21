@@ -16,7 +16,11 @@ const initialState = {
   },
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, action) => {
+  if (!action) return state;
+
+  const { type, payload } = action;
+
   switch (type) {
     case "REMOTE_CONFIG_FETCHED_LINKS": {
       const { links } = payload;

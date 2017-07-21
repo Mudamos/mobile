@@ -12,7 +12,6 @@ import { isDev } from "./utils";
 import {
   ChangeForgotPasswordContainer,
   ChangePasswordContainer,
-  CityFilterContainer,
   ForgotPasswordContainer,
   PlipContainer,
   PlipsContainer,
@@ -31,20 +30,12 @@ import {
   SignersContainer,
   SignInContainer,
   SignUpContainer,
-  StateFilterContainer,
   TSEContainer,
 } from "./containers";
 
 import {
   appDidMount,
   appWillUnmount,
-  fetchIsUserFirstTime,
-  fetchFeatureToggles,
-  fetchFilteredPlips,
-  fetchRemoteConfig,
-  fetchRemoteLinks,
-  fetchSession,
-  fetchStoredPlipsFilters,
   navigate,
   navigateBack,
 } from "./actions";
@@ -113,8 +104,6 @@ const scenes = Actions.create(
       <Scene key="showPlip" component={PlipContainer} hideNavBar={true} />
       <Scene key="plipViewer" component={PlipViewerContainer} hideNavBar={true} title="Texto do projeto"/>
       <Scene key="signers" component={SignersContainer} hideNavBar={true} />
-      <Scene key="stateFilter" component={StateFilterContainer} hideNavBar={true} />
-      <Scene key="cityFilter" component={CityFilterContainer} hideNavBar={true} />
     </Scene>
 
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
@@ -157,13 +146,6 @@ sagaRunner.run(sagas, {
   walletStore,
 });
 
-store.dispatch(fetchSession());
-store.dispatch(fetchIsUserFirstTime());
-store.dispatch(fetchStoredPlipsFilters());
-store.dispatch(fetchFeatureToggles());
-store.dispatch(fetchRemoteLinks());
-store.dispatch(fetchRemoteConfig());
-
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 
 export default class App extends Component {
@@ -181,7 +163,6 @@ export default class App extends Component {
 
   componentDidMount() {
     store.dispatch(appDidMount());
-    store.dispatch(fetchFilteredPlips());
   }
 
   componentWillUnmount() {

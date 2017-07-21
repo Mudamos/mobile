@@ -1,4 +1,4 @@
-import { spawn } from "redux-saga/effects";
+import { fork, spawn } from "redux-saga/effects";
 
 import analyticsSaga from "./analytics";
 import appStateSaga from "./app-state";
@@ -10,7 +10,6 @@ import authenticationSaga from "./authentication";
 import passwordSaga from "./password";
 import permissionSaga from "./permission";
 import plipSaga from "./plip";
-import preNavigationActions from "./pre-navigation-actions";
 import profileSaga from "./profile";
 import stateSaga from "./state";
 import navigationSaga from "./navigation";
@@ -22,6 +21,7 @@ import linkingSaga from "./linking";
 import localStorageSaga from "./local-storage";
 import locationSaga from "./location";
 import walletSaga from "./wallet";
+import setupSaga from "./setup";
 
 export default function* rootSaga({
   analytics,
@@ -48,7 +48,6 @@ export default function* rootSaga({
   yield spawn(passwordSaga, { mobileApi, sessionStore, Crypto });
   yield spawn(permissionSaga, { permissionService });
   yield spawn(plipSaga, { apiError, localStorage, mobileApi, mudamosWebApi, walletStore });
-  yield spawn(preNavigationActions);
   yield spawn(profileSaga, { mobileApi, DeviceInfo, sessionStore, Crypto });
   yield spawn(stateSaga, { repositories });
   yield spawn(errorSaga);
@@ -60,4 +59,5 @@ export default function* rootSaga({
   yield spawn(localStorageSaga, { localStorage });
   yield spawn(locationSaga, { locationService, permissionService });
   yield spawn(walletSaga, { mobileApi, walletStore });
+  yield fork(setupSaga, { sessionStore });
 }

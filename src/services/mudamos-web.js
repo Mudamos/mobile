@@ -75,7 +75,7 @@ const getPagination = ({ response, ...args }) => ({
 });
 
 
-const listPlips = ({ get }) => ({ page, uf, cityId }) => get(`/api/v2/plips?${buildQueryString({ page, uf, city_id: cityId })}`)
+const listPlips = ({ get }) => ({ scope, page, limit, uf, cityId }) => get(`/api/v2/plips?${buildQueryString({ scope, page, limit, uf, city_id: cityId })}`)
   .then(getPagination)
   .then(({ json, page, nextPage }) => ({ plips: json.data.plips, page, nextPage }))
 

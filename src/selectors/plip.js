@@ -1,43 +1,79 @@
-import { concatLists } from "../utils";
+import {
+  CITYWIDE_SCOPE,
+  STATEWIDE_SCOPE,
+  NATIONWIDE_SCOPE,
+  moment,
+} from "../utils";
 
-export const findNationwidePlips = state => state.plip.nationwidePlips;
+import { currentUser } from "./profile";
 
-export const findStatewidePlips = state => state.plip.statewidePlips;
+import {
+  contains,
+  flatten,
+  groupBy,
+  prop,
+  sort,
+} from "ramda";
 
-export const findCitywidePlips = state => state.plip.citywidePlips;
+export const errorFetchingPlips = state => state.plip.errorFetchingPlips;
 
-export const allScopedPlips = state =>
-  concatLists(
-    findNationwidePlips(state),
-    findStatewidePlips(state),
-    findCitywidePlips(state),
-  );
+export const isFetchingPlips = state => state.plip.isFetchingPlips;
 
-export const isFetchingNationwidePlips = state => !!state.plip.isFetchingNationwidePlips;
+export const isRefreshingPlips = state => state.plip.isRefreshingPlips;
 
-export const isFetchingStatewidePlips = state => !!state.plip.isFetchingStatewidePlips;
+export const findPlips = state => {
+  const plips = state.plip.plips || [];
+  const address = (currentUser(state) || {}).address;
+  const normalize = str => (str || "").toLowerCase();
+  const getTime = date => moment(date).toDate().getTime();
+  const orderPlips = plips => sort((a, b) => getTime(b.phase.initialDate) - getTime(a.phase.initialDate), plips || []);
+  const groupBySignature = groupBy(({ id }) => hasUserSignedPlip(id)(state) ? "signed" : "unsigned");
 
-export const isFetchingCitywidePlips = state => !!state.plip.isFetchingCitywidePlips;
+  const userCityPlips = plips.filter(({ scopeCoverage }) => {
+    return scopeCoverage.scope === CITYWIDE_SCOPE &&
+           address &&
+           normalize(address.uf) === normalize(scopeCoverage.city.uf) &&
+           normalize(address.city) === normalize(scopeCoverage.city.name);
+  }).filter(({ id }) => !hasUserSignedPlip(id)(state));
 
-export const isRefreshingNationwidePlips = state => !!state.plip.isRefreshingNationwidePlips;
+  const userStatePlips = plips.filter(({ scopeCoverage }) => {
+    return scopeCoverage.scope === STATEWIDE_SCOPE &&
+           address &&
+           normalize(address.uf) === normalize(scopeCoverage.uf);
+  }).filter(({ id }) => !hasUserSignedPlip(id)(state));
 
-export const isRefreshingStatewidePlips = state => !!state.plip.isRefreshingStatewidePlips;
+  const unsignedNationwidePlips = plips
+    .filter(({ scopeCoverage }) => scopeCoverage.scope === NATIONWIDE_SCOPE)
+    .filter(({ id }) => !hasUserSignedPlip(id)(state));
 
-export const isRefreshingCitywidePlips = state => !!state.plip.isRefreshingCitywidePlips;
+  const filteredIds = flatten([userCityPlips, userStatePlips, unsignedNationwidePlips]).map(prop("id"));
+  const others = plips.filter(({ id }) => !contains(id, filteredIds));
+
+  const signedNationwide = others.filter(({ scopeCoverage }) => scopeCoverage.scope === NATIONWIDE_SCOPE);
+  const otherStatewide = groupBySignature(others.filter(({ scopeCoverage }) => scopeCoverage.scope === STATEWIDE_SCOPE));
+  const otherCitywide = groupBySignature(others.filter(({ scopeCoverage }) => scopeCoverage.scope === CITYWIDE_SCOPE));
+
+  return flatten([
+    orderPlips(userCityPlips),
+    orderPlips(userStatePlips),
+    orderPlips(unsignedNationwidePlips),
+    orderPlips(otherStatewide["unsigned"]),
+    orderPlips(otherCitywide["unsigned"]),
+    orderPlips(signedNationwide),
+    orderPlips(otherStatewide["signed"]),
+    orderPlips(otherCitywide["signed"]),
+  ]);
+}
 
 export const isSigningPlip = state => state.plip.isSigning;
-
-export const errorFetchingNationwidePlips = state => state.plip.errorFetchingNationwidePlips;
-
-export const errorFetchingStatewidePlips = state => state.plip.errorFetchingStatewidePlips;
-
-export const errorFetchingCitywidePlips = state => state.plip.errorFetchingCitywidePlips;
 
 export const getUserSignInfo = state => state.plip.userSignInfo;
 
 export const getPlipSignInfo = state => state.plip.plipSignInfo;
 
-export const getUserCurrentPlipSignInfo = (state, plipId) => state.plip.userSignInfo[plipId];
+export const getUserCurrentPlipSignInfo = (state, plipId) => (getUserSignInfo(state) || {})[plipId];
+
+export const hasUserSignedPlip = plipId => state => !!((getUserCurrentPlipSignInfo(state, plipId) || {}).updatedAt)
 
 export const hasUserJustSignedPlip = (state, plipId) => state.plip.justSignedPlips[plipId];
 
@@ -56,70 +92,8 @@ export const getCurrentSigningPlip = state => state.plip.currentSigningPlip;
 
 export const wasUserSiginingBefore = state => getCurrentSigningPlip(state);
 
-export const getNextNationwidePlipsPage = state => state.plip.nextNationwidePlipsPage;
-
-export const getNextStatewidePlipsPage = state => state.plip.nextStatewidePlipsPage;
-
-export const getNextCitywidePlipsPage = state => state.plip.nextCitywidePlipsPage;
-
-export const isFetchingNextNationwidePlipsPage = state => state.plip.isFetchingNextNationwidePlipsPage;
-
-export const isFetchingNextStatewidePlipsPage = state => state.plip.isFetchingNextStatewidePlipsPage;
-
-export const isFetchingNextCitywidePlipsPage = state => state.plip.isFetchingNextCitywidePlipsPage;
-
 export const isFetchingPlipRelatedInfo = state => state.plip.isFetchingPlipRelatedInfo;
 
 export const fetchPlipRelatedInfoError = state => state.plip.fetchPlipRelatedInfoError;
-
-export const getPlipsFilters = state => state.plip.plipsFilters;
-
-export const getNationwidePlipsLoadState = state => {
-  const result = {
-    nextPage: getNextNationwidePlipsPage(state),
-    isFetchingNextPage: isFetchingNextNationwidePlipsPage(state),
-    isFetchingPlips: isFetchingNationwidePlips(state),
-    isRefreshing: isRefreshingNationwidePlips(state),
-  };
-
-  const { isFetchingNextPage, isFetchingPlips, isRefreshing} = result;
-
-  // So we do not fire a fetch again
-  result.isAlreadyFetching = isFetchingNextPage || isFetchingPlips || isRefreshing;
-
-  return result;
-};
-
-export const getStatewidePlipsLoadState = state => {
-  const result = {
-    nextPage: getNextStatewidePlipsPage(state),
-    isFetchingNextPage: isFetchingNextStatewidePlipsPage(state),
-    isFetchingPlips: isFetchingStatewidePlips(state),
-    isRefreshing: isRefreshingStatewidePlips(state),
-  };
-
-  const { isFetchingNextPage, isFetchingPlips, isRefreshing} = result;
-
-  // So we do not fire a fetch again
-  result.isAlreadyFetching = isFetchingNextPage || isFetchingPlips || isRefreshing;
-
-  return result;
-};
-
-export const getCitywidePlipsLoadState = state => {
-  const result = {
-    nextPage: getNextCitywidePlipsPage(state),
-    isFetchingNextPage: isFetchingNextCitywidePlipsPage(state),
-    isFetchingPlips: isFetchingCitywidePlips(state),
-    isRefreshing: isRefreshingCitywidePlips(state),
-  };
-
-  const { isFetchingNextPage, isFetchingPlips, isRefreshing} = result;
-
-  // So we do not fire a fetch again
-  result.isAlreadyFetching = isFetchingNextPage || isFetchingPlips || isRefreshing;
-
-  return result;
-};
 
 export const findPlipsSignInfo = state => state.plip.plipsSignInfo;

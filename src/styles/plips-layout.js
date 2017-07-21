@@ -47,6 +47,9 @@ export default StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 27,
   },
+  firstRowContainer: {
+    marginTop: 10,
+  },
   footerContainer: {
     flex: 1,
     paddingHorizontal: 27,
