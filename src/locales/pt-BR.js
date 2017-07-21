@@ -43,6 +43,7 @@ const translations = {
     getToKnowMudamos: "Conheça a Mudamos",
     help: "Ajuda",
     sendYourIdea: "Envie sua ideia!",
+    sendYourPL: "Proponha um PL",
     whyProjectsLink: "Por que estes projetos de lei?",
   },
   loading: "Carregando...",
