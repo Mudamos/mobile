@@ -1,5 +1,7 @@
 # Next
 
+## [1.6.0] 21/07/2017
+
 * [PR #357] Add “Proponha um PL” menu item
 * [PR #353] Add new action button with authenticated singers link
   - Confgure Firebase Remote Config
