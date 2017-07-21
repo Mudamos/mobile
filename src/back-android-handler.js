@@ -7,8 +7,6 @@ import {
   clearPlipSigners,
   clearPlipSignersError,
   clearProfileSaveErrors,
-  clearCities,
-  clearStates,
   signingPlip,
 } from "./actions";
 
@@ -39,9 +37,6 @@ export default store => () => {
     case "changePassword":
       store.dispatch(clearChangePasswordError());
       return defaultBackAction();
-    case "cityFilter":
-      store.dispatch(clearCities());
-      return defaultBackAction();
     case "showPlip":
       store.dispatch(clearPlipInfo());
       return defaultBackAction();
@@ -53,9 +48,6 @@ export default store => () => {
     case "signUp":
       store.dispatch(clearProfileSaveErrors());
       store.dispatch(signingPlip(null));
-      return defaultBackAction();
-    case "stateFilter":
-      store.dispatch(clearStates());
       return defaultBackAction();
     case "profileAddress":
     case "profileAvatar":

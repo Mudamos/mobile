@@ -12,7 +12,6 @@ import { isDev } from "./utils";
 import {
   ChangeForgotPasswordContainer,
   ChangePasswordContainer,
-  CityFilterContainer,
   ForgotPasswordContainer,
   PlipContainer,
   PlipsContainer,
@@ -31,7 +30,6 @@ import {
   SignersContainer,
   SignInContainer,
   SignUpContainer,
-  StateFilterContainer,
   TSEContainer,
 } from "./containers";
 
@@ -106,8 +104,6 @@ const scenes = Actions.create(
       <Scene key="showPlip" component={PlipContainer} hideNavBar={true} />
       <Scene key="plipViewer" component={PlipViewerContainer} hideNavBar={true} title="Texto do projeto"/>
       <Scene key="signers" component={SignersContainer} hideNavBar={true} />
-      <Scene key="stateFilter" component={StateFilterContainer} hideNavBar={true} />
-      <Scene key="cityFilter" component={CityFilterContainer} hideNavBar={true} />
     </Scene>
 
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
