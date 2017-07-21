@@ -106,9 +106,9 @@ class Container extends Component {
 
     const entries = [
       { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout.bind(this), position: 2 },
-      { icon: "help", title: locale.links.whyProjectsLink, action: () => this.onOpenURL({ eventName: "tapped_menu_why_projects", link: remoteLinks.whyProjectsLink }), position: 3 },
+      { icon: "account-balance", title: locale.links.sendYourPL, action: () => this.onOpenURL({ eventName: "tapped_menu_send_your_pl", link: remoteLinks.sendYourIdea }), position: 3 },
       { icon: "extension", title: locale.links.getToKnowMudamos, action: () => this.onOpenURL({ eventName: "tapped_menu_get_to_know_mudamos", link: remoteLinks.getToKnowMudamos }), position: 4 },
-      { icon: "info", title: locale.links.help, action: () => this.onOpenURL({ eventName: "tapped_menu_help", link: remoteLinks.help }), position: 5 },
+      { icon: "help", title: locale.links.help, action: () => this.onOpenURL({ eventName: "tapped_menu_help", link: remoteLinks.help }), position: 5 },
       { icon: "favorite", title: locale.menu.tellAFriend, action: this.onTellAFriend.bind(this), position: 6 },
     ];
 
