@@ -1,5 +1,7 @@
 # Next
 
+* [PR #363] Tagging user location
+
 ## [1.6.0] 21/07/2017
 
 * [PR #357] Add “Proponha um PL” menu item
