@@ -937,6 +937,30 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		46C5FFFE1F7996AA00D0A974 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				B55C452B89744C8C88F648C4 /* libReactNativeConfig.a */,
+				7C6E4E916C3B4AFEBB903B41 /* libRNSpinkit.a */,
+				9BC5D238E00C444189EA91E3 /* libRNVectorIcons.a */,
+				18D778CA95AA41818810664F /* libLRDRCTSimpleToast.a */,
+				1082FEFEA6B34CF8A23BF45D /* libAirMaps.a */,
+				E26FDBD24B0A4D90A5A1EB13 /* libRCTMaterialKit.a */,
+				D8424FEEF17243CFB758995F /* libRNRandomBytes.a */,
+				FE91C85ACE5E44DC89DDD281 /* libRNDeviceInfo.a */,
+				CF9BB36D0B0549BF80BA15B1 /* libBVLinearGradient.a */,
+				7D115F907C014FE4A318F416 /* libRCTFBSDK.a */,
+				B5AA2BE2727F416DA6981B84 /* libRNShare.a */,
+				BCA8BA48A81E4C2AB38DBFDB /* libReactNativePermissions.a */,
+				4DB5F27F75FA40E7B12ACE07 /* libReact Native Open Settings.a */,
+				621C3D10CAD54FC5982F12BB /* libRNImagePicker.a */,
+				7A536F47719B41759AAD3D00 /* libRCTOneSignal.a */,
+				3E366E4C3ED543A4B6736655 /* libRNFirebaseCrashReport.a */,
+				1D75AB137A5F4B73824350C9 /* libFirestack.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		46D05B301E5F071300350745 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1080,6 +1104,7 @@
 				A5E7F9BCFEA23D3C9568FD2A /* Pods */,
 				E37103BD91427355FD24D359 /* Frameworks */,
 				6FF64EC282744621BB244B38 /* Resources */,
+				46C5FFFE1F7996AA00D0A974 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
