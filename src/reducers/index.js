@@ -7,6 +7,7 @@ import facebook from "./facebook";
 import feature from "./feature";
 import localStorage from "./local-storage";
 import location from "./location";
+import notification from "./notification";
 import password from "./password";
 import permission from "./permission";
 import plip from "./plip";
@@ -26,6 +27,7 @@ export default combineReducers({
   feature,
   localStorage,
   location,
+  notification,
   password,
   permission,
   profile,

@@ -13,6 +13,7 @@ import plipSaga from "./plip";
 import profileSaga from "./profile";
 import stateSaga from "./state";
 import navigationSaga from "./navigation";
+import notificationSaga from "./notification";
 import remoteConfigSaga from "./remote-config";
 import sessionSaga from "./session";
 import shareSaga from "./share";
@@ -45,6 +46,7 @@ export default function* rootSaga({
   yield spawn(facebookSaga, { sessionStore, mobileApi, Crypto });
   yield spawn(featureSaga, { RemoteConfigService });
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
+  yield spawn(notificationSaga);
   yield spawn(passwordSaga, { mobileApi, sessionStore, Crypto });
   yield spawn(permissionSaga, { permissionService });
   yield spawn(plipSaga, { apiError, localStorage, mobileApi, mudamosWebApi, walletStore });
