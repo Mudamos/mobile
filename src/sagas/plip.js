@@ -9,6 +9,7 @@ import {
 
 import {
   homeSceneKey,
+  isBlank,
   isDev,
   isUnauthorized,
   logError,
@@ -17,6 +18,10 @@ import {
   STATEWIDE_SCOPE,
   CITYWIDE_SCOPE,
 } from "../utils";
+
+import {
+  isNationalCause,
+} from "../models";
 
 import {
   appReady,
@@ -119,7 +124,16 @@ function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
   // Because we are ordering client side, we must fetch "all" plips
   const limit = 100;
   const scope = "all";
-  return yield call(mudamosWebApi.listPlips, { scope, page, limit, uf, cityId });
+  const includeCauses = true;
+
+  return yield call(mudamosWebApi.listPlips, {
+    cityId,
+    includeCauses,
+    limit,
+    page,
+    scope,
+    uf,
+  });
 }
 
 function* fetchPlipRelatedInfo({ mobileApi }) {
@@ -389,8 +403,8 @@ function eligibleToSignPlip({ plip, user }) {
 
   switch (scope) {
     case NATIONWIDE_SCOPE: return true;
-    case STATEWIDE_SCOPE: return !userUF || matchUF();
-    case CITYWIDE_SCOPE: return !userCityName || !userUF || matchCity();
+    case STATEWIDE_SCOPE: return isBlank(userUF) || isNationalCause(plip) || matchUF();
+    case CITYWIDE_SCOPE: return isBlank(userCityName) || isNationalCause(plip) || matchCity();
   }
 }
 

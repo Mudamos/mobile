@@ -1,13 +1,17 @@
 import {
+  allPass,
   apply,
   complement,
   concat,
+  contains,
   equals,
   filter,
   find,
+  flip,
   fromPairs,
   head,
   is,
+  isEmpty,
   isNil,
   last,
   mergeWith,
@@ -15,6 +19,7 @@ import {
   propEq,
   reduce,
   reject,
+  test,
   toPairs,
   unapply,
 } from "ramda";
@@ -189,3 +194,13 @@ export const randomItem = list => list[Math.floor(Math.random() * list.length)];
 
 // slow start, slow end
 export const countTimingFunction = (interval, progress) => interval * (1 - Math.sin(Math.PI*progress)) * 10;
+
+export const isBlank = value => isNil(value) || isEmpty(value) || isBlankString(value);
+
+export const isBlankString = value => allPass([isString, test(/^\s*$/)])(value);
+
+export const isPresent = complement(isBlank);
+
+export const includes = flip(contains);
+
+export const excludes = complement(includes);

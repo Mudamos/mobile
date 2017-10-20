@@ -2,15 +2,20 @@ import {
   CITYWIDE_SCOPE,
   STATEWIDE_SCOPE,
   NATIONWIDE_SCOPE,
+
+  excludes,
   moment,
 } from "../utils";
+
+import {
+  isNationalCause,
+} from "../models";
 
 import { currentUser } from "./profile";
 
 import {
-  contains,
-  flatten,
   groupBy,
+  pipe,
   prop,
   sort,
 } from "ramda";
@@ -23,21 +28,26 @@ export const isRefreshingPlips = state => state.plip.isRefreshingPlips;
 
 export const findPlips = state => {
   const plips = state.plip.plips || [];
-  const address = (currentUser(state) || {}).address;
+  const user = currentUser(state);
+  const address = (user || {}).address;
   const normalize = str => (str || "").toLowerCase();
   const getTime = date => moment(date).toDate().getTime();
   const orderPlips = plips => sort((a, b) => getTime(b.phase.initialDate) - getTime(a.phase.initialDate), plips || []);
   const groupBySignature = groupBy(({ id }) => hasUserSignedPlip(id)(state) ? "signed" : "unsigned");
 
-  const userCityPlips = plips.filter(({ scopeCoverage }) => {
-    return scopeCoverage.scope === CITYWIDE_SCOPE &&
+  const userCityPlips = plips.filter(plip => {
+    const { scopeCoverage } = plip;
+
+    return !isNationalCause(plip) && scopeCoverage.scope === CITYWIDE_SCOPE &&
            address &&
            normalize(address.uf) === normalize(scopeCoverage.city.uf) &&
            normalize(address.city) === normalize(scopeCoverage.city.name);
   }).filter(({ id }) => !hasUserSignedPlip(id)(state));
 
-  const userStatePlips = plips.filter(({ scopeCoverage }) => {
-    return scopeCoverage.scope === STATEWIDE_SCOPE &&
+  const userStatePlips = plips.filter(plip => {
+    const { scopeCoverage } = plip;
+
+    return !isNationalCause(plip) && scopeCoverage.scope === STATEWIDE_SCOPE &&
            address &&
            normalize(address.uf) === normalize(scopeCoverage.uf);
   }).filter(({ id }) => !hasUserSignedPlip(id)(state));
@@ -46,23 +56,37 @@ export const findPlips = state => {
     .filter(({ scopeCoverage }) => scopeCoverage.scope === NATIONWIDE_SCOPE)
     .filter(({ id }) => !hasUserSignedPlip(id)(state));
 
-  const filteredIds = flatten([userCityPlips, userStatePlips, unsignedNationwidePlips]).map(prop("id"));
-  const others = plips.filter(({ id }) => !contains(id, filteredIds));
+  const filteredIds = [
+    ...userCityPlips,
+    ...userStatePlips,
+    ...unsignedNationwidePlips,
+  ].map(prop("id"));
+
+  const others = plips.filter(pipe(prop("id"), excludes(filteredIds)));
 
   const signedNationwide = others.filter(({ scopeCoverage }) => scopeCoverage.scope === NATIONWIDE_SCOPE);
-  const otherStatewide = groupBySignature(others.filter(({ scopeCoverage }) => scopeCoverage.scope === STATEWIDE_SCOPE));
-  const otherCitywide = groupBySignature(others.filter(({ scopeCoverage }) => scopeCoverage.scope === CITYWIDE_SCOPE));
+  const otherStatewide = groupBySignature(others.filter(plip => !isNationalCause(plip) && plip.scopeCoverage.scope === STATEWIDE_SCOPE));
+  const otherCitywide = groupBySignature(others.filter(plip => !isNationalCause(plip) && plip.scopeCoverage.scope === CITYWIDE_SCOPE));
 
-  return flatten([
-    orderPlips(userCityPlips),
-    orderPlips(userStatePlips),
-    orderPlips(unsignedNationwidePlips),
-    orderPlips(otherStatewide["unsigned"]),
-    orderPlips(otherCitywide["unsigned"]),
-    orderPlips(signedNationwide),
-    orderPlips(otherStatewide["signed"]),
-    orderPlips(otherCitywide["signed"]),
-  ]);
+  const stateNationalCause = groupBySignature(others.filter(plip => isNationalCause(plip) && plip.scopeCoverage.scope === STATEWIDE_SCOPE));
+  const cityNationalCause = groupBySignature(others.filter(plip => isNationalCause(plip) && plip.scopeCoverage.scope === CITYWIDE_SCOPE));
+
+  return [
+    ...orderPlips(userCityPlips),
+    ...(user ? orderPlips(cityNationalCause["unsigned"]) : []),
+    ...orderPlips(userStatePlips),
+    ...(user ? orderPlips(stateNationalCause["unsigned"]) : []),
+    ...orderPlips(unsignedNationwidePlips),
+    ...(user ? [] : orderPlips(cityNationalCause["unsigned"])),
+    ...(user ? [] : orderPlips(stateNationalCause["unsigned"])),
+    ...orderPlips(otherStatewide["unsigned"]),
+    ...orderPlips(otherCitywide["unsigned"]),
+    ...orderPlips(signedNationwide),
+    ...orderPlips(otherStatewide["signed"]),
+    ...orderPlips(stateNationalCause["signed"]),
+    ...orderPlips(otherCitywide["signed"]),
+    ...orderPlips(cityNationalCause["signed"]),
+  ];
 }
 
 export const isSigningPlip = state => state.plip.isSigning;

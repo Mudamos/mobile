@@ -19,6 +19,10 @@ import {
   findStateByUF,
 } from "../utils";
 
+import {
+  isNationalCause,
+} from "../models";
+
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import * as Animatable from "react-native-animatable";
@@ -251,10 +255,14 @@ export default class PlipsLayout extends Component {
   }
 
   scopeCoverageTitle(plip) {
-    switch(plip.scopeCoverage.scope) {
-      case NATIONWIDE_SCOPE: return "PL Nacional";
-      case STATEWIDE_SCOPE: return `PL Estadual: ${findStateByUF(plip.scopeCoverage.uf).name}`;
-      case CITYWIDE_SCOPE: return `PL Municipal: ${plip.scopeCoverage.city.name}, ${plip.scopeCoverage.city.uf}`;
+    if (plip.scopeCoverage.scope === NATIONWIDE_SCOPE) {
+      return "PL Nacional";
+    } else if (isNationalCause(plip)) {
+      return "Causa Nacional";
+    } else if (plip.scopeCoverage.scope === STATEWIDE_SCOPE) {
+      return `PL Estadual: ${findStateByUF(plip.scopeCoverage.uf).name}`;
+    } else if (plip.scopeCoverage.scope === CITYWIDE_SCOPE) {
+      return `PL Municipal: ${plip.scopeCoverage.city.name}, ${plip.scopeCoverage.city.uf}`;
     }
   }
 

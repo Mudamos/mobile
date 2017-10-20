@@ -75,9 +75,27 @@ const getPagination = ({ response, ...args }) => ({
 });
 
 
-const listPlips = ({ get }) => ({ scope, page, limit, uf, cityId }) => get(`/api/v2/plips?${buildQueryString({ scope, page, limit, uf, city_id: cityId })}`)
-  .then(getPagination)
-  .then(({ json, page, nextPage }) => ({ plips: json.data.plips, page, nextPage }))
+const listPlips = ({ get }) => ({
+  cityId,
+  includeCauses,
+  limit,
+  page,
+  scope,
+  uf,
+}) => {
+  const qs = buildQueryString({
+    city_id: cityId,
+    include_causes: includeCauses,
+    limit,
+    page,
+    scope,
+    uf,
+  });
+
+  return get(`/api/v2/plips?${qs}`)
+    .then(getPagination)
+    .then(({ json, page, nextPage }) => ({ plips: json.data.plips, page, nextPage }));
+};
 
 export default function MudamosWebApi(host) {
   const client = requester({ host });
