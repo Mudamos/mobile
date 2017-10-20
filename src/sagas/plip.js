@@ -40,7 +40,7 @@ import {
   isSigningPlip,
   logEvent,
   navigate,
-  plipsSingInfoFetched,
+  plipsSignInfoFetched,
   plipJustSigned,
   plipsRefreshError,
   plipSigners,
@@ -213,10 +213,15 @@ function* updatePlipSignInfoSaga({ mobileApi }) {
   yield takeEvery("PLIP_JUST_SIGNED", function* ({ payload }) {
     try {
       const { plipId } = payload;
-      yield [
-        call(fetchPlipSignInfo, { mobileApi, plipId }),
+
+      const [plipSignInfo] = yield [
+        call(mobileApi.plipSignInfo, plipId),
         call(fetchShortSigners, { mobileApi, plipId }),
       ];
+
+      const info = plipSignInfo.info;
+      yield put(plipSignInfoFetched({ plipId, info }));
+      yield put(plipsSignInfoFetched({ signInfo: { [plipId]: info }}));
     } catch(e) {
       logError(e);
     }
@@ -366,7 +371,7 @@ function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
       return memo;
     }, {});
 
-    yield put(plipsSingInfoFetched({ signInfo }));
+    yield put(plipsSignInfoFetched({ signInfo }));
   } catch(e) {
     logError(e, { tag: "fetchPlipsRelatedInfo" });
   }

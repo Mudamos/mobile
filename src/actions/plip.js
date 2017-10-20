@@ -165,7 +165,7 @@ export const clearPlipInfo = () => ({
   type: "PLIP_CLEAR_INFO",
 });
 
-export const plipsSingInfoFetched = ({ signInfo }) => ({
+export const plipsSignInfoFetched = ({ signInfo }) => ({
   type: "PLIP_PLIPS_SIGN_INFO_FETCHED",
   payload: { signInfo },
 });
