@@ -209,10 +209,13 @@ const userSignInfo = ({ client }) => (authToken, plipId) =>
     .get(`/users/message/${plipId}`)
     .then(getData);
 
-const plipSignInfo = ({ client }) => plipId =>
-  client
+const plipSignInfo = ({ client }) => ({ authToken, plipId }) => {
+  const api =  authToken ? authorizedClient(client, authToken) : client;
+
+  return api
     .get(`/petition/${plipId}/info`)
     .then(getData);
+};
 
 const logout = ({ client }) => authToken =>
   authorizedClient(client, authToken)

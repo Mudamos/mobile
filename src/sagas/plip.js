@@ -201,8 +201,9 @@ function* fetchUserSignInfo({ mobileApi, plipId }) {
 
 function* fetchPlipSignInfo({ mobileApi, plipId }) {
   try {
+    const authToken = yield select(currentAuthToken);
     yield put(fetchingPlipSignInfo(true));
-    const plipSignInfo = yield call(mobileApi.plipSignInfo, plipId);
+    const plipSignInfo = yield call(mobileApi.plipSignInfo, { authToken, plipId });
     yield put(plipSignInfoFetched({ plipId, info: plipSignInfo.info }));
   } finally {
     yield put(fetchingPlipSignInfo(false));
@@ -213,9 +214,10 @@ function* updatePlipSignInfoSaga({ mobileApi }) {
   yield takeEvery("PLIP_JUST_SIGNED", function* ({ payload }) {
     try {
       const { plipId } = payload;
+      const authToken = yield select(currentAuthToken);
 
       const [plipSignInfo] = yield [
-        call(mobileApi.plipSignInfo, plipId),
+        call(mobileApi.plipSignInfo, { authToken, plipId }),
         call(fetchShortSigners, { mobileApi, plipId }),
       ];
 
@@ -378,7 +380,8 @@ function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
 }
 
 function* fetchPlipsSignInfo({ mobileApi, plipIds }) {
-  return yield plipIds.map(id => call(mobileApi.plipSignInfo, id));
+  const authToken = yield select(currentAuthToken);
+  return yield plipIds.map(plipId => call(mobileApi.plipSignInfo, { authToken, plipId }));
 }
 
 function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
