@@ -7,7 +7,7 @@ const initialState = {
   isRefreshingPlips: false,
 };
 
-export default  (state = initialState, action) => {
+export default (state = initialState, action) => {
   if (!action) return state;
 
   const { type, payload } = action;

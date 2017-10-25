@@ -1,8 +1,7 @@
 import farfetch, { prefix, requestLogger, responseLogger } from "farfetch";
 import { camelizeKeys } from "humps";
-import { isNil, not } from "ramda";
 
-import { isDev } from "../utils";
+import { buildQueryString, isDev } from "../utils";
 
 const requester = ({ host }) => {
   let builder = farfetch;
@@ -24,22 +23,6 @@ const requester = ({ host }) => {
 
   return builder;
 };
-
-const buildQueryString = params =>
-  Object
-    .keys(params)
-    .map(k => {
-        if (isNil(params[k])) return null;
-        if (Array.isArray(params[k])) {
-            return params[k]
-                .map(val => `${encodeURIComponent(k)}[]=${encodeURIComponent(val)}`)
-                .join("&")
-        }
-
-        return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`
-    })
-    .filter(value => not(isNil(value)))
-    .join("&")
 
 const handleResponseError = res => res
   .then(rejectErrorResponses)

@@ -15,6 +15,7 @@ import {
   isNil,
   last,
   mergeWith,
+  not,
   pipe,
   propEq,
   reduce,
@@ -204,3 +205,19 @@ export const isPresent = complement(isBlank);
 export const includes = flip(contains);
 
 export const excludes = complement(includes);
+
+export const buildQueryString = params =>
+  Object
+    .keys(params)
+    .map(k => {
+        if (isNil(params[k])) return null;
+        if (Array.isArray(params[k])) {
+            return params[k]
+                .map(val => `${encodeURIComponent(k)}[]=${encodeURIComponent(val)}`)
+                .join("&")
+        }
+
+        return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`
+    })
+    .filter(value => not(isNil(value)))
+    .join("&")

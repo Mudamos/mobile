@@ -58,6 +58,7 @@ import {
   currentAuthToken,
   findPlips,
   getCurrentSigningPlip,
+  getPlipSignatureGoals,
   isUserLoggedIn,
   getIneligiblePlipReasonForScope,
 } from "../selectors";
@@ -83,11 +84,12 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
     try {
       yield put(fetchingPlips(true));
       const response = yield call(fetchPlips, { mudamosWebApi });
+      yield put(plipsFetched(response));
+
       const plipIds = (response.plips || []).map(prop("id"));
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
 
-      yield put(plipsFetched(response));
       yield put(fetchingPlips(false));
     } catch (e) {
       logError(e);
@@ -105,11 +107,12 @@ function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
     try {
       yield put(isRefreshingPlips(true));
       const response = yield call(fetchPlips, { page: 1, mudamosWebApi });
+      yield put(plipsFetched(response));
+
       const plipIds = (response.plips || []).map(prop("id"));
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
 
-      yield put(plipsFetched(response));
     } catch (e) {
       logError(e);
 
@@ -157,7 +160,7 @@ function* fetchPlipRelatedInfo({ mobileApi }) {
         yield put(signPlipAction({ plip: currentSigningPlip }));
       }
     } catch (e) {
-      logError(e);
+      logError(e, { tag: "fetchPlipRelatedInfo" });
 
       yield put(fetchingPlipRelatedInfo(false));
       yield put(fetchPlipRelatedInfoError(e));
@@ -202,8 +205,14 @@ function* fetchUserSignInfo({ mobileApi, plipId }) {
 function* fetchPlipSignInfo({ mobileApi, plipId }) {
   try {
     const authToken = yield select(currentAuthToken);
+    const { initialGoal, finalGoal } = yield select(getPlipSignatureGoals(plipId));
     yield put(fetchingPlipSignInfo(true));
-    const plipSignInfo = yield call(mobileApi.plipSignInfo, { authToken, plipId });
+    const plipSignInfo = yield call(mobileApi.plipSignInfo, {
+      authToken,
+      plipId,
+      initialGoal,
+      finalGoal,
+    });
     yield put(plipSignInfoFetched({ plipId, info: plipSignInfo.info }));
   } finally {
     yield put(fetchingPlipSignInfo(false));
@@ -215,9 +224,10 @@ function* updatePlipSignInfoSaga({ mobileApi }) {
     try {
       const { plipId } = payload;
       const authToken = yield select(currentAuthToken);
+      const { initialGoal, finalGoal } = yield select(getPlipSignatureGoals(plipId));
 
       const [plipSignInfo] = yield [
-        call(mobileApi.plipSignInfo, { authToken, plipId }),
+        call(mobileApi.plipSignInfo, { authToken, plipId, initialGoal, finalGoal }),
         call(fetchShortSigners, { mobileApi, plipId }),
       ];
 
@@ -381,7 +391,11 @@ function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
 
 function* fetchPlipsSignInfo({ mobileApi, plipIds }) {
   const authToken = yield select(currentAuthToken);
-  return yield plipIds.map(plipId => call(mobileApi.plipSignInfo, { authToken, plipId }));
+  const goals = yield plipIds.map(id => select(getPlipSignatureGoals(id)))
+
+  return yield zip(plipIds, goals)
+    .map(([plipId, { initialGoal, finalGoal }]) =>
+      call(mobileApi.plipSignInfo, { authToken, plipId, initialGoal, finalGoal }));
 }
 
 function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {

@@ -2,6 +2,7 @@ import farfetch, { prefix, requestLogger, responseLogger } from "farfetch";
 import { camelizeKeys } from "humps";
 
 import {
+  buildQueryString,
   log,
   logError as logErrorUtil,
   isDev,
@@ -209,11 +210,15 @@ const userSignInfo = ({ client }) => (authToken, plipId) =>
     .get(`/users/message/${plipId}`)
     .then(getData);
 
-const plipSignInfo = ({ client }) => ({ authToken, plipId }) => {
+const plipSignInfo = ({ client }) => ({ authToken, plipId, initialGoal, finalGoal }) => {
   const api =  authToken ? authorizedClient(client, authToken) : client;
+  const qs = buildQueryString({
+    initial_goal: initialGoal,
+    final_goal: finalGoal,
+  });
 
   return api
-    .get(`/petition/${plipId}/info`)
+    .get(`/petition/${plipId}/info?${qs}`)
     .then(getData);
 };
 

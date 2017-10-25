@@ -17,6 +17,7 @@ import {
   groupBy,
   pipe,
   prop,
+  propEq,
   sort,
 } from "ramda";
 
@@ -25,6 +26,9 @@ export const errorFetchingPlips = state => state.plip.errorFetchingPlips;
 export const isFetchingPlips = state => state.plip.isFetchingPlips;
 
 export const isRefreshingPlips = state => state.plip.isRefreshingPlips;
+
+export const findPlip = id => state =>
+  (state.plip.plips || []).find(propEq("id", id));
 
 export const findPlips = state => {
   const plips = state.plip.plips || [];
@@ -121,3 +125,14 @@ export const isFetchingPlipRelatedInfo = state => state.plip.isFetchingPlipRelat
 export const fetchPlipRelatedInfoError = state => state.plip.fetchPlipRelatedInfoError;
 
 export const findPlipsSignInfo = state => state.plip.plipsSignInfo;
+
+export const getPlipSignatureGoals = plipId => state => {
+  const plip = findPlip(plipId)(state) || {};
+
+  const {
+    initialSignaturesGoal: initialGoal,
+    totalSignaturesRequired: finalGoal,
+  } = plip;
+
+  return { initialGoal, finalGoal };
+};
