@@ -7,7 +7,9 @@ import {
 } from "react-native";
 
 import {
+  any,
   clamp,
+  isNil,
 } from "ramda";
 
 import {
@@ -22,6 +24,8 @@ import locale from "../../locales/pt-BR";
 import { MKProgress } from "react-native-material-kit";
 import AnimateNumber from "react-native-animate-number";
 
+
+const noCounters = (...args) => any(isNil)(args);
 
 const plipProgress = ({ signaturesRequired, signaturesCount }) => {
   if (!signaturesRequired || signaturesRequired == 0 || !signaturesCount) {
@@ -68,6 +72,8 @@ const MetricsInfo = ({
   totalSignaturesRequired,
   finalDate,
 }) => {
+  if (noCounters(signaturesRequired, totalSignaturesRequired)) return null;
+
   const canSign = signatureEnabled({ finalDate });
   const showGoal = canSign && !isRemainingDaysEnabled;
 
@@ -104,9 +110,9 @@ const MetricsInfo = ({
 MetricsInfo.propTypes = {
   finalDate: PropTypes.string.isRequired,
   isRemainingDaysEnabled: PropTypes.bool,
-  signaturesCount: PropTypes.number.isRequired,
-  signaturesRequired: PropTypes.number.isRequired,
-  totalSignaturesRequired: PropTypes.number.isRequired,
+  signaturesCount: PropTypes.number,
+  signaturesRequired: PropTypes.number,
+  totalSignaturesRequired: PropTypes.number,
 };
 
 export default MetricsInfo;

@@ -128,11 +128,18 @@ export const findPlipsSignInfo = state => state.plip.plipsSignInfo;
 
 export const getPlipSignatureGoals = plipId => state => {
   const plip = findPlip(plipId)(state) || {};
+  const { currentSignatureGoal } = getPlipSignInfo(plipId)(state) || {};
 
   const {
     initialSignaturesGoal: initialGoal,
     totalSignaturesRequired: finalGoal,
   } = plip;
 
-  return { initialGoal, finalGoal };
+  return { currentSignatureGoal, initialGoal, finalGoal };
 };
+
+export const getPlipsSignatureGoals = state =>
+  (state.plip.plips || []).reduce((memo, { id }) => ({
+    ...memo,
+    [id]: getPlipSignatureGoals(id)(state),
+  }), {});

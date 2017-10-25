@@ -42,6 +42,10 @@ import styles, {
 
 import locale from "../locales/pt-BR";
 
+import {
+  SignatureGoalsType,
+} from "../prop-types";
+
 
 export default class PlipLayout extends Component {
   state = {
@@ -59,6 +63,7 @@ export default class PlipLayout extends Component {
     remoteConfig: PropTypes.shape({
       authenticatedSignersButtonTitle: PropTypes.string,
     }),
+    signatureGoals: SignatureGoalsType,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     userSignDate: PropTypes.object,
@@ -136,12 +141,12 @@ export default class PlipLayout extends Component {
   }
 
   get plipProgress() {
-    const { plip, plipSignInfo } = this.props;
+    const { plip, plipSignInfo, signatureGoals } = this.props;
 
-    if (!plip || !plip.signaturesRequired) return 0;
+    if (!plip || !signatureGoals.currentSignatureGoal) return 0;
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
-    const total = plip.signaturesRequired;
+    const total = signatureGoals.currentSignatureGoal;
     const progress = clamp(0, 1, count / total);
 
     return progress;
@@ -195,6 +200,7 @@ export default class PlipLayout extends Component {
     const {
       isRemainingDaysEnabled,
       plip,
+      signatureGoals,
       signers,
       signersTotal,
       userSignDate,
@@ -227,7 +233,7 @@ export default class PlipLayout extends Component {
                 {!this.signatureEnabled && this.renderPlipFinished()}
               </View>
 
-              <Text style={styles.finalGoalText}>* Nossa meta final é de {formatNumber(plip.totalSignaturesRequired)} assinaturas</Text>
+              { !!signatureGoals.finalGoal && <Text style={styles.finalGoalText}>* Nossa meta final é de {formatNumber(signatureGoals.finalGoal)} assinaturas</Text> }
             </View>
 
             {userSignDate && <SignedMessageView date={userSignDate} />}
@@ -397,8 +403,8 @@ export default class PlipLayout extends Component {
   }
 
   renderSignaturesCount() {
-    const { plip, plipSignInfo } = this.props;
-    const { signaturesRequired: goal } = plip;
+    const { plipSignInfo, signatureGoals } = this.props;
+    const { currentSignatureGoal: goal } = signatureGoals;
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
 
     const CountView = () =>

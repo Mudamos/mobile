@@ -221,3 +221,5 @@ export const buildQueryString = params =>
     })
     .filter(value => not(isNil(value)))
     .join("&")
+
+export const isNotNil = complement(isNil);

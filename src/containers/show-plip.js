@@ -25,6 +25,7 @@ import {
   getCurrentPlipShortSignersInfo,
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
+  getPlipSignatureGoals,
   hasUserJustSignedPlip,
   listRemoteConfig,
 } from "../selectors";
@@ -102,6 +103,7 @@ const mapStateToProps = (state, ownProps) => {
     remoteConfig: listRemoteConfig(state),
     signers: currentPlipShortSignersInfo.users,
     signersTotal: currentPlipShortSignersInfo.total,
+    signatureGoals: getPlipSignatureGoals(plipId)(state),
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
 }

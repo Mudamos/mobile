@@ -41,8 +41,10 @@ import MetricsInfo from "../containers/plip/metrics-info";
 import styles from "../styles/plips-layout";
 
 import locale from "../locales/pt-BR";
-import { RemoteLinksType } from "../prop-types/remote-config";
-
+import {
+  RemoteLinksType,
+  SignatureGoalsType,
+} from "../prop-types";
 
 export default class PlipsLayout extends Component {
   state = {
@@ -57,11 +59,19 @@ export default class PlipsLayout extends Component {
     plipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
+    signatureGoals: PropTypes.shape({
+      [PropTypes.string]: SignatureGoalsType,
+    }).isRequired,
     userSignInfo: PropTypes.object.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
+  }
+
+  plipSignatureGoals(plipId) {
+    const { signatureGoals } = this.props;
+    return signatureGoals[plipId];
   }
 
   render() {
@@ -170,6 +180,7 @@ export default class PlipsLayout extends Component {
     const plipSignInfo = plipsSignInfo[plip.id];
     const plipUserSignInfo = userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
+    const goals = this.plipSignatureGoals(plip.id);
 
     // Not every animation seem to work on both platforms
     const AnimatableView = Platform.OS === "ios" ? Animatable.View : View;
@@ -224,9 +235,9 @@ export default class PlipsLayout extends Component {
             !!plipSignInfo &&
               <Animatable.View animation="fadeInUp" easing="ease">
                 <MetricsInfo
-                  signaturesRequired={plip.signaturesRequired}
+                  signaturesRequired={goals.currentSignatureGoal}
                   signaturesCount={plipSignInfo.signaturesCount}
-                  totalSignaturesRequired={plip.totalSignaturesRequired}
+                  totalSignaturesRequired={goals.finalGoal}
                   finalDate={plip.phase.finalDate}
                 />
               </Animatable.View>
