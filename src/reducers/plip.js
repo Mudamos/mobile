@@ -98,20 +98,10 @@ export default (state = initialState, action) => {
           [payload.plipId]: payload.info,
         },
       };
-    case "PLIP_SIGN_INFO_FETCHED":
-      return {
-        ...state,
-        plipSignInfo: payload.info,
-      };
     case "PLIP_FETCHING_USER_SIGN_INFO":
       return {
         ...state,
         isFetchingUserSignInfo: payload.isFetchingUserSignInfo,
-      };
-    case "PLIP_FETCHING_PLIP_SIGN_INFO":
-      return {
-        ...state,
-        isFetchingPlipSignInfo: payload.isFetchingPlipSignInfo,
       };
     case "PLIP_SIGNING_PLIP":
       return {
@@ -141,7 +131,6 @@ export default (state = initialState, action) => {
         currentSigningPlip: null,
         fetchPlipRelatedInfoError: null,
         justSignedPlips: {},
-        plipSignInfo: null,
         shortSigners: null,
         shortSignersTotal: null,
       };

@@ -32,7 +32,6 @@ import {
   fetchingPlipRelatedInfo,
   fetchingPlipSigners,
   fetchPlipSignersError,
-  fetchingPlipSignInfo,
   fetchingShortPlipSigners,
   fetchingUserSignInfo,
   invalidatePhone,
@@ -45,7 +44,6 @@ import {
   plipsRefreshError,
   plipSigners,
   plipSignError,
-  plipSignInfoFetched,
   plipUserSignInfo,
   profileStateMachine,
   signPlip as signPlipAction,
@@ -144,11 +142,9 @@ function* fetchPlipRelatedInfo({ mobileApi }) {
     try {
       yield put(fetchingPlipRelatedInfo(true));
       const { plipId } = payload;
-      const loggedIn = yield select(isUserLoggedIn);
 
       yield [
-        loggedIn ? call(fetchUserSignInfo, { mobileApi, plipId }) : Promise.resolve(),
-        call(fetchPlipSignInfo, { mobileApi, plipId }),
+        call(fetchPlipsRelatedInfo, { mobileApi, plipIds: [plipId] }),
         call(fetchShortSigners, { mobileApi, plipId }),
       ];
 
@@ -202,38 +198,15 @@ function* fetchUserSignInfo({ mobileApi, plipId }) {
   }
 }
 
-function* fetchPlipSignInfo({ mobileApi, plipId }) {
-  try {
-    const authToken = yield select(currentAuthToken);
-    const { initialGoal, finalGoal } = yield select(getPlipSignatureGoals(plipId));
-    yield put(fetchingPlipSignInfo(true));
-    const plipSignInfo = yield call(mobileApi.plipSignInfo, {
-      authToken,
-      plipId,
-      initialGoal,
-      finalGoal,
-    });
-    yield put(plipSignInfoFetched({ plipId, info: plipSignInfo.info }));
-  } finally {
-    yield put(fetchingPlipSignInfo(false));
-  }
-}
-
 function* updatePlipSignInfoSaga({ mobileApi }) {
   yield takeEvery("PLIP_JUST_SIGNED", function* ({ payload }) {
     try {
       const { plipId } = payload;
-      const authToken = yield select(currentAuthToken);
-      const { initialGoal, finalGoal } = yield select(getPlipSignatureGoals(plipId));
 
-      const [plipSignInfo] = yield [
-        call(mobileApi.plipSignInfo, { authToken, plipId, initialGoal, finalGoal }),
+      yield [
+        call(fetchPlipsRelatedInfo, { mobileApi, plipIds: [plipId] }),
         call(fetchShortSigners, { mobileApi, plipId }),
       ];
-
-      const info = plipSignInfo.info;
-      yield put(plipSignInfoFetched({ plipId, info }));
-      yield put(plipsSignInfoFetched({ signInfo: { [plipId]: info }}));
     } catch(e) {
       logError(e);
     }

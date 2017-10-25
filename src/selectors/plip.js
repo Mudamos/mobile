@@ -97,7 +97,7 @@ export const isSigningPlip = state => state.plip.isSigning;
 
 export const getUserSignInfo = state => state.plip.userSignInfo;
 
-export const getPlipSignInfo = state => state.plip.plipSignInfo;
+export const getPlipSignInfo = id => state => (findPlipsSignInfo(state) || {})[id];
 
 export const getUserCurrentPlipSignInfo = (state, plipId) => (getUserSignInfo(state) || {})[plipId];
 

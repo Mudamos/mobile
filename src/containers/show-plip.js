@@ -79,8 +79,9 @@ const onPlipSign = ({ dispatch, plip }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const userSignInfo = getUserCurrentPlipSignInfo(state, ownProps.plip.id);
-  let plipSignInfo = getPlipSignInfo(state);
+  const plipId = ownProps.plip.id;
+  const userSignInfo = getUserCurrentPlipSignInfo(state, plipId);
+  let plipSignInfo = getPlipSignInfo(plipId)(state);
 
   if (plipSignInfo) {
     plipSignInfo = {
