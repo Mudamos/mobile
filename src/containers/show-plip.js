@@ -18,6 +18,7 @@ import {
 } from "../actions";
 
 import {
+  currentUser,
   fetchPlipRelatedInfoError,
   isFetchingPlipRelatedInfo,
   isRemainingDaysEnabled,
@@ -104,6 +105,7 @@ const mapStateToProps = (state, ownProps) => {
     signers: currentPlipShortSignersInfo.users,
     signersTotal: currentPlipShortSignersInfo.total,
     signatureGoals: getPlipSignatureGoals(plipId)(state),
+    user: currentUser(state),
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
 }

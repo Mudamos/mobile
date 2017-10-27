@@ -27,3 +27,7 @@ export const logout = () => ({
 export const clearSession = () => ({
   type: "SESSION_CLEAR_SESSION",
 });
+
+export const userLoggedOut = () => ({
+  type: "SESSION_USER_LOGGED_OUT",
+});

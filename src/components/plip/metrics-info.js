@@ -19,6 +19,11 @@ import {
   signatureEnabled,
 } from "../../utils";
 
+import {
+  isNationalCause,
+  isUserGoals,
+} from "../../models";
+
 import locale from "../../locales/pt-BR";
 
 import { MKProgress } from "react-native-material-kit";
@@ -67,30 +72,34 @@ const renderPlipFinished = () => {
 
 const MetricsInfo = ({
   isRemainingDaysEnabled,
+  plip,
   signaturesRequired,
   signaturesCount,
   totalSignaturesRequired,
+  user,
   finalDate,
 }) => {
   if (noCounters(signaturesRequired, totalSignaturesRequired)) return null;
 
   const canSign = signatureEnabled({ finalDate });
-  const showGoal = canSign && !isRemainingDaysEnabled;
+  const showGoal = canSign && !isRemainingDaysEnabled && !isNationalCause(plip);
 
   return (
     <View>
       <View style={styles.infoContainer}>
-        <View style={styles.infoContainerRow}>
-          <TargetPercentage
+        <View style={isNationalCause(plip) ? styles.infoNationalCauseContainerRow : styles.infoContainerRow}>
+          { !isNationalCause(plip) && <TargetPercentage
             signaturesRequired={signaturesRequired}
             signaturesCount={signaturesCount}
             append={showGoal ? "*" : ""}
-          />
+          /> }
           <SignaturesCount
             canSign={canSign}
+            plip={plip}
             signaturesCount={signaturesCount}
             signaturesRequired={signaturesRequired}
             showGoal={showGoal}
+            user={user}
           />
           {canSign && isRemainingDaysEnabled && <RemainingDays finalDate={finalDate} />}
           {!canSign && renderPlipFinished()}
@@ -110,9 +119,11 @@ const MetricsInfo = ({
 MetricsInfo.propTypes = {
   finalDate: PropTypes.string.isRequired,
   isRemainingDaysEnabled: PropTypes.bool,
+  plip: PropTypes.object.isRequired,
   signaturesCount: PropTypes.number,
   signaturesRequired: PropTypes.number,
   totalSignaturesRequired: PropTypes.number,
+  user: PropTypes.object,
 };
 
 export default MetricsInfo;
@@ -156,7 +167,7 @@ TargetPercentage.propTypes = {
   signaturesRequired: PropTypes.number.isRequired,
 };
 
-const SignaturesCount = ({ canSign, showGoal, signaturesCount, signaturesRequired }) => {
+const SignaturesCount = ({ canSign, plip, showGoal, signaturesCount, signaturesRequired, user }) => {
   const count = signaturesCount;
   const goal = signaturesRequired;
 
@@ -167,6 +178,10 @@ const SignaturesCount = ({ canSign, showGoal, signaturesCount, signaturesRequire
       formatter={formatNumber}
       style={styles.infoText}
     />;
+
+  const signatureMessage = canSign
+    ? !isNationalCause(plip) || isUserGoals({ user, plip }) ? "já assinaram" : "já assinaram em todo país"
+    : !isNationalCause(plip) || isUserGoals({ user, plip }) ? "assinaram" : "assinaram em todo páis";
 
   return (
     <View style={[(showGoal ? { marginLeft: 5 } : {})]}>
@@ -180,16 +195,18 @@ const SignaturesCount = ({ canSign, showGoal, signaturesCount, signaturesRequire
       }
 
       {!showGoal && <CountView />}
-      <Text style={styles.infoTextSubtitle}>{canSign ? "já assinaram" : "assinaram"}</Text>
+      <Text style={styles.infoTextSubtitle}>{signatureMessage}</Text>
     </View>
   );
 };
 
 SignaturesCount.propTypes = {
   canSign: PropTypes.bool,
+  plip: PropTypes.object.isRequired,
   showGoal: PropTypes.bool,
   signaturesCount: PropTypes.number.isRequired,
   signaturesRequired: PropTypes.number.isRequired,
+  user: PropTypes.object,
 };
 
 const RemainingDays = ({ finalDate }) => {
@@ -226,6 +243,12 @@ const infoTextSubtitle = {
   ...textShadow,
 };
 
+const infoContainerRow = {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+};
+
 const styles = StyleSheet.create({
   finalGoalText: {
     marginTop: 10,
@@ -242,10 +265,10 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     backgroundColor: "transparent",
   },
-  infoContainerRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
+  infoContainerRow,
+  infoNationalCauseContainerRow: {
+    ...infoContainerRow,
+    justifyContent: "space-around",
   },
   infoPercentageText: {
     ...infoText,

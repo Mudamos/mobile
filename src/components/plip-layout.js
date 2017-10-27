@@ -35,6 +35,11 @@ import SignerBubbleView from "./signer-bubble-view";
 import BackButton from "./back-button";
 import YouTube from "./you-tube";
 
+import {
+  isNationalCause,
+  isUserGoals,
+} from "../models";
+
 import styles, {
   HEADER_SCROLL_DISTANCE,
   SMALL_ANIM_OFFSET,
@@ -66,6 +71,7 @@ export default class PlipLayout extends Component {
     signatureGoals: SignatureGoalsType,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
+    user: PropTypes.object,
     userSignDate: PropTypes.object,
     onBack: PropTypes.func.isRequired,
     onFetchPlipRelatedInfo: PropTypes.func.isRequired,
@@ -120,8 +126,8 @@ export default class PlipLayout extends Component {
   }
 
   get showCurrentGoal() {
-    const { isRemainingDaysEnabled } = this.props;
-    return this.signatureEnabled && !isRemainingDaysEnabled;
+    const { isRemainingDaysEnabled, plip } = this.props;
+    return this.signatureEnabled && !isRemainingDaysEnabled && !isNationalCause(plip);
   }
 
   get messageForDaysLeft() {
@@ -226,14 +232,16 @@ export default class PlipLayout extends Component {
             {this.renderProgress()}
 
             <View style={styles.infoContainer}>
-              <View style={styles.infoContainerRow}>
-                {this.renderTargetPercentage()}
+              <View style={isNationalCause(plip) ? styles.infoNationalCauseContainerRow : styles.infoContainerRow}>
+                {this.renderTargetPercentage(plip)}
                 {this.renderSignaturesCount()}
                 {this.signatureEnabled && isRemainingDaysEnabled && this.renderDaysLeft()}
                 {!this.signatureEnabled && this.renderPlipFinished()}
               </View>
 
-              { !!signatureGoals.finalGoal && <Text style={styles.finalGoalText}>* Nossa meta final é de {formatNumber(signatureGoals.finalGoal)} assinaturas</Text> }
+              { !!signatureGoals.finalGoal && !isNationalCause(plip) &&
+                <Text style={styles.finalGoalText}>* Nossa meta final é de {formatNumber(signatureGoals.finalGoal)} assinaturas</Text>
+              }
             </View>
 
             {userSignDate && <SignedMessageView date={userSignDate} />}
@@ -286,7 +294,9 @@ export default class PlipLayout extends Component {
     );
   }
 
-  renderTargetPercentage() {
+  renderTargetPercentage(plip) {
+    if (isNationalCause(plip)) return null;
+
     return (
       <View>
         <Text style={styles.infoPercentageText}>{this.progressPercentage}%</Text>
@@ -403,12 +413,22 @@ export default class PlipLayout extends Component {
   }
 
   renderSignaturesCount() {
-    const { plipSignInfo, signatureGoals } = this.props;
+    const {
+      plip,
+      plipSignInfo,
+      signatureGoals,
+      user,
+    } = this.props;
+
     const { currentSignatureGoal: goal } = signatureGoals;
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
 
     const CountView = () =>
       <Text style={styles.infoText}>{formatNumber(count)}</Text>
+
+    const signatureMessage = this.signatureEnabled
+      ? !isNationalCause(plip) || isUserGoals({ user, plip }) ? "já assinaram" : "já assinaram em todo país"
+      : !isNationalCause(plip) || isUserGoals({ user, plip }) ? "assinaram" : "assinaram em todo páis";
 
     return (
       <View style={[(this.showCurrentGoal ? { marginLeft: 5 } : {})]}>
@@ -422,7 +442,7 @@ export default class PlipLayout extends Component {
         }
 
         {!this.showCurrentGoal && <CountView />}
-        <Text style={styles.infoTextSubtitle}>{this.signatureEnabled ? "já assinaram" : "assinaram"}</Text>
+        <Text style={styles.infoTextSubtitle}>{signatureMessage}</Text>
       </View>
     );
   }

@@ -376,7 +376,7 @@ function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
 }
 
 function* loadStorePlipsInfo({ mobileApi }) {
-  yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
+  yield takeLatest(["SESSION_LOGGIN_SUCCEEDED", "SESSION_USER_LOGGED_OUT"], function* () {
     try {
       const plips = yield select(findPlips);
       const plipIds = (plips || []).map(prop("id"));

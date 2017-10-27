@@ -52,6 +52,7 @@ export default class PlipsLayout extends Component {
   };
 
   static propTypes = {
+    currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
@@ -176,7 +177,12 @@ export default class PlipsLayout extends Component {
   }
 
   renderRowPlip({ plip }) {
-    const { plipsSignInfo, userSignInfo, onGoToPlip } = this.props;
+    const {
+      currentUser,
+      plipsSignInfo,
+      userSignInfo,
+      onGoToPlip,
+    } = this.props;
     const plipSignInfo = plipsSignInfo[plip.id];
     const plipUserSignInfo = userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
@@ -239,6 +245,8 @@ export default class PlipsLayout extends Component {
                   signaturesCount={plipSignInfo.signaturesCount}
                   totalSignaturesRequired={goals.finalGoal}
                   finalDate={plip.phase.finalDate}
+                  plip={plip}
+                  user={currentUser}
                 />
               </Animatable.View>
           }

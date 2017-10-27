@@ -8,6 +8,7 @@ import { isDev } from "../utils";
 import {
   clearSession,
   logginSucceeded,
+  userLoggedOut,
 } from "../actions";
 
 import {
@@ -47,6 +48,7 @@ export function* logout({ mobileApi, sessionStore }) {
 
   const authToken = yield select(currentAuthToken);
   yield put(clearSession());
+  yield put(userLoggedOut());
 
   if (authToken) {
     if (isDev) console.log("Will call logout api with token:", authToken);
