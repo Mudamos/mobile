@@ -1,5 +1,6 @@
 # Next
 
+* [PR #366] National cause
 * [PR #363] Tagging user location
 
 ## [1.6.0] 21/07/2017
