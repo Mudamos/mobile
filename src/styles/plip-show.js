@@ -30,6 +30,11 @@ const infoTextSubtitle = {
   fontSize: 12,
 };
 
+const infoContainerRow = {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+};
 
 export default StyleSheet.create({
   actionIcon: {
@@ -111,10 +116,10 @@ export default StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
   },
-  infoContainerRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
+  infoContainerRow,
+  infoNationalCauseContainerRow: {
+    ...infoContainerRow,
+    justifyContent: "space-around",
   },
   infoPercentageText: {
     ...infoText,

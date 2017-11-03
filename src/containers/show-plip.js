@@ -18,6 +18,7 @@ import {
 } from "../actions";
 
 import {
+  currentUser,
   fetchPlipRelatedInfoError,
   isFetchingPlipRelatedInfo,
   isRemainingDaysEnabled,
@@ -25,6 +26,7 @@ import {
   getCurrentPlipShortSignersInfo,
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
+  getPlipSignatureGoals,
   hasUserJustSignedPlip,
   listRemoteConfig,
 } from "../selectors";
@@ -79,8 +81,9 @@ const onPlipSign = ({ dispatch, plip }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const userSignInfo = getUserCurrentPlipSignInfo(state, ownProps.plip.id);
-  let plipSignInfo = getPlipSignInfo(state);
+  const plipId = ownProps.plip.id;
+  const userSignInfo = getUserCurrentPlipSignInfo(state, plipId);
+  let plipSignInfo = getPlipSignInfo(plipId)(state);
 
   if (plipSignInfo) {
     plipSignInfo = {
@@ -101,6 +104,8 @@ const mapStateToProps = (state, ownProps) => {
     remoteConfig: listRemoteConfig(state),
     signers: currentPlipShortSignersInfo.users,
     signersTotal: currentPlipShortSignersInfo.total,
+    signatureGoals: getPlipSignatureGoals(plipId)(state),
+    user: currentUser(state),
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
 }

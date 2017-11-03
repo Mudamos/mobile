@@ -1,20 +1,26 @@
 import {
+  allPass,
   apply,
   complement,
   concat,
+  contains,
   equals,
   filter,
   find,
+  flip,
   fromPairs,
   head,
   is,
+  isEmpty,
   isNil,
   last,
   mergeWith,
+  not,
   pipe,
   propEq,
   reduce,
   reject,
+  test,
   toPairs,
   unapply,
 } from "ramda";
@@ -189,3 +195,31 @@ export const randomItem = list => list[Math.floor(Math.random() * list.length)];
 
 // slow start, slow end
 export const countTimingFunction = (interval, progress) => interval * (1 - Math.sin(Math.PI*progress)) * 10;
+
+export const isBlank = value => isNil(value) || isEmpty(value) || isBlankString(value);
+
+export const isBlankString = value => allPass([isString, test(/^\s*$/)])(value);
+
+export const isPresent = complement(isBlank);
+
+export const includes = flip(contains);
+
+export const excludes = complement(includes);
+
+export const buildQueryString = params =>
+  Object
+    .keys(params)
+    .map(k => {
+        if (isNil(params[k])) return null;
+        if (Array.isArray(params[k])) {
+            return params[k]
+                .map(val => `${encodeURIComponent(k)}[]=${encodeURIComponent(val)}`)
+                .join("&")
+        }
+
+        return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`
+    })
+    .filter(value => not(isNil(value)))
+    .join("&")
+
+export const isNotNil = complement(isNil);

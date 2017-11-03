@@ -41,6 +41,7 @@ import {
   findRemoteLinks,
   findPlipsSignInfo,
   getCurrentSigningPlip,
+  getPlipsSignatureGoals,
 } from "../selectors";
 
 import PlipsLayout from "../components/plips-layout";
@@ -293,23 +294,22 @@ class Container extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentSigningPlip: getCurrentSigningPlip(state),
-    currentUser: getCurrentUser(state),
-    errorFetchingPlips: errorFetchingPlips(state),
-    isAppReady: isAppReady(state),
-    isFetchingPlips: isFetchingPlips(state),
-    isFetchingProfile: isFetchingProfile(state),
-    isRefreshingPlips: isRefreshingPlips(state),
-    isUserFirstTime: isUserFirstTime(state),
-    isUserLoggedIn: isUserLoggedIn(state),
-    plips: findPlips(state),
-    remoteLinks: findRemoteLinks(state),
-    plipsSignInfo: findPlipsSignInfo(state),
-    userSignInfo: getUserSignInfo(state),
-  };
-}
+const mapStateToProps = state => ({
+  currentSigningPlip: getCurrentSigningPlip(state),
+  currentUser: getCurrentUser(state),
+  errorFetchingPlips: errorFetchingPlips(state),
+  isAppReady: isAppReady(state),
+  isFetchingPlips: isFetchingPlips(state),
+  isFetchingProfile: isFetchingProfile(state),
+  isRefreshingPlips: isRefreshingPlips(state),
+  isUserFirstTime: isUserFirstTime(state),
+  isUserLoggedIn: isUserLoggedIn(state),
+  plips: findPlips(state),
+  remoteLinks: findRemoteLinks(state),
+  plipsSignInfo: findPlipsSignInfo(state),
+  signatureGoals: getPlipsSignatureGoals(state),
+  userSignInfo: getUserSignInfo(state),
+});
 
 const mapDispatchToProps = dispatch => ({
   onAvatarChanged: avatar => dispatch(profileSaveAvatar({ avatar, shouldNavigate: false })),

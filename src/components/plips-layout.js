@@ -19,6 +19,10 @@ import {
   findStateByUF,
 } from "../utils";
 
+import {
+  isNationalCause,
+} from "../models";
+
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import * as Animatable from "react-native-animatable";
@@ -37,8 +41,10 @@ import MetricsInfo from "../containers/plip/metrics-info";
 import styles from "../styles/plips-layout";
 
 import locale from "../locales/pt-BR";
-import { RemoteLinksType } from "../prop-types/remote-config";
-
+import {
+  RemoteLinksType,
+  SignatureGoalsType,
+} from "../prop-types";
 
 export default class PlipsLayout extends Component {
   state = {
@@ -46,6 +52,7 @@ export default class PlipsLayout extends Component {
   };
 
   static propTypes = {
+    currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
@@ -53,11 +60,19 @@ export default class PlipsLayout extends Component {
     plipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
+    signatureGoals: PropTypes.shape({
+      [PropTypes.string]: SignatureGoalsType,
+    }).isRequired,
     userSignInfo: PropTypes.object.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
+  }
+
+  plipSignatureGoals(plipId) {
+    const { signatureGoals } = this.props;
+    return signatureGoals[plipId];
   }
 
   render() {
@@ -162,10 +177,16 @@ export default class PlipsLayout extends Component {
   }
 
   renderRowPlip({ plip }) {
-    const { plipsSignInfo, userSignInfo, onGoToPlip } = this.props;
+    const {
+      currentUser,
+      plipsSignInfo,
+      userSignInfo,
+      onGoToPlip,
+    } = this.props;
     const plipSignInfo = plipsSignInfo[plip.id];
     const plipUserSignInfo = userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
+    const goals = this.plipSignatureGoals(plip.id);
 
     // Not every animation seem to work on both platforms
     const AnimatableView = Platform.OS === "ios" ? Animatable.View : View;
@@ -220,10 +241,12 @@ export default class PlipsLayout extends Component {
             !!plipSignInfo &&
               <Animatable.View animation="fadeInUp" easing="ease">
                 <MetricsInfo
-                  signaturesRequired={plip.signaturesRequired}
+                  signaturesRequired={goals.currentSignatureGoal}
                   signaturesCount={plipSignInfo.signaturesCount}
-                  totalSignaturesRequired={plip.totalSignaturesRequired}
+                  totalSignaturesRequired={goals.finalGoal}
                   finalDate={plip.phase.finalDate}
+                  plip={plip}
+                  user={currentUser}
                 />
               </Animatable.View>
           }
@@ -251,10 +274,14 @@ export default class PlipsLayout extends Component {
   }
 
   scopeCoverageTitle(plip) {
-    switch(plip.scopeCoverage.scope) {
-      case NATIONWIDE_SCOPE: return "PL Nacional";
-      case STATEWIDE_SCOPE: return `PL Estadual: ${findStateByUF(plip.scopeCoverage.uf).name}`;
-      case CITYWIDE_SCOPE: return `PL Municipal: ${plip.scopeCoverage.city.name}, ${plip.scopeCoverage.city.uf}`;
+    if (plip.scopeCoverage.scope === NATIONWIDE_SCOPE) {
+      return "PL Nacional";
+    } else if (isNationalCause(plip)) {
+      return "Causa Nacional";
+    } else if (plip.scopeCoverage.scope === STATEWIDE_SCOPE) {
+      return `PL Estadual: ${findStateByUF(plip.scopeCoverage.uf).name}`;
+    } else if (plip.scopeCoverage.scope === CITYWIDE_SCOPE) {
+      return `PL Municipal: ${plip.scopeCoverage.city.name}, ${plip.scopeCoverage.city.uf}`;
     }
   }
 

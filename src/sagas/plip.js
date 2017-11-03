@@ -9,6 +9,7 @@ import {
 
 import {
   homeSceneKey,
+  isBlank,
   isDev,
   isUnauthorized,
   logError,
@@ -19,6 +20,10 @@ import {
 } from "../utils";
 
 import {
+  isNationalCause,
+} from "../models";
+
+import {
   appReady,
   plipsFetchError,
   plipsFetched,
@@ -27,7 +32,6 @@ import {
   fetchingPlipRelatedInfo,
   fetchingPlipSigners,
   fetchPlipSignersError,
-  fetchingPlipSignInfo,
   fetchingShortPlipSigners,
   fetchingUserSignInfo,
   invalidatePhone,
@@ -35,12 +39,11 @@ import {
   isSigningPlip,
   logEvent,
   navigate,
-  plipsSingInfoFetched,
+  plipsSignInfoFetched,
   plipJustSigned,
   plipsRefreshError,
   plipSigners,
   plipSignError,
-  plipSignInfoFetched,
   plipUserSignInfo,
   profileStateMachine,
   signPlip as signPlipAction,
@@ -53,6 +56,7 @@ import {
   currentAuthToken,
   findPlips,
   getCurrentSigningPlip,
+  getPlipSignatureGoals,
   isUserLoggedIn,
   getIneligiblePlipReasonForScope,
 } from "../selectors";
@@ -78,11 +82,12 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
     try {
       yield put(fetchingPlips(true));
       const response = yield call(fetchPlips, { mudamosWebApi });
+      yield put(plipsFetched(response));
+
       const plipIds = (response.plips || []).map(prop("id"));
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
 
-      yield put(plipsFetched(response));
       yield put(fetchingPlips(false));
     } catch (e) {
       logError(e);
@@ -100,11 +105,12 @@ function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
     try {
       yield put(isRefreshingPlips(true));
       const response = yield call(fetchPlips, { page: 1, mudamosWebApi });
+      yield put(plipsFetched(response));
+
       const plipIds = (response.plips || []).map(prop("id"));
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
 
-      yield put(plipsFetched(response));
     } catch (e) {
       logError(e);
 
@@ -119,7 +125,16 @@ function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
   // Because we are ordering client side, we must fetch "all" plips
   const limit = 100;
   const scope = "all";
-  return yield call(mudamosWebApi.listPlips, { scope, page, limit, uf, cityId });
+  const includeCauses = true;
+
+  return yield call(mudamosWebApi.listPlips, {
+    cityId,
+    includeCauses,
+    limit,
+    page,
+    scope,
+    uf,
+  });
 }
 
 function* fetchPlipRelatedInfo({ mobileApi }) {
@@ -127,11 +142,9 @@ function* fetchPlipRelatedInfo({ mobileApi }) {
     try {
       yield put(fetchingPlipRelatedInfo(true));
       const { plipId } = payload;
-      const loggedIn = yield select(isUserLoggedIn);
 
       yield [
-        loggedIn ? call(fetchUserSignInfo, { mobileApi, plipId }) : Promise.resolve(),
-        call(fetchPlipSignInfo, { mobileApi, plipId }),
+        call(fetchPlipsRelatedInfo, { mobileApi, plipIds: [plipId] }),
         call(fetchShortSigners, { mobileApi, plipId }),
       ];
 
@@ -143,7 +156,7 @@ function* fetchPlipRelatedInfo({ mobileApi }) {
         yield put(signPlipAction({ plip: currentSigningPlip }));
       }
     } catch (e) {
-      logError(e);
+      logError(e, { tag: "fetchPlipRelatedInfo" });
 
       yield put(fetchingPlipRelatedInfo(false));
       yield put(fetchPlipRelatedInfoError(e));
@@ -185,22 +198,13 @@ function* fetchUserSignInfo({ mobileApi, plipId }) {
   }
 }
 
-function* fetchPlipSignInfo({ mobileApi, plipId }) {
-  try {
-    yield put(fetchingPlipSignInfo(true));
-    const plipSignInfo = yield call(mobileApi.plipSignInfo, plipId);
-    yield put(plipSignInfoFetched({ plipId, info: plipSignInfo.info }));
-  } finally {
-    yield put(fetchingPlipSignInfo(false));
-  }
-}
-
 function* updatePlipSignInfoSaga({ mobileApi }) {
   yield takeEvery("PLIP_JUST_SIGNED", function* ({ payload }) {
     try {
       const { plipId } = payload;
+
       yield [
-        call(fetchPlipSignInfo, { mobileApi, plipId }),
+        call(fetchPlipsRelatedInfo, { mobileApi, plipIds: [plipId] }),
         call(fetchShortSigners, { mobileApi, plipId }),
       ];
     } catch(e) {
@@ -352,14 +356,19 @@ function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
       return memo;
     }, {});
 
-    yield put(plipsSingInfoFetched({ signInfo }));
+    yield put(plipsSignInfoFetched({ signInfo }));
   } catch(e) {
     logError(e, { tag: "fetchPlipsRelatedInfo" });
   }
 }
 
 function* fetchPlipsSignInfo({ mobileApi, plipIds }) {
-  return yield plipIds.map(id => call(mobileApi.plipSignInfo, id));
+  const authToken = yield select(currentAuthToken);
+  const goals = yield plipIds.map(id => select(getPlipSignatureGoals(id)))
+
+  return yield zip(plipIds, goals)
+    .map(([plipId, { initialGoal, finalGoal }]) =>
+      call(mobileApi.plipSignInfo, { authToken, plipId, initialGoal, finalGoal }));
 }
 
 function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
@@ -367,7 +376,7 @@ function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
 }
 
 function* loadStorePlipsInfo({ mobileApi }) {
-  yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
+  yield takeLatest(["SESSION_LOGGIN_SUCCEEDED", "SESSION_USER_LOGGED_OUT"], function* () {
     try {
       const plips = yield select(findPlips);
       const plipIds = (plips || []).map(prop("id"));
@@ -389,8 +398,8 @@ function eligibleToSignPlip({ plip, user }) {
 
   switch (scope) {
     case NATIONWIDE_SCOPE: return true;
-    case STATEWIDE_SCOPE: return !userUF || matchUF();
-    case CITYWIDE_SCOPE: return !userCityName || !userUF || matchCity();
+    case STATEWIDE_SCOPE: return isBlank(userUF) || isNationalCause(plip) || matchUF();
+    case CITYWIDE_SCOPE: return isBlank(userCityName) || isNationalCause(plip) || matchCity();
   }
 }
 
