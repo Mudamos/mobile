@@ -1,5 +1,6 @@
 # Next
 
+* [PR #368] Remove onesignal tag info upon logout
 * [PR #366] National cause
 * [PR #363] Tagging user location
 

@@ -1,3 +1,7 @@
+import {
+  omit,
+} from "ramda";
+
 const initialState = {
   oneSignalUserInfo: {},
 };
@@ -24,6 +28,12 @@ export default (state = initialState, action) => {
           email,
           uf,
         },
+      };
+    }
+    case "SESSION_CLEAR_SESSION": {
+      return {
+        ...state,
+        oneSignalUserInfo: omit(["city", "email", "uf"])(state.oneSignalUserInfo),
       };
     }
     default:
