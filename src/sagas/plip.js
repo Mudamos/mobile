@@ -33,7 +33,6 @@ import {
   fetchingPlipSigners,
   fetchPlipSignersError,
   fetchingShortPlipSigners,
-  fetchingUserSignInfo,
   invalidatePhone,
   isRefreshingPlips,
   isSigningPlip,
@@ -187,15 +186,10 @@ function* fetchShortSigners({ mobileApi, plipId }) {
 }
 
 function* fetchUserSignInfo({ mobileApi, plipId }) {
-  try {
-    const authToken = yield select(currentAuthToken);
+  const authToken = yield select(currentAuthToken);
 
-    yield put(fetchingUserSignInfo(true));
-    const userSignInfo = yield call(mobileApi.userSignInfo, authToken, plipId);
-    yield put(plipUserSignInfo({ plipId, info: userSignInfo.signMessage }));
-  } finally {
-    yield put(fetchingUserSignInfo(false));
-  }
+  const userSignInfo = yield call(mobileApi.userSignInfo, authToken, plipId);
+  yield put(plipUserSignInfo({ plipId, info: userSignInfo.signMessage }));
 }
 
 function* updatePlipSignInfoSaga({ mobileApi }) {

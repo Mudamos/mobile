@@ -98,11 +98,6 @@ export default (state = initialState, action) => {
           [payload.plipId]: payload.info,
         },
       };
-    case "PLIP_FETCHING_USER_SIGN_INFO":
-      return {
-        ...state,
-        isFetchingUserSignInfo: payload.isFetchingUserSignInfo,
-      };
     case "PLIP_SIGNING_PLIP":
       return {
         ...state,
