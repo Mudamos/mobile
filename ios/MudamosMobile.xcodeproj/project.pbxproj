@@ -2451,8 +2451,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e8f8d87d-a287-469b-86f8-440faa15129b";
-				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: br.com.tagview.mudamosmobile";
+				PROVISIONING_PROFILE = "ceeccb84-7402-44f2-8277-3ec2d4c3f925";
+				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc: br.com.tagview.mudamosmobile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
