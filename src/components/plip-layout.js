@@ -37,6 +37,7 @@ import YouTube from "./you-tube";
 
 import {
   isNationalCause,
+  isStateNationalCause,
   isUserGoals,
 } from "../models";
 
@@ -424,17 +425,31 @@ export default class PlipLayout extends Component {
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
 
     const CountView = () =>
-      <Text style={styles.infoText}>{formatNumber(count)}</Text>
+      <Text style={styles.infoText}>{formatNumber(count)}</Text>;
 
-    const signatureMessage = this.signatureEnabled
-      ? !isNationalCause(plip) || isUserGoals({ user, plip }) ? "já assinaram" : "já assinaram em todo país"
-      : !isNationalCause(plip) || isUserGoals({ user, plip }) ? "assinaram" : "assinaram em todo páis";
+    const getMessage = () => {
+      if (isUserGoals({ user, plip })) {
+        const location = isStateNationalCause(plip)
+          ? user.address.state
+          : user.address.city;
+
+          return `pessoas em ${location} assinaram`;
+      }
+
+      if (isNationalCause(plip)) {
+        return "pessoas assinaram no Brasil";
+      }
+
+      return this.signatureEnabled ? "já assinaram" : "assinaram";
+    }
+
+    const signatureMessage = getMessage();
 
     return (
-      <View style={[(this.showCurrentGoal ? { marginLeft: 5 } : {})]}>
+      <View style={{ flex: 1, marginLeft: 5 }}>
         {
           this.showCurrentGoal &&
-            <View style={{flexDirection: "row", alignItems: "flex-start"}}>
+            <View style={{ alignSelf: "flex-end", flexDirection: "row", alignItems: "flex-start"}}>
               <CountView />
               <Text style={[styles.infoTextSubtitle, { alignSelf: "center", marginLeft: 5 }]}>de</Text>
               <Text style={[styles.infoText, { marginLeft: 5 }]}>{formatNumber(goal)}</Text>
@@ -442,7 +457,7 @@ export default class PlipLayout extends Component {
         }
 
         {!this.showCurrentGoal && <CountView />}
-        <Text style={styles.infoTextSubtitle}>{signatureMessage}</Text>
+        <Text style={[styles.infoTextSubtitle, this.showCurrentGoal ? { alignSelf: "flex-end" } : null]}>{signatureMessage}</Text>
       </View>
     );
   }

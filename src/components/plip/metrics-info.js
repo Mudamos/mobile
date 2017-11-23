@@ -21,6 +21,7 @@ import {
 
 import {
   isNationalCause,
+  isStateNationalCause,
   isUserGoals,
 } from "../../models";
 
@@ -179,15 +180,29 @@ const SignaturesCount = ({ canSign, plip, showGoal, signaturesCount, signaturesR
       style={styles.infoText}
     />;
 
-  const signatureMessage = canSign
-    ? !isNationalCause(plip) || isUserGoals({ user, plip }) ? "já assinaram" : "já assinaram em todo país"
-    : !isNationalCause(plip) || isUserGoals({ user, plip }) ? "assinaram" : "assinaram em todo páis";
+  const getMessage = () => {
+    if (isUserGoals({ user, plip })) {
+      const location = isStateNationalCause(plip)
+        ? user.address.state
+        : user.address.city;
+
+      return `pessoas em ${location} assinaram`;
+    }
+
+    if (isNationalCause(plip)) {
+      return "pessoas assinaram no Brasil";
+    }
+
+    return canSign ? "já assinaram" : "assinaram";
+  }
+
+  const signatureMessage = getMessage();
 
   return (
-    <View style={[(showGoal ? { marginLeft: 5 } : {})]}>
+    <View style={styles.signaturesCountContainer}>
       {
         showGoal &&
-          <View style={{flexDirection: "row", alignItems: "flex-start"}}>
+          <View style={{ alignSelf: "flex-end", flexDirection: "row", alignItems: "flex-start" }}>
             <CountView />
             <Text style={[styles.infoTextSubtitle, { alignSelf: "center", marginLeft: 5 }]}>de</Text>
             <Text style={[styles.infoText, { marginLeft: 5 }]}>{formatNumber(goal)}</Text>
@@ -195,7 +210,7 @@ const SignaturesCount = ({ canSign, plip, showGoal, signaturesCount, signaturesR
       }
 
       {!showGoal && <CountView />}
-      <Text style={styles.infoTextSubtitle}>{signatureMessage}</Text>
+      <Text style={[styles.infoTextSubtitle, showGoal ? { alignSelf: "flex-end" } : null]} numberOfLines={2}>{signatureMessage}</Text>
     </View>
   );
 };
@@ -287,5 +302,9 @@ const styles = StyleSheet.create({
   progress: {
     height: 7,
     backgroundColor: "#484848",
+  },
+  signaturesCountContainer: {
+    flex: 1,
+    marginLeft: 5,
   },
 });
