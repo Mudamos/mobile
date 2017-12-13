@@ -10,4 +10,4 @@ export default root => {
     retrieve: () => storage.fetch(sessionKey).then(session => session || Promise.reject("No sesssion available")),
     destroy: () => storage.destroy(sessionKey),
   };
-}
+};

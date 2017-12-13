@@ -93,8 +93,8 @@ const store = isDev ?
   createStore(reducer, applyMiddleware(sagaRunner, logger)) :
   createStore(reducer, applyMiddleware(sagaRunner));
 
-const sessionStore = SessionManager("@Mudamos");
-const walletStore = WalletManager("@Mudamos");
+const sessionStore = SessionManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP });
+const walletStore = WalletManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP });
 const localStorage = defaultStorage();
 
 const scenes = Actions.create(
