@@ -80,8 +80,8 @@
       launchAutomaticallySubstyle = "2">
       <RemoteRunnable
          runnableDebuggingMode = "1"
-         BundleIdentifier = "com.apple.mobilesafari"
-         RemotePath = "/Applications/MobileSafari.app">
+         BundleIdentifier = "br.com.tagview.callapp"
+         RemotePath = "/var/containers/Bundle/Application/70AE4645-2791-4A1C-B58F-1A283D57769C/callapp.app">
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
@@ -102,16 +102,20 @@
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "1"
+         BundleIdentifier = "br.com.tagview.callapp"
+         RemotePath = "/var/containers/Bundle/Application/70AE4645-2791-4A1C-B58F-1A283D57769C/callapp.app">
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "46ED2A6B1DF194E400B36CD0"
-            BuildableName = "MudamosMobileTagviewBeta.app"
-            BlueprintName = "MudamosMobileTagviewBeta"
+            BlueprintIdentifier = "46C9B90E1FE14BB000B319D9"
+            BuildableName = "MessageSignerActionBeta.appex"
+            BlueprintName = "MessageSignerActionBeta"
             ReferencedContainer = "container:MudamosMobile.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
