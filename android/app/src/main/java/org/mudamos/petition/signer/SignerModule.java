@@ -1,17 +1,16 @@
 package org.mudamos.petition.signer;
 
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactApplicationContext;
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
+
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.Arguments;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.util.Log;
 
 
 /**
@@ -35,9 +34,21 @@ public class SignerModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void done(ReadableMap data) {
-        Log.d("OHMYGOD", data.getString("dance"));
+        Log.d("OHMYGOD", data.getString("message"));
         Intent result = new Intent();
-        result.putExtra("org.mudamos.petition.result.something", data.getString("dance"));
+
+        if (data.hasKey("message"))
+            result.putExtra("org.mudamos.petition.result.message", data.getString("message"));
+
+        if (data.hasKey("publicKey"))
+            result.putExtra("org.mudamos.petition.result.publicKey", data.getString("publicKey"));
+
+        if (data.hasKey("timestamp"))
+            result.putExtra("org.mudamos.petition.result.timestamp", data.getString("timestamp"));
+
+        if (data.hasKey("error"))
+            result.putExtra("org.mudamos.petition.result.error", data.getBoolean("error"));
+
         getCurrentActivity().setResult(Activity.RESULT_OK, result);
         getCurrentActivity().finish();
     }
@@ -50,40 +61,14 @@ public class SignerModule extends ReactContextBaseJavaModule {
     public WritableMap processIntent() {
         WritableMap map = Arguments.createMap();
 
-        String value = "lol";
-        String type = "wut";
-        String action = "rofl";
-
         Activity currentActivity = getCurrentActivity();
 
-//        if (currentActivity != null) {
-//            Intent intent = currentActivity.getIntent();
-//            action = intent.getAction();
-//            type = intent.getType();
-//            if (type == null) {
-//                type = "";
-//            }
-//            if (Intent.ACTION_SEND.equals(action) && "text/plain".equals(type)) {
-//                value = intent.getStringExtra(Intent.EXTRA_TEXT);
-//            }
-//            else if (Intent.ACTION_SEND.equals(action) && ("image/*".equals(type) || "image/jpeg".equals(type) || "image/png".equals(type) || "image/jpg".equals(type) ) ) {
-//                Uri uri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
-//                value = "file://" + RealPathUtil.getRealPathFromURI(currentActivity, uri);
-//
-//            } else {
-//                value = "";
-//            }
-//        } else {
-//            value = "";
-//            type = "";
-//        }
+        if (currentActivity != null) {
+            Intent intent = currentActivity.getIntent();
+            map.putString("message", intent.getStringExtra("org.mudamos.petition.message"));
+        }
 
-        Log.d("OHMYGOD", getCurrentActivity().getClass().getSimpleName());
-        Log.d("OHMYGOD", getCurrentActivity().getLocalClassName());
-        Log.d("OHMYGOD", getCurrentActivity().getClass().getName());
         String activityName = getCurrentActivity().getClass().getSimpleName();
-        map.putString("type", type);
-        map.putString("value",value);
         map.putString("activityName", activityName);
 
         return map;

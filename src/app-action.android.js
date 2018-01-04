@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import createReduxLogger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
+import { Actions, Router, Scene } from "react-native-router-flux";
+import sceneStyle from "./styles/scene-default";
 
 import {
   ActionSignerContainer,
@@ -12,8 +14,6 @@ import {
 import {
   appSetup,
 } from "./actions";
-
-import routeReducer from "./services/route-reducer";
 
 import { isDev } from "./utils";
 
@@ -50,11 +50,19 @@ const store = isDev ?
 const sessionStore = SessionManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP });
 const walletStore = WalletManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP });
 
+const scenes = Actions.create(
+  <Scene key="root">
+    <Scene key="sign" initial={true} component={ActionSignerContainer} hideNavBar={true} />
+  </Scene>
+);
+
 sagaRunner.run(sagas, {
   mobileApi: MobileApi(Config.MOBILE_API_URL),
   sessionStore,
   walletStore,
 });
+
+const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 
 export default class App extends Component {
   componentDidMount() {
@@ -64,7 +72,11 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <ActionSignerContainer />
+        <Router
+          scenes={scenes}
+          getSceneStyle={getSceneStyle}
+          title="Mudamos"
+        />
       </Provider>
     );
   }

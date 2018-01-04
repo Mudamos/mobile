@@ -7,37 +7,57 @@ import {
 
 import Layout from "../purple-layout";
 import FlatButton from "../flat-button";
+import HeaderLogo from "../header-logo";
+import NavigationBar from "../navigation-bar";
+import SplashLoader from "../splash-loader";
 
 const ActionSigner = ({
   errorMessage,
   hasError,
   result,
   onCloseSignActionApp,
-}) => (
-  <View style={styles.container}>
-    <Layout contentStyle={styles.layout}>
-      { hasError &&
-        <View style={styles.error}>
-          <Text style={styles.errorText}>{errorMessage}</Text>
-        </View>
-      }
+}) => {
+  const isLoading = !result && !hasError;
+  if (isLoading) {
+    return <SplashLoader isVisible={true} loadingTitle="Efetuando ação. Aguarde..." />
+  }
 
-      { !hasError &&
-        <View style={styles.result}>
-          <Text style={styles.resultText}>{result}</Text>
-        </View>
-      }
+  if (result) {
+    return <SplashLoader isVisible={true} loadingTitle="Sucesso!" />
+  }
 
-      { (hasError || !!result) &&
-        <FlatButton
-          title="Fechar"
-          onPress={onCloseSignActionApp}
-          style={{marginHorizontal: 20, marginTop: 20}}
+  return (
+    <View style={styles.container}>
+      <Layout>
+        <NavigationBar
+          middleView={<HeaderLogo />}
         />
-      }
-    </Layout>
-  </View>
-);
+
+        <View style={styles.contentContainer}>
+          { hasError &&
+            <View style={styles.error}>
+              <Text style={styles.errorText}>{errorMessage}</Text>
+            </View>
+          }
+
+          { !hasError &&
+            <View style={styles.result}>
+              <Text style={styles.resultText}>{result}</Text>
+            </View>
+          }
+
+          { (hasError || !!result) &&
+            <FlatButton
+              title="Fechar"
+              onPress={onCloseSignActionApp}
+              style={{marginHorizontal: 20, marginTop: 20}}
+            />
+          }
+        </View>
+      </Layout>
+    </View>
+  );
+};
 
 ActionSigner.propTypes = {
   errorMessage: PropTypes.string,
@@ -48,6 +68,7 @@ ActionSigner.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "transparent",
     flex: 1,
   },
   error: {
@@ -57,9 +78,10 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
-  layout: {
-    padding: 20,
+  contentContainer: {
+    flex: 1,
     justifyContent: "center",
+    marginHorizontal: 20,
   },
   result: {
     backgroundColor: "transparent",

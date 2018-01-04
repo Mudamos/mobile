@@ -40,6 +40,13 @@ const signApp = (state = initialState, action) => {
         },
       };
     }
+    case "SIGNER_RESET":
+    case "SETUP": {
+      return {
+        ...state,
+        ...initialState,
+      };
+    }
     default: {
       return state;
     }

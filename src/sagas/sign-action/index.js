@@ -12,7 +12,6 @@ function* setup() {
     const data = yield call(NativeModules.SignerAction.data);
 
     if (data && data.activityName === "SignerActivity") {
-      console.log("I HAZ SIGNER");
       yield put({ type: "SIGNER_SIGN_MESSAGE" });
     }
   });
@@ -28,17 +27,14 @@ export default function* rootSaga({
   yield fork(setup);
 
   yield call(fetchSession, { sessionStore });
-  // TODO: this wont wokr on android because the saga could be already running
-  // I should fire this on component did mount
-  //yield put({ type: "SIGNER_SIGN_MESSAGE" });
 
   yield takeLatest("SIGNER_CLOSE_APP", function* () {
-    NativeModules.SignerAction.done({ dance: "now weeee" });
-   // const hasError = yield select(s => !!s.signApp.error.hasError);
-   // const errorMessage = yield select(s => s.signApp.error.message);
-   // const sign = yield select(s => s.signApp.result);
-   // const result = omit(["signedMessage"], { ...sign, message: sign.signedMessage || errorMessage });
+    const hasError = yield select(s => !!s.signApp.error.hasError);
+    const errorMessage = yield select(s => s.signApp.error.message);
+    const sign = yield select(s => s.signApp.result);
+    const result = omit(["signedMessage"], { ...sign, message: sign.signedMessage || errorMessage });
 
-   // NativeModules.SignerAction.done({ error: hasError, ...result });
+    yield put({ type: "SIGNER_RESET" });
+    NativeModules.SignerAction.done({ error: hasError, ...result });
   });
 }
