@@ -44,6 +44,7 @@ function* getUser({ mobileApi }) {
 function* sign({ mobileApi, walletStore }) {
   yield takeLatest("SIGNER_SIGN_MESSAGE", function* () {
     try {
+      yield call(delay, 5000);
       const loggedIn = yield select(isUserLoggedIn);
       if (!loggedIn) {
         return yield call(signError, {
@@ -51,75 +52,88 @@ function* sign({ mobileApi, walletStore }) {
         });
       }
 
-      const user = yield call(getUser, { mobileApi });
-      if (!user) {
+      const lol = yield NativeModules.SignerAction.data();
+      console.log("xxxxxxxxxxxxxxxxxxx", lol);
+
+      if (lol && lol.activityName === "MainActivity") {
         return yield call(signError, {
-          message: "User is unathorized",
+          message: "Just dance main!",
         });
       }
 
-      const validWallet = yield call(validateLocalWallet, { walletStore });
-      if (!validWallet) {
-        return yield call(signError, {
-          message: "Wallet is invalid",
-        });
-      }
-
-      if (!(yield select(isProfileComplete))) {
-        return yield call(signError, {
-          message: "Profile is not complete",
-        });
-      }
-
-      const [seed, difficulty] = yield [
-        call(walletStore.retrieve, user.voteCard),
-        call(mobileApi.difficulty),
-      ];
-
-      const appInputData = yield call(NativeModules.SignerAction.inputData);
-      if (isDev) {
-        console.log("Input data:", appInputData);
-      }
-
-      const { message: appInput } = appInputData;
-      if (!appInput) {
-        return yield call(signError, {
-          message: `Invalid message sent to sign ${JSON.stringify(appInputData)}`,
-        });
-      }
-
-      const timestamp = moment().toISOString();
-      const message = buildMessage({ appInput, timestamp });
-      const block = yield call([LibCrypto, LibCrypto.signMessage], seed, message, difficulty);
-
-      if (isDev) {
-        console.log("Block:", block);
-      }
-
-      const authToken = yield select(currentAuthToken);
-
-      const { publicKey } = yield mobileApi.signMessage(authToken, {
-        message: block,
+      return yield call(signError, {
+        message: "Just dance not main!",
       });
 
-      yield put({
-        type: "SIGNER_SUCCESS",
-        payload: {
-          message: "Sign success",
-          signedMessage: message,
-          timestamp,
-          publicKey,
-        },
-      });
+     // const user = yield call(getUser, { mobileApi });
+     // if (!user) {
+     //   return yield call(signError, {
+     //     message: "User is unathorized",
+     //   });
+     // }
 
-      yield call(delay, 100);
-      // TODO: go back to the calling app
+     // const validWallet = yield call(validateLocalWallet, { walletStore });
+     // if (!validWallet) {
+     //   return yield call(signError, {
+     //     message: "Wallet is invalid",
+     //   });
+     // }
+
+     // if (!(yield select(isProfileComplete))) {
+     //   return yield call(signError, {
+     //     message: "Profile is not complete",
+     //   });
+     // }
+
+     // const [seed, difficulty] = yield [
+     //   call(walletStore.retrieve, user.voteCard),
+     //   call(mobileApi.difficulty),
+     // ];
+
+     // const appInputData = yield call(NativeModules.SignerAction.inputData);
+     // if (isDev) {
+     //   console.log("Input data:", appInputData);
+     // }
+
+     // const { message: appInput } = appInputData;
+     // if (!appInput) {
+     //   return yield call(signError, {
+     //     message: `Invalid message sent to sign ${JSON.stringify(appInputData)}`,
+     //   });
+     // }
+
+     // const timestamp = moment().toISOString();
+     // const message = buildMessage({ appInput, timestamp });
+     // const block = yield call([LibCrypto, LibCrypto.signMessage], seed, message, difficulty);
+
+     // if (isDev) {
+     //   console.log("Block:", block);
+     // }
+
+     // const authToken = yield select(currentAuthToken);
+
+     // const { publicKey } = yield mobileApi.signMessage(authToken, {
+     //   message: block,
+     // });
+
+     // yield put({
+     //   type: "SIGNER_SUCCESS",
+     //   payload: {
+     //     message: "Sign success",
+     //     signedMessage: message,
+     //     timestamp,
+     //     publicKey,
+     //   },
+     // });
+
+     // yield call(delay, 100);
+     // // TODO: go back to the calling app
     } catch(e) {
-      logError(e);
+     // logError(e);
 
-      yield call(signError, {
-        message: e.userMessage ? e.userMessage : e.message,
-      });
+     // yield call(signError, {
+     //   message: e.userMessage ? e.userMessage : e.message,
+     // });
     }
   });
 }

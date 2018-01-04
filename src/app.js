@@ -35,6 +35,7 @@ import {
 
 import {
   appDidMount,
+  appSetup,
   appWillUnmount,
   navigate,
   navigateBack,
@@ -163,6 +164,7 @@ export default class App extends Component {
 
   componentDidMount() {
     store.dispatch(appDidMount());
+    store.dispatch(appSetup());
   }
 
   componentWillUnmount() {

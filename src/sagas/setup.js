@@ -1,5 +1,6 @@
 import { takeLatest } from "redux-saga";
 import { call, fork, put } from "redux-saga/effects";
+import { NativeModules } from "react-native";
 
 import {
   appSetup,
@@ -15,6 +16,12 @@ import { fetchSession } from "./session";
 
 function* setup({ sessionStore }) {
   yield takeLatest("SETUP", function* () {
+    const data = yield call(NativeModules.SignerAction.data);
+    if (data && data.activityName === "SignerActivity") {
+      return;
+    }
+    console.log("I AM MAIN!!!")
+
     yield call(fetchSession, { sessionStore });
 
     yield [
@@ -30,5 +37,5 @@ function* setup({ sessionStore }) {
 export default function* setupSaga({ sessionStore }) {
   yield fork(setup, { sessionStore });
 
-  yield put(appSetup());
+  //yield put(appSetup());
 }
