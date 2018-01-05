@@ -42,6 +42,7 @@ export default (state = initialState, action) => {
       return { ...state, voteCardId: payload.voteCardId };
     case "PROFILE_SAVING_AVATAR":
       return { ...state, isSavingAvatar: payload.isSaving };
+    case "SIGNER_RESET":
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,

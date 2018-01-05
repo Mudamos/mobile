@@ -22,6 +22,7 @@ export default (state = initialState, action) => {
         ...state,
         isLoggingIn: false,
       };
+    case "SIGNER_RESET":
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,

@@ -18,6 +18,7 @@ import {
 
 import { fetchProfile } from "../profile";
 import { validateLocalWallet } from "../wallet";
+import { fetchSession } from "../session";
 
 const buildMessage = ({ appInput, timestamp }) => [
   appInput,
@@ -41,9 +42,11 @@ function* getUser({ mobileApi }) {
   }
 }
 
-function* sign({ mobileApi, walletStore }) {
+function* sign({ mobileApi, sessionStore, walletStore }) {
   yield takeLatest("SIGNER_SIGN_MESSAGE", function* () {
     try {
+      yield call(fetchSession, { sessionStore });
+
       const loggedIn = yield select(isUserLoggedIn);
       if (!loggedIn) {
         return yield call(signError, {
@@ -127,6 +130,6 @@ function* sign({ mobileApi, walletStore }) {
   });
 }
 
-export default function* signMessage({ mobileApi, walletStore }) {
-  yield fork(sign, { mobileApi, walletStore });
+export default function* signMessage({ mobileApi, sessionStore, walletStore }) {
+  yield fork(sign, { mobileApi, sessionStore, walletStore });
 }

@@ -28,6 +28,7 @@ export default (state = initialState, action) => {
         ...state,
         hasWallet: payload.hasWallet,
       }
+    case "SIGNER_RESET":
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,

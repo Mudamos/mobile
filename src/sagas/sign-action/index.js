@@ -5,7 +5,6 @@ import { omit } from "ramda";
 
 import signMessage from "./sign-message";
 import sessionSaga from "../session";
-import { fetchSession } from "../session";
 
 function* setup() {
   yield takeLatest("SETUP", function* () {
@@ -22,11 +21,9 @@ export default function* rootSaga({
   sessionStore,
   walletStore,
 }) {
-  yield fork(signMessage, { mobileApi, walletStore });
+  yield fork(signMessage, { mobileApi, sessionStore, walletStore });
   yield fork(sessionSaga, { mobileApi, sessionStore });
   yield fork(setup);
-
-  yield call(fetchSession, { sessionStore });
 
   yield takeLatest("SIGNER_CLOSE_APP", function* () {
     const hasError = yield select(s => !!s.signApp.error.hasError);
