@@ -3,6 +3,12 @@ import { delay } from "redux-saga";
 import { call, fork, put, select } from "redux-saga/effects";
 import { NativeModules } from "react-native";
 
+import {
+  nth,
+  pipe,
+  split,
+} from "ramda";
+
 import moment from "moment";
 import LibCrypto from "mudamos-libcrypto";
 import {
@@ -105,11 +111,14 @@ function* sign({ mobileApi, sessionStore, walletStore }) {
         message: block,
       });
 
+      const signature = pipe(split(";"), nth(3));
+
       yield put({
         type: "SIGNER_SUCCESS",
         payload: {
           message: "Sign success",
           signedMessage: message,
+          signature: signature(block),
           timestamp,
           publicKey,
         },

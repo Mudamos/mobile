@@ -28,12 +28,13 @@ const signApp = (state = initialState, action) => {
       };
     }
     case "SIGNER_SUCCESS": {
-      const { message, signedMessage, publicKey, timestamp } = action.payload;
+      const { message, signature, signedMessage, publicKey, timestamp } = action.payload;
 
       return {
         ...state,
         result: {
           message,
+          signature,
           signedMessage,
           publicKey,
           timestamp,

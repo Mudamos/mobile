@@ -40,6 +40,9 @@ public class SignerModule extends ReactContextBaseJavaModule {
         if (data.hasKey("message"))
             result.putExtra("org.mudamos.petition.result.message", data.getString("message"));
 
+        if (data.hasKey("signature"))
+            result.putExtra("org.mudamos.petition.result.signature", data.getString("signature"));
+
         if (data.hasKey("publicKey"))
             result.putExtra("org.mudamos.petition.result.publicKey", data.getString("publicKey"));
 
