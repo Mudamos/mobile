@@ -41,3 +41,7 @@ target "MudamosProduction" do
 
   pods
 end
+
+target "MessageSignerActionBeta" do
+  use_frameworks!
+end

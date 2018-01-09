@@ -32,6 +32,9 @@
 		400834B331534457AC160DEA /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8424FEEF17243CFB758995F /* libRNRandomBytes.a */; };
 		4607F33B1E97F72A0018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
 		4607F33C1E97F7340018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
+		461E718D2004EFBA00DEA617 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E718C2004EFBA00DEA617 /* ActionViewController.swift */; };
+		461E71902004EFBB00DEA617 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 461E718E2004EFBA00DEA617 /* MainInterface.storyboard */; };
+		461E71952004EFBB00DEA617 /* MessageSignerActionBeta.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 461E718A2004EFBA00DEA617 /* MessageSignerActionBeta.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4622FF021E562C0400404C0D /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4622FEFC1E562BD900404C0D /* libReactNativePermissions.a */; };
 		4623C3E71E0081A800158849 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623C3E31E00818500158849 /* libRNDeviceInfo.a */; };
 		4632073A1EBA7D0800778DCC /* google in Resources */ = {isa = PBXBuildFile; fileRef = 463207391EBA7D0800778DCC /* google */; };
@@ -148,6 +151,9 @@
 		46CBB3741E268E52000B4F5A /* lato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3601E268E52000B4F5A /* lato.ttf */; };
 		46D05B531E5F073B00350745 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
 		46D30D7C1DE46B8400CE09C0 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46D30D7B1DE46B8400CE09C0 /* FacebookSDKStrings.bundle */; };
+		46DA29922004F13300D16AC9 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DA29912004F13300D16AC9 /* Dummy.swift */; };
+		46DA29932004F13300D16AC9 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DA29912004F13300D16AC9 /* Dummy.swift */; };
+		46DA29942004F13300D16AC9 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DA29912004F13300D16AC9 /* Dummy.swift */; };
 		46E7BBC41ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
 		46E7BBC51ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
 		46E7BBC61ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
@@ -228,6 +234,7 @@
 		D255DBA5704D40A7AB44AB19 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B55C452B89744C8C88F648C4 /* libReactNativeConfig.a */; };
 		D2826D23B7EA43F593D2F889 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB5F27F75FA40E7B12ACE07 /* libReact Native Open Settings.a */; };
 		D3E5BB9F9F7942BAAFD16EF4 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F2DC68A75BF46FBBA40FCDC /* Octicons.ttf */; };
+		E6A4A26401D52589473E9221 /* Pods_MessageSignerActionBeta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8613D4AEEBFE8BD30FBBE942 /* Pods_MessageSignerActionBeta.framework */; };
 		F424078D44A14BFBBE1D412B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B5E533F39E44066933C7E40 /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
 
@@ -308,6 +315,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 15209BEF1D250F63000D0F44;
 			remoteInfo = LRDRCTSimpleToast;
+		};
+		461E71922004EFBB00DEA617 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 461E71892004EFBA00DEA617;
+			remoteInfo = MessageSignerActionBeta;
 		};
 		4622FEFB1E562BD900404C0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -479,6 +493,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		461E71942004EFBB00DEA617 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				461E71952004EFBB00DEA617 /* MessageSignerActionBeta.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
@@ -513,6 +541,10 @@
 		245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTagviewBeta.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTagviewBeta/Pods-MudamosMobileTagviewBeta.release.xcconfig"; sourceTree = "<group>"; };
 		3E366E4C3ED543A4B6736655 /* libRNFirebaseCrashReport.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebaseCrashReport.a; sourceTree = "<group>"; };
 		413B12353FD34D1C9F7FE084 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		461E718A2004EFBA00DEA617 /* MessageSignerActionBeta.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionBeta.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		461E718C2004EFBA00DEA617 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		461E718F2004EFBA00DEA617 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		461E71912004EFBB00DEA617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		462DE3E01E9C0D630075CAFC /* MudamosProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosProduction.entitlements; sourceTree = "<group>"; };
 		463207391EBA7D0800778DCC /* google */ = {isa = PBXFileReference; lastKnownFileType = folder; path = google; sourceTree = "<group>"; };
 		463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/production/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -539,6 +571,10 @@
 		46CBB35F1E268E52000B4F5A /* lato_light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato_light.ttf; sourceTree = "<group>"; };
 		46CBB3601E268E52000B4F5A /* lato.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato.ttf; sourceTree = "<group>"; };
 		46D30D7B1DE46B8400CE09C0 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
+		46DA298E2004F13200D16AC9 /* MudamosMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosMobile-Bridging-Header.h"; sourceTree = "<group>"; };
+		46DA298F2004F13200D16AC9 /* MudamosMobileTagviewBeta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosMobileTagviewBeta-Bridging-Header.h"; sourceTree = "<group>"; };
+		46DA29902004F13200D16AC9 /* MudamosProduction-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosProduction-Bridging-Header.h"; sourceTree = "<group>"; };
+		46DA29912004F13300D16AC9 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		46DE63581DE469430031B576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		46E7BBA11ECCBFD0001D1720 /* MUDFirebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUDFirebase.h; sourceTree = "<group>"; };
 		46E7BBC31ECCC026001D1720 /* MUDFirebase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDFirebase.m; sourceTree = "<group>"; };
@@ -555,6 +591,8 @@
 		46F35B571E269C800002728D /* roboto_thin_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_thin_italic.ttf; sourceTree = "<group>"; };
 		46F35B581E269C800002728D /* roboto_thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_thin.ttf; sourceTree = "<group>"; };
 		46F35B591E269C800002728D /* roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto.ttf; sourceTree = "<group>"; };
+		4A0795748700DD2DBF73DB4F /* Pods-MessageSignerActionBeta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerActionBeta.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerActionBeta/Pods-MessageSignerActionBeta.release.xcconfig"; sourceTree = "<group>"; };
+		4D0BE9790385A330CB70444C /* Pods-MudamosMobileTagviewBeta-MessageSignerActionBeta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTagviewBeta-MessageSignerActionBeta.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTagviewBeta-MessageSignerActionBeta/Pods-MudamosMobileTagviewBeta-MessageSignerActionBeta.release.xcconfig"; sourceTree = "<group>"; };
 		4DB5F27F75FA40E7B12ACE07 /* libReact Native Open Settings.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libReact Native Open Settings.a"; sourceTree = "<group>"; };
 		4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		52CFEA4AA81E45E9A3978748 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
@@ -564,18 +602,21 @@
 		621C3D10CAD54FC5982F12BB /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
+		78744E14ED6DC8A4E13BB63E /* Pods-MessageSignerActionBeta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerActionBeta.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerActionBeta/Pods-MessageSignerActionBeta.debug.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7A536F47719B41759AAD3D00 /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
 		7C6E4E916C3B4AFEBB903B41 /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		7D115F907C014FE4A318F416 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobileTagviewBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		8613D4AEEBFE8BD30FBBE942 /* Pods_MessageSignerActionBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerActionBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A8D322C544414483346976 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
 		97451B22B8FD4C2CB64542DB /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
 		9A4DE2CC59E274427F8D159E /* Pods_MudamosProduction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosProduction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5E533F39E44066933C7E40 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		9BC5D238E00C444189EA91E3 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		9F016C18A1E94D748F17680C /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		9F3093916EF9890852865D86 /* Pods-MudamosMobileTagviewBeta-MessageSignerActionBeta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTagviewBeta-MessageSignerActionBeta.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTagviewBeta-MessageSignerActionBeta/Pods-MudamosMobileTagviewBeta-MessageSignerActionBeta.debug.xcconfig"; sourceTree = "<group>"; };
 		A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNRandomBytes.xcodeproj; path = "../node_modules/react-native-randombytes/RNRandomBytes.xcodeproj"; sourceTree = "<group>"; };
 		A686DD9DC7B8449382CEDA8A /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		B15E59AB4D564186AE6276F2 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
@@ -593,6 +634,7 @@
 		DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E26FDBD24B0A4D90A5A1EB13 /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTMaterialKit.a; sourceTree = "<group>"; };
 		E43A712CA50B405C881A95F5 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
+		F3DDECFD6D3C6C5764276661 /* Pods_MudamosMobileTagviewBeta_MessageSignerActionBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobileTagviewBeta_MessageSignerActionBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC45B1BB94D278A89EF7F9D9 /* Pods-MudamosMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		FC816BA612714338983ED538 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		FD315B732F68A52F03537566 /* Pods-MudamosMobileTagviewBeta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTagviewBeta.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTagviewBeta/Pods-MudamosMobileTagviewBeta.debug.xcconfig"; sourceTree = "<group>"; };
@@ -641,6 +683,14 @@
 				4BFC7789634149D2A3F02AA4 /* libRCTOneSignal.a in Frameworks */,
 				34BC8EBCC2BA4877B640450A /* libRNFirebaseCrashReport.a in Frameworks */,
 				C05A91829A814B3B9EB7E152 /* libFirestack.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		461E71872004EFBA00DEA617 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6A4A26401D52589473E9221 /* Pods_MessageSignerActionBeta.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,6 +859,10 @@
 				46439D891E709B03008577C0 /* InfoMudamosProduction.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				46DA29912004F13300D16AC9 /* Dummy.swift */,
+				46DA298E2004F13200D16AC9 /* MudamosMobile-Bridging-Header.h */,
+				46DA298F2004F13200D16AC9 /* MudamosMobileTagviewBeta-Bridging-Header.h */,
+				46DA29902004F13200D16AC9 /* MudamosProduction-Bridging-Header.h */,
 			);
 			name = MudamosMobile;
 			sourceTree = "<group>";
@@ -836,6 +890,16 @@
 				460E7DCD1DF18C1100F86028 /* libLRDRCTSimpleToast.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		461E718B2004EFBA00DEA617 /* MessageSignerActionBeta */ = {
+			isa = PBXGroup;
+			children = (
+				461E718C2004EFBA00DEA617 /* ActionViewController.swift */,
+				461E718E2004EFBA00DEA617 /* MainInterface.storyboard */,
+				461E71912004EFBB00DEA617 /* Info.plist */,
+			);
+			path = MessageSignerActionBeta;
 			sourceTree = "<group>";
 		};
 		4622FEE11E562BD800404C0D /* Products */ = {
@@ -1100,6 +1164,7 @@
 				13B07FAE1A68108700A75B9A /* MudamosMobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MudamosMobileTests */,
+				461E718B2004EFBA00DEA617 /* MessageSignerActionBeta */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				A5E7F9BCFEA23D3C9568FD2A /* Pods */,
 				E37103BD91427355FD24D359 /* Frameworks */,
@@ -1117,6 +1182,7 @@
 				00E356EE1AD99517003FC87E /* MudamosMobileTests.xctest */,
 				46ED2A941DF194E400B36CD0 /* MudamosMobileTagviewBeta.app */,
 				46439D881E709B03008577C0 /* MudamosProduction.app */,
+				461E718A2004EFBA00DEA617 /* MessageSignerActionBeta.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1132,6 +1198,10 @@
 				245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */,
 				C31184017F8613138D7E49E4 /* Pods-MudamosProduction.debug.xcconfig */,
 				5B984827EF456536636B8D2D /* Pods-MudamosProduction.release.xcconfig */,
+				78744E14ED6DC8A4E13BB63E /* Pods-MessageSignerActionBeta.debug.xcconfig */,
+				4A0795748700DD2DBF73DB4F /* Pods-MessageSignerActionBeta.release.xcconfig */,
+				9F3093916EF9890852865D86 /* Pods-MudamosMobileTagviewBeta-MessageSignerActionBeta.debug.xcconfig */,
+				4D0BE9790385A330CB70444C /* Pods-MudamosMobileTagviewBeta-MessageSignerActionBeta.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1143,6 +1213,8 @@
 				CB358AEDAED7A7D4E7C8E06C /* Pods_MudamosMobileTests.framework */,
 				8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */,
 				9A4DE2CC59E274427F8D159E /* Pods_MudamosProduction.framework */,
+				8613D4AEEBFE8BD30FBBE942 /* Pods_MessageSignerActionBeta.framework */,
+				F3DDECFD6D3C6C5764276661 /* Pods_MudamosMobileTagviewBeta_MessageSignerActionBeta.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1192,6 +1264,25 @@
 			productReference = 13B07F961A680F5B00A75B9A /* MudamosMobile.app */;
 			productType = "com.apple.product-type.application";
 		};
+		461E71892004EFBA00DEA617 /* MessageSignerActionBeta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 461E71BA2004EFBB00DEA617 /* Build configuration list for PBXNativeTarget "MessageSignerActionBeta" */;
+			buildPhases = (
+				8A65E59D7FF76642067F0E92 /* [CP] Check Pods Manifest.lock */,
+				461E71862004EFBA00DEA617 /* Sources */,
+				461E71872004EFBA00DEA617 /* Frameworks */,
+				461E71882004EFBA00DEA617 /* Resources */,
+				0E276C14B0F7F882EE0034CC /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MessageSignerActionBeta;
+			productName = MessageSignerActionBeta;
+			productReference = 461E718A2004EFBA00DEA617 /* MessageSignerActionBeta.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		46439D3C1E709B03008577C0 /* MudamosProduction */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46439D851E709B03008577C0 /* Build configuration list for PBXNativeTarget "MudamosProduction" */;
@@ -1224,10 +1315,12 @@
 				46ED2A8E1DF194E400B36CD0 /* Bundle React Native code and images */,
 				46ED2A8F1DF194E400B36CD0 /* [CP] Embed Pods Frameworks */,
 				46ED2A901DF194E400B36CD0 /* [CP] Copy Pods Resources */,
+				461E71942004EFBB00DEA617 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				461E71932004EFBB00DEA617 /* PBXTargetDependency */,
 			);
 			name = MudamosMobileTagviewBeta;
 			productName = "Hello World";
@@ -1240,6 +1333,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
@@ -1249,9 +1343,16 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = T97PZRMFDE;
+						LastSwiftMigration = 0920;
+					};
+					461E71892004EFBA00DEA617 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = T97PZRMFDE;
+						ProvisioningStyle = Manual;
 					};
 					46439D3C1E709B03008577C0 = {
 						DevelopmentTeam = YGK2CQTELW;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1264,6 +1365,7 @@
 					};
 					46ED2A6B1DF194E400B36CD0 = {
 						DevelopmentTeam = T97PZRMFDE;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1403,6 +1505,7 @@
 				00E356ED1AD99517003FC87E /* MudamosMobileTests */,
 				46ED2A6B1DF194E400B36CD0 /* MudamosMobileTagviewBeta */,
 				46439D3C1E709B03008577C0 /* MudamosProduction */,
+				461E71892004EFBA00DEA617 /* MessageSignerActionBeta */,
 			);
 		};
 /* End PBXProject section */
@@ -1703,6 +1806,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		461E71882004EFBA00DEA617 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				461E71902004EFBB00DEA617 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		46439D5B1E709B03008577C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1814,6 +1925,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "source ~/.bash_profile\nexport NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		0E276C14B0F7F882EE0034CC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MessageSignerActionBeta/Pods-MessageSignerActionBeta-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		1CDF2DF2E939EC792041AC27 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2008,6 +2134,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8A65E59D7FF76642067F0E92 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		DC9231CF015E329FDB5635AC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2040,8 +2181,17 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				46DA29922004F13300D16AC9 /* Dummy.swift in Sources */,
 				4675EBF31ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
 				46E7BBC41ECCC026001D1720 /* MUDFirebase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		461E71862004EFBA00DEA617 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				461E718D2004EFBA00DEA617 /* ActionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2051,6 +2201,7 @@
 			files = (
 				46439D3F1E709B03008577C0 /* AppDelegate.m in Sources */,
 				46439D401E709B03008577C0 /* main.m in Sources */,
+				46DA29942004F13300D16AC9 /* Dummy.swift in Sources */,
 				4675EBF51ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
 				46E7BBC61ECCC026001D1720 /* MUDFirebase.m in Sources */,
 			);
@@ -2062,6 +2213,7 @@
 			files = (
 				46ED2A6E1DF194E400B36CD0 /* AppDelegate.m in Sources */,
 				46ED2A6F1DF194E400B36CD0 /* main.m in Sources */,
+				46DA29932004F13300D16AC9 /* Dummy.swift in Sources */,
 				4675EBF41ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
 				46E7BBC51ECCC026001D1720 /* MUDFirebase.m in Sources */,
 			);
@@ -2075,6 +2227,11 @@
 			target = 13B07F861A680F5B00A75B9A /* MudamosMobile */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
+		461E71932004EFBB00DEA617 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 461E71892004EFBA00DEA617 /* MessageSignerActionBeta */;
+			targetProxy = 461E71922004EFBB00DEA617 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -2087,6 +2244,14 @@
 			path = MudamosMobile;
 			sourceTree = "<group>";
 		};
+		461E718E2004EFBA00DEA617 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				461E718F2004EFBA00DEA617 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -2094,6 +2259,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5CA59394A12E918879BC09D5 /* Pods-MudamosMobileTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2122,6 +2288,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 207C3AC18ADF55D82D20DF88 /* Pods-MudamosMobileTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = MudamosMobileTests/Info.plist;
@@ -2148,6 +2315,7 @@
 			baseConfigurationReference = FC45B1BB94D278A89EF7F9D9 /* Pods-MudamosMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = T97PZRMFDE;
@@ -2183,6 +2351,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.MudamosMobile;
 				PRODUCT_NAME = MudamosMobile;
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2192,6 +2363,7 @@
 			baseConfigurationReference = BB620C49F665BCB96048640D /* Pods-MudamosMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T97PZRMFDE;
 				HEADER_SEARCH_PATHS = (
@@ -2226,7 +2398,98 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.MudamosMobile;
 				PRODUCT_NAME = MudamosMobile;
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobile-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		461E71962004EFBB00DEA617 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78744E14ED6DC8A4E13BB63E /* Pods-MessageSignerActionBeta.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = T97PZRMFDE;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = MessageSignerActionBeta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile.MessageSignerActionBeta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9c638b9d-571f-4125-aa44-eb159749ec73";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos signer beta";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		461E71972004EFBB00DEA617 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A0795748700DD2DBF73DB4F /* Pods-MessageSignerActionBeta.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mor & Dan Tecnologia Consultoria Empresarial Ltda (T97PZRMFDE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = T97PZRMFDE;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = MessageSignerActionBeta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile.MessageSignerActionBeta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "11b7d675-039a-4a24-be23-871cd8962517";
+				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc: br.com.tagview.mudamosmobile.MessageSigner";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -2235,6 +2498,7 @@
 			baseConfigurationReference = C31184017F8613138D7E49E4 /* Pods-MudamosProduction.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MudamosProduction.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -2280,6 +2544,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "638fe4dc-8cc8-46c4-8a6a-1d36632af0cc";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app dev (push enabled)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosProduction-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2289,6 +2556,7 @@
 			baseConfigurationReference = 5B984827EF456536636B8D2D /* Pods-MudamosProduction.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MudamosProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Instituto de Tecnologia e Sociedade (YGK2CQTELW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -2334,6 +2602,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "161e25e2-2e4a-4879-9720-472339b63b21";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app store (push enabled)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosProduction-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -2342,7 +2612,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FD315B732F68A52F03537566 /* Pods-MudamosMobileTagviewBeta.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MudamosMobileTagviewBeta.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2394,6 +2666,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a2389657-7561-4ba4-b988-7bdbb369df4e";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos mobile dev";
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobileTagviewBeta-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2402,7 +2677,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MudamosMobileTagviewBeta.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mor & Dan Tecnologia Consultoria Empresarial Ltda (T97PZRMFDE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -2453,6 +2730,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "958c1fa8-de2b-4383-a542-62fec1454821";
 				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc: br.com.tagview.mudamosmobile";
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobileTagviewBeta-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -2596,6 +2875,15 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		461E71BA2004EFBB00DEA617 /* Build configuration list for PBXNativeTarget "MessageSignerActionBeta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				461E71962004EFBB00DEA617 /* Debug */,
+				461E71972004EFBB00DEA617 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
