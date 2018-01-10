@@ -17,6 +17,10 @@ def pods
   pod "Firebase/Storage"
 end
 
+def signer_pods
+  pod "CoreBitcoin", podspec: "https://raw.github.com/oleganza/CoreBitcoin/master/CoreBitcoin.podspec"
+end
+
 target "MudamosMobile" do
   # Uncomment the next line if you"re using Swift or would like to use dynamic frameworks
   use_frameworks!
@@ -44,4 +48,10 @@ end
 
 target "MessageSignerActionBeta" do
   use_frameworks!
+
+ # signer_pods
+
+ # pre_install do |installer|
+ #   def installer.verify_no_static_framework_transitive_dependencies; end
+ # end
 end

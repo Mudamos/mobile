@@ -32,6 +32,7 @@
 		400834B331534457AC160DEA /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8424FEEF17243CFB758995F /* libRNRandomBytes.a */; };
 		4607F33B1E97F72A0018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
 		4607F33C1E97F7340018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
+		460C62D8200528DE00441DCD /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460C62D7200528DE00441DCD /* sign.html */; };
 		461E718D2004EFBA00DEA617 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E718C2004EFBA00DEA617 /* ActionViewController.swift */; };
 		461E71902004EFBB00DEA617 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 461E718E2004EFBA00DEA617 /* MainInterface.storyboard */; };
 		461E71952004EFBB00DEA617 /* MessageSignerActionBeta.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 461E718A2004EFBA00DEA617 /* MessageSignerActionBeta.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -109,6 +110,7 @@
 		46439D801E709B03008577C0 /* roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B561E269C800002728D /* roboto_medium.ttf */; };
 		46439D811E709B03008577C0 /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B591E269C800002728D /* roboto.ttf */; };
 		4644560C1E1ECFD600AACF91 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 464455F51E1ECFAD00AACF91 /* libRCTFBSDK.a */; };
+		46474E432004FE2C00A58E3C /* DummyObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 46474E422004FE2C00A58E3C /* DummyObjc.m */; };
 		4658C25A1DFF25020063E371 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46668FAD1DFB386E002ECF64 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4673AD161DF88AA100E81C9A /* libAirMaps.a */; };
 		46668FAE1DFB3875002ECF64 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
@@ -541,8 +543,9 @@
 		245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTagviewBeta.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTagviewBeta/Pods-MudamosMobileTagviewBeta.release.xcconfig"; sourceTree = "<group>"; };
 		3E366E4C3ED543A4B6736655 /* libRNFirebaseCrashReport.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebaseCrashReport.a; sourceTree = "<group>"; };
 		413B12353FD34D1C9F7FE084 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		460C62D7200528DE00441DCD /* sign.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = sign.html; sourceTree = "<group>"; };
 		461E718A2004EFBA00DEA617 /* MessageSignerActionBeta.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionBeta.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		461E718C2004EFBA00DEA617 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		461E718C2004EFBA00DEA617 /* ActionViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		461E718F2004EFBA00DEA617 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		461E71912004EFBB00DEA617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		462DE3E01E9C0D630075CAFC /* MudamosProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosProduction.entitlements; sourceTree = "<group>"; };
@@ -550,6 +553,9 @@
 		463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46439D881E709B03008577C0 /* MudamosProduction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosProduction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46439D891E709B03008577C0 /* InfoMudamosProduction.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = InfoMudamosProduction.plist; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/InfoMudamosProduction.plist"; sourceTree = "<absolute>"; };
+		46474E412004FE2B00A58E3C /* MessageSignerActionBeta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MessageSignerActionBeta-Bridging-Header.h"; sourceTree = "<group>"; };
+		46474E422004FE2C00A58E3C /* DummyObjc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DummyObjc.m; sourceTree = "<group>"; };
+		464AE1842005056C00DE205B /* ISO8601DateFormatter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ISO8601DateFormatter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDFirebaseConfig.m; sourceTree = "<group>"; };
 		4675EBF61ECCB947004C8A69 /* MUDFirebaseConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUDFirebaseConfig.h; sourceTree = "<group>"; };
 		46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold_italic.ttf; sourceTree = "<group>"; };
@@ -898,6 +904,9 @@
 				461E718C2004EFBA00DEA617 /* ActionViewController.swift */,
 				461E718E2004EFBA00DEA617 /* MainInterface.storyboard */,
 				461E71912004EFBB00DEA617 /* Info.plist */,
+				46474E422004FE2C00A58E3C /* DummyObjc.m */,
+				46474E412004FE2B00A58E3C /* MessageSignerActionBeta-Bridging-Header.h */,
+				460C62D7200528DE00441DCD /* sign.html */,
 			);
 			path = MessageSignerActionBeta;
 			sourceTree = "<group>";
@@ -1209,6 +1218,7 @@
 		E37103BD91427355FD24D359 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				464AE1842005056C00DE205B /* ISO8601DateFormatter.framework */,
 				DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */,
 				CB358AEDAED7A7D4E7C8E06C /* Pods_MudamosMobileTests.framework */,
 				8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */,
@@ -1348,6 +1358,7 @@
 					461E71892004EFBA00DEA617 = {
 						CreatedOnToolsVersion = 9.2;
 						DevelopmentTeam = T97PZRMFDE;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 					};
 					46439D3C1E709B03008577C0 = {
@@ -1811,6 +1822,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				461E71902004EFBB00DEA617 /* MainInterface.storyboard in Resources */,
+				460C62D8200528DE00441DCD /* sign.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2191,6 +2203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46474E432004FE2C00A58E3C /* DummyObjc.m in Sources */,
 				461E718D2004EFBA00DEA617 /* ActionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2412,6 +2425,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -2428,14 +2442,18 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = T97PZRMFDE;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MessageSignerActionBeta",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = MessageSignerActionBeta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MessageSignerActionBeta",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile.MessageSignerActionBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2443,6 +2461,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos signer beta";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "MessageSignerActionBeta/MessageSignerActionBeta-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2457,6 +2476,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -2473,20 +2493,25 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = T97PZRMFDE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MessageSignerActionBeta",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = MessageSignerActionBeta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MessageSignerActionBeta",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile.MessageSignerActionBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "11b7d675-039a-4a24-be23-871cd8962517";
 				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc: br.com.tagview.mudamosmobile.MessageSigner";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MessageSignerActionBeta/MessageSignerActionBeta-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
