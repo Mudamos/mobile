@@ -7,17 +7,46 @@
 //
 
 import UIKit
+import WebKit
 import MobileCoreServices
 
-class ActionViewController: UIViewController {
+class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
     @IBOutlet weak var imageView: UIImageView!
 
-    var webView: UIWebView?
+    var webView: WKWebView!
 
-    func delay(_ delay:Double, closure:@escaping ()->()) {
+    func delay(_ delay:Double, closure: @escaping () -> ()) {
         let when = DispatchTime.now() + delay
         DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+    }
+
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print("result: \(message.body)")
+        guard let body = message.body as? [String: Any] else {
+            print("could not convert message body to dictionary")
+            return
+        }
+
+        guard let seed = body["seed"] as? [String: Any] else {
+            print("fail seed")
+            return
+        }
+
+        guard let key = seed["publicKey"] as? String else {
+            print("key failed")
+            return
+        }
+
+        print("key: \(key)")
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        let thing = "`jamantafeliz`"
+        self.webView.evaluateJavaScript("getThingy(\(thing))") { r, e in
+            print("result: \(r)")
+            print("error: \(e)")
+        }
     }
 
     override func viewDidLoad() {
@@ -26,15 +55,23 @@ class ActionViewController: UIViewController {
         print("begin")
 
         let url = Bundle.main.url(forResource: "sign", withExtension: "html")
-        webView = UIWebView()
-        webView?.loadRequest(URLRequest(url: url!))
-
-        delay(5) {
-            print("weee")
-
-            let lol = self.webView?.stringByEvaluatingJavaScript(from: "window.result")
-            print("lol \(lol)")
-        }
+        let contentController = WKUserContentController()
+        contentController.add(self, name: "myController")
+        let configuration = WKWebViewConfiguration()
+        configuration.userContentController = contentController
+        webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.navigationDelegate = self
+        webView.load(URLRequest(url: url!))
+//
+//        delay(5) {
+//            print("weee")
+//
+//            self.webView.evaluateJavaScript("getThingy()") { r, e in
+//
+//                print("result: \(r)")
+//                print("error: \(e)")
+//            }
+//        }
 
     
 //        // Get the item[s] we're handling from the extension context.
@@ -75,6 +112,7 @@ class ActionViewController: UIViewController {
     }
 
     @IBAction func done() {
+        webView.navigationDelegate = nil
         // Return any edited content to the host app.
         // This template doesn't do anything, so we just echo the passed in items.
         self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
