@@ -5020,6 +5020,10 @@ react-native-tabs@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/react-native-tabs/-/react-native-tabs-1.0.9.tgz#75d3c35e8b5b6970869eab282372cb32e2a782cd"
 
+react-native-user-defaults@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-native-user-defaults/-/react-native-user-defaults-0.1.5.tgz#138aaeced5bf7518c88ccb08dd8d878e1c6344ae"
+
 react-native-vector-icons:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-3.0.0.tgz#a2f63757dee4fb89f67eef660e25e86926ae6827"

@@ -18,7 +18,8 @@ def pods
 end
 
 def signer_pods
-  pod "CoreBitcoin", podspec: "https://raw.github.com/oleganza/CoreBitcoin/master/CoreBitcoin.podspec"
+  pod "Alamofire"
+  #pod "CoreBitcoin", podspec: "https://raw.github.com/oleganza/CoreBitcoin/master/CoreBitcoin.podspec"
 end
 
 target "MudamosMobile" do
@@ -49,7 +50,7 @@ end
 target "MessageSignerActionBeta" do
   use_frameworks!
 
- # signer_pods
+  signer_pods
 
  # pre_install do |installer|
  #   def installer.verify_no_static_framework_transitive_dependencies; end

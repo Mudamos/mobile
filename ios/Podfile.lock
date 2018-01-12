@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.4.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -86,6 +87,7 @@ PODS:
   - Protobuf (3.3.0)
 
 DEPENDENCIES:
+  - Alamofire
   - Bolts
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -101,6 +103,7 @@ DEPENDENCIES:
   - IQKeyboardManager
 
 SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
@@ -120,6 +123,6 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 4a6f83b540283c2645aaeba2bd8dc0f09b5c77f8
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
 
-PODFILE CHECKSUM: 55ec095cf03034054fb8bcefaae1987e132ff78c
+PODFILE CHECKSUM: b99fb20bbfd781cdd28e1169ff4b70abe931a402
 
 COCOAPODS: 1.1.1
