@@ -1,5 +1,7 @@
 # Next
 
+## [1.7.0] 12/01/2018
+
 * [PR #371] Change signature count message
 * [PR #368] Remove onesignal tag info upon logout
 * [PR #366] National cause
