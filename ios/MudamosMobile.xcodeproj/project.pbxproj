@@ -118,6 +118,9 @@
 		4675EBF31ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
 		4675EBF41ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
 		4675EBF51ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
+		4681C0F6200CD76C00918025 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681C0F5200CD76C00918025 /* Formatter.swift */; };
+		4681C11B200CD7BE00918025 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681C11A200CD7BE00918025 /* Date.swift */; };
+		4681C11D200CD7D400918025 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681C11C200CD7D400918025 /* String.swift */; };
 		468261211EBA7E330044D471 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
 		468261421EBA7E3C0044D471 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
 		468B52A31E57273200A4E6B6 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */; };
@@ -576,6 +579,9 @@
 		464AE1842005056C00DE205B /* ISO8601DateFormatter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ISO8601DateFormatter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDFirebaseConfig.m; sourceTree = "<group>"; };
 		4675EBF61ECCB947004C8A69 /* MUDFirebaseConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUDFirebaseConfig.h; sourceTree = "<group>"; };
+		4681C0F5200CD76C00918025 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		4681C11A200CD7BE00918025 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		4681C11C200CD7D400918025 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold_italic.ttf; sourceTree = "<group>"; };
 		46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold.ttf; sourceTree = "<group>"; };
 		46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_italic.ttf; sourceTree = "<group>"; };
@@ -1106,6 +1112,9 @@
 			isa = PBXGroup;
 			children = (
 				46D909BA2006A607004D9957 /* CustomStringConvertible.swift */,
+				4681C0F5200CD76C00918025 /* Formatter.swift */,
+				4681C11A200CD7BE00918025 /* Date.swift */,
+				4681C11C200CD7D400918025 /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2292,8 +2301,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4601EF7D2008DEF4000AADD7 /* WalletService.swift in Sources */,
+				4681C11D200CD7D400918025 /* String.swift in Sources */,
+				4681C11B200CD7BE00918025 /* Date.swift in Sources */,
 				46D909B62006925C004D9957 /* MUDError.swift in Sources */,
 				46B8EE0920067E4F00A84E26 /* MobileApi.swift in Sources */,
+				4681C0F6200CD76C00918025 /* Formatter.swift in Sources */,
 				46D909B82006A0EF004D9957 /* User.swift in Sources */,
 				46B8EE0620066FAC00A84E26 /* SessionService.swift in Sources */,
 				46474E432004FE2C00A58E3C /* DummyObjc.m in Sources */,

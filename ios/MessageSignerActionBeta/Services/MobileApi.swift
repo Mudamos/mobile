@@ -32,8 +32,41 @@ class MobileApi {
 
     Alamofire.request(buildURL("/api/v1/profile"), headers: headers).validate().responseJSON { response in
       self.handleResponse(response: response) { data, error in
-        if let profileData = data, let userData = profileData["user"] as? [String: Any] {
+        if error != nil {
+          completionHandler(nil, error)
+        } else if let profileData = data, let userData = profileData["user"] as? [String: Any] {
           completionHandler(User(json: userData), nil)
+        } else {
+          completionHandler(nil, .Unknown(NSError(domain: "", code: -1, userInfo: nil)))
+        }
+      }
+    }
+  }
+
+  func difficulty(completionHandler: @escaping (Int?, MUDError?) -> ()) {
+    Alamofire.request(buildURL("/api/v1/config/difficulty")).validate().responseJSON { response in
+      self.handleResponse(response: response) { data, error in
+        if error != nil {
+          completionHandler(nil, error)
+        } else if data != nil, let configData = data!["config"] as? [String: String], let value = configData["value"] {
+          completionHandler(Int(value), nil)
+        } else {
+          completionHandler(nil, .Unknown(NSError(domain: "", code: -1, userInfo: nil)))
+        }
+      }
+    }
+  }
+
+  func signMessage(message: String, completionHandler: @escaping (String?, MUDError?) -> ()) {
+    let headers = buildAuthHeaders([:])
+    let parameters = ["message": message]
+
+    Alamofire.request(buildURL("/api/v1/message/sign/custom"), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+      self.handleResponse(response: response) { data, error in
+        if error != nil {
+          completionHandler(nil, error)
+        } else if data != nil, let publicKey = data!["publicKey"] as? String {
+          completionHandler(publicKey, nil)
         } else {
           completionHandler(nil, .Unknown(NSError(domain: "", code: -1, userInfo: nil)))
         }

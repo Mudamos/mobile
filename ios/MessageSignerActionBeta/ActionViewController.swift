@@ -31,24 +31,97 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
       return
     }
 
-    guard let seed = body["seed"] as? [String: Any] else {
-      print("fail seed")
+    guard let signedMessage = body["signedMessage"] as? String else {
+      print("failed sign lib crypto signedMessage")
       return
     }
 
-    guard let key = seed["publicKey"] as? String else {
-      print("key failed")
+    guard let timestamp = body["timestamp"] as? String else {
+      print("failed sign lib crypto timestamp")
       return
     }
 
-    print("key: \(key)")
+//    guard let seed = body["seed"] as? [String: Any] else {
+//      print("fail seed")
+//      return
+//    }
+
+//    guard let key = seed["publicKey"] as? String else {
+//      print("key failed")
+//      return
+//    }
+//
+//    print("key: \(key)")
+
+    print("timestamp: \(timestamp), signedMessage: \(signedMessage)")
+
+    api.signMessage(message: signedMessage) { result, error in
+      print("sign error: \(error)")
+      print("sign result: \(result)")
+
+      if let publicKey = result {
+        print("publicKey: \(publicKey)")
+      }
+    }
+  }
+
+  func buildMessage(input: String, now: String) -> String {
+    return [input, now].joined(separator: ";")
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    let thing = "`jamantafeliz`"
-    self.webView.evaluateJavaScript("getThingy(\(thing))") { r, e in
-      print("result: \(r)")
-      print("error: \(e)")
+//    let thing = "`jamantafeliz`"
+//    self.webView.evaluateJavaScript("getThingy(\(thing))") { r, e in
+//      print("result: \(r)")
+//      print("error: \(e)")
+//    }
+
+    print("will call profile")
+
+    api.profile() { result, error in
+      print("profile: \(result)")
+      print("request error: \(error)")
+
+      if let user = result, let voteCard = user.voteCard {
+        let seed = self.walletService.retrieve(password: voteCard)
+        print("le seed: \(seed)")
+
+        if let encryptedSeed = seed {
+          self.webView.evaluateJavaScript("getSeed(`\(encryptedSeed)`, `\(voteCard)`)") { r, e in
+            print("result seed: \(r)")
+            print("error seed: \(e)")
+
+            if let realSeed = r {
+              print("real seed: \(realSeed)")
+
+              self.webView.evaluateJavaScript("validateWallet(`\(realSeed)`)") { r, e in
+                print("validateWallet error: \(e)")
+
+                if let _ = r as? Bool {
+                  print("valid wallet")
+
+                  self.api.difficulty { result, error in
+                    print("difficulty error: \(error)")
+                    print("difficulty: \(result)")
+
+                    if let difficulty = result {
+                      let input = "abacatecremoso"
+                      let now = Date().iso8601
+
+                      let message = self.buildMessage(input: input, now: now)
+                      print("message: \(message)")
+                      print("signMessage(`\(realSeed)`, `\(message)`, \(difficulty), `\(now)`)")
+                      self.webView.evaluateJavaScript("signMessage(`\(realSeed)`, `\(message)`, \(difficulty), `\(now)`)") { _, e in
+                        print("lib crypto error: \(String(describing: e))")
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 
@@ -57,32 +130,26 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
 
     print("begin")
 
-    let url = Bundle.main.url(forResource: "sign", withExtension: "html")
+    //let url = Bundle.main.url(forResource: "sign", withExtension: "html")
+    let url = Bundle.main.path(forResource: "sign", ofType: "html")
+    print("url: \(url)")
+    let content = try? String(contentsOfFile: url!, encoding: .utf8)
+    print("has content: \(content != nil)")
     let contentController = WKUserContentController()
     contentController.add(self, name: "myController")
+    print("built contentController")
+
     let configuration = WKWebViewConfiguration()
     configuration.userContentController = contentController
+    print("built configuration")
+
     webView = WKWebView(frame: .zero, configuration: configuration)
+    print("built webview")
     webView.navigationDelegate = self
-    webView.load(URLRequest(url: url!))
-
-    api.profile() { result, error in
-      print("profile: \(result)")
-      print("request error: \(error)")
-      if let user = result, let voteCard = user.voteCard {
-        let seed = self.walletService.retrieve(password: voteCard)
-        print("le seed: \(seed)")
-        print("getSeed(`\(seed!)`, `\(voteCard)`)")
-        self.webView.evaluateJavaScript("getSeed(`\(seed!)`, `\(voteCard)`)") { r, e in
-          print("result seed: \(r)")
-          print("error seed: \(e)")
-
-          if let realSeed = r {
-            print("real seed: \(realSeed)")
-          }
-        }
-      }
-    }
+    print("will load url")
+    //webView.load(URLRequest(url: url!))
+    webView.loadHTMLString(content!, baseURL: nil)
+    print("view did load")
 
     //
     //        delay(5) {
