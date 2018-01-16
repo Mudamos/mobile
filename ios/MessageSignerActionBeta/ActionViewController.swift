@@ -104,11 +104,10 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
 
       self.debugMe("PublicKey: \(publicKey)")
       self.addSuccess("Sucesso!!")
-      self.doneButton.isEnabled = true
 
-//      self.delay(2) {
-//        self.done()
-//      }
+      self.delay(2) {
+        self.done()
+      }
     }
   }
 
