@@ -131,6 +131,10 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
       self.api.profile() { result, error in
         self.debugMe("Profile fetched")
         if error != nil {
+          if case .Unauthorized(_) = error! {
+            return self.addError("Usuário não logado")
+          }
+
           return self.addError("Erro ao buscar o perfil")
         }
 
