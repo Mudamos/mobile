@@ -74,6 +74,10 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
     return gradient
   }()
 
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+
   func delay(_ delay:Double, closure: @escaping () -> ()) {
     let when = DispatchTime.now() + delay
     DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
