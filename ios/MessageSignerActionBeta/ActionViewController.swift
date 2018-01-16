@@ -18,13 +18,25 @@ class SignResult {
   var error = false
 
   var item: NSExtensionItem {
-    let attrs: NSDictionary = [
-      "message": message,
-      "signature": signature,
-      "publicKey": publicKey,
-      "timestamp": timestamp,
+    let attrs: NSMutableDictionary = [
       "error": error
     ]
+
+    if let v = message {
+      attrs["message"] = v
+    }
+
+    if let v = signature {
+      attrs["signature"] = v
+    }
+
+    if let v = publicKey {
+      attrs["publicKey"] = v
+    }
+
+    if let v = timestamp {
+      attrs["timestamp"] = v
+    }
 
     let provider = NSItemProvider(item: attrs, typeIdentifier: "com.mudamos.signmessage")
     let item = NSExtensionItem()
@@ -95,7 +107,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
     self.debugMe("will call profile!!")
 
     self.extractInputData { result in
-      self.debugMe("Extract Result: \(result)")
+      self.debugMe("Extract Result: \(String(describing: result))")
       guard let messageToSign = result else {
         return
       }
@@ -151,7 +163,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
 
               self.debugMe("will sign message")
               self.signMessage(seed: seed, message: message, difficulty: difficulty, timestamp: now) { error in
-                self.debugMe("fired sign message error: \(error)")
+                self.debugMe("fired sign message error: \(String(describing: error))")
                 if error != nil {
                   return self.addError("Erro ao assinar mensagem")
                 }
@@ -216,7 +228,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
         return completionHandler(nil)
       }
 
-      self.debugMe("item: \(item)")
+      self.debugMe("item: \(String(describing: item))")
 
       guard let result = item as? [String: Any] else {
         self.addError("Could not convert message")
@@ -233,7 +245,6 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
   }
 
   override func viewDidLoad() {
-    //signal(SIGPIPE, SIG_IGN);
     super.viewDidLoad()
     debugMe("viewDidLoad!")
 
@@ -244,22 +255,19 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
 
     debugMe("begin!")
     loadWebView()
-//    delay(5) {
-//      debugMe("calling done")
-//      self.done()
-//    }
 
     debugMe("finish load!")
   }
 
   private func debugMe(_ text: String) {
-//    OperationQueue.main.addOperation {
-//      self.logView.text = text + "\n" + (self.logView.text ?? "")
-//
-//      self.delay(1) {
-//        self.logView.setContentOffset(.zero, animated: false)
-//      }
-//    }
+    print(text)
+    OperationQueue.main.addOperation {
+      self.logView.text = text + "\n" + (self.logView.text ?? "")
+
+      self.delay(1) {
+        self.logView.setContentOffset(.zero, animated: false)
+      }
+    }
   }
 
   private func loadWebView() {
@@ -292,7 +300,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
 
   @IBAction func done() {
     debugMe("closing the extension")
-    //webView.navigationDelegate = nil
+    webView?.navigationDelegate = nil
     extensionContext!.completeRequest(returningItems: [signResult.item], completionHandler: nil)
     debugMe("done closing")
   }
