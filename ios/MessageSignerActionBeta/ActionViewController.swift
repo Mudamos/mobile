@@ -10,14 +10,43 @@ import UIKit
 import WebKit
 import MobileCoreServices
 
+class SignResult {
+  var message: String?
+  var signature: String?
+  var publicKey: String?
+  var timestamp: String?
+  var error = false
+
+  var item: NSExtensionItem {
+    let attrs: NSDictionary = [
+      "message": message,
+      "signature": signature,
+      "publicKey": publicKey,
+      "timestamp": timestamp,
+      "error": error
+    ]
+
+    let provider = NSItemProvider(item: attrs, typeIdentifier: "com.mudamos.signmessage")
+    let item = NSExtensionItem()
+    item.attachments = [provider]
+
+    return item
+  }
+}
+
 class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
-  @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var loader: UIActivityIndicatorView!
+  @IBOutlet weak var resultLabel: UILabel!
+  @IBOutlet weak var doneButton: UIBarButtonItem!
 
   var webView: WKWebView!
 
   let api = MobileApi()
   let walletService = WalletService()
+
+  let messageIdentifier = "com.mudamos.signmessage"
+  let signResult = SignResult()
 
   func delay(_ delay:Double, closure: @escaping () -> ()) {
     let when = DispatchTime.now() + delay
@@ -25,42 +54,33 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
   }
 
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    print("result: \(message.body)")
+    print("Result body: \(message.body)")
     guard let body = message.body as? [String: Any] else {
-      print("could not convert message body to dictionary")
-      return
+      return self.addError("Erro ao assinar mensagem")
     }
 
     guard let signedMessage = body["signedMessage"] as? String else {
-      print("failed sign lib crypto signedMessage")
-      return
+      return self.addError("Erro ao assinar mensagem")
     }
 
-    guard let timestamp = body["timestamp"] as? String else {
-      print("failed sign lib crypto timestamp")
-      return
-    }
+    self.signResult.signature = signedMessage.components(separatedBy: ";")[3]
 
-//    guard let seed = body["seed"] as? [String: Any] else {
-//      print("fail seed")
-//      return
-//    }
+    self.api.signMessage(message: signedMessage) { result, error in
+      if error != nil {
+        return self.addError(error.debugDescription)
+      }
 
-//    guard let key = seed["publicKey"] as? String else {
-//      print("key failed")
-//      return
-//    }
-//
-//    print("key: \(key)")
+      guard let publicKey = result else {
+        return self.addError("Resultado inválido")
+      }
 
-    print("timestamp: \(timestamp), signedMessage: \(signedMessage)")
+      self.signResult.publicKey = publicKey
 
-    api.signMessage(message: signedMessage) { result, error in
-      print("sign error: \(error)")
-      print("sign result: \(result)")
+      print("PublicKey: \(publicKey)")
+      self.addSuccess("Sucesso!")
 
-      if let publicKey = result {
-        print("publicKey: \(publicKey)")
+      self.delay(2) {
+        self.done()
       }
     }
   }
@@ -70,52 +90,68 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//    let thing = "`jamantafeliz`"
-//    self.webView.evaluateJavaScript("getThingy(\(thing))") { r, e in
-//      print("result: \(r)")
-//      print("error: \(e)")
-//    }
+    print("will call profile!")
 
-    print("will call profile")
+    self.extractInputData { result in
+      print("Extract Result: \(result)")
+      guard let messageToSign = result else {
+        return
+      }
 
-    api.profile() { result, error in
-      print("profile: \(result)")
-      print("request error: \(error)")
+      self.api.profile() { result, error in
+        print("Profile fetched")
+        if error != nil {
+          return self.addError("Erro ao buscar o perfil")
+        }
 
-      if let user = result, let voteCard = user.voteCard {
-        let seed = self.walletService.retrieve(password: voteCard)
-        print("le seed: \(seed)")
+        guard let user = result, let voteCard = user.voteCard else {
+          return self.addError("Sem título de eleitor")
+        }
 
-        if let encryptedSeed = seed {
-          self.webView.evaluateJavaScript("getSeed(`\(encryptedSeed)`, `\(voteCard)`)") { r, e in
-            print("result seed: \(r)")
-            print("error seed: \(e)")
+        guard let encryptedSeed = self.walletService.retrieve(password: voteCard) else {
+          return self.addError("Wallet não encontrada")
+        }
 
-            if let realSeed = r {
-              print("real seed: \(realSeed)")
+        self.getSeed(encryptedSeed: encryptedSeed, voteCard: voteCard) { result, error in
+          print("Seed fetched")
+          if error != nil {
+            return self.addError("Erro ao acessar wallet")
+          }
 
-              self.webView.evaluateJavaScript("validateWallet(`\(realSeed)`)") { r, e in
-                print("validateWallet error: \(e)")
+          guard let seed = result as? String else {
+            return self.addError("Wallet não encontrada")
+          }
 
-                if let _ = r as? Bool {
-                  print("valid wallet")
+          self.validateWallet(seed: seed) { result, error in
+            print("Wallet validated")
+            if error != nil {
+              return self.addError("Erro ao validar wallet")
+            }
 
-                  self.api.difficulty { result, error in
-                    print("difficulty error: \(error)")
-                    print("difficulty: \(result)")
+            if let valid = result as? Bool, !valid {
+              return self.addError("Invalid local wallet")
+            }
 
-                    if let difficulty = result {
-                      let input = "abacatecremoso"
-                      let now = Date().iso8601
+            self.api.difficulty { result, error in
+              print("Diffculty fetched")
+              if error != nil {
+                return self.addError("Erro ao buscar dificuldade")
+              }
 
-                      let message = self.buildMessage(input: input, now: now)
-                      print("message: \(message)")
-                      print("signMessage(`\(realSeed)`, `\(message)`, \(difficulty), `\(now)`)")
-                      self.webView.evaluateJavaScript("signMessage(`\(realSeed)`, `\(message)`, \(difficulty), `\(now)`)") { _, e in
-                        print("lib crypto error: \(String(describing: e))")
-                      }
-                    }
-                  }
+              guard let difficulty = result else {
+                return self.addError("Nenhuma dificuldade")
+              }
+
+              let now = Date().iso8601
+              let message = self.buildMessage(input: messageToSign, now: now)
+              self.signResult.message = message
+              self.signResult.timestamp = now
+
+              print("will sign message")
+              self.signMessage(seed: seed, message: message, difficulty: difficulty, timestamp: now) { error in
+                print("fired sign message error: \(error)")
+                if error != nil {
+                  return self.addError("Erro ao assinar mensagem")
                 }
               }
             }
@@ -125,74 +161,105 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
     }
   }
 
+  private func signMessage(seed: String, message: String, difficulty: Int, timestamp: String, completionHandler: @escaping (Error?) -> ()) {
+    print("signMessage(`\(seed)`, `\(message)`, \(difficulty), `\(timestamp)`)")
+    webView.evaluateJavaScript("signMessage(`\(seed)`, `\(message)`, \(difficulty), `\(timestamp)`)") { _, e in
+      completionHandler(e)
+    }
+  }
+
+  private func validateWallet(seed: String, completionHandler: @escaping (Any?, Error?) -> ()) {
+    webView.evaluateJavaScript("validateWallet(`\(seed)`)", completionHandler: completionHandler)
+  }
+
+  private func getSeed(encryptedSeed: String, voteCard: String, completionHandler: @escaping (Any?, Error?) -> ()) {
+    webView.evaluateJavaScript("getSeed(`\(encryptedSeed)`, `\(voteCard)`)", completionHandler: completionHandler)
+  }
+
+  private func addError(_ text: String) {
+    OperationQueue.main.addOperation {
+      self.resultLabel.text = text
+      self.signResult.error = true
+      self.doneButton.isEnabled = true
+      self.loader.stopAnimating()
+    }
+  }
+
+  private func addSuccess(_ text: String) {
+    OperationQueue.main.addOperation {
+      self.resultLabel.text = text
+      self.loader.stopAnimating()
+    }
+  }
+
+  private func extractInputData(completionHandler: @escaping (String?) -> ()) {
+    guard let item = extensionContext?.inputItems.first as? NSExtensionItem else {
+      addError("Nenhum item enviado")
+      return completionHandler(nil)
+    }
+
+    guard let provider = item.attachments?.first as? NSItemProvider else {
+      addError("Nenhum provider")
+      return completionHandler(nil)
+    }
+
+    if !provider.hasItemConformingToTypeIdentifier(messageIdentifier) {
+      addError("Identificador não encontrado")
+      return completionHandler(nil)
+    }
+
+    provider.loadItem(forTypeIdentifier: messageIdentifier, options: nil) { item, error in
+      if error != nil || item == nil {
+        self.addError("Load item error")
+        return completionHandler(nil)
+      }
+
+      print("item: \(item)")
+
+      guard let result = item as? [String: Any] else {
+        self.addError("Could not convert message")
+        return completionHandler(nil)
+      }
+
+      guard let message = result["message"] as? String else {
+        self.addError("Message not found in payload")
+        return completionHandler(nil)
+      }
+
+      completionHandler(message)
+    }
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
+    print("viewDidLoad")
+
+    resultLabel.text = nil
+    doneButton.isEnabled = false
+    loader.startAnimating()
 
     print("begin")
+    loadWebView()
 
-    //let url = Bundle.main.url(forResource: "sign", withExtension: "html")
-    let url = Bundle.main.path(forResource: "sign", ofType: "html")
-    print("url: \(url)")
-    let content = try? String(contentsOfFile: url!, encoding: .utf8)
-    print("has content: \(content != nil)")
-    let contentController = WKUserContentController()
-    contentController.add(self, name: "myController")
-    print("built contentController")
+    print("finish load")
+  }
 
-    let configuration = WKWebViewConfiguration()
-    configuration.userContentController = contentController
-    print("built configuration")
+  private func loadWebView() {
+    OperationQueue.main.addOperation {
+      let url = Bundle.main.path(forResource: "sign", ofType: "html")
+      let content = try? String(contentsOfFile: url!, encoding: .utf8)
+      print("Has content?: \(content != nil)")
 
-    webView = WKWebView(frame: .zero, configuration: configuration)
-    print("built webview")
-    webView.navigationDelegate = self
-    print("will load url")
-    //webView.load(URLRequest(url: url!))
-    webView.loadHTMLString(content!, baseURL: nil)
-    print("view did load")
+      let contentController = WKUserContentController()
+      contentController.add(self, name: "myController")
 
-    //
-    //        delay(5) {
-    //            print("weee")
-    //
-    //            self.webView.evaluateJavaScript("getThingy()") { r, e in
-    //
-    //                print("result: \(r)")
-    //                print("error: \(e)")
-    //            }
-    //        }
+      let configuration = WKWebViewConfiguration()
+      configuration.userContentController = contentController
 
-    
-    //        // Get the item[s] we're handling from the extension context.
-    //
-    //        // For example, look for an image and place it into an image view.
-    //        // Replace this with something appropriate for the type[s] your extension supports.
-    //        var imageFound = false
-    //        for item in self.extensionContext!.inputItems as! [NSExtensionItem] {
-    //            for provider in item.attachments! as! [NSItemProvider] {
-    //                if provider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
-    //                    // This is an image. We'll load it, then place it in our image view.
-    //                    weak var weakImageView = self.imageView
-    //                    provider.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { (imageURL, error) in
-    //                        OperationQueue.main.addOperation {
-    //                            if let strongImageView = weakImageView {
-    //                                if let imageURL = imageURL as? URL {
-    //                                    strongImageView.image = UIImage(data: try! Data(contentsOf: imageURL))
-    //                                }
-    //                            }
-    //                        }
-    //                    })
-    //
-    //                    imageFound = true
-    //                    break
-    //                }
-    //            }
-    //
-    //            if (imageFound) {
-    //                // We only handle one image, so stop looking for more.
-    //                break
-    //            }
-    //        }
+      self.webView = WKWebView(frame: .zero, configuration: configuration)
+      self.webView.navigationDelegate = self
+      self.webView.loadHTMLString(content!, baseURL: nil)
+    }
   }
 
   override func didReceiveMemoryWarning() {
@@ -202,9 +269,6 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
 
   @IBAction func done() {
     webView.navigationDelegate = nil
-    // Return any edited content to the host app.
-    // This template doesn't do anything, so we just echo the passed in items.
-    self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
+    extensionContext!.completeRequest(returningItems: [signResult.item], completionHandler: nil)
   }
-
 }

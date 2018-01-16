@@ -16,4 +16,8 @@ class User: CustomStringConvertible {
     self.id = json["user_id"] != nil ? String(describing: json["user_id"]!) : nil
     self.voteCard = json["user_voteidcard"] as? String
   }
+
+  var description: String {
+    return "<User id: \(id) voteCard: \(voteCard) />"
+  }
 }
