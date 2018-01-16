@@ -33,27 +33,31 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ResultLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6D7-SW-gGE" userLabel="ResultLabel">
                                 <rect key="frame" x="16" y="264.5" width="288" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="z4o-2g-7gA">
-                                <rect key="frame" x="150" y="264" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="z4o-2g-7gA">
+                                <rect key="frame" x="142" y="256" width="37" height="37"/>
                             </activityIndicatorView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9YG-jn-S2a">
                                 <rect key="frame" x="8" y="293" width="304" height="227"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo-alt" translatesAutoresizingMaskIntoConstraints="NO" id="fTv-Eo-4HM">
+                                <rect key="frame" x="50" y="76" width="220" height="100"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9YG-jn-S2a" firstAttribute="leading" secondItem="VVe-Uw-JpX" secondAttribute="leading" constant="8" id="8Md-QK-GUR"/>
                             <constraint firstItem="VVe-Uw-JpX" firstAttribute="trailing" secondItem="NOA-Dm-cuz" secondAttribute="trailing" id="A05-Pj-hrr"/>
                             <constraint firstItem="NOA-Dm-cuz" firstAttribute="leading" secondItem="VVe-Uw-JpX" secondAttribute="leading" id="HxO-8t-aoh"/>
                             <constraint firstItem="VVe-Uw-JpX" firstAttribute="trailing" secondItem="9YG-jn-S2a" secondAttribute="trailing" constant="8" id="Ot4-MJ-5dn"/>
+                            <constraint firstItem="fTv-Eo-4HM" firstAttribute="top" secondItem="NOA-Dm-cuz" secondAttribute="bottom" constant="12" id="P41-Vt-7FI"/>
                             <constraint firstItem="9YG-jn-S2a" firstAttribute="top" secondItem="6D7-SW-gGE" secondAttribute="bottom" constant="8" symbolic="YES" id="Ynr-1C-Rtz"/>
+                            <constraint firstItem="fTv-Eo-4HM" firstAttribute="centerX" secondItem="VVe-Uw-JpX" secondAttribute="centerX" id="Z7V-5C-Huv"/>
                             <constraint firstItem="VVe-Uw-JpX" firstAttribute="bottom" secondItem="9YG-jn-S2a" secondAttribute="bottom" constant="8" id="Ztz-rd-Um7"/>
                             <constraint firstItem="z4o-2g-7gA" firstAttribute="centerX" secondItem="VVe-Uw-JpX" secondAttribute="centerX" id="dfV-Sj-BCd"/>
                             <constraint firstItem="VVe-Uw-JpX" firstAttribute="trailing" secondItem="6D7-SW-gGE" secondAttribute="trailing" constant="16" id="eD9-jh-YT6"/>
@@ -70,6 +74,7 @@
                         <outlet property="doneButton" destination="WYi-yp-eM6" id="xLy-vP-I5j"/>
                         <outlet property="loader" destination="z4o-2g-7gA" id="EjE-lg-IVu"/>
                         <outlet property="logView" destination="9YG-jn-S2a" id="qxw-Tf-VPa"/>
+                        <outlet property="navigationBar" destination="NOA-Dm-cuz" id="J4l-wp-iER"/>
                         <outlet property="resultLabel" destination="6D7-SW-gGE" id="v8e-n7-RuW"/>
                         <outlet property="view" destination="zMn-AG-sqS" id="Qma-de-2ek"/>
                     </connections>
@@ -79,4 +84,7 @@
             <point key="canvasLocation" x="137.59999999999999" y="133.13343328335833"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Logo-alt" width="220" height="100"/>
+    </resources>
 </document>

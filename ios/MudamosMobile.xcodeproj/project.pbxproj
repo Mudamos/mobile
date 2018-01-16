@@ -31,6 +31,7 @@
 		34BC8EBCC2BA4877B640450A /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E366E4C3ED543A4B6736655 /* libRNFirebaseCrashReport.a */; };
 		400834B331534457AC160DEA /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8424FEEF17243CFB758995F /* libRNRandomBytes.a */; };
 		4601EF7D2008DEF4000AADD7 /* WalletService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4601EF7C2008DEF4000AADD7 /* WalletService.swift */; };
+		460764A0200E5685002694A8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4607649F200E5685002694A8 /* Images.xcassets */; };
 		4607F33B1E97F72A0018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
 		4607F33C1E97F7340018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
 		460C62D8200528DE00441DCD /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460C62D7200528DE00441DCD /* sign.html */; };
@@ -564,6 +565,7 @@
 		3E366E4C3ED543A4B6736655 /* libRNFirebaseCrashReport.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebaseCrashReport.a; sourceTree = "<group>"; };
 		413B12353FD34D1C9F7FE084 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		4601EF7C2008DEF4000AADD7 /* WalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletService.swift; sourceTree = "<group>"; };
+		4607649F200E5685002694A8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		460C62D7200528DE00441DCD /* sign.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = sign.html; sourceTree = "<group>"; };
 		461E718A2004EFBA00DEA617 /* MessageSignerActionBeta.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionBeta.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		461E718C2004EFBA00DEA617 /* ActionViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -945,6 +947,7 @@
 				46474E422004FE2C00A58E3C /* DummyObjc.m */,
 				46474E412004FE2B00A58E3C /* MessageSignerActionBeta-Bridging-Header.h */,
 				460C62D7200528DE00441DCD /* sign.html */,
+				4607649F200E5685002694A8 /* Images.xcassets */,
 			);
 			path = MessageSignerActionBeta;
 			sourceTree = "<group>";
@@ -1918,6 +1921,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				460764A0200E5685002694A8 /* Images.xcassets in Resources */,
 				461E71902004EFBB00DEA617 /* MainInterface.storyboard in Resources */,
 				460C62D8200528DE00441DCD /* sign.html in Resources */,
 			);
@@ -2532,6 +2536,7 @@
 			baseConfigurationReference = 78744E14ED6DC8A4E13BB63E /* Pods-MessageSignerActionBeta.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2585,6 +2590,7 @@
 			baseConfigurationReference = 4A0795748700DD2DBF73DB4F /* Pods-MessageSignerActionBeta.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

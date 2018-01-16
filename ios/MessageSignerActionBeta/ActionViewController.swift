@@ -52,6 +52,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
   @IBOutlet weak var resultLabel: UILabel!
   @IBOutlet weak var doneButton: UIBarButtonItem!
   @IBOutlet weak var logView: UITextView!
+  @IBOutlet weak var navigationBar: UINavigationBar!
 
   var webView: WKWebView!
 
@@ -60,6 +61,18 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
 
   let messageIdentifier = "com.mudamos.signmessage"
   let signResult = SignResult()
+
+  let gradientLayer: CAGradientLayer = {
+    let gradient = CAGradientLayer()
+    gradient.colors = [
+      UIColor(red:0.44, green:0.29, blue:0.87, alpha:1).cgColor,
+      UIColor(red:0.71, green:0.16, blue:0.91, alpha:1).cgColor
+    ]
+    gradient.locations = [0, 1]
+    gradient.startPoint = CGPoint(x: -0.14, y: -0.14)
+    gradient.endPoint = CGPoint(x: 1.51, y: 1.44)
+    return gradient
+  }()
 
   func delay(_ delay:Double, closure: @escaping () -> ()) {
     let when = DispatchTime.now() + delay
@@ -248,15 +261,33 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
     super.viewDidLoad()
     debugMe("viewDidLoad!")
 
-    logView.text = nil
-    resultLabel.text = nil
-    doneButton.isEnabled = false
-    loader.startAnimating()
+    prepareLayout()
 
     debugMe("begin!")
     loadWebView()
 
     debugMe("finish load!")
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    gradientLayer.frame = view.bounds
+  }
+
+  private func prepareLayout() {
+    navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationBar.shadowImage = UIImage()
+    navigationBar.isTranslucent = true
+    navigationBar.backgroundColor = UIColor.clear
+    navigationBar.tintColor = UIColor.white
+
+    gradientLayer.frame = view.bounds
+    view.layer.insertSublayer(gradientLayer, at: 0)
+
+    logView.text = nil
+    resultLabel.text = nil
+    doneButton.isEnabled = false
+    loader.startAnimating()
   }
 
   private func debugMe(_ text: String) {
