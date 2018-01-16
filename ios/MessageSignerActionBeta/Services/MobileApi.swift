@@ -18,7 +18,8 @@ class MobileApi {
   }
 
   init() {
-    host = ProcessInfo.processInfo.environment["MOBILE_API_URL"]!
+    //host = ProcessInfo.processInfo.environment["MOBILE_API_URL"]!
+    host = "https://mudamos-blockchain-api-staging.herokuapp.com"
     sessionService = SessionService()
   }
 

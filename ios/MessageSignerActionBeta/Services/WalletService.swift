@@ -14,8 +14,11 @@ class WalletService {
   private let walletKey: String
 
   init() {
-    storage = UserDefaults(suiteName: ProcessInfo.processInfo.environment["IOS_APP_GROUP"])!
-    rootPrefix = ProcessInfo.processInfo.environment["STORAGE_ROOT_PREFIX"]!
+//    storage = UserDefaults(suiteName: ProcessInfo.processInfo.environment["IOS_APP_GROUP"])!
+//    rootPrefix = ProcessInfo.processInfo.environment["STORAGE_ROOT_PREFIX"]!
+
+    storage = UserDefaults(suiteName: "group.br.com.tagview.mudamosmobile")!
+    rootPrefix = "@Mudamos"
     walletKey = "wallet"
   }
 

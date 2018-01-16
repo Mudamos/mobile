@@ -87,17 +87,17 @@
          <EnvironmentVariable
             key = "IOS_APP_GROUP"
             value = "group.br.com.tagview.mudamosmobile"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "MOBILE_API_URL"
             value = "https://mudamos-blockchain-api-staging.herokuapp.com"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "STORAGE_ROOT_PREFIX"
             value = "@Mudamos"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>

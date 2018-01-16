@@ -39,6 +39,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
   @IBOutlet weak var loader: UIActivityIndicatorView!
   @IBOutlet weak var resultLabel: UILabel!
   @IBOutlet weak var doneButton: UIBarButtonItem!
+  @IBOutlet weak var logView: UITextView!
 
   var webView: WKWebView!
 
@@ -54,7 +55,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
   }
 
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    print("Result body: \(message.body)")
+    self.debugMe("Result body: \(message.body)")
     guard let body = message.body as? [String: Any] else {
       return self.addError("Erro ao assinar mensagem")
     }
@@ -76,12 +77,13 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
 
       self.signResult.publicKey = publicKey
 
-      print("PublicKey: \(publicKey)")
-      self.addSuccess("Sucesso!")
+      self.debugMe("PublicKey: \(publicKey)")
+      self.addSuccess("Sucesso!!")
+      self.doneButton.isEnabled = true
 
-      self.delay(2) {
-        self.done()
-      }
+//      self.delay(2) {
+//        self.done()
+//      }
     }
   }
 
@@ -90,16 +92,16 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    print("will call profile!")
+    self.debugMe("will call profile!!")
 
     self.extractInputData { result in
-      print("Extract Result: \(result)")
+      self.debugMe("Extract Result: \(result)")
       guard let messageToSign = result else {
         return
       }
 
       self.api.profile() { result, error in
-        print("Profile fetched")
+        self.debugMe("Profile fetched")
         if error != nil {
           return self.addError("Erro ao buscar o perfil")
         }
@@ -113,7 +115,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
         }
 
         self.getSeed(encryptedSeed: encryptedSeed, voteCard: voteCard) { result, error in
-          print("Seed fetched")
+          self.debugMe("Seed fetched")
           if error != nil {
             return self.addError("Erro ao acessar wallet")
           }
@@ -123,7 +125,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
           }
 
           self.validateWallet(seed: seed) { result, error in
-            print("Wallet validated")
+            self.debugMe("Wallet validated")
             if error != nil {
               return self.addError("Erro ao validar wallet")
             }
@@ -133,7 +135,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
             }
 
             self.api.difficulty { result, error in
-              print("Diffculty fetched")
+              self.debugMe("Diffculty fetched")
               if error != nil {
                 return self.addError("Erro ao buscar dificuldade")
               }
@@ -147,9 +149,9 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
               self.signResult.message = message
               self.signResult.timestamp = now
 
-              print("will sign message")
+              self.debugMe("will sign message")
               self.signMessage(seed: seed, message: message, difficulty: difficulty, timestamp: now) { error in
-                print("fired sign message error: \(error)")
+                self.debugMe("fired sign message error: \(error)")
                 if error != nil {
                   return self.addError("Erro ao assinar mensagem")
                 }
@@ -162,7 +164,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
   }
 
   private func signMessage(seed: String, message: String, difficulty: Int, timestamp: String, completionHandler: @escaping (Error?) -> ()) {
-    print("signMessage(`\(seed)`, `\(message)`, \(difficulty), `\(timestamp)`)")
+    debugMe("signMessage(`\(seed)`, `\(message)`, \(difficulty), `\(timestamp)`)")
     webView.evaluateJavaScript("signMessage(`\(seed)`, `\(message)`, \(difficulty), `\(timestamp)`)") { _, e in
       completionHandler(e)
     }
@@ -214,7 +216,7 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
         return completionHandler(nil)
       }
 
-      print("item: \(item)")
+      self.debugMe("item: \(item)")
 
       guard let result = item as? [String: Any] else {
         self.addError("Could not convert message")
@@ -231,24 +233,40 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
   }
 
   override func viewDidLoad() {
+    //signal(SIGPIPE, SIG_IGN);
     super.viewDidLoad()
-    print("viewDidLoad")
+    debugMe("viewDidLoad!")
 
+    logView.text = nil
     resultLabel.text = nil
     doneButton.isEnabled = false
     loader.startAnimating()
 
-    print("begin")
+    debugMe("begin!")
     loadWebView()
+//    delay(5) {
+//      debugMe("calling done")
+//      self.done()
+//    }
 
-    print("finish load")
+    debugMe("finish load!")
+  }
+
+  private func debugMe(_ text: String) {
+//    OperationQueue.main.addOperation {
+//      self.logView.text = text + "\n" + (self.logView.text ?? "")
+//
+//      self.delay(1) {
+//        self.logView.setContentOffset(.zero, animated: false)
+//      }
+//    }
   }
 
   private func loadWebView() {
     OperationQueue.main.addOperation {
       let url = Bundle.main.path(forResource: "sign", ofType: "html")
       let content = try? String(contentsOfFile: url!, encoding: .utf8)
-      print("Has content?: \(content != nil)")
+      self.debugMe("Has content?: \(content != nil)")
 
       let contentController = WKUserContentController()
       contentController.add(self, name: "myController")
@@ -258,17 +276,24 @@ class ActionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
 
       self.webView = WKWebView(frame: .zero, configuration: configuration)
       self.webView.navigationDelegate = self
+      self.view.addSubview(self.webView)
+
+      self.debugMe("webview created")
       self.webView.loadHTMLString(content!, baseURL: nil)
+      self.debugMe("added webview content")
     }
   }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
+    debugMe("Memory waning!!!!!!!!!!!!")
     // Dispose of any resources that can be recreated.
   }
 
   @IBAction func done() {
-    webView.navigationDelegate = nil
+    debugMe("closing the extension")
+    //webView.navigationDelegate = nil
     extensionContext!.completeRequest(returningItems: [signResult.item], completionHandler: nil)
+    debugMe("done closing")
   }
 }
