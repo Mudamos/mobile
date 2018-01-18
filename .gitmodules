@@ -1,0 +1,3 @@
+[submodule "action-sign-generator/mudamos-libcrypto"]
+	path = action-sign-generator/mudamos-libcrypto
+	url = git@github.com:itsriodejaneiro/mudamos-libcrypto.git
