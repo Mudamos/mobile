@@ -1,0 +1,17 @@
+{
+  "name": "action-sign-generator",
+  "version": "1.0.0",
+  "description": "Generates the action signer html/js used on the ios action extension",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "install-mudamos-libcrypto-deps": "cd mudamos-libcrypto && yarn install --no-lockfile && cd -",
+    "generate-mudamos-lib-crypto": "browserify mudamos-libcrypto/lib/lib-crypto.js -t babelify --standalone LibCrypto > output/mudamos-lib-crypto.js",
+    "generate-crypto": "browserify src/index.js -t babelify --standalone Crypto > output/crypto.js"
+  },
+  "dependencies": {
+    "babelify": "^8.0.0",
+    "browserify": "^15.2.0",
+    "crypto-browserify": "^3.12.0"
+  }
+}

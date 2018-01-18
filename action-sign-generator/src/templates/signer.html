@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <script type="text/javascript">#MUDLIBCRYPTO</script>
+    <script type="text/javascript">#CRYPTO</script>
+
+    <script type="text/javascript">
+      function testWalletCreation(thing) {
+        setTimeout(function() {
+          var seed = LibCrypto.createSeedAndWallet("BRAZILIAN-PORTUGUESE", "some-random-entropy");
+          var original = thing;
+          var message = LibCrypto.signMessage(seed.seed, original, 2);
+          window.result = LibCrypto.verifyMessage(seed.publicKey, original, message.split(";")[2]);
+          window.webkit.messageHandlers.myController.postMessage({
+            success: window.result,
+            seed: seed,
+          });
+        }, 1);
+      }
+
+      function getSeed(text, password) {
+        try {
+          var ALGORITHM = "aes-256-ctr";
+          var crypto = Crypto;
+
+          var decipher = crypto.createDecipher(ALGORITHM, password);
+
+          var decryption = decipher.update(text, "hex", "utf8");
+          decryption += decipher.final("utf8");
+
+          return decryption;
+        } catch (e) {
+          return;
+        }
+      }
+
+      function validateWallet(seed) {
+        return LibCrypto.validateSeed(seed);
+      }
+
+      function signMessage(seed, message, difficulty, timestamp) {
+        setTimeout(function() {
+          var signedMessage = LibCrypto.signMessage(seed, message, difficulty);
+          window.webkit.messageHandlers.myController.postMessage({
+            signedMessage: signedMessage,
+            timestamp: timestamp,
+          });
+        }, 1);
+      }
+    </script>
+  </body>
+</html>
