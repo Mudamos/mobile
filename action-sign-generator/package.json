@@ -7,7 +7,9 @@
   "scripts": {
     "install-mudamos-libcrypto-deps": "cd mudamos-libcrypto && yarn install --no-lockfile && cd -",
     "generate-mudamos-lib-crypto": "browserify mudamos-libcrypto/lib/lib-crypto.js -t babelify --standalone LibCrypto > output/mudamos-lib-crypto.js",
-    "generate-crypto": "browserify src/index.js -t babelify --standalone Crypto > output/crypto.js"
+    "generate-crypto": "browserify src/index.js -t babelify --standalone Crypto > output/crypto.js",
+    "generate-template": "./bin/generator",
+    "build": "yarn run generate-mudamos-lib-crypto && yarn run generate-crypto && yarn run generate-template"
   },
   "dependencies": {
     "babelify": "^8.0.0",

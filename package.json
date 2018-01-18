@@ -14,7 +14,8 @@
     "build-android-beta": "ENVFILE=.env.beta android/gradlew -p android assembleMudamosBetaRelease",
     "build-android-production": "ENVFILE=.env.production android/gradlew -p android assembleProductionRelease",
     "distribute-ios-beta": "ipa distribute:s3 -b mudamos-mobile-beta -f ios/ipa/MudamosTagviewBeta.ipa",
-    "postinstall": "./node_modules/.bin/rn-nodeify --install vm,buffer,stream,events,crypto,assert,process,react-native-randombytes,react-native-crypto --hack"
+    "postinstall": "./node_modules/.bin/rn-nodeify --install vm,buffer,stream,events,crypto,assert,process,react-native-randombytes,react-native-crypto --hack",
+    "generate-ios-action-sign-html": "cd action-sign-generator && yarn run build && cd -"
   },
   "dependencies": {
     "@shoutem/animation": "^0.9.0",
