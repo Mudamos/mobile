@@ -15,6 +15,7 @@
     "build-android-production": "ENVFILE=.env.production android/gradlew -p android assembleProductionRelease",
     "distribute-ios-beta": "ipa distribute:s3 -b mudamos-mobile-beta -f ios/ipa/MudamosTagviewBeta.ipa",
     "postinstall": "./node_modules/.bin/rn-nodeify --install vm,buffer,stream,events,crypto,assert,process,react-native-randombytes,react-native-crypto --hack",
+    "install-action-sign-deps": "cd action-sign-generator && yarn install && yarn install-mudamos-libcrypto-deps && cd -",
     "generate-ios-action-sign-html": "cd action-sign-generator && yarn run build && cd -"
   },
   "dependencies": {

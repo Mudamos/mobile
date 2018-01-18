@@ -2,6 +2,11 @@
 
 ## Instalação
 
+
+```
+$ git submodule update --init
+```
+
 Instale o [node](https://nodejs.org) v6.9.1 usando o método de sua preferência.
 
 Instale o package manager [yarn](https://yarnpkg.com/en/docs/install).
@@ -9,7 +14,7 @@ Instale o package manager [yarn](https://yarnpkg.com/en/docs/install).
 Agora instale as dependências do projeto.
 
 ```
-yarn install
+$ yarn install
 ```
 
 ### Android
@@ -20,8 +25,8 @@ Primeiro, certifique-se que a SDK do Android está instalada, e que a env var `A
 
 Exemplo no OSX com Homebrew:
 ```
-brew install android-sdk
-export ANDROID_HOME=/usr/local/opt/android-sdk
+$ brew install android-sdk
+$ export ANDROID_HOME=/usr/local/opt/android-sdk
 ```
 
 Agora instale os seguintes pacotes da SDK:
@@ -47,26 +52,26 @@ Para o desenvolvimento e build das aplicações no iOS, é necessário instalar 
 Caso não tenha o [bundler](http://bundler.io/) instalado, instale-o:
 
 ```
-gem install bundler
+$ gem install bundler
 ```
 
 Agora instale as dependências Ruby:
 
 ```
-bundle install
+$ bundle install
 ```
 
 Vamos instalar agora as dependências de build:
 
 ```
-pod install --project-directory=./ios
+$ pod install --project-directory=./ios
 ```
 
 ## Desenvolvimento
 
 Primeiramente, crie um arquivo de configuração a partir do sample
 ```
-cp .env.sample .env
+$ cp .env.sample .env
 ```
 
 Algumas variáveis de ambiente não estão no projeto *by design*.
@@ -76,26 +81,26 @@ Algumas variáveis de ambiente não estão no projeto *by design*.
 Rode o servidor de desenvolvimento:
 
 ```
-npm start
+$ yarn start
 ```
 
 ### Android
 
 Com algum device ou emulador conectado:
 ```
-npm run android
+$ yarn run android
 ```
 
 ### iOS
 
 ```
-npm run ios
+$ yarn run ios
 ```
 
 ## Testes
 
 ```
-npm test
+$ yarn test
 ```
 
 ## Building
@@ -145,7 +150,7 @@ $ ENVFILE=.env.somenv android/gradlew -p android assembleMudamosBetaRelease
 ou simplesmente,
 
 ```
-$ npm run --silent build-android-beta
+$ yarn run --silent build-android-beta
 ```
 
 Para gerar a versão de produção:
@@ -163,7 +168,7 @@ e então:
 
 
 ```
-$ npm run --silent build-android-production
+$ yarn run --silent build-android-production
 ```
 
 
@@ -198,15 +203,30 @@ Obtenha com um responsável o arquivo `GoogleService-Info.plist` e adicione na p
 Versão beta:
 
 ```
-$ npm run build-ios-beta -- -m <PATH_TO_THE_PROVISION_PROFILE>
+$ yarn run build-ios-beta -- -m <PATH_TO_THE_PROVISION_PROFILE>
 ```
 
 Para distruibuir, envie o `.ipa` gerado para o storage S3:
 
 ```
-$ npm run distribute-ios-beta -- -a <AWS_ACCESS_KEY> -s <AWS_SECRET_ACCESS_KEY>
+$ yarn run distribute-ios-beta -- -a <AWS_ACCESS_KEY> -s <AWS_SECRET_ACCESS_KEY>
 ```
 
 Essas chaves podem ser obtidas com um responsável.
 
 Para a versão de produção use o xcode.
+
+### Gerando o html/js para o ios action extension
+
+Para gerar o html, instale as dependências do mudamos-libcrypto e do sub projeto `./action-sign-generator`.
+
+
+```
+$ yarn run install-action-sign-deps
+```
+
+Agora gere o html,
+
+```
+$ yarn run generate-ios-action-sign-html
+```
