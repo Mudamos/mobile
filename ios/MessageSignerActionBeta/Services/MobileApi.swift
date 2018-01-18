@@ -10,8 +10,9 @@ import Foundation
 import Alamofire
 
 class MobileApi {
-  let host: String
-  let sessionService: SessionService
+  private let host: String
+  private let sessionService: SessionService
+  private let env = DotEnv()
 
   var sessionToken: String? {
     return sessionService.retrieve()
@@ -19,7 +20,7 @@ class MobileApi {
 
   init() {
     //host = ProcessInfo.processInfo.environment["MOBILE_API_URL"]!
-    host = "https://mudamos-blockchain-api-staging.herokuapp.com"
+    host = env["MOBILE_API_URL"]!
     sessionService = SessionService()
   }
 

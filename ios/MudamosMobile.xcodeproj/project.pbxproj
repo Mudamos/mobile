@@ -43,6 +43,8 @@
 		4632073A1EBA7D0800778DCC /* google in Resources */ = {isa = PBXBuildFile; fileRef = 463207391EBA7D0800778DCC /* google */; };
 		4632073B1EBA7D0800778DCC /* google in Resources */ = {isa = PBXBuildFile; fileRef = 463207391EBA7D0800778DCC /* google */; };
 		4632073C1EBA7D0800778DCC /* google in Resources */ = {isa = PBXBuildFile; fileRef = 463207391EBA7D0800778DCC /* google */; };
+		463A7C72200FCE6D000A52AD /* generate-env.rb in Resources */ = {isa = PBXBuildFile; fileRef = 463A7C71200FCE6D000A52AD /* generate-env.rb */; };
+		463A7C98200FD959000A52AD /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463A7C97200FD959000A52AD /* DotEnv.swift */; };
 		463C8ED11E0841D500E79749 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463C8EB71E08419900E79749 /* libBVLinearGradient.a */; };
 		463D557B1EBB9E1700D1D8C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */; };
 		463FA2B21E30E7830035B49D /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463FA2AF1E30E7310035B49D /* libRNShare.a */; };
@@ -573,6 +575,8 @@
 		461E71912004EFBB00DEA617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		462DE3E01E9C0D630075CAFC /* MudamosProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosProduction.entitlements; sourceTree = "<group>"; };
 		463207391EBA7D0800778DCC /* google */ = {isa = PBXFileReference; lastKnownFileType = folder; path = google; sourceTree = "<group>"; };
+		463A7C71200FCE6D000A52AD /* generate-env.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "generate-env.rb"; sourceTree = "<group>"; };
+		463A7C97200FD959000A52AD /* DotEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotEnv.swift; sourceTree = "<group>"; };
 		463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46439D881E709B03008577C0 /* MudamosProduction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosProduction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46439D891E709B03008577C0 /* InfoMudamosProduction.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = InfoMudamosProduction.plist; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/InfoMudamosProduction.plist"; sourceTree = "<absolute>"; };
@@ -949,6 +953,7 @@
 				46474E412004FE2B00A58E3C /* MessageSignerActionBeta-Bridging-Header.h */,
 				460C62D7200528DE00441DCD /* sign.html */,
 				4607649F200E5685002694A8 /* Images.xcassets */,
+				463A7C71200FCE6D000A52AD /* generate-env.rb */,
 			);
 			path = MessageSignerActionBeta;
 			sourceTree = "<group>";
@@ -1108,6 +1113,7 @@
 			children = (
 				46D909B52006925C004D9957 /* MUDError.swift */,
 				46D909B72006A0EF004D9957 /* User.swift */,
+				463A7C97200FD959000A52AD /* DotEnv.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1360,6 +1366,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 461E71BA2004EFBB00DEA617 /* Build configuration list for PBXNativeTarget "MessageSignerActionBeta" */;
 			buildPhases = (
+				464D7CD0200FC64500230041 /* ShellScript */,
+				463A7C96200FCFB7000A52AD /* ShellScript */,
 				8A65E59D7FF76642067F0E92 /* [CP] Check Pods Manifest.lock */,
 				461E71862004EFBA00DEA617 /* Sources */,
 				461E71872004EFBA00DEA617 /* Frameworks */,
@@ -1924,6 +1932,7 @@
 			files = (
 				460764A0200E5685002694A8 /* Images.xcassets in Resources */,
 				461E71902004EFBB00DEA617 /* MainInterface.storyboard in Resources */,
+				463A7C72200FCE6D000A52AD /* generate-env.rb in Resources */,
 				460C62D8200528DE00441DCD /* sign.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2085,6 +2094,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MudamosMobileTests/Pods-MudamosMobileTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		463A7C96200FCFB7000A52AD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby MessageSignerActionBeta/generate-env.rb";
+		};
 		46439D3D1E709B03008577C0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2143,6 +2165,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MudamosProduction/Pods-MudamosProduction-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		464D7CD0200FC64500230041 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \".env.beta\" > /tmp/envfile";
 		};
 		46ED2A6C1DF194E400B36CD0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2316,6 +2351,7 @@
 				46474E432004FE2C00A58E3C /* DummyObjc.m in Sources */,
 				46D909BB2006A607004D9957 /* CustomStringConvertible.swift in Sources */,
 				461E718D2004EFBA00DEA617 /* ActionViewController.swift in Sources */,
+				463A7C98200FD959000A52AD /* DotEnv.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

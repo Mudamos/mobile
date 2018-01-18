@@ -13,11 +13,13 @@ class SessionService {
   private let rootPrefix: String
   private let sessionKey: String
 
+  private let env = DotEnv()
+
   init() {
 //    storage = UserDefaults(suiteName: ProcessInfo.processInfo.environment["IOS_APP_GROUP"])!
 //    rootPrefix = ProcessInfo.processInfo.environment["STORAGE_ROOT_PREFIX"]!
-    storage = UserDefaults(suiteName: "group.br.com.tagview.mudamosmobile")!
-    rootPrefix = "@Mudamos"
+    storage = UserDefaults(suiteName: env["IOS_APP_GROUP"]!)!
+    rootPrefix = env["STORAGE_ROOT_PREFIX"]!
     sessionKey = "session"
   }
 
