@@ -1,5 +1,7 @@
 # Next
 
+* Add new iOS app icon size requirement
+
 ## [1.7.0] 12/01/2018
 
 * [PR #371] Change signature count message
