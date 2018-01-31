@@ -23,6 +23,10 @@ export const appSetup = () => ({
   type: "SETUP",
 });
 
+export const actionSignAppSetup = () => ({
+  type: "ACTION_SIGN_APP_SETUP",
+});
+
 export const mainAppInitiated = () => ({
   type: "APP_MAIN_INITIATED",
 });

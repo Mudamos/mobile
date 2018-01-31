@@ -1,5 +1,6 @@
 import { takeLatest } from "redux-saga";
-import { call, put, spawn, select } from "redux-saga/effects";
+import { call, fork, put, spawn, select } from "redux-saga/effects";
+import { Alert } from "react-native";
 
 import { monitorUpload } from "./upload";
 
@@ -20,12 +21,15 @@ import {
   unauthorized,
   voteCardIdAcquired,
   logEvent,
+  invalidatePhone,
+  profileValidationCompleted,
 } from "../actions";
 
 import {
   currentAuthToken,
   currentUser,
   getCurrentSigningPlip,
+  isProfileComplete,
 } from "../selectors";
 
 import {
@@ -38,7 +42,7 @@ import Toast from "react-native-simple-toast";
 
 import locale from "../locales/pt-BR";
 import { blockBuilder } from "./crypto";
-
+import { validateLocalWallet } from "./wallet";
 
 function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
   yield takeLatest("PROFILE_SAVE_MAIN", function* ({ payload }) {
@@ -328,11 +332,11 @@ function* updateProfile({ mobileApi }) {
 }
 
 
-export function* fetchProfile({ mobileApi }) {
+export function* fetchProfile({ mobileApi, force = false }) {
   try {
     let user = yield select(currentUser);
 
-    if (user) return user;
+    if (!force && user) return user;
 
     yield put(isFetchingProfile(true));
 
@@ -363,7 +367,59 @@ export function* fetchProfileSaga({ mobileApi }) {
   });
 }
 
-export default function* profileSaga({ mobileApi, DeviceInfo, sessionStore, Crypto }) {
+function* validateProfile({ dispatch, mobileApi, walletStore }) {
+  function* navigateToMissingScreen() {
+    return yield put(profileStateMachine({ type: "reset" }));
+  }
+
+  yield takeLatest("PROFILE_VALIDATE_PROFILE", function* () {
+    try {
+      const user = yield call(fetchProfile, { mobileApi, force: true });
+
+      if (!user.voteCard) {
+        log("User does not have a vote card");
+        yield put(profileValidationCompleted({ error: false }));
+        return yield call(navigateToMissingScreen);
+      }
+
+      const publicKey = yield call(walletStore.publicKey, user.voteCard);
+      log(`User public key: ${publicKey}`);
+
+      if (!publicKey || (publicKey !== user.wallet.key || !user.wallet.status)) {
+        log("Public key does not match");
+        Alert.alert(
+          locale.invalidSignature,
+          locale.willCreateNewWallet,
+          [{text: locale.ok, onPress: () => dispatch(profileStateMachine())}]
+        );
+
+        yield put(invalidatePhone());
+        return yield put(profileValidationCompleted({ error: false }));
+      }
+
+      if (!(yield call(validateLocalWallet, { walletStore }))) {
+        log("Wallet is invalid");
+        yield put(profileValidationCompleted({ error: false }));
+        return yield call(navigateToMissingScreen);
+      }
+
+      if (!(yield select(isProfileComplete))) {
+        log("Profile is not complete");
+        yield put(profileValidationCompleted({ error: false }));
+        return yield call(navigateToMissingScreen);
+      }
+
+      yield call([Toast, Toast.show], locale.validProfile);
+      yield put(profileValidationCompleted({ error: false }));
+    } catch(e) {
+      if (isUnauthorized(e)) return yield put(unauthorized());
+
+      yield put(profileValidationCompleted({ error: true }));
+    }
+  });
+}
+
+export default function* profileSaga({ dispatch, mobileApi, DeviceInfo, sessionStore, Crypto, walletStore }) {
   yield spawn(saveMainProfile, { mobileApi, sessionStore, Crypto });
   yield spawn(updateProfile, { mobileApi });
   yield spawn(saveAvatarProfile, { mobileApi });
@@ -373,4 +429,5 @@ export default function* profileSaga({ mobileApi, DeviceInfo, sessionStore, Cryp
   yield spawn(sendPhoneValidation, { mobileApi });
   yield spawn(savePhoneProfile, { mobileApi, DeviceInfo });
   yield spawn(fetchProfileSaga, { mobileApi });
+  yield fork(validateProfile, { dispatch, mobileApi, walletStore });
 }

@@ -2,6 +2,9 @@
   "name": "MudamosMobile",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": "6.9.x"
+  },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "android/gradlew -p android installDevelopmentDebug && adb reverse tcp:8081 tcp:8081 && adb shell am start -n br.com.tagview.petition.development/org.mudamos.petition.MainActivity",

@@ -60,6 +60,7 @@ export const storeBuilder = () => {
         analytics: Analytics(),
         apiError: ApiError(),
         Crypto,
+        dispatch: store.dispatch,
         DeviceInfo,
         localStorage,
         locationService: LocationService,

@@ -6,13 +6,13 @@ import {
 } from "./containers/action-signer";
 
 import {
-  appSetup,
+  actionSignAppSetup,
 } from "./actions";
 
 const AppBuilder = store =>
   class App extends Component {
     componentDidMount() {
-      store.dispatch(appSetup());
+      store.dispatch(actionSignAppSetup());
     }
 
     render() {

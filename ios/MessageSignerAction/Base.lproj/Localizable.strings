@@ -8,10 +8,10 @@
 
 "could-not-convert-message" = "Não foi possível converter a mensagem.";
 "error-title" = "Ocorreu um erro.";
-"incomplete-profile" = "Perfil incompleto. Use a app da Mudamos+ para completar seu perfil.";
+"incomplete-profile" = "Perfil incompleto. Use a app da Mudamos+ para completar seu perfil. Acesse no menu a opção 'Validar perfil'.";
 "identifier-not-found" = "Identificador da mensagem não encontrado.";
 "invalid-payload" = "Mensagem inválida.";
-"invalid-wallet" = "Sua assinatura é inválida. Use a app da Mudamos+ para atualizá-la.";
+"invalid-wallet" = "Sua assinatura é inválida. Use a app da Mudamos+ para atualizá-la. Acesse no menu a opção 'Validar perfil'.";
 "sign-error" = "Erro ao efetuar a assinatura.";
 "success!" = "Sucesso!";
 "unknown-error" = "Erro ao efetuar ação.";

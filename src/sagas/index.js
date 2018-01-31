@@ -30,6 +30,7 @@ export default function* rootSaga({
   analytics,
   apiError,
   Crypto,
+  dispatch,
   DeviceInfo,
   localStorage,
   locationService,
@@ -45,7 +46,6 @@ export default function* rootSaga({
   yield fork(actionSignerSaga, { mobileApi, mudamosSigner, walletStore });
 
   yield spawn(analyticsSaga, { analytics });
-  yield spawn(appStateSaga);
   yield spawn(citySaga, { repositories });
   yield spawn(navigationSaga, { mobileApi, sessionStore });
   yield spawn(facebookSaga, { sessionStore, mobileApi, Crypto });
@@ -55,7 +55,7 @@ export default function* rootSaga({
   yield spawn(passwordSaga, { mobileApi, sessionStore, Crypto });
   yield spawn(permissionSaga, { permissionService });
   yield spawn(plipSaga, { apiError, localStorage, mobileApi, mudamosWebApi, walletStore });
-  yield spawn(profileSaga, { mobileApi, DeviceInfo, sessionStore, Crypto });
+  yield spawn(profileSaga, { dispatch, mobileApi, DeviceInfo, sessionStore, Crypto, walletStore });
   yield spawn(stateSaga, { repositories });
   yield spawn(errorSaga);
   yield spawn(remoteConfigSaga, { RemoteConfigService });
@@ -67,4 +67,5 @@ export default function* rootSaga({
   yield spawn(locationSaga, { locationService, permissionService });
   yield spawn(walletSaga, { mobileApi, walletStore });
   yield fork(setupSaga, { mudamosSigner, sessionStore });
+  yield spawn(appStateSaga);
 }

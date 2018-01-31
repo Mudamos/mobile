@@ -68,3 +68,5 @@ export const isProfileComplete =
     isWalletProfileComplete,
     isPhoneProfileComplete,
   ]);
+
+export const isValidatingProfile = state => state.profile.validatingProfile;

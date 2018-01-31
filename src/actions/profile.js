@@ -104,3 +104,12 @@ export const saveAvatarError = error => ({
   type: "PROFILE_SAVE_AVATAR_ERROR",
   payload: { error },
 });
+
+export const validateProfile = () => ({
+  type: "PROFILE_VALIDATE_PROFILE",
+});
+
+export const profileValidationCompleted = ({ error }) => ({
+  type: "PROFILE_VALIDATE_COMPLETED",
+  payload: { error },
+});

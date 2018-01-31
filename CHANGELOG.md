@@ -1,5 +1,6 @@
 # Next
 
+* [PR #376] Validate profile
 * [PR #374] Add Action sign feature
 * Add new iOS app icon size requirement
 

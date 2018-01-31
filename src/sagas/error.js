@@ -48,6 +48,9 @@ function appError({ type, payload }) {
       return showToast(locale.errors.passwordRetrieveError);
     case "PLIP_SIGN_ERROR":
       return showToast(locale.errors.signPlipError);
+    case "PROFILE_VALIDATE_COMPLETED": {
+      return payload.error ? showToast(locale.errors.genericError) : null;
+    }
     case "PLIP_FETCH_SIGNERS_ERROR":
       return showToast(locale.errors.genericError);
     case "PLIPS_REFRESH_ERROR":

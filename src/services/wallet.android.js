@@ -6,6 +6,13 @@ import crypto from "./crypto";
 import LibCrypto from "mudamos-libcrypto";
 
 import {
+  always,
+  nth,
+  pipe,
+  split,
+} from "ramda";
+
+import {
   isDev,
   moment,
 } from "../utils";
@@ -57,6 +64,19 @@ export default root => {
       });
   };
 
+  const publicKey = password => retrieve(password)
+    .then(seed => {
+      if (!seed) return;
+      const message = "publicKey";
+      const difficulty = 1;
+
+      const block = LibCrypto.signMessage(seed, message, difficulty);
+      const publicKey = pipe(split(";"), nth(1));
+
+      return publicKey(block);
+    })
+    .catch(always(null));
+
   const destroy = () => storage.destroy(key);
 
   const exists = () => storage.fetch(key).then(seed => !!seed);
@@ -66,6 +86,7 @@ export default root => {
     valid: valid,
     exists: exists,
     persist: persist,
+    publicKey: publicKey,
     retrieve: retrieve,
     destroy: destroy,
   };

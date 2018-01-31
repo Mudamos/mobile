@@ -8,6 +8,9 @@ import LibCrypto from "mudamos-libcrypto";
 
 import {
   always,
+  nth,
+  pipe,
+  split,
 } from "ramda";
 
 import {
@@ -77,6 +80,19 @@ export default (root, { suite }) => {
       });
   };
 
+  const publicKey = password => retrieve(password)
+    .then(seed => {
+      if (!seed) return;
+      const message = "publicKey";
+      const difficulty = 1;
+
+      const block = LibCrypto.signMessage(seed, message, difficulty);
+      const publicKey = pipe(split(";"), nth(1));
+
+      return publicKey(block);
+    })
+    .catch(always(null));
+
   const destroy = () => storage.remove(key, suite);
 
   const exists = () => storage.get(key, suite)
@@ -88,6 +104,7 @@ export default (root, { suite }) => {
     valid: valid,
     exists: exists,
     persist: persist,
+    publicKey: publicKey,
     retrieve: retrieve,
     destroy: destroy,
   };

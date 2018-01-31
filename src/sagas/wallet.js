@@ -18,6 +18,7 @@ import {
 import {
   isDev,
   isUnauthorized,
+  log,
   logError,
 } from "../utils";
 
@@ -84,7 +85,9 @@ function* hasLocalWallet({ walletStore }) {
 function* invalidateWallet({ walletStore }) {
   yield takeEvery("PROFILE_INVALIDATE_PHONE", function* () {
     try {
+      log("Will invalidate wallet");
       yield call(walletStore.destroy);
+      log("Wallet invalidated");
     } catch (e) {
       logError(e, { tag: "invalidateWallet" });
     }

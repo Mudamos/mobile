@@ -73,6 +73,7 @@ class SignInLayout extends Component {
                 value={this.state.email}
                 onChangeText={email => this.setState({ email })}
                 keyboardType="email-address"
+                autoCapitalize="none"
                 onSubmitEditing={() => this.emailInput.blur()}
                 ref={ref => this.emailInput = ref}
               />

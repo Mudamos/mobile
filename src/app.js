@@ -31,7 +31,6 @@ import {
 
 import {
   appDidMount,
-  appSetup,
   appWillUnmount,
   navigate,
   navigateBack,
@@ -96,7 +95,6 @@ const AppBuilder = store =>
 
     componentDidMount() {
       store.dispatch(appDidMount());
-      store.dispatch(appSetup());
     }
 
     componentWillUnmount() {

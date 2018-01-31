@@ -37,7 +37,7 @@ export default (state = initialState, action) => {
       };
     }
     case "ACTION_SIGNER_RESET":
-    case "SETUP": {
+    case "ACTION_SIGN_APP_SETUP": {
       return {
         ...state,
         ...initialState,

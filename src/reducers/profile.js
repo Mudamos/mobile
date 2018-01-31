@@ -42,6 +42,12 @@ export default (state = initialState, action) => {
       return { ...state, voteCardId: payload.voteCardId };
     case "PROFILE_SAVING_AVATAR":
       return { ...state, isSavingAvatar: payload.isSaving };
+    case "PROFILE_VALIDATE_PROFILE": {
+      return { ...state, validatingProfile: true };
+    }
+    case "PROFILE_VALIDATE_COMPLETED": {
+      return { ...state, validatingProfile: false };
+    }
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,
@@ -54,6 +60,7 @@ export default (state = initialState, action) => {
         phoneJustValidated: false,
         profileFetchError: false,
         sendValidationErrors: null,
+        validatingProfile: false,
         voteCardId: null,
       };
     default:

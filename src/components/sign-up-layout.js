@@ -93,6 +93,7 @@ export default class SignUpLayout extends Component {
                 keyboardType="email-address"
                 onSubmitEditing={() => this.emailInput.blur()}
                 ref={ref => this.emailInput = ref}
+                autoCapitalize="none"
               />
 
               <MDTextInput

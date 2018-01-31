@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import {
   ListView,
+  StyleSheet,
   View,
 } from "react-native";
 
@@ -25,6 +26,7 @@ import {
   refreshPlips,
   tellAFriend,
   userFirstTimeDone,
+  validateProfile,
 } from "../actions";
 
 import {
@@ -42,8 +44,10 @@ import {
   findPlipsSignInfo,
   getCurrentSigningPlip,
   getPlipsSignatureGoals,
+  isValidatingProfile,
 } from "../selectors";
 
+import PageLoader from "../components/page-loader";
 import PlipsLayout from "../components/plips-layout";
 import SplashLoader from "../components/splash-loader";
 import Menu from "../components/side-menu";
@@ -59,6 +63,11 @@ import { RemoteLinksType } from "../prop-types/remote-config";
 
 const sortMenuEntries = entries => sortBy(prop("position"), entries);
 
+const styles = StyleSheet.create({
+  full: {
+    flex: 1,
+  },
+});
 
 class Container extends Component {
   state = {
@@ -78,6 +87,7 @@ class Container extends Component {
     isRefreshing: PropTypes.bool,
     isUserFirstTime: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
+    isValidatingProfile: PropTypes.bool,
     plips: PropTypes.array,
     remoteLinks: RemoteLinksType,
     onAvatarChanged: PropTypes.func.isRequired,
@@ -93,6 +103,7 @@ class Container extends Component {
     onRetryPlips: PropTypes.func.isRequired,
     onSignUp: PropTypes.func.isRequired,
     onTellAFriend: PropTypes.func.isRequired,
+    onValidateProfile: PropTypes.func.isRequired,
   };
 
   get menuEntries() {
@@ -103,6 +114,7 @@ class Container extends Component {
       remoteLinks,
       onChangePassword,
       onProfileEdit,
+      onValidateProfile,
     } = this.props;
 
     const entries = [
@@ -114,6 +126,7 @@ class Container extends Component {
     ];
 
     if (!isFetchingProfile && currentUser) {
+      entries.push({ icon: "verified-user", title: locale.menu.validateProfile, action: onValidateProfile, position: -1 });
       entries.push({ icon: "account-circle", title: locale.menu.editProfile, action: onProfileEdit, position: 0 });
 
       if (currentUser.isAppUser) {
@@ -164,20 +177,25 @@ class Container extends Component {
   }
 
   render() {
-    const { onFetchProfile } = this.props;
+    const { isValidatingProfile, onFetchProfile } = this.props;
     const { menuOpen: open } = this.state;
 
     return (
-      <Menu
-        open={open}
-        content={this.renderMenuContent()}
-        onOpenStart={onFetchProfile}
-        onOpen={() => this.setState({ menuOpen: true })}
-        onClose={() => this.setState({ menuOpen: false })}
-      >
-        {this.renderPage()}
-        {this.renderFirstTimeLoader()}
-      </Menu>
+      <View style={styles.full}>
+        <Menu
+          open={open}
+          content={this.renderMenuContent()}
+          onOpenStart={onFetchProfile}
+          onOpen={() => this.setState({ menuOpen: true })}
+          onClose={() => this.setState({ menuOpen: false })}
+        >
+          {this.renderPage()}
+          {this.renderFirstTimeLoader()}
+
+        </Menu>
+
+        <PageLoader isVisible={isValidatingProfile} />
+      </View>
     );
   }
 
@@ -304,6 +322,7 @@ const mapStateToProps = state => ({
   isRefreshingPlips: isRefreshingPlips(state),
   isUserFirstTime: isUserFirstTime(state),
   isUserLoggedIn: isUserLoggedIn(state),
+  isValidatingProfile: isValidatingProfile(state),
   plips: findPlips(state),
   remoteLinks: findRemoteLinks(state),
   plipsSignInfo: findPlipsSignInfo(state),
@@ -325,6 +344,7 @@ const mapDispatchToProps = dispatch => ({
   onRefresh: () => dispatch(refreshPlips()),
   onSignUp: () => dispatch(navigate("signUp")),
   onTellAFriend: () => dispatch(tellAFriend()),
+  onValidateProfile: () => dispatch(validateProfile()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

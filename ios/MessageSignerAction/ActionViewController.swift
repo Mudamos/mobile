@@ -129,7 +129,7 @@ extension ActionViewController: SignerDelegate {
     }
 
     let result = mudamosPayload.buildResponseResult(withError: error)
-    close(withResult: result, delay: 2)
+    close(withResult: result, delay: 4)
   }
 
   func didFinishSign(result: SignerResult) {

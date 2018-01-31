@@ -34,7 +34,7 @@ function* setup({ mudamosSigner, sessionStore }) {
     ];
   });
 
-  yield takeLatest("SETUP", function* () {
+  yield takeLatest("ACTION_SIGN_APP_SETUP", function* () {
     const isSignerApp = yield call(mudamosSigner.isSignerApp);
     if (!isSignerApp) return;
 

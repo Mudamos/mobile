@@ -100,19 +100,21 @@ function* signMessage({ mobileApi, mudamosSigner, walletStore }) {
 }
 
 function* closeActionSigner({ mudamosSigner }) {
-  const actions = [
-    "ACTION_SIGNER_SIGN_ERROR",
-    "ACTION_SIGNER_SIGN_SUCCESS",
-  ];
-
-  yield takeLatest(actions, function* () {
-    yield call(delay, 2000);
-
+  function* exit() {
     const result = yield select(actionSignerResult);
     yield call(mudamosSigner.done, result);
 
-    yield call(delay, 500);
     yield put(ationSignerReset());
+  }
+
+  yield takeLatest("ACTION_SIGNER_SIGN_SUCCESS", function* () {
+    yield call(delay, 1500);
+    yield call(exit);
+  });
+
+  yield takeLatest("ACTION_SIGNER_SIGN_ERROR", function* () {
+    yield call(delay, 4000);
+    yield call(exit);
   });
 }
 
