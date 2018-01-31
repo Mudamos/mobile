@@ -1,5 +1,5 @@
+import { allPass } from "ramda";
 import { User } from "../models";
-
 
 export const isFetchingProfile = state => state.profile.isFetching;
 
@@ -57,3 +57,14 @@ export const getCurrentUserAvatar = state => {
   const user = currentUser(state) || new User();
   return user.avatar;
 }
+
+export const isProfileComplete =
+  allPass([
+    isMainProfileComplete,
+    isAvatarProfileComplete,
+    isBirthProfileComplete,
+    isAddressProfileComplete,
+    isDocumentsProfileComplete,
+    isWalletProfileComplete,
+    isPhoneProfileComplete,
+  ]);

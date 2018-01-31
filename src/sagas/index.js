@@ -24,6 +24,8 @@ import locationSaga from "./location";
 import walletSaga from "./wallet";
 import setupSaga from "./setup";
 
+import actionSignerSaga from "./action-signer";
+
 export default function* rootSaga({
   analytics,
   apiError,
@@ -31,6 +33,7 @@ export default function* rootSaga({
   DeviceInfo,
   localStorage,
   locationService,
+  mudamosSigner,
   mudamosWebApi,
   mobileApi,
   permissionService,
@@ -39,6 +42,8 @@ export default function* rootSaga({
   sessionStore,
   walletStore,
 }) {
+  yield fork(actionSignerSaga, { mobileApi, mudamosSigner, walletStore });
+
   yield spawn(analyticsSaga, { analytics });
   yield spawn(appStateSaga);
   yield spawn(citySaga, { repositories });
@@ -61,5 +66,5 @@ export default function* rootSaga({
   yield spawn(localStorageSaga, { localStorage });
   yield spawn(locationSaga, { locationService, permissionService });
   yield spawn(walletSaga, { mobileApi, walletStore });
-  yield fork(setupSaga, { sessionStore });
+  yield fork(setupSaga, { mudamosSigner, sessionStore });
 }

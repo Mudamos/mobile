@@ -1,13 +1,9 @@
-import Config from "react-native-config";
-
 import React, { Component, PropTypes } from "react";
 
 import { Actions, Router, Scene } from "react-native-router-flux";
 import sceneStyle from "./styles/scene-default";
 
 import OneSignal from "react-native-onesignal";
-
-import { isDev } from "./utils";
 
 import {
   ChangeForgotPasswordContainer,
@@ -35,6 +31,7 @@ import {
 
 import {
   appDidMount,
+  appSetup,
   appWillUnmount,
   navigate,
   navigateBack,
@@ -44,58 +41,9 @@ import {
 import routeReducer from "./services/route-reducer";
 import backAndroidHandler from "./back-android-handler";
 
-import MudamosWebApi from "./services/mudamos-web";
-import SessionManager from "./services/session";
-import WalletManager from "./services/wallet";
-import MobileApi from "./services/mobile-api";
-import ApiError from "./services/api-error";
-import { defaultStorage } from "./services/local-storage";
-import DeviceInfo from "./services/device-info";
-import PermissionService from "./services/permission";
-import LocationService from "./services/location";
-import Crypto from "./services/crypto";
-import RemoteConfigService from "./services/remote-config";
-import Analytics from "./services/analytics";
-
-import * as repositories from "./repositories";
-
-import reducer from "./reducers";
-import sagas from "./sagas";
-
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import createReduxLogger from "redux-logger";
-import createSagaMiddleware from "redux-saga";
-
 
 OneSignal.inFocusDisplaying(2); // Show notification on drawer
-
-const sagaRunner = createSagaMiddleware();
-const logger = createReduxLogger({
-  collapsed: true,
-  colors: {
-    title: false,
-    prevState: false,
-    action: false,
-    nextState: false,
-    error: false,
-  },
-  diff: true,
-  level: {
-    prevState: false,
-    action: "log",
-    nextState: "log",
-    error: "error",
-  },
-});
-
-const store = isDev ?
-  createStore(reducer, applyMiddleware(sagaRunner, logger)) :
-  createStore(reducer, applyMiddleware(sagaRunner));
-
-const sessionStore = SessionManager("@Mudamos");
-const walletStore = WalletManager("@Mudamos");
-const localStorage = defaultStorage();
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -130,56 +78,44 @@ const scenes = Actions.create(
   </Scene>
 );
 
-sagaRunner.run(sagas, {
-  analytics: Analytics(),
-  apiError: ApiError(),
-  Crypto,
-  DeviceInfo,
-  localStorage,
-  locationService: LocationService,
-  mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
-  mobileApi: MobileApi(Config.MOBILE_API_URL),
-  permissionService: PermissionService(),
-  RemoteConfigService,
-  repositories,
-  sessionStore,
-  walletStore,
-});
-
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 
-export default class App extends Component {
-  static childContextTypes = {
-    navigate: PropTypes.func,
-    navigateBack: PropTypes.func,
+const AppBuilder = store =>
+  class App extends Component {
+    static childContextTypes = {
+      navigate: PropTypes.func,
+      navigateBack: PropTypes.func,
+    }
+
+    getChildContext() {
+      return {
+        navigate: (...props) => store.dispatch(navigate(...props)),
+        navigateBack: () => store.dispatch(navigateBack()),
+      };
+    }
+
+    componentDidMount() {
+      store.dispatch(appDidMount());
+      store.dispatch(appSetup());
+    }
+
+    componentWillUnmount() {
+      store.dispatch(appWillUnmount());
+    }
+
+    render() {
+      return (
+        <Provider store={store}>
+          <Router
+            createReducer={routeReducer(store)}
+            scenes={scenes}
+            getSceneStyle={getSceneStyle}
+            title="Mudamos"
+            backAndroidHandler={backAndroidHandler(store)}
+          />
+        </Provider>
+      );
+    }
   }
 
-  getChildContext() {
-    return {
-      navigate: (...props) => store.dispatch(navigate(...props)),
-      navigateBack: () => store.dispatch(navigateBack()),
-    };
-  }
-
-  componentDidMount() {
-    store.dispatch(appDidMount());
-  }
-
-  componentWillUnmount() {
-    store.dispatch(appWillUnmount());
-  }
-
-  render() {
-    return (
-      <Provider store={store}>
-        <Router
-          createReducer={routeReducer(store)}
-          scenes={scenes}
-          getSceneStyle={getSceneStyle}
-          title="Mudamos"
-          backAndroidHandler={backAndroidHandler(store)}
-        />
-      </Provider>
-    );
-  }
-}
+export default AppBuilder

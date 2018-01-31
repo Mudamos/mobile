@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+  mainInitiated: false,
+};
 
 export default (state = initialState, action) => {
   if (!action) return state;
@@ -11,6 +13,12 @@ export default (state = initialState, action) => {
         ...state,
         isReady: payload.isReady,
       };
+    case "APP_MAIN_INITIATED": {
+      return {
+        ...state,
+        mainInitiated: true,
+      };
+    }
     default:
       return state;
   }

@@ -1,0 +1,18 @@
+#! /usr/bin/env node
+"use strict"
+
+const fs = require("fs");
+
+const template = fs.readFileSync("./src/templates/signer.html", "utf8");
+const mudamosLibCrypto = fs.readFileSync("./output/mudamos-lib-crypto.js", "utf8");
+const crypto = fs.readFileSync("./output/crypto.js", "utf8");
+
+const build = () => template
+  .replace("#MUDLIBCRYPTO", mudamosLibCrypto)
+  .replace("#CRYPTO", crypto);
+
+const signer = build();
+
+fs.writeFileSync("../ios/MessageSignerAction/sign.html", signer, { encoding: "utf8", flag: "w" });
+
+console.log("Done!");

@@ -22,3 +22,7 @@ export const appWillUnmount = () => ({
 export const appSetup = () => ({
   type: "SETUP",
 });
+
+export const mainAppInitiated = () => ({
+  type: "APP_MAIN_INITIATED",
+});

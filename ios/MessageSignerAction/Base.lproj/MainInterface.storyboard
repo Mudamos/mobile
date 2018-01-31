@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="roboto.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Image-->
+        <scene sceneID="7MM-of-jgj">
+            <objects>
+                <viewController title="Image" id="ObA-dk-sSI" customClass="ActionViewController" customModule="MessageSignerAction" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zMn-AG-sqS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="UWk-kf-DS5">
+                                <rect key="frame" x="142" y="256" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuf-ZU-4YJ">
+                                <rect key="frame" x="20" y="264.5" width="280" height="20"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo-alt" translatesAutoresizingMaskIntoConstraints="NO" id="JLu-BN-xJe">
+                                <rect key="frame" x="50" y="28" width="220" height="100"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Executando assinatura. Aguarde..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v43-DF-knX">
+                                <rect key="frame" x="31.5" y="301" width="258" height="20"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kuf-ZU-4YJ" firstAttribute="leading" secondItem="VVe-Uw-JpX" secondAttribute="leading" constant="20" id="4fV-ax-Crs"/>
+                            <constraint firstItem="JLu-BN-xJe" firstAttribute="centerX" secondItem="VVe-Uw-JpX" secondAttribute="centerX" id="Avq-cZ-TeS"/>
+                            <constraint firstItem="UWk-kf-DS5" firstAttribute="centerY" secondItem="VVe-Uw-JpX" secondAttribute="centerY" id="LLK-fs-3BI"/>
+                            <constraint firstItem="JLu-BN-xJe" firstAttribute="top" secondItem="VVe-Uw-JpX" secondAttribute="top" constant="8" id="P8R-PF-AtS"/>
+                            <constraint firstItem="kuf-ZU-4YJ" firstAttribute="centerY" secondItem="VVe-Uw-JpX" secondAttribute="centerY" id="TFd-gA-vdq"/>
+                            <constraint firstItem="v43-DF-knX" firstAttribute="top" secondItem="UWk-kf-DS5" secondAttribute="bottom" constant="8" symbolic="YES" id="ki2-wZ-lIM"/>
+                            <constraint firstItem="UWk-kf-DS5" firstAttribute="centerX" secondItem="VVe-Uw-JpX" secondAttribute="centerX" id="mOd-pb-tK5"/>
+                            <constraint firstItem="v43-DF-knX" firstAttribute="centerX" secondItem="VVe-Uw-JpX" secondAttribute="centerX" id="pMC-ad-IXy"/>
+                            <constraint firstItem="VVe-Uw-JpX" firstAttribute="trailing" secondItem="kuf-ZU-4YJ" secondAttribute="trailing" constant="20" id="sx5-yN-HaM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VVe-Uw-JpX"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="528"/>
+                    <connections>
+                        <outlet property="loader" destination="UWk-kf-DS5" id="1IE-2h-cTD"/>
+                        <outlet property="loaderLabel" destination="v43-DF-knX" id="sRC-r6-U4X"/>
+                        <outlet property="resultLabel" destination="kuf-ZU-4YJ" id="X9l-eQ-EJy"/>
+                        <outlet property="view" destination="zMn-AG-sqS" id="Qma-de-2ek"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X47-rx-isc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Logo-alt" width="220" height="100"/>
+    </resources>
+</document>

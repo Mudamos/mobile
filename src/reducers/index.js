@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
+import actionSigner from "./action-signer";
 import app from "./app";
 import appState from "./app-state";
 import city from "./city";
@@ -20,6 +21,7 @@ import address from "./address";
 import wallet from "./wallet";
 
 export default combineReducers({
+  actionSigner,
   app,
   appState,
   city,

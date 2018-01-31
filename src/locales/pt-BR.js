@@ -1,4 +1,11 @@
 const translations = {
+  actionSignerError: {
+    "invalid-payload": "Mensagem inválida.",
+    "incomplete-profile": "Perfil incompleto. Use a app da Mudamos+ para completar seu perfil.",
+    "invalid-wallet": "Sua assinatura é inválida. Use a app da Mudamos+ para atualizá-la.",
+    "unknown-error": "Erro ao efetuar ação.",
+    "user-not-logged-in": "Usuário não logado. Use a app da Mudamos+ para se logar.",
+  },
   addressConfirmHeader: "Confirme sua localização",
   addressSearchHeader: "Informe seu CEP",
   alreadyHavePasswordCode: "Já possuo um código",
@@ -30,6 +37,7 @@ const translations = {
   email: "E-mail",
   enroll: "Cadastrar",
   enterNewPassword: "Agora a nova senha",
+  executingActionWait: "Executando assinatura. Aguarde...",
   facebookLogin: "Entrar com Facebook",
   followUpOnTheWeb: "Acompanhe em nosso site:",
   forgotPassword: "Esqueceu a senha?",
@@ -108,6 +116,7 @@ const translations = {
   skip: "Pular",
   stateFilterTitle: "Selecione o estado",
   stateName: "Nome do estado",
+  "success!": "Sucesso!",
   takePhoto: "Tirar uma foto",
   tellAFriendMessages: {
     phr1: "Seu celular como arma de intervenção no cenário político brasileiro. Baixe agora e assine!",

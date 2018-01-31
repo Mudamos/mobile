@@ -24,14 +24,143 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		1F94796C0ABFA93D81BB4DEB /* Pods_MessageSignerAction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0B56C85FAE918C101C4C94 /* Pods_MessageSignerAction.framework */; };
 		2364B1868423443CBD44C241 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D778CA95AA41818810664F /* libLRDRCTSimpleToast.a */; };
 		25C471E7FD8644158C6B3260 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1082FEFEA6B34CF8A23BF45D /* libAirMaps.a */; };
 		30910D199404C3C085B8EE95 /* Pods_MudamosMobileTagviewBeta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */; };
 		321F777C009E4EAD870F828D /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9BB36D0B0549BF80BA15B1 /* libBVLinearGradient.a */; };
 		34BC8EBCC2BA4877B640450A /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E366E4C3ED543A4B6736655 /* libRNFirebaseCrashReport.a */; };
 		400834B331534457AC160DEA /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8424FEEF17243CFB758995F /* libRNRandomBytes.a */; };
+		460373532012565900EC7EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 460373522012565900EC7EBE /* Images.xcassets */; };
+		460373542012565900EC7EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 460373522012565900EC7EBE /* Images.xcassets */; };
+		460373552012565900EC7EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 460373522012565900EC7EBE /* Images.xcassets */; };
+		46037398201257E300EC7EBE /* libRCTUserDefaults.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46037397201257A100EC7EBE /* libRCTUserDefaults.a */; };
+		46037399201257EE00EC7EBE /* libRCTUserDefaults.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46037397201257A100EC7EBE /* libRCTUserDefaults.a */; };
+		4603739C20125D7300EC7EBE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603739B20125D7300EC7EBE /* Date.swift */; };
+		4603739D20125D7300EC7EBE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603739B20125D7300EC7EBE /* Date.swift */; };
+		4603739E20125D7300EC7EBE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603739B20125D7300EC7EBE /* Date.swift */; };
+		460373A020125E6000EC7EBE /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603739F20125E6000EC7EBE /* Formatter.swift */; };
+		460373A120125E6000EC7EBE /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603739F20125E6000EC7EBE /* Formatter.swift */; };
+		460373A220125E6000EC7EBE /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603739F20125E6000EC7EBE /* Formatter.swift */; };
+		460373A420125EB500EC7EBE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373A320125EB500EC7EBE /* String.swift */; };
+		460373A520125EB500EC7EBE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373A320125EB500EC7EBE /* String.swift */; };
+		460373A620125EB500EC7EBE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373A320125EB500EC7EBE /* String.swift */; };
+		460373A920125F6300EC7EBE /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373A820125F6300EC7EBE /* DotEnv.swift */; };
+		460373AA20125F6300EC7EBE /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373A820125F6300EC7EBE /* DotEnv.swift */; };
+		460373AB20125F6300EC7EBE /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373A820125F6300EC7EBE /* DotEnv.swift */; };
+		460373AD20125FC200EC7EBE /* MUDError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373AC20125FC200EC7EBE /* MUDError.swift */; };
+		460373AE20125FC200EC7EBE /* MUDError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373AC20125FC200EC7EBE /* MUDError.swift */; };
+		460373AF20125FC200EC7EBE /* MUDError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373AC20125FC200EC7EBE /* MUDError.swift */; };
+		460373B12012600600EC7EBE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373B02012600600EC7EBE /* User.swift */; };
+		460373B22012600600EC7EBE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373B02012600600EC7EBE /* User.swift */; };
+		460373B32012600600EC7EBE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373B02012600600EC7EBE /* User.swift */; };
+		460373B6201260A900EC7EBE /* MobileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373B5201260A900EC7EBE /* MobileApi.swift */; };
+		460373B7201260A900EC7EBE /* MobileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373B5201260A900EC7EBE /* MobileApi.swift */; };
+		460373B8201260A900EC7EBE /* MobileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373B5201260A900EC7EBE /* MobileApi.swift */; };
+		460373BA2012612B00EC7EBE /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373B92012612B00EC7EBE /* SessionService.swift */; };
+		460373BB2012612B00EC7EBE /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373B92012612B00EC7EBE /* SessionService.swift */; };
+		460373BC2012612B00EC7EBE /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373B92012612B00EC7EBE /* SessionService.swift */; };
+		460373BE2012617C00EC7EBE /* WalletService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373BD2012617C00EC7EBE /* WalletService.swift */; };
+		460373BF2012617C00EC7EBE /* WalletService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373BD2012617C00EC7EBE /* WalletService.swift */; };
+		460373C02012617C00EC7EBE /* WalletService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460373BD2012617C00EC7EBE /* WalletService.swift */; };
+		460373C3201263A900EC7EBE /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460373C2201263A800EC7EBE /* sign.html */; };
+		460373C4201263A900EC7EBE /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460373C2201263A800EC7EBE /* sign.html */; };
+		460373C5201263A900EC7EBE /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460373C2201263A800EC7EBE /* sign.html */; };
+		460373CA2012685D00EC7EBE /* copy-env-file.rb in Resources */ = {isa = PBXBuildFile; fileRef = 460373C92012685D00EC7EBE /* copy-env-file.rb */; };
+		460373CB2012685D00EC7EBE /* copy-env-file.rb in Resources */ = {isa = PBXBuildFile; fileRef = 460373C92012685D00EC7EBE /* copy-env-file.rb */; };
+		460373CC2012685D00EC7EBE /* copy-env-file.rb in Resources */ = {isa = PBXBuildFile; fileRef = 460373C92012685D00EC7EBE /* copy-env-file.rb */; };
 		4607F33B1E97F72A0018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
 		4607F33C1E97F7340018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
+		460B5A7B201230B30028A617 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460B5A7A201230B30028A617 /* Dummy.swift */; };
+		460B5A7C201230B30028A617 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460B5A7A201230B30028A617 /* Dummy.swift */; };
+		460B5A7D201230B30028A617 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460B5A7A201230B30028A617 /* Dummy.swift */; };
+		460CED6920165CC1008ECD65 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CED6820165CC1008ECD65 /* Async.swift */; };
+		460CED6A20165CC1008ECD65 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CED6820165CC1008ECD65 /* Async.swift */; };
+		460CED6B20165CC1008ECD65 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CED6820165CC1008ECD65 /* Async.swift */; };
+		460CED8F2016661D008ECD65 /* roboto_black_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B4E1E269C800002728D /* roboto_black_italic.ttf */; };
+		460CED902016661D008ECD65 /* roboto_black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B4F1E269C800002728D /* roboto_black.ttf */; };
+		460CED912016661D008ECD65 /* roboto_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B501E269C800002728D /* roboto_bold_italic.ttf */; };
+		460CED922016661D008ECD65 /* roboto_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B511E269C800002728D /* roboto_bold.ttf */; };
+		460CED932016661D008ECD65 /* roboto_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B521E269C800002728D /* roboto_italic.ttf */; };
+		460CED942016661D008ECD65 /* roboto_light_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B531E269C800002728D /* roboto_light_italic.ttf */; };
+		460CED952016661D008ECD65 /* roboto_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B541E269C800002728D /* roboto_light.ttf */; };
+		460CED962016661D008ECD65 /* roboto_medium_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B551E269C800002728D /* roboto_medium_italic.ttf */; };
+		460CED972016661D008ECD65 /* roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B561E269C800002728D /* roboto_medium.ttf */; };
+		460CED982016661D008ECD65 /* roboto_thin_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B571E269C800002728D /* roboto_thin_italic.ttf */; };
+		460CED992016661D008ECD65 /* roboto_thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B581E269C800002728D /* roboto_thin.ttf */; };
+		460CED9A2016661D008ECD65 /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B591E269C800002728D /* roboto.ttf */; };
+		460CED9B2016661D008ECD65 /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
+		460CED9C2016661D008ECD65 /* pt_sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */; };
+		460CED9D2016661D008ECD65 /* pt_sans_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */; };
+		460CED9E2016661D008ECD65 /* pt_sans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CE01E26989000AF78FF /* pt_sans.ttf */; };
+		460CED9F2016661D008ECD65 /* lato_black_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */; };
+		460CEDA02016661D008ECD65 /* lato_black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3581E268E52000B4F5A /* lato_black.ttf */; };
+		460CEDA12016661D008ECD65 /* lato_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3591E268E52000B4F5A /* lato_bold_italic.ttf */; };
+		460CEDA22016661D008ECD65 /* lato_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35A1E268E52000B4F5A /* lato_bold.ttf */; };
+		460CEDA32016661E008ECD65 /* lato_hairline_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35B1E268E52000B4F5A /* lato_hairline_italic.ttf */; };
+		460CEDA42016661E008ECD65 /* lato_hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35C1E268E52000B4F5A /* lato_hairline.ttf */; };
+		460CEDA52016661E008ECD65 /* lato_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35D1E268E52000B4F5A /* lato_italic.ttf */; };
+		460CEDA62016661E008ECD65 /* lato_light_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35E1E268E52000B4F5A /* lato_light_italic.ttf */; };
+		460CEDA72016661E008ECD65 /* lato_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35F1E268E52000B4F5A /* lato_light.ttf */; };
+		460CEDA82016661E008ECD65 /* lato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3601E268E52000B4F5A /* lato.ttf */; };
+		460CEDA92016661F008ECD65 /* roboto_black_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B4E1E269C800002728D /* roboto_black_italic.ttf */; };
+		460CEDAA2016661F008ECD65 /* roboto_black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B4F1E269C800002728D /* roboto_black.ttf */; };
+		460CEDAB2016661F008ECD65 /* roboto_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B501E269C800002728D /* roboto_bold_italic.ttf */; };
+		460CEDAC2016661F008ECD65 /* roboto_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B511E269C800002728D /* roboto_bold.ttf */; };
+		460CEDAD2016661F008ECD65 /* roboto_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B521E269C800002728D /* roboto_italic.ttf */; };
+		460CEDAE2016661F008ECD65 /* roboto_light_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B531E269C800002728D /* roboto_light_italic.ttf */; };
+		460CEDAF2016661F008ECD65 /* roboto_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B541E269C800002728D /* roboto_light.ttf */; };
+		460CEDB02016661F008ECD65 /* roboto_medium_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B551E269C800002728D /* roboto_medium_italic.ttf */; };
+		460CEDB12016661F008ECD65 /* roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B561E269C800002728D /* roboto_medium.ttf */; };
+		460CEDB22016661F008ECD65 /* roboto_thin_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B571E269C800002728D /* roboto_thin_italic.ttf */; };
+		460CEDB32016661F008ECD65 /* roboto_thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B581E269C800002728D /* roboto_thin.ttf */; };
+		460CEDB42016661F008ECD65 /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B591E269C800002728D /* roboto.ttf */; };
+		460CEDB52016661F008ECD65 /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
+		460CEDB62016661F008ECD65 /* pt_sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */; };
+		460CEDB72016661F008ECD65 /* pt_sans_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */; };
+		460CEDB82016661F008ECD65 /* pt_sans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CE01E26989000AF78FF /* pt_sans.ttf */; };
+		460CEDB92016661F008ECD65 /* lato_black_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */; };
+		460CEDBA2016661F008ECD65 /* lato_black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3581E268E52000B4F5A /* lato_black.ttf */; };
+		460CEDBB2016661F008ECD65 /* lato_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3591E268E52000B4F5A /* lato_bold_italic.ttf */; };
+		460CEDBC2016661F008ECD65 /* lato_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35A1E268E52000B4F5A /* lato_bold.ttf */; };
+		460CEDBD2016661F008ECD65 /* lato_hairline_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35B1E268E52000B4F5A /* lato_hairline_italic.ttf */; };
+		460CEDBE2016661F008ECD65 /* lato_hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35C1E268E52000B4F5A /* lato_hairline.ttf */; };
+		460CEDBF2016661F008ECD65 /* lato_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35D1E268E52000B4F5A /* lato_italic.ttf */; };
+		460CEDC02016661F008ECD65 /* lato_light_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35E1E268E52000B4F5A /* lato_light_italic.ttf */; };
+		460CEDC12016661F008ECD65 /* lato_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35F1E268E52000B4F5A /* lato_light.ttf */; };
+		460CEDC22016661F008ECD65 /* lato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3601E268E52000B4F5A /* lato.ttf */; };
+		460CEDC32016661F008ECD65 /* roboto_black_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B4E1E269C800002728D /* roboto_black_italic.ttf */; };
+		460CEDC42016661F008ECD65 /* roboto_black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B4F1E269C800002728D /* roboto_black.ttf */; };
+		460CEDC52016661F008ECD65 /* roboto_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B501E269C800002728D /* roboto_bold_italic.ttf */; };
+		460CEDC62016661F008ECD65 /* roboto_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B511E269C800002728D /* roboto_bold.ttf */; };
+		460CEDC72016661F008ECD65 /* roboto_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B521E269C800002728D /* roboto_italic.ttf */; };
+		460CEDC82016661F008ECD65 /* roboto_light_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B531E269C800002728D /* roboto_light_italic.ttf */; };
+		460CEDC92016661F008ECD65 /* roboto_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B541E269C800002728D /* roboto_light.ttf */; };
+		460CEDCA2016661F008ECD65 /* roboto_medium_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B551E269C800002728D /* roboto_medium_italic.ttf */; };
+		460CEDCB2016661F008ECD65 /* roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B561E269C800002728D /* roboto_medium.ttf */; };
+		460CEDCC2016661F008ECD65 /* roboto_thin_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B571E269C800002728D /* roboto_thin_italic.ttf */; };
+		460CEDCD2016661F008ECD65 /* roboto_thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B581E269C800002728D /* roboto_thin.ttf */; };
+		460CEDCE2016661F008ECD65 /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B591E269C800002728D /* roboto.ttf */; };
+		460CEDCF2016661F008ECD65 /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
+		460CEDD02016661F008ECD65 /* pt_sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */; };
+		460CEDD12016661F008ECD65 /* pt_sans_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */; };
+		460CEDD22016661F008ECD65 /* pt_sans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CE01E26989000AF78FF /* pt_sans.ttf */; };
+		460CEDD32016661F008ECD65 /* lato_black_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */; };
+		460CEDD42016661F008ECD65 /* lato_black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3581E268E52000B4F5A /* lato_black.ttf */; };
+		460CEDD52016661F008ECD65 /* lato_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3591E268E52000B4F5A /* lato_bold_italic.ttf */; };
+		460CEDD62016661F008ECD65 /* lato_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35A1E268E52000B4F5A /* lato_bold.ttf */; };
+		460CEDD72016661F008ECD65 /* lato_hairline_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35B1E268E52000B4F5A /* lato_hairline_italic.ttf */; };
+		460CEDD82016661F008ECD65 /* lato_hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35C1E268E52000B4F5A /* lato_hairline.ttf */; };
+		460CEDD92016661F008ECD65 /* lato_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35D1E268E52000B4F5A /* lato_italic.ttf */; };
+		460CEDDA2016661F008ECD65 /* lato_light_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35E1E268E52000B4F5A /* lato_light_italic.ttf */; };
+		460CEDDB2016661F008ECD65 /* lato_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35F1E268E52000B4F5A /* lato_light.ttf */; };
+		460CEDDC2016661F008ECD65 /* lato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3601E268E52000B4F5A /* lato.ttf */; };
+		460CEDE120166E46008ECD65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 460CEDE520166E46008ECD65 /* Localizable.strings */; };
+		460CEDE220166E46008ECD65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 460CEDE520166E46008ECD65 /* Localizable.strings */; };
+		460CEDE320166E46008ECD65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 460CEDE520166E46008ECD65 /* Localizable.strings */; };
+		4615B18420125382006CBF41 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9602920122E5D00D5AEB9 /* ActionViewController.swift */; };
+		4615B18820125382006CBF41 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */; };
+		4615B18F201253F1006CBF41 /* MessageSignerActionProduction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4615B18D20125382006CBF41 /* MessageSignerActionProduction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4622FF021E562C0400404C0D /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4622FEFC1E562BD900404C0D /* libReactNativePermissions.a */; };
 		4623C3E71E0081A800158849 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623C3E31E00818500158849 /* libRNDeviceInfo.a */; };
 		4632073A1EBA7D0800778DCC /* google in Resources */ = {isa = PBXBuildFile; fileRef = 463207391EBA7D0800778DCC /* google */; };
@@ -112,6 +241,15 @@
 		4675EBF31ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
 		4675EBF41ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
 		4675EBF51ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
+		467749AF20160362001717E1 /* MudamosPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749AE20160362001717E1 /* MudamosPayload.swift */; };
+		467749B020160362001717E1 /* MudamosPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749AE20160362001717E1 /* MudamosPayload.swift */; };
+		467749B120160362001717E1 /* MudamosPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749AE20160362001717E1 /* MudamosPayload.swift */; };
+		467749D6201612DA001717E1 /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749D5201612DA001717E1 /* Signer.swift */; };
+		467749D7201612DA001717E1 /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749D5201612DA001717E1 /* Signer.swift */; };
+		467749D8201612DA001717E1 /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749D5201612DA001717E1 /* Signer.swift */; };
+		467749DA2016232A001717E1 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749D92016232A001717E1 /* Bool.swift */; };
+		467749DB2016232A001717E1 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749D92016232A001717E1 /* Bool.swift */; };
+		467749DC2016232A001717E1 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749D92016232A001717E1 /* Bool.swift */; };
 		468261211EBA7E330044D471 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
 		468261421EBA7E3C0044D471 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
 		468B52A31E57273200A4E6B6 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */; };
@@ -123,6 +261,9 @@
 		46918CE61E26989000AF78FF /* pt_sans_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */; };
 		46918CE71E26989000AF78FF /* pt_sans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CE01E26989000AF78FF /* pt_sans.ttf */; };
 		46918CE81E26989000AF78FF /* pt_sans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CE01E26989000AF78FF /* pt_sans.ttf */; };
+		46A2BA9D201233D4006EFFBB /* MessageSignerActionBeta.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 46B86B6920123271009E643E /* MessageSignerActionBeta.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		46B86B6020123271009E643E /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9602920122E5D00D5AEB9 /* ActionViewController.swift */; };
+		46B86B6420123271009E643E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */; };
 		46BD9FDC1DF1A0E600366372 /* InfoTagviewBeta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */; };
 		46C00F0E1EBB5681006F17F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */; };
 		46C00F101EBB56FA006F17F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C00F0F1EBB56FA006F17F1 /* GoogleService-Info.plist */; };
@@ -151,6 +292,9 @@
 		46E7BBC41ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
 		46E7BBC51ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
 		46E7BBC61ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
+		46E9602A20122E5D00D5AEB9 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9602920122E5D00D5AEB9 /* ActionViewController.swift */; };
+		46E9602D20122E5D00D5AEB9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */; };
+		46E9603120122E5D00D5AEB9 /* MessageSignerAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 46E9602720122E5D00D5AEB9 /* MessageSignerAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		46ED2A6E1DF194E400B36CD0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		46ED2A6F1DF194E400B36CD0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		46ED2A711DF194E400B36CD0 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -209,7 +353,9 @@
 		4BFC7789634149D2A3F02AA4 /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A536F47719B41759AAD3D00 /* libRCTOneSignal.a */; };
 		4E3854BF0D083037E79D169F /* Pods_MudamosMobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB358AEDAED7A7D4E7C8E06C /* Pods_MudamosMobileTests.framework */; };
 		5BCE8C5C9D8349EFB95E719A /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10E569BB49504C0E8E0A286A /* EvilIcons.ttf */; };
+		5DCF04FC33184DA7ABE235B4 /* libRCTUserDefaults.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8ECEA6C6F4D44C68E112068 /* libRCTUserDefaults.a */; };
 		609EBA8E9D8E4A92BF4BBEA5 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC816BA612714338983ED538 /* Entypo.ttf */; };
+		6B85438473FAA84B3277BDAA /* Pods_MessageSignerActionBeta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F1E8C94AB3D4618ACD7013 /* Pods_MessageSignerActionBeta.framework */; };
 		6DEB6F7A5414DE00DCABF21D /* Pods_MudamosMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8FFD6EB8614D6594CD5E902C /* Pods_MudamosProduction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4DE2CC59E274427F8D159E /* Pods_MudamosProduction.framework */; };
@@ -228,6 +374,7 @@
 		D255DBA5704D40A7AB44AB19 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B55C452B89744C8C88F648C4 /* libReactNativeConfig.a */; };
 		D2826D23B7EA43F593D2F889 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB5F27F75FA40E7B12ACE07 /* libReact Native Open Settings.a */; };
 		D3E5BB9F9F7942BAAFD16EF4 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F2DC68A75BF46FBBA40FCDC /* Octicons.ttf */; };
+		EA07316F0AD6058CEC5283F3 /* Pods_MessageSignerActionProduction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB5E7FCF51E832F7A4FB548 /* Pods_MessageSignerActionProduction.framework */; };
 		F424078D44A14BFBBE1D412B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B5E533F39E44066933C7E40 /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
 
@@ -295,6 +442,13 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
+		46037396201257A100EC7EBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA2512E0E9D946D691598029 /* RCTUserDefaults.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTUserDefaults;
+		};
 		4607F3271E97F6F10018F4AA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A686DD9DC7B8449382CEDA8A /* RCTOneSignal.xcodeproj */;
@@ -308,6 +462,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 15209BEF1D250F63000D0F44;
 			remoteInfo = LRDRCTSimpleToast;
+		};
+		4615B190201253F1006CBF41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4615B18120125382006CBF41;
+			remoteInfo = MessageSignerActionProduction;
 		};
 		4622FEFB1E562BD900404C0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -378,6 +539,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 190C8BAA1BEAADCC00CD505E;
 			remoteInfo = "React Native Open Settings";
+		};
+		46A2BA9E201233D4006EFFBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 46B86B5D20123271009E643E;
+			remoteInfo = MessageSignerActionBeta;
 		};
 		46C0AB2B1DD5E40600447C6C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -456,6 +624,13 @@
 			remoteGlobalIDString = D42CB3511B2538DE00FD0AE2;
 			remoteInfo = RNSpinkit;
 		};
+		46E9602F20122E5D00D5AEB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 46E9602620122E5D00D5AEB9;
+			remoteInfo = MessageSignerAction;
+		};
 		46FD05CE1ED34C1B001173CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0BC2FAE33414083B13F7BDE /* Firestack.xcodeproj */;
@@ -478,6 +653,42 @@
 			remoteInfo = RCTText;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4615B192201253F2006CBF41 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4615B18F201253F1006CBF41 /* MessageSignerActionProduction.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46A2BAC2201233D5006EFFBB /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				46A2BA9D201233D4006EFFBB /* MessageSignerActionBeta.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46E9605720122E5D00D5AEB9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				46E9603120122E5D00D5AEB9 /* MessageSignerAction.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -511,8 +722,29 @@
 		1EBAE3E29553499CBB9730E7 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		207C3AC18ADF55D82D20DF88 /* Pods-MudamosMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTests/Pods-MudamosMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTagviewBeta.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTagviewBeta/Pods-MudamosMobileTagviewBeta.release.xcconfig"; sourceTree = "<group>"; };
+		3D04F85D25B6A20A9064C5C3 /* Pods-MessageSignerActionProduction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerActionProduction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerActionProduction/Pods-MessageSignerActionProduction.debug.xcconfig"; sourceTree = "<group>"; };
 		3E366E4C3ED543A4B6736655 /* libRNFirebaseCrashReport.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebaseCrashReport.a; sourceTree = "<group>"; };
 		413B12353FD34D1C9F7FE084 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		460373522012565900EC7EBE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4603739B20125D7300EC7EBE /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		4603739F20125E6000EC7EBE /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		460373A320125EB500EC7EBE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		460373A820125F6300EC7EBE /* DotEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotEnv.swift; sourceTree = "<group>"; };
+		460373AC20125FC200EC7EBE /* MUDError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUDError.swift; sourceTree = "<group>"; };
+		460373B02012600600EC7EBE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		460373B5201260A900EC7EBE /* MobileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileApi.swift; sourceTree = "<group>"; };
+		460373B92012612B00EC7EBE /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
+		460373BD2012617C00EC7EBE /* WalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletService.swift; sourceTree = "<group>"; };
+		460373C2201263A800EC7EBE /* sign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sign.html; sourceTree = "<group>"; };
+		460373C92012685D00EC7EBE /* copy-env-file.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "copy-env-file.rb"; sourceTree = "<group>"; };
+		460B5A77201230B20028A617 /* MudamosMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosMobile-Bridging-Header.h"; sourceTree = "<group>"; };
+		460B5A78201230B20028A617 /* MudamosMobileTagviewBeta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosMobileTagviewBeta-Bridging-Header.h"; sourceTree = "<group>"; };
+		460B5A79201230B20028A617 /* MudamosProduction-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosProduction-Bridging-Header.h"; sourceTree = "<group>"; };
+		460B5A7A201230B30028A617 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		460CED6820165CC1008ECD65 /* Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
+		460CEDE6201671E4008ECD65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4615B18D20125382006CBF41 /* MessageSignerActionProduction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionProduction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4615B18E20125383006CBF41 /* MessageSignerActionProduction-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MessageSignerActionProduction-Info.plist"; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/MessageSignerAction/MessageSignerActionProduction-Info.plist"; sourceTree = "<absolute>"; };
 		462DE3E01E9C0D630075CAFC /* MudamosProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosProduction.entitlements; sourceTree = "<group>"; };
 		463207391EBA7D0800778DCC /* google */ = {isa = PBXFileReference; lastKnownFileType = folder; path = google; sourceTree = "<group>"; };
 		463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/production/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -520,11 +752,17 @@
 		46439D891E709B03008577C0 /* InfoMudamosProduction.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = InfoMudamosProduction.plist; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/InfoMudamosProduction.plist"; sourceTree = "<absolute>"; };
 		4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDFirebaseConfig.m; sourceTree = "<group>"; };
 		4675EBF61ECCB947004C8A69 /* MUDFirebaseConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUDFirebaseConfig.h; sourceTree = "<group>"; };
+		467749AE20160362001717E1 /* MudamosPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MudamosPayload.swift; sourceTree = "<group>"; };
+		467749D5201612DA001717E1 /* Signer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signer.swift; sourceTree = "<group>"; };
+		467749D92016232A001717E1 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 		46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold_italic.ttf; sourceTree = "<group>"; };
 		46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold.ttf; sourceTree = "<group>"; };
 		46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_italic.ttf; sourceTree = "<group>"; };
 		46918CE01E26989000AF78FF /* pt_sans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans.ttf; sourceTree = "<group>"; };
 		46AA978D1E9BBCD200B76B3F /* MudamosMobileTagviewBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosMobileTagviewBeta.entitlements; sourceTree = "<group>"; };
+		46B86B6920123271009E643E /* MessageSignerActionBeta.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionBeta.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		46B86B6A20123271009E643E /* MessageSignerActionBeta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MessageSignerActionBeta-Info.plist"; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/MessageSignerAction/MessageSignerActionBeta-Info.plist"; sourceTree = "<absolute>"; };
+		46B86B8D20123330009E643E /* MessageSignerActionBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MessageSignerActionBeta.entitlements; path = MessageSignerActionBeta/MessageSignerActionBeta.entitlements; sourceTree = "<group>"; };
 		46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InfoTagviewBeta.plist; path = MudamosMobile/InfoTagviewBeta.plist; sourceTree = "<group>"; };
 		46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/development/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46C00F0F1EBB56FA006F17F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/mudamos-beta/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -542,6 +780,10 @@
 		46DE63581DE469430031B576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		46E7BBA11ECCBFD0001D1720 /* MUDFirebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUDFirebase.h; sourceTree = "<group>"; };
 		46E7BBC31ECCC026001D1720 /* MUDFirebase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDFirebase.m; sourceTree = "<group>"; };
+		46E9602720122E5D00D5AEB9 /* MessageSignerAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		46E9602920122E5D00D5AEB9 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		46E9602C20122E5D00D5AEB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		46E9602E20122E5D00D5AEB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46ED2A941DF194E400B36CD0 /* MudamosMobileTagviewBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosMobileTagviewBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46F35B4E1E269C800002728D /* roboto_black_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_black_italic.ttf; sourceTree = "<group>"; };
 		46F35B4F1E269C800002728D /* roboto_black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto_black.ttf; sourceTree = "<group>"; };
@@ -562,10 +804,13 @@
 		5B984827EF456536636B8D2D /* Pods-MudamosProduction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosProduction.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosProduction/Pods-MudamosProduction.release.xcconfig"; sourceTree = "<group>"; };
 		5CA59394A12E918879BC09D5 /* Pods-MudamosMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTests/Pods-MudamosMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		621C3D10CAD54FC5982F12BB /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
+		66F1E8C94AB3D4618ACD7013 /* Pods_MessageSignerActionBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerActionBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		6D0B56C85FAE918C101C4C94 /* Pods_MessageSignerAction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerAction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7A536F47719B41759AAD3D00 /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
+		7BB5E7FCF51E832F7A4FB548 /* Pods_MessageSignerActionProduction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerActionProduction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C6E4E916C3B4AFEBB903B41 /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		7D115F907C014FE4A318F416 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobileTagviewBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -575,12 +820,16 @@
 		9A4DE2CC59E274427F8D159E /* Pods_MudamosProduction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosProduction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5E533F39E44066933C7E40 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		9BC5D238E00C444189EA91E3 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
+		9E03105BDAAC5A0BB5ADB6DB /* Pods-MessageSignerActionBeta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerActionBeta.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerActionBeta/Pods-MessageSignerActionBeta.release.xcconfig"; sourceTree = "<group>"; };
 		9F016C18A1E94D748F17680C /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNRandomBytes.xcodeproj; path = "../node_modules/react-native-randombytes/RNRandomBytes.xcodeproj"; sourceTree = "<group>"; };
 		A686DD9DC7B8449382CEDA8A /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
+		A8ECEA6C6F4D44C68E112068 /* libRCTUserDefaults.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTUserDefaults.a; sourceTree = "<group>"; };
+		AAFC20247486915F58C3D1A4 /* Pods-MessageSignerAction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerAction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerAction/Pods-MessageSignerAction.debug.xcconfig"; sourceTree = "<group>"; };
 		B15E59AB4D564186AE6276F2 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		B55C452B89744C8C88F648C4 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		B5AA2BE2727F416DA6981B84 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
+		BA2512E0E9D946D691598029 /* RCTUserDefaults.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTUserDefaults.xcodeproj; path = "../node_modules/react-native-user-defaults/RCTUserDefaults.xcodeproj"; sourceTree = "<group>"; };
 		BB620C49F665BCB96048640D /* Pods-MudamosMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile.release.xcconfig"; sourceTree = "<group>"; };
 		BCA8BA48A81E4C2AB38DBFDB /* libReactNativePermissions.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativePermissions.a; sourceTree = "<group>"; };
 		C31184017F8613138D7E49E4 /* Pods-MudamosProduction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosProduction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosProduction/Pods-MudamosProduction.debug.xcconfig"; sourceTree = "<group>"; };
@@ -588,13 +837,16 @@
 		CF9BB36D0B0549BF80BA15B1 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		D0BC2FAE33414083B13F7BDE /* Firestack.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Firestack.xcodeproj; path = "../node_modules/react-native-firestack/ios/Firestack.xcodeproj"; sourceTree = "<group>"; };
 		D4DD84D58E0F4CCBA2E32688 /* React Native Open Settings.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = "React Native Open Settings.xcodeproj"; path = "../node_modules/react-native-open-settings/React Native Open Settings.xcodeproj"; sourceTree = "<group>"; };
+		D6443B90852D3BE7AB57D2A1 /* Pods-MessageSignerActionProduction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerActionProduction.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerActionProduction/Pods-MessageSignerActionProduction.release.xcconfig"; sourceTree = "<group>"; };
 		D782C177FC6040C8A34D9B30 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
 		D8424FEEF17243CFB758995F /* libRNRandomBytes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRandomBytes.a; sourceTree = "<group>"; };
 		DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E26FDBD24B0A4D90A5A1EB13 /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTMaterialKit.a; sourceTree = "<group>"; };
 		E43A712CA50B405C881A95F5 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
+		EEADA9860C7C730162F487DC /* Pods-MessageSignerAction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerAction.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerAction/Pods-MessageSignerAction.release.xcconfig"; sourceTree = "<group>"; };
 		FC45B1BB94D278A89EF7F9D9 /* Pods-MudamosMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		FC816BA612714338983ED538 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		FCB1D375C90853BD089B8C16 /* Pods-MessageSignerActionBeta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerActionBeta.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerActionBeta/Pods-MessageSignerActionBeta.debug.xcconfig"; sourceTree = "<group>"; };
 		FD315B732F68A52F03537566 /* Pods-MudamosMobileTagviewBeta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTagviewBeta.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTagviewBeta/Pods-MudamosMobileTagviewBeta.debug.xcconfig"; sourceTree = "<group>"; };
 		FE91C85ACE5E44DC89DDD281 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -641,6 +893,15 @@
 				4BFC7789634149D2A3F02AA4 /* libRCTOneSignal.a in Frameworks */,
 				34BC8EBCC2BA4877B640450A /* libRNFirebaseCrashReport.a in Frameworks */,
 				C05A91829A814B3B9EB7E152 /* libFirestack.a in Frameworks */,
+				5DCF04FC33184DA7ABE235B4 /* libRCTUserDefaults.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4615B18520125382006CBF41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA07316F0AD6058CEC5283F3 /* Pods_MessageSignerActionProduction.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +909,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46037399201257EE00EC7EBE /* libRCTUserDefaults.a in Frameworks */,
 				46FD05F01ED34C4C001173CC /* libFirestack.a in Frameworks */,
 				468261421EBA7E3C0044D471 /* libRNFirebaseCrashReport.a in Frameworks */,
 				4607F33C1E97F7340018F4AA /* libRCTOneSignal.a in Frameworks */,
@@ -680,10 +942,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		46B86B6120123271009E643E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B85438473FAA84B3277BDAA /* Pods_MessageSignerActionBeta.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46E9602420122E5D00D5AEB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F94796C0ABFA93D81BB4DEB /* Pods_MessageSignerAction.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		46ED2A701DF194E400B36CD0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46037398201257E300EC7EBE /* libRCTUserDefaults.a in Frameworks */,
 				46FD05EF1ED34C44001173CC /* libFirestack.a in Frameworks */,
 				468261211EBA7E330044D471 /* libRNFirebaseCrashReport.a in Frameworks */,
 				4607F33B1E97F72A0018F4AA /* libRCTOneSignal.a in Frameworks */,
@@ -809,6 +1088,10 @@
 				46439D891E709B03008577C0 /* InfoMudamosProduction.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				460B5A7A201230B30028A617 /* Dummy.swift */,
+				460B5A77201230B20028A617 /* MudamosMobile-Bridging-Header.h */,
+				460B5A78201230B20028A617 /* MudamosMobileTagviewBeta-Bridging-Header.h */,
+				460B5A79201230B20028A617 /* MudamosProduction-Bridging-Header.h */,
 			);
 			name = MudamosMobile;
 			sourceTree = "<group>";
@@ -820,6 +1103,48 @@
 				46C0AB451DD5E40600447C6C /* libReact-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		46037393201257A100EC7EBE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				46037397201257A100EC7EBE /* libRCTUserDefaults.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4603739A20125D4F00EC7EBE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				467749D92016232A001717E1 /* Bool.swift */,
+				4603739B20125D7300EC7EBE /* Date.swift */,
+				4603739F20125E6000EC7EBE /* Formatter.swift */,
+				460373A320125EB500EC7EBE /* String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		460373A720125F4F00EC7EBE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				460373A820125F6300EC7EBE /* DotEnv.swift */,
+				460373AC20125FC200EC7EBE /* MUDError.swift */,
+				460373B02012600600EC7EBE /* User.swift */,
+				467749AE20160362001717E1 /* MudamosPayload.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		460373B42012607E00EC7EBE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				460373B5201260A900EC7EBE /* MobileApi.swift */,
+				460373B92012612B00EC7EBE /* SessionService.swift */,
+				460373BD2012617C00EC7EBE /* WalletService.swift */,
+				467749D5201612DA001717E1 /* Signer.swift */,
+				460CED6820165CC1008ECD65 /* Async.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		4607F3171E97F6F00018F4AA /* Products */ = {
@@ -957,6 +1282,7 @@
 				7A536F47719B41759AAD3D00 /* libRCTOneSignal.a */,
 				3E366E4C3ED543A4B6736655 /* libRNFirebaseCrashReport.a */,
 				1D75AB137A5F4B73824350C9 /* libFirestack.a */,
+				A8ECEA6C6F4D44C68E112068 /* libRCTUserDefaults.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -983,6 +1309,25 @@
 				46DBF04B1DE386CF006B43B5 /* libRNSpinkit.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		46E9602820122E5D00D5AEB9 /* MessageSignerAction */ = {
+			isa = PBXGroup;
+			children = (
+				460373B42012607E00EC7EBE /* Services */,
+				460373A720125F4F00EC7EBE /* Models */,
+				4603739A20125D4F00EC7EBE /* Extensions */,
+				46E9602920122E5D00D5AEB9 /* ActionViewController.swift */,
+				46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */,
+				46E9602E20122E5D00D5AEB9 /* Info.plist */,
+				46B86B6A20123271009E643E /* MessageSignerActionBeta-Info.plist */,
+				4615B18E20125383006CBF41 /* MessageSignerActionProduction-Info.plist */,
+				460373522012565900EC7EBE /* Images.xcassets */,
+				460373C92012685D00EC7EBE /* copy-env-file.rb */,
+				460373C2201263A800EC7EBE /* sign.html */,
+				460CEDE520166E46008ECD65 /* Localizable.strings */,
+			);
+			path = MessageSignerAction;
 			sourceTree = "<group>";
 		};
 		46FD05C91ED34C1B001173CC /* Products */ = {
@@ -1075,6 +1420,7 @@
 				A686DD9DC7B8449382CEDA8A /* RCTOneSignal.xcodeproj */,
 				0B04C0F7DF104E1F802EB2E1 /* RNFirebaseCrashReport.xcodeproj */,
 				D0BC2FAE33414083B13F7BDE /* Firestack.xcodeproj */,
+				BA2512E0E9D946D691598029 /* RCTUserDefaults.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1091,6 +1437,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				46B86B8D20123330009E643E /* MessageSignerActionBeta.entitlements */,
 				463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */,
 				46C00F0F1EBB56FA006F17F1 /* GoogleService-Info.plist */,
 				46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */,
@@ -1100,6 +1447,7 @@
 				13B07FAE1A68108700A75B9A /* MudamosMobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MudamosMobileTests */,
+				46E9602820122E5D00D5AEB9 /* MessageSignerAction */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				A5E7F9BCFEA23D3C9568FD2A /* Pods */,
 				E37103BD91427355FD24D359 /* Frameworks */,
@@ -1117,6 +1465,9 @@
 				00E356EE1AD99517003FC87E /* MudamosMobileTests.xctest */,
 				46ED2A941DF194E400B36CD0 /* MudamosMobileTagviewBeta.app */,
 				46439D881E709B03008577C0 /* MudamosProduction.app */,
+				46E9602720122E5D00D5AEB9 /* MessageSignerAction.appex */,
+				46B86B6920123271009E643E /* MessageSignerActionBeta.appex */,
+				4615B18D20125382006CBF41 /* MessageSignerActionProduction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1132,6 +1483,12 @@
 				245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */,
 				C31184017F8613138D7E49E4 /* Pods-MudamosProduction.debug.xcconfig */,
 				5B984827EF456536636B8D2D /* Pods-MudamosProduction.release.xcconfig */,
+				AAFC20247486915F58C3D1A4 /* Pods-MessageSignerAction.debug.xcconfig */,
+				EEADA9860C7C730162F487DC /* Pods-MessageSignerAction.release.xcconfig */,
+				FCB1D375C90853BD089B8C16 /* Pods-MessageSignerActionBeta.debug.xcconfig */,
+				9E03105BDAAC5A0BB5ADB6DB /* Pods-MessageSignerActionBeta.release.xcconfig */,
+				3D04F85D25B6A20A9064C5C3 /* Pods-MessageSignerActionProduction.debug.xcconfig */,
+				D6443B90852D3BE7AB57D2A1 /* Pods-MessageSignerActionProduction.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1143,6 +1500,9 @@
 				CB358AEDAED7A7D4E7C8E06C /* Pods_MudamosMobileTests.framework */,
 				8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */,
 				9A4DE2CC59E274427F8D159E /* Pods_MudamosProduction.framework */,
+				6D0B56C85FAE918C101C4C94 /* Pods_MessageSignerAction.framework */,
+				66F1E8C94AB3D4618ACD7013 /* Pods_MessageSignerActionBeta.framework */,
+				7BB5E7FCF51E832F7A4FB548 /* Pods_MessageSignerActionProduction.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1182,15 +1542,37 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				DC9231CF015E329FDB5635AC /* [CP] Embed Pods Frameworks */,
 				57A79E06FA998F91BB424AD9 /* [CP] Copy Pods Resources */,
+				46E9605720122E5D00D5AEB9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				46E9603020122E5D00D5AEB9 /* PBXTargetDependency */,
 			);
 			name = MudamosMobile;
 			productName = "Hello World";
 			productReference = 13B07F961A680F5B00A75B9A /* MudamosMobile.app */;
 			productType = "com.apple.product-type.application";
+		};
+		4615B18120125382006CBF41 /* MessageSignerActionProduction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4615B18A20125382006CBF41 /* Build configuration list for PBXNativeTarget "MessageSignerActionProduction" */;
+			buildPhases = (
+				4615B18220125382006CBF41 /* [CP] Check Pods Manifest.lock */,
+				460373CF201268AD00EC7EBE /* ShellScript */,
+				4615B18320125382006CBF41 /* Sources */,
+				4615B18520125382006CBF41 /* Frameworks */,
+				4615B18720125382006CBF41 /* Resources */,
+				4615B18920125382006CBF41 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MessageSignerActionProduction;
+			productName = MessageSignerAction;
+			productReference = 4615B18D20125382006CBF41 /* MessageSignerActionProduction.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		46439D3C1E709B03008577C0 /* MudamosProduction */ = {
 			isa = PBXNativeTarget;
@@ -1203,15 +1585,57 @@
 				46439D821E709B03008577C0 /* Bundle React Native code and images */,
 				46439D831E709B03008577C0 /* [CP] Embed Pods Frameworks */,
 				46439D841E709B03008577C0 /* [CP] Copy Pods Resources */,
+				4615B192201253F2006CBF41 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4615B191201253F1006CBF41 /* PBXTargetDependency */,
 			);
 			name = MudamosProduction;
 			productName = "Hello World";
 			productReference = 46439D881E709B03008577C0 /* MudamosProduction.app */;
 			productType = "com.apple.product-type.application";
+		};
+		46B86B5D20123271009E643E /* MessageSignerActionBeta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46B86B6620123271009E643E /* Build configuration list for PBXNativeTarget "MessageSignerActionBeta" */;
+			buildPhases = (
+				46B86B5E20123271009E643E /* [CP] Check Pods Manifest.lock */,
+				460373CE201268A200EC7EBE /* ShellScript */,
+				46B86B5F20123271009E643E /* Sources */,
+				46B86B6120123271009E643E /* Frameworks */,
+				46B86B6320123271009E643E /* Resources */,
+				46B86B6520123271009E643E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MessageSignerActionBeta;
+			productName = MessageSignerAction;
+			productReference = 46B86B6920123271009E643E /* MessageSignerActionBeta.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		46E9602620122E5D00D5AEB9 /* MessageSignerAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46E9605620122E5D00D5AEB9 /* Build configuration list for PBXNativeTarget "MessageSignerAction" */;
+			buildPhases = (
+				28FF65DE45764D3FB39786F0 /* [CP] Check Pods Manifest.lock */,
+				460373CD2012687700EC7EBE /* ShellScript */,
+				46E9602320122E5D00D5AEB9 /* Sources */,
+				46E9602420122E5D00D5AEB9 /* Frameworks */,
+				46E9602520122E5D00D5AEB9 /* Resources */,
+				27544FB8F2B1BEC52914B54B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MessageSignerAction;
+			productName = MessageSignerAction;
+			productReference = 46E9602720122E5D00D5AEB9 /* MessageSignerAction.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		46ED2A6B1DF194E400B36CD0 /* MudamosMobileTagviewBeta */ = {
 			isa = PBXNativeTarget;
@@ -1224,10 +1648,12 @@
 				46ED2A8E1DF194E400B36CD0 /* Bundle React Native code and images */,
 				46ED2A8F1DF194E400B36CD0 /* [CP] Embed Pods Frameworks */,
 				46ED2A901DF194E400B36CD0 /* [CP] Copy Pods Resources */,
+				46A2BAC2201233D5006EFFBB /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				46A2BA9F201233D4006EFFBB /* PBXTargetDependency */,
 			);
 			name = MudamosMobileTagviewBeta;
 			productName = "Hello World";
@@ -1240,6 +1666,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 920;
 				LastUpgradeCheck = 610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
@@ -1249,9 +1676,15 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = T97PZRMFDE;
+						LastSwiftMigration = 920;
+					};
+					4615B18120125382006CBF41 = {
+						DevelopmentTeam = YGK2CQTELW;
+						ProvisioningStyle = Automatic;
 					};
 					46439D3C1E709B03008577C0 = {
 						DevelopmentTeam = YGK2CQTELW;
+						LastSwiftMigration = 920;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1262,10 +1695,28 @@
 							};
 						};
 					};
-					46ED2A6B1DF194E400B36CD0 = {
+					46B86B5D20123271009E643E = {
 						DevelopmentTeam = T97PZRMFDE;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					46E9602620122E5D00D5AEB9 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = T97PZRMFDE;
+						ProvisioningStyle = Automatic;
+					};
+					46ED2A6B1DF194E400B36CD0 = {
+						DevelopmentTeam = T97PZRMFDE;
+						LastSwiftMigration = 920;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -1345,6 +1796,10 @@
 					ProjectRef = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
 				},
 				{
+					ProductGroup = 46037393201257A100EC7EBE /* Products */;
+					ProjectRef = BA2512E0E9D946D691598029 /* RCTUserDefaults.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302E01ABCB9EE00DB3ED1 /* Products */;
 					ProjectRef = 00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */;
 				},
@@ -1403,6 +1858,9 @@
 				00E356ED1AD99517003FC87E /* MudamosMobileTests */,
 				46ED2A6B1DF194E400B36CD0 /* MudamosMobileTagviewBeta */,
 				46439D3C1E709B03008577C0 /* MudamosProduction */,
+				46E9602620122E5D00D5AEB9 /* MessageSignerAction */,
+				46B86B5D20123271009E643E /* MessageSignerActionBeta */,
+				4615B18120125382006CBF41 /* MessageSignerActionProduction */,
 			);
 		};
 /* End PBXProject section */
@@ -1462,6 +1920,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		46037397201257A100EC7EBE /* libRCTUserDefaults.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTUserDefaults.a;
+			remoteRef = 46037396201257A100EC7EBE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */ = {
@@ -1703,6 +2168,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4615B18720125382006CBF41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				460CEDD42016661F008ECD65 /* lato_black.ttf in Resources */,
+				460CEDD02016661F008ECD65 /* pt_sans_bold.ttf in Resources */,
+				460CEDC82016661F008ECD65 /* roboto_light_italic.ttf in Resources */,
+				460CEDC62016661F008ECD65 /* roboto_bold.ttf in Resources */,
+				460CEDCA2016661F008ECD65 /* roboto_medium_italic.ttf in Resources */,
+				460373CC2012685D00EC7EBE /* copy-env-file.rb in Resources */,
+				460CEDD82016661F008ECD65 /* lato_hairline.ttf in Resources */,
+				460CEDC42016661F008ECD65 /* roboto_black.ttf in Resources */,
+				460CEDC92016661F008ECD65 /* roboto_light.ttf in Resources */,
+				460CEDDA2016661F008ECD65 /* lato_light_italic.ttf in Resources */,
+				460CEDCC2016661F008ECD65 /* roboto_thin_italic.ttf in Resources */,
+				460CEDD52016661F008ECD65 /* lato_bold_italic.ttf in Resources */,
+				460CEDC52016661F008ECD65 /* roboto_bold_italic.ttf in Resources */,
+				460CEDC32016661F008ECD65 /* roboto_black_italic.ttf in Resources */,
+				460CEDD12016661F008ECD65 /* pt_sans_italic.ttf in Resources */,
+				460CEDD92016661F008ECD65 /* lato_italic.ttf in Resources */,
+				460CEDE320166E46008ECD65 /* Localizable.strings in Resources */,
+				460CEDCB2016661F008ECD65 /* roboto_medium.ttf in Resources */,
+				460CEDDB2016661F008ECD65 /* lato_light.ttf in Resources */,
+				460CEDCD2016661F008ECD65 /* roboto_thin.ttf in Resources */,
+				460CEDCE2016661F008ECD65 /* roboto.ttf in Resources */,
+				460CEDDC2016661F008ECD65 /* lato.ttf in Resources */,
+				4615B18820125382006CBF41 /* MainInterface.storyboard in Resources */,
+				460CEDD62016661F008ECD65 /* lato_bold.ttf in Resources */,
+				460CEDD32016661F008ECD65 /* lato_black_italic.ttf in Resources */,
+				460CEDC72016661F008ECD65 /* roboto_italic.ttf in Resources */,
+				460CEDD72016661F008ECD65 /* lato_hairline_italic.ttf in Resources */,
+				460373C5201263A900EC7EBE /* sign.html in Resources */,
+				460CEDCF2016661F008ECD65 /* pt_sans_bold_italic.ttf in Resources */,
+				460373552012565900EC7EBE /* Images.xcassets in Resources */,
+				460CEDD22016661F008ECD65 /* pt_sans.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		46439D5B1E709B03008577C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1747,6 +2250,82 @@
 				46439D7F1E709B03008577C0 /* lato_black_italic.ttf in Resources */,
 				46439D801E709B03008577C0 /* roboto_medium.ttf in Resources */,
 				46439D811E709B03008577C0 /* roboto.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46B86B6320123271009E643E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				460CEDBA2016661F008ECD65 /* lato_black.ttf in Resources */,
+				460CEDB62016661F008ECD65 /* pt_sans_bold.ttf in Resources */,
+				460CEDAE2016661F008ECD65 /* roboto_light_italic.ttf in Resources */,
+				460CEDAC2016661F008ECD65 /* roboto_bold.ttf in Resources */,
+				460CEDB02016661F008ECD65 /* roboto_medium_italic.ttf in Resources */,
+				460373CB2012685D00EC7EBE /* copy-env-file.rb in Resources */,
+				460CEDBE2016661F008ECD65 /* lato_hairline.ttf in Resources */,
+				460CEDAA2016661F008ECD65 /* roboto_black.ttf in Resources */,
+				460CEDAF2016661F008ECD65 /* roboto_light.ttf in Resources */,
+				460CEDC02016661F008ECD65 /* lato_light_italic.ttf in Resources */,
+				460CEDB22016661F008ECD65 /* roboto_thin_italic.ttf in Resources */,
+				460CEDBB2016661F008ECD65 /* lato_bold_italic.ttf in Resources */,
+				460CEDAB2016661F008ECD65 /* roboto_bold_italic.ttf in Resources */,
+				460CEDA92016661F008ECD65 /* roboto_black_italic.ttf in Resources */,
+				460CEDB72016661F008ECD65 /* pt_sans_italic.ttf in Resources */,
+				460CEDBF2016661F008ECD65 /* lato_italic.ttf in Resources */,
+				460CEDE220166E46008ECD65 /* Localizable.strings in Resources */,
+				460CEDB12016661F008ECD65 /* roboto_medium.ttf in Resources */,
+				460CEDC12016661F008ECD65 /* lato_light.ttf in Resources */,
+				460CEDB32016661F008ECD65 /* roboto_thin.ttf in Resources */,
+				460CEDB42016661F008ECD65 /* roboto.ttf in Resources */,
+				460CEDC22016661F008ECD65 /* lato.ttf in Resources */,
+				46B86B6420123271009E643E /* MainInterface.storyboard in Resources */,
+				460CEDBC2016661F008ECD65 /* lato_bold.ttf in Resources */,
+				460CEDB92016661F008ECD65 /* lato_black_italic.ttf in Resources */,
+				460CEDAD2016661F008ECD65 /* roboto_italic.ttf in Resources */,
+				460CEDBD2016661F008ECD65 /* lato_hairline_italic.ttf in Resources */,
+				460373C4201263A900EC7EBE /* sign.html in Resources */,
+				460CEDB52016661F008ECD65 /* pt_sans_bold_italic.ttf in Resources */,
+				460373542012565900EC7EBE /* Images.xcassets in Resources */,
+				460CEDB82016661F008ECD65 /* pt_sans.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46E9602520122E5D00D5AEB9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				460CEDA02016661D008ECD65 /* lato_black.ttf in Resources */,
+				460CED9C2016661D008ECD65 /* pt_sans_bold.ttf in Resources */,
+				460CED942016661D008ECD65 /* roboto_light_italic.ttf in Resources */,
+				460CED922016661D008ECD65 /* roboto_bold.ttf in Resources */,
+				460CED962016661D008ECD65 /* roboto_medium_italic.ttf in Resources */,
+				460373CA2012685D00EC7EBE /* copy-env-file.rb in Resources */,
+				460CEDA42016661E008ECD65 /* lato_hairline.ttf in Resources */,
+				460CED902016661D008ECD65 /* roboto_black.ttf in Resources */,
+				460CED952016661D008ECD65 /* roboto_light.ttf in Resources */,
+				460CEDA62016661E008ECD65 /* lato_light_italic.ttf in Resources */,
+				460CED982016661D008ECD65 /* roboto_thin_italic.ttf in Resources */,
+				460CEDA12016661D008ECD65 /* lato_bold_italic.ttf in Resources */,
+				460CED912016661D008ECD65 /* roboto_bold_italic.ttf in Resources */,
+				460CED8F2016661D008ECD65 /* roboto_black_italic.ttf in Resources */,
+				460CED9D2016661D008ECD65 /* pt_sans_italic.ttf in Resources */,
+				460CEDA52016661E008ECD65 /* lato_italic.ttf in Resources */,
+				460CEDE120166E46008ECD65 /* Localizable.strings in Resources */,
+				460CED972016661D008ECD65 /* roboto_medium.ttf in Resources */,
+				460CEDA72016661E008ECD65 /* lato_light.ttf in Resources */,
+				460CED992016661D008ECD65 /* roboto_thin.ttf in Resources */,
+				460CED9A2016661D008ECD65 /* roboto.ttf in Resources */,
+				460CEDA82016661E008ECD65 /* lato.ttf in Resources */,
+				46E9602D20122E5D00D5AEB9 /* MainInterface.storyboard in Resources */,
+				460CEDA22016661D008ECD65 /* lato_bold.ttf in Resources */,
+				460CED9F2016661D008ECD65 /* lato_black_italic.ttf in Resources */,
+				460CED932016661D008ECD65 /* roboto_italic.ttf in Resources */,
+				460CEDA32016661E008ECD65 /* lato_hairline_italic.ttf in Resources */,
+				460373C3201263A900EC7EBE /* sign.html in Resources */,
+				460CED9B2016661D008ECD65 /* pt_sans_bold_italic.ttf in Resources */,
+				460373532012565900EC7EBE /* Images.xcassets in Resources */,
+				460CED9E2016661D008ECD65 /* pt_sans.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1830,6 +2409,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MudamosMobileTests/Pods-MudamosMobileTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		27544FB8F2B1BEC52914B54B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MessageSignerAction/Pods-MessageSignerAction-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		28FF65DE45764D3FB39786F0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		297399DBBEA7BA4A938F4C70 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1843,6 +2452,75 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MudamosMobileTests/Pods-MudamosMobileTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		460373CD2012687700EC7EBE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby MessageSignerAction/copy-env-file.rb";
+		};
+		460373CE201268A200EC7EBE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby MessageSignerAction/copy-env-file.rb .env.beta";
+		};
+		460373CF201268AD00EC7EBE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby MessageSignerAction/copy-env-file.rb .env.production";
+		};
+		4615B18220125382006CBF41 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4615B18920125382006CBF41 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MessageSignerActionProduction/Pods-MessageSignerActionProduction-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		46439D3D1E709B03008577C0 /* [CP] Check Pods Manifest.lock */ = {
@@ -1902,6 +2580,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MudamosProduction/Pods-MudamosProduction-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		46B86B5E20123271009E643E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		46B86B6520123271009E643E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MessageSignerActionBeta/Pods-MessageSignerActionBeta-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		46ED2A6C1DF194E400B36CD0 /* [CP] Check Pods Manifest.lock */ = {
@@ -2040,8 +2748,30 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				460B5A7B201230B30028A617 /* Dummy.swift in Sources */,
 				4675EBF31ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
 				46E7BBC41ECCC026001D1720 /* MUDFirebase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4615B18320125382006CBF41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				460373A220125E6000EC7EBE /* Formatter.swift in Sources */,
+				4615B18420125382006CBF41 /* ActionViewController.swift in Sources */,
+				467749DC2016232A001717E1 /* Bool.swift in Sources */,
+				460373AB20125F6300EC7EBE /* DotEnv.swift in Sources */,
+				467749D8201612DA001717E1 /* Signer.swift in Sources */,
+				460373A620125EB500EC7EBE /* String.swift in Sources */,
+				460373B8201260A900EC7EBE /* MobileApi.swift in Sources */,
+				4603739E20125D7300EC7EBE /* Date.swift in Sources */,
+				460373C02012617C00EC7EBE /* WalletService.swift in Sources */,
+				460373BC2012612B00EC7EBE /* SessionService.swift in Sources */,
+				460CED6B20165CC1008ECD65 /* Async.swift in Sources */,
+				460373AF20125FC200EC7EBE /* MUDError.swift in Sources */,
+				467749B120160362001717E1 /* MudamosPayload.swift in Sources */,
+				460373B32012600600EC7EBE /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2051,8 +2781,51 @@
 			files = (
 				46439D3F1E709B03008577C0 /* AppDelegate.m in Sources */,
 				46439D401E709B03008577C0 /* main.m in Sources */,
+				460B5A7D201230B30028A617 /* Dummy.swift in Sources */,
 				4675EBF51ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
 				46E7BBC61ECCC026001D1720 /* MUDFirebase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46B86B5F20123271009E643E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				460373A120125E6000EC7EBE /* Formatter.swift in Sources */,
+				46B86B6020123271009E643E /* ActionViewController.swift in Sources */,
+				467749DB2016232A001717E1 /* Bool.swift in Sources */,
+				460373AA20125F6300EC7EBE /* DotEnv.swift in Sources */,
+				467749D7201612DA001717E1 /* Signer.swift in Sources */,
+				460373A520125EB500EC7EBE /* String.swift in Sources */,
+				460373B7201260A900EC7EBE /* MobileApi.swift in Sources */,
+				4603739D20125D7300EC7EBE /* Date.swift in Sources */,
+				460373BF2012617C00EC7EBE /* WalletService.swift in Sources */,
+				460373BB2012612B00EC7EBE /* SessionService.swift in Sources */,
+				460CED6A20165CC1008ECD65 /* Async.swift in Sources */,
+				460373AE20125FC200EC7EBE /* MUDError.swift in Sources */,
+				467749B020160362001717E1 /* MudamosPayload.swift in Sources */,
+				460373B22012600600EC7EBE /* User.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46E9602320122E5D00D5AEB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				460373A020125E6000EC7EBE /* Formatter.swift in Sources */,
+				46E9602A20122E5D00D5AEB9 /* ActionViewController.swift in Sources */,
+				467749DA2016232A001717E1 /* Bool.swift in Sources */,
+				460373A920125F6300EC7EBE /* DotEnv.swift in Sources */,
+				467749D6201612DA001717E1 /* Signer.swift in Sources */,
+				460373A420125EB500EC7EBE /* String.swift in Sources */,
+				460373B6201260A900EC7EBE /* MobileApi.swift in Sources */,
+				4603739C20125D7300EC7EBE /* Date.swift in Sources */,
+				460373BE2012617C00EC7EBE /* WalletService.swift in Sources */,
+				460373BA2012612B00EC7EBE /* SessionService.swift in Sources */,
+				460CED6920165CC1008ECD65 /* Async.swift in Sources */,
+				460373AD20125FC200EC7EBE /* MUDError.swift in Sources */,
+				467749AF20160362001717E1 /* MudamosPayload.swift in Sources */,
+				460373B12012600600EC7EBE /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2062,6 +2835,7 @@
 			files = (
 				46ED2A6E1DF194E400B36CD0 /* AppDelegate.m in Sources */,
 				46ED2A6F1DF194E400B36CD0 /* main.m in Sources */,
+				460B5A7C201230B30028A617 /* Dummy.swift in Sources */,
 				4675EBF41ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
 				46E7BBC51ECCC026001D1720 /* MUDFirebase.m in Sources */,
 			);
@@ -2075,6 +2849,21 @@
 			target = 13B07F861A680F5B00A75B9A /* MudamosMobile */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
+		4615B191201253F1006CBF41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4615B18120125382006CBF41 /* MessageSignerActionProduction */;
+			targetProxy = 4615B190201253F1006CBF41 /* PBXContainerItemProxy */;
+		};
+		46A2BA9F201233D4006EFFBB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 46B86B5D20123271009E643E /* MessageSignerActionBeta */;
+			targetProxy = 46A2BA9E201233D4006EFFBB /* PBXContainerItemProxy */;
+		};
+		46E9603020122E5D00D5AEB9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 46E9602620122E5D00D5AEB9 /* MessageSignerAction */;
+			targetProxy = 46E9602F20122E5D00D5AEB9 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -2087,6 +2876,22 @@
 			path = MudamosMobile;
 			sourceTree = "<group>";
 		};
+		460CEDE520166E46008ECD65 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				460CEDE6201671E4008ECD65 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46E9602C20122E5D00D5AEB9 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -2094,6 +2899,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5CA59394A12E918879BC09D5 /* Pods-MudamosMobileTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2112,6 +2918,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MudamosMobile.app/MudamosMobile";
@@ -2122,6 +2929,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 207C3AC18ADF55D82D20DF88 /* Pods-MudamosMobileTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = MudamosMobileTests/Info.plist;
@@ -2129,6 +2937,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2147,7 +2956,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC45B1BB94D278A89EF7F9D9 /* Pods-MudamosMobile.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = T97PZRMFDE;
@@ -2172,6 +2984,7 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
+					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2183,6 +2996,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.MudamosMobile;
 				PRODUCT_NAME = MudamosMobile;
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2191,7 +3007,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BB620C49F665BCB96048640D /* Pods-MudamosMobile.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T97PZRMFDE;
 				HEADER_SEARCH_PATHS = (
@@ -2215,6 +3034,7 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
+					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2226,7 +3046,93 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.MudamosMobile;
 				PRODUCT_NAME = MudamosMobile;
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobile-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		4615B18B20125382006CBF41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D04F85D25B6A20A9064C5C3 /* Pods-MessageSignerActionProduction.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = YGK2CQTELW;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/MessageSignerAction/MessageSignerActionProduction-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.MudamosMobile.MessageSignerAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4615B18C20125382006CBF41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6443B90852D3BE7AB57D2A1 /* Pods-MessageSignerActionProduction.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Instituto de Tecnologia e Sociedade (YGK2CQTELW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = YGK2CQTELW;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/MessageSignerAction/MessageSignerActionProduction-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.MudamosMobile.MessageSignerAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -2234,8 +3140,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C31184017F8613138D7E49E4 /* Pods-MudamosProduction.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MudamosProduction.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -2261,12 +3170,14 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
+					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = InfoMudamosProduction.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2280,6 +3191,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "638fe4dc-8cc8-46c4-8a6a-1d36632af0cc";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app dev (push enabled)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosProduction-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2288,7 +3202,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B984827EF456536636B8D2D /* Pods-MudamosProduction.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MudamosProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Instituto de Tecnologia e Sociedade (YGK2CQTELW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -2315,12 +3231,14 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
+					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = InfoMudamosProduction.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2334,7 +3252,183 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "161e25e2-2e4a-4879-9720-472339b63b21";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app store (push enabled)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosProduction-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		46B86B6720123271009E643E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCB1D375C90853BD089B8C16 /* Pods-MessageSignerActionBeta.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MessageSignerActionBeta/MessageSignerActionBeta.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = T97PZRMFDE;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/MessageSignerAction/MessageSignerActionBeta-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile.MessageSignerActionBeta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9c638b9d-571f-4125-aa44-eb159749ec73";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos signer beta";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		46B86B6820123271009E643E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E03105BDAAC5A0BB5ADB6DB /* Pods-MessageSignerActionBeta.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MessageSignerActionBeta/MessageSignerActionBeta.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mor & Dan Tecnologia Consultoria Empresarial Ltda (T97PZRMFDE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = T97PZRMFDE;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/MessageSignerAction/MessageSignerActionBeta-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile.MessageSignerActionBeta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "11b7d675-039a-4a24-be23-871cd8962517";
+				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc: br.com.tagview.mudamosmobile.MessageSigner";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		46E9603220122E5D00D5AEB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAFC20247486915F58C3D1A4 /* Pods-MessageSignerAction.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = T97PZRMFDE;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = MessageSignerAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.MudamosMobile.MessageSignerAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		46E9603320122E5D00D5AEB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEADA9860C7C730162F487DC /* Pods-MessageSignerAction.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = T97PZRMFDE;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = MessageSignerAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.MudamosMobile.MessageSignerAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -2342,7 +3436,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FD315B732F68A52F03537566 /* Pods-MudamosMobileTagviewBeta.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MudamosMobileTagviewBeta.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2370,12 +3466,14 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
+					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2394,6 +3492,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a2389657-7561-4ba4-b988-7bdbb369df4e";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos mobile dev";
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobileTagviewBeta-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2402,7 +3503,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 245171D29B70E3836D0013F4 /* Pods-MudamosMobileTagviewBeta.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MudamosMobileTagviewBeta.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mor & Dan Tecnologia Consultoria Empresarial Ltda (T97PZRMFDE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -2429,12 +3532,14 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
+					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2453,6 +3558,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "958c1fa8-de2b-4383-a542-62fec1454821";
 				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc: br.com.tagview.mudamosmobile";
+				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobileTagviewBeta-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -2513,6 +3620,7 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
+					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -2571,6 +3679,7 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
+					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -2600,11 +3709,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		4615B18A20125382006CBF41 /* Build configuration list for PBXNativeTarget "MessageSignerActionProduction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4615B18B20125382006CBF41 /* Debug */,
+				4615B18C20125382006CBF41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		46439D851E709B03008577C0 /* Build configuration list for PBXNativeTarget "MudamosProduction" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				46439D861E709B03008577C0 /* Debug */,
 				46439D871E709B03008577C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		46B86B6620123271009E643E /* Build configuration list for PBXNativeTarget "MessageSignerActionBeta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46B86B6720123271009E643E /* Debug */,
+				46B86B6820123271009E643E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		46E9605620122E5D00D5AEB9 /* Build configuration list for PBXNativeTarget "MessageSignerAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46E9603220122E5D00D5AEB9 /* Debug */,
+				46E9603320122E5D00D5AEB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

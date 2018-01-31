@@ -1,5 +1,5 @@
 import { takeLatest } from "redux-saga";
-import { call, fork, put } from "redux-saga/effects";
+import { call, fork, put, select } from "redux-saga/effects";
 
 import {
   appSetup,
@@ -9,12 +9,18 @@ import {
   fetchRemoteConfig,
   fetchProfile,
   fetchPlips,
+  mainAppInitiated as mainAppInitiatedAction,
+  signMessage,
 } from "../actions";
 
 import { fetchSession } from "./session";
+import { mainAppInitiated } from "../selectors";
 
-function* setup({ sessionStore }) {
+function* setup({ mudamosSigner, sessionStore }) {
   yield takeLatest("SETUP", function* () {
+    const isMainApp = yield call(mudamosSigner.isMainApp);
+    if (!isMainApp) return;
+
     yield call(fetchSession, { sessionStore });
 
     yield [
@@ -24,11 +30,30 @@ function* setup({ sessionStore }) {
       put(fetchRemoteConfig()),
       put(fetchProfile()),
       put(fetchPlips()),
+      put(mainAppInitiatedAction()),
     ];
   });
-}
-export default function* setupSaga({ sessionStore }) {
-  yield fork(setup, { sessionStore });
 
-  yield put(appSetup());
+  yield takeLatest("SETUP", function* () {
+    const isSignerApp = yield call(mudamosSigner.isSignerApp);
+    if (!isSignerApp) return;
+
+    yield call(fetchSession, { sessionStore });
+    yield put(signMessage());
+  });
+}
+export default function* setupSaga({ mudamosSigner, sessionStore }) {
+  yield fork(setup, { mudamosSigner, sessionStore });
+
+  // If the app was started because of an action
+  // the setup process was halted, so we need to initiated the main app again
+  yield takeLatest("APP_ON_FOREGROUND", function* () {
+    const isMainApp = yield call(mudamosSigner.isMainApp);
+    if (!isMainApp) return;
+
+    const initiated = yield select(mainAppInitiated);
+    if (!initiated) {
+      yield put(appSetup());
+    }
+  });
 }

@@ -205,6 +205,13 @@ const signPlip = ({ client }) => (authToken, signMessage) =>
     .send({ signMessage })
     .then(getData);
 
+const signMessage = ({ client }) => (authToken, { message }) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/message/sign/custom")
+    .send({ message })
+    .then(getData);
+
 const userSignInfo = ({ client }) => (authToken, plipId) =>
   authorizedClient(client, authToken)
     .get(`/users/message/${plipId}`)
@@ -364,6 +371,7 @@ export default function MobileApi(host) {
     searchZipCode: searchZipCode({ client: v1Client }),
     sendPhoneValidation: sendPhoneValidation({ client: v1Client }),
     signIn: signIn({ client: v1Client }),
+    signMessage: signMessage({ client: v1Client }),
     signUp: signUp({ client: v2Client }),
     signPlip: signPlip({ client: v1Client }),
     updateProfile: updateProfile({ client: v1Client }),

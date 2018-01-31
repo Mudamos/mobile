@@ -8,6 +8,7 @@ import {
 } from "ramda";
 
 import {
+  different,
   homeSceneKey,
   isBlank,
   isDev,
@@ -370,13 +371,40 @@ function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
 }
 
 function* loadStorePlipsInfo({ mobileApi }) {
-  yield takeLatest(["SESSION_LOGGIN_SUCCEEDED", "SESSION_USER_LOGGED_OUT"], function* () {
+  let oldUserLocation;
+
+  function* fetch() {
     try {
       const plips = yield select(findPlips);
       const plipIds = (plips || []).map(prop("id"));
       if (!plipIds.length) return;
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+    } catch(e) {
+      logError(e, { tag: "loadStorePlipsInfo" });
+    }
+  }
+
+  yield takeLatest(["SESSION_LOGGIN_SUCCEEDED", "SESSION_USER_LOGGED_OUT"], function* () {
+   yield call(fetch);
+  });
+
+  yield takeLatest("PROFILE_USER_UPDATED", function* ({ payload: { currentUser }}) {
+    try {
+      if (!currentUser) {
+        oldUserLocation = null;
+        return;
+      }
+
+      const newLocation = { uf: currentUser.address.uf, city: currentUser.address.city };
+      if (!oldUserLocation) {
+        oldUserLocation = newLocation;
+        return;
+      }
+
+      if (different(newLocation, oldUserLocation)) {
+        yield call(fetch);
+      }
     } catch(e) {
       logError(e, { tag: "loadStorePlipsInfo" });
     }

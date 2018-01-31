@@ -2,5 +2,9 @@ import "./shim.js"
 
 import { AppRegistry } from "react-native";
 import App from "./src/app";
+import { storeBuilder } from "./src/store";
 
-AppRegistry.registerComponent("MudamosMobile", () => App);
+const { store, run } = storeBuilder();
+run();
+
+AppRegistry.registerComponent("MudamosMobile", () => App(store));

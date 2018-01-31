@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropTypes } from "react";
 import { Image } from "react-native";
 
 import * as Animatable from "react-native-animatable";
@@ -9,7 +9,7 @@ import locale from "../locales/pt-BR";
 import styles from "../styles/splash-loader";
 
 
-const SplashLoader = props => {
+const SplashLoader = ({ loadingTitle = locale.loading, ...props }) => {
   const logo = (
     <Image
       source={require("../images/Logo-alt.png")}
@@ -24,7 +24,7 @@ const SplashLoader = props => {
       iterationCount="infinite"
       style={styles.loading}
     >
-      {locale.loading}
+      {loadingTitle}
     </Animatable.Text>
   );
 
@@ -40,6 +40,7 @@ const SplashLoader = props => {
 
 SplashLoader.propTypes = {
   ...PageLoader.propTypes,
+  loadingTitle: PropTypes.string,
 };
 
 SplashLoader.defaultProps = {

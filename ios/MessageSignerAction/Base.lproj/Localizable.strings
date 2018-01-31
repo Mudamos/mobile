@@ -1,0 +1,21 @@
+/*
+  Localizable.strings
+  MudamosMobile
+
+  Created by Guilherme da Silva Mello on 22/01/18.
+  Copyright © 2018 Facebook. All rights reserved.
+*/
+
+"could-not-convert-message" = "Não foi possível converter a mensagem.";
+"error-title" = "Ocorreu um erro.";
+"incomplete-profile" = "Perfil incompleto. Use a app da Mudamos+ para completar seu perfil.";
+"identifier-not-found" = "Identificador da mensagem não encontrado.";
+"invalid-payload" = "Mensagem inválida.";
+"invalid-wallet" = "Sua assinatura é inválida. Use a app da Mudamos+ para atualizá-la.";
+"sign-error" = "Erro ao efetuar a assinatura.";
+"success!" = "Sucesso!";
+"unknown-error" = "Erro ao efetuar ação.";
+"user-not-logged-in" = "Usuário não logado. Use a app da Mudamos+ para se logar.";
+
+/* ActionViewController */
+"executing-action-wait" = "Executando assinatura. Aguarde...";
