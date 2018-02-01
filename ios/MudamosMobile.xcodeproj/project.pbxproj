@@ -737,6 +737,7 @@
 		460373BD2012617C00EC7EBE /* WalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletService.swift; sourceTree = "<group>"; };
 		460373C2201263A800EC7EBE /* sign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sign.html; sourceTree = "<group>"; };
 		460373C92012685D00EC7EBE /* copy-env-file.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "copy-env-file.rb"; sourceTree = "<group>"; };
+		46039B9C2023416D0028BE43 /* MessageSignerActionBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageSignerActionBeta.entitlements; sourceTree = "<group>"; };
 		460B5A77201230B20028A617 /* MudamosMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosMobile-Bridging-Header.h"; sourceTree = "<group>"; };
 		460B5A78201230B20028A617 /* MudamosMobileTagviewBeta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosMobileTagviewBeta-Bridging-Header.h"; sourceTree = "<group>"; };
 		460B5A79201230B20028A617 /* MudamosProduction-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosProduction-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -762,7 +763,6 @@
 		46AA978D1E9BBCD200B76B3F /* MudamosMobileTagviewBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosMobileTagviewBeta.entitlements; sourceTree = "<group>"; };
 		46B86B6920123271009E643E /* MessageSignerActionBeta.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionBeta.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		46B86B6A20123271009E643E /* MessageSignerActionBeta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MessageSignerActionBeta-Info.plist"; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/MessageSignerAction/MessageSignerActionBeta-Info.plist"; sourceTree = "<absolute>"; };
-		46B86B8D20123330009E643E /* MessageSignerActionBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MessageSignerActionBeta.entitlements; path = MessageSignerActionBeta/MessageSignerActionBeta.entitlements; sourceTree = "<group>"; };
 		46BAB489202240CC0068CE6F /* MessageSignerActionProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageSignerActionProduction.entitlements; sourceTree = "<group>"; };
 		46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InfoTagviewBeta.plist; path = MudamosMobile/InfoTagviewBeta.plist; sourceTree = "<group>"; };
 		46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/development/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1438,8 +1438,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				46039B9C2023416D0028BE43 /* MessageSignerActionBeta.entitlements */,
 				46BAB489202240CC0068CE6F /* MessageSignerActionProduction.entitlements */,
-				46B86B8D20123330009E643E /* MessageSignerActionBeta.entitlements */,
 				463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */,
 				46C00F0F1EBB56FA006F17F1 /* GoogleService-Info.plist */,
 				46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */,
@@ -3292,7 +3292,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MessageSignerActionBeta/MessageSignerActionBeta.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MessageSignerActionBeta.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3338,7 +3338,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MessageSignerActionBeta/MessageSignerActionBeta.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MessageSignerActionBeta.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mor & Dan Tecnologia Consultoria Empresarial Ltda (T97PZRMFDE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
