@@ -763,6 +763,7 @@
 		46B86B6920123271009E643E /* MessageSignerActionBeta.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionBeta.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		46B86B6A20123271009E643E /* MessageSignerActionBeta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MessageSignerActionBeta-Info.plist"; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/MessageSignerAction/MessageSignerActionBeta-Info.plist"; sourceTree = "<absolute>"; };
 		46B86B8D20123330009E643E /* MessageSignerActionBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MessageSignerActionBeta.entitlements; path = MessageSignerActionBeta/MessageSignerActionBeta.entitlements; sourceTree = "<group>"; };
+		46BAB489202240CC0068CE6F /* MessageSignerActionProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageSignerActionProduction.entitlements; sourceTree = "<group>"; };
 		46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InfoTagviewBeta.plist; path = MudamosMobile/InfoTagviewBeta.plist; sourceTree = "<group>"; };
 		46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/development/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46C00F0F1EBB56FA006F17F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/mudamos-beta/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1437,6 +1438,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				46BAB489202240CC0068CE6F /* MessageSignerActionProduction.entitlements */,
 				46B86B8D20123330009E643E /* MessageSignerActionBeta.entitlements */,
 				463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */,
 				46C00F0F1EBB56FA006F17F1 /* GoogleService-Info.plist */,
@@ -1680,13 +1682,21 @@
 					};
 					4615B18120125382006CBF41 = {
 						DevelopmentTeam = YGK2CQTELW;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					46439D3C1E709B03008577C0 = {
 						DevelopmentTeam = YGK2CQTELW;
 						LastSwiftMigration = 920;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -3070,8 +3080,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MessageSignerActionProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = YGK2CQTELW;
 				ENABLE_TESTABILITY = YES;
@@ -3084,8 +3095,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.MudamosMobile.MessageSignerAction;
+				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition.MessageSignerAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dc1856ab-0429-40d4-8758-9c52e4722da0";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos Signer Action Dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3112,9 +3125,10 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MessageSignerActionProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Instituto de Tecnologia e Sociedade (YGK2CQTELW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YGK2CQTELW;
@@ -3127,8 +3141,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.MudamosMobile.MessageSignerAction;
+				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition.MessageSignerAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e30360f5-22fa-49ea-8c4a-084c82012d36";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos Signer Action Prod";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
@@ -3250,7 +3266,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "161e25e2-2e4a-4879-9720-472339b63b21";
+				PROVISIONING_PROFILE = "6c402eca-e229-46b3-b499-5cbe20b6ab32";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app store (push enabled)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MudamosProduction-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
