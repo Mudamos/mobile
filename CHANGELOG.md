@@ -1,5 +1,6 @@
 # Next
 
+* [PR #382] Properly return the signature
 * [PR #378] Add prod app group
 * [PR #376] Validate profile
 * [PR #374] Add Action sign feature

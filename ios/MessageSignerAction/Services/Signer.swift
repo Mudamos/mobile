@@ -187,7 +187,7 @@ class SignerResult {
   let publicKey: String
 
   var signature: String {
-    return signedMessage.components(separatedBy: ";")[3]
+    return signedMessage.components(separatedBy: ";").suffix(2).first!
   }
 
   init(message: String, originalMessage: MudamosMessage, signedMessage: String, timestamp: String, publicKey: String) {

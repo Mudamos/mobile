@@ -31,7 +31,7 @@ const buildMessage = ({ message, timestamp }) => [
   timestamp,
 ].join(";");
 
-const signature = pipe(split(";"), nth(3));
+const signature = pipe(split(";"), nth(-2));
 
 function* signMessage({ mobileApi, mudamosSigner, walletStore }) {
   yield takeLatest("ACTION_SIGNER_SIGN_MESSAGE", function* () {
