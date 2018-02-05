@@ -3310,7 +3310,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile.MessageSignerActionBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9c638b9d-571f-4125-aa44-eb159749ec73";
+				PROVISIONING_PROFILE = "5c8ccc0a-3012-40db-8cb5-e68e92713415";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos signer beta";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -3356,7 +3356,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile.MessageSignerActionBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "11b7d675-039a-4a24-be23-871cd8962517";
+				PROVISIONING_PROFILE = "969eb26a-8ec5-4254-978c-cb24881020a2";
 				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc: br.com.tagview.mudamosmobile.MessageSigner";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -3506,7 +3506,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a2389657-7561-4ba4-b988-7bdbb369df4e";
+				PROVISIONING_PROFILE = "619faee9-09f1-447f-b4bb-c0deb904c284";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos mobile dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobileTagviewBeta-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3572,7 +3572,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "958c1fa8-de2b-4383-a542-62fec1454821";
+				PROVISIONING_PROFILE = "295b259c-b83c-4322-90e3-150efa73466e";
 				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc: br.com.tagview.mudamosmobile";
 				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobileTagviewBeta-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
