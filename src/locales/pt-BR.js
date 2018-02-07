@@ -1,6 +1,7 @@
 const translations = {
   actionSignerError: {
     "invalid-payload": "Mensagem inválida.",
+    "invalid-payload-size": "Tamanho da mensagem é inválido.",
     "incomplete-profile": "Perfil incompleto. Use a app da Mudamos+ para completar seu perfil. Acesse no menu a opção 'Validar perfil'.",
     "invalid-wallet": "Sua assinatura é inválida. Use a app da Mudamos+ para atualizá-la. Acesse no menu a opção 'Validar perfil'.",
     "unknown-error": "Erro ao efetuar ação.",
