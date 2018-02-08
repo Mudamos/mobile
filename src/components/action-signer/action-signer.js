@@ -25,7 +25,7 @@ import locale from "../../locales/pt-BR";
 
 const enhance = compose(
   withProps(({ done, error, errorIdentifier }) => ({
-    errorMessage: error ? locale.actionSignerError[errorIdentifier] : null,
+    errorMessage: error ? locale.actionSignerError[errorIdentifier] || errorIdentifier : null,
     isLoading: !done,
     success: done && !error,
   })),

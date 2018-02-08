@@ -38,6 +38,10 @@ class MudamosPayload {
         return completionHandler(nil, MUDError.InvalidMudamosPayload("could-not-convert-message"))
       }
 
+      if message.count == 0 {
+        return completionHandler(nil, MUDError.InvalidMudamosPayload("invalid-payload"))
+      }
+
       completionHandler(MudamosMessage(data: message), nil)
     }
   }
