@@ -1,20 +1,31 @@
 import OneSignal from "react-native-onesignal";
 
 import {
+  buffers,
+  delay,
   takeLatest,
 } from "redux-saga";
 
 import {
+  actionChannel,
   call,
+  flush,
   fork,
   put,
   select,
+  take,
 } from "redux-saga/effects";
 
 import {
+  flip,
+  fromPairs,
+  lensPath,
   map,
   pick,
   pipe,
+  prop,
+  view,
+  zipObj,
 } from "ramda";
 
 import {
@@ -22,6 +33,9 @@ import {
 } from "../actions";
 
 import {
+  findPlip,
+  findPlips,
+  hasUserSignedPlip,
   oneSignalUserInfo,
 } from "../selectors";
 
@@ -30,7 +44,7 @@ import {
   logError,
 } from "../utils";
 
-const getTags = pipe(pick(["city", "uf"]), map(v => v || ""));
+const getUserTags = pipe(pick(["city", "uf"]), map(v => v || ""));
 
 function* updateOneSignalProfile() {
   yield takeLatest("PROFILE_USER_UPDATED", function* ({ payload: { currentUser } }) {
@@ -44,11 +58,9 @@ function* updateOneSignalProfile() {
         city: currentUser.address.city,
       };
 
-      const getTags = pipe(pick(["city", "uf"]), map(v => v || ""));
-
       if (different(info, newAttrs)) {
         yield [
-          call([OneSignal, OneSignal.sendTags], getTags(newAttrs)),
+          call([OneSignal, OneSignal.sendTags], getUserTags(newAttrs)),
           call([OneSignal, OneSignal.syncHashedEmail], newAttrs.email),
         ];
 
@@ -58,6 +70,39 @@ function* updateOneSignalProfile() {
       logError(e, { tag: "updateOneSignal" });
     }
   });
+}
+
+function* signedPlips() {
+  const channel = yield actionChannel("PLIP_USER_SIGN_INFO", buffers.expanding(50));
+
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    try {
+      const currentAction = yield take(channel);
+
+      yield call(delay, 1000);
+
+      const pendingActions = yield flush(channel);
+      const actions = [currentAction, ...pendingActions];
+
+      const ids = actions.map(view(lensPath(["payload", "plipId"])));
+
+      const signedResult = yield ids.map(id => select(hasUserSignedPlip(id)));
+      const plips = yield ids.map(id => select(findPlip(id)))
+      const detailIds = plips.map(prop("detailId"));
+
+      const buildTags = pipe(
+        map(id => `signed-plip-${id}`),
+        flip(zipObj)(signedResult)
+      );
+
+      const tags = buildTags(detailIds);
+
+      yield call([OneSignal, OneSignal.sendTags], tags);
+    } catch(e) {
+      logError(e, { tag: "signedPlips" });
+    }
+  }
 }
 
 function* clearOneSinalProfileInfo() {
@@ -70,7 +115,7 @@ function* clearOneSinalProfileInfo() {
       };
 
       yield [
-        call([OneSignal, OneSignal.sendTags], getTags(newAttrs)),
+        call([OneSignal, OneSignal.sendTags], getUserTags(newAttrs)),
         call([OneSignal, OneSignal.syncHashedEmail], newAttrs.email),
       ];
     } catch(e) {
@@ -79,7 +124,26 @@ function* clearOneSinalProfileInfo() {
   });
 }
 
+function* clearSignedPlips() {
+  yield takeLatest("SESSION_USER_LOGGED_OUT", function* () {
+    try {
+      const plips = yield select(findPlips);
+      const tags = pipe(
+        map(prop("detailId")),
+        map(id => [`signed-plip-${id}`, false]),
+        fromPairs
+      )(plips);
+
+      yield call([OneSignal, OneSignal.sendTags], tags);
+    } catch(e) {
+      logError(e, { tag: "clearSignedPlips" });
+    }
+  });
+}
+
 export default function* notificationSaga() {
   yield fork(updateOneSignalProfile);
   yield fork(clearOneSinalProfileInfo);
+  yield fork(signedPlips);
+  yield fork(clearSignedPlips);
 }
