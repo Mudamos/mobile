@@ -1,5 +1,6 @@
 # Next
 
+* [PR #386] Tag user signed plips
 * [PR #384] Validate the message payload size
 * [PR #382] Properly return the signature
 * [PR #378] Add prod app group
