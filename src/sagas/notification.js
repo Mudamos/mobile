@@ -17,6 +17,7 @@ import {
 } from "redux-saga/effects";
 
 import {
+  concat,
   flip,
   fromPairs,
   lensPath,
@@ -45,6 +46,8 @@ import {
 } from "../utils";
 
 const getUserTags = pipe(pick(["city", "uf"]), map(v => v || ""));
+
+const signedPlipTag = concat("signed-plip-");
 
 function* updateOneSignalProfile() {
   yield takeLatest("PROFILE_USER_UPDATED", function* ({ payload: { currentUser } }) {
@@ -92,7 +95,7 @@ function* signedPlips() {
       const detailIds = plips.map(prop("detailId"));
 
       const buildTags = pipe(
-        map(id => `signed-plip-${id}`),
+        map(signedPlipTag),
         flip(zipObj)(signedResult)
       );
 
@@ -130,7 +133,8 @@ function* clearSignedPlips() {
       const plips = yield select(findPlips);
       const tags = pipe(
         map(prop("detailId")),
-        map(id => [`signed-plip-${id}`, false]),
+        map(signedPlipTag),
+        map(tag => [tag, false]),
         fromPairs
       )(plips);
 
