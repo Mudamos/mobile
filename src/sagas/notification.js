@@ -96,7 +96,7 @@ function* signedPlips() {
 
       const buildTags = pipe(
         map(signedPlipTag),
-        flip(zipObj)(signedResult)
+        flip(zipObj)(signedResult.map(String))
       );
 
       const tags = buildTags(detailIds);
@@ -134,7 +134,7 @@ function* clearSignedPlips() {
       const tags = pipe(
         map(prop("detailId")),
         map(signedPlipTag),
-        map(tag => [tag, false]),
+        map(tag => [tag, "false"]),
         fromPairs
       )(plips);
 
