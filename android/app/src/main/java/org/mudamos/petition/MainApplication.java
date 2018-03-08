@@ -26,6 +26,7 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.facebook.soloader.SoLoader;
 
 import org.mudamos.petition.firebase.FirebasePackage;
 import org.mudamos.petition.signer.SignerPackage;
@@ -75,12 +76,13 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public ReactNativeHost getReactNativeHost() {
-      return mReactNativeHost;
+    return mReactNativeHost;
   }
 
   @Override
   public void onCreate() {
     super.onCreate();
     FacebookSdk.sdkInitialize(getApplicationContext());
+    SoLoader.init(this, /* native exopackage */ false);
   }
 }
