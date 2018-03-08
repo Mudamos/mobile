@@ -26,12 +26,13 @@ project.xcworkspace
 # Cocoapods
 ios/Pods
 
-# Android/IJ
+# Android/IntelliJ
 #
-*.iml
+build/
 .idea
 .gradle
 local.properties
+*.iml
 
 # node.js
 #
