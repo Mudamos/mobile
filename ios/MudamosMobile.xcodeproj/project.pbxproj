@@ -66,9 +66,6 @@
 		460373C3201263A900EC7EBE /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460373C2201263A800EC7EBE /* sign.html */; };
 		460373C4201263A900EC7EBE /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460373C2201263A800EC7EBE /* sign.html */; };
 		460373C5201263A900EC7EBE /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460373C2201263A800EC7EBE /* sign.html */; };
-		460373CA2012685D00EC7EBE /* copy-env-file.rb in Resources */ = {isa = PBXBuildFile; fileRef = 460373C92012685D00EC7EBE /* copy-env-file.rb */; };
-		460373CB2012685D00EC7EBE /* copy-env-file.rb in Resources */ = {isa = PBXBuildFile; fileRef = 460373C92012685D00EC7EBE /* copy-env-file.rb */; };
-		460373CC2012685D00EC7EBE /* copy-env-file.rb in Resources */ = {isa = PBXBuildFile; fileRef = 460373C92012685D00EC7EBE /* copy-env-file.rb */; };
 		4607F33B1E97F72A0018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
 		4607F33C1E97F7340018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
 		460B5A7B201230B30028A617 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460B5A7A201230B30028A617 /* Dummy.swift */; };
@@ -736,7 +733,6 @@
 		460373B92012612B00EC7EBE /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
 		460373BD2012617C00EC7EBE /* WalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletService.swift; sourceTree = "<group>"; };
 		460373C2201263A800EC7EBE /* sign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sign.html; sourceTree = "<group>"; };
-		460373C92012685D00EC7EBE /* copy-env-file.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "copy-env-file.rb"; sourceTree = "<group>"; };
 		46039B9C2023416D0028BE43 /* MessageSignerActionBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageSignerActionBeta.entitlements; sourceTree = "<group>"; };
 		460B5A77201230B20028A617 /* MudamosMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosMobile-Bridging-Header.h"; sourceTree = "<group>"; };
 		460B5A78201230B20028A617 /* MudamosMobileTagviewBeta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosMobileTagviewBeta-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1324,7 +1320,6 @@
 				46B86B6A20123271009E643E /* MessageSignerActionBeta-Info.plist */,
 				4615B18E20125383006CBF41 /* MessageSignerActionProduction-Info.plist */,
 				460373522012565900EC7EBE /* Images.xcassets */,
-				460373C92012685D00EC7EBE /* copy-env-file.rb */,
 				460373C2201263A800EC7EBE /* sign.html */,
 				460CEDE520166E46008ECD65 /* Localizable.strings */,
 			);
@@ -2187,7 +2182,6 @@
 				460CEDC82016661F008ECD65 /* roboto_light_italic.ttf in Resources */,
 				460CEDC62016661F008ECD65 /* roboto_bold.ttf in Resources */,
 				460CEDCA2016661F008ECD65 /* roboto_medium_italic.ttf in Resources */,
-				460373CC2012685D00EC7EBE /* copy-env-file.rb in Resources */,
 				460CEDD82016661F008ECD65 /* lato_hairline.ttf in Resources */,
 				460CEDC42016661F008ECD65 /* roboto_black.ttf in Resources */,
 				460CEDC92016661F008ECD65 /* roboto_light.ttf in Resources */,
@@ -2272,7 +2266,6 @@
 				460CEDAE2016661F008ECD65 /* roboto_light_italic.ttf in Resources */,
 				460CEDAC2016661F008ECD65 /* roboto_bold.ttf in Resources */,
 				460CEDB02016661F008ECD65 /* roboto_medium_italic.ttf in Resources */,
-				460373CB2012685D00EC7EBE /* copy-env-file.rb in Resources */,
 				460CEDBE2016661F008ECD65 /* lato_hairline.ttf in Resources */,
 				460CEDAA2016661F008ECD65 /* roboto_black.ttf in Resources */,
 				460CEDAF2016661F008ECD65 /* roboto_light.ttf in Resources */,
@@ -2310,7 +2303,6 @@
 				460CED942016661D008ECD65 /* roboto_light_italic.ttf in Resources */,
 				460CED922016661D008ECD65 /* roboto_bold.ttf in Resources */,
 				460CED962016661D008ECD65 /* roboto_medium_italic.ttf in Resources */,
-				460373CA2012685D00EC7EBE /* copy-env-file.rb in Resources */,
 				460CEDA42016661E008ECD65 /* lato_hairline.ttf in Resources */,
 				460CED902016661D008ECD65 /* roboto_black.ttf in Resources */,
 				460CED952016661D008ECD65 /* roboto_light.ttf in Resources */,
@@ -2475,7 +2467,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ruby MessageSignerAction/copy-env-file.rb";
+			shellScript = "file=.env\n\necho \"Picking env file $file\"\n\necho \"Current folder: $(pwd)\"\n\ntarget=\"$CONFIGURATION_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/envfile\"\n\necho \"Will copy to $target\"\n\ncp \"../$file\" \"$target\"\n\necho \"Done! :)\"";
 		};
 		460373CE201268A200EC7EBE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2488,7 +2480,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ruby MessageSignerAction/copy-env-file.rb .env.beta";
+			shellScript = "file=.env.beta\n\necho \"Picking env file $file\"\n\necho \"Current folder: $(pwd)\"\n\ntarget=\"$CONFIGURATION_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/envfile\"\n\necho \"Will copy to $target\"\n\ncp \"../$file\" \"$target\"\n\necho \"Done! :)\"";
 		};
 		460373CF201268AD00EC7EBE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2501,7 +2493,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ruby MessageSignerAction/copy-env-file.rb .env.production";
+			shellScript = "file=.env.production\n\necho \"Picking env file $file\"\n\necho \"Current folder: $(pwd)\"\n\ntarget=\"$CONFIGURATION_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/envfile\"\n\necho \"Will copy to $target\"\n\ncp \"../$file\" \"$target\"\n\necho \"Done! :)\"";
 		};
 		4615B18220125382006CBF41 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
