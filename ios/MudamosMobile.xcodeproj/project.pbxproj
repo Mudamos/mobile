@@ -3097,8 +3097,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition.MessageSignerAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dc1856ab-0429-40d4-8758-9c52e4722da0";
-				PROVISIONING_PROFILE_SPECIFIER = "Mudamos Signer Action Dev";
+				PROVISIONING_PROFILE = "666ddbc4-844f-4bae-a6fe-679c442a0dfe";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos gui dev Signer Action";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3143,8 +3143,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition.MessageSignerAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e30360f5-22fa-49ea-8c4a-084c82012d36";
-				PROVISIONING_PROFILE_SPECIFIER = "Mudamos Signer Action Prod";
+				PROVISIONING_PROFILE = "96281e7c-fb13-45f3-9794-ca27e351fd54";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos prod Signer Action";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
@@ -3205,8 +3205,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "638fe4dc-8cc8-46c4-8a6a-1d36632af0cc";
-				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app dev (push enabled)";
+				PROVISIONING_PROFILE = "53a3ec3e-f554-4a39-9a85-2c97375c7440";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos gui dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "MudamosProduction-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -3266,8 +3266,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6c402eca-e229-46b3-b499-5cbe20b6ab32";
-				PROVISIONING_PROFILE_SPECIFIER = "Mudamos app store (push enabled)";
+				PROVISIONING_PROFILE = "7607b78a-7a87-4332-b201-40851eda68d5";
+				PROVISIONING_PROFILE_SPECIFIER = "Mudamos prod";
 				SWIFT_OBJC_BRIDGING_HEADER = "MudamosProduction-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
