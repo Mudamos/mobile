@@ -1,5 +1,7 @@
 # Next
 
+## [1.8.0] 09/03/2018
+
 * [PR #388] Use string value tags for onesignal
 * [PR #386] Tag user signed plips
 * [PR #384] Validate the message payload size
