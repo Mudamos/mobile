@@ -5175,9 +5175,9 @@ react-native-fence-html:
     htmlparser2 "^3.9.0"
     stream "0.0.2"
 
-react-native-firebase-crash-report@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-firebase-crash-report/-/react-native-firebase-crash-report-1.1.1.tgz#bb7cb0e11dc3b0124eea2a195dd0098e1f25ca0f"
+react-native-firebase-crash-report@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-firebase-crash-report/-/react-native-firebase-crash-report-1.3.0.tgz#bfd38f4c86bbe6ddac20e13d9c5b7ae8cba31af4"
 
 "react-native-firestack@https://github.com/itsriodejaneiro/react-native-firestack.git#eabd7d9":
   version "2.3.8"
