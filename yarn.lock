@@ -5179,9 +5179,9 @@ react-native-firebase-crash-report@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-firebase-crash-report/-/react-native-firebase-crash-report-1.1.1.tgz#bb7cb0e11dc3b0124eea2a195dd0098e1f25ca0f"
 
-react-native-firestack@^2.3.9:
-  version "2.3.9"
-  resolved "https://registry.yarnpkg.com/react-native-firestack/-/react-native-firestack-2.3.9.tgz#9654abe4a3e4c81a1977cc43d0d8d99322ad10f1"
+"react-native-firestack@https://github.com/itsriodejaneiro/react-native-firestack.git#eabd7d9":
+  version "2.3.8"
+  resolved "https://github.com/itsriodejaneiro/react-native-firestack.git#eabd7d9"
   dependencies:
     bows "^1.6.0"
     es6-symbol "^3.1.0"
