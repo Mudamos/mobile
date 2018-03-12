@@ -5237,9 +5237,9 @@ react-native-animate-number@^0.1.2:
   dependencies:
     react-timer-mixin "^0.13.3"
 
-react-native-config:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.1.2.tgz#cf6e3e312845f411fe9ef42f3ea283c576078681"
+react-native-config@^0.11.5:
+  version "0.11.5"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.5.tgz#516cb7b6ec437c7739236ca075971db3aabdcb95"
 
 react-native-crypto@^2.0.1:
   version "2.0.1"
