@@ -58,7 +58,7 @@
     "react-native-image-picker": "^0.26.7",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-maps": "^0.11.0",
-    "react-native-material-kit": "git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25",
+    "react-native-material-kit": "^0.5.1",
     "react-native-onesignal": "3.1.1",
     "react-native-open-settings": "https://github.com/itsriodejaneiro/react-native-open-settings.git#952440d",
     "react-native-permissions": "^1.1.1",

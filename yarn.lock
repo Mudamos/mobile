@@ -5160,9 +5160,9 @@ ramda:
   version "0.22.1"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.22.1.tgz#031da0c3df417c5b33c96234757eb37033f36a0e"
 
-ramda@~0.21.0:
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.21.0.tgz#a001abedb3ff61077d4ff1d577d44de77e8d0a35"
+ramda@^0.24.1:
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.24.1.tgz#c3b7755197f35b8dc3502228262c4c91ddb6b857"
 
 random-bytes@~1.0.0:
   version "1.0.0"
@@ -5324,11 +5324,12 @@ react-native-maps:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.11.0.tgz#8baa56eef83e9f2f04a70b192624b7bc9c56289d"
 
-"react-native-material-kit@git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25":
-  version "0.3.3"
-  resolved "git://github.com/youennPennarun/react-native-material-kit.git#cc9ac25"
+react-native-material-kit@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-material-kit/-/react-native-material-kit-0.5.1.tgz#fc05605273bfa0d145c6e36cca755cbde5b8db3a"
   dependencies:
-    ramda "~0.21.0"
+    prop-types "^15.5.10"
+    ramda "^0.24.1"
 
 react-native-onesignal@3.1.1:
   version "3.1.1"
@@ -5344,9 +5345,9 @@ react-native-permissions@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.1.1.tgz#4876004681ff8556454613d85249b01baff9b35b"
 
-react-native-randombytes@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-randombytes/-/react-native-randombytes-3.0.0.tgz#8327464f227a2c42d6ef013b7586b0ad4385ae61"
+react-native-randombytes@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-randombytes/-/react-native-randombytes-2.3.0.tgz#3ed6f8a4a803c453d787961047f6b2650d7c7335"
   dependencies:
     buffer "^4.9.1"
     sjcl "^1.0.3"
