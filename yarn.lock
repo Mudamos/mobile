@@ -5255,9 +5255,9 @@ react-native-crypto@^2.0.1:
     pbkdf2 "^3.0.3"
     public-encrypt "^4.0.0"
 
-"react-native-device-info@https://github.com/guimello/react-native-device-info":
-  version "0.9.6"
-  resolved "https://github.com/guimello/react-native-device-info#7b1b48fe48d0e787a213d619d1bfc2bcf157144c"
+react-native-device-info@^0.17.4:
+  version "0.17.4"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.17.4.tgz#c135d4719f0512729de1c72e058a137e29ea1e3e"
 
 react-native-drawer@^2.3.0:
   version "2.3.0"
