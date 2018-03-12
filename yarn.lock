@@ -5215,9 +5215,9 @@ react-native-onesignal@3.1.1:
   version "1.0.0"
   resolved "https://github.com/itsriodejaneiro/react-native-open-settings.git#952440d"
 
-react-native-permissions@0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-0.2.5.tgz#81c3adbb09d9edb6ae320d458ca9c021e03a5aba"
+react-native-permissions@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.1.1.tgz#4876004681ff8556454613d85249b01baff9b35b"
 
 react-native-randombytes@^2.2.0:
   version "2.2.0"
