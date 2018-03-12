@@ -62,7 +62,7 @@
     "react-native-onesignal": "3.1.1",
     "react-native-open-settings": "https://github.com/itsriodejaneiro/react-native-open-settings.git#952440d",
     "react-native-permissions": "^1.1.1",
-    "react-native-randombytes": "^2.2.0",
+    "react-native-randombytes": "^2.3.0",
     "react-native-router-flux": "^3.37.0",
     "react-native-share": "1.0.26",
     "react-native-simple-toast": "^0.0.5",
