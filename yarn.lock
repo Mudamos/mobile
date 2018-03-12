@@ -5211,9 +5211,9 @@ react-native-onesignal@3.1.1:
   dependencies:
     invariant "^2.2.2"
 
-react-native-open-settings@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-open-settings/-/react-native-open-settings-0.0.3.tgz#a0896f9e87b95cf45beb1c89953580fa0c0c01d8"
+"react-native-open-settings@https://github.com/itsriodejaneiro/react-native-open-settings.git#952440d":
+  version "1.0.0"
+  resolved "https://github.com/itsriodejaneiro/react-native-open-settings.git#952440d"
 
 react-native-permissions@0.2.5:
   version "0.2.5"
