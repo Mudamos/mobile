@@ -13,7 +13,6 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* MudamosMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MudamosMobileTests.m */; };
-		1100EFAB76364256B1E566B8 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E26FDBD24B0A4D90A5A1EB13 /* libRCTMaterialKit.a */; };
 		12DE1FDA65EF4A9BBD79B18B /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B15E59AB4D564186AE6276F2 /* Ionicons.ttf */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
@@ -27,9 +26,6 @@
 		1F94796C0ABFA93D81BB4DEB /* Pods_MessageSignerAction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0B56C85FAE918C101C4C94 /* Pods_MessageSignerAction.framework */; };
 		25C471E7FD8644158C6B3260 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1082FEFEA6B34CF8A23BF45D /* libAirMaps.a */; };
 		30910D199404C3C085B8EE95 /* Pods_MudamosMobileTagviewBeta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */; };
-		321F777C009E4EAD870F828D /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9BB36D0B0549BF80BA15B1 /* libBVLinearGradient.a */; };
-		34BC8EBCC2BA4877B640450A /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E366E4C3ED543A4B6736655 /* libRNFirebaseCrashReport.a */; };
-		400834B331534457AC160DEA /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8424FEEF17243CFB758995F /* libRNRandomBytes.a */; };
 		460373532012565900EC7EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 460373522012565900EC7EBE /* Images.xcassets */; };
 		460373542012565900EC7EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 460373522012565900EC7EBE /* Images.xcassets */; };
 		460373552012565900EC7EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 460373522012565900EC7EBE /* Images.xcassets */; };
@@ -178,14 +174,6 @@
 		46439D4B1E709B03008577C0 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		46439D4F1E709B03008577C0 /* Pods_MudamosMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */; };
 		46439D511E709B03008577C0 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1082FEFEA6B34CF8A23BF45D /* libAirMaps.a */; };
-		46439D521E709B03008577C0 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E26FDBD24B0A4D90A5A1EB13 /* libRCTMaterialKit.a */; };
-		46439D531E709B03008577C0 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8424FEEF17243CFB758995F /* libRNRandomBytes.a */; };
-		46439D541E709B03008577C0 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE91C85ACE5E44DC89DDD281 /* libRNDeviceInfo.a */; };
-		46439D551E709B03008577C0 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9BB36D0B0549BF80BA15B1 /* libBVLinearGradient.a */; };
-		46439D561E709B03008577C0 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D115F907C014FE4A318F416 /* libRCTFBSDK.a */; };
-		46439D571E709B03008577C0 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AA2BE2727F416DA6981B84 /* libRNShare.a */; };
-		46439D591E709B03008577C0 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB5F27F75FA40E7B12ACE07 /* libReact Native Open Settings.a */; };
-		46439D5A1E709B03008577C0 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 621C3D10CAD54FC5982F12BB /* libRNImagePicker.a */; };
 		46439D5C1E709B03008577C0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		46439D5D1E709B03008577C0 /* pt_sans_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */; };
 		46439D5E1E709B03008577C0 /* roboto_thin_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B571E269C800002728D /* roboto_thin_italic.ttf */; };
@@ -270,6 +258,26 @@
 		46B76D202058221000547DA0 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 460E7DCD1DF18C1100F86028 /* libLRDRCTSimpleToast.a */; };
 		46B76D212058221F00547DA0 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 460E7DCD1DF18C1100F86028 /* libLRDRCTSimpleToast.a */; };
 		46B76D222058223000547DA0 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 460E7DCD1DF18C1100F86028 /* libLRDRCTSimpleToast.a */; };
+		46B76D232058228A00547DA0 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
+		46B76D242058229400547DA0 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
+		46B76D252058229D00547DA0 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623C3E31E00818500158849 /* libRNDeviceInfo.a */; };
+		46B76D26205822AB00547DA0 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463C8EB71E08419900E79749 /* libBVLinearGradient.a */; };
+		46B76D27205822C100547DA0 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463FA2AF1E30E7310035B49D /* libRNShare.a */; };
+		46B76D28205822CB00547DA0 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */; };
+		46B76D29205822D700547DA0 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
+		46B76D2A205822E200547DA0 /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
+		46B76D2B205822EF00547DA0 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
+		46B76D2C205822F800547DA0 /* libFirestack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD05CF1ED34C1B001173CC /* libFirestack.a */; };
+		46B76D2D2058230300547DA0 /* libRCTUserDefaults.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46037397201257A100EC7EBE /* libRCTUserDefaults.a */; };
+		46B76D2E2058232400547DA0 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 464455F51E1ECFAD00AACF91 /* libRCTFBSDK.a */; };
+		46B76D2F2058233800547DA0 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
+		46B76D302058234200547DA0 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
+		46B76D312058234E00547DA0 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623C3E31E00818500158849 /* libRNDeviceInfo.a */; };
+		46B76D322058235B00547DA0 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463C8EB71E08419900E79749 /* libBVLinearGradient.a */; };
+		46B76D332058236600547DA0 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 464455F51E1ECFAD00AACF91 /* libRCTFBSDK.a */; };
+		46B76D342058237100547DA0 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463FA2AF1E30E7310035B49D /* libRNShare.a */; };
+		46B76D352058237A00547DA0 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */; };
+		46B76D362058238400547DA0 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
 		46B86B6020123271009E643E /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9602920122E5D00D5AEB9 /* ActionViewController.swift */; };
 		46B86B6420123271009E643E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */; };
 		46BD9FDC1DF1A0E600366372 /* InfoTagviewBeta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */; };
@@ -354,25 +362,17 @@
 		46F35B711E269C810002728D /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B591E269C800002728D /* roboto.ttf */; };
 		46FD05EF1ED34C44001173CC /* libFirestack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD05CF1ED34C1B001173CC /* libFirestack.a */; };
 		46FD05F01ED34C4C001173CC /* libFirestack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD05CF1ED34C1B001173CC /* libFirestack.a */; };
-		4BFC7789634149D2A3F02AA4 /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A536F47719B41759AAD3D00 /* libRCTOneSignal.a */; };
 		4E3854BF0D083037E79D169F /* Pods_MudamosMobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB358AEDAED7A7D4E7C8E06C /* Pods_MudamosMobileTests.framework */; };
 		5BCE8C5C9D8349EFB95E719A /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10E569BB49504C0E8E0A286A /* EvilIcons.ttf */; };
-		5DCF04FC33184DA7ABE235B4 /* libRCTUserDefaults.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8ECEA6C6F4D44C68E112068 /* libRCTUserDefaults.a */; };
 		609EBA8E9D8E4A92BF4BBEA5 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC816BA612714338983ED538 /* Entypo.ttf */; };
 		6B85438473FAA84B3277BDAA /* Pods_MessageSignerActionBeta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F1E8C94AB3D4618ACD7013 /* Pods_MessageSignerActionBeta.framework */; };
 		6DEB6F7A5414DE00DCABF21D /* Pods_MudamosMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8FFD6EB8614D6594CD5E902C /* Pods_MudamosProduction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4DE2CC59E274427F8D159E /* Pods_MudamosProduction.framework */; };
-		A5018F06EEB84A608D7B07BC /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AA2BE2727F416DA6981B84 /* libRNShare.a */; };
 		A987A82739134C549891CBB6 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 413B12353FD34D1C9F7FE084 /* Zocial.ttf */; };
-		AC342FDED7B646099A9A63A1 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 621C3D10CAD54FC5982F12BB /* libRNImagePicker.a */; };
 		AE65A15000BA4D24BE9384D3 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EBAE3E29553499CBB9730E7 /* MaterialIcons.ttf */; };
-		B994268565B54407A5F37EDF /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE91C85ACE5E44DC89DDD281 /* libRNDeviceInfo.a */; };
 		B9DC8F78B14942C9AA8886FC /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52CFEA4AA81E45E9A3978748 /* SimpleLineIcons.ttf */; };
-		C05A91829A814B3B9EB7E152 /* libFirestack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D75AB137A5F4B73824350C9 /* libFirestack.a */; };
 		C9AFB9662A2E495A8F9DC469 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F016C18A1E94D748F17680C /* Foundation.ttf */; };
-		CFDF383329294DF592208AB8 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D115F907C014FE4A318F416 /* libRCTFBSDK.a */; };
-		D2826D23B7EA43F593D2F889 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB5F27F75FA40E7B12ACE07 /* libReact Native Open Settings.a */; };
 		D3E5BB9F9F7942BAAFD16EF4 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F2DC68A75BF46FBBA40FCDC /* Octicons.ttf */; };
 		EA07316F0AD6058CEC5283F3 /* Pods_MessageSignerActionProduction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB5E7FCF51E832F7A4FB548 /* Pods_MessageSignerActionProduction.framework */; };
 		F424078D44A14BFBBE1D412B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B5E533F39E44066933C7E40 /* FontAwesome.ttf */; };
@@ -971,6 +971,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46B76D2E2058232400547DA0 /* libRCTFBSDK.a in Frameworks */,
+				46B76D2D2058230300547DA0 /* libRCTUserDefaults.a in Frameworks */,
+				46B76D2C205822F800547DA0 /* libFirestack.a in Frameworks */,
+				46B76D2B205822EF00547DA0 /* libRNFirebaseCrashReport.a in Frameworks */,
+				46B76D2A205822E200547DA0 /* libRCTOneSignal.a in Frameworks */,
+				46B76D29205822D700547DA0 /* libRNImagePicker.a in Frameworks */,
+				46B76D28205822CB00547DA0 /* libReact Native Open Settings.a in Frameworks */,
+				46B76D27205822C100547DA0 /* libRNShare.a in Frameworks */,
+				46B76D26205822AB00547DA0 /* libBVLinearGradient.a in Frameworks */,
+				46B76D252058229D00547DA0 /* libRNDeviceInfo.a in Frameworks */,
+				46B76D242058229400547DA0 /* libRNRandomBytes.a in Frameworks */,
+				46B76D232058228A00547DA0 /* libRCTMaterialKit.a in Frameworks */,
 				46B76D212058221F00547DA0 /* libLRDRCTSimpleToast.a in Frameworks */,
 				46B76D1E205821D500547DA0 /* libRNVectorIcons.a in Frameworks */,
 				46B76D1B2058219600547DA0 /* libRNSpinkit.a in Frameworks */,
@@ -989,18 +1001,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				6DEB6F7A5414DE00DCABF21D /* Pods_MudamosMobile.framework in Frameworks */,
 				25C471E7FD8644158C6B3260 /* libAirMaps.a in Frameworks */,
-				1100EFAB76364256B1E566B8 /* libRCTMaterialKit.a in Frameworks */,
-				400834B331534457AC160DEA /* libRNRandomBytes.a in Frameworks */,
-				B994268565B54407A5F37EDF /* libRNDeviceInfo.a in Frameworks */,
-				321F777C009E4EAD870F828D /* libBVLinearGradient.a in Frameworks */,
-				CFDF383329294DF592208AB8 /* libRCTFBSDK.a in Frameworks */,
-				A5018F06EEB84A608D7B07BC /* libRNShare.a in Frameworks */,
-				D2826D23B7EA43F593D2F889 /* libReact Native Open Settings.a in Frameworks */,
-				AC342FDED7B646099A9A63A1 /* libRNImagePicker.a in Frameworks */,
-				4BFC7789634149D2A3F02AA4 /* libRCTOneSignal.a in Frameworks */,
-				34BC8EBCC2BA4877B640450A /* libRNFirebaseCrashReport.a in Frameworks */,
-				C05A91829A814B3B9EB7E152 /* libFirestack.a in Frameworks */,
-				5DCF04FC33184DA7ABE235B4 /* libRCTUserDefaults.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1016,6 +1016,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46B76D362058238400547DA0 /* libRNImagePicker.a in Frameworks */,
+				46B76D352058237A00547DA0 /* libReact Native Open Settings.a in Frameworks */,
+				46B76D342058237100547DA0 /* libRNShare.a in Frameworks */,
+				46B76D332058236600547DA0 /* libRCTFBSDK.a in Frameworks */,
+				46B76D322058235B00547DA0 /* libBVLinearGradient.a in Frameworks */,
+				46B76D312058234E00547DA0 /* libRNDeviceInfo.a in Frameworks */,
+				46B76D302058234200547DA0 /* libRNRandomBytes.a in Frameworks */,
+				46B76D2F2058233800547DA0 /* libRCTMaterialKit.a in Frameworks */,
 				46B76D222058223000547DA0 /* libLRDRCTSimpleToast.a in Frameworks */,
 				46B76D1F205821E300547DA0 /* libRNVectorIcons.a in Frameworks */,
 				46B76D1C205821A300547DA0 /* libRNSpinkit.a in Frameworks */,
@@ -1038,14 +1046,6 @@
 				46439D4B1E709B03008577C0 /* libRCTWebSocket.a in Frameworks */,
 				46439D4F1E709B03008577C0 /* Pods_MudamosMobile.framework in Frameworks */,
 				46439D511E709B03008577C0 /* libAirMaps.a in Frameworks */,
-				46439D521E709B03008577C0 /* libRCTMaterialKit.a in Frameworks */,
-				46439D531E709B03008577C0 /* libRNRandomBytes.a in Frameworks */,
-				46439D541E709B03008577C0 /* libRNDeviceInfo.a in Frameworks */,
-				46439D551E709B03008577C0 /* libBVLinearGradient.a in Frameworks */,
-				46439D561E709B03008577C0 /* libRCTFBSDK.a in Frameworks */,
-				46439D571E709B03008577C0 /* libRNShare.a in Frameworks */,
-				46439D591E709B03008577C0 /* libReact Native Open Settings.a in Frameworks */,
-				46439D5A1E709B03008577C0 /* libRNImagePicker.a in Frameworks */,
 				8FFD6EB8614D6594CD5E902C /* Pods_MudamosProduction.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
