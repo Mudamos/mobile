@@ -9,6 +9,10 @@
     hoist-non-react-statics "^1.2.0"
     lodash "^4.15.0"
 
+"@yarnpkg/lockfile@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@yarnpkg/lockfile/-/lockfile-1.0.0.tgz#33d1dbb659a23b81f87f048762b35a446172add3"
+
 abab@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.3.tgz#b81de5f7274ec4e756d797cd834f303642724e5d"
@@ -2475,7 +2479,7 @@ event-target-shim@^1.0.5:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-1.1.1.tgz#a86e5ee6bdaa16054475da797ccddf0c55698491"
 
-events@^1.1.0:
+events@^1.0.0, events@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
@@ -5345,9 +5349,9 @@ react-native-permissions@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.1.1.tgz#4876004681ff8556454613d85249b01baff9b35b"
 
-react-native-randombytes@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-randombytes/-/react-native-randombytes-2.3.0.tgz#3ed6f8a4a803c453d787961047f6b2650d7c7335"
+react-native-randombytes@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-randombytes/-/react-native-randombytes-3.0.0.tgz#8327464f227a2c42d6ef013b7586b0ad4385ae61"
   dependencies:
     buffer "^4.9.1"
     sjcl "^1.0.3"
@@ -5368,10 +5372,6 @@ react-native-share@1.0.26:
 react-native-simple-toast:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/react-native-simple-toast/-/react-native-simple-toast-0.0.5.tgz#8530a9d0696613ad25bc5d4283f1e3c541ec2bc4"
-
-"react-native-simple-toast@https://github.com/itsriodejaneiro/react-native-simple-toast.git#ef1c167":
-  version "0.0.8"
-  resolved "https://github.com/itsriodejaneiro/react-native-simple-toast.git#ef1c167"
 
 react-native-spinkit@^1.1.1:
   version "1.1.1"
@@ -5897,10 +5897,11 @@ ripemd160@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-1.0.1.tgz#93a4bbd4942bc574b69a8fa57c71de10ecca7d6e"
 
-rn-nodeify@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/rn-nodeify/-/rn-nodeify-7.0.1.tgz#f72d215fb8bf26e1456d63bee2995f55cff189a7"
+rn-nodeify@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/rn-nodeify/-/rn-nodeify-10.0.0.tgz#f2dda38be4189f0eafcd6781b53caa0e32215220"
   dependencies:
+    "@yarnpkg/lockfile" "^1.0.0"
     deep-equal "^1.0.0"
     findit "^2.0.0"
     fs-extra "^0.22.1"
