@@ -8,6 +8,10 @@ import LinearGradient from "react-native-linear-gradient";
 
 import styles from "../styles/purple-layout";
 
+const gradientStart = { x: 0.0, y: 0.25 };
+const gradientEnd = { x: 0.7, y: 1.0 };
+const gradientLocation = [0, 1.5, 2.0];
+const gradientColors = ["#7E52D8", "#9427DB", "#9526DB"];
 
 export default class PurpleLayout extends Component {
   static propTypes = {
@@ -27,11 +31,11 @@ export default class PurpleLayout extends Component {
         style={style}
       >
         <LinearGradient
-          start={[0.0, 0.25]}
-          end={[0.7, 1.0]}
-          locations={[0,1.5,2.0]}
+          start={gradientStart}
+          end={gradientEnd}
+          locations={gradientLocation}
           style={[styles.gradientContainer, contentStyle]}
-          colors={["#7E52D8", "#9427DB", "#9526DB"]}
+          colors={gradientColors}
         >
           {this.props.children}
         </LinearGradient>
