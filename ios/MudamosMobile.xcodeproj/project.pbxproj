@@ -177,7 +177,6 @@
 		46439D491E709B03008577C0 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		46439D4A1E709B03008577C0 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		46439D4B1E709B03008577C0 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
-		46439D4E1E709B03008577C0 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC5D238E00C444189EA91E3 /* libRNVectorIcons.a */; };
 		46439D4F1E709B03008577C0 /* Pods_MudamosMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */; };
 		46439D501E709B03008577C0 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D778CA95AA41818810664F /* libLRDRCTSimpleToast.a */; };
 		46439D511E709B03008577C0 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1082FEFEA6B34CF8A23BF45D /* libAirMaps.a */; };
@@ -267,6 +266,9 @@
 		46B76D1A2058218300547DA0 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DBF04B1DE386CF006B43B5 /* libRNSpinkit.a */; };
 		46B76D1B2058219600547DA0 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DBF04B1DE386CF006B43B5 /* libRNSpinkit.a */; };
 		46B76D1C205821A300547DA0 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DBF04B1DE386CF006B43B5 /* libRNSpinkit.a */; };
+		46B76D1D205821C800547DA0 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DBF0461DE386CF006B43B5 /* libRNVectorIcons.a */; };
+		46B76D1E205821D500547DA0 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DBF0461DE386CF006B43B5 /* libRNVectorIcons.a */; };
+		46B76D1F205821E300547DA0 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DBF0461DE386CF006B43B5 /* libRNVectorIcons.a */; };
 		46B86B6020123271009E643E /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9602920122E5D00D5AEB9 /* ActionViewController.swift */; };
 		46B86B6420123271009E643E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */; };
 		46BD9FDC1DF1A0E600366372 /* InfoTagviewBeta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */; };
@@ -312,7 +314,6 @@
 		46ED2A781DF194E400B36CD0 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		46ED2A791DF194E400B36CD0 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		46ED2A7A1DF194E400B36CD0 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
-		46ED2A7D1DF194E400B36CD0 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC5D238E00C444189EA91E3 /* libRNVectorIcons.a */; };
 		46ED2A7F1DF194E400B36CD0 /* Pods_MudamosMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */; };
 		46ED2A801DF194E400B36CD0 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D778CA95AA41818810664F /* libLRDRCTSimpleToast.a */; };
 		46ED2A821DF194E400B36CD0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -369,7 +370,6 @@
 		B994268565B54407A5F37EDF /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE91C85ACE5E44DC89DDD281 /* libRNDeviceInfo.a */; };
 		B9DC8F78B14942C9AA8886FC /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52CFEA4AA81E45E9A3978748 /* SimpleLineIcons.ttf */; };
 		C05A91829A814B3B9EB7E152 /* libFirestack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D75AB137A5F4B73824350C9 /* libFirestack.a */; };
-		C4DC04054CD8457DBDF02C62 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC5D238E00C444189EA91E3 /* libRNVectorIcons.a */; };
 		C9AFB9662A2E495A8F9DC469 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F016C18A1E94D748F17680C /* Foundation.ttf */; };
 		CFDF383329294DF592208AB8 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D115F907C014FE4A318F416 /* libRCTFBSDK.a */; };
 		D2826D23B7EA43F593D2F889 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB5F27F75FA40E7B12ACE07 /* libReact Native Open Settings.a */; };
@@ -971,6 +971,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46B76D1E205821D500547DA0 /* libRNVectorIcons.a in Frameworks */,
 				46B76D1B2058219600547DA0 /* libRNSpinkit.a in Frameworks */,
 				46B76D182058214500547DA0 /* libReactNativeConfig.a in Frameworks */,
 				46B76D1520581F7200547DA0 /* libReactNativePermissions.a in Frameworks */,
@@ -985,7 +986,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				C4DC04054CD8457DBDF02C62 /* libRNVectorIcons.a in Frameworks */,
 				6DEB6F7A5414DE00DCABF21D /* Pods_MudamosMobile.framework in Frameworks */,
 				2364B1868423443CBD44C241 /* libLRDRCTSimpleToast.a in Frameworks */,
 				25C471E7FD8644158C6B3260 /* libAirMaps.a in Frameworks */,
@@ -1016,6 +1016,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46B76D1F205821E300547DA0 /* libRNVectorIcons.a in Frameworks */,
 				46B76D1C205821A300547DA0 /* libRNSpinkit.a in Frameworks */,
 				46B76D192058215200547DA0 /* libReactNativeConfig.a in Frameworks */,
 				46B76D162058202E00547DA0 /* libReactNativePermissions.a in Frameworks */,
@@ -1034,7 +1035,6 @@
 				46439D491E709B03008577C0 /* libRCTText.a in Frameworks */,
 				46439D4A1E709B03008577C0 /* libRCTVibration.a in Frameworks */,
 				46439D4B1E709B03008577C0 /* libRCTWebSocket.a in Frameworks */,
-				46439D4E1E709B03008577C0 /* libRNVectorIcons.a in Frameworks */,
 				46439D4F1E709B03008577C0 /* Pods_MudamosMobile.framework in Frameworks */,
 				46439D501E709B03008577C0 /* libLRDRCTSimpleToast.a in Frameworks */,
 				46439D511E709B03008577C0 /* libAirMaps.a in Frameworks */,
@@ -1070,6 +1070,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46B76D1D205821C800547DA0 /* libRNVectorIcons.a in Frameworks */,
 				46B76D1A2058218300547DA0 /* libRNSpinkit.a in Frameworks */,
 				46B76D172058212800547DA0 /* libReactNativeConfig.a in Frameworks */,
 				46B76D1420581F5000547DA0 /* libReactNativePermissions.a in Frameworks */,
@@ -1097,7 +1098,6 @@
 				46ED2A781DF194E400B36CD0 /* libRCTText.a in Frameworks */,
 				46ED2A791DF194E400B36CD0 /* libRCTVibration.a in Frameworks */,
 				46ED2A7A1DF194E400B36CD0 /* libRCTWebSocket.a in Frameworks */,
-				46ED2A7D1DF194E400B36CD0 /* libRNVectorIcons.a in Frameworks */,
 				46ED2A7F1DF194E400B36CD0 /* Pods_MudamosMobile.framework in Frameworks */,
 				46ED2A801DF194E400B36CD0 /* libLRDRCTSimpleToast.a in Frameworks */,
 				30910D199404C3C085B8EE95 /* Pods_MudamosMobileTagviewBeta.framework in Frameworks */,
