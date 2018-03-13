@@ -5369,9 +5369,9 @@ react-native-share@1.0.26:
   version "1.0.26"
   resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.0.26.tgz#b69d75c82b78bce11ad7fc802ea8f851d5ff96b5"
 
-react-native-simple-toast:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/react-native-simple-toast/-/react-native-simple-toast-0.0.5.tgz#8530a9d0696613ad25bc5d4283f1e3c541ec2bc4"
+"react-native-simple-toast@https://github.com/itsriodejaneiro/react-native-simple-toast.git#ef1c167":
+  version "0.0.8"
+  resolved "https://github.com/itsriodejaneiro/react-native-simple-toast.git#ef1c167"
 
 react-native-spinkit@^1.1.1:
   version "1.1.1"
