@@ -229,7 +229,9 @@ dependencies {
       exclude group: 'com.android.support'
     }
     compile project(':react-native-linear-gradient')
-    compile project(':react-native-device-info')
+    compile(project(':react-native-device-info')) {
+      exclude group: 'com.google.android.gms'
+    }
     compile project(':react-native-randombytes')
     compile project(':react-native-material-kit')
 
