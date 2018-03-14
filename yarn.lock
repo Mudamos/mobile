@@ -5178,9 +5178,9 @@ react-native-experimental-navigation@^0.29.1:
     fbjs "^0.8.1"
     prop-types "^15.5.10"
 
-react-native-fbsdk@0.5.1:
+"react-native-fbsdk@https://github.com/itsriodejaneiro/react-native-fbsdk.git#revert-to-0.5.1-with-fix":
   version "0.5.1"
-  resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-0.5.1.tgz#6edc7be4a6bb19a421914be81a0fd9eeb54d2f6d"
+  resolved "https://github.com/itsriodejaneiro/react-native-fbsdk.git#7fd11a41ad3a789177748659fe64bc0e412094ee"
 
 "react-native-fence-html@https://github.com/itsriodejaneiro/react-native-fence-html.git#d534ffc":
   version "1.0.6"
