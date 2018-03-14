@@ -10,7 +10,6 @@ import com.ianlin.RNFirebaseCrashReport.RNFirebaseCrashReportPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.opensettings.OpenSettingsPackage;
-import com.joshblour.reactnativepermissions.ReactNativePermissionsPackage;
 import cl.json.RNSharePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -54,7 +53,6 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactNativeOneSignalPackage(),
             new ImagePickerPackage(),
             new OpenSettingsPackage(),
-            new ReactNativePermissionsPackage(),
             new RNSharePackage(),
             new FBSDKPackage(mCallbackManager),
             new LinearGradientPackage(),
