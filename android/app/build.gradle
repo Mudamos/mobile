@@ -225,7 +225,9 @@ dependencies {
     compile project(':react-native-image-picker')
     compile project(':react-native-open-settings')
     compile project(':react-native-share')
-    compile project(':react-native-fbsdk')
+    compile(project(':react-native-fbsdk')) {
+      exclude group: 'com.android.support'
+    }
     compile project(':react-native-linear-gradient')
     compile project(':react-native-device-info')
     compile project(':react-native-randombytes')
@@ -258,6 +260,7 @@ dependencies {
     compile project(':react-native-config')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
+    compile 'com.android.support:cardview-v7:23.0.1'
     compile "com.facebook.react:react-native:+"  // From node_modules
 }
 
