@@ -33,7 +33,7 @@ Agora instale os seguintes pacotes da SDK:
 
 * Android SDK Tools
 * Android SDK Platform-tools, revision 23.1
-* Android SDK Build-tools, revision 23.0.1
+* Android SDK Build-tools, revision 23.0.3
 * Android SDK Platform 24
 * Android Support Repository, revision 38
 * Google Repository, revision 36
@@ -42,7 +42,7 @@ Agora instale os seguintes pacotes da SDK:
 Abaixo está uma forma de instalar as dependências sendo elas algumas mais atuais (não ainda testadas). Lembre-se que vc pode usar manualmente o SD Manager do android.
 
 ```
-$ android update sdk --all --no-ui --filter tools,platform-tools,build-tools-23.0.1,android-24,extra-android-support,extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services
+$ android update sdk --all --no-ui --filter tools,platform-tools,build-tools-23.0.3,android-24,extra-android-support,extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services
 ```
 
 ### iOS
