@@ -41,6 +41,7 @@
     "mudamos-libcrypto": "0.6.4",
     "numeral": "^2.0.4",
     "process": "^0.11.9",
+    "prop-types": "^15.6.1",
     "ramda": "^0.22.1",
     "react": "16.3.0-alpha.1",
     "react-addons-shallow-compare": "15.6.2",
