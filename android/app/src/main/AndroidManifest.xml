@@ -1,8 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.mudamos.petition"
-    android:versionCode="1"
-    android:versionName="1.0">
+    package="org.mudamos.petition">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
@@ -20,15 +18,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" tools:remove="${excludeSystemAlertWindowPermission}"/>
 
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="23" />
-
     <application
       android:name=".MainApplication"
-      android:allowBackup="true"
       android:label="@string/ANDROID_APP_NAME"
       android:icon="@mipmap/ic_launcher"
+      android:allowBackup="false"
       android:theme="@style/AppTheme"
       tools:replace="android:label">
 
