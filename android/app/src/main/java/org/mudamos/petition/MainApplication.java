@@ -68,6 +68,11 @@ public class MainApplication extends Application implements ReactApplication {
             new SignerPackage()
       );
     }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
   };
 
   @Override
