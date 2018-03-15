@@ -1,4 +1,4 @@
-import React, { Component, PropTypes }  from "react";
+import React, { Component } from "react";
 
 import {
   Animated,
@@ -13,6 +13,8 @@ import {
   formatNumber,
   moment,
 } from "../utils";
+
+import PropTypes from "prop-types";
 
 import { clamp } from "ramda";
 
