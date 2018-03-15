@@ -36,6 +36,7 @@ const style = StyleSheet.create({
     color: "#fff",
     fontFamily: "roboto",
     fontSize: 14,
+    flex: 1,
   },
 });
 
