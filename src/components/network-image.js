@@ -4,15 +4,19 @@ import {
   Animated,
   ActivityIndicator,
   Image,
+  ImageBackground,
 } from "react-native";
 
 import { cancelablePromise } from "../utils";
 
 import styles from "../styles/network-image";
 
+const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground);
+
 export default class NetworkImage extends Component {
   static propTypes = {
     children: PropTypes.node,
+    imageStyle: Image.propTypes.style,
     loaderColor: PropTypes.string,
 
     ...Image.propStyles,
@@ -65,14 +69,19 @@ export default class NetworkImage extends Component {
 
   render() {
     if (this.state.loading) return this.renderLoading();
+    const { children, ...props } = this.props;
 
-    return (
-      <Animated.Image
-        {...this.props}
-      >
-        {this.props.children}
-      </Animated.Image>
-    );
+    if (children) {
+      return (
+        <AnimatedImageBackground
+          {...props}
+        >
+          {children}
+        </AnimatedImageBackground>
+      );
+    } else {
+      return <Animated.Image {...props} />;
+    }
   }
 
   prefetch(uri) {

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  View,
+  Image,
   ViewPropTypes,
   TouchableOpacity,
 } from "react-native";
@@ -15,6 +15,7 @@ import styles from "../styles/avatar";
 export default class Avatar extends Component {
   static propTypes = {
     avatarStyle: ViewPropTypes.style,
+    imageStyle: Image.propTypes.style,
     defaultPicture: PropTypes.any,
     size: PropTypes.number,
     source: PropTypes.object,
@@ -50,6 +51,7 @@ export default class Avatar extends Component {
             width: size,
             height: size,
           }, avatarStyle]}
+          imageStyle={styles.imageBubble}
         />
       </TouchableOpacity>
     );

@@ -62,6 +62,7 @@ export default class SignerBubbleView extends Component {
         key={`bubble-head-${user.id}`}
         source={{uri: user.pictureUrl}}
         style={styles.bubble}
+        imageStyle={styles.imageBubble}
       />
     );
 
