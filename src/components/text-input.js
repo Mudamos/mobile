@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   View,
+  ViewPropTypes,
 } from "react-native";
 
 import MIcon from "react-native-vector-icons/MaterialIcons";
@@ -20,7 +21,7 @@ class MyTextInput extends Component {
 
   static propTypes = {
     editable: PropTypes.bool,
-    errorStyle: View.propTypes.style,
+    errorStyle: ViewPropTypes.style,
     hasError: PropTypes.bool,
     hint: PropTypes.string,
     inputErrorStyle: TextInput.propTypes.style,

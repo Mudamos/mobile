@@ -2,19 +2,20 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  View,
-  TouchableHighlight,
-  Text,
   StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+  ViewPropTypes,
 } from "react-native";
 
 import { isString } from "../utils";
 
 export default class SimpleButton extends Component {
   static propTypes = {
-    buttonStyle: View.propTypes.style,
+    buttonStyle: ViewPropTypes.style,
     children: PropTypes.node,
-    containerStyle: View.propTypes.style,
+    containerStyle: ViewPropTypes.style,
     disabled: PropTypes.bool.isRequired,
     textStyle: Text.propTypes.style,
 

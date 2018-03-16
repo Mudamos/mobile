@@ -3,7 +3,7 @@ import React from "react";
 import {
   TouchableOpacity,
   Text,
-  View,
+  ViewPropTypes,
 } from "react-native";
 
 import textStyles from "../styles/text";
@@ -31,7 +31,7 @@ const ModalLinkButton = props => {
 
 
 ModalLinkButton.propTypes = {
-  containerStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
   linkStyle: Text.propTypes.style,
   title: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,

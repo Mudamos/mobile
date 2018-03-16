@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import { View } from "react-native";
+import { ViewPropTypes } from "react-native";
 
 import Layout from "./layout";
 
@@ -17,8 +17,8 @@ const gradientColors = ["#7E52D8", "#9427DB", "#9526DB"];
 export default class PurpleLayout extends Component {
   static propTypes = {
     children: PropTypes.node,
-    contentStyle: View.propTypes.style,
-    style: View.propTypes.style,
+    contentStyle: ViewPropTypes.style,
+    style: ViewPropTypes.style,
   };
 
   render() {

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Text,
   View,
+  ViewPropTypes,
 } from "react-native";
 
 import NetworkImage from "./network-image";
@@ -22,7 +23,7 @@ const gradientColors = ["#7E52D8", "#9427DB", "#9526DB"];
 export default class SignerBubbleView extends Component {
   static propTypes = {
     size: PropTypes.number.isRequired,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     total: PropTypes.number.isRequired,
     users: PropTypes.array.isRequired,
     onPress: PropTypes.func,
