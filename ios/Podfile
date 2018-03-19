@@ -15,6 +15,27 @@ def pods
   pod "Firebase/Messaging"
   pod "Firebase/RemoteConfig"
   pod "Firebase/Storage"
+
+  rn_path = "../node_modules/react-native"
+  rn_maps_path = "../node_modules/react-native-maps"
+
+ # pod "yoga", path: "#{rn_path}/ReactCommon/yoga"
+ # pod "React", path: rn_path, subspecs: [
+ #   "Core",
+ #   "RCTActionSheet",
+ #   "RCTAnimation",
+ #   "RCTGeolocation",
+ #   "RCTImage",
+ #   "RCTLinkingIOS",
+ #   "RCTNetwork",
+ #   "RCTSettings",
+ #   "RCTText",
+ #   "RCTVibration",
+ #   "RCTWebSocket",
+ #   "DevSupport"
+ # ]
+
+ # pod "react-native-maps", path: rn_maps_path
 end
 
 def message_signer_pods
@@ -63,3 +84,20 @@ target "MessageSignerActionProduction" do
 
   message_signer_pods
 end
+
+#post_install do |installer|
+#  installer.pods_project.targets.each do |target|
+#    if target.name == "react-native-google-maps"
+#      puts "Disabling CLANG_ENABLE_MODULES for target: #{target}"
+#
+#      target.build_configurations.each do |config|
+#        config.build_settings["CLANG_ENABLE_MODULES"] = "No"
+#      end
+#    end
+#
+#    if target.name == "React"
+#      puts "Removing React target"
+#      target.remove_from_project
+#    end
+#  end
+#end
