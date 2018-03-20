@@ -2,6 +2,10 @@
   "name": "action-sign-generator",
   "version": "1.0.0",
   "description": "Generates the action signer html/js used on the ios action extension",
+  "private": true,
+  "engines": {
+    "node": "8.9.x"
+  },
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
