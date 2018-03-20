@@ -15,8 +15,8 @@ import styles from "../styles/avatar";
 export default class Avatar extends Component {
   static propTypes = {
     avatarStyle: ViewPropTypes.style,
-    imageStyle: Image.propTypes.style,
     defaultPicture: PropTypes.any,
+    imageStyle: Image.propTypes.style,
     size: PropTypes.number,
     source: PropTypes.object,
     onPress: PropTypes.func.isRequired,
