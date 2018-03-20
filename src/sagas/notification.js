@@ -47,7 +47,7 @@ import {
 
 const getUserTags = pipe(pick(["city", "uf"]), map(v => v || ""));
 
-const signedPlipTag = concat("signed-plip-");
+const signedPlipTag = pipe(String, concat("signed-plip-"));
 
 function* updateOneSignalProfile() {
   yield takeLatest("PROFILE_USER_UPDATED", function* ({ payload: { currentUser } }) {
