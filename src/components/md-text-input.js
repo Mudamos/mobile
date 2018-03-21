@@ -67,6 +67,10 @@ export default class MDTextInput extends Component {
     underlineEnabled: true,
   }
 
+  input = null;
+
+  setInput = component => this.input = component;
+
   get highlightColor() {
     return (this.props.hasError && errorColor) || whiteTransparent;
   }
@@ -100,7 +104,7 @@ export default class MDTextInput extends Component {
         <MKTextField
           {...textFieldProps}
 
-          ref={ref => this.input = ref}
+          ref={this.setInput}
           tintColor={this.tintColor}
           selectionColor={selectionColor}
           highlightColor={this.highlightColor}

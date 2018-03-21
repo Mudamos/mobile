@@ -2,6 +2,12 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
+  compose,
+  withHandlers,
+  withStateHandlers,
+} from "recompose";
+
+import {
   TouchableOpacity,
   Text,
   View,
@@ -23,24 +29,31 @@ import { errorForField } from "../utils";
 import styles from "../styles/sign-up-layout";
 
 
-export default class SignUpLayout extends Component {
-  state = {}
-
+class SignUpLayout extends Component {
   static propTypes = {
     createErrors: PropTypes.array,
+    email: PropTypes.string,
     isCreating: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
+    name: PropTypes.string,
+    password: PropTypes.string,
     onBack: PropTypes.func.isRequired,
     onCreate: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
+    onSetEmail: PropTypes.func.isRequired,
+    onSetName: PropTypes.func.isRequired,
+    onSetPassword: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   }
 
   get validForm() {
+    const { email, name, password } = this.props;
+
     return [
-      this.state.name,
-      this.state.email,
-      this.state.password,
+      name,
+      email,
+      password,
     ].every(v => v);
   }
 
@@ -54,6 +67,16 @@ export default class SignUpLayout extends Component {
       isCreating,
       isLoggingIn,
       onSignIn,
+    } = this.props;
+
+    const {
+      email,
+      name,
+      password,
+      onSetEmail,
+      onSetName,
+      onSetPassword,
+      onSubmit,
     } = this.props;
 
     return (
@@ -77,8 +100,8 @@ export default class SignUpLayout extends Component {
             <View style={styles.inputContainer}>
               <MDTextInput
                 placeholder={locale.name}
-                value={this.state.name}
-                onChangeText={name => this.setState({ name })}
+                value={name}
+                onChangeText={onSetName}
                 hasError={!!errorForField("name", createErrors)}
                 error={errorForField("name", createErrors)}
                 onSubmitEditing={() => this.nameInput.blur()}
@@ -87,8 +110,8 @@ export default class SignUpLayout extends Component {
 
               <MDTextInput
                 placeholder={locale.email}
-                value={this.state.email}
-                onChangeText={email => this.setState({ email })}
+                value={email}
+                onChangeText={onSetEmail}
                 hasError={!!errorForField("email", createErrors)}
                 error={errorForField("email", createErrors)}
                 keyboardType="email-address"
@@ -99,8 +122,8 @@ export default class SignUpLayout extends Component {
 
               <MDTextInput
                 placeholder={locale.password}
-                value={this.state.password}
-                onChangeText={password => this.setState({ password })}
+                value={password}
+                onChangeText={onSetPassword}
                 password={true}
                 hasError={!!errorForField("password", createErrors)}
                 error={errorForField("password", createErrors)}
@@ -112,7 +135,7 @@ export default class SignUpLayout extends Component {
             <FlatButton
               title={locale.enroll.toUpperCase()}
               enabled={this.createEnabled}
-              onPress={this.submit.bind(this)}
+              onPress={onSubmit}
               style={{marginHorizontal: 20, marginTop: 20}}
             />
 
@@ -157,11 +180,26 @@ export default class SignUpLayout extends Component {
       />
     );
   }
-
-  submit() {
-    const { onCreate } = this.props;
-    const { name, email, password } = this.state;
-
-    onCreate({ name, email, password });
-  }
 }
+
+const enhance = compose(
+  withStateHandlers(
+    { name: "", email: "", password: "" },
+    {
+      onSetName: () => value => ({
+        name: value,
+      }),
+      onSetEmail: () => value => ({
+        email: value,
+      }),
+      onSetPassword: () => value => ({
+        password: value,
+      }),
+    }
+  ),
+  withHandlers({
+    onSubmit: ({ email, name, password, onCreate }) => () => onCreate({ name, email, password }),
+  })
+);
+
+export default enhance(SignUpLayout);

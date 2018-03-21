@@ -34,8 +34,12 @@ class MyTextInput extends Component {
     onChange: PropTypes.func,
   };
 
+  input = null;
+
+  setInput = component => this.input = component;
+
   focus() {
-    this.refs.input.focus();
+    this.input.focus();
   }
 
   render() {
@@ -59,7 +63,7 @@ class MyTextInput extends Component {
 
         <TextInput
           {...properProps}
-          ref="input"
+          ref={this.setInput}
           underlineColorAndroid="transparent"
           style={[
             styles.input,
