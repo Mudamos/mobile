@@ -88,12 +88,22 @@ public class SignerModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void isMainApp(Promise promise) {
         String activityName = currentActivityName();
+
+        if (BuildConfig.DEBUG) {
+          Log.d(TAG, "isMainApp activityName: " + activityName);
+        }
+
         promise.resolve(activityName == null || activityName.equals(MAIN_ACTIVITY_NAME));
     }
 
     @ReactMethod
     public void isSignerApp(Promise promise) {
         String activityName = currentActivityName();
+
+        if (BuildConfig.DEBUG) {
+          Log.d(TAG, "isSignerApp activityName: " + activityName);
+        }
+
         promise.resolve(activityName != null && activityName.equals(MUDAMOS_SIGNER_ACTIVITY_NAME));
     }
 
