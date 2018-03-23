@@ -1,5 +1,4 @@
-import { takeLatest } from "redux-saga";
-import { call, put, spawn, select } from "redux-saga/effects";
+import { call, put, spawn, select, takeLatest } from "redux-saga/effects";
 
 import {
   isUnauthorized,

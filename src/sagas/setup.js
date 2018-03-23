@@ -1,5 +1,4 @@
-import { takeLatest } from "redux-saga";
-import { all, call, fork, put, select } from "redux-saga/effects";
+import { all, call, fork, put, select, takeLatest } from "redux-saga/effects";
 
 import {
   appSetup,

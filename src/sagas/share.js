@@ -1,5 +1,4 @@
-import { takeEvery } from "redux-saga";
-import { call, put, spawn, fork } from "redux-saga/effects";
+import { call, put, spawn, fork, takeEvery } from "redux-saga/effects";
 
 import { keys } from "ramda";
 

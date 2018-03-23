@@ -1,5 +1,4 @@
-import { takeLatest } from "redux-saga";
-import { all, call, fork, put } from "redux-saga/effects";
+import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 
 import {
   toPairs,

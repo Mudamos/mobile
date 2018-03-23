@@ -1,5 +1,4 @@
-import { takeLatest } from "redux-saga";
-import { take, call, put, spawn } from "redux-saga/effects";
+import { take, call, put, spawn, takeLatest } from "redux-saga/effects";
 
 import { all, contains } from "ramda";
 

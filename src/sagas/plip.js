@@ -1,6 +1,5 @@
 import { Alert } from "react-native";
-import { takeEvery, takeLatest } from "redux-saga";
-import { all, call, spawn, put, select, fork } from "redux-saga/effects";
+import { all, call, spawn, put, select, fork, takeEvery, takeLatest } from "redux-saga/effects";
 
 import {
   prop,

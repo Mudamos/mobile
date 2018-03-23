@@ -3,7 +3,6 @@ import OneSignal from "react-native-onesignal";
 import {
   buffers,
   delay,
-  takeLatest,
 } from "redux-saga";
 
 import {
@@ -15,6 +14,7 @@ import {
   put,
   select,
   take,
+  takeLatest,
 } from "redux-saga/effects";
 
 import {

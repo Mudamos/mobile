@@ -1,5 +1,4 @@
-import { takeLatest } from "redux-saga";
-import { call, fork, put, spawn, select } from "redux-saga/effects";
+import { call, fork, put, spawn, select, takeLatest } from "redux-saga/effects";
 import { Alert } from "react-native";
 
 import { monitorUpload } from "./upload";

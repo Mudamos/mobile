@@ -1,4 +1,4 @@
-import { takeEvery } from "redux-saga";
+import { takeEvery } from "redux-saga/effects";
 
 import Toast from "react-native-simple-toast";
 

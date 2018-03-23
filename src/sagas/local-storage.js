@@ -1,5 +1,4 @@
-import { takeEvery } from "redux-saga";
-import { call, put, spawn } from "redux-saga/effects";
+import { call, put, spawn, takeEvery } from "redux-saga/effects";
 
 import {
   userFirstTimeFetched,
