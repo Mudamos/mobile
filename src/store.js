@@ -2,7 +2,7 @@ import Config from "react-native-config";
 import { isDev } from "./utils";
 
 import { createStore, applyMiddleware } from "redux";
-import createReduxLogger from "redux-logger";
+import { createLogger } from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 
 import reducer from "./reducers";
@@ -30,7 +30,7 @@ const localStorage = defaultStorage();
 
 export const storeBuilder = () => {
   const sagaRunner = createSagaMiddleware();
-  const logger = createReduxLogger({
+  const logger = createLogger({
     collapsed: true,
     colors: {
       title: false,
