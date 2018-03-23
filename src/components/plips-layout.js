@@ -47,6 +47,11 @@ import {
   SignatureGoalsType,
 } from "../prop-types";
 
+const plipRowReadingGradientColors = ["rgba(0, 0, 0, .3)", "rgba(0, 0, 0, 0.3)", "rgba(0, 0, 0, .7)"];
+const plipRowReadingGradientLocations = [0, 0.7, 1];
+
+const hasSignedGradientColors = ["#00DB5E", "#00A79E"];
+
 export default class PlipsLayout extends Component {
   state = {
     isRemainingDaysEnabled: PropTypes.bool,
@@ -132,10 +137,6 @@ export default class PlipsLayout extends Component {
   }
 
   renderListView({ plipsDataSource, isRefreshingPlips }) {
-    const {
-      onRefresh,
-    } = this.props;
-
     return (
       <MyListView
         style={styles.listView}
@@ -144,11 +145,11 @@ export default class PlipsLayout extends Component {
         enableEmptySections={true}
         scrollEventThrottle={500}
         dataSource={plipsDataSource}
-        renderRow={this.renderRow({ height: 360, margin: 0 })}
+        renderRow={this.renderCommonRow}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshingPlips}
-            onRefresh={onRefresh}
+            onRefresh={this.onRefresh}
             tintColor="black"
           />
         }
@@ -177,6 +178,8 @@ export default class PlipsLayout extends Component {
     );
   }
 
+  renderCommonRow = this.renderRow({ height: 360, margin: 0 });
+
   renderRowPlip({ plip }) {
     const {
       currentUser,
@@ -202,8 +205,8 @@ export default class PlipsLayout extends Component {
 
         { /* This gradient improves the reading of the PLIP title and subtitle */ }
         <LinearGradient
-          colors={["rgba(0, 0, 0, .3)", "rgba(0, 0, 0, 0.3)", "rgba(0, 0, 0, .7)"]}
-          locations={[0, 0.7, 1]}
+          colors={plipRowReadingGradientColors}
+          locations={plipRowReadingGradientLocations}
           style={styles.plipImageGradient}
         />
 
@@ -256,7 +259,7 @@ export default class PlipsLayout extends Component {
             hasSigned &&
               <AnimatableView animation="zoomIn" easing="ease-in-out-sine" style={styles.signedContainer} duration={2000}>
                 <LinearGradient
-                  colors={["#00DB5E", "#00A79E"]}
+                  colors={hasSignedGradientColors}
                   style={styles.signedGradient}
                 >
                   <Text style={styles.signedText}>{locale.signed}</Text>
@@ -287,8 +290,6 @@ export default class PlipsLayout extends Component {
   }
 
   renderNoPlips() {
-    const { onOpenURL, remoteLinks } = this.props;
-
     return (
       <View style={styles.noProjectsContainer}>
         <View style={styles.noProjectsInnerContainer}>
@@ -302,7 +303,7 @@ export default class PlipsLayout extends Component {
 
         <FlatButton
           title={locale.links.sendYourIdea.toUpperCase()}
-          onPress={() => onOpenURL(remoteLinks.sendYourIdea)}
+          onPress={this.onSendYourIdea}
           style={{backgroundColor: "#00c084" }}
           textStyle={{color: "#fff"}}
         />
@@ -325,11 +326,9 @@ export default class PlipsLayout extends Component {
   }
 
   renderMenuButton() {
-    const { openMenu } = this.props;
-
     return (
       <TouchableOpacity
-        onPress={openMenu}
+        onPress={this.onOpenMenu}
       >
         <Icon
           name="dehaze"
@@ -341,12 +340,10 @@ export default class PlipsLayout extends Component {
   }
 
   renderRetry() {
-    const { onRetryPlips } = this.props;
-
     return (
       <View style={styles.retryContainer}>
         <RetryButton
-          onPress={onRetryPlips}
+          onPress={this.onRetryPlips}
           style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
         />
       </View>
@@ -359,5 +356,28 @@ export default class PlipsLayout extends Component {
 
   plipImage(plip) {
     return plip.cycle && plip.cycle.pictures && plip.cycle.pictures.original;
+  }
+
+  onRefresh = () => {
+    const {
+      onRefresh,
+    } = this.props;
+
+    onRefresh();
+  }
+
+  onSendYourIdea = () => {
+    const { onOpenURL, remoteLinks } = this.props;
+    onOpenURL(remoteLinks.sendYourIdea);
+  }
+
+  onOpenMenu = () => {
+    const { openMenu } = this.props;
+    openMenu();
+  }
+
+  onRetryPlips = () => {
+    const { onRetryPlips } = this.props;
+    onRetryPlips();
   }
 }
