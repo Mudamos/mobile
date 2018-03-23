@@ -1,5 +1,5 @@
 import { takeLatest } from "redux-saga";
-import { call, fork, put } from "redux-saga/effects";
+import { all, call, fork, put } from "redux-saga/effects";
 
 import {
   logError,
@@ -18,7 +18,7 @@ function* fetchFeatureToggles({ RemoteConfigService }) {
     try {
       const [
         plipRemainingDaysEnabled,
-      ] = yield FEATURE_TOGGLE_NAMES.map(name => call(RemoteConfigService.asBoolean, name));
+      ] = yield all(FEATURE_TOGGLE_NAMES.map(name => call(RemoteConfigService.asBoolean, name)));
 
       const features = {
         plipRemainingDaysEnabled,

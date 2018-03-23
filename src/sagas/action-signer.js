@@ -1,5 +1,5 @@
 import { delay, takeLatest } from "redux-saga";
-import { call, fork, put, select } from "redux-saga/effects";
+import { all, call, fork, put, select } from "redux-saga/effects";
 import LibCrypto from "mudamos-libcrypto";
 
 import {
@@ -57,11 +57,11 @@ function* signMessage({ mobileApi, mudamosSigner, walletStore }) {
         return yield put(actionSignerError({ message: "incomplete-profile" }));
       }
 
-      const [seed, difficulty, { message: userMessage }] = yield [
+      const [seed, difficulty, { message: userMessage }] = yield all([
         call(walletStore.retrieve, user.voteCard),
         call(mobileApi.difficulty),
         call(mudamosSigner.data),
-      ];
+      ]);
 
       if (!userMessage) {
         return yield put(actionSignerError({ message: "invalid-payload" }));

@@ -1,5 +1,5 @@
 import { takeLatest } from "redux-saga";
-import { call, fork, put } from "redux-saga/effects";
+import { all, call, fork, put } from "redux-saga/effects";
 
 import {
   toPairs,
@@ -35,7 +35,7 @@ function* fetchLinks({ RemoteConfigService }) {
         help,
         sendYourIdea,
         whyProjectsLink,
-      ] = yield REMOTE_LINK_NAMES.map(name => call(RemoteConfigService.asString, name));
+      ] = yield all(REMOTE_LINK_NAMES.map(name => call(RemoteConfigService.asString, name)));
 
       const links = {
         getToKnowMudamos,
@@ -58,7 +58,7 @@ function* fetchRemoteConfigs({ RemoteConfigService }) {
         authenticatedSignersButtonTitle,
         ineligibleToSignCitywidePlipReason,
         ineligibleToSignStatewidePlipReason,
-      ] = yield toPairs(OTHER_CONFIGS).map(([name, type]) => call(RemoteConfigService[type], name));
+      ] = yield all(toPairs(OTHER_CONFIGS).map(([name, type]) => call(RemoteConfigService[type], name)));
 
       const config = {
         authenticatedSignersButtonTitle,
