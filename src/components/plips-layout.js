@@ -229,7 +229,7 @@ export default class PlipsLayout extends Component {
             title={locale.moreDetails.toUpperCase()}
             onPress={() => onGoToPlip(plip)}
             style={{
-              height: 30,
+              height: 35,
               marginHorizontal: 20,
               marginTop: 55,
               marginBottom: 25,
