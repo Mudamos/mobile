@@ -42,7 +42,7 @@ Agora instale os seguintes pacotes da SDK:
 Abaixo está uma forma de instalar as dependências sendo elas algumas mais atuais (não ainda testadas). Lembre-se que vc pode usar manualmente o SD Manager do android.
 
 ```
-$ android update sdk --all --no-ui --filter tools,platform-tools,build-tools-23.0.3,android-24,extra-android-support,extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services
+$ android update sdk --all --no-ui --filter tools,platform-tools,build-tools-27.0.3,android-24,extra-android-support,extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services
 ```
 
 ### iOS
@@ -70,6 +70,7 @@ $ pod install --project-directory=./ios
 ## Facebook SDK
 
 Para o iOS, dependemos da versão **4.31.1** do sdk que deve estar localizado em `~/Documents/FacebookSDK`.
+Android dependemos da versão **4.31.0** que é automaticamente baixada pelo Gradle.
 
 ## Desenvolvimento
 
