@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
 import {
   Animated,
   Easing,
   Dimensions,
-  Image,
+  ImageBackground,
   ScrollView,
   View,
 } from "react-native";
@@ -70,13 +71,13 @@ export default class Modal extends Component {
 
     return (
       <Animated.View style={[styles.container, { height, top: slide }]}>
-        <Image
+        <ImageBackground
           source={require("../images/header-people.png")}
           style={styles.peopleImage}
           resizeMode="cover"
         >
           <HeaderLogo style={styles.logo}/>
-        </Image>
+        </ImageBackground>
 
         <View style={styles.contentContainer}>
           <ScrollView bounces={false}>

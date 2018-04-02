@@ -1,4 +1,4 @@
-import React, { Component, PropTypes }  from "react";
+import React, { Component } from "react";
 
 import {
   Animated,
@@ -13,6 +13,8 @@ import {
   formatNumber,
   moment,
 } from "../utils";
+
+import PropTypes from "prop-types";
 
 import { clamp } from "ramda";
 
@@ -52,6 +54,9 @@ import {
   SignatureGoalsType,
 } from "../prop-types";
 
+const footerGradientStart = { x: 0.0, y: 0.1 };
+const footerGradientEnd = { x: 0.5, y: 1.0 };
+const footerGradientLocation = [0, 0.5];
 
 export default class PlipLayout extends Component {
   state = {
@@ -486,9 +491,9 @@ export default class PlipLayout extends Component {
 
     return (
       <LinearGradient
-        start={[0.0, 0.1]}
-        end={[0.5, 1.0]}
-        locations={[0, 0.5]}
+        start={footerGradientStart}
+        end={footerGradientEnd}
+        locations={footerGradientLocation}
         style={styles.footerContainer}
         colors={["#9844ce", "#7E52D8"]}
       >

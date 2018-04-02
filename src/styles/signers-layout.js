@@ -8,6 +8,7 @@ export default StyleSheet.create({
     width: AVATAR_SIZE,
     borderRadius: AVATAR_SIZE / 2,
     marginRight: 12,
+    overflow: "hidden",
   },
   full: {
     flex: 1,

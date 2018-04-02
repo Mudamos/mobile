@@ -22,7 +22,7 @@ MyScrollView.propTypes = {
 };
 
 MyScrollView.defaultProps = {
-  keyboardShouldPersistTaps: true,
+  keyboardShouldPersistTaps: "always",
   automaticallyAdjustContentInsets: false,
   bounces: false,
   showsVerticalScrollIndicator: false,

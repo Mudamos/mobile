@@ -1,10 +1,12 @@
 import React, {
   Component,
-  PropTypes,
 } from "react";
+
+import PropTypes from "prop-types";
 
 import {
   View,
+  ViewPropTypes,
 } from "react-native";
 
 import StatusBarSpacer from "./status-bar-spacer";
@@ -14,8 +16,8 @@ import styles from "../styles/layout";
 class Layout extends Component {
   static propTypes = {
     children: PropTypes.node,
-    contentStyle: View.propTypes.style,
-    style: View.propTypes.style,
+    contentStyle: ViewPropTypes.style,
+    style: ViewPropTypes.style,
   };
 
   render() {

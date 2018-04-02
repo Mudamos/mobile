@@ -1,5 +1,4 @@
-import { takeEvery, takeLatest } from "redux-saga";
-import { call, fork, put, spawn, select } from "redux-saga/effects";
+import { call, fork, put, spawn, select, takeEvery, takeLatest } from "redux-saga/effects";
 
 import { Actions } from "react-native-router-flux";
 

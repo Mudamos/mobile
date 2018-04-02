@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
+
+import PropTypes from "prop-types";
 
 import { clamp } from "ramda";
 
@@ -6,17 +8,22 @@ import {
   TouchableOpacity,
   Text,
   View,
+  ViewPropTypes,
 } from "react-native";
 
 import NetworkImage from "./network-image";
 import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/signer-bubble-view";
 
+const gradientStart = { x: 0.0, y: 0.25 };
+const gradientEnd = { x: 0.7, y: 1.0 };
+const gradientLocation = [0, 1.5, 2.0];
+const gradientColors = ["#7E52D8", "#9427DB", "#9526DB"];
 
 export default class SignerBubbleView extends Component {
   static propTypes = {
     size: PropTypes.number.isRequired,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     total: PropTypes.number.isRequired,
     users: PropTypes.array.isRequired,
     onPress: PropTypes.func,
@@ -55,6 +62,7 @@ export default class SignerBubbleView extends Component {
         key={`bubble-head-${user.id}`}
         source={{uri: user.pictureUrl}}
         style={styles.bubble}
+        imageStyle={styles.imageBubble}
       />
     );
 
@@ -75,11 +83,11 @@ export default class SignerBubbleView extends Component {
 
     const bubble = (
       <LinearGradient
-        start={[0.0, 0.25]}
-        end={[0.7, 1.0]}
-        locations={[0, 1.5, 2.0]}
+        start={gradientStart}
+        end={gradientEnd}
+        locations={gradientLocation}
         style={styles.bubbleGradient}
-        colors={["#7E52D8", "#9427DB", "#9526DB"]}
+        colors={gradientColors}
       >
         <Text style={styles.exceeding}>
           +{exceeding}

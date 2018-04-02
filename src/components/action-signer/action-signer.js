@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React from "react";
 import {
   Image,
   Text,
@@ -13,6 +13,8 @@ import {
   setPropTypes,
   withProps,
 } from "recompose";
+
+import PropTypes from "prop-types";
 
 import {
   prop,

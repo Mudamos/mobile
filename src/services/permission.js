@@ -41,12 +41,12 @@ const onPermissionRequest = (response, { permission, message, rationale }) => {
 
 const requestPermission = (permission, { message, rationale = true } = {}) =>
   Permissions
-    .requestPermission(permission)
+    .request(permission)
       .then(response => onPermissionRequest(response, { permission, message, rationale }))
 
 const checkStatus = permission =>
   Permissions
-    .getPermissionStatus(permission)
+    .check(permission)
 
 const service = () => ({
   checkStatus,

@@ -1,6 +1,5 @@
 import { Alert } from "react-native";
-import { takeEvery, takeLatest } from "redux-saga";
-import { call, spawn, put, select, fork } from "redux-saga/effects";
+import { all, call, spawn, put, select, fork, takeEvery, takeLatest } from "redux-saga/effects";
 
 import {
   prop,
@@ -143,10 +142,10 @@ function* fetchPlipRelatedInfo({ mobileApi }) {
       yield put(fetchingPlipRelatedInfo(true));
       const { plipId } = payload;
 
-      yield [
+      yield all([
         call(fetchPlipsRelatedInfo, { mobileApi, plipIds: [plipId] }),
         call(fetchShortSigners, { mobileApi, plipId }),
-      ];
+      ]);
 
       yield put(fetchingPlipRelatedInfo(false));
 
@@ -198,10 +197,10 @@ function* updatePlipSignInfoSaga({ mobileApi }) {
     try {
       const { plipId } = payload;
 
-      yield [
+      yield all([
         call(fetchPlipsRelatedInfo, { mobileApi, plipIds: [plipId] }),
         call(fetchShortSigners, { mobileApi, plipId }),
-      ];
+      ]);
     } catch(e) {
       logError(e);
     }
@@ -341,10 +340,10 @@ function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
 
     const loggedIn = yield select(isUserLoggedIn);
 
-    const [plipSignResults] = yield [
+    const [plipSignResults] = yield all([
       call(fetchPlipsSignInfo, { mobileApi, plipIds }),
       loggedIn ? call(fetchPlipsUserSignInfo, { mobileApi, plipIds }) : Promise.resolve(),
-    ];
+    ]);
 
     const signInfo = zip(plipIds, plipSignResults).reduce((memo, [id, result]) => {
       memo[id] = result.info;
@@ -359,15 +358,17 @@ function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
 
 function* fetchPlipsSignInfo({ mobileApi, plipIds }) {
   const authToken = yield select(currentAuthToken);
-  const goals = yield plipIds.map(id => select(getPlipSignatureGoals(id)))
+  const goals = yield all(plipIds.map(id => select(getPlipSignatureGoals(id))));
 
-  return yield zip(plipIds, goals)
+  const calls = zip(plipIds, goals)
     .map(([plipId, { initialGoal, finalGoal }]) =>
       call(mobileApi.plipSignInfo, { authToken, plipId, initialGoal, finalGoal }));
+
+  return yield all(calls);
 }
 
 function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
-  return yield plipIds.map(plipId => call(fetchUserSignInfo, { mobileApi, plipId }));
+  return yield all(plipIds.map(plipId => call(fetchUserSignInfo, { mobileApi, plipId })));
 }
 
 function* loadStorePlipsInfo({ mobileApi }) {

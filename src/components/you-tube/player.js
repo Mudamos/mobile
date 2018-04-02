@@ -1,14 +1,13 @@
-import React, { Component, PropTypes } from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
-import {
-  View,
-} from "react-native";
+import { ViewPropTypes } from "react-native";
 
 import YouTubeWebView from "./web-view";
 
 export default class YouTubePlayer extends Component {
   static propTypes = {
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     videoId: PropTypes.string.isRequired,
   };
 

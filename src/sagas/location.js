@@ -1,5 +1,4 @@
-import { takeLatest } from "redux-saga";
-import { call, put, spawn } from "redux-saga/effects";
+import { call, put, spawn, takeLatest } from "redux-saga/effects";
 import { Platform } from "react-native";
 
 import { log, logError } from "../utils";

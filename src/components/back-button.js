@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
 import {
   Text,
   TouchableOpacity,
-  View,
+  ViewPropTypes,
 } from "react-native";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -11,7 +12,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 export default class BackButton extends Component {
   static propTypes = {
     color: PropTypes.string,
-    containerStyle: View.propTypes.style,
+    containerStyle: ViewPropTypes.style,
     size: PropTypes.number,
 
     ...Text.propTypes,

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "React";
+import PropTypes from "prop-types";
+import React, { Component } from "React";
 
 import { ListView } from "react-native";
 

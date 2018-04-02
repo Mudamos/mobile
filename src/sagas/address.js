@@ -1,5 +1,4 @@
-import { takeLatest } from "redux-saga";
-import { spawn, put, call, select } from "redux-saga/effects";
+import { spawn, put, call, select, takeLatest } from "redux-saga/effects";
 
 import {
   addressZipCodeSearching,

@@ -1,6 +1,7 @@
-import React, { PropTypes } from "react";
+import PropTypes from "prop-types";
+import React from "react";
 
-import { Text, View } from "react-native";
+import { Text, View, ViewPropTypes } from "react-native";
 
 import LinearGradient from "react-native-linear-gradient";
 
@@ -25,7 +26,7 @@ const SignedMessageView = ({ date, style }) => {
 
 SignedMessageView.propTypes = {
   date: PropTypes.object.isRequired,
-  style: View.propTypes.style,
+  style: ViewPropTypes.style,
 };
 
 export default SignedMessageView;

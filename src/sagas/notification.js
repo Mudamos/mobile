@@ -3,17 +3,18 @@ import OneSignal from "react-native-onesignal";
 import {
   buffers,
   delay,
-  takeLatest,
 } from "redux-saga";
 
 import {
   actionChannel,
+  all,
   call,
   flush,
   fork,
   put,
   select,
   take,
+  takeLatest,
 } from "redux-saga/effects";
 
 import {
@@ -47,7 +48,7 @@ import {
 
 const getUserTags = pipe(pick(["city", "uf"]), map(v => v || ""));
 
-const signedPlipTag = concat("signed-plip-");
+const signedPlipTag = pipe(String, concat("signed-plip-"));
 
 function* updateOneSignalProfile() {
   yield takeLatest("PROFILE_USER_UPDATED", function* ({ payload: { currentUser } }) {
@@ -62,10 +63,10 @@ function* updateOneSignalProfile() {
       };
 
       if (different(info, newAttrs)) {
-        yield [
+        yield all([
           call([OneSignal, OneSignal.sendTags], getUserTags(newAttrs)),
           call([OneSignal, OneSignal.syncHashedEmail], newAttrs.email),
-        ];
+        ]);
 
         yield put(oneSignalUserInfoUpdated(newAttrs));
       }
@@ -90,8 +91,8 @@ function* signedPlips() {
 
       const ids = actions.map(view(lensPath(["payload", "plipId"])));
 
-      const signedResult = yield ids.map(id => select(hasUserSignedPlip(id)));
-      const plips = yield ids.map(id => select(findPlip(id)))
+      const signedResult = yield all(ids.map(id => select(hasUserSignedPlip(id))));
+      const plips = yield all(ids.map(id => select(findPlip(id))));
       const detailIds = plips.map(prop("detailId"));
 
       const buildTags = pipe(
@@ -117,10 +118,10 @@ function* clearOneSinalProfileInfo() {
         city: "",
       };
 
-      yield [
+      yield all([
         call([OneSignal, OneSignal.sendTags], getUserTags(newAttrs)),
         call([OneSignal, OneSignal.syncHashedEmail], newAttrs.email),
-      ];
+      ]);
     } catch(e) {
       logError(e, { tag: "clearOneSinalProfileInfo" });
     }

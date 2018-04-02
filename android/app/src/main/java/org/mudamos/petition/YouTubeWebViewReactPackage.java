@@ -20,12 +20,10 @@ import java.util.List;
 public class YouTubeWebViewReactPackage implements ReactPackage, LifecycleEventListener {
     private YouTubeWebViewManager viewManager;
 
-    @Override
+    // Deprecated in RN 0.47.0
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }
-
-
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {

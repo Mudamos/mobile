@@ -6,6 +6,10 @@ import FlatButton from "./flat-button";
 
 import styles from "../styles/purple-flat-button";
 
+const gradientStart = { x: 0.0, y: 0.25 };
+const gradientEnd = { x: 0.7, y: 1.0 };
+const gradientLocation = [0, 1.5, 2.0];
+const gradientColors = ["#7E52D8", "#9427DB", "#9526DB"];
 
 export default class PurpleFlatButton extends FlatButton {
   renderButton() {
@@ -20,11 +24,11 @@ export default class PurpleFlatButton extends FlatButton {
     return (
       <Button>
         <LinearGradient
-          start={[0.0, 0.25]}
-          end={[0.7, 1.0]}
-          locations={[0, 1.5, 2.0]}
-          style={[styles.gradientContainer]}
-          colors={["#7E52D8", "#9427DB", "#9526DB"]}
+          start={gradientStart}
+          end={gradientEnd}
+          locations={gradientLocation}
+          style={styles.gradientContainer}
+          colors={gradientColors}
         >
           <Text
             numberOfLines={2}

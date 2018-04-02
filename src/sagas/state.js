@@ -1,5 +1,4 @@
-import { takeLatest } from "redux-saga";
-import { call, spawn, put } from "redux-saga/effects";
+import { call, spawn, put, takeLatest } from "redux-saga/effects";
 
 import {
   statesFetched,

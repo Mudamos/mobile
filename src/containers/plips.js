@@ -1,10 +1,12 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   ListView,
   StyleSheet,
   View,
 } from "react-native";
+
+import PropTypes from "prop-types";
 
 import {
   prop,

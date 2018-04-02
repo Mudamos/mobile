@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
-import { View } from "react-native";
+import { View, ViewPropTypes } from "react-native";
 
 import Spinner from "react-native-spinkit";
 
@@ -13,7 +14,7 @@ class PageLoader extends Component {
     isVisible: PropTypes.bool,
     prepend: PropTypes.node,
     size: PropTypes.number,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     type: PropTypes.string,
   }
 

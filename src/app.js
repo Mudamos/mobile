@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import { Actions, Router, Scene } from "react-native-router-flux";
 import sceneStyle from "./styles/scene-default";

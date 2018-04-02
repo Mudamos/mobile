@@ -1,7 +1,6 @@
 package org.mudamos.petition;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -11,7 +10,6 @@ import com.ianlin.RNFirebaseCrashReport.RNFirebaseCrashReportPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.opensettings.OpenSettingsPackage;
-import com.joshblour.reactnativepermissions.ReactNativePermissionsPackage;
 import cl.json.RNSharePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -22,10 +20,10 @@ import com.airbnb.android.react.maps.MapsPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
-import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.facebook.soloader.SoLoader;
 
 import org.mudamos.petition.firebase.FirebasePackage;
 import org.mudamos.petition.signer.SignerPackage;
@@ -42,7 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
-    protected boolean getUseDeveloperSupport() {
+    public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
     }
 
@@ -55,7 +53,6 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactNativeOneSignalPackage(),
             new ImagePickerPackage(),
             new OpenSettingsPackage(),
-            new ReactNativePermissionsPackage(),
             new RNSharePackage(),
             new FBSDKPackage(mCallbackManager),
             new LinearGradientPackage(),
@@ -71,16 +68,22 @@ public class MainApplication extends Application implements ReactApplication {
             new SignerPackage()
       );
     }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
   };
 
   @Override
   public ReactNativeHost getReactNativeHost() {
-      return mReactNativeHost;
+    return mReactNativeHost;
   }
 
   @Override
   public void onCreate() {
     super.onCreate();
     FacebookSdk.sdkInitialize(getApplicationContext());
+    SoLoader.init(this, /* native exopackage */ false);
   }
 }

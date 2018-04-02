@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
 import {
   StyleSheet,
@@ -36,6 +37,7 @@ const style = StyleSheet.create({
     color: "#fff",
     fontFamily: "roboto",
     fontSize: 14,
+    flex: 1,
   },
 });
 
@@ -64,6 +66,10 @@ export default class MDTextInput extends Component {
     style: style.textFieldStyle,
     underlineEnabled: true,
   }
+
+  input = null;
+
+  setInput = component => this.input = component;
 
   get highlightColor() {
     return (this.props.hasError && errorColor) || whiteTransparent;
@@ -98,7 +104,7 @@ export default class MDTextInput extends Component {
         <MKTextField
           {...textFieldProps}
 
-          ref={ref => this.input = ref}
+          ref={this.setInput}
           tintColor={this.tintColor}
           selectionColor={selectionColor}
           highlightColor={this.highlightColor}

@@ -1,5 +1,4 @@
-import { takeLatest, takeEvery } from "redux-saga";
-import { call, put, select, spawn } from "redux-saga/effects";
+import { call, put, select, spawn, takeLatest, takeEvery } from "redux-saga/effects";
 
 import {
   creatingWallet,

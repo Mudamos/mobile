@@ -1,5 +1,4 @@
-import { takeLatest } from "redux-saga";
-import { call, fork, put, select } from "redux-saga/effects";
+import { all, call, fork, put, select, takeLatest } from "redux-saga/effects";
 
 import {
   appSetup,
@@ -23,7 +22,7 @@ function* setup({ mudamosSigner, sessionStore }) {
 
     yield call(fetchSession, { sessionStore });
 
-    yield [
+    yield all([
       put(fetchIsUserFirstTime()),
       put(fetchFeatureToggles()),
       put(fetchRemoteLinks()),
@@ -31,7 +30,7 @@ function* setup({ mudamosSigner, sessionStore }) {
       put(fetchProfile()),
       put(fetchPlips()),
       put(mainAppInitiatedAction()),
-    ];
+    ]);
   });
 
   yield takeLatest("ACTION_SIGN_APP_SETUP", function* () {

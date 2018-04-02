@@ -1,12 +1,11 @@
-import React, {
-  Component,
-  PropTypes,
-} from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
 import {
   Text,
   TextInput,
   View,
+  ViewPropTypes,
 } from "react-native";
 
 import MIcon from "react-native-vector-icons/MaterialIcons";
@@ -22,7 +21,7 @@ class MyTextInput extends Component {
 
   static propTypes = {
     editable: PropTypes.bool,
-    errorStyle: View.propTypes.style,
+    errorStyle: ViewPropTypes.style,
     hasError: PropTypes.bool,
     hint: PropTypes.string,
     inputErrorStyle: TextInput.propTypes.style,
@@ -35,8 +34,12 @@ class MyTextInput extends Component {
     onChange: PropTypes.func,
   };
 
+  input = null;
+
+  setInput = component => this.input = component;
+
   focus() {
-    this.refs.input.focus();
+    this.input.focus();
   }
 
   render() {
@@ -60,7 +63,7 @@ class MyTextInput extends Component {
 
         <TextInput
           {...properProps}
-          ref="input"
+          ref={this.setInput}
           underlineColorAndroid="transparent"
           style={[
             styles.input,

@@ -1,5 +1,4 @@
-import { takeEvery } from "redux-saga";
-import { call, fork } from "redux-saga/effects";
+import { call, fork, takeEvery } from "redux-saga/effects";
 
 import {
   log,

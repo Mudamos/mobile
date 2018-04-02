@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { StyleSheet } from "react-native";
 
 import Drawer from "react-native-drawer";
 import LinearGradient from "react-native-linear-gradient";
@@ -13,6 +14,17 @@ const drawerStyles = {
     backgroundColor: "white",
   },
 };
+
+const gradientStart = { x: 0.0, y: 0.25 };
+const gradientEnd = { x: 1.0, y: 1.0 };
+const gradientLocation = [0, 2.0];
+const gradientColors = ["#3D3D3D", "#212121"];
+
+const styles = StyleSheet.create({
+  full: {
+    flex: 1,
+  },
+});
 
 
 export default class Menu extends Component {
@@ -37,11 +49,11 @@ export default class Menu extends Component {
 
     const wrappedContent = (
       <LinearGradient
-        start={[0.0, 0.25]}
-        end={[1.0, 1.0]}
-        locations={[0,2.0]}
-        style={[{flex: 1}]}
-        colors={["#3D3D3D", "#212121"]}
+        start={gradientStart}
+        end={gradientEnd}
+        locations={gradientLocation}
+        style={styles.full}
+        colors={gradientColors}
       >
         {content}
       </LinearGradient>

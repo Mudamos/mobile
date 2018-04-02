@@ -1,9 +1,11 @@
-import React, { Component, PropTypes } from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
 import {
   Image,
   TouchableOpacity,
   View,
+  ViewPropTypes,
 } from "react-native";
 
 import FIcon from "react-native-vector-icons/FontAwesome";
@@ -16,7 +18,7 @@ export default class YouTube extends Component {
   };
 
   static propTypes = {
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     videoId: PropTypes.string.isRequired,
   };
 
