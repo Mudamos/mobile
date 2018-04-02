@@ -1,5 +1,7 @@
 # Next
 
+* [PR #390] Upgrade React Native and dependencies
+
 ## [1.8.0] 09/03/2018
 
 * [PR #388] Use string value tags for onesignal
