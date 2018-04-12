@@ -1,5 +1,6 @@
 # Next
 
+* [PR #393] Pod Firebase Crash deprecation
 * [PR #390] Upgrade React Native and dependencies
 
 ## [1.8.0] 09/03/2018
