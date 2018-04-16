@@ -60,6 +60,12 @@
 			</dict>
 		</dict>
 	</dict>
+  <key>NSAppleMusicUsageDescription</key>
+  <string>Não pedimos essa permissão</string>
+  <key>NSMotionUsageDescription</key>
+  <string>Não pedimos essa permissão</string>
+  <key>NSSpeechRecognitionUsageDescription</key>
+  <string>Não pedimos essa permissão</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Não pedimos essa permissão</string>
 	<key>NSCalendarsUsageDescription</key>
