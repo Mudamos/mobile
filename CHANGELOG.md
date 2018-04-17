@@ -4,6 +4,7 @@
 
 * [PR #393] Pod Firebase Crash deprecation
 * [PR #390] Upgrade React Native and dependencies
+* [PR #396] Add new permission description keys in Info.plist
 
 ## [1.8.0] 09/03/2018
 

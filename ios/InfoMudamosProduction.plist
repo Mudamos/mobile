@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.8.1</string>
+	<string>1.8.2</string>
 	<key>FacebookAppID</key>
 	<string>1802796723310104</string>
 	<key>FacebookDisplayName</key>
@@ -60,6 +60,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Não pedimos essa permissão</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Não pedimos essa permissão</string>
 	<key>NSCalendarsUsageDescription</key>
@@ -68,8 +70,12 @@
 	<string>Para você tirar uma foto para seu avatar</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Compartilhar sua localização permite buscar automaticamente seu CEP</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Não pedimos essa permissão</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Para você escolher um avatar</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Não pedimos essa permissão</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>pt_sans_bold.ttf</string>
