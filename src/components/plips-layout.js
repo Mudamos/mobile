@@ -451,16 +451,11 @@ class Plip extends Component {
               </AnimatableView>
           }
 
-          <Image source={require("../images/plips-top-left.png")} style={{position: "absolute", top: 0, left: 0}} />
-          <Image source={require("../images/plips-bottom-right.png")} style={{position: "absolute", bottom: 0, right: 0}} />
-          <Image source={require("../images/plips-bottom-left.png")} style={{position: "absolute", bottom: 0, left: 0}} />
-          <Image source={require("../images/plips-top-right.png")} style={{position: "absolute", top: 0, right: 0}} />
+          <TopLeft />
+          <BottomRight />
+          <BottomLeft />
+          <TopRight />
         </View>
-
-        <TopLeft />
-        <BottomRight />
-        <BottomLeft />
-        <TopRight />
       </View>
     );
   }
