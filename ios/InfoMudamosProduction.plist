@@ -23,9 +23,13 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>1214485690</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1802796723310104</string>
+				<string>br.com.tagview.mudamosmobile</string>
 			</array>
 		</dict>
 	</array>

@@ -58,13 +58,45 @@
 }
 
 - (BOOL)application:(UIApplication *)application
+continueUserActivity:(NSUserActivity *)userActivity
+ restorationHandler:(void (^)(NSArray *))restorationHandler {
+  BOOL handled = [[FIRDynamicLinks dynamicLinks] handleUniversalLink:userActivity.webpageURL
+                                                          completion:^(FIRDynamicLink * _Nullable dynamicLink,
+                                                                       NSError * _Nullable error) {
+                                                            if (dynamicLink) {
+                                                              NSLog(@"le link %@", dynamicLink.url);
+                                                            }
+                                                            NSLog(@"ooooooooooooooo");
+                                                          }];
+  NSLog(@"nnnnnnnnnnnnn");
+  return handled;
+}
+
+- (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-  return [[FBSDKApplicationDelegate sharedInstance] application:application
+  NSLog(@"################");
+  BOOL fb = [[FBSDKApplicationDelegate sharedInstance] application:application
                                                         openURL:url
                                               sourceApplication:sourceApplication
                                                      annotation:annotation];
+  
+  NSLog(@"fffffffff %@", fb ? @"y" : @"n");
+  if (fb) return YES;
+  
+  FIRDynamicLink *dynamicLink = [[FIRDynamicLinks dynamicLinks] dynamicLinkFromCustomSchemeURL:url];
+  
+  if (dynamicLink) {
+    NSLog(@"hhhhhh");
+    if (dynamicLink.url) {
+      NSLog(@"yyyyyyyyyy %@", dynamicLink.url);
+    } else {
+      NSLog(@"nooooooooo");
+    }
+  }
+  
+  return NO;
 }
 
 @end
