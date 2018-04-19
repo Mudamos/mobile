@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "android/gradlew -p android installDevelopmentDebug && adb reverse tcp:8081 tcp:8081 && adb shell am start -n br.com.tagview.petition.development/org.mudamos.petition.MainActivity",
+    "android-beta": "ENVFILE=.env.beta android/gradlew -p android installMudamosBetaDebug && adb reverse tcp:8081 tcp:8081 && adb shell am start -n br.com.tagview.petition.mudamos.beta/org.mudamos.petition.MainActivity",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "ios-4s-beta": "node node_modules/react-native/local-cli/cli.js run-ios --simulator='iPhone 4s' --scheme MudamosMobileBeta",
     "ios-se-beta": "node node_modules/react-native/local-cli/cli.js run-ios --simulator='iPhone SE iOS 10' --scheme MudamosMobileBeta",

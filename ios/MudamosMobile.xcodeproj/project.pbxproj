@@ -60,6 +60,9 @@
 		460373C3201263A900EC7EBE /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460373C2201263A800EC7EBE /* sign.html */; };
 		460373C4201263A900EC7EBE /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460373C2201263A800EC7EBE /* sign.html */; };
 		460373C5201263A900EC7EBE /* sign.html in Resources */ = {isa = PBXBuildFile; fileRef = 460373C2201263A800EC7EBE /* sign.html */; };
+		46049353208A783100EE4FEE /* MUDFirebaseDynamicLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 46049352208A783100EE4FEE /* MUDFirebaseDynamicLink.m */; };
+		46049354208A783100EE4FEE /* MUDFirebaseDynamicLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 46049352208A783100EE4FEE /* MUDFirebaseDynamicLink.m */; };
+		46049355208A783100EE4FEE /* MUDFirebaseDynamicLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 46049352208A783100EE4FEE /* MUDFirebaseDynamicLink.m */; };
 		4607F33B1E97F72A0018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
 		4607F33C1E97F7340018F4AA /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607F3281E97F6F10018F4AA /* libRCTOneSignal.a */; };
 		460B5A7B201230B30028A617 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460B5A7A201230B30028A617 /* Dummy.swift */; };
@@ -883,6 +886,8 @@
 		460373BD2012617C00EC7EBE /* WalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletService.swift; sourceTree = "<group>"; };
 		460373C2201263A800EC7EBE /* sign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sign.html; sourceTree = "<group>"; };
 		46039B9C2023416D0028BE43 /* MessageSignerActionBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageSignerActionBeta.entitlements; sourceTree = "<group>"; };
+		46049351208A783100EE4FEE /* MUDFirebaseDynamicLink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUDFirebaseDynamicLink.h; sourceTree = "<group>"; };
+		46049352208A783100EE4FEE /* MUDFirebaseDynamicLink.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUDFirebaseDynamicLink.m; sourceTree = "<group>"; };
 		460B5A77201230B20028A617 /* MudamosMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosMobile-Bridging-Header.h"; sourceTree = "<group>"; };
 		460B5A78201230B20028A617 /* MudamosMobileTagviewBeta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosMobileTagviewBeta-Bridging-Header.h"; sourceTree = "<group>"; };
 		460B5A79201230B20028A617 /* MudamosProduction-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MudamosProduction-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1404,6 +1409,8 @@
 				4675EBF61ECCB947004C8A69 /* MUDFirebaseConfig.h */,
 				46E7BBA11ECCBFD0001D1720 /* MUDFirebase.h */,
 				46E7BBC31ECCC026001D1720 /* MUDFirebase.m */,
+				46049351208A783100EE4FEE /* MUDFirebaseDynamicLink.h */,
+				46049352208A783100EE4FEE /* MUDFirebaseDynamicLink.m */,
 			);
 			name = MUDFirebase;
 			sourceTree = "<group>";
@@ -1882,6 +1889,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
 						};
 					};
 					46B86B5D20123271009E643E = {
@@ -1910,6 +1920,9 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
 								enabled = 1;
 							};
 						};
@@ -2913,6 +2926,8 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2925,6 +2940,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3027,6 +3044,8 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -3039,6 +3058,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3127,6 +3148,8 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -3139,6 +3162,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3166,6 +3191,7 @@
 				460B5A7B201230B30028A617 /* Dummy.swift in Sources */,
 				4675EBF31ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
 				46E7BBC41ECCC026001D1720 /* MUDFirebase.m in Sources */,
+				46049353208A783100EE4FEE /* MUDFirebaseDynamicLink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3199,6 +3225,7 @@
 				460B5A7D201230B30028A617 /* Dummy.swift in Sources */,
 				4675EBF51ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
 				46E7BBC61ECCC026001D1720 /* MUDFirebase.m in Sources */,
+				46049355208A783100EE4FEE /* MUDFirebaseDynamicLink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3253,6 +3280,7 @@
 				460B5A7C201230B30028A617 /* Dummy.swift in Sources */,
 				4675EBF41ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */,
 				46E7BBC51ECCC026001D1720 /* MUDFirebase.m in Sources */,
+				46049354208A783100EE4FEE /* MUDFirebaseDynamicLink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3993,7 +4021,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MudamosMobileTagviewBeta.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -4042,7 +4070,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "619faee9-09f1-447f-b4bb-c0deb904c284";
+				PROVISIONING_PROFILE = "78215a0f-79f5-4082-8fe4-23f8d79b3ff0";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos mobile dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobileTagviewBeta-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4059,7 +4087,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MudamosMobileTagviewBeta.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mor & Dan Tecnologia Consultoria Empresarial Ltda (T97PZRMFDE)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T97PZRMFDE;
@@ -4107,7 +4135,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "295b259c-b83c-4322-90e3-150efa73466e";
+				PROVISIONING_PROFILE = "7c6204de-b566-46c1-9eaf-32c1a681d734";
 				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc: br.com.tagview.mudamosmobile";
 				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobileTagviewBeta-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
