@@ -26,6 +26,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
 import org.mudamos.petition.firebase.FirebasePackage;
+import org.mudamos.petition.firebase.MUDFirebaseDynamicLinkPackage;
 import org.mudamos.petition.signer.SignerPackage;
 
 import java.util.Arrays;
@@ -65,6 +66,7 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactNativeConfigPackage(),
             new YouTubeWebViewReactPackage(),
             new FirebasePackage(),
+            new MUDFirebaseDynamicLinkPackage(),
             new SignerPackage()
       );
     }

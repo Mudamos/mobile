@@ -14,6 +14,7 @@ import Crypto from "./services/crypto";
 import DeviceInfo from "./services/device-info";
 import { defaultStorage } from "./services/local-storage";
 import LocationService from "./services/location";
+import MUDFirebaseDynamicLink from "./services/mud-firebase-dynamic-link";
 import MudamosSigner from "./services/mudamos-signer";
 import MudamosWebApi from "./services/mudamos-web";
 import MobileApi from "./services/mobile-api";
@@ -27,6 +28,8 @@ import * as repositories from "./repositories";
 const sessionStore = SessionManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP });
 const walletStore = WalletManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP });
 const localStorage = defaultStorage();
+
+const mudDynamicLink = new MUDFirebaseDynamicLink();
 
 export const storeBuilder = () => {
   const sagaRunner = createSagaMiddleware();
@@ -64,6 +67,7 @@ export const storeBuilder = () => {
         DeviceInfo,
         localStorage,
         locationService: LocationService,
+        mudDynamicLink,
         mudamosSigner: MudamosSigner(),
         mudamosWebApi: MudamosWebApi(Config.MUDAMOS_WEB_API_URL),
         mobileApi: MobileApi(Config.MOBILE_API_URL),
