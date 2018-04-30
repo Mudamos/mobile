@@ -4,6 +4,7 @@ const initialState = {
   plipsSignInfo: {},
   errorFetchingPlips: false,
   isFetchingPlips: false,
+  isFetchingPlipsNextPage: false,
   isRefreshingPlips: false,
 };
 
@@ -13,6 +14,21 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case "ALL_PLIPS_FETCHED": {
+      return { ...state, allPlips: payload.plips };
+    }
+    case "FETCH_PLIPS_NEXT_PAGE": {
+      return {
+        ...state,
+        isFetchingPlipsNextPage: true,
+      };
+    }
+    case "FETCHING_PLIPS_NEXT_PAGE_ERROR": {
+      return {
+        ...state,
+        isFetchingPlipsNextPage: false,
+      };
+    }
     case "PLIPS_FETCHING": {
       return {
         ...state,
@@ -31,6 +47,7 @@ export default (state = initialState, action) => {
         plips: payload.plips,
         currentPlipsPage: payload.page,
         nextPlipsPage: payload.nextPage,
+        isFetchingPlipsNextPage: false,
       };
     case "PLIPS_REFRESHING_PLIPS":
       return {

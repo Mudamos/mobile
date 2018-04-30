@@ -1,8 +1,13 @@
 import { Alert } from "react-native";
 import { all, call, spawn, put, select, fork, takeEvery, takeLatest } from "redux-saga/effects";
+import { delay } from "redux-saga";
 
 import {
+  chain,
+  identity,
   prop,
+  splitEvery,
+  take,
   zip,
 } from "ramda";
 
@@ -24,8 +29,10 @@ import {
 } from "../models";
 
 import {
+  allPlipsFetched,
   appReady,
   plipsFetchError,
+  plipsFetchNextPageError,
   plipsFetched,
   fetchPlipRelatedInfoError,
   fetchingPlips,
@@ -56,6 +63,10 @@ import {
   findPlips,
   getCurrentSigningPlip,
   getPlipSignatureGoals,
+  getCurrentPlipsPage,
+  getNextPlipsPage,
+  listAllPlips,
+  sortPlips,
   isUserLoggedIn,
   getIneligiblePlipReasonForScope,
 } from "../selectors";
@@ -75,15 +86,32 @@ const buildSignMessage = ({ user, plip }) => [
   plip.id,
 ].join(";");
 
+const PLIPS_PER_PAGE = 4;
+
+function* paginatePlips({ plips }) {
+  const allPlips = yield select(sortPlips(plips || []));
+  const paginate = take(PLIPS_PER_PAGE);
+
+  return {
+    page: 1,
+    nextPage: allPlips.length > PLIPS_PER_PAGE ? 2 : null,
+    plips: paginate(allPlips),
+  };
+}
 
 function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
   yield takeLatest("FETCH_PLIPS", function* () {
     try {
       yield put(fetchingPlips(true));
       const response = yield call(fetchPlips, { mudamosWebApi });
-      yield put(plipsFetched(response));
+      const paginatedPlips = yield call(paginatePlips, response);
 
-      const plipIds = (response.plips || []).map(prop("id"));
+      yield all([
+        put(allPlipsFetched(response)),
+        put(plipsFetched(paginatedPlips)),
+      ]);
+
+      const plipIds = (paginatedPlips.plips || []).map(prop("id"));
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
 
@@ -99,17 +127,42 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
   });
 }
 
-function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
-  yield takeLatest("PLIPS_REFRESH_PLIPS", function* () {
+function* fetchPlipsNextPageSaga({ mobileApi }) {
+  yield takeLatest("FETCH_PLIPS_NEXT_PAGE", function* () {
+    console.log("FETCH_PLIPS_NEXT_PAGE")
     try {
-      yield put(isRefreshingPlips(true));
-      const response = yield call(fetchPlips, { page: 1, mudamosWebApi });
+      // debounce
+      yield call(delay, 500);
+
+      const response = yield call(plipsNextPage);
       yield put(plipsFetched(response));
 
       const plipIds = (response.plips || []).map(prop("id"));
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+    } catch (e) {
+      logError(e);
 
+      yield put(plipsFetchNextPageError(e));
+    }
+  });
+}
+
+function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
+  yield takeLatest("PLIPS_REFRESH_PLIPS", function* () {
+    try {
+      yield put(isRefreshingPlips(true));
+      const response = yield call(fetchPlips, { page: 1, mudamosWebApi });
+      const paginatedPlips = yield call(paginatePlips, response);
+
+      yield all([
+        put(allPlipsFetched(response)),
+        put(plipsFetched(paginatedPlips)),
+      ]);
+
+      const plipIds = (paginatedPlips.plips || []).map(prop("id"));
+
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
     } catch (e) {
       logError(e);
 
@@ -134,6 +187,30 @@ function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
     scope,
     uf,
   });
+}
+
+function* plipsNextPage() {
+  const allPlips = yield select(listAllPlips);
+  const { plips, nextPage, currentPage } = yield all({
+    plips: select(sortPlips(allPlips)),
+    nextPage: select(getNextPlipsPage),
+    currentPage: select(getCurrentPlipsPage),
+  });
+
+  if (!nextPage) {
+    return { page: currentPage, nextPage: null, plips: [] };
+  }
+
+  const compact = chain(identity);
+  const paginatedPlips = splitEvery(PLIPS_PER_PAGE, plips);
+  const currentPlips = take(nextPage, paginatedPlips);
+  const hasNext = (paginatedPlips[nextPage + 1] || []).length > 0;
+
+  return {
+    page: nextPage,
+    nextPage: hasNext ? nextPage + 1 : null,
+    plips: compact(currentPlips),
+  };
 }
 
 function* fetchPlipRelatedInfo({ mobileApi }) {
@@ -429,6 +506,7 @@ function eligibleToSignPlip({ plip, user }) {
 export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError }) {
   yield fork(fetchPlipsSaga, { mobileApi, mudamosWebApi });
   yield fork(refreshPlipsSaga, { mobileApi, mudamosWebApi });
+  yield fork(fetchPlipsNextPageSaga, { mobileApi });
   yield spawn(signPlip, { mobileApi, walletStore, apiError });
   yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });

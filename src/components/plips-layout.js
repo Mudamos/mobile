@@ -52,14 +52,12 @@ const plipRowReadingGradientLocations = [0, 0.7, 1];
 const hasSignedGradientColors = ["#00DB5E", "#00A79E"];
 
 export default class PlipsLayout extends Component {
-  state = {
-    isRemainingDaysEnabled: PropTypes.bool,
-  };
-
   static propTypes = {
     currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
+    hasNextPage: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
+    isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
     openMenu: PropTypes.func.isRequired,
     plips: PropTypes.array,
@@ -69,6 +67,7 @@ export default class PlipsLayout extends Component {
       [PropTypes.string]: SignatureGoalsType,
     }).isRequired,
     userSignInfo: PropTypes.object.isRequired,
+    onFetchPlipsNextPage: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
@@ -81,6 +80,12 @@ export default class PlipsLayout extends Component {
     const { onGoToPlip } = this.props;
     onGoToPlip(plip);
   }
+
+  onFetchPlipsNextPage = () => {
+    const { isFetchingPlipsNextPage, onFetchPlipsNextPage } = this.props;
+
+    if (!isFetchingPlipsNextPage) onFetchPlipsNextPage();
+  };
 
   plipSignatureGoals(plipId) {
     const { signatureGoals } = this.props;
@@ -145,6 +150,8 @@ export default class PlipsLayout extends Component {
   renderListView({ plips, isRefreshingPlips }) {
     const {
       currentUser,
+      hasNextPage,
+      isFetchingPlipsNextPage,
       plipsSignInfo,
       userSignInfo,
       signatureGoals,
@@ -167,6 +174,9 @@ export default class PlipsLayout extends Component {
         data={plips}
         renderItem={this.renderCommonRow}
         extraData={extraData}
+        onEndReached={hasNextPage ? this.onFetchPlipsNextPage : null}
+        onEndReachedThreshold={0.9}
+        refreshing={isRefreshingPlips}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshingPlips}
@@ -174,6 +184,7 @@ export default class PlipsLayout extends Component {
             tintColor="black"
           />
         }
+        ListFooterComponent={isFetchingPlipsNextPage && this.renderInnerLoader({ animating: true })}
       />
     );
   }
@@ -335,7 +346,7 @@ class Plip extends Component {
   shouldComponentUpdate(nextProps) {
     const { props } = this;
 
-    return props.index !== nextProps.index
+    const shouldUpdate = props.index !== nextProps.index
       || props.plip.id !== nextProps.plip.id
       || props.height !== nextProps.height
       || props.margin !== nextProps.margin
@@ -344,6 +355,8 @@ class Plip extends Component {
       || props.hasSigned !== nextProps.hasSigned
       || props.currentSignatureGoal !== nextProps.currentSignatureGoal
       || props.finalGoal !== nextProps.finalGoal;
+
+      return shouldUpdate;
   }
 
   onPress = () => {

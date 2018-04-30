@@ -66,6 +66,6 @@ export default function* rootSaga({
   yield spawn(localStorageSaga, { localStorage });
   yield spawn(locationSaga, { locationService, permissionService });
   yield spawn(walletSaga, { mobileApi, walletStore });
-  yield fork(setupSaga, { mudamosSigner, sessionStore });
+  yield fork(setupSaga, { mobileApi, mudamosSigner, sessionStore });
   yield spawn(appStateSaga);
 }
