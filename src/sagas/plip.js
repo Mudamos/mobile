@@ -129,7 +129,6 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
 
 function* fetchPlipsNextPageSaga({ mobileApi }) {
   yield takeLatest("FETCH_PLIPS_NEXT_PAGE", function* () {
-    console.log("FETCH_PLIPS_NEXT_PAGE")
     try {
       // debounce
       yield call(delay, 500);
