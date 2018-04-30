@@ -84,7 +84,7 @@ function* signedPlips() {
     try {
       const currentAction = yield take(channel);
 
-      yield call(delay, 1000);
+      yield call(delay, 3000);
 
       const pendingActions = yield flush(channel);
       const actions = [currentAction, ...pendingActions];
