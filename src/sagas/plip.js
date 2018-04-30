@@ -15,6 +15,7 @@ import {
   different,
   homeSceneKey,
   isBlank,
+  isPresent,
   isDev,
   isUnauthorized,
   logError,
@@ -210,6 +211,27 @@ function* plipsNextPage() {
     nextPage: hasNext ? nextPage + 1 : null,
     plips: compact(currentPlips),
   };
+}
+
+function* resortPlips() {
+  const allPlips = yield select(listAllPlips);
+  const { plips, nextPage, currentPage } = yield all({
+    plips: select(sortPlips(allPlips)),
+    nextPage: select(getNextPlipsPage),
+    currentPage: select(getCurrentPlipsPage),
+  });
+
+  const compact = chain(identity);
+  const paginatedPlips = splitEvery(PLIPS_PER_PAGE, plips);
+  const currentPlips = take(currentPage, paginatedPlips);
+
+  const response = {
+    page: currentPage,
+    nextPage,
+    plips: compact(currentPlips),
+  };
+
+  yield put(plipsFetched(response));
 }
 
 function* fetchPlipRelatedInfo({ mobileApi }) {
@@ -462,8 +484,13 @@ function* loadStorePlipsInfo({ mobileApi }) {
     }
   }
 
-  yield takeLatest(["SESSION_LOGGIN_SUCCEEDED", "SESSION_USER_LOGGED_OUT"], function* () {
-   yield call(fetch);
+  yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
+    yield call(fetch);
+  });
+
+  yield takeLatest("SESSION_USER_LOGGED_OUT", function* () {
+    yield call(resortPlips);
+    yield call(fetch);
   });
 
   yield takeLatest("PROFILE_USER_UPDATED", function* ({ payload: { currentUser }}) {
@@ -476,10 +503,17 @@ function* loadStorePlipsInfo({ mobileApi }) {
       const newLocation = { uf: currentUser.address.uf, city: currentUser.address.city };
       if (!oldUserLocation) {
         oldUserLocation = newLocation;
+
+        if (isPresent(newLocation.uf) && isPresent(newLocation.city)) {
+          yield call(resortPlips);
+          yield call(fetch);
+        }
+
         return;
       }
 
       if (different(newLocation, oldUserLocation)) {
+        yield call(resortPlips);
         yield call(fetch);
       }
     } catch(e) {
