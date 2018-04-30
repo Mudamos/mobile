@@ -288,7 +288,7 @@ export default class PlipsLayout extends Component {
   }
 
   plipImage(plip) {
-    return plip.cycle && plip.cycle.pictures && plip.cycle.pictures.original;
+    return plip.cycle && plip.cycle.pictures && plip.cycle.pictures.thumb;
   }
 
   onRefresh = () => {
