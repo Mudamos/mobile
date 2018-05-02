@@ -7,6 +7,7 @@ const emitter = new NativeEventEmitter(NativeModules.MUDFirebaseDynamicLink);
 export default class MUDFirebaseDynamicLink {
   subscribe(listener) {
     this.subscription = emitter.addListener(onDeepLinkReceivedEvent, listener);
+    return () => this.unsubscribe();
   }
 
   unsubscribe() {

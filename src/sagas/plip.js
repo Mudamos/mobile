@@ -4,8 +4,12 @@ import { delay } from "redux-saga";
 
 import {
   chain,
+  contains,
+  flip,
   identity,
+  pipe,
   prop,
+  reject,
   splitEvery,
   take,
   zip,
@@ -31,6 +35,7 @@ import {
 
 import {
   allPlipsFetched,
+  addPlip,
   appReady,
   plipsFetchError,
   plipsFetchNextPageError,
@@ -182,7 +187,7 @@ function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
   const scope = "all";
   const includeCauses = true;
 
-  return yield call(mudamosWebApi.listPlips, {
+  const response = yield call(mudamosWebApi.listPlips, {
     cityId,
     includeCauses,
     limit,
@@ -190,6 +195,14 @@ function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
     scope,
     uf,
   });
+
+    const id = prop("id");
+    const currentPlips = yield select(findPlips);
+    const currentIds = currentPlips.map(id);
+    const containInIds = flip(contains)(currentIds);
+    const uniqById = reject(pipe(id, containInIds));
+
+    return { ...response, plips: uniqById(response.plips) };
 }
 
 function* plipsNextPage() {
@@ -536,6 +549,15 @@ function eligibleToSignPlip({ plip, user }) {
     case NATIONWIDE_SCOPE: return true;
     case STATEWIDE_SCOPE: return isBlank(userUF) || isNationalCause(plip) || matchUF();
     case CITYWIDE_SCOPE: return isBlank(userCityName) || isNationalCause(plip) || matchCity();
+  }
+}
+
+export function* fetchPlip({ plip }) {
+  const id = prop("id");
+  const currentPlips = yield select(findPlips);
+  const currentIds = currentPlips.map(id);
+  if(!currentIds.includes(plip.id)) {
+    yield put(addPlip(plip));
   }
 }
 

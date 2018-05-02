@@ -23,6 +23,7 @@ import localStorageSaga from "./local-storage";
 import locationSaga from "./location";
 import walletSaga from "./wallet";
 import setupSaga from "./setup";
+import appLinkSaga from "./app-link";
 
 import actionSignerSaga from "./action-signer";
 
@@ -37,6 +38,7 @@ export default function* rootSaga({
   mudamosSigner,
   mudamosWebApi,
   mobileApi,
+  mudDynamicLink,
   permissionService,
   RemoteConfigService,
   repositories,
@@ -68,4 +70,5 @@ export default function* rootSaga({
   yield spawn(walletSaga, { mobileApi, walletStore });
   yield fork(setupSaga, { mobileApi, mudamosSigner, sessionStore });
   yield spawn(appStateSaga);
+  yield fork(appLinkSaga, { mudamosWebApi, mobileApi, mudDynamicLink });
 }

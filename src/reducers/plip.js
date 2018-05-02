@@ -6,6 +6,7 @@ const initialState = {
   isFetchingPlips: false,
   isFetchingPlipsNextPage: false,
   isRefreshingPlips: false,
+  plips: [],
 };
 
 export default (state = initialState, action) => {
@@ -49,6 +50,12 @@ export default (state = initialState, action) => {
         nextPlipsPage: payload.nextPage,
         isFetchingPlipsNextPage: false,
       };
+    case "ADD_PLIP": {
+      return {
+        ...state,
+        plips: [...state.plips, payload.plip],
+      };
+    }
     case "PLIPS_REFRESHING_PLIPS":
       return {
         ...state,
