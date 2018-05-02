@@ -80,11 +80,8 @@ const listPlips = ({ get }) => ({
     .then(({ json, page, nextPage }) => ({ plips: json.data.plips, page, nextPage }));
 };
 
-const findPlip = ({ get }) => ({
-  slug
-}) => {
-  return get(`/api/v2/plips/${slug}`)
-    .then(({ json }) => ({ plip: json.data.plip }));
+const findPlip = ({ get }) => ({ slug }) => {
+  return get(`/api/v2/plips/${slug}`).then(({ json }) => ({ plip: json.data.plip }));
 };
 
 export default function MudamosWebApi(host) {

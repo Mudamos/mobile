@@ -1,11 +1,10 @@
-import { all, take, takeLatest, call , put, fork, wait, select } from "redux-saga/effects";
+import { take, call , put, fork, select } from "redux-saga/effects";
 
-import { eventChannel, END, buffers, delay } from 'redux-saga';
+import { eventChannel, buffers } from "redux-saga";
 
 import {
   navigate,
   appReady,
-  navigateBack,
   fetchingPlipRelatedInfo,
 } from "../actions";
 
@@ -13,21 +12,11 @@ import {
   fetchPlip,
 } from "./plip"
 
-import {
-  findPlips,
-} from "../selectors";
-
-import {
-  contains,
-  flip,
-  pipe,
-  prop,
-} from "ramda";
 
 const createMessageChannel = ({ mudDynamicLink, buffer = buffers.sliding(1)}) =>
   eventChannel(emitter => mudDynamicLink.subscribe(emitter), buffer);
 
-function* handleAppLink({ mudamosWebApi, mobileApi, mudDynamicLink }) {
+function* handleAppLink({ mudamosWebApi, mudDynamicLink }) {
   const channel = yield call(createMessageChannel, { mudDynamicLink });
 
   try {
@@ -63,7 +52,7 @@ function* showLoading({ state, boolean}) {
   }
 }
 
-export default function* appLinkSaga({ mudamosWebApi, mobileApi, mudDynamicLink }) {
-  yield fork(handleAppLink, { mudamosWebApi, mobileApi, mudDynamicLink });
+export default function* appLinkSaga({ mudamosWebApi, mudDynamicLink }) {
+  yield fork(handleAppLink, { mudamosWebApi, mudDynamicLink });
 }
 
