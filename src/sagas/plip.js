@@ -110,20 +110,21 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
       yield all([
         put(allPlipsFetched(response)),
         put(plipsFetched(paginatedPlips)),
+        put(fetchingPlips(false)),
+        put(appReady(true)),
       ]);
 
       const plipIds = (paginatedPlips.plips || []).map(prop("id"));
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
-
-      yield put(fetchingPlips(false));
     } catch (e) {
       logError(e);
 
-      yield put(fetchingPlips(false));
-      yield put(plipsFetchError(e));
-    } finally {
-      yield put(appReady(true));
+      yield all([
+        put(fetchingPlips(false)),
+        put(plipsFetchError(e)),
+        put(appReady(true)),
+      ]);
     }
   });
 }
@@ -158,6 +159,7 @@ function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
       yield all([
         put(allPlipsFetched(response)),
         put(plipsFetched(paginatedPlips)),
+        put(isRefreshingPlips(false)),
       ]);
 
       const plipIds = (paginatedPlips.plips || []).map(prop("id"));
@@ -166,9 +168,10 @@ function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
     } catch (e) {
       logError(e);
 
-      yield put(plipsRefreshError(e));
-    } finally {
-      yield put(isRefreshingPlips(false));
+      yield all([
+        put(plipsRefreshError(e)),
+        put(isRefreshingPlips(false)),
+      ]);
     }
   });
 }
