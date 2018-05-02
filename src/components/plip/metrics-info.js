@@ -33,6 +33,8 @@ import { MKProgress } from "react-native-material-kit";
 import AnimateNumber from "react-native-animate-number";
 
 
+const percentageFormatter = v => `${v}%`;
+
 const noCounters = (...args) => any(isNil)(args);
 
 const plipProgress = ({ signaturesRequired, signaturesCount }) => {
@@ -154,9 +156,9 @@ const TargetPercentage = ({ append, signaturesRequired, signaturesCount }) => {
     <View>
       <AnimateNumber
         value={percentage}
-        countBy={2}
+        countBy={10}
         timing={countTimingFunction}
-        formatter={val => `${val}%`}
+        formatter={percentageFormatter}
         style={styles.infoPercentageText}
       />
       <Text style={styles.infoPercentageSubtitle}>da meta atual{append}</Text>

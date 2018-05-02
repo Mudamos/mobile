@@ -3,8 +3,8 @@ import React, { Component } from "react";
 
 import {
   ActivityIndicator,
+  FlatList,
   Image,
-  ListView,
   Platform,
   RefreshControl,
   TouchableOpacity,
@@ -36,7 +36,6 @@ import NetworkImage from "./network-image";
 import LinearGradient from "react-native-linear-gradient";
 import FlatButton from "./flat-button";
 import TransparentFlatButton from "./transparent-flat-button";
-import MyListView from "./list-view";
 import MetricsInfo from "../containers/plip/metrics-info";
 
 import styles from "../styles/plips-layout";
@@ -53,28 +52,40 @@ const plipRowReadingGradientLocations = [0, 0.7, 1];
 const hasSignedGradientColors = ["#00DB5E", "#00A79E"];
 
 export default class PlipsLayout extends Component {
-  state = {
-    isRemainingDaysEnabled: PropTypes.bool,
-  };
-
   static propTypes = {
     currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
+    hasNextPage: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
+    isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
     openMenu: PropTypes.func.isRequired,
-    plipsDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
+    plips: PropTypes.array,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
     signatureGoals: PropTypes.shape({
       [PropTypes.string]: SignatureGoalsType,
     }).isRequired,
     userSignInfo: PropTypes.object.isRequired,
+    onFetchPlipsNextPage: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
   }
+
+  plipListKey = item => String(item.id);
+
+  onGoToPlip = plip => {
+    const { onGoToPlip } = this.props;
+    onGoToPlip(plip);
+  }
+
+  onFetchPlipsNextPage = () => {
+    const { isFetchingPlipsNextPage, onFetchPlipsNextPage } = this.props;
+
+    if (!isFetchingPlipsNextPage) onFetchPlipsNextPage();
+  };
 
   plipSignatureGoals(plipId) {
     const { signatureGoals } = this.props;
@@ -98,10 +109,10 @@ export default class PlipsLayout extends Component {
       errorFetchingPlips: error,
       isFetchingPlips,
       isRefreshingPlips,
-      plipsDataSource,
+      plips,
     } = this.props;
 
-    const hasRows = plipsDataSource.getRowCount() > 0;
+    const hasRows = plips.length > 0;
     const shouldShowNoPlips =
       !error &&
       !isFetchingPlips &&
@@ -112,7 +123,7 @@ export default class PlipsLayout extends Component {
         {
           !error && hasRows &&
             this.renderListView({
-              plipsDataSource,
+              plips,
               isRefreshingPlips,
             })
         }
@@ -136,16 +147,36 @@ export default class PlipsLayout extends Component {
     );
   }
 
-  renderListView({ plipsDataSource, isRefreshingPlips }) {
+  renderListView({ plips, isRefreshingPlips }) {
+    const {
+      currentUser,
+      hasNextPage,
+      isFetchingPlipsNextPage,
+      plipsSignInfo,
+      userSignInfo,
+      signatureGoals,
+    } = this.props;
+
+    const extraData = {
+      currentUser,
+      plipsSignInfo,
+      userSignInfo,
+      signatureGoals,
+    };
+
     return (
-      <MyListView
+      <FlatList
         style={styles.listView}
         contentContainerStyle={styles.listViewContent}
         automaticallyAdjustContentInsets={false}
-        enableEmptySections={true}
         scrollEventThrottle={500}
-        dataSource={plipsDataSource}
-        renderRow={this.renderCommonRow}
+        keyExtractor={this.plipListKey}
+        data={plips}
+        renderItem={this.renderCommonRow}
+        extraData={extraData}
+        onEndReached={hasNextPage ? this.onFetchPlipsNextPage : null}
+        onEndReachedThreshold={0.9}
+        refreshing={isRefreshingPlips}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshingPlips}
@@ -153,141 +184,43 @@ export default class PlipsLayout extends Component {
             tintColor="black"
           />
         }
+        ListFooterComponent={isFetchingPlipsNextPage && this.renderInnerLoader({ animating: true })}
       />
     );
   }
 
-  renderRow = ({ height, margin }) => ([plip, index], section, row, highlightRow) => {
-    const { onGoToPlip } = this.props;
-
-    return (
-      <View style={[styles.rowContainer, index === 0 ? styles.firstRowContainer : {}]}>
-        <TouchableOpacity
-          onPress={() => {
-            highlightRow(section, row);
-            onGoToPlip(plip);
-          }}
-          style={[styles.tableRow, {
-            minHeight: height,
-            margin,
-          }]}
-        >
-          {this.renderRowPlip({ plip, height, margin })}
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
-  renderCommonRow = this.renderRow({ height: 360, margin: 0 });
-
-  renderRowPlip({ plip }) {
+  renderRow = ({ height, margin }) => ({ item: plip, index }) => {
     const {
       currentUser,
       plipsSignInfo,
       userSignInfo,
-      onGoToPlip,
     } = this.props;
-    const plipSignInfo = plipsSignInfo[plip.id];
-    const plipUserSignInfo = userSignInfo[plip.id];
+
+    const plipSignInfo = plipsSignInfo && plipsSignInfo[plip.id];
+    const plipUserSignInfo = userSignInfo && userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
     const goals = this.plipSignatureGoals(plip.id);
-
-    // Not every animation seem to work on both platforms
-    const AnimatableView = Platform.OS === "ios" ? Animatable.View : View;
+    const cover = this.plipImage(plip);
 
     return (
-      <View style={styles.plipRow}>
-        <NetworkImage
-          source={{uri: this.plipImage(plip)}}
-          resizeMode="cover"
-          style={styles.plipImage}
-        />
+      <Plip
+        user={currentUser}
+        index={index}
+        plip={plip}
+        cover={cover}
+        signaturesCount={plipSignInfo && plipSignInfo.signaturesCount}
+        currentSignatureGoal={goals.currentSignatureGoal}
+        finalGoal={goals.finalGoal}
+        hasSigned={hasSigned}
+        onPress={this.onGoToPlip}
 
-        { /* This gradient improves the reading of the PLIP title and subtitle */ }
-        <LinearGradient
-          colors={plipRowReadingGradientColors}
-          locations={plipRowReadingGradientLocations}
-          style={styles.plipImageGradient}
-        />
-
-        <View style={styles.plipTitleContainer}>
-          <View style={styles.plipTitleInnerContainer}>
-            <Text style={styles.plipTitle}>
-              {plip.phase.name}
-            </Text>
-
-            <Text style={styles.plipSubtitle}>
-              {plip.phase.description}
-            </Text>
-
-            <Text style={styles.plipScope}>
-              {this.scopeCoverageTitle(plip)}
-            </Text>
-          </View>
-
-          <TransparentFlatButton
-            title={locale.moreDetails.toUpperCase()}
-            onPress={() => onGoToPlip(plip)}
-            style={{
-              height: 35,
-              marginHorizontal: 20,
-              marginTop: 55,
-              marginBottom: 25,
-            }}
-            textStyle={{
-              textShadowColor: "rgba(0,0,0, 1)",
-              textShadowOffset: { width: 1, height: 1 },
-              textShadowRadius: 1,
-            }}
-          />
-
-          {
-            !!plipSignInfo &&
-              <Animatable.View animation="fadeInUp" easing="ease">
-                <MetricsInfo
-                  signaturesRequired={goals.currentSignatureGoal}
-                  signaturesCount={plipSignInfo.signaturesCount}
-                  totalSignaturesRequired={goals.finalGoal}
-                  finalDate={plip.phase.finalDate}
-                  plip={plip}
-                  user={currentUser}
-                />
-              </Animatable.View>
-          }
-
-          {
-            hasSigned &&
-              <AnimatableView animation="zoomIn" easing="ease-in-out-sine" style={styles.signedContainer} duration={2000}>
-                <LinearGradient
-                  colors={hasSignedGradientColors}
-                  style={styles.signedGradient}
-                >
-                  <Text style={styles.signedText}>{locale.signed}</Text>
-                </LinearGradient>
-              </AnimatableView>
-          }
-
-          <Image source={require("../images/plips-top-left.png")} style={{position: "absolute", top: 0, left: 0}} />
-          <Image source={require("../images/plips-bottom-right.png")} style={{position: "absolute", bottom: 0, right: 0}} />
-          <Image source={require("../images/plips-bottom-left.png")} style={{position: "absolute", bottom: 0, left: 0}} />
-          <Image source={require("../images/plips-top-right.png")} style={{position: "absolute", top: 0, right: 0}} />
-        </View>
-
-      </View>
+        height={height}
+        margin={margin}
+      />
     );
   }
 
-  scopeCoverageTitle(plip) {
-    if (plip.scopeCoverage.scope === NATIONWIDE_SCOPE) {
-      return "PL Nacional";
-    } else if (isNationalCause(plip)) {
-      return "Causa Nacional";
-    } else if (plip.scopeCoverage.scope === STATEWIDE_SCOPE) {
-      return `PL Estadual: ${findStateByUF(plip.scopeCoverage.uf).name}`;
-    } else if (plip.scopeCoverage.scope === CITYWIDE_SCOPE) {
-      return `PL Municipal: ${plip.scopeCoverage.city.name}, ${plip.scopeCoverage.city.uf}`;
-    }
-  }
+  renderCommonRow = this.renderRow({ height: 360, margin: 0 });
 
   renderNoPlips() {
     return (
@@ -355,7 +288,7 @@ export default class PlipsLayout extends Component {
   }
 
   plipImage(plip) {
-    return plip.cycle && plip.cycle.pictures && plip.cycle.pictures.original;
+    return plip.cycle && plip.cycle.pictures && plip.cycle.pictures.thumb;
   }
 
   onRefresh = () => {
@@ -381,3 +314,179 @@ export default class PlipsLayout extends Component {
     onRetryPlips();
   }
 }
+
+const moreDetailsStyle = {
+  height: 35,
+  marginHorizontal: 20,
+  marginTop: 55,
+  marginBottom: 25,
+};
+
+const moreDetailsTextStyle = {
+  textShadowColor: "rgba(0,0,0, 1)",
+  textShadowOffset: { width: 1, height: 1 },
+  textShadowRadius: 1,
+};
+
+class Plip extends Component {
+  static propTypes = {
+    cover: PropTypes.string,
+    currentSignatureGoal: PropTypes.number,
+    finalGoal: PropTypes.number,
+    hasSigned: PropTypes.bool,
+    height: PropTypes.number.isRequired,
+    index: PropTypes.number.isRequired,
+    margin: PropTypes.number.isRequired,
+    plip: PropTypes.object.isRequired,
+    signaturesCount: PropTypes.number,
+    user: PropTypes.object,
+    onPress: PropTypes.func.isRequired,
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { props } = this;
+
+    const shouldUpdate = props.index !== nextProps.index
+      || props.plip.id !== nextProps.plip.id
+      || props.height !== nextProps.height
+      || props.margin !== nextProps.margin
+      || props.user !== nextProps.user
+      || props.signaturesCount !== nextProps.signaturesCount
+      || props.hasSigned !== nextProps.hasSigned
+      || props.currentSignatureGoal !== nextProps.currentSignatureGoal
+      || props.finalGoal !== nextProps.finalGoal;
+
+      return shouldUpdate;
+  }
+
+  onPress = () => {
+    const { plip, onPress } = this.props;
+    onPress(plip);
+  }
+
+  render() {
+    const {
+      index,
+      plip,
+
+      height,
+      margin,
+    } = this.props;
+
+    return (
+      <View style={[styles.rowContainer, index === 0 ? styles.firstRowContainer : {}]}>
+        <TouchableOpacity
+          onPress={this.onPress}
+          style={[styles.tableRow, {
+            minHeight: height,
+            margin,
+          }]}
+        >
+          {this.renderPlip({ plip })}
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  renderPlip({ plip }) {
+    const {
+      cover,
+      currentSignatureGoal,
+      finalGoal,
+      hasSigned,
+      user,
+      signaturesCount,
+    } = this.props;
+
+    // Not every animation seem to work on both platforms
+    const AnimatableView = Platform.OS === "ios" ? Animatable.View : View;
+
+    return (
+      <View style={styles.plipRow}>
+        <NetworkImage
+          source={{uri: cover}}
+          resizeMode="cover"
+          style={styles.plipImage}
+        />
+
+        { /* This gradient improves the reading of the PLIP title and subtitle */ }
+        <LinearGradient
+          colors={plipRowReadingGradientColors}
+          locations={plipRowReadingGradientLocations}
+          style={styles.plipImageGradient}
+        />
+
+        <View style={styles.plipTitleContainer}>
+          <View style={styles.plipTitleInnerContainer}>
+            <Text style={styles.plipTitle}>
+              {plip.phase.name}
+            </Text>
+
+            <Text style={styles.plipSubtitle}>
+              {plip.phase.description}
+            </Text>
+
+            <Text style={styles.plipScope}>
+              {this.scopeCoverageTitle(plip)}
+            </Text>
+          </View>
+
+          <TransparentFlatButton
+            title={locale.moreDetails.toUpperCase()}
+            onPress={this.onGoToPlip}
+            style={moreDetailsStyle}
+            textStyle={moreDetailsTextStyle}
+          />
+
+          {
+            signaturesCount != null &&
+              <Animatable.View animation="fadeInUp" easing="ease">
+                <MetricsInfo
+                  signaturesRequired={currentSignatureGoal}
+                  signaturesCount={signaturesCount}
+                  totalSignaturesRequired={finalGoal}
+                  finalDate={plip.phase.finalDate}
+                  plip={plip}
+                  user={user}
+                />
+              </Animatable.View>
+          }
+
+          {
+            hasSigned &&
+              <AnimatableView animation="zoomIn" easing="ease-in-out-sine" style={styles.signedContainer} duration={2000}>
+                <LinearGradient
+                  colors={hasSignedGradientColors}
+                  style={styles.signedGradient}
+                >
+                  <Text style={styles.signedText}>{locale.signed}</Text>
+                </LinearGradient>
+              </AnimatableView>
+          }
+
+          <TopLeft />
+          <BottomRight />
+          <BottomLeft />
+          <TopRight />
+        </View>
+      </View>
+    );
+  }
+
+  scopeCoverageTitle(plip) {
+    if (plip.scopeCoverage.scope === NATIONWIDE_SCOPE) {
+      return "PL Nacional";
+    } else if (isNationalCause(plip)) {
+      return "Causa Nacional";
+    } else if (plip.scopeCoverage.scope === STATEWIDE_SCOPE) {
+      return `PL Estadual: ${findStateByUF(plip.scopeCoverage.uf).name}`;
+    } else if (plip.scopeCoverage.scope === CITYWIDE_SCOPE) {
+      return `PL Municipal: ${plip.scopeCoverage.city.name}, ${plip.scopeCoverage.city.uf}`;
+    }
+  }
+}
+
+const TopLeft = () => <Image source={require("../images/plips-top-left.png")} style={{position: "absolute", top: 0, left: 0}} />;
+const BottomRight = () => <Image source={require("../images/plips-bottom-right.png")} style={{position: "absolute", bottom: 0, right: 0}} />;
+const BottomLeft = () => <Image source={require("../images/plips-bottom-left.png")} style={{position: "absolute", bottom: 0, left: 0}} />;
+const TopRight = () => <Image source={require("../images/plips-top-right.png")} style={{position: "absolute", top: 0, right: 0}} />;

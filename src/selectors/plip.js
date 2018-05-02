@@ -25,19 +25,23 @@ export const errorFetchingPlips = state => state.plip.errorFetchingPlips;
 
 export const isFetchingPlips = state => state.plip.isFetchingPlips;
 
+export const isFetchingPlipsNextPage = state => state.plip.isFetchingPlipsNextPage;
+
 export const isRefreshingPlips = state => state.plip.isRefreshingPlips;
 
 export const findPlip = id => state =>
   (state.plip.plips || []).find(propEq("id", id));
 
-export const findPlips = state => {
-  const plips = state.plip.plips || [];
+export const findPlips = state => state.plip.plips || [];
+
+export const sortPlips = plips => state => {
   const user = currentUser(state);
   const address = (user || {}).address;
   const normalize = str => (str || "").toLowerCase();
   const getTime = date => moment(date).toDate().getTime();
   const orderPlips = plips => sort((a, b) => getTime(b.phase.initialDate) - getTime(a.phase.initialDate), plips || []);
-  const groupBySignature = groupBy(({ id }) => hasUserSignedPlip(id)(state) ? "signed" : "unsigned");
+  // There is no concept for signed unsigned anymore
+  const groupBySignature = groupBy(() => "unsigned");
 
   const userCityPlips = plips.filter(plip => {
     const { scopeCoverage } = plip;
@@ -91,7 +95,15 @@ export const findPlips = state => {
     ...orderPlips(otherCitywide["signed"]),
     ...orderPlips(cityNationalCause["signed"]),
   ];
-}
+};
+
+export const listAllPlips = state => state.plip.allPlips;
+
+export const getNextPlipsPage = state => state.plip.nextPlipsPage;
+
+export const getCurrentPlipsPage = state => state.plip.currentPlipsPage;
+
+export const hasPlipsNextPage = state => !!getNextPlipsPage(state);
 
 export const isSigningPlip = state => state.plip.isSigning;
 

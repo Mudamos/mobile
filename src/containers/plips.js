@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  ListView,
   StyleSheet,
   View,
 } from "react-native";
@@ -20,6 +19,7 @@ import locale from "../locales/pt-BR";
 import {
   fetchProfile,
   fetchPlips,
+  fetchPlipsNextPage,
   logEvent,
   logout,
   navigate,
@@ -34,10 +34,12 @@ import {
 import {
   isAppReady,
   isFetchingPlips,
+  isFetchingPlipsNextPage,
   isRefreshingPlips,
   errorFetchingPlips,
   currentUser as getCurrentUser,
   getUserSignInfo,
+  hasPlipsNextPage,
   isFetchingProfile,
   isUserFirstTime,
   isUserLoggedIn,
@@ -75,8 +77,6 @@ class Container extends Component {
   state = {
     menuOpen: false,
     showAboutModal: false,
-
-    plipsDataSource: this.cloneRows({ dataSource: this.dataSource(), plips: this.props.plips }),
   };
 
   static propTypes = {
@@ -168,14 +168,6 @@ class Container extends Component {
     if (nextProps.isUserFirstTime === true && !this.state.showAboutModal) {
       this.setState({ showAboutModal: true });
     }
-
-    const {
-      plipsDataSource,
-    } = this.state;
-
-    this.setState({
-      plipsDataSource: this.cloneRows({ dataSource: plipsDataSource, plips: nextProps.plips }),
-    });
   }
 
   render() {
@@ -193,7 +185,6 @@ class Container extends Component {
         >
           {this.renderPage()}
           {this.renderFirstTimeLoader()}
-
         </Menu>
 
         <PageLoader isVisible={isValidatingProfile} />
@@ -203,7 +194,6 @@ class Container extends Component {
 
   renderPage() {
     const {
-      plipsDataSource,
       showAboutModal,
     } = this.state;
 
@@ -212,8 +202,7 @@ class Container extends Component {
         <PlipsLayout
           {...this.props}
 
-          openMenu={this.openMenu.bind(this)}
-          plipsDataSource={plipsDataSource}
+          openMenu={this.openMenu}
         />
 
         {
@@ -258,7 +247,7 @@ class Container extends Component {
     );
   }
 
-  openMenu() {
+  openMenu = () => {
     const { onFetchProfile } = this.props;
 
     this.setState({ menuOpen: true });
@@ -302,24 +291,16 @@ class Container extends Component {
     this.closeMenu();
     onLogEvent({ name: "tapped_menu_signup" });
   }
-
-  dataSource() {
-    return new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    })
-  }
-
-  cloneRows({ dataSource, plips }) {
-    return dataSource.cloneWithRows((plips || []).map((plip, index) => [plip, index]))
-  }
 }
 
 const mapStateToProps = state => ({
   currentSigningPlip: getCurrentSigningPlip(state),
   currentUser: getCurrentUser(state),
   errorFetchingPlips: errorFetchingPlips(state),
+  hasNextPage: hasPlipsNextPage(state),
   isAppReady: isAppReady(state),
   isFetchingPlips: isFetchingPlips(state),
+  isFetchingPlipsNextPage: isFetchingPlipsNextPage(state),
   isFetchingProfile: isFetchingProfile(state),
   isRefreshingPlips: isRefreshingPlips(state),
   isUserFirstTime: isUserFirstTime(state),
@@ -336,6 +317,7 @@ const mapDispatchToProps = dispatch => ({
   onAvatarChanged: avatar => dispatch(profileSaveAvatar({ avatar, shouldNavigate: false })),
   onRetryPlips: () => dispatch(fetchPlips()),
   onChangePassword: () => dispatch(navigate("changePassword")),
+  onFetchPlipsNextPage: () => dispatch(fetchPlipsNextPage()),
   onFetchProfile: () => dispatch(fetchProfile()),
   onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
   onGoToPlip: plip => dispatch(navigate("showPlip", { plip })),

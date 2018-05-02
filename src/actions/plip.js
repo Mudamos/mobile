@@ -2,6 +2,10 @@ export const fetchPlips = () => ({
   type: "FETCH_PLIPS",
 });
 
+export const fetchPlipsNextPage = () => ({
+  type: "FETCH_PLIPS_NEXT_PAGE",
+});
+
 export const refreshPlips = () => ({
   type: "PLIPS_REFRESH_PLIPS",
 });
@@ -16,9 +20,19 @@ export const plipsFetchError = error => ({
   payload: { error },
 });
 
+export const plipsFetchNextPageError = error => ({
+  type: "FETCHING_PLIPS_NEXT_PAGE_ERROR",
+  payload: { error },
+});
+
 export const plipsFetched = ({ plips, page, nextPage }) => ({
   type: "PLIPS_FETCHED",
   payload: { plips, page, nextPage },
+});
+
+export const allPlipsFetched = ({ plips }) => ({
+  type: "ALL_PLIPS_FETCHED",
+  payload: { plips },
 });
 
 export const isRefreshingPlips = isRefreshing => ({
@@ -30,9 +44,6 @@ export const plipsRefreshError = error => ({
   type: "PLIPS_REFRESH_ERROR",
   payload: { error },
 });
-
-
-
 
 export const fetchFilteredPlips = () => ({
   type: "FETCH_FILTERED_PLIPS",

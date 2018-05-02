@@ -6,16 +6,18 @@ import {
   fetchFeatureToggles,
   fetchRemoteLinks,
   fetchRemoteConfig,
-  fetchProfile,
   fetchPlips,
   mainAppInitiated as mainAppInitiatedAction,
   signMessage,
 } from "../actions";
 
+import { fetchProfile } from "./profile";
 import { fetchSession } from "./session";
 import { mainAppInitiated } from "../selectors";
 
-function* setup({ mudamosSigner, sessionStore }) {
+import { logError } from "../utils";
+
+function* setup({ mobileApi, mudamosSigner, sessionStore }) {
   yield takeLatest("SETUP", function* () {
     const isMainApp = yield call(mudamosSigner.isMainApp);
     if (!isMainApp) return;
@@ -27,10 +29,16 @@ function* setup({ mudamosSigner, sessionStore }) {
       put(fetchFeatureToggles()),
       put(fetchRemoteLinks()),
       put(fetchRemoteConfig()),
-      put(fetchProfile()),
-      put(fetchPlips()),
       put(mainAppInitiatedAction()),
     ]);
+
+    try {
+      yield call(fetchProfile, { mobileApi });
+    } catch(e) {
+      logError(e);
+    }
+
+    yield put(fetchPlips());
   });
 
   yield takeLatest("ACTION_SIGN_APP_SETUP", function* () {
@@ -41,8 +49,8 @@ function* setup({ mudamosSigner, sessionStore }) {
     yield put(signMessage());
   });
 }
-export default function* setupSaga({ mudamosSigner, sessionStore }) {
-  yield fork(setup, { mudamosSigner, sessionStore });
+export default function* setupSaga({ mobileApi, mudamosSigner, sessionStore }) {
+  yield fork(setup, { mobileApi, mudamosSigner, sessionStore });
 
   // If the app was started because of an action
   // the setup process was halted, so we need to initiated the main app again

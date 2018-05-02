@@ -53,6 +53,7 @@ function appError({ type, payload }) {
     }
     case "PLIP_FETCH_SIGNERS_ERROR":
       return showToast(locale.errors.genericError);
+    case "FETCHING_PLIPS_NEXT_PAGE_ERROR":
     case "PLIPS_REFRESH_ERROR":
       return showToast(locale.errors.fetchPlips);
     case "PROFILE_SAVE_AVATAR_ERROR":

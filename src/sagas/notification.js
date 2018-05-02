@@ -36,7 +36,7 @@ import {
 
 import {
   findPlip,
-  findPlips,
+  listAllPlips,
   hasUserSignedPlip,
   oneSignalUserInfo,
 } from "../selectors";
@@ -84,7 +84,7 @@ function* signedPlips() {
     try {
       const currentAction = yield take(channel);
 
-      yield call(delay, 1000);
+      yield call(delay, 3000);
 
       const pendingActions = yield flush(channel);
       const actions = [currentAction, ...pendingActions];
@@ -131,7 +131,7 @@ function* clearOneSinalProfileInfo() {
 function* clearSignedPlips() {
   yield takeLatest("SESSION_USER_LOGGED_OUT", function* () {
     try {
-      const plips = yield select(findPlips);
+      const plips = yield select(listAllPlips);
       const tags = pipe(
         map(prop("detailId")),
         map(signedPlipTag),

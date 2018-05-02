@@ -105,7 +105,7 @@ export default class PlipLayout extends Component {
 
   get plipImage() {
     const { plip } = this.props;
-    return plip && plip.cycle && plip.cycle.pictures && plip.cycle.pictures.original;
+    return plip && plip.cycle && plip.cycle.pictures && plip.cycle.pictures.thumb;
   }
 
   get plipPresentation() {

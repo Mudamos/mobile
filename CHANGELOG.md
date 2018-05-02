@@ -1,5 +1,6 @@
 # Next
 
+* [PR #401] Plips virtual pagination
 * [PR #398] Add dynamic link module
 
 ## [1.8.1] 13/04/2018
