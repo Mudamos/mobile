@@ -49,10 +49,11 @@ const scenes = Actions.create(
   <Scene key="root">
     <Scene key="plipsNav" initial={true} type="reset" hideNavBar={true}>
       <Scene key="plipsList" initial={true} component={PlipsContainer} hideNavBar={true} />
-      <Scene key="showPlip" component={PlipContainer} hideNavBar={true} />
-      <Scene key="plipViewer" component={PlipViewerContainer} hideNavBar={true} title="Texto do projeto"/>
-      <Scene key="signers" component={SignersContainer} hideNavBar={true} />
     </Scene>
+
+    <Scene key="showPlip" component={PlipContainer} hideNavBar={true} />
+    <Scene key="plipViewer" component={PlipViewerContainer} hideNavBar={true} title="Texto do projeto"/>
+    <Scene key="signers" component={SignersContainer} hideNavBar={true} />
 
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
     <Scene key="signUp" component={SignUpContainer} hideNavBar={true} title="Identificação" />
