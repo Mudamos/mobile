@@ -447,7 +447,7 @@ function* invalidateWalletAndNavigate(params = {}) {
   yield put(profileStateMachine(params));
 }
 
-function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
+export function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
   try {
     if (!plipIds || !plipIds.length) return;
 
