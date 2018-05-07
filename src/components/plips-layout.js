@@ -433,7 +433,7 @@ class Plip extends Component {
 
           <TransparentFlatButton
             title={locale.moreDetails.toUpperCase()}
-            onPress={this.onGoToPlip}
+            onPress={this.onPress}
             style={moreDetailsStyle}
             textStyle={moreDetailsTextStyle}
           />
