@@ -1,3 +1,7 @@
+import {
+  prop,
+} from "ramda";
+
 const initialState = {
   userSignInfo: {},
   justSignedPlips: {},
@@ -51,11 +55,20 @@ export default (state = initialState, action) => {
         nextPlipsPage: payload.nextPage,
         isFetchingPlipsNextPage: false,
       };
+
     case "ADD_PLIP": {
-      return {
-        ...state,
-        plips: [...state.plips, payload.plip],
-      };
+      const id = prop("id");
+      const currentPlips = state.plips;
+      const currentIds = currentPlips.map(id);
+
+      if(!currentIds.includes(payload.plip.id)) {
+        return {
+          ...state,
+          plips: [...state.plips, payload.plip],
+        };
+      } else {
+        return { ...state };
+      }
     }
     case "PLIPS_REFRESHING_PLIPS":
       return {

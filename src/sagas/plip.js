@@ -35,7 +35,6 @@ import {
 
 import {
   allPlipsFetched,
-  addPlip,
   appReady,
   plipsFetchError,
   plipsFetchNextPageError,
@@ -549,15 +548,6 @@ function eligibleToSignPlip({ plip, user }) {
     case NATIONWIDE_SCOPE: return true;
     case STATEWIDE_SCOPE: return isBlank(userUF) || isNationalCause(plip) || matchUF();
     case CITYWIDE_SCOPE: return isBlank(userCityName) || isNationalCause(plip) || matchCity();
-  }
-}
-
-export function* fetchPlip({ plip }) {
-  const id = prop("id");
-  const currentPlips = yield select(findPlips);
-  const currentIds = currentPlips.map(id);
-  if(!currentIds.includes(plip.id)) {
-    yield put(addPlip(plip));
   }
 }
 
