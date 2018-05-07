@@ -7,6 +7,7 @@ const initialState = {
   isFetchingPlipsNextPage: false,
   isRefreshingPlips: false,
   plips: [],
+  currentPlip: null,
 };
 
 export default (state = initialState, action) => {
@@ -147,12 +148,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
 
+        currentPlip: null,
         currentSigningPlip: null,
         fetchPlipRelatedInfoError: null,
         justSignedPlips: {},
         shortSigners: null,
         shortSignersTotal: null,
       };
+    case "SET_CURRENT_PLIP":
+      return {
+        ...state,
+        currentPlip: payload.plip,
+      }
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,

@@ -189,6 +189,7 @@ export default class PlipLayout extends Component {
       isFetchingPlipRelatedInfo,
       isSigning,
       errorFetching,
+      plip,
     } = this.props;
 
     const { showSignSuccess } = this.state;
@@ -196,14 +197,14 @@ export default class PlipLayout extends Component {
     return (
       <View style={[styles.container]}>
         <Layout>
-          { errorFetching && this.renderRetry() }
-          { !errorFetching && !isFetchingPlipRelatedInfo && this.renderMainContent() }
-          { this.renderNavBar() }
+          { errorFetching && plip && this.renderRetry() }
+          { !errorFetching && !isFetchingPlipRelatedInfo && plip && this.renderMainContent() }
+          { plip && this.renderNavBar() }
         </Layout>
 
-        {showSignSuccess && this.renderSignSuccess()}
+        {showSignSuccess && plip && this.renderSignSuccess()}
 
-        <PageLoader isVisible={isFetchingPlipRelatedInfo || isSigning} />
+        <PageLoader isVisible={isFetchingPlipRelatedInfo || isSigning || !plip} />
       </View>
     );
   }

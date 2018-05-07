@@ -103,6 +103,8 @@ export const getNextPlipsPage = state => state.plip.nextPlipsPage;
 
 export const getCurrentPlipsPage = state => state.plip.currentPlipsPage;
 
+export const getCurrentPlip = state => state.plip.currentPlip;
+
 export const hasPlipsNextPage = state => !!getNextPlipsPage(state);
 
 export const isSigningPlip = state => state.plip.isSigning;

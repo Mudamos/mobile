@@ -20,6 +20,7 @@ import {
 
 import {
   currentUser,
+  getCurrentPlip,
   fetchPlipRelatedInfoError,
   isFetchingPlipRelatedInfo,
   isRemainingDaysEnabled,
@@ -41,7 +42,7 @@ class Container extends Component {
     isFetchingPlipRelatedInfo: PropTypes.bool,
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
-    plip: PropTypes.object, // Navigation injected
+    plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
@@ -58,7 +59,9 @@ class Container extends Component {
 
   componentWillMount() {
     const { plip, onFetchPlipRelatedInfo } = this.props;
-    onFetchPlipRelatedInfo(plip.id);
+    if (plip) {
+      onFetchPlipRelatedInfo(plip.id);
+    }
   }
 
   render() {
@@ -81,8 +84,9 @@ const onPlipSign = ({ dispatch, plip }) => {
   )
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const plipId = ownProps.plip.id;
+const mapStateToProps = (state) => {
+  const currentPlip = getCurrentPlip(state);
+  const plipId = currentPlip ? currentPlip.id : null;
   const userSignInfo = getUserCurrentPlipSignInfo(state, plipId);
   let plipSignInfo = getPlipSignInfo(plipId)(state);
 
@@ -96,11 +100,12 @@ const mapStateToProps = (state, ownProps) => {
   const currentPlipShortSignersInfo = getCurrentPlipShortSignersInfo(state);
 
   return {
+    plip: getCurrentPlip(state),
     errorFetching: fetchPlipRelatedInfoError(state),
     isFetchingPlipRelatedInfo: isFetchingPlipRelatedInfo(state),
     isRemainingDaysEnabled: isRemainingDaysEnabled(state),
     isSigning: isSigningPlip(state),
-    justSignedPlip: hasUserJustSignedPlip(state, ownProps.plip.id),
+    justSignedPlip: hasUserJustSignedPlip(state, plipId),
     plipSignInfo: plipSignInfo,
     remoteConfig: listRemoteConfig(state),
     signers: currentPlipShortSignersInfo.users,

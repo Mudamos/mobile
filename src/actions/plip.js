@@ -170,3 +170,8 @@ export const plipsSignInfoFetched = ({ signInfo }) => ({
   type: "PLIP_PLIPS_SIGN_INFO_FETCHED",
   payload: { signInfo },
 });
+
+export const setCurrentPlip = plip => ({
+  type: "SET_CURRENT_PLIP",
+  payload: { plip },
+})
