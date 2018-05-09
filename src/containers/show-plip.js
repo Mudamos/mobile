@@ -10,6 +10,7 @@ import locale from "../locales/pt-BR";
 import {
   clearPlipInfo,
   fetchPlipRelatedInfo,
+  handleAppLink,
   navigate,
   navigateBack,
   openURL,
@@ -29,6 +30,7 @@ import {
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
   getPlipSignatureGoals,
+  handlingAppLinkError,
   hasUserJustSignedPlip,
   listRemoteConfig,
 } from "../selectors";
@@ -39,6 +41,7 @@ import PlipLayout from "../components/plip-layout";
 class Container extends Component {
   static propTypes = {
     errorFetching: PropTypes.bool,
+    errorHandlingAppLink: PropTypes.bool,
     isFetchingPlipRelatedInfo: PropTypes.bool,
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
@@ -52,15 +55,16 @@ class Container extends Component {
     onOpenSigners: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
+    onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
+  componentWillReceiveProps(nextProps) {
     const { plip, onFetchPlipRelatedInfo } = this.props;
-    if (plip) {
-      onFetchPlipRelatedInfo(plip.id);
+    if (nextProps.plip && (plip == null || plip.id !== nextProps.plip.id)) {
+      onFetchPlipRelatedInfo(nextProps.plip.id);
     }
   }
 
@@ -84,7 +88,7 @@ const onPlipSign = ({ dispatch, plip }) => {
   )
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const currentPlip = getCurrentPlip(state);
   const plipId = currentPlip ? currentPlip.id : null;
   const userSignInfo = getUserCurrentPlipSignInfo(state, plipId);
@@ -102,10 +106,11 @@ const mapStateToProps = (state) => {
   return {
     plip: getCurrentPlip(state),
     errorFetching: fetchPlipRelatedInfoError(state),
+    errorHandlingAppLink: handlingAppLinkError(state),
     isFetchingPlipRelatedInfo: isFetchingPlipRelatedInfo(state),
     isRemainingDaysEnabled: isRemainingDaysEnabled(state),
     isSigning: isSigningPlip(state),
-    justSignedPlip: hasUserJustSignedPlip(state, plipId),
+    justSignedPlip: plipId ? hasUserJustSignedPlip(state, plipId) : false,
     plipSignInfo: plipSignInfo,
     remoteConfig: listRemoteConfig(state),
     signers: currentPlipShortSignersInfo.users,
@@ -125,6 +130,7 @@ const mapDispatchToProps = dispatch => ({
   onOpenSigners: plipId => dispatch(navigate("signers", { plipId })),
   onOpenURL: url => dispatch(openURL(url)),
   onPlipSign: plip => onPlipSign({ dispatch, plip }),
+  onRetryAppLink: () => dispatch(handleAppLink()),
   onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
   onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),

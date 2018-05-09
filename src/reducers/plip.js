@@ -67,7 +67,7 @@ export default (state = initialState, action) => {
           plips: [...state.plips, payload.plip],
         };
       } else {
-        return { ...state };
+        return state;
       }
     }
     case "PLIPS_REFRESHING_PLIPS":
