@@ -141,7 +141,8 @@ export const fetchPlipRelatedInfoError = state => state.plip.fetchPlipRelatedInf
 export const findPlipsSignInfo = state => state.plip.plipsSignInfo;
 
 export const getPlipSignatureGoals = plipId => state => {
-  const plip = findPlip(plipId)(state) || {};
+  const currentPlip = getCurrentPlip(state);
+  const plip = findPlip(plipId)(state) || (currentPlip && currentPlip.id === plipId ? currentPlip : {});
   const { currentSignatureGoal } = getPlipSignInfo(plipId)(state) || {};
 
   const {

@@ -170,6 +170,12 @@ export default class PlipLayout extends Component {
     return Math.floor(this.plipProgress * 100);
   }
 
+  onRetryAppLink = () => {
+    const { onRetryAppLink } = this.props;
+
+    this.props.onRetryAppLink();
+  }
+
   componentWillMount() {
     this.setState({
       scrollY: new Animated.Value(0),
@@ -675,11 +681,10 @@ export default class PlipLayout extends Component {
   }
 
   renderRetryAppLink() {
-    const { onRetryAppLink } = this.props;
     return (
       <View style={styles.retryContainer}>
         <RetryButton
-          onPress={() => onRetryAppLink()}
+          onPress={this.onRetryAppLink}
           style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
         />
       </View>

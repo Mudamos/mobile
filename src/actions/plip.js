@@ -45,11 +45,6 @@ export const plipsRefreshError = error => ({
   payload: { error },
 });
 
-export const addPlip = plip => ({
-  type: "ADD_PLIP",
-  payload: { plip },
-});
-
 export const fetchFilteredPlips = () => ({
   type: "FETCH_FILTERED_PLIPS",
 });

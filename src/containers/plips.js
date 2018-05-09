@@ -321,7 +321,10 @@ const mapDispatchToProps = dispatch => ({
   onFetchPlipsNextPage: () => dispatch(fetchPlipsNextPage()),
   onFetchProfile: () => dispatch(fetchProfile()),
   onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
-  onGoToPlip: plip => { dispatch(navigate("showPlip")); dispatch(setCurrentPlip(plip)) },
+  onGoToPlip: plip => {
+    dispatch(navigate("showPlip"));
+    dispatch(setCurrentPlip(plip));
+  },
   onLogEvent: ({ name, extraData }) => dispatch(logEvent({ name, extraData })),
   onLogout: () => dispatch(logout()),
   onOpenURL: url => dispatch(openURL(url)),

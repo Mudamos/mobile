@@ -3,7 +3,6 @@ import { call , fork, put, select, take, takeLatest } from "redux-saga/effects";
 import { buffers, eventChannel } from "redux-saga";
 
 import {
-  addPlip,
   appLinkHandleError,
   clearAppLinkError,
   handleAppLink,
@@ -51,7 +50,6 @@ function* handlePlip({ mudamosWebApi }) {
 
         const slug = slugMatches[1];
         const response = yield call(mudamosWebApi.findPlip, { slug });
-        yield put(addPlip(response.plip));
         yield put(setCurrentPlip(response.plip));
       } catch (e) {
         logError(e);
@@ -66,7 +64,7 @@ function* handlePlip({ mudamosWebApi }) {
 function* clearError() {
   yield takeLatest("NAVIGATION", function* () {
     const appLinkError = yield select(handlingAppLinkError);
-    if(appLinkError) {
+    if (appLinkError) {
       yield put(clearAppLinkError());
     }
   });

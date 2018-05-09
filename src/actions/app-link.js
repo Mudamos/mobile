@@ -10,8 +10,8 @@ export const setAppLinkUrl = url => ({
 
 export const handleAppLink = () => ({
   type: "HANDLE_APP_LINK",
-})
+});
 
 export const clearAppLinkError = () => ({
   type: "CLEAR_APP_LINK_ERROR",
-})
+});
