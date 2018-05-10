@@ -1,5 +1,6 @@
 # Next
 
+* [PR #402] Redirect to a plip page when receive a link
 * [PR #401] Plips virtual pagination
 * [PR #398] Add dynamic link module
 
