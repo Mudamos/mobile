@@ -3,7 +3,7 @@ import { map, prop } from "ramda";
 const extractValue = map(prop("value"));
 
 const initialState = {
-  plipRemainingDaysEnabled: true,
+  plipRemainingDaysEnabled: false,
 };
 
 export default (state = initialState, action) => {

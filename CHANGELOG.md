@@ -1,6 +1,10 @@
 # Next
 
 * [PR #402] Redirect to a plip page when receive a link
+
+## [1.9.0] 10/05/2018
+
+* [ISSUE #404] Change default remote config values
 * [PR #401] Plips virtual pagination
 * [PR #398] Add dynamic link module
 
