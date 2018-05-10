@@ -4,15 +4,15 @@ const extractValue = map(prop("value"));
 
 const initialState = {
   links: {
-    getToKnowMudamos: "https://www.mudamos.org",
-    help: "https://www.mudamos.org/ajuda",
-    sendYourIdea: "https://www.mudamos.org/envie-sua-ideia",
+    getToKnowMudamos: "https://www.mudamos.org/quem-somos",
+    help: "https://itsrio2.typeform.com/to/nGzwjv",
+    sendYourIdea: "https://itsrio2.typeform.com/to/iulNZI",
     whyProjectsLink: "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular",
   },
   config: {
     authenticatedSignersButtonTitle: "Lista de assinantes e outras informações",
-    ineligibleToSignCitywidePlipReason: "Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do município para o qual a lei se destina.",
-    ineligibleToSignStatewidePlipReason: "Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do estado para o qual a lei se destina.",
+    ineligibleToSignCitywidePlipReason: "Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do município para o qual ele se destina. Se deseja propor essa lei para o seu município, use a função \"Proponha um PL\" no menu do App.",
+    ineligibleToSignStatewidePlipReason: "Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do estado para o qual ele se destina. Se deseja propor essa lei para o seu município, use a função \"Proponha um PL\" no menu do App.",
   },
 };
 

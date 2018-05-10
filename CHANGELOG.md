@@ -1,5 +1,6 @@
 # Next
 
+* [ISSUE #404] Change default remote config values
 * [PR #401] Plips virtual pagination
 * [PR #398] Add dynamic link module
 
