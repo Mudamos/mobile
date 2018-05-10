@@ -4,8 +4,12 @@ import { delay } from "redux-saga";
 
 import {
   chain,
+  contains,
+  flip,
   identity,
+  pipe,
   prop,
+  reject,
   splitEvery,
   take,
   zip,
@@ -182,7 +186,7 @@ function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
   const scope = "all";
   const includeCauses = true;
 
-  return yield call(mudamosWebApi.listPlips, {
+  const response = yield call(mudamosWebApi.listPlips, {
     cityId,
     includeCauses,
     limit,
@@ -190,6 +194,14 @@ function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
     scope,
     uf,
   });
+
+    const id = prop("id");
+    const currentPlips = yield select(findPlips);
+    const currentIds = currentPlips.map(id);
+    const containInIds = flip(contains)(currentIds);
+    const uniqById = reject(pipe(id, containInIds));
+
+    return { ...response, plips: uniqById(response.plips) };
 }
 
 function* plipsNextPage() {

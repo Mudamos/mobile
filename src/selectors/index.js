@@ -1,6 +1,7 @@
 export * from "./action-signer";
 export * from "./address";
 export * from "./app";
+export * from "./app-link";
 export * from "./app-state";
 export * from "./city";
 export * from "./feature";

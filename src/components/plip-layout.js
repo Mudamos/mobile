@@ -65,6 +65,7 @@ export default class PlipLayout extends Component {
 
   static propTypes = {
     errorFetching: PropTypes.bool,
+    errorHandlingAppLink: PropTypes.bool,
     isFetchingPlipRelatedInfo: PropTypes.bool,
     isRemainingDaysEnabled: PropTypes.bool,
     isSigning: PropTypes.bool,
@@ -84,6 +85,7 @@ export default class PlipLayout extends Component {
     onOpenSigners: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
+    onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
@@ -168,6 +170,12 @@ export default class PlipLayout extends Component {
     return Math.floor(this.plipProgress * 100);
   }
 
+  onRetryAppLink = () => {
+    const { onRetryAppLink } = this.props;
+
+    this.props.onRetryAppLink();
+  }
+
   componentWillMount() {
     this.setState({
       scrollY: new Animated.Value(0),
@@ -189,6 +197,8 @@ export default class PlipLayout extends Component {
       isFetchingPlipRelatedInfo,
       isSigning,
       errorFetching,
+      errorHandlingAppLink,
+      plip,
     } = this.props;
 
     const { showSignSuccess } = this.state;
@@ -196,14 +206,15 @@ export default class PlipLayout extends Component {
     return (
       <View style={[styles.container]}>
         <Layout>
-          { errorFetching && this.renderRetry() }
-          { !errorFetching && !isFetchingPlipRelatedInfo && this.renderMainContent() }
+          { errorHandlingAppLink && this.renderRetryAppLink() }
+          { errorFetching && plip && this.renderRetry() }
+          { !errorFetching && !errorHandlingAppLink && !isFetchingPlipRelatedInfo && plip && this.renderMainContent() }
           { this.renderNavBar() }
         </Layout>
 
-        {showSignSuccess && this.renderSignSuccess()}
+        {showSignSuccess && plip && this.renderSignSuccess()}
 
-        <PageLoader isVisible={isFetchingPlipRelatedInfo || isSigning} />
+        <PageLoader isVisible={isFetchingPlipRelatedInfo || isSigning || (!plip && !errorHandlingAppLink)} />
       </View>
     );
   }
@@ -576,6 +587,7 @@ export default class PlipLayout extends Component {
   renderNavBar() {
     const {
       errorFetching,
+      errorHandlingAppLink,
       isFetchingPlipRelatedInfo,
       onBack,
     } = this.props;
@@ -587,7 +599,7 @@ export default class PlipLayout extends Component {
       extrapolate: "clamp",
     });
 
-    if (errorFetching || isFetchingPlipRelatedInfo) {
+    if (errorFetching || errorHandlingAppLink || isFetchingPlipRelatedInfo) {
       // Forces nav bar color
       navColorOpacity = finalNavColor;
     }
@@ -599,7 +611,7 @@ export default class PlipLayout extends Component {
         }]}
         leftView={<BackButton onPress={onBack} />}
         middleView={this.renderLogo()}
-        rightView={!errorFetching && !isFetchingPlipRelatedInfo ? this.renderShareButton() : null}
+        rightView={!errorFetching && !errorHandlingAppLink && !isFetchingPlipRelatedInfo ? this.renderShareButton() : null}
       />
     );
   }
@@ -662,6 +674,17 @@ export default class PlipLayout extends Component {
       <View style={styles.retryContainer}>
         <RetryButton
           onPress={() => onFetchPlipRelatedInfo(plip.id)}
+          style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
+        />
+      </View>
+    );
+  }
+
+  renderRetryAppLink() {
+    return (
+      <View style={styles.retryContainer}>
+        <RetryButton
+          onPress={this.onRetryAppLink}
           style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
         />
       </View>

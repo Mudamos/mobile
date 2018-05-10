@@ -103,6 +103,8 @@ export const getNextPlipsPage = state => state.plip.nextPlipsPage;
 
 export const getCurrentPlipsPage = state => state.plip.currentPlipsPage;
 
+export const getCurrentPlip = state => state.plip.currentPlip;
+
 export const hasPlipsNextPage = state => !!getNextPlipsPage(state);
 
 export const isSigningPlip = state => state.plip.isSigning;
@@ -139,7 +141,8 @@ export const fetchPlipRelatedInfoError = state => state.plip.fetchPlipRelatedInf
 export const findPlipsSignInfo = state => state.plip.plipsSignInfo;
 
 export const getPlipSignatureGoals = plipId => state => {
-  const plip = findPlip(plipId)(state) || {};
+  const currentPlip = getCurrentPlip(state);
+  const plip = findPlip(plipId)(state) || (currentPlip && currentPlip.id === plipId ? currentPlip : {});
   const { currentSignatureGoal } = getPlipSignInfo(plipId)(state) || {};
 
   const {

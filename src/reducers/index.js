@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 
 import actionSigner from "./action-signer";
 import app from "./app";
+import appLink from "./app-link"
 import appState from "./app-state";
 import city from "./city";
 import facebook from "./facebook";
@@ -23,6 +24,7 @@ import wallet from "./wallet";
 export default combineReducers({
   actionSigner,
   app,
+  appLink,
   appState,
   city,
   facebook,
