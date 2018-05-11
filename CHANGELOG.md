@@ -1,5 +1,6 @@
 # Next
 
+* [PR #409] Use share link if available
 * [PR #402] Redirect to a plip page when receive a link
 
 ## [1.9.0] 10/05/2018
