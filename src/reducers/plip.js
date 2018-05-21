@@ -1,7 +1,3 @@
-import {
-  prop,
-} from "ramda";
-
 const initialState = {
   userSignInfo: {},
   justSignedPlips: {},

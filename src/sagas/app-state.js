@@ -3,9 +3,19 @@ import { fork, call, put, take, cancel } from "redux-saga/effects";
 import { AppState } from "react-native";
 
 import {
+  contains,
+  flip,
+} from "ramda";
+
+import { backoff } from "../utils";
+
+import {
   appOnForeground,
   appOnBackground,
 } from "../actions";
+
+const KNOWN_STATES = ["active", "inactive", "background"];
+const isKnownState = flip(contains)(KNOWN_STATES);
 
 const createAppStateChannel = (buffer = buffers.sliding(2)) => {
   return eventChannel(emitter => {
@@ -15,8 +25,12 @@ const createAppStateChannel = (buffer = buffers.sliding(2)) => {
 
     AppState.addEventListener("change", stateEmitter);
 
-    // At our first subscribe the current state won't be called.
-    stateEmitter(AppState.currentState);
+    // For some reason AppState.currentState returns 'unknown'
+    // so we wait until it returns a valid state in order to fire the initial app state
+    backoff(() => new Promise((resolve, reject) => isKnownState(AppState.currentState)
+      ? resolve(stateEmitter(AppState.currentState))
+      : reject()
+    ));
 
     return () => {
       AppState.removeEventListener("change", stateEmitter);

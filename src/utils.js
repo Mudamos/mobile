@@ -223,3 +223,13 @@ export const buildQueryString = params =>
     .join("&")
 
 export const isNotNil = complement(isNil);
+
+export const delay = duration => new Promise(r => setTimeout(r, duration));
+
+export const backoff = (fn, { attempts, delay: duration = 100 } = {}) =>
+  fn().catch(err => isNil(attempts) || attempts > 1
+    ? delay(duration).then(() => backoff(fn, {
+      attempts: isNil(attempts) ? attempts : attempts - 1,
+      delay: duration * 2,
+    }))
+    : Promise.reject(err));

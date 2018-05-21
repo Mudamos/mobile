@@ -170,11 +170,7 @@ export default class PlipLayout extends Component {
     return Math.floor(this.plipProgress * 100);
   }
 
-  onRetryAppLink = () => {
-    const { onRetryAppLink } = this.props;
-
-    this.props.onRetryAppLink();
-  }
+  onRetryAppLink = () => this.props.onRetryAppLink();
 
   componentWillMount() {
     this.setState({
