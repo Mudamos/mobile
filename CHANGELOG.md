@@ -1,5 +1,6 @@
 # Next
 
+* [PR #411] Fix app hanging on loading screen
 * [PR #409] Use share link if available
 * [PR #402] Redirect to a plip page when receive a link
 
