@@ -12,6 +12,7 @@ import {
 } from "../actions";
 
 import {
+  findPlipBySlug,
   getAppLinkUrl,
   handlingAppLinkError,
 } from "../selectors";
@@ -49,8 +50,14 @@ function* handlePlip({ mudamosWebApi }) {
         yield put(navigate("showPlip"));
 
         const slug = slugMatches[1];
-        const response = yield call(mudamosWebApi.findPlip, { slug });
-        yield put(setCurrentPlip(response.plip));
+        const foundPlip = yield select(findPlipBySlug(slug));
+
+        if (foundPlip) {
+          yield put(setCurrentPlip(foundPlip));
+        } else {
+          const response = yield call(mudamosWebApi.findPlip, { slug });
+          yield put(setCurrentPlip(response.plip));
+        }
       } catch (e) {
         logError(e);
 
