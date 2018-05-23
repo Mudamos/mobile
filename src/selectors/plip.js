@@ -161,7 +161,7 @@ export const getPlipsSignatureGoals = state =>
 
 export const findPlipBySlug = slug => state => {
   if (state.plip.allPlips) {
-    return state.plip.allPlips.find((plip) => {
+    return state.plip.allPlips.find(plip => {
       const plipSlug = /\S+\/(\S+)\/plugins\/peticao\/?$/.exec(plip.plipUrl);
 
       if (plipSlug && plipSlug[1] === slug) {
