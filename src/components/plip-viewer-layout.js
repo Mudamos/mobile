@@ -32,7 +32,7 @@ export default class PlipViewerLayout extends Component {
   static propTypes = {
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
-    plip: PropTypes.object, // Injected through navigation params
+    plip: PropTypes.object,
     userSignDate: PropTypes.object,
     onBack: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,

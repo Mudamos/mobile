@@ -158,3 +158,15 @@ export const getPlipsSignatureGoals = state =>
     ...memo,
     [id]: getPlipSignatureGoals(id)(state),
   }), {});
+
+export const findPlipBySlug = slug => state => {
+  if (state.plip.allPlips) {
+    return state.plip.allPlips.find(plip => {
+      const plipSlug = /\S+\/(\S+)\/plugins\/peticao\/?$/.exec(plip.plipUrl);
+
+      if (plipSlug && plipSlug[1] === slug) {
+        return true;
+      }
+    });
+  }
+}
