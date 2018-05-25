@@ -1,5 +1,7 @@
 # Next
 
+## [1.10.0] 25/05/2018
+
 * [PR #413] Improve performance at app link
 * [PR #411] Fix app hanging on loading screen
 * [PR #409] Use share link if available
