@@ -1,0 +1,1 @@
+export const getTabView = state => state.mainTabview;

@@ -10,6 +10,7 @@ export * from "./feature";
 export * from "./linking";
 export * from "./location";
 export * from "./local-storage";
+export * from "./main-tabview";
 export * from "./navigation";
 export * from "./notification";
 export * from "./password";
