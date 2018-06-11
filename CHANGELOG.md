@@ -1,5 +1,6 @@
 # Next
 
+* [PR #418] Add new layout at plips view with tabs
 * [PR #417] Update to RN 0.55.4
 
 ## [1.10.0] 25/05/2018
