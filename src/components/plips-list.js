@@ -13,31 +13,13 @@ import {
   View,
 } from "react-native";
 
-import {
-  moment,
-  NATIONWIDE_SCOPE,
-  STATEWIDE_SCOPE,
-  CITYWIDE_SCOPE,
-  findStateByUF,
-} from "../utils";
-
-import {
-  isNationalCause,
-} from "../models";
-
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import * as Animatable from "react-native-animatable";
 
-import NavigationBar from "./navigation-bar";
 import RetryButton from "./retry-button";
-import HeaderLogo from "./header-logo";
 import NetworkImage from "./network-image";
-import LinearGradient from "react-native-linear-gradient";
 import FlatButton from "./flat-button";
-import TransparentFlatButton from "./transparent-flat-button";
-import MetricsInfo from "../containers/plip/metrics-info";
-import MainTabview from "../containers/main-tabview";
 
 import styles from "../styles/plips-list";
 
@@ -182,7 +164,6 @@ export default class PlipsList extends Component {
     const plipSignInfo = plipsSignInfo && plipsSignInfo[plip.id];
     const plipUserSignInfo = userSignInfo && userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
-    const goals = this.plipSignatureGoals(plip.id);
     const cover = this.plipImage(plip);
 
     return (
@@ -401,7 +382,6 @@ class Plip extends Component {
   renderFavoriteButton() {
     return (
       <TouchableOpacity
-        onPress={console.log("favorite pressed")}
       >
         <Icon
           name="favorite"
@@ -416,7 +396,6 @@ class Plip extends Component {
   renderShareButton() {
     return (
       <TouchableOpacity
-        onPress={console.log("share pressed")}
       >
         <Icon
           name="share"
@@ -441,7 +420,7 @@ class Plip extends Component {
 
   renderAssignmentText(customTotalSignatures) {
     hasMoreThan10 = customTotalSignatures > 10;
-    verbose = (customTotalSignatures > 1) ? "assinaturas" : "assinatura"
+    verbose = (customTotalSignatures > 1) ? locale.signatures.toLowerCase() : locale.signature.toLowerCase();
 
     return(
       <Text>
@@ -457,26 +436,9 @@ class Plip extends Component {
         style={[styles.plipDetailsLinkContainer]}
       >
         <Animated.Text style={styles.plipDetailsLink}>
-          SAIBA MAIS
+          {locale.moreInfo.toUpperCase()}
         </Animated.Text>
       </TouchableOpacity>
     );
   }
-
-  scopeCoverageTitle(plip) {
-    if (plip.scopeCoverage.scope === NATIONWIDE_SCOPE) {
-      return "PL Nacional";
-    } else if (isNationalCause(plip)) {
-      return "Causa Nacional";
-    } else if (plip.scopeCoverage.scope === STATEWIDE_SCOPE) {
-      return `PL Estadual: ${findStateByUF(plip.scopeCoverage.uf).name}`;
-    } else if (plip.scopeCoverage.scope === CITYWIDE_SCOPE) {
-      return `PL Municipal: ${plip.scopeCoverage.city.name}, ${plip.scopeCoverage.city.uf}`;
-    }
-  }
 }
-
-const TopLeft = () => <Image source={require("../images/plips-top-left.png")} style={{position: "absolute", top: 0, left: 0}} />;
-const BottomRight = () => <Image source={require("../images/plips-bottom-right.png")} style={{position: "absolute", bottom: 0, right: 0}} />;
-const BottomLeft = () => <Image source={require("../images/plips-bottom-left.png")} style={{position: "absolute", bottom: 0, left: 0}} />;
-const TopRight = () => <Image source={require("../images/plips-top-right.png")} style={{position: "absolute", top: 0, right: 0}} />;
