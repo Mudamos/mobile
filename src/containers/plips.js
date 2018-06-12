@@ -27,6 +27,7 @@ import {
   profileSaveAvatar,
   refreshPlips,
   tellAFriend,
+  sharePlip,
   updateMainTabViewIndex,
   userFirstTimeDone,
   validateProfile,
@@ -107,6 +108,7 @@ class Container extends Component {
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
     onSignUp: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
     onTellAFriend: PropTypes.func.isRequired,
     onValidateProfile: PropTypes.func.isRequired,
   };
@@ -337,6 +339,7 @@ const mapDispatchToProps = dispatch => ({
   onUpdateIndex: ({ index }) => dispatch(updateMainTabViewIndex(index)),
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),
+  onShare: plip => dispatch(sharePlip(plip)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

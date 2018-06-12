@@ -54,6 +54,7 @@ export default class PlipsList extends Component {
     onOpenURL: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
   }
 
   plipListKey = item => String(item.id);
@@ -61,6 +62,11 @@ export default class PlipsList extends Component {
   onGoToPlip = plip => {
     const { onGoToPlip } = this.props;
     onGoToPlip(plip);
+  }
+
+  onShare = plip => {
+    const { onShare } = this.props;
+    onShare(plip);
   }
 
   onFetchPlipsNextPage = () => {
@@ -178,6 +184,7 @@ export default class PlipsList extends Component {
         cover={cover}
         signaturesCount={plipSignInfo && plipSignInfo.signaturesCount}
         hasSigned={hasSigned}
+        onShare={this.onShare}
         onGoToPlip={this.onGoToPlip}
 
         height={height}
@@ -255,6 +262,7 @@ class Plip extends Component {
     signaturesCount: PropTypes.number,
     user: PropTypes.object,
     onGoToPlip: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
   }
 
   shouldComponentUpdate(nextProps) {
@@ -275,6 +283,11 @@ class Plip extends Component {
     const { plip, onGoToPlip } = this.props;
 
     onGoToPlip(plip);
+  }
+
+  onShare = () => {
+    const { plip, onShare } = this.props;
+    onShare(plip);
   }
 
   render() {
@@ -388,8 +401,14 @@ class Plip extends Component {
   }
 
   renderShareButton() {
+    const {
+      onShare
+    } = this.props;
+
+
     return (
       <TouchableOpacity
+        onPress={this.onShare}
       >
         <Icon
           name="share"

@@ -78,6 +78,7 @@ export default class PlipsLayout extends Component {
     onOpenURL: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
     onUpdateIndex: PropTypes.func.isRequired,
   }
 
