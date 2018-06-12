@@ -1,5 +1,7 @@
 # Next
 
+* [PR #417] Update to RN 0.55.4
+
 ## [1.10.0] 25/05/2018
 
 * [PR #413] Improve performance at app link
