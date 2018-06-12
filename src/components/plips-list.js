@@ -5,7 +5,6 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
-  Platform,
   RefreshControl,
   TouchableOpacity,
   Text,
@@ -18,8 +17,6 @@ import {
 } from "../models";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
-
-import * as Animatable from "react-native-animatable";
 
 import RetryButton from "./retry-button";
 import NetworkImage from "./network-image";
@@ -292,7 +289,6 @@ class Plip extends Component {
 
   render() {
     const {
-      index,
       plip,
 
       height,
@@ -315,12 +311,8 @@ class Plip extends Component {
     const {
       cover,
       hasSigned,
-      user,
       signaturesCount,
     } = this.props;
-
-    // Not every animation seem to work on both platforms
-    const AnimatableView = Platform.OS === "ios" ? Animatable.View : View;
 
     const customTotalSignatures = calcCustomTotalSignatures(signaturesCount);
 
@@ -401,11 +393,6 @@ class Plip extends Component {
   }
 
   renderShareButton() {
-    const {
-      onShare
-    } = this.props;
-
-
     return (
       <TouchableOpacity
         onPress={this.onShare}
@@ -432,8 +419,8 @@ class Plip extends Component {
   }
 
   renderAssignmentText(customTotalSignatures) {
-    hasMoreThan10 = customTotalSignatures > 10;
-    verbose = (customTotalSignatures > 1) ? locale.signatures.toLowerCase() : locale.signature.toLowerCase();
+    const hasMoreThan10 = customTotalSignatures > 10;
+    const verbose = (customTotalSignatures > 1) ? locale.signatures.toLowerCase() : locale.signature.toLowerCase();
 
     return(
       <Text>

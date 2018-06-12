@@ -2,59 +2,27 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  Platform,
-  RefreshControl,
   TouchableOpacity,
-  Text,
   View,
 } from "react-native";
-
-import {
-  moment,
-  NATIONWIDE_SCOPE,
-  STATEWIDE_SCOPE,
-  CITYWIDE_SCOPE,
-  findStateByUF,
-} from "../utils";
 
 import {
   TabViewType,
 } from "../prop-types";
 
-import {
-  isNationalCause,
-} from "../models";
-
 import Icon from "react-native-vector-icons/MaterialIcons";
-
-import * as Animatable from "react-native-animatable";
 
 import Layout from "./layout";
 import NavigationBar from "./navigation-bar";
-import RetryButton from "./retry-button";
 import HeaderLogo from "./header-logo";
-import NetworkImage from "./network-image";
-import LinearGradient from "react-native-linear-gradient";
-import FlatButton from "./flat-button";
-import TransparentFlatButton from "./transparent-flat-button";
-import MetricsInfo from "../containers/plip/metrics-info";
 import MainTabView from "../components/main-tab-view";
 
 import styles from "../styles/plips-layout";
 
-import locale from "../locales/pt-BR";
 import {
   RemoteLinksType,
   SignatureGoalsType,
 } from "../prop-types";
-
-const plipRowReadingGradientColors = ["rgba(0, 0, 0, .3)", "rgba(0, 0, 0, 0.3)", "rgba(0, 0, 0, .7)"];
-const plipRowReadingGradientLocations = [0, 0.7, 1];
-
-const hasSignedGradientColors = ["#00DB5E", "#00A79E"];
 
 export default class PlipsLayout extends Component {
   static propTypes = {
@@ -64,7 +32,6 @@ export default class PlipsLayout extends Component {
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
-    tabViewState: TabViewType,
     openMenu: PropTypes.func.isRequired,
     plips: PropTypes.array,
     plipsSignInfo: PropTypes.object.isRequired,
@@ -72,6 +39,7 @@ export default class PlipsLayout extends Component {
     signatureGoals: PropTypes.shape({
       [PropTypes.string]: SignatureGoalsType,
     }).isRequired,
+    tabViewState: TabViewType,
     userSignInfo: PropTypes.object.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,

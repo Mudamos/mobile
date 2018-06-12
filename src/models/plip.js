@@ -44,8 +44,7 @@ export const calcCustomTotalSignatures = (signaturesCount) => {
   let signaturesLength = 0;
   let signatures = signaturesCount;
 
-  while(true) {
-    if(signatures < 10) break;
+  while(signatures >= 10) {
     signatures /= 10;
     signaturesLength++;
   }

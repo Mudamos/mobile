@@ -1,27 +1,24 @@
 import React, { Component } from "react";
-import { View, Animated, StyleSheet, Dimensions } from "react-native";
-import { TabView, TabBar, SceneMap } from "react-native-tab-view";
-import { getMainTabView } from "../selectors";
-import { connect } from "react-redux";
-import { updateMainTabViewIndex } from "../actions";
+import { StyleSheet, Dimensions } from "react-native";
+import { TabView, TabBar } from "react-native-tab-view";
 import PropTypes from "prop-types";
 import PlipsList from "../components/plips-list";
 import { TabViewType } from "../prop-types";
 
 const styles = StyleSheet.create({
   label: {
-    color: '#7705B9',
+    color: "#7705B9",
     fontSize: 18,
     fontFamily: "roboto",
   },
   tabBar: {
-    backgroundColor: '#FFF',
+    backgroundColor: "#FFF",
   },
   tab: {
     width: 180,
   },
   indicator: {
-    borderBottomColor: '#00BFD8',
+    borderBottomColor: "#00BFD8",
     borderBottomWidth: 3,
   },
 });
@@ -29,7 +26,7 @@ const styles = StyleSheet.create({
 
 const initialLayout = {
   height: 0,
-  width: Dimensions.get('window').width,
+  width: Dimensions.get("window").width,
 };
 
 export default class MainTabView extends Component {
@@ -46,13 +43,13 @@ export default class MainTabView extends Component {
 
   renderScene = ({ route }) => {
     switch (route.key) {
-    case 'national':
+    case "national":
       return <PlipsList {...this.props} />;
-    case 'myLocation':
+    case "myLocation":
       return <PlipsList {...this.props} />;
-    case 'signed':
+    case "signed":
       return <PlipsList {...this.props} />;
-    case 'favorites':
+    case "favorites":
       return <PlipsList {...this.props} />;
     default:
       return null;

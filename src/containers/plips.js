@@ -107,8 +107,8 @@ class Container extends Component {
     onProfileEdit: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
-    onSignUp: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
+    onSignUp: PropTypes.func.isRequired,
     onTellAFriend: PropTypes.func.isRequired,
     onValidateProfile: PropTypes.func.isRequired,
   };

@@ -1,32 +1,9 @@
 import {
   Dimensions,
-  Platform,
   StyleSheet,
 } from "react-native";
 
 const { width: windowWidth } = Dimensions.get("window");
-
-const textShadow = {
-  textShadowColor: "rgba(0,0,0, 1)",
-  textShadowOffset: { width: 1, height: 1 },
-  textShadowRadius: 1,
-};
-
-const plipSubtitle = {
-  color: "#fff",
-  fontSize: 22,
-  lineHeight: 30,
-  ...textShadow,
-
-  ...Platform.select({
-    ios: {
-      fontFamily: "roboto-light",
-    },
-    android: {
-      fontFamily: "roboto_light",
-    },
-  }),
-};
 
 export default StyleSheet.create({
   actionIcon: {
@@ -150,7 +127,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   plipTitleContainerSigned: {
     backgroundColor: "#00BFD8",
