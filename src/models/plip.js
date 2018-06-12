@@ -39,12 +39,12 @@ export const isUserGoals = ({ user, plip }) => {
 };
 
 export const calcCustomTotalSignatures = (signaturesCount) => {
-  if(!signaturesCount) return null;
+  if (!signaturesCount) return null;
 
   let signaturesLength = 0;
   let signatures = signaturesCount;
 
-  while(signatures >= 10) {
+  while (signatures >= 10) {
     signatures /= 10;
     signaturesLength++;
   }

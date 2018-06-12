@@ -336,7 +336,7 @@ const mapDispatchToProps = dispatch => ({
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
   onRefresh: () => dispatch(refreshPlips()),
   onSignUp: () => dispatch(navigate("signUp")),
-  onUpdateIndex: ({ index }) => dispatch(updateMainTabViewIndex(index)),
+  onMainTabChange: ({ index }) => dispatch(updateMainTabViewIndex(index)),
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),
   onShare: plip => dispatch(sharePlip(plip)),

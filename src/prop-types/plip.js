@@ -7,11 +7,11 @@ export const SignatureGoalsType = PropTypes.shape({
 });
 
 export const TabViewType = PropTypes.shape({
-  index: PropTypes.number,
+  index: PropTypes.number.isRequired,
   routes: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string,
-      title: PropTypes.string,
+      key: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
     }),
-  ),
+  ).isRequired,
 });

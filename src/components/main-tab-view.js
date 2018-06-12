@@ -32,13 +32,13 @@ const initialLayout = {
 export default class MainTabView extends Component {
   static propTypes = {
     tabViewState: TabViewType,
-    onUpdateIndex: PropTypes.func.isRequired,
+    onMainTabChange: PropTypes.func.isRequired,
   };
 
   handleIndexChange = index => {
-    const { onUpdateIndex } = this.props;
+    const { onMainTabChange } = this.props;
 
-    onUpdateIndex({ index });
+    onMainTabChange({ index });
   };
 
   renderScene = ({ route }) => {
