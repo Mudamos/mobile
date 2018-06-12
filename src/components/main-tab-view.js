@@ -1,35 +1,54 @@
 import React, { Component } from "react";
 import { View, Animated, StyleSheet, Dimensions } from "react-native";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
-import { getTabView } from "../selectors";
+import { getMainTabView } from "../selectors";
 import { connect } from "react-redux";
-import { updateMainTabviewIndex } from "../actions";
+import { updateMainTabViewIndex } from "../actions";
 import PropTypes from "prop-types";
 import PlipsList from "../components/plips-list";
+import { TabViewType } from "../prop-types";
 
-import styles from "../styles/main-tabview";
+const styles = StyleSheet.create({
+  label: {
+    color: '#7705B9',
+    fontSize: 18,
+    fontFamily: "roboto",
+  },
+  tabBar: {
+    backgroundColor: '#FFF',
+  },
+  tab: {
+    width: 180,
+  },
+  indicator: {
+    borderBottomColor: '#00BFD8',
+    borderBottomWidth: 3,
+  },
+});
+
 
 const initialLayout = {
   height: 0,
   width: Dimensions.get('window').width,
 };
 
-class MainTabview extends Component {
+export default class MainTabView extends Component {
   static propTypes = {
-    TabviewState: PropTypes.object,
+    tabViewState: TabViewType,
     onUpdateIndex: PropTypes.func.isRequired,
   };
 
-  _handleIndexChange = index => {
+  handleIndexChange = index => {
     const { onUpdateIndex } = this.props;
 
-    onUpdateIndex({index});
+    onUpdateIndex({ index });
   };
-  _renderScene = ({ route }) => {
+
+  renderScene = ({ route }) => {
     switch (route.key) {
     case 'national':
       return <PlipsList {...this.props} />;
-    case 'my_location':
+    case 'myLocation':
       return <PlipsList {...this.props} />;
     case 'signed':
       return <PlipsList {...this.props} />;
@@ -40,41 +59,31 @@ class MainTabview extends Component {
     }
   };
 
-  _renderTabBar = props => (
+  routeTitle = ({ route }) => route.title;
+
+  renderTabBar = props => (
     <TabBar
       {...props}
       scrollEnabled
       indicatorStyle={styles.indicator}
-      style={styles.tabbar}
+      style={styles.tabBar}
       tabStyle={styles.tab}
       labelStyle={styles.label}
-      getLabelText={({ route }) => route.title}
+      getLabelText={this.routeTitle}
     />
   );
 
   render() {
-    const { TabviewState } = this.props;
+    const { tabViewState } = this.props;
 
     return (
       <TabView
-        navigationState={TabviewState}
-        renderScene={this._renderScene}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
+        navigationState={tabViewState}
+        renderScene={this.renderScene}
+        renderTabBar={this.renderTabBar}
+        onIndexChange={this.handleIndexChange}
         initialLayout={initialLayout}
       />
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    TabviewState: getTabView(state),
-  };
-}
-
-const mapDispatchToProps = dispatch => ({
-  onUpdateIndex: ({ index }) => dispatch(updateMainTabviewIndex(index)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainTabview);

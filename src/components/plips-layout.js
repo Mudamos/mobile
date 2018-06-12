@@ -21,6 +21,10 @@ import {
 } from "../utils";
 
 import {
+  TabViewType,
+} from "../prop-types";
+
+import {
   isNationalCause,
 } from "../models";
 
@@ -37,7 +41,7 @@ import LinearGradient from "react-native-linear-gradient";
 import FlatButton from "./flat-button";
 import TransparentFlatButton from "./transparent-flat-button";
 import MetricsInfo from "../containers/plip/metrics-info";
-import MainTabview from "../containers/main-tabview";
+import MainTabView from "../components/main-tab-view";
 
 import styles from "../styles/plips-layout";
 
@@ -60,6 +64,7 @@ export default class PlipsLayout extends Component {
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
+    tabViewState: TabViewType,
     openMenu: PropTypes.func.isRequired,
     plips: PropTypes.array,
     plipsSignInfo: PropTypes.object.isRequired,
@@ -73,6 +78,7 @@ export default class PlipsLayout extends Component {
     onOpenURL: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
+    onUpdateIndex: PropTypes.func.isRequired,
   }
 
   render() {
@@ -80,7 +86,7 @@ export default class PlipsLayout extends Component {
       <View style={styles.full}>
         <Layout>
           {this.renderNavBar()}
-          <MainTabview {...this.props}/>
+          <MainTabView {...this.props}/>
         </Layout>
       </View>
     );
@@ -115,6 +121,7 @@ export default class PlipsLayout extends Component {
     );
   }
 
+  // TODO: Add search filter
   renderSearchButton() {
     return (
       <TouchableOpacity

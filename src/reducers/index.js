@@ -20,7 +20,7 @@ import state from "./state";
 import navigation from "./navigation";
 import address from "./address";
 import wallet from "./wallet";
-import mainTabview from "./main-tabview";
+import mainTabview from "./main-tab-view";
 
 export default combineReducers({
   actionSigner,

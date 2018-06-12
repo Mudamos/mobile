@@ -13,6 +13,10 @@ import {
   View,
 } from "react-native";
 
+import {
+  calcCustomTotalSignatures,
+} from "../models";
+
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import * as Animatable from "react-native-animatable";
@@ -294,19 +298,6 @@ class Plip extends Component {
     );
   }
 
-  calcCustomTotalSignatures(signaturesCount) {
-    let signaturesLength = 0;
-    let signatures = signaturesCount;
-
-    while(true) {
-      if(signatures < 10) break;
-      signatures /= 10;
-      signaturesLength++;
-    }
-
-    return Math.floor(signatures) * Math.pow(10, signaturesLength);
-  }
-
   renderPlip({ plip }) {
     const {
       cover,
@@ -318,9 +309,7 @@ class Plip extends Component {
     // Not every animation seem to work on both platforms
     const AnimatableView = Platform.OS === "ios" ? Animatable.View : View;
 
-    const plipName = hasSigned && plip.phase.name.length > 20 ? plip.phase.name.substring(0, 17) + "..." : plip.phase.name
-
-    const customTotalSignatures = signaturesCount ? this.calcCustomTotalSignatures(signaturesCount) : null;
+    const customTotalSignatures = calcCustomTotalSignatures(signaturesCount);
 
     return (
       <View style={styles.pliView}>
@@ -333,8 +322,12 @@ class Plip extends Component {
         </View>
         <View>
           <View style={[styles.plipTitleContainer, hasSigned ? styles.plipTitleContainerSigned : styles.plipTitleContainerNotSigned]}>
-            <Text style={styles.plipTitle}>
-              {plipName}
+            <Text
+              style={styles.plipTitle}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {plip.phase.name}
             </Text>
             { hasSigned &&
               <View style={styles.plipSignedContainer}>
@@ -379,6 +372,7 @@ class Plip extends Component {
     );
   }
 
+  // TODO Add Favorite link
   renderFavoriteButton() {
     return (
       <TouchableOpacity

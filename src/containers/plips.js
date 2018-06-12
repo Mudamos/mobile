@@ -27,6 +27,7 @@ import {
   profileSaveAvatar,
   refreshPlips,
   tellAFriend,
+  updateMainTabViewIndex,
   userFirstTimeDone,
   validateProfile,
   setCurrentPlip,
@@ -39,6 +40,7 @@ import {
   isRefreshingPlips,
   errorFetchingPlips,
   currentUser as getCurrentUser,
+  getMainTabView,
   getUserSignInfo,
   hasPlipsNextPage,
   isFetchingProfile,
@@ -311,6 +313,7 @@ const mapStateToProps = state => ({
   remoteLinks: findRemoteLinks(state),
   plipsSignInfo: findPlipsSignInfo(state),
   signatureGoals: getPlipsSignatureGoals(state),
+  tabViewState: getMainTabView(state),
   userSignInfo: getUserSignInfo(state),
 });
 
@@ -331,6 +334,7 @@ const mapDispatchToProps = dispatch => ({
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
   onRefresh: () => dispatch(refreshPlips()),
   onSignUp: () => dispatch(navigate("signUp")),
+  onUpdateIndex: ({ index }) => dispatch(updateMainTabViewIndex(index)),
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),
 });
