@@ -327,13 +327,15 @@ class Plip extends Component {
         </View>
         <View>
           <View style={[styles.plipTitleContainer, hasSigned ? styles.plipTitleContainerSigned : styles.plipTitleContainerNotSigned]}>
-            <Text
-              style={styles.plipTitle}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-            >
-              {plip.phase.name}
-            </Text>
+            <View style={hasSigned ? {maxWidth: 200} : {}}>
+              <Text
+                style={styles.plipTitle}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {plip.phase.name}
+              </Text>
+            </View>
             { hasSigned &&
               <View style={styles.plipSignedContainer}>
                 <Text style={styles.plipSignedText}>
