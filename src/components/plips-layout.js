@@ -43,11 +43,11 @@ export default class PlipsLayout extends Component {
     userSignInfo: PropTypes.object.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
+    onMainTabChange: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
-    onMainTabChange: PropTypes.func.isRequired,
   }
 
   render() {
