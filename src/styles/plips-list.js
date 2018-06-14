@@ -6,24 +6,6 @@ import {
 const { width: windowWidth } = Dimensions.get("window");
 
 export default StyleSheet.create({
-  actionIcon: {
-    marginRight: 18,
-  },
-  actionTitle: {
-    color: "#fff",
-    flex: 3,
-    fontFamily: "lato",
-    fontSize: 15,
-    fontWeight: "bold",
-  },
-  actionRow: {
-    backgroundColor: "transparent",
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 27,
-  },
   footerContainer: {
     flex: 1,
     paddingHorizontal: 27,
@@ -46,9 +28,6 @@ export default StyleSheet.create({
   listView: {
     flex: 1,
     paddingTop: 5,
-  },
-  navigationBar: {
-    backgroundColor: "#883DE1",
   },
   noProjectsContainer: {
     flex: 1,
@@ -74,53 +53,13 @@ export default StyleSheet.create({
     minWidth: windowWidth,
     ...StyleSheet.absoluteFillObject,
   },
-  retryContainer: {
-    flex: 1,
-    justifyContent: "center",
-  },
   rowContainer: {
     backgroundColor: "#FFF",
-  },
-  subTabContainer: {
-    height: 36,
-    backgroundColor: "#F9F9F9",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  subItem: {
-    color: "#8934E5",
-    fontFamily: "lato",
-    fontSize: 12,
-    fontWeight: "bold",
-  },
-  subTabItemContainer: {
-    borderRadius: 100,
-    backgroundColor: "#F3F3F3",
-    flexDirection: "row",
-    paddingLeft: 10,
-    paddingRight: 5,
-    paddingVertical: 1,
-    alignItems: "center",
-  },
-  tabItem: {
-    fontFamily: "lato",
-    fontSize: 12,
-    fontWeight: "bold",
-  },
-  tabsContainer: {
-    height: 36,
-    backgroundColor: "#F3F3F3",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  plipView: {
-    flex: 1,
   },
   plipImageView: {
     height: 200,
   },
-  plipTitleContainer: {
+  plipHeaderContainer: {
     paddingVertical: 15,
     paddingHorizontal: 25,
     flex: 1,
@@ -129,21 +68,24 @@ export default StyleSheet.create({
     alignItems: "center",
     flexWrap: "wrap",
   },
-  plipTitleContainerSigned: {
+  plipHeaderContainerSigned: {
     backgroundColor: "#00BFD8",
   },
-  plipTitleContainerNotSigned: {
+  plipHeaderContainerNotSigned: {
     backgroundColor: "#7705B9",
+  },
+  plipTitleContainer: {
+    flex: 10,
   },
   plipTitle: {
     color: "#FFF",
     fontSize: 24,
     fontFamily: "pt sans",
     fontWeight: "bold",
-    lineHeight: 60,
   },
   plipSignedContainer: {
     flex: 1,
+    flexBasis: 90,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
