@@ -7,6 +7,7 @@ export * from "./city";
 export * from "./feature";
 export * from "./local-storage";
 export * from "./location";
+export * from "./main-tab-view";
 export * from "./notification";
 export * from "./password";
 export * from "./permission";

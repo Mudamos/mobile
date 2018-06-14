@@ -59,6 +59,7 @@ const translations = {
   loading: "Carregando...",
   logout: "Sair",
   mobile: "Celular",
+  moreInfo: "Saiba mais",
   moreDetails: "Mais detalhes",
   menu: {
     about: "Sobre o aplicativo",
@@ -110,6 +111,7 @@ const translations = {
   share: "Compartilhar",
   shareAlt: "Compartilhe",
   shareMessage: ({description, name, hashtag}) => `${description}! Assine ${name} e construa um Brasil melhor. ${hashtag}`,
+  signature: "Assinatura",
   signatures: "Assinaturas",
   signupSuccessModalText: "Seu celular foi validado e agora você já pode assinar projetos de lei de iniciativa popular.",
   signed: "Assinado",

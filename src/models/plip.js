@@ -37,3 +37,17 @@ export const isUserGoals = ({ user, plip }) => {
 
   return !!user.address.uf && !!user.address.city;
 };
+
+export const calcCustomTotalSignatures = (signaturesCount) => {
+  if (!signaturesCount) return null;
+
+  let signaturesLength = 0;
+  let signatures = signaturesCount;
+
+  while (signatures >= 10) {
+    signatures /= 10;
+    signaturesLength++;
+  }
+
+  return Math.floor(signatures) * Math.pow(10, signaturesLength);
+}

@@ -20,26 +20,28 @@ import state from "./state";
 import navigation from "./navigation";
 import address from "./address";
 import wallet from "./wallet";
+import mainTabview from "./main-tab-view";
 
 export default combineReducers({
   actionSigner,
+  address,
   app,
   appLink,
   appState,
   city,
   facebook,
   feature,
-  localStorage,
   location,
+  localStorage,
+  mainTabview,
   notification,
   password,
   permission,
-  profile,
   plip,
+  profile,
   remoteConfig,
   session,
   state,
   navigation,
-  address,
   wallet,
 });
