@@ -412,7 +412,7 @@ class Plip extends Component {
   renderAssignmentIcon() {
     return (
       <Icon
-        name="assignment"
+        name="trending-up"
         style={styles.signaturesIcon}
         size={30}
         color="#00000080"
