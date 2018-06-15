@@ -157,7 +157,7 @@ export default class PlipLayout extends Component {
     if (!plip || !signatureGoals.currentSignatureGoal) return 0;
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
-    const total = signatureGoals.currentSignatureGoal;
+    const total = signatureGoals.finalGoal;
     const progress = clamp(0, 1, count / total);
 
     return progress;
