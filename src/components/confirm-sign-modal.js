@@ -3,6 +3,8 @@ import React, { Component } from "react";
 
 import { Animated, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+import locale from "../locales/pt-BR";
+
 import RoundedButton from "./rounded-button";
 
 const styles = StyleSheet.create({
@@ -101,7 +103,7 @@ class ConfirmSignModal extends Component {
   renderButtonSign() {
     const { onPlipSign } = this.props;
 
-    const title = "ASSINAR";
+    const title = locale.sign;
     const action = onPlipSign;
     const signButton = styles.signButton;
     const titleStyle = styles.text;
@@ -115,7 +117,7 @@ class ConfirmSignModal extends Component {
   renderButtonCancel() {
     const { onToggleSignModal } = this.props
 
-    const title = "CANCELAR";
+    const title = locale.cancel;
     const action = onToggleSignModal;
     const titleStyle = styles.text;
     const buttonStyle = styles.button;
@@ -139,7 +141,7 @@ class ConfirmSignModal extends Component {
 
     if (!isVisible) return (<View/>);
 
-    const modalTitle = "Assinar Projeto de Lei";
+    const modalTitle = locale.signPlip;
     const modalDescription = (<Text style={styles.text}>Clique em &quot;<Text style={styles.bold}>Assinar</Text>&quot; para confirmar sua colaboração ao Projeto de Lei: <Text style={styles.bold}>{plipName}</Text>.</Text>);
 
     return (

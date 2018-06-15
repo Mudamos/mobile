@@ -5,13 +5,15 @@ import { Text, View } from "react-native";
 
 import styles from "../styles/signed-message-view";
 
+import locale from "../locales/pt-BR";
+
 const SignedMessageView = ({ date }) => {
   const day = date.format("DD/MM/YYYY");
   const time = date.format("HH:mm");
 
   return (
     <View style={styles.outerContainer}>
-      <Text style={styles.projectSigned}>Você assinou este projeto em: {day} às {time}</Text>
+      <Text style={styles.projectSigned}>{locale.youSignedThisProjectAt({ day: day, time: time })}</Text>
     </View>
   );
 }

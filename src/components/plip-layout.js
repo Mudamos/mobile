@@ -273,7 +273,7 @@ export default class PlipLayout extends Component {
     const willSign = !userSignDate && this.signatureEnabled;
     const willShare = userSignDate || !this.signatureEnabled;
 
-    const title = willSign && "Eu quero fazer a diferença" || willShare && "Faça a diferença e compartilhe";
+    const title = willSign && locale.iWannaMakeTheDifference || willShare && locale.makeTheDifferenceAndShare;
     const onPress = willSign && this.onToggleSignModal.bind(this) || willShare && this.onShare.bind(this);
     const iconName = willSign && "check-circle" || willShare && "share";
 
@@ -390,9 +390,14 @@ export default class PlipLayout extends Component {
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
 
+    const signaturesAndGoals = {
+      signatures: formatNumber(count),
+      goal: formatNumber(signatureGoals.finalGoal),
+    }
+
     return (
       <View style={{flex: 1, flexDirection: "row", justifyContent: "flex-end"}}>
-        <Text style={{color: "#000", paddingHorizontal: 10, paddingTop: 20}}>Assinaturas:{formatNumber(count)} Meta:{formatNumber(signatureGoals.finalGoal)}</Text>
+        <Text style={{color: "#000", paddingHorizontal: 10, paddingTop: 20}}>{locale.signaturesAndGoals(signaturesAndGoals)}</Text>
       </View>
     );
   }
@@ -441,7 +446,7 @@ export default class PlipLayout extends Component {
     } = this.props;
 
     const title = locale.downloadPDF;
-    const subtitle = plipSignInfo && plipSignInfo.updatedAt && "Registrada em: " + plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss");
+    const subtitle = plipSignInfo && plipSignInfo.updatedAt && locale.registeredAt + plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss");
     const action = this.onOpenDocument.bind(this);
     const icon = "file-download"
     const buttonStyle = { flexDirection: "row" }
@@ -459,7 +464,7 @@ export default class PlipLayout extends Component {
     } = this.props;
 
     const title = remoteConfig && remoteConfig.authenticatedSignersButtonTitle.toUpperCase();
-    const subtitle = "Você será redirecionado para o site Mudamos+";
+    const subtitle = locale.youWillBeRedirectToMudamos;
     const action = this.onOpenURL.bind(this);
     const icon = "exit-to-app";
     const buttonStyle = { flexDirection: "row" }

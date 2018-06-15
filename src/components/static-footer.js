@@ -11,6 +11,8 @@ import {
 
 import PropTypes from "prop-types";
 
+import locale from "../locales/pt-BR";
+
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
@@ -21,9 +23,6 @@ const styles = StyleSheet.create({
     fontFamily: "roboto",
   },
 });
-
-const securityMessage = "Este é um ambiente seguro e todas as suas informações estão protegidas."
-const whatIsMudamos = "Mudamos é uma iniciativa do Instituto de Tecnologia e Sociedade do Rio de Janeiro (ITS Rio), premiada e financiada exclusivamente pelo prêmio Desafio Google de Impacto Social, conquistado em 2016."
 
 export default class StaticFooter extends Component {
   static propTypes = {
@@ -45,7 +44,7 @@ export default class StaticFooter extends Component {
             style={{marginRight: 20}}
           />
           <View style={{flexGrow: 1, width: 0}}>
-            <Text style={styles.text}>{securityMessage}</Text>
+            <Text style={styles.text}>{locale.securityMessage}</Text>
           </View>
         </View>
         <View style={{flexDirection: "row", marginBottom: 40}}>
@@ -54,7 +53,7 @@ export default class StaticFooter extends Component {
             style={{marginRight: 20}}
           />
           <View style={{flexGrow: 1, width: 0}}>
-            <Text style={styles.text}>{whatIsMudamos}</Text>
+            <Text style={styles.text}>{locale.whatIsMudamos}</Text>
           </View>
         </View>
         <View style={{flexDirection: "row", justifyContent: "center"}}>
