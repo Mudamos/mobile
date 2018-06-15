@@ -27,7 +27,6 @@ import NetworkImage from "./network-image";
 import PageLoader from "./page-loader";
 import RetryButton from "./retry-button";
 import BlueFlatButton from "./blue-flat-button";
-import SignModal from "./plip-signed-modal";
 import SignedMessageView from "./signed-message-view";
 import SignerBubbleView from "./signer-bubble-view";
 import BackButton from "./back-button";
@@ -35,6 +34,7 @@ import YouTube from "./you-tube";
 import ProgressBarClassic from "./progress-bar-classic";
 import RoundedButton from "./rounded-button";
 import StaticFooter from "./static-footer";
+import ConfirmSignModal from "./confirm-sign-modal";
 
 import {
   isNationalCause,
@@ -53,7 +53,7 @@ import {
 
 export default class PlipLayout extends Component {
   state = {
-    showSignSuccess: false,
+    isSignModalVisible: false,
   };
 
   static propTypes = {
@@ -80,7 +80,6 @@ export default class PlipLayout extends Component {
     onPlipSign: PropTypes.func.isRequired,
     onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
-    onSignSuccessClose: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
 
@@ -170,20 +169,16 @@ export default class PlipLayout extends Component {
 
   onRetryAppLink = () => this.props.onRetryAppLink();
 
+  onToggleSignModal() {
+    const { isSignModalVisible } = this.state;
+
+    this.setState({ isSignModalVisible: !isSignModalVisible });
+  }
+
   componentWillMount() {
     this.setState({
       scrollY: new Animated.Value(0),
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // Handling the success modal after signing the plip. It should be just displayed once.
-    if (nextProps.justSignedPlip && nextProps.justSignedPlip !== this.props.justSignedPlip) {
-      this.setState({ showSignSuccess: true });
-    } else if (nextProps.justSignedPlip === false && this.state.showSignSuccess) {
-      // Handling the case the modal was displayed on another view and we need to dismiss it here
-      this.setState({ showSignSuccess: false });
-    }
   }
 
   render() {
@@ -195,7 +190,7 @@ export default class PlipLayout extends Component {
       plip,
     } = this.props;
 
-    const { showSignSuccess } = this.state;
+    const { isSignModalVisible } = this.state;
 
     return (
       <View style={[styles.container]}>
@@ -207,9 +202,8 @@ export default class PlipLayout extends Component {
           { !errorFetching && !errorHandlingAppLink && !isFetchingPlipRelatedInfo && plip && this.renderSignButton() }
         </Layout>
 
-        {showSignSuccess && plip && this.renderSignSuccess()}
-
         <PageLoader isVisible={isFetchingPlipRelatedInfo || isSigning || (!plip && !errorHandlingAppLink)} />
+        <ConfirmSignModal isVisible={isSignModalVisible} plipName={this.plipName} onToggleSignModal={this.onToggleSignModal.bind(this)} onPlipSign={this.onPlipSign.bind(this)}/>
       </View>
     );
   }
@@ -280,8 +274,7 @@ export default class PlipLayout extends Component {
     const willShare = userSignDate || !this.signatureEnabled;
 
     const title = willSign && "Eu quero fazer a diferença" || willShare && "Faça a diferença e compartilhe";
-    const onPress = willSign && this.onPlipSign.bind(this) || willShare && this.onShare.bind(this);
-
+    const onPress = willSign && this.onToggleSignModal.bind(this) || willShare && this.onShare.bind(this);
     const iconName = willSign && "check-circle" || willShare && "share";
 
     return (
@@ -605,16 +598,6 @@ export default class PlipLayout extends Component {
     );
   }
 
-  renderSignSuccess() {
-    return (
-      <SignModal
-        plipName={this.plipName}
-        onShare={this.onShare.bind(this)}
-        onClose={this.onModalSuccessClose.bind(this)}
-      />
-    );
-  }
-
   onFetchPlipRelatedInfo() {
     const { plip, onFetchPlipRelatedInfo} = this.props;
     onFetchPlipRelatedInfo(plip.id);
@@ -627,14 +610,8 @@ export default class PlipLayout extends Component {
 
   onPlipSign() {
     const { plip, onPlipSign } = this.props;
+    this.onToggleSignModal();
     onPlipSign(plip);
-  }
-
-  onModalSuccessClose() {
-    const { onSignSuccessClose, plip } = this.props;
-
-    this.setState({ showSignSuccess: false });
-    onSignSuccessClose(plip);
   }
 
   onOpenSigners() {

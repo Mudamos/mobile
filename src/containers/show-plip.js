@@ -1,11 +1,8 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Alert } from "react-native";
 import { connect } from "react-redux";
 
 import { moment } from "../utils";
-
-import locale from "../locales/pt-BR";
 
 import {
   clearPlipInfo,
@@ -77,17 +74,6 @@ class Container extends Component {
   }
 }
 
-const onPlipSign = ({ dispatch, plip }) => {
-  Alert.alert(
-    null,
-    `${locale.doYouWantToSign} "${plip.phase.name}"?`,
-    [
-      {text: locale.cancel, onPress: () => {}, style: "cancel"},
-      {text: locale.yes, onPress: () => dispatch(signPlip({ plip }))},
-    ]
-  )
-};
-
 const mapStateToProps = state => {
   const currentPlip = getCurrentPlip(state);
   const plipId = currentPlip ? currentPlip.id : null;
@@ -129,7 +115,7 @@ const mapDispatchToProps = dispatch => ({
   onFetchPlipRelatedInfo: plipId => dispatch(fetchPlipRelatedInfo(plipId)),
   onOpenSigners: plipId => dispatch(navigate("signers", { plipId })),
   onOpenURL: url => dispatch(openURL(url)),
-  onPlipSign: plip => onPlipSign({ dispatch, plip }),
+  onPlipSign: plip => dispatch(signPlip({ plip })),
   onRetryAppLink: () => dispatch(handleAppLink()),
   onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
