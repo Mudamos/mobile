@@ -12,19 +12,14 @@ export default StyleSheet.create({
     borderColor: "rgba(0,0,0,.5)",
     borderWidth: 1,
     marginRight: BUBBLE_MARGIN,
+    flex: 1,
+    alignSelf: "center",
+    justifyContent: "center",
     overflow: "hidden",
   },
   imageBubble: {
     overflow: "visible",
     top: -1,
-  },
-  bubbleGradient: {
-    height: BUBBLE_SIZE,
-    width: BUBBLE_SIZE,
-    borderRadius: BUBBLE_SIZE / 2,
-    marginRight: BUBBLE_MARGIN,
-    alignItems: "center",
-    justifyContent: "center",
   },
   container: {
     flex: 1,
@@ -33,8 +28,7 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   exceeding: {
-    backgroundColor: "transparent",
-    color: "#fff",
+    color: "#000",
     fontFamily: "roboto",
     fontSize: 14,
     textAlign: "center",
