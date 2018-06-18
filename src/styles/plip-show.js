@@ -60,6 +60,11 @@ export default StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 27,
   },
+  aditionalInfo: {
+    fontWeight: "bold",
+    color: "#000",
+    marginBottom: 30,
+  },
   backgroundImage: {
     height: IMAGE_HEIGHT_WITH_LEAK,
     backgroundColor: "rgb(71, 57, 121)",
@@ -154,6 +159,10 @@ export default StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "transparent",
   },
+  mainContainer: {
+    marginTop: 30,
+    marginHorizontal: 15,
+  },
   mainContentContainer: {
     backgroundColor: "#7E52D8",
     flex: 1,
@@ -239,6 +248,11 @@ export default StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 0,
+  },
+  signaturesAndGoals: {
+    color: "#000",
+    paddingHorizontal: 10,
+    paddingTop: 20,
   },
   signersBubble: {
     alignSelf: "flex-end",

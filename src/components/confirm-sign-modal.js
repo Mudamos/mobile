@@ -20,6 +20,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
+  buttonPanel: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
   container: {
     ...StyleSheet.absoluteFillObject,
     elevation: 8,
@@ -152,7 +158,7 @@ class ConfirmSignModal extends Component {
           <View style={styles.descriptionContainer}>
             {modalDescription}
           </View>
-          <View style={{flex: 1, flexDirection: "row", justifyContent: "center", flexWrap: "wrap"}}>
+          <View style={styles.buttonPanel}>
             { this.renderButtonCancel() }
             { this.renderButtonSign() }
           </View>

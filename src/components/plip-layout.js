@@ -247,14 +247,14 @@ export default class PlipLayout extends Component {
                   onPress={this.onOpenSigners.bind(this)}
                 />
             }
-            <View style={{marginTop: 30, marginHorizontal: 15}}>
+            <View style={styles.mainContainer}>
               {this.renderDescription()}
               <View style={[styles.divider, {marginVertical: 30, marginHorizontal: -15}]} />
               {this.renderPresentation()}
               {this.renderVideo()}
               {this.renderButtonReadFullText()}
               <View style={[styles.divider, {marginVertical: 30, marginHorizontal: -15}]} />
-              <Text style={{fontWeight: "bold", color: "#000", marginBottom: 30}}>Informações Adicionais:</Text>
+              <Text style={styles.aditionalInfo}>Informações Adicionais:</Text>
               {this.renderButtonDownloadPDF()}
               {this.renderButtonSignerList()}
             </View>
@@ -397,7 +397,7 @@ export default class PlipLayout extends Component {
 
     return (
       <View style={{flex: 1, flexDirection: "row", justifyContent: "flex-end"}}>
-        <Text style={{color: "#000", paddingHorizontal: 10, paddingTop: 20}}>{locale.signaturesAndGoals(signaturesAndGoals)}</Text>
+        <Text style={styles.signaturesAndGoals}>{locale.signaturesAndGoals(signaturesAndGoals)}</Text>
       </View>
     );
   }
