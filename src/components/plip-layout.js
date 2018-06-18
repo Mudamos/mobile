@@ -36,10 +36,6 @@ import RoundedButton from "./rounded-button";
 import StaticFooter from "./static-footer";
 import ConfirmSignModal from "./confirm-sign-modal";
 
-import {
-  isNationalCause,
-} from "../models";
-
 import styles, {
   HEADER_SCROLL_DISTANCE,
   SMALL_ANIM_OFFSET,
@@ -90,13 +86,6 @@ export default class PlipLayout extends Component {
     return plip.phase && plip.phase.name;
   }
 
-  get plipSubtitle() {
-    const { plip } = this.props;
-    if (!plip) return;
-
-    return plip.phase && plip.phase.description;
-  }
-
   get plipImage() {
     const { plip } = this.props;
     return plip && plip.cycle && plip.cycle.pictures && plip.cycle.pictures.thumb;
@@ -128,20 +117,6 @@ export default class PlipLayout extends Component {
   get signatureEnabled() {
     const daysLeft = this.daysLeft;
     return daysLeft != null && daysLeft >= 0;
-  }
-
-  get showCurrentGoal() {
-    const { isRemainingDaysEnabled, plip } = this.props;
-    return this.signatureEnabled && !isRemainingDaysEnabled && !isNationalCause(plip);
-  }
-
-  get messageForDaysLeft() {
-    if (this.daysLeft > 0) {
-      const sufix = this.daysLeft > 1 ? "dias" : "dia";
-      return `${formatNumber(this.daysLeft)} ${sufix}`;
-    } else if (this.daysLeft === 0) {
-      return locale.lastDay;
-    }
   }
 
   get callToAction() {
@@ -249,11 +224,11 @@ export default class PlipLayout extends Component {
             }
             <View style={styles.mainContainer}>
               {this.renderDescription()}
-              <View style={[styles.divider, {marginVertical: 30, marginHorizontal: -15}]} />
+              <View style={styles.divider} />
               {this.renderPresentation()}
               {this.renderVideo()}
               {this.renderButtonReadFullText()}
-              <View style={[styles.divider, {marginVertical: 30, marginHorizontal: -15}]} />
+              <View style={styles.divider} />
               <Text style={styles.aditionalInfo}>Informações Adicionais:</Text>
               {this.renderButtonDownloadPDF()}
               {this.renderButtonSignerList()}
@@ -294,27 +269,6 @@ export default class PlipLayout extends Component {
     return (
       <View style={{flex: 1, justifyContent: "center"}}>
         <ProgressBarClassic value={this.progressPercentage}/>
-      </View>
-    );
-  }
-
-  renderTargetPercentage(plip) {
-    if (isNationalCause(plip)) return null;
-
-    return (
-      <View>
-        <Text style={styles.infoPercentageText}>{this.progressPercentage}%</Text>
-        <Text style={styles.infoPercentageSubtitle}>da meta atual *</Text>
-      </View>
-    );
-  }
-
-  renderPlipFinished() {
-    return (
-      <View>
-        <View style={{flex: 1, justifyContent: "flex-end"}}>
-          <Text style={styles.infoTextSubtitle}>{locale.petitionEnded}</Text>
-        </View>
       </View>
     );
   }
@@ -396,7 +350,7 @@ export default class PlipLayout extends Component {
     }
 
     return (
-      <View style={{flex: 1, flexDirection: "row", justifyContent: "flex-end"}}>
+      <View style={styles.signaturesAndGoalsContainer}>
         <Text style={styles.signaturesAndGoals}>{locale.signaturesAndGoals(signaturesAndGoals)}</Text>
       </View>
     );
@@ -475,15 +429,6 @@ export default class PlipLayout extends Component {
     );
   }
 
-  renderDaysLeft() {
-    return (
-      <View>
-        <Text style={styles.infoText}>{this.messageForDaysLeft}</Text>
-        <Text style={styles.infoTextSubtitle}>para o encerramento</Text>
-      </View>
-    );
-  }
-
   renderNavBar() {
     const {
       errorFetching,
@@ -515,7 +460,6 @@ export default class PlipLayout extends Component {
       />
     );
   }
-
 
   renderFavoriteButton() {
     return (

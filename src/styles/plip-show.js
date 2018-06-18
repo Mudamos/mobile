@@ -80,6 +80,8 @@ export default StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: "#0000001A",
+    marginVertical: 30,
+    marginHorizontal: -15,
   },
   finalGoalText: {
     marginTop: 10,
@@ -253,6 +255,11 @@ export default StyleSheet.create({
     color: "#000",
     paddingHorizontal: 10,
     paddingTop: 20,
+  },
+  signaturesAndGoalsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
   signersBubble: {
     alignSelf: "flex-end",
