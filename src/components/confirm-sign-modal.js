@@ -72,8 +72,8 @@ class ConfirmSignModal extends Component {
     isVisible: false,
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.isVisible === false) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isVisible === true) {
       Animated.sequence([
         Animated.timing(
           this.state.fadeAnim,
@@ -145,7 +145,7 @@ class ConfirmSignModal extends Component {
       bottom,
     } = this.state;
 
-    if (!isVisible) return (<View/>);
+    if (!isVisible) return null;
 
     const modalTitle = locale.signPlip;
     const modalDescription = (<Text style={styles.text}>Clique em &quot;<Text style={styles.bold}>Assinar</Text>&quot; para confirmar sua colaboração ao Projeto de Lei: <Text style={styles.bold}>{plipName}</Text>.</Text>);

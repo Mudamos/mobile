@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import {
   StyleSheet,
   Text,
   View,
-  LayoutAnimation,
 } from "react-native";
 
 const barColor = "#00BFD8";
@@ -45,44 +44,25 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class ProgressBarClassic extends Component {
-  static propTypes = {
-    value: PropTypes.number,
-  };
+const ProgressBarClassic = props => {
+  const { value } = props;
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: props.value || 0,
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    LayoutAnimation.spring();
-    this.setState({value: nextProps.value});
-  }
-
-  componentWillUpdate() {
-    LayoutAnimation.spring();
-  }
-
-  render() {
-    return (
-      <View>
-        <View style={[styles.flexBox, styles.progressBar]}>
-          <View style={[styles.barLeft, {flex:this.state.value}]}></View>
-          <View style={[styles.barRight, {flex:100 - this.state.value}]}>
-            <View style={styles.textContainer}>
-              <Text style={styles.text}>{this.state.value}%</Text>
-            </View>
+  return (
+    <View>
+      <View style={[styles.flexBox, styles.progressBar]}>
+        <View style={[styles.barLeft, {flex: value}]}></View>
+        <View style={[styles.barRight, {flex:100 - value}]}>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>{value}%</Text>
           </View>
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 }
 
-ProgressBarClassic.defaultProps = {
-  value: 0,
-}
+ProgressBarClassic.propTypes = {
+  value: PropTypes.number,
+};
+
+export default ProgressBarClassic;

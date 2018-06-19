@@ -144,7 +144,7 @@ export default class PlipLayout extends Component {
 
   onRetryAppLink = () => this.props.onRetryAppLink();
 
-  onToggleSignModal() {
+  onToggleSignModal = () => {
     const { isSignModalVisible } = this.state;
 
     this.setState({ isSignModalVisible: !isSignModalVisible });
@@ -178,7 +178,7 @@ export default class PlipLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={isFetchingPlipRelatedInfo || isSigning || (!plip && !errorHandlingAppLink)} />
-        <ConfirmSignModal isVisible={isSignModalVisible} plipName={this.plipName} onToggleSignModal={this.onToggleSignModal.bind(this)} onPlipSign={this.onPlipSign.bind(this)}/>
+        <ConfirmSignModal isVisible={isSignModalVisible} plipName={this.plipName} onToggleSignModal={this.onToggleSignModal} onPlipSign={this.onPlipSign}/>
       </View>
     );
   }
@@ -219,7 +219,7 @@ export default class PlipLayout extends Component {
                   users={signers}
                   total={signersTotal}
                   style={styles.signersBubble}
-                  onPress={this.onOpenSigners.bind(this)}
+                  onPress={this.onOpenSigners}
                 />
             }
             <View style={styles.mainContainer}>
@@ -249,7 +249,7 @@ export default class PlipLayout extends Component {
     const willShare = userSignDate || !this.signatureEnabled;
 
     const title = willSign && locale.iWannaMakeTheDifference || willShare && locale.makeTheDifferenceAndShare;
-    const onPress = willSign && this.onToggleSignModal.bind(this) || willShare && this.onShare.bind(this);
+    const onPress = willSign && this.onToggleSignModal || willShare && this.onShare;
     const iconName = willSign && "check-circle" || willShare && "share";
 
     return (
@@ -385,7 +385,7 @@ export default class PlipLayout extends Component {
   renderButtonReadFullText() {
     return (
       <TouchableOpacity
-        onPress={this.onViewPlip.bind(this)}
+        onPress={this.onViewPlip}
       >
         <View style={styles.actionFullText}>
           <Text style={styles.actionTitle}>{locale.readFullText.toUpperCase()}</Text>
@@ -401,7 +401,7 @@ export default class PlipLayout extends Component {
 
     const title = locale.downloadPDF;
     const subtitle = plipSignInfo && plipSignInfo.updatedAt && locale.registeredAt + plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss");
-    const action = this.onOpenDocument.bind(this);
+    const action = this.onOpenDocument;
     const icon = "file-download"
     const buttonStyle = { flexDirection: "row" }
 
@@ -419,9 +419,10 @@ export default class PlipLayout extends Component {
 
     const title = remoteConfig && remoteConfig.authenticatedSignersButtonTitle.toUpperCase();
     const subtitle = locale.youWillBeRedirectToMudamos;
-    const action = this.onOpenURL.bind(this);
+    const action = this.onOpenURL;
     const icon = "exit-to-app";
-    const buttonStyle = { flexDirection: "row" }
+    const buttonStyle = { flexDirection: "row" };
+
     return (
       <View style={{marginBottom: 20}}>
         <RoundedButton title={title} subtitle={subtitle} action={action} icon={icon} buttonStyle={buttonStyle}/>
@@ -440,7 +441,7 @@ export default class PlipLayout extends Component {
     const finalNavColor = "#7705B9";
     let navColorOpacity = this.state.scrollY.interpolate({
       inputRange: [0, (HEADER_SCROLL_DISTANCE - SMALL_ANIM_OFFSET) / 2, HEADER_SCROLL_DISTANCE - SMALL_ANIM_OFFSET],
-      outputRange: ["#00000066", "#7705B9", finalNavColor],
+      outputRange: ["rgba(0,0,0,0.4)", "rgb(119, 5, 185)", finalNavColor],
       extrapolate: "clamp",
     });
 
@@ -477,7 +478,7 @@ export default class PlipLayout extends Component {
 
   renderShareButton() {
     return (
-      <TouchableOpacity onPress={this.onShare.bind(this)}>
+      <TouchableOpacity onPress={this.onShare}>
         <Icon
           name="share"
           size={24}
@@ -529,7 +530,7 @@ export default class PlipLayout extends Component {
     return (
       <View style={styles.retryContainer}>
         <RetryButton
-          onPress={this.onFetchPlipRelatedInfo.bind(this)}
+          onPress={this.onFetchPlipRelatedInfo}
           style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
         />
       </View>
@@ -547,38 +548,38 @@ export default class PlipLayout extends Component {
     );
   }
 
-  onFetchPlipRelatedInfo() {
+  onFetchPlipRelatedInfo = () => {
     const { plip, onFetchPlipRelatedInfo} = this.props;
     onFetchPlipRelatedInfo(plip.id);
   }
 
-  onOpenDocument() {
+  onOpenDocument = () => {
     const { plip, onOpenURL } = this.props;
     onOpenURL(plip.documentUrl);
   }
 
-  onPlipSign() {
+  onPlipSign = () => {
     const { plip, onPlipSign } = this.props;
     this.onToggleSignModal();
     onPlipSign(plip);
   }
 
-  onOpenSigners() {
+  onOpenSigners = () => {
     const { plip, onOpenSigners } = this.props;
     onOpenSigners(plip.id);
   }
 
-  onOpenURL() {
+  onOpenURL = () => {
     const { plip, onOpenURL } = this.props;
     onOpenURL(plip.plipUrl);
   }
 
-  onShare() {
+  onShare = () => {
     const { plip, onShare } = this.props;
     onShare(plip);
   }
 
-  onViewPlip() {
+  onViewPlip = () => {
     const { plip, onViewPlip } = this.props;
     onViewPlip(plip);
   }
