@@ -402,8 +402,8 @@ export default class PlipLayout extends Component {
     const title = locale.downloadPDF;
     const subtitle = plipSignInfo && plipSignInfo.updatedAt && locale.registeredAt + plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss");
     const action = this.onOpenDocument;
-    const icon = "file-download"
-    const buttonStyle = { flexDirection: "row" }
+    const icon = "file-download";
+    const buttonStyle = { flexDirection: "row" };
 
     return (
       <View style={{marginBottom: 20}}>
