@@ -145,8 +145,6 @@ export default class PlipLayout extends Component {
   onRetryAppLink = () => this.props.onRetryAppLink();
 
   onToggleSignModal = () => {
-    const { isSignModalVisible } = this.state;
-
     this.setState(({ isSignModalVisible }) => ({ isSignModalVisible: !isSignModalVisible }));
   }
 

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { StyleSheet } from "react-native";
 
@@ -115,7 +115,10 @@ const StaticFooter = ({ onFacebook, onInstagram, onTwitter }) => (
 );
 
 StaticFooter.propTypes = {
+  onFacebook: PropTypes.func,
+  onInstagram: PropTypes.func,
   onOpenURL: PropTypes.func.isRequired,
+  onTwitter: PropTypes.func,
 }
 
 export default enhance(StaticFooter);
