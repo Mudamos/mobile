@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     marginRight: 18,
   },
   actionSubtitle: {
-    color: "#000000B3",
+    color: "rgba(0, 0, 0, .7)",
     fontFamily: "lato",
     fontSize: 10,
     marginTop: 5,

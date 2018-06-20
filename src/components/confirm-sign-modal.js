@@ -72,37 +72,39 @@ class ConfirmSignModal extends Component {
     isVisible: false,
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isVisible === true) {
-      Animated.sequence([
-        Animated.timing(
-          this.state.fadeAnim,
-          {
-            toValue: 1,
-            duration: 200,
-          }),
-        Animated.timing(
-          this.state.bottom,
-          {
-            toValue: 0,
-            duration: 300,
-          }),
-      ]).start();
-    } else {
-      Animated.sequence([
-        Animated.timing(
-          this.state.bottom,
-          {
-            toValue: -300,
-            duration: 100,
-          }),
-        Animated.timing(
-          this.state.fadeAnim,
-          {
-            toValue: 0,
-            duration: 200,
-          }),
-      ]).start();
+  componentDidUpdate(prevProps) {
+    if (this.props.isVisible !== prevProps.isVisible) {
+      if (prevProps.isVisible === false) {
+        Animated.sequence([
+          Animated.timing(
+            this.state.fadeAnim,
+            {
+              toValue: 1,
+              duration: 200,
+            }),
+          Animated.timing(
+            this.state.bottom,
+            {
+              toValue: 0,
+              duration: 300,
+            }),
+        ]).start();
+      } else {
+        Animated.sequence([
+          Animated.timing(
+            this.state.bottom,
+            {
+              toValue: -300,
+              duration: 100,
+            }),
+          Animated.timing(
+            this.state.fadeAnim,
+            {
+              toValue: 0,
+              duration: 200,
+            }),
+        ]).start();
+      }
     }
   }
 

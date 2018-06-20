@@ -47,71 +47,67 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class StaticFooter extends Component {
-  static propTypes = {
-    onOpenURL: PropTypes.func.isRequired,
-  }
-
-  render() {
-    const {
-      onOpenURL,
-    } = this.props;
-
-    return (
-      <View style={styles.mainContent}>
-        <View style={styles.securityInfoContainer}>
-          <MaterialIcon
-            name={"lock"}
-            size={24}
-            color="#FFF"
-            style={{marginRight: 20}}
-          />
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>{locale.securityMessage}</Text>
-          </View>
-        </View>
-        <View style={styles.aboutMudamosContainer}>
-          <Image
-            source={require("../images/its-black-logo.png")}
-            style={{marginRight: 20}}
-          />
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>{locale.whatIsMudamos}</Text>
-          </View>
-        </View>
-        <View style={styles.linksContainer}>
-          <TouchableOpacity
-            onPress={() => onOpenURL("https://www.facebook.com/ITSriodejaneiro")}
-          >
-            <FontAwesomeIcon
-              name={"facebook"}
-              size={24}
-              color="#FFF"
-              style={{marginHorizontal: 20}}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => onOpenURL("https://twitter.com/itsriodejaneiro")}
-          >
-            <FontAwesomeIcon
-              name={"twitter"}
-              size={24}
-              color="#FFF"
-              style={{marginHorizontal: 20}}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => onOpenURL("https://www.instagram.com/itsriodejaneiro/")}
-          >
-            <FontAwesomeIcon
-              name={"instagram"}
-              size={24}
-              color="#FFF"
-              style={{marginHorizontal: 20}}
-            />
-          </TouchableOpacity>
+const StaticFooter = ({ onOpenURL }) => {
+  return (
+    <View style={styles.mainContent}>
+      <View style={styles.securityInfoContainer}>
+        <MaterialIcon
+          name={"lock"}
+          size={24}
+          color="#FFF"
+          style={{marginRight: 20}}
+        />
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>{locale.securityMessage}</Text>
         </View>
       </View>
-    );
-  }
+      <View style={styles.aboutMudamosContainer}>
+        <Image
+          source={require("../images/its-black-logo.png")}
+          style={{marginRight: 20}}
+        />
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>{locale.whatIsMudamos}</Text>
+        </View>
+      </View>
+      <View style={styles.linksContainer}>
+        <TouchableOpacity
+          onPress={() => onOpenURL("https://www.facebook.com/ITSriodejaneiro")}
+        >
+          <FontAwesomeIcon
+            name={"facebook"}
+            size={24}
+            color="#FFF"
+            style={{marginHorizontal: 20}}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => onOpenURL("https://twitter.com/itsriodejaneiro")}
+        >
+          <FontAwesomeIcon
+            name={"twitter"}
+            size={24}
+            color="#FFF"
+            style={{marginHorizontal: 20}}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => onOpenURL("https://www.instagram.com/itsriodejaneiro/")}
+        >
+          <FontAwesomeIcon
+            name={"instagram"}
+            size={24}
+            color="#FFF"
+            style={{marginHorizontal: 20}}
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
+
+StaticFooter.propTypes = {
+  onOpenURL: PropTypes.func.isRequired,
+}
+
+export default StaticFooter;

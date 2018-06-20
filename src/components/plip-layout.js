@@ -147,7 +147,7 @@ export default class PlipLayout extends Component {
   onToggleSignModal = () => {
     const { isSignModalVisible } = this.state;
 
-    this.setState({ isSignModalVisible: !isSignModalVisible });
+    this.setState(({ isSignModalVisible }) => ({ isSignModalVisible: !isSignModalVisible }));
   }
 
   componentWillMount() {

@@ -79,7 +79,7 @@ export default StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: "#0000001A",
+    backgroundColor: "#rgba(0, 0, 0, .1)",
     marginVertical: 30,
     marginHorizontal: -15,
   },
@@ -215,7 +215,7 @@ export default StyleSheet.create({
     backgroundColor: "#fff",
   },
   progress: {
-    borderColor: "#0000001A",
+    borderColor: "#rgba(0, 0, 0, .1)",
     borderBottomWidth: 1,
     borderRightWidth: 1,
     height: 34,
