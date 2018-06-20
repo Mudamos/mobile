@@ -470,7 +470,7 @@ export default class PlipLayout extends Component {
           name="favorite"
           style={styles.favoriteIcon}
           size={30}
-          color="#00000080"
+          color="rgba(0, 0, 0, .5)"
         />
       </TouchableOpacity>
     );
@@ -482,7 +482,7 @@ export default class PlipLayout extends Component {
         <Icon
           name="share"
           size={24}
-          color="#00000080"
+          color="rgba(0, 0, 0, .5)"
         />
       </TouchableOpacity>
     );
