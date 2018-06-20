@@ -388,7 +388,7 @@ class Plip extends Component {
           name="favorite"
           style={styles.favoriteIcon}
           size={30}
-          color="#00000080"
+          color="rgba(0, 0, 0, .5)"
         />
       </TouchableOpacity>
     );
@@ -403,7 +403,7 @@ class Plip extends Component {
           name="share"
           style={styles.shareIcon}
           size={30}
-          color="#00000080"
+          color="rgba(0, 0, 0, .5)"
         />
       </TouchableOpacity>
     );
@@ -415,7 +415,7 @@ class Plip extends Component {
         name="trending-up"
         style={styles.signaturesIcon}
         size={30}
-        color="#00000080"
+        color="rgba(0, 0, 0, .5)"
       />
     );
   }

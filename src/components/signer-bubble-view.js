@@ -12,13 +12,7 @@ import {
 } from "react-native";
 
 import NetworkImage from "./network-image";
-import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/signer-bubble-view";
-
-const gradientStart = { x: 0.0, y: 0.25 };
-const gradientEnd = { x: 0.7, y: 1.0 };
-const gradientLocation = [0, 1.5, 2.0];
-const gradientColors = ["#7E52D8", "#9427DB", "#9526DB"];
 
 export default class SignerBubbleView extends Component {
   static propTypes = {
@@ -30,7 +24,7 @@ export default class SignerBubbleView extends Component {
   }
 
   static defaultProps = {
-    size: 3,
+    size: 5,
   }
 
   get profiles() {
@@ -82,17 +76,11 @@ export default class SignerBubbleView extends Component {
     if (!exceeding) return null;
 
     const bubble = (
-      <LinearGradient
-        start={gradientStart}
-        end={gradientEnd}
-        locations={gradientLocation}
-        style={styles.bubbleGradient}
-        colors={gradientColors}
-      >
+      <View style={[styles.bubble, {backgroundColor: "#D6C0E9", borderColor: "transparent"}]}>
         <Text style={styles.exceeding}>
-          +{exceeding}
+          +
         </Text>
-      </LinearGradient>
+      </View>
     );
 
     return onPress ?
