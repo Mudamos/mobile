@@ -108,7 +108,7 @@ class Container extends Component {
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
-    onSignUp: PropTypes.func.isRequired,
+    onSignIn: PropTypes.func.isRequired,
     onTellAFriend: PropTypes.func.isRequired,
     onValidateProfile: PropTypes.func.isRequired,
   };
@@ -125,11 +125,11 @@ class Container extends Component {
     } = this.props;
 
     const entries = [
-      { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout.bind(this), position: 2 },
+      { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout, position: 2 },
       { icon: "account-balance", title: locale.links.sendYourPL, action: () => this.onOpenURL({ eventName: "tapped_menu_send_your_pl", link: remoteLinks.sendYourIdea }), position: 3 },
       { icon: "extension", title: locale.links.getToKnowMudamos, action: () => this.onOpenURL({ eventName: "tapped_menu_get_to_know_mudamos", link: remoteLinks.getToKnowMudamos }), position: 4 },
       { icon: "help", title: locale.links.help, action: () => this.onOpenURL({ eventName: "tapped_menu_help", link: remoteLinks.help }), position: 5 },
-      { icon: "favorite", title: locale.menu.tellAFriend, action: this.onTellAFriend.bind(this), position: 6 },
+      { icon: "favorite", title: locale.menu.tellAFriend, action: this.onTellAFriend, position: 6 },
     ];
 
     if (!isFetchingProfile && currentUser) {
@@ -142,7 +142,7 @@ class Container extends Component {
     }
 
     if (!isFetchingProfile && !currentUser && !isUserLoggedIn) {
-      entries.push({ icon: "person", title: locale.getIn, action: this.onSignUp.bind(this), position: 0});
+      entries.push({ icon: "person", title: locale.getIn, action: this.onSignIn, position: 0});
     }
 
     return sortMenuEntries(entries);
@@ -213,7 +213,7 @@ class Container extends Component {
         {
           showAboutModal &&
             <SimpleModal
-              onClose={this.onFirstTimeModalClose.bind(this)}
+              onClose={this.onFirstTimeModalClose}
             >
               <MarkdownView
                 content={locale.markdown.aboutBody}
@@ -263,14 +263,14 @@ class Container extends Component {
     this.setState({ menuOpen: false });
   }
 
-  onAbout() {
+  onAbout = () => {
     const { onLogEvent } = this.props;
     this.closeMenu();
     this.setState({ showAboutModal: true });
     onLogEvent({ name: "tapped_menu_about_app" });
   }
 
-  onTellAFriend() {
+  onTellAFriend = () => {
     const { onLogEvent, onTellAFriend } = this.props;
     onLogEvent({ name: "tapped_menu_tell_a_friend" });
     onTellAFriend();
@@ -282,17 +282,17 @@ class Container extends Component {
     onOpenURL(link);
   }
 
-  onFirstTimeModalClose() {
+  onFirstTimeModalClose = () => {
     const { onFirstTimeModalClose } = this.props;
 
     onFirstTimeModalClose();
     this.setState({ showAboutModal: false });
   }
 
-  onSignUp() {
-    const { onSignUp, onLogEvent } = this.props;
+  onSignIn = () => {
+    const { onSignIn, onLogEvent } = this.props;
 
-    onSignUp();
+    onSignIn();
     this.closeMenu();
     onLogEvent({ name: "tapped_menu_signup" });
   }
@@ -335,7 +335,7 @@ const mapDispatchToProps = dispatch => ({
   onOpenURL: url => dispatch(openURL(url)),
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
   onRefresh: () => dispatch(refreshPlips()),
-  onSignUp: () => dispatch(navigate("signUp")),
+  onSignIn: () => dispatch(navigate("signIn")),
   onMainTabChange: ({ index }) => dispatch(updateMainTabViewIndex(index)),
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),

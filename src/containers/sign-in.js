@@ -11,6 +11,7 @@ import {
   loginUser,
   navigate,
   navigateBack,
+  openURL,
 } from "../actions";
 
 const mapStateToProps = state => ({
@@ -21,6 +22,8 @@ const mapDispatchToProps = dispatch => ({
   onBack: () => dispatch(navigateBack()),
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
   onForgotPassword: () => dispatch(navigate("forgotPassword")),
+  onOpenURL: url => dispatch(openURL(url)),
+  onSignUp: () => dispatch(navigate("signUp")),
   onSignIn: (email, password) => dispatch(loginUser(email, password)),
 });
 

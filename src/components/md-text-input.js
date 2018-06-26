@@ -7,6 +7,8 @@ import {
   View,
 } from "react-native";
 
+import Icon from "react-native-vector-icons/MaterialIcons";
+
 import {
   MKTextField,
 } from "react-native-material-kit";
@@ -28,6 +30,11 @@ const style = StyleSheet.create({
   },
   errorText: {
     color: errorColor,
+  },
+  eyeIcon: {
+    position: "absolute",
+    top: 30,
+    right: 0,
   },
   textFieldStyle: {
     height: 48,
@@ -67,6 +74,11 @@ export default class MDTextInput extends Component {
     underlineEnabled: true,
   }
 
+  state = {
+    icEye: "visibility-off",
+    togglePassword: true
+  }
+
   input = null;
 
   setInput = component => this.input = component;
@@ -84,6 +96,24 @@ export default class MDTextInput extends Component {
     return hasError ? error : hint;
   }
 
+  changePasswordType = () => {
+    let newState;
+    if (this.state.togglePassword) {
+        newState = {
+            icEye: 'visibility',
+            togglePassword: false
+        }
+    } else {
+        newState = {
+            icEye: 'visibility-off',
+            togglePassword: true
+        }
+    }
+
+    this.setState(newState)
+
+  };
+
   render() {
     const {
       hasError,
@@ -94,16 +124,19 @@ export default class MDTextInput extends Component {
       floatingLabelFont,
       underlineEnabled,
       selectionColor,
+      password,
 
       ...textFieldProps
     } = this.props;
+
+    const { icEye, togglePassword } = this.state;
 
     return (
       <View style={[style.container, mdContainerStyle]}>
 
         <MKTextField
           {...textFieldProps}
-
+          password={password && togglePassword}
           ref={this.setInput}
           tintColor={this.tintColor}
           selectionColor={selectionColor}
@@ -113,6 +146,15 @@ export default class MDTextInput extends Component {
           underlineSize={underlineEnabled ? 1 : 0}
           underlineEnabled={underlineEnabled}
         />
+        { password &&
+          <Icon
+            style={style.eyeIcon}
+            name={icEye}
+            size={24}
+            color="#fff"
+            onPress={this.changePasswordType}
+          />
+        }
 
         {
           this.message &&

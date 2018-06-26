@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
+  Image,
   TouchableOpacity,
   Text,
   View,
@@ -16,6 +17,8 @@ import MDTextInput from "./md-text-input";
 import FlatButton from "./flat-button";
 import FBLoginButton from "./fb-login-button";
 import NavigationBar from "./navigation-bar";
+import RoundedButton from "./rounded-button";
+import StaticFooter from "./static-footer";
 
 import locale from "../locales/pt-BR";
 
@@ -30,7 +33,9 @@ class SignInLayout extends Component {
     onBack: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
     onForgotPassword: PropTypes.func.isRequired,
+    onOpenURL: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
+    onSignUp: PropTypes.func.isRequired,
   }
 
   get validForm() {
@@ -46,61 +51,30 @@ class SignInLayout extends Component {
 
   render() {
     const {
-      isLoggingIn,
-      onForgotPassword,
+      isLoggingIn
     } = this.props;
 
     return (
       <View style={styles.container}>
         <Layout>
-          <ScrollView>
+          <ScrollView style={styles.container}>
             {this.renderNavBar()}
-
-            <Text style={styles.headerTitle}>
-              {locale.signInTitle}
-            </Text>
-
-            {this.renderFBLogin()}
-
-            <View style={styles.separatorContainer}>
-              <View style={styles.separatorLine} />
-              <Text style={styles.separatorText}>ou</Text>
-              <View style={styles.separatorLine} />
-            </View>
+            {this.renderHeader()}
 
             <View style={styles.inputContainer}>
-              <MDTextInput
-                placeholder={locale.email}
-                value={this.state.email}
-                onChangeText={email => this.setState({ email })}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                onSubmitEditing={() => this.emailInput.blur()}
-                ref={ref => this.emailInput = ref}
-              />
-
-              <MDTextInput
-                placeholder={locale.password}
-                value={this.state.password}
-                password={true}
-                onChangeText={password => this.setState({ password })}
-                onSubmitEditing={() => this.passwordInput.blur()}
-                ref={ref => this.passwordInput = ref}
-              />
+              {this.renderEmailInput()}
+              {this.renderPasswordInput()}
+              {this.renderForgotPassword()}
+              {this.renderContinueButton()}
             </View>
 
-            <FlatButton
-              title={locale.getIn.toUpperCase()}
-              enabled={this.signInEnabled}
-              onPress={this.onSubmit.bind(this)}
-              style={{marginHorizontal: 20, marginTop: 20}}
-            />
+            {this.renderOrSeparator()}
+            {this.renderFBLogin()}
+            {this.renderSeparator()}
 
-            <TouchableOpacity onPress={onForgotPassword}>
-              <Text style={styles.forgotPassword}>
-                {locale.forgotPassword}
-              </Text>
-            </TouchableOpacity>
+            {this.renderLinkToSignUp()}
+
+            <StaticFooter onOpenURL={this.onOpenURL} />
           </ScrollView>
         </Layout>
 
@@ -109,26 +83,122 @@ class SignInLayout extends Component {
     );
   }
 
+  renderHeader() {
+    return (
+      <View>
+        <Image
+          source={require("../images/Logo-alt.png")}
+          style={styles.logo}
+        />
+
+        <Text style={styles.headerTitle}>
+          {locale.imAlreadyRegistered}
+        </Text>
+      </View>
+    );
+  }
+
+  renderEmailInput() {
+    return (
+      <MDTextInput
+        placeholder={locale.emailRegistered}
+        value={this.state.email}
+        onChangeText={email => this.setState({ email })}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        onSubmitEditing={() => this.emailInput.blur()}
+        ref={ref => this.emailInput = ref}
+      />
+    );
+  }
+
+  renderPasswordInput() {
+    return (
+      <MDTextInput
+        placeholder={locale.passwordAtMudamos}
+        value={this.state.password}
+        password={true}
+        autoCapitalize="none"
+        onChangeText={password => this.setState({ password })}
+        onSubmitEditing={() => this.passwordInput.blur()}
+        ref={ref => this.passwordInput = ref}
+      />
+    );
+  }
+
+  renderContinueButton() {
+    return (
+      <View style={styles.continueButtonContainer}>
+        <RoundedButton title={locale.continue} action={this.onSubmit.bind(this)} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+      </View>
+    );
+  }
+
+  renderSeparator() {
+    return (
+      <View style={styles.separatorContainer}>
+        <View style={styles.separatorLine} />
+      </View>
+    );
+  }
+
+  renderOrSeparator() {
+    return (
+      <View style={styles.separatorContainer}>
+        <View style={styles.separatorLine} />
+        <Text style={styles.separatorText}>ou</Text>
+        <View style={styles.separatorLine} />
+      </View>
+    );
+  }
+
   renderNavBar() {
-    const { onBack } = this.props;
     return (
       <NavigationBar
-        leftView={<BackButton onPress={onBack} />}
-        middleView={<HeaderLogo />}
+        leftView={<BackButton onPress={this.onBack} />}
       />
     );
   }
 
   renderFBLogin() {
-    const { onFacebookLogin } = this.props;
-
     return (
       <FBLoginButton
-        onPress={onFacebookLogin}
-        style={{marginHorizontal: 20, marginTop: 24}}
+        onPress={this.onFacebookLogin}
+        style={{marginHorizontal: 20}}
       />
     );
   }
+
+  renderForgotPassword() {
+    return (
+      <TouchableOpacity onPress={this.onForgotPassword}>
+        <Text style={styles.forgotPassword}>
+          {locale.forgotPasswordTitle}
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+
+  renderLinkToSignUp() {
+    return (
+      <View style={styles.signUpContainer}>
+        <Text style={styles.registerTitle}>Não tem cadastro?</Text>
+        <TouchableOpacity onPress={this.onSignUp}>
+          <Text style={styles.registerLink}>Cadastre-se</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  onBack = () => this.props.onBack();
+
+  onFacebookLogin = () => this.props.onFacebookLogin();
+
+  onForgotPassword = () => this.props.onForgotPassword();
+
+  onOpenURL = (url) => this.props.onOpenURL(url);
+
+  onSignUp = () => this.props.onSignUp();
 
   onSubmit() {
     const { email, password } = this.state;

@@ -62,9 +62,9 @@ export default class RoundedButton extends Component {
     iconColor: PropTypes.string,
     iconStyle: ViewPropTypes.style,
     subtitle: PropTypes.string,
-    subtitleStyle: ViewPropTypes.style,
+    subtitleStyle: Text.propTypes.style,
     title: PropTypes.string.isRequired,
-    titleStyle: ViewPropTypes.style,
+    titleStyle: Text.propTypes.style,
   };
 
   render() {

@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: "#883DE1",
+    backgroundColor: "#6000AA",
     elevation: 12,
   },
   loading: {
