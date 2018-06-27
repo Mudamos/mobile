@@ -1,66 +1,70 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, "9.0"
+# platform :ios, '9.0'
 
-def pods
-  pod "Bolts"
-  pod "FBSDKCoreKit", "4.22.1"
-  pod "FBSDKShareKit", "4.22.1"
-  pod "FBSDKLoginKit", "4.22.1"
-  pod "IQKeyboardManager"
-  pod "Firebase"
-  pod "Firebase/Core"
-  pod "Firebase/Auth"
-  pod "Firebase/Crash"
-  pod "Firebase/Database"
-  pod "Firebase/Messaging"
-  pod "Firebase/RemoteConfig"
-  pod "Firebase/Storage"
-  pod "Firebase/DynamicLinks"
-end
-
-def message_signer_pods
-  pod "Alamofire"
-end
-
-target "MudamosMobile" do
-  # Uncomment the next line if you"re using Swift or would like to use dynamic frameworks
+target 'MessageSignerAction' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pods
+  # Pods for MessageSignerAction
 
-  target "MudamosMobileTests" do
+end
+
+target 'MessageSignerActionBeta' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for MessageSignerActionBeta
+
+end
+
+target 'MessageSignerActionProduction' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for MessageSignerActionProduction
+
+end
+
+target 'MudamosMobile' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for MudamosMobile
+
+  target 'MudamosMobileTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
 end
 
-target "MudamosMobileTagviewBeta" do
+target 'MudamosMobileTagviewBeta' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pods
+  # Pods for MudamosMobileTagviewBeta
+
 end
 
-target "MudamosProduction" do
+target 'MudamosProduction' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pods
+  # Pods for MudamosProduction
+
 end
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+platform :ios, '8.0'
 
-target "MessageSignerAction" do
-  use_frameworks!
-
-  message_signer_pods
-end
-
-target "MessageSignerActionBeta" do
-  use_frameworks!
-
-  message_signer_pods
-end
-
-target "MessageSignerActionProduction" do
-  use_frameworks!
-
-  message_signer_pods
+[
+  'Firebase',
+  'Firebase/Core',
+  'Firebase/Auth',
+  'Firebase/Storage',
+  'Firebase/Database',
+  'Firebase/RemoteConfig',
+  'Firebase/Messaging'
+].each do |lib|
+  pod lib
 end
