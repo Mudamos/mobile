@@ -7,6 +7,7 @@ import {
   facebookUserLogIn,
   navigate,
   navigateBack,
+  openURL,
   profileSaveMain,
   signingPlip,
 } from "../actions";
@@ -16,7 +17,6 @@ import {
   isSavingProfile,
   profileSaveErrors,
 } from "../selectors";
-
 
 const mapStateToProps = state => ({
   createErrors: profileSaveErrors(state),
@@ -30,9 +30,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(signingPlip(null)); // Clear the user plip sign intention if they gave up
     dispatch(navigateBack());
   },
-  onCreate: ({ name, email, password }) => dispatch(profileSaveMain({ name, email, password })),
+  onCreate: ({ cpf, email, password, termsAccepted }) => dispatch(profileSaveMain({ cpf, email, password, termsAccepted })),
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
-  onSignIn: () => dispatch(navigate("signIn")),
+  onOpenURL: url => dispatch(openURL(url)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpLayout);

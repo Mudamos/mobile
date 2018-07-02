@@ -12,9 +12,9 @@ export const isFetchingProfile = isFetching => ({
   payload: { isFetching },
 });
 
-export const profileSaveMain = ({ name, email, password }) => ({
+export const profileSaveMain = ({ cpf, email, password, termsAccepted }) => ({
   type: "PROFILE_SAVE_MAIN",
-  payload: { name, email, password },
+  payload: { cpf, email, password, termsAccepted },
 });
 
 export const saveProfileBirthdate = birthdate => ({

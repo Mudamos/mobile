@@ -1,15 +1,32 @@
 import { Platform, StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  breadcrumb: {
+    marginVertical: 15,
+  },
   container: {
-    backgroundColor: "transparent",
+    backgroundColor: "#6000AA",
     flex: 1,
+  },
+  continueButton: {
+    backgroundColor: "#00BFD8",
+    borderWidth: 0,
+    marginTop: 20,
+    marginHorizontal: 20,
+  },
+  continueButtonTitle: {
+    color: "#FFF",
+  },
+  cpfExampleText: {
+    marginTop: 5,
+    fontSize: 10,
   },
   headerTitle: {
     alignSelf: "center",
     color: "#fff",
     fontSize: 20,
-    marginHorizontal: 12,
+    fontWeight: "500",
+    marginHorizontal: 30,
     marginTop: 12,
     textAlign: "center",
 
@@ -64,4 +81,19 @@ export default StyleSheet.create({
   signInContainer: {
     marginVertical: 10,
   },
+  termsAcceptedCheckbox: {
+    paddingLeft: 0,
+  },
+  termsAcceptedContainer: {
+    alignItems: "center",
+    flex: 1,
+    flexDirection: "row",
+    marginTop: 20,
+  },
+  termsAcceptedText: {
+    fontSize: 12,
+  },
+  text: {
+    color: "#FFF",
+  }
 });

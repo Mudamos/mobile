@@ -46,11 +46,12 @@ import { validateLocalWallet } from "./wallet";
 function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
   yield takeLatest("PROFILE_SAVE_MAIN", function* ({ payload }) {
     try {
-      const { name, email, password } = payload;
-      const apiPayload = { user: { name } };
+      const { cpf, email, password, termsAccepted } = payload;
+      const apiPayload = { user: { cpf } };
 
       if (email) apiPayload.user.email = email;
       if (password) apiPayload.user.password = password;
+      if (termsAccepted) apiPayload.user.termsAccepted = termsAccepted ? 1 : 0;
 
       yield put(savingProfile(true));
 
@@ -60,7 +61,7 @@ function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
         const currentSigningPlip = yield select(getCurrentSigningPlip);
         if (currentSigningPlip) apiPayload.plipId = currentSigningPlip.id;
 
-        const message = [apiPayload.user.name, apiPayload.user.email, apiPayload.user.password].join(";");
+        const message = [apiPayload.user.cpf, apiPayload.user.email, apiPayload.user.password, apiPayload.user.termsAccepted].join(";");
         apiPayload.block = yield call(blockBuilder, { message, mobileApi, Crypto });
       }
 

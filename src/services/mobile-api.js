@@ -347,6 +347,7 @@ const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatar
 export default function MobileApi(host) {
   const v1Client = requester({ host, version: "v1" });
   const v2Client = requester({ host, version: "v2" });
+  const v3Client = requester({ host, version: "v3" });
 
   return {
     changePassword: changePassword({ client: v1Client }),
@@ -372,7 +373,7 @@ export default function MobileApi(host) {
     sendPhoneValidation: sendPhoneValidation({ client: v1Client }),
     signIn: signIn({ client: v1Client }),
     signMessage: signMessage({ client: v1Client }),
-    signUp: signUp({ client: v2Client }),
+    signUp: signUp({ client: v3Client }),
     signPlip: signPlip({ client: v1Client }),
     updateProfile: updateProfile({ client: v1Client }),
     userSignInfo: userSignInfo({ client: v1Client }),

@@ -22,12 +22,15 @@ import BackButton from "./back-button";
 import FlatButton from "./flat-button";
 import FBLoginButton from "./fb-login-button";
 import NavigationBar from "./navigation-bar";
+import RoundedButton from "./rounded-button";
+import SignUpBreadCrumb from "./sign-up-breadcrumb";
+import StaticFooter from "./static-footer";
+import Checkbox from "./v2-custom-flat-checkbox";
 
 import locale from "../locales/pt-BR";
 import { errorForField } from "../utils";
 
 import styles from "../styles/sign-up-layout";
-
 
 class SignUpLayout extends Component {
   static propTypes = {
@@ -35,25 +38,27 @@ class SignUpLayout extends Component {
     email: PropTypes.string,
     isCreating: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
-    name: PropTypes.string,
+    cpf: PropTypes.string,
     password: PropTypes.string,
+    termsAccepted: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
     onCreate: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
+    onSetCpf: PropTypes.func.isRequired,
     onSetEmail: PropTypes.func.isRequired,
-    onSetName: PropTypes.func.isRequired,
     onSetPassword: PropTypes.func.isRequired,
-    onSignIn: PropTypes.func.isRequired,
+    onSetTermsAccepted: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
   }
 
   get validForm() {
-    const { email, name, password } = this.props;
+    const { email, cpf, password, termsAccepted } = this.props;
 
     return [
-      name,
+      cpf,
       email,
       password,
+      termsAccepted,
     ].every(v => v);
   }
 
@@ -66,47 +71,43 @@ class SignUpLayout extends Component {
       createErrors,
       isCreating,
       isLoggingIn,
-      onSignIn,
     } = this.props;
 
     const {
       email,
-      name,
+      cpf,
       password,
+      termsAccepted,
+      onOpenURL,
       onSetEmail,
-      onSetName,
+      onSetCpf,
       onSetPassword,
+      onSetTermsAccepted,
       onSubmit,
     } = this.props;
 
     return (
       <View style={styles.container}>
         <Layout>
-          <ScrollView>
+          <ScrollView style={styles.container}>
             {this.renderNavBar()}
 
-            <Text style={styles.headerTitle}>
-              {locale.signUpTitle}
-            </Text>
-
-            {this.renderFBLogin()}
-
-            <View style={styles.separatorContainer}>
-              <View style={styles.separatorLine} />
-              <Text style={styles.separatorText}>ou</Text>
-              <View style={styles.separatorLine} />
-            </View>
+            <SignUpBreadCrumb highlightId={1} containerStyle={styles.breadcrumb} />
 
             <View style={styles.inputContainer}>
-              <MDTextInput
-                placeholder={locale.name}
-                value={name}
-                onChangeText={onSetName}
-                hasError={!!errorForField("name", createErrors)}
-                error={errorForField("name", createErrors)}
-                onSubmitEditing={() => this.nameInput.blur()}
-                ref={ref => this.nameInput = ref}
-              />
+              <View>
+                <MDTextInput
+                  placeholder={locale.cpf}
+                  value={cpf}
+                  onChangeText={onSetCpf}
+                  hasError={!!errorForField("cpf", createErrors)}
+                  error={errorForField("cpf", createErrors)}
+                  keyboardType="numeric"
+                  onSubmitEditing={() => this.nameInput.blur()}
+                  ref={ref => this.nameInput = ref}
+                />
+                <Text style={[styles.text, styles.cpfExampleText]}>Ex: 000.000.000-00</Text>
+                </View>
 
               <MDTextInput
                 placeholder={locale.email}
@@ -130,31 +131,22 @@ class SignUpLayout extends Component {
                 onSubmitEditing={() => this.passwordInput.blur()}
                 ref={ref => this.passwordInput = ref}
               />
+
+              <View style={styles.termsAcceptedContainer}>
+                <Checkbox
+                  checked={termsAccepted}
+                  onCheckedChange={onSetTermsAccepted}
+                  style={styles.termsAcceptedCheckbox}
+                />
+                <Text style={[styles.text, styles.termsAcceptedText]}>Li e estou de acoro com os termos de uso</Text>
+              </View>
             </View>
 
-            <FlatButton
-              title={locale.enroll.toUpperCase()}
-              enabled={this.createEnabled}
-              onPress={onSubmit}
-              style={{marginHorizontal: 20, marginTop: 20}}
-            />
+            <RoundedButton title={locale.continue} enabled={this.createEnabled} action={onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
 
-            <View style={styles.signInContainer}>
-              <TouchableOpacity onPress={onSignIn}>
-                <Text style={styles.lightText}>
-                  {locale.hasAnAccountAlready}
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={onSignIn}>
-                <Text style={styles.login}>
-                  {locale.performLogin}
-                </Text>
-              </TouchableOpacity>
-            </View>
+            <StaticFooter onOpenURL={onOpenURL} />
           </ScrollView>
         </Layout>
-
         <PageLoader isVisible={isCreating || isLoggingIn} />
       </View>
     );
@@ -169,25 +161,14 @@ class SignUpLayout extends Component {
       />
     );
   }
-
-  renderFBLogin() {
-    const { onFacebookLogin } = this.props;
-
-    return (
-      <FBLoginButton
-        onPress={onFacebookLogin}
-        style={{marginHorizontal: 20, marginTop: 24}}
-      />
-    );
-  }
 }
 
 const enhance = compose(
   withStateHandlers(
-    { name: "", email: "", password: "" },
+    { cpf: "", email: "", password: "", termsAccepted: false },
     {
-      onSetName: () => value => ({
-        name: value,
+      onSetCpf: () => value => ({
+        cpf: value,
       }),
       onSetEmail: () => value => ({
         email: value,
@@ -195,10 +176,13 @@ const enhance = compose(
       onSetPassword: () => value => ({
         password: value,
       }),
+      onSetTermsAccepted: () => value => ({
+        termsAccepted: value.checked,
+      })
     }
   ),
   withHandlers({
-    onSubmit: ({ email, name, password, onCreate }) => () => onCreate({ name, email, password }),
+    onSubmit: ({ email, cpf, password, termsAccepted, onCreate }) => () => onCreate({ cpf, email, password, termsAccepted }),
   })
 );
 
