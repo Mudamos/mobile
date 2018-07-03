@@ -4,6 +4,15 @@ export default StyleSheet.create({
   breadcrumb: {
     marginVertical: 15,
   },
+  cantRememberVoteCardText: {
+    color: "#FFF",
+    fontSize: 10,
+  },
+  cantRememberVoteCardContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+    marginTop: -15,
+  },
   container: {
     backgroundColor: "#6000AA",
     flex: 1,
@@ -94,6 +103,17 @@ export default StyleSheet.create({
     fontSize: 12,
   },
   text: {
+    color: "#FFF",
+  },
+  warningContainer: {
+    alignItems: "center",
+    flex: 1,
+    flexDirection: "row",
+    marginHorizontal: 33,
+    marginTop: 20,
+  },
+  whyDocumentsText: {
+    marginHorizontal: 10,
     color: "#FFF",
   },
 });

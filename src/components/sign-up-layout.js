@@ -8,7 +8,6 @@ import {
 } from "recompose";
 
 import {
-  TouchableOpacity,
   Text,
   View,
 } from "react-native";
@@ -16,11 +15,10 @@ import {
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
 import HeaderLogo from "./header-logo";
+import CpfInput from "./cpf-input";
 import MDTextInput from "./md-text-input";
 import PageLoader from "./page-loader";
 import BackButton from "./back-button";
-import FlatButton from "./flat-button";
-import FBLoginButton from "./fb-login-button";
 import NavigationBar from "./navigation-bar";
 import RoundedButton from "./rounded-button";
 import SignUpBreadCrumb from "./sign-up-breadcrumb";
@@ -34,16 +32,17 @@ import styles from "../styles/sign-up-layout";
 
 class SignUpLayout extends Component {
   static propTypes = {
+    cpf: PropTypes.string,
     createErrors: PropTypes.array,
     email: PropTypes.string,
     isCreating: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
-    cpf: PropTypes.string,
     password: PropTypes.string,
     termsAccepted: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
     onCreate: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
+    onOpenURL: PropTypes.func.isRequired,
     onSetCpf: PropTypes.func.isRequired,
     onSetEmail: PropTypes.func.isRequired,
     onSetPassword: PropTypes.func.isRequired,
@@ -54,8 +53,10 @@ class SignUpLayout extends Component {
   get validForm() {
     const { email, cpf, password, termsAccepted } = this.props;
 
+    const validCpf = String(cpf).length === 14;
+
     return [
-      cpf,
+      validCpf,
       email,
       password,
       termsAccepted,
@@ -95,19 +96,16 @@ class SignUpLayout extends Component {
             <SignUpBreadCrumb highlightId={1} containerStyle={styles.breadcrumb} />
 
             <View style={styles.inputContainer}>
-              <View>
-                <MDTextInput
-                  placeholder={locale.cpf}
-                  value={cpf}
-                  onChangeText={onSetCpf}
-                  hasError={!!errorForField("cpf", createErrors)}
-                  error={errorForField("cpf", createErrors)}
-                  keyboardType="numeric"
-                  onSubmitEditing={() => this.nameInput.blur()}
-                  ref={ref => this.nameInput = ref}
-                />
-                <Text style={[styles.text, styles.cpfExampleText]}>Ex: 000.000.000-00</Text>
-                </View>
+              <CpfInput
+                value={cpf}
+                onChangeCpfText={onSetCpf}
+                placeholder={locale.cpf.toUpperCase()}
+                hasError={!!errorForField("cpf", createErrors)}
+                error={errorForField("cpf", createErrors)}
+                hint="Ex: 999.999.999-99"
+                onSubmitEditing={() => this.cpfInput.blur()}
+                ref={ref => this.cpfInput = ref}
+              />
 
               <MDTextInput
                 placeholder={locale.email}
@@ -138,7 +136,7 @@ class SignUpLayout extends Component {
                   onCheckedChange={onSetTermsAccepted}
                   style={styles.termsAcceptedCheckbox}
                 />
-                <Text style={[styles.text, styles.termsAcceptedText]}>Li e estou de acoro com os termos de uso</Text>
+                <Text style={[styles.text, styles.termsAcceptedText]}>{locale.agreeWithTerms}</Text>
               </View>
             </View>
 
@@ -178,7 +176,7 @@ const enhance = compose(
       }),
       onSetTermsAccepted: () => value => ({
         termsAccepted: value.checked,
-      })
+      }),
     }
   ),
   withHandlers({

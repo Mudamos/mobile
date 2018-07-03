@@ -78,7 +78,7 @@ function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
       yield put(logginSucceeded(newAuth));
 
       yield put(savingProfile(false));
-      yield put(profileStateMachine());
+      yield put(navigate("profileSignUp"));
       yield put(logEvent({ name: "app_signup" }));
     } catch(e) {
       logError(e, { tag: "saveMainProfile" });
@@ -307,12 +307,12 @@ function* saveAvatarProfile({ mobileApi }) {
 function* updateProfile({ mobileApi }) {
   yield takeLatest("PROFILE_UPDATE", function* ({ payload }) {
     try {
-      const { birthdate, name, zipCode } = payload;
+      const { birthdate, name, zipCode, voteIdCard } = payload;
 
       yield put(savingProfile(true));
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.updateProfile, authToken, { birthdate, name, zipCode });
+      const response = yield call(mobileApi.updateProfile, authToken, { birthdate, name, zipCode, voteIdCard });
 
       const user = User.fromJson(response.user);
 

@@ -76,9 +76,9 @@ export const invalidatePhone = () => ({
   type: "PROFILE_INVALIDATE_PHONE",
 });
 
-export const profileUpdate = ({ birthdate, name, zipCode }) => ({
+export const profileUpdate = ({ birthdate, name, zipCode, voteIdCard }) => ({
   type: "PROFILE_UPDATE",
-  payload: { birthdate, name, zipCode },
+  payload: { birthdate, name, zipCode, voteIdCard },
 });
 
 export const clearProfileSaveErrors = () => ({

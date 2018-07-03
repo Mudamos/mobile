@@ -10,11 +10,9 @@ import {
 
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
-import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
 import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
-import FlatButton from "./flat-button";
 import FBLoginButton from "./fb-login-button";
 import NavigationBar from "./navigation-bar";
 import RoundedButton from "./rounded-button";
@@ -51,7 +49,7 @@ class SignInLayout extends Component {
 
   render() {
     const {
-      isLoggingIn
+      isLoggingIn,
     } = this.props;
 
     return (

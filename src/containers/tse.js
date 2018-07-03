@@ -46,8 +46,10 @@ const jsCode = user => {
       function fillOutForm() {
         var nameField = document.getElementsByName("nomeEleitor")[0];
         var birthField = document.getElementsByName("dataNascimento")[0];
-        if (nameField && !nameField.value) nameField.value = "${user.name}";
-        if (birthField && !birthField.value) birthField.value = "${fromISODate(user.birthdate)}";
+        const userName = ${user.name}
+        const userBirthdate = ${user.birthdate && fromISODate(user.birthdate)}
+        if (userName && nameField && !nameField.value) nameField.value = userName;
+        if (userBirthdate && birthField && !birthField.value) birthField.value = userBirthdate;
       }
       fillOutForm();
 

@@ -3,9 +3,12 @@ import { connect } from "react-redux";
 import SignUpLayout from "../components/sign-up-layout";
 
 import {
+  extractNumbers,
+} from "../utils";
+
+import {
   clearProfileSaveErrors,
   facebookUserLogIn,
-  navigate,
   navigateBack,
   openURL,
   profileSaveMain,
@@ -30,7 +33,14 @@ const mapDispatchToProps = dispatch => ({
     dispatch(signingPlip(null)); // Clear the user plip sign intention if they gave up
     dispatch(navigateBack());
   },
-  onCreate: ({ cpf, email, password, termsAccepted }) => dispatch(profileSaveMain({ cpf, email, password, termsAccepted })),
+  onCreate: ({ cpf, email, password, termsAccepted }) => {
+    dispatch(profileSaveMain({
+      cpf: extractNumbers(cpf),
+      email,
+      password,
+      termsAccepted,
+    }))
+  },
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
   onOpenURL: url => dispatch(openURL(url)),
 });

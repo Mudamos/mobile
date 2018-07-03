@@ -257,11 +257,16 @@ const changePassword = ({ client }) => (authToken, { currentPassword, newPasswor
     .send({ user: { currentPassword, newPassword } })
     .then(getData);
 
-const updateProfile = ({ client }) => (authToken, { birthdate, name, zipCode }) =>
+const updateProfile = ({ client }) => (authToken, { birthdate, name, voteIdCard, zipCode }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
     .post("/users/profile/update")
-    .send({ user: { birthday: birthdate, name, zipcode: zipCode }})
+    .send({ user: {
+      birthday: birthdate || "",
+      name: name || "",
+      zipcode: zipCode || "",
+      voteidcard: voteIdCard || "",
+    }})
     .then(getData);
 
 const fetchShortPlipSigners = ({ client }) => (authToken, { plipId }) =>
@@ -375,7 +380,7 @@ export default function MobileApi(host) {
     signMessage: signMessage({ client: v1Client }),
     signUp: signUp({ client: v3Client }),
     signPlip: signPlip({ client: v1Client }),
-    updateProfile: updateProfile({ client: v1Client }),
+    updateProfile: updateProfile({ client: v3Client }),
     userSignInfo: userSignInfo({ client: v1Client }),
   };
 }

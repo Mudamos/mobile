@@ -22,6 +22,7 @@ import {
   ProfilePhoneContainer,
   ProfilePhoneCodeContainer,
   ProfileUpdateContainer,
+  ProfileSignUpContainer,
   ProfileWalletContainer,
   ShowVideoContainer,
   SignersContainer,
@@ -63,6 +64,7 @@ const scenes = Actions.create(
 
     <Scene key="changePassword" component={ChangePasswordContainer} hideNavBar={true} />
     <Scene key="profileUpdate" component={ProfileUpdateContainer} hideNavBar={true} />
+    <Scene key="profileSignUp" component={ProfileSignUpContainer} hideNavBar={true} title="Dados Pessoais"/>
 
     <Scene key="profileMissingFields" component={ProfileMissingFieldsContainer} hideNavBar={true} title="Confirme suas informações" />
     <Scene key="profileAvatar" component={ProfileAvatarContainer} hideNavBar={true} />

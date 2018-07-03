@@ -1,15 +1,17 @@
 import React from "react";
 
 import {
-  Image,
   StyleSheet,
   Text,
   View,
+  ViewPropTypes,
 } from "react-native";
 
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import IonIcons from 'react-native-vector-icons/Ionicons';
+import PropTypes from "prop-types";
+
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import IonIcons from "react-native-vector-icons/Ionicons";
 
 import locale from "../locales/pt-BR";
 
@@ -75,7 +77,7 @@ const defaultColor = "#FFF";
 const SignUpBreadCrumb = props => {
   const {
     containerStyle,
-    highlightId
+    highlightId,
   } = props;
 
   return (
@@ -96,5 +98,10 @@ const SignUpBreadCrumb = props => {
     </View>
   );
 }
+
+SignUpBreadCrumb.propTypes = {
+  containerStyle: ViewPropTypes.style,
+  highlightId: PropTypes.number,
+};
 
 export default SignUpBreadCrumb;
