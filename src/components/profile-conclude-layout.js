@@ -8,8 +8,6 @@ import {
 
 import styles from "../styles/profile-conclude-layout";
 
-import { errorForField } from "../utils";
-
 import BackButton from "./back-button";
 import HeaderLogo from "./header-logo";
 import Layout from "./purple-layout";
@@ -25,14 +23,14 @@ import locale from "../locales/pt-BR";
 
 export default class ProfileConcludeLayout extends Component {
   static propTypes = {
-    isSaving: PropTypes.bool,
-    onOpenURL: PropTypes.func.isRequired,
-    onBack: PropTypes.func.isRequired,
     currentUser: PropTypes.object,
-    userSignInfo: PropTypes.object,
+    isSaving: PropTypes.bool,
     plip: PropTypes.object,
     plipsSignInfo: PropTypes.object,
+    userSignInfo: PropTypes.object,
+    onBack: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func,
+    onOpenURL: PropTypes.func.isRequired,
     onShare: PropTypes.func,
   }
 

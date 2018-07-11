@@ -1,8 +1,6 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import textStyles from "./text";
-
-const { height, width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   blueRoundedButton: {
@@ -23,7 +21,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   headerSubTitle: {
     color: "#FFF",

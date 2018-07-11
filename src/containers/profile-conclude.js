@@ -2,16 +2,11 @@ import { connect } from "react-redux";
 
 import ProfileConcludeLayout from "../components/profile-conclude-layout";
 
-import { toISODate } from "../utils";
-
-import { saveProfileBirthdate } from "../actions";
-
 import {
   currentUser as getCurrentUser,
   findPlipsSignInfo,
   getUserSignInfo,
   isSavingProfile,
-  profileSaveErrors,
   mostRecentNationalPlip,
 } from "../selectors";
 

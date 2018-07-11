@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 
 import textStyles from "./text";
 
-const { height, width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 export default StyleSheet.create({
   breadcrumb: {
@@ -28,7 +28,7 @@ export default StyleSheet.create({
     color: "#fff",
     fontFamily: "roboto",
     fontSize: 10,
-    fontWeight: "500"
+    fontWeight: "500",
   },
   dontRememberZipCodeContainer: {
     flex: 1,
@@ -37,7 +37,7 @@ export default StyleSheet.create({
     marginTop: -14,
   },
   headerContainer: {
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   headerSubTitle: {
     color: "#FFF",
@@ -59,5 +59,5 @@ export default StyleSheet.create({
   },
   zipCodeContainer: {
     marginHorizontal: 20,
-  }
+  },
 });

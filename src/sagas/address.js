@@ -6,7 +6,6 @@ import {
   addressReverseZipCodeSearchError,
   addressFound,
   clearLocation,
-  navigate,
   unauthorized,
 } from "../actions";
 
@@ -19,9 +18,6 @@ import {
 } from "../utils";
 
 import { Address } from "../models";
-
-const LATITUDE_DELTA = 0.015;
-const LONGITUDE_DELTA = 0.0121;
 
 function* searchZipCode({ mobileApi }) {
   yield takeLatest("ADDRESS_ZIP_CODE_SEARCH", function* ({ payload }) {

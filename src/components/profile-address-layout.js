@@ -24,7 +24,6 @@ import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
 import ZipCodeInput from "./zip-code-input";
 import HeaderLogo from "./header-logo";
-import FlatButton from "./flat-button";
 import PageLoader from"./page-loader";
 import NavigationBar from "./navigation-bar";
 import SignUpBreadCrumb from "./sign-up-breadcrumb";
@@ -39,9 +38,10 @@ const LONGITUDE_DELTA = 0.018;
 
 class ProfileAddressLayout extends Component {
   static propTypes = {
-    zipCode: PropTypes.string,
     isFetchingLocation: PropTypes.bool,
     isSearching: PropTypes.bool,
+    location: PropTypes.object,
+    zipCode: PropTypes.string,
     onBack: PropTypes.func.isRequired,
     onDontKnowZipCode: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
@@ -101,6 +101,7 @@ class ProfileAddressLayout extends Component {
   render() {
     const {
       isFetchingLocation,
+      isSaving,
       isSearching,
       onOpenURL,
     } = this.props;

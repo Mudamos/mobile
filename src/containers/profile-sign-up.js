@@ -45,8 +45,7 @@ const mapDispatchToProps = dispatch => ({
       birthdate: toISODate(birthdate),
       name,
       voteIdCard: extractNumbers(voteCard),
-    }));
-    dispatch(navigate("profileAddress"));
+    }))
   },
   onOpenURL: url => dispatch(openURL(url)),
   onTSERequested: () => dispatch(navigate("tse")),
