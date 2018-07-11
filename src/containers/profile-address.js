@@ -19,6 +19,7 @@ import {
   fetchLocation,
   getUserLocation,
   isFetchingLocation,
+  isSavingProfile,
   isSearchingZipCode,
 } from "../selectors";
 
@@ -49,6 +50,7 @@ class Container extends Component {
 
 const mapStateToProps = state => ({
   isFetchingLocation: isFetchingLocation(state),
+  isSaving: isSavingProfile(state),
   isSearching: isSearchingZipCode(state),
   userLocation: getUserLocation(state),
   location: fetchLocation(state),

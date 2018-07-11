@@ -39,6 +39,7 @@ const LONGITUDE_DELTA = 0.018;
 class ProfileAddressLayout extends Component {
   static propTypes = {
     isFetchingLocation: PropTypes.bool,
+    isSaving: PropTypes.bool,
     isSearching: PropTypes.bool,
     location: PropTypes.object,
     zipCode: PropTypes.string,
@@ -120,7 +121,7 @@ class ProfileAddressLayout extends Component {
           </ScrollView>
         </Layout>
 
-        <PageLoader isVisible={isFetchingLocation || isSearching} />
+        <PageLoader isVisible={isFetchingLocation || isSearching || isSaving} />
       </View>
     );
   }
