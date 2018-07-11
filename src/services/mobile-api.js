@@ -367,7 +367,7 @@ export default function MobileApi(host) {
     plipSignInfo: plipSignInfo({ client: v1Client }),
     profile: profile({ client: v1Client }),
     retrievePassword: retrievePassword({ client: v2Client }),
-    reverseSearchZipCode: reverseSearchZipCode({ client: v2Client }),
+    reverseSearchZipCode: reverseSearchZipCode({ client: v3Client }),
     saveAvatar: upload({ endpoint: `${host}/api/v1/profile/photo` }),
     saveBirthdate: saveBirthdate({ client: v1Client }),
     saveDocuments: saveDocuments({ client: v1Client }),
