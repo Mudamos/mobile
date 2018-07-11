@@ -17,6 +17,7 @@ import {
   ProfileAddressConfirmContainer,
   ProfileAvatarContainer,
   ProfileBirthContainer,
+  ProfileConcludeContainer,
   ProfileDocumentsContainer,
   ProfileMissingFieldsContainer,
   ProfilePhoneContainer,
@@ -75,6 +76,7 @@ const scenes = Actions.create(
     <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
     <Scene key="profilePhoneCode" component={ProfilePhoneCodeContainer} hideNavBar={true} title="Telefone" />
     <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
+    <Scene key="profileConclude" component={ProfileConcludeContainer} hideNavBar={true} title="Conclude" />
 
     <Scene key="tse" component={TSEContainer} hideNavBar={true} direction="vertical" />
     <Scene key="showVideo" component={ShowVideoContainer} hideNavBar={true} direction="vertical" />

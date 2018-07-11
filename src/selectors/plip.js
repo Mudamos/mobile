@@ -15,6 +15,7 @@ import { currentUser } from "./profile";
 
 import {
   groupBy,
+  last,
   pipe,
   prop,
   propEq,
@@ -170,3 +171,7 @@ export const findPlipBySlug = slug => state => {
     });
   }
 }
+
+export const allNationalPlips = state => state.plip.allPlips && state.plip.allPlips.filter(plip => isNationalCause(plip))
+
+export const mostRecentNationalPlip = state => allNationalPlips(state) && last(allNationalPlips(state))

@@ -131,7 +131,7 @@ function* saveZipCodeProfile({ mobileApi }) {
 
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
-      yield put(profileStateMachine());
+      yield put(navigate("profileConclude"))
       yield put(logEvent({ name: "completed_zip_code" }));
     } catch (e) {
       logError(e, { tag: "saveZipCodeProfile" });
