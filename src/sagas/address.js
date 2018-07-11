@@ -20,6 +20,8 @@ import {
 
 import { Address } from "../models";
 
+const LATITUDE_DELTA = 0.015;
+const LONGITUDE_DELTA = 0.0121;
 
 function* searchZipCode({ mobileApi }) {
   yield takeLatest("ADDRESS_ZIP_CODE_SEARCH", function* ({ payload }) {
@@ -34,7 +36,6 @@ function* searchZipCode({ mobileApi }) {
       yield put(addressFound(Address.fromJson(response)));
       yield put(addressZipCodeSearching(false));
       yield put(clearLocation());
-      yield put(navigate("profileAddressConfirm"));
     } catch(e) {
       logError(e, { tag: "searchZipCode" });
 
@@ -61,7 +62,6 @@ function* searchZipCodeWithCoords({ mobileApi }) {
       if (response && response.zipcode) {
         yield put(addressFound(Address.fromJson(response)));
         yield put(clearLocation());
-        yield put(navigate("profileAddressConfirm"));
       }
 
       yield put(addressZipCodeSearching(false));

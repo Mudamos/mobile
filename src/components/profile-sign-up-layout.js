@@ -84,7 +84,6 @@ class ProfileSignUpLayout extends Component {
   }
 
   enableReason = () => {
-
     Keyboard.dismiss();
     this.onToggleReasonEnabled();
   }

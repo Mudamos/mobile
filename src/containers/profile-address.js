@@ -9,17 +9,20 @@ import { extractNumbers } from "../utils";
 import {
   addressZipCodeSearch,
   addressZipCodeSearchWithCoords,
+  navigate,
   openURL,
   requestUserLocation,
+  saveZipCode,
 } from "../actions";
 
 import {
+  fetchLocation,
   getUserLocation,
   isFetchingLocation,
   isSearchingZipCode,
 } from "../selectors";
 
-const CORREIOS_URL = "http://m.correios.com.br/movel/buscaCep.do";
+const CORREIOS_URL = "http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm";
 
 class Container extends Component {
   static propTypes = {
@@ -48,12 +51,16 @@ const mapStateToProps = state => ({
   isFetchingLocation: isFetchingLocation(state),
   isSearching: isSearchingZipCode(state),
   userLocation: getUserLocation(state),
+  location: fetchLocation(state),
 });
 
 const mapDispatchToProps = dispatch => ({
+  onBack: () =>  dispatch(navigate("plipsNav")),
   onDontKnowZipCode: () => dispatch(openURL(CORREIOS_URL)),
+  onOpenURL: url => dispatch(openURL(url)),
   onRequestLocation: ({ message }) => dispatch(requestUserLocation({ message })),
-  onSearch: zipCode => dispatch(addressZipCodeSearch(extractNumbers(zipCode))),
+  onSave: location => dispatch(saveZipCode(location)),
+  onSearch: zipCode => {dispatch(addressZipCodeSearch(extractNumbers(zipCode)))},
   onSearchZipCodeWithCoords: ({ latitude, longitude }) => dispatch(addressZipCodeSearchWithCoords({ latitude, longitude })),
 })
 

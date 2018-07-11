@@ -40,12 +40,14 @@ const mapDispatchToProps = dispatch => ({
     dispatch(clearProfileSaveErrors());
     dispatch(navigate("plipsNav"));
   },
-  onSave: ({ birthdate, name, voteCard }) =>
+  onSave: ({ birthdate, name, voteCard }) => {
     dispatch(profileUpdate({
       birthdate: toISODate(birthdate),
       name,
       voteIdCard: extractNumbers(voteCard),
-    })),
+    }));
+    dispatch(navigate("profileAddress"));
+  },
   onOpenURL: url => dispatch(openURL(url)),
   onTSERequested: () => dispatch(navigate("tse")),
 });
