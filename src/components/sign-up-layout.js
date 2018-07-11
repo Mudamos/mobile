@@ -10,6 +10,7 @@ import {
 import {
   Text,
   View,
+  TouchableOpacity,
 } from "react-native";
 
 import Layout from "./purple-layout";
@@ -48,6 +49,7 @@ class SignUpLayout extends Component {
     onSetPassword: PropTypes.func.isRequired,
     onSetTermsAccepted: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    onTermsRequested: PropTypes.func.isRequired,
   }
 
   get validForm() {
@@ -85,6 +87,7 @@ class SignUpLayout extends Component {
       onSetPassword,
       onSetTermsAccepted,
       onSubmit,
+      onTermsRequested,
     } = this.props;
 
     return (
@@ -136,7 +139,15 @@ class SignUpLayout extends Component {
                   onCheckedChange={onSetTermsAccepted}
                   style={styles.termsAcceptedCheckbox}
                 />
-                <Text style={[styles.text, styles.termsAcceptedText]}>{locale.agreeWithTerms}</Text>
+                <Text style={[styles.termsAcceptedText, styles.text]}>
+                  {locale.readAndAgreedWithTermsPrefix}
+                </Text>
+
+                <TouchableOpacity
+                  onPress={onTermsRequested}
+                >
+                  <Text style={[styles.termsAcceptedText, styles.text, styles.termsAcceptedLink]}>{locale.termsOfUse.toUpperCase()}</Text>
+                </TouchableOpacity>
               </View>
             </View>
 

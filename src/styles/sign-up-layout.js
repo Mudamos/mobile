@@ -93,6 +93,10 @@ export default StyleSheet.create({
   termsAcceptedText: {
     fontSize: 12,
   },
+  termsAcceptedLink: {
+    fontWeight: "500",
+    marginLeft: 4,
+  },
   text: {
     color: "#FFF",
   },
