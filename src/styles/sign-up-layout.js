@@ -21,11 +21,11 @@ export default StyleSheet.create({
     marginTop: 5,
     fontSize: 10,
   },
-  headerTitle: {
+  headerTitleText: {
     alignSelf: "center",
     color: "#fff",
     fontSize: 20,
-    fontWeight: "500",
+    fontWeight: "700",
     marginHorizontal: 30,
     marginTop: 12,
     textAlign: "center",

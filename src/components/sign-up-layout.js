@@ -98,6 +98,8 @@ class SignUpLayout extends Component {
 
             <SignUpBreadCrumb highlightId={1} containerStyle={styles.breadcrumb} />
 
+            <Text style={styles.headerTitleText}>{locale.signUpTitle}</Text>
+
             <View style={styles.inputContainer}>
               <CpfInput
                 value={cpf}
@@ -105,13 +107,13 @@ class SignUpLayout extends Component {
                 placeholder={locale.cpf.toUpperCase()}
                 hasError={!!errorForField("cpf", createErrors)}
                 error={errorForField("cpf", createErrors)}
-                hint="Ex: 999.999.999-99"
+                hint="Ex: 000.000.000-00"
                 onSubmitEditing={() => this.cpfInput.blur()}
                 ref={ref => this.cpfInput = ref}
               />
 
               <MDTextInput
-                placeholder={locale.email}
+                placeholder={locale.emailForAccess}
                 value={email}
                 onChangeText={onSetEmail}
                 hasError={!!errorForField("email", createErrors)}
@@ -123,7 +125,7 @@ class SignUpLayout extends Component {
               />
 
               <MDTextInput
-                placeholder={locale.password}
+                placeholder={locale.choosePassword}
                 value={password}
                 onChangeText={onSetPassword}
                 password={true}

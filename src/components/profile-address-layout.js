@@ -33,8 +33,8 @@ import RoundedButton from "./rounded-button";
 
 import locale from "../locales/pt-BR";
 
-const LATITUDE_DELTA = 0.018;
-const LONGITUDE_DELTA = 0.018;
+const LATITUDE_DELTA = 0.010;
+const LONGITUDE_DELTA = 0.010;
 
 class ProfileAddressLayout extends Component {
   static propTypes = {

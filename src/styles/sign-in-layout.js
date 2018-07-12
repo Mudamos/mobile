@@ -13,7 +13,6 @@ export default StyleSheet.create({
     marginHorizontal: 20,
   },
   continueButtonContainer: {
-    paddingHorizontal: 60,
     marginTop: 18,
   },
   continueButtonTitle: {
@@ -66,7 +65,7 @@ export default StyleSheet.create({
   },
   registerTitle: StyleSheet.flatten([
     textStyles.header,
-    { fontSize: 16, fontWeight: "100" },
+    { fontSize: 16, fontWeight: "400" },
   ]),
   registerLink: StyleSheet.flatten([
     textStyles.link,

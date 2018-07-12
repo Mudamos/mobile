@@ -16,6 +16,9 @@ import IonIcons from "react-native-vector-icons/Ionicons";
 import locale from "../locales/pt-BR";
 
 const styles = StyleSheet.create({
+  arrowIcon: {
+    marginTop: 6,
+  },
   container: {
     flex: 1,
     paddingBottom: 20,
@@ -25,49 +28,36 @@ const styles = StyleSheet.create({
   },
   icon: {
     backgroundColor: "#AAA",
-    borderRadius: 20,
+    borderRadius: 18,
     padding: 4,
+    width: 34,
+    height: 34,
+    overflow: "hidden",
   },
-  iconContainer: {
+  iconsContainer: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: "flex-start",
+    justifyContent: "center",
     paddingHorizontal: 40,
+  },
+  iconContainer: {
+    width: 90,
+    alignItems: "center",
+    marginHorizontal: -10,
   },
   text: {
     fontSize: 10,
+    marginTop: 10,
     color: "#FFF",
   },
   textContainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 10,
-    paddingHorizontal: 32,
-  },
-  textConclude: {
-    position: "absolute",
-    top: 40,
-    left: 282,
+    justifyContent: "center",
   },
   textHighlight: {
     fontWeight: "500",
-  },
-  textIdentification: {
-    position: "absolute",
-    top: 40,
-    left: 26,
-  },
-  textLocality: {
-    position: "absolute",
-    top: 40,
-    left: 198,
-  },
-  textProfileData: {
-    position: "absolute",
-    top: 40,
-    left: 104,
   },
 });
 
@@ -82,19 +72,27 @@ const SignUpBreadCrumb = props => {
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <View style={styles.iconContainer}>
-        <MaterialIcons name="face" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 1 && styles.highlight]} />
-        <IonIcons name="ios-arrow-round-forward" size={iconSize} color={defaultColor} />
-        <MaterialIcons name="person" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 2 && styles.highlight]} />
-        <IonIcons name="ios-arrow-round-forward" size={iconSize} color={defaultColor} />
-        <MaterialCommunityIcons name="pin" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 3 && styles.highlight]} />
-        <IonIcons name="ios-arrow-round-forward" size={iconSize} color={defaultColor} />
-        <MaterialCommunityIcons name="check-outline" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 4 && styles.highlight]} />
+      <View style={styles.iconsContainer}>
+        <View style={[styles.iconContainer, {marginHorizontal: -10}]}>
+          <MaterialIcons name="face" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 1 && styles.highlight]} />
+          <Text style={[styles.text, highlightId === 1 && styles.textHighlight]}>{locale.identification}</Text>
+        </View>
+        <IonIcons name="ios-arrow-round-forward" size={iconSize} style={styles.arrowIcon} color={defaultColor} />
+        <View style={[styles.iconContainer, {marginHorizontal: -10}]}>
+          <MaterialIcons name="person" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 2 && styles.highlight]} />
+          <Text style={[styles.text, highlightId === 2 && styles.textHighlight]}>{locale.profileData}</Text>
+        </View>
+        <IonIcons name="ios-arrow-round-forward" size={iconSize} style={styles.arrowIcon} color={defaultColor} />
+        <View style={[styles.iconContainer, {marginHorizontal: -10}]}>
+          <MaterialCommunityIcons name="pin" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 3 && styles.highlight]} />
+          <Text style={[styles.text, highlightId === 3 && styles.textHighlight]}>{locale.locality}</Text>
+        </View>
+        <IonIcons name="ios-arrow-round-forward" size={iconSize} style={styles.arrowIcon} color={defaultColor} />
+        <View style={[styles.iconContainer, {marginHorizontal: -10}]}>
+          <MaterialCommunityIcons name="check-outline" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 4 && styles.highlight]} />
+          <Text style={[styles.text, highlightId === 4 && styles.textHighlight]}>{locale.conclude}</Text>
+        </View>
       </View>
-      <Text style={[styles.text, styles.textIdentification, highlightId === 1 && styles.textHighlight]}>{locale.identification}</Text>
-      <Text style={[styles.text, styles.textProfileData, highlightId === 2 && styles.textHighlight]}>{locale.profileData}</Text>
-      <Text style={[styles.text, styles.textLocality, highlightId === 3 && styles.textHighlight]}>{locale.locality}</Text>
-      <Text style={[styles.text, styles.textConclude, highlightId === 4 && styles.textHighlight]}>{locale.conclude}</Text>
     </View>
   );
 }

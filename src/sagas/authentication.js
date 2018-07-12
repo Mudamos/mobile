@@ -5,8 +5,8 @@ import {
   logginSucceeded,
   finishedLogIn,
   logInError,
+  navigate,
   updatedUserProfile,
-  profileStateMachine,
   clearSession,
   logEvent,
 } from "../actions";
@@ -32,7 +32,7 @@ function* login({ mobileApi, sessionStore }) {
       const user = User.fromJson(response.user);
 
       yield put(updatedUserProfile({ user }));
-      yield put(profileStateMachine({ type: "reset" }));
+      yield put(navigate("plipsNav"));
       yield put(logEvent({ name: "app_login" }));
     } catch(e) {
       if (isDev) console.log("API Error: ", e.message, e.stack);
