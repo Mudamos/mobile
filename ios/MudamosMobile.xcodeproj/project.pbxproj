@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -370,7 +371,13 @@
 		6B85438473FAA84B3277BDAA /* Pods_MessageSignerActionBeta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F1E8C94AB3D4618ACD7013 /* Pods_MessageSignerActionBeta.framework */; };
 		6DEB6F7A5414DE00DCABF21D /* Pods_MudamosMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		8BCF7B1BB4A947919E183C91 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BFF38D4975C4835BF23E26A /* MaterialCommunityIcons.ttf */; };
+		8CD6080220F7BF94009173F8 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5572CE9DA3D411E8DF2CBBB /* Feather.ttf */; };
+		8CD6080320F7BF95009173F8 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5572CE9DA3D411E8DF2CBBB /* Feather.ttf */; };
+		8CD6080420F7BF98009173F8 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BFF38D4975C4835BF23E26A /* MaterialCommunityIcons.ttf */; };
+		8CD6080520F7BF99009173F8 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BFF38D4975C4835BF23E26A /* MaterialCommunityIcons.ttf */; };
 		8FFD6EB8614D6594CD5E902C /* Pods_MudamosProduction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4DE2CC59E274427F8D159E /* Pods_MudamosProduction.framework */; };
+		95AF5285FE754434A7DB3211 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5572CE9DA3D411E8DF2CBBB /* Feather.ttf */; };
 		A987A82739134C549891CBB6 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 413B12353FD34D1C9F7FE084 /* Zocial.ttf */; };
 		AE65A15000BA4D24BE9384D3 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EBAE3E29553499CBB9730E7 /* MaterialIcons.ttf */; };
 		B9DC8F78B14942C9AA8886FC /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52CFEA4AA81E45E9A3978748 /* SimpleLineIcons.ttf */; };
@@ -378,8 +385,6 @@
 		D3E5BB9F9F7942BAAFD16EF4 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F2DC68A75BF46FBBA40FCDC /* Octicons.ttf */; };
 		EA07316F0AD6058CEC5283F3 /* Pods_MessageSignerActionProduction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB5E7FCF51E832F7A4FB548 /* Pods_MessageSignerActionProduction.framework */; };
 		F424078D44A14BFBBE1D412B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B5E533F39E44066933C7E40 /* FontAwesome.ttf */; };
-		95AF5285FE754434A7DB3211 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5572CE9DA3D411E8DF2CBBB /* Feather.ttf */; };
-		8BCF7B1BB4A947919E183C91 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BFF38D4975C4835BF23E26A /* MaterialCommunityIcons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -960,6 +965,7 @@
 		621C3D10CAD54FC5982F12BB /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		66F1E8C94AB3D4618ACD7013 /* Pods_MessageSignerActionBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerActionBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		6BFF38D4975C4835BF23E26A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		6D0B56C85FAE918C101C4C94 /* Pods_MessageSignerAction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerAction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -997,14 +1003,13 @@
 		D8424FEEF17243CFB758995F /* libRNRandomBytes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRandomBytes.a; sourceTree = "<group>"; };
 		DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E26FDBD24B0A4D90A5A1EB13 /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTMaterialKit.a; sourceTree = "<group>"; };
+		E5572CE9DA3D411E8DF2CBBB /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		EEADA9860C7C730162F487DC /* Pods-MessageSignerAction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerAction.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerAction/Pods-MessageSignerAction.release.xcconfig"; sourceTree = "<group>"; };
 		FC45B1BB94D278A89EF7F9D9 /* Pods-MudamosMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		FC816BA612714338983ED538 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		FCB1D375C90853BD089B8C16 /* Pods-MessageSignerActionBeta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerActionBeta.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerActionBeta/Pods-MessageSignerActionBeta.debug.xcconfig"; sourceTree = "<group>"; };
 		FD315B732F68A52F03537566 /* Pods-MudamosMobileTagviewBeta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTagviewBeta.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTagviewBeta/Pods-MudamosMobileTagviewBeta.debug.xcconfig"; sourceTree = "<group>"; };
 		FE91C85ACE5E44DC89DDD281 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
-		E5572CE9DA3D411E8DF2CBBB /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6BFF38D4975C4835BF23E26A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2571,6 +2576,7 @@
 			files = (
 				46439D5C1E709B03008577C0 /* Images.xcassets in Resources */,
 				46439D5D1E709B03008577C0 /* pt_sans_italic.ttf in Resources */,
+				8CD6080320F7BF95009173F8 /* Feather.ttf in Resources */,
 				46439D5E1E709B03008577C0 /* roboto_thin_italic.ttf in Resources */,
 				46439D5F1E709B03008577C0 /* lato_italic.ttf in Resources */,
 				46439D601E709B03008577C0 /* lato_hairline.ttf in Resources */,
@@ -2590,6 +2596,7 @@
 				46439D6C1E709B03008577C0 /* FontAwesome.ttf in Resources */,
 				46439D6D1E709B03008577C0 /* Foundation.ttf in Resources */,
 				46439D6E1E709B03008577C0 /* roboto_italic.ttf in Resources */,
+				8CD6080520F7BF99009173F8 /* MaterialCommunityIcons.ttf in Resources */,
 				46439D6F1E709B03008577C0 /* roboto_thin.ttf in Resources */,
 				46439D701E709B03008577C0 /* pt_sans_bold_italic.ttf in Resources */,
 				46439D711E709B03008577C0 /* Ionicons.ttf in Resources */,
@@ -2698,6 +2705,7 @@
 				46CBB3701E268E52000B4F5A /* lato_light_italic.ttf in Resources */,
 				46F35B651E269C810002728D /* roboto_light_italic.ttf in Resources */,
 				46CBB3681E268E52000B4F5A /* lato_bold.ttf in Resources */,
+				8CD6080220F7BF94009173F8 /* Feather.ttf in Resources */,
 				46ED2A831DF194E400B36CD0 /* LaunchScreen.xib in Resources */,
 				46918CE21E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */,
 				46F35B6D1E269C810002728D /* roboto_thin_italic.ttf in Resources */,
@@ -2711,6 +2719,7 @@
 				46F35B671E269C810002728D /* roboto_light.ttf in Resources */,
 				46ED2A851DF194E400B36CD0 /* FacebookSDKStrings.bundle in Resources */,
 				46F35B611E269C800002728D /* roboto_bold.ttf in Resources */,
+				8CD6080420F7BF98009173F8 /* MaterialCommunityIcons.ttf in Resources */,
 				46CBB36A1E268E52000B4F5A /* lato_hairline_italic.ttf in Resources */,
 				46CBB3641E268E52000B4F5A /* lato_black.ttf in Resources */,
 				46ED2A861DF194E400B36CD0 /* EvilIcons.ttf in Resources */,
@@ -2925,19 +2934,31 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MudamosProduction/Pods-MudamosProduction-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3031,19 +3052,31 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MudamosMobileTagviewBeta/Pods-MudamosMobileTagviewBeta-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3123,19 +3156,31 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4041,7 +4086,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tagview.mudamosmobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "78215a0f-79f5-4082-8fe4-23f8d79b3ff0";
+				PROVISIONING_PROFILE = "7ba826ce-4b2f-49e9-8360-c3d54e104aba";
 				PROVISIONING_PROFILE_SPECIFIER = "Mudamos mobile dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "MudamosMobileTagviewBeta-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
