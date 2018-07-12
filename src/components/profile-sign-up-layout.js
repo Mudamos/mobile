@@ -159,7 +159,7 @@ class ProfileSignUpLayout extends Component {
                 placeholder={locale.voteCard}
                 hasError={!!errorForField("voteidcard", errors)}
                 error={errorForField("voteidcard", errors)}
-                hint="Ex: 9999.9999.9999"
+                hint="Ex: 0000.0000.0000"
                 onSubmitEditing={() => this.cardInput.blur()}
                 ref={ref => this.cardInput = ref}
               />

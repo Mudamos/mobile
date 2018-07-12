@@ -73,22 +73,22 @@ const SignUpBreadCrumb = props => {
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={styles.iconsContainer}>
-        <View style={[styles.iconContainer, {marginHorizontal: -10}]}>
+        <View style={styles.iconContainer}>
           <MaterialIcons name="face" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 1 && styles.highlight]} />
           <Text style={[styles.text, highlightId === 1 && styles.textHighlight]}>{locale.identification}</Text>
         </View>
         <IonIcons name="ios-arrow-round-forward" size={iconSize} style={styles.arrowIcon} color={defaultColor} />
-        <View style={[styles.iconContainer, {marginHorizontal: -10}]}>
+        <View style={styles.iconContainer}>
           <MaterialIcons name="person" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 2 && styles.highlight]} />
           <Text style={[styles.text, highlightId === 2 && styles.textHighlight]}>{locale.profileData}</Text>
         </View>
         <IonIcons name="ios-arrow-round-forward" size={iconSize} style={styles.arrowIcon} color={defaultColor} />
-        <View style={[styles.iconContainer, {marginHorizontal: -10}]}>
+        <View style={styles.iconContainer}>
           <MaterialCommunityIcons name="pin" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 3 && styles.highlight]} />
           <Text style={[styles.text, highlightId === 3 && styles.textHighlight]}>{locale.locality}</Text>
         </View>
         <IonIcons name="ios-arrow-round-forward" size={iconSize} style={styles.arrowIcon} color={defaultColor} />
-        <View style={[styles.iconContainer, {marginHorizontal: -10}]}>
+        <View style={styles.iconContainer}>
           <MaterialCommunityIcons name="check-outline" size={iconSize} color={defaultColor} style={[styles.icon, highlightId === 4 && styles.highlight]} />
           <Text style={[styles.text, highlightId === 4 && styles.textHighlight]}>{locale.conclude}</Text>
         </View>
