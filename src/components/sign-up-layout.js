@@ -24,7 +24,7 @@ import NavigationBar from "./navigation-bar";
 import RoundedButton from "./rounded-button";
 import SignUpBreadCrumb from "./sign-up-breadcrumb";
 import StaticFooter from "./static-footer";
-import Checkbox from "./v2-custom-flat-checkbox";
+import Checkbox from "./multicolor-flat-checkbox";
 
 import locale from "../locales/pt-BR";
 import { errorForField } from "../utils";

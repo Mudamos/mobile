@@ -198,8 +198,10 @@ class ProfileAddressLayout extends Component {
     const { latitude, longitude } = location;
 
     return (
-      <View style={styles.mapContainer} pointerEvents="none">
+      <View style={styles.mapContainer}>
         <MapView style={styles.map}
+          scrollEnabled={false}
+          zoomEnabled={false}
           region={{
             latitude,
             longitude,
