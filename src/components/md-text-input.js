@@ -97,21 +97,10 @@ export default class MDTextInput extends Component {
   }
 
   changePasswordType = () => {
-    let newState;
-    if (this.state.togglePassword) {
-        newState = {
-            icEye: "visibility",
-            togglePassword: false,
-        }
-    } else {
-        newState = {
-            icEye: "visibility-off",
-            togglePassword: true,
-        }
-    }
-
-    this.setState(newState)
-
+    this.setState(({ togglePassword }) => ({
+      togglePassword: !togglePassword,
+      icEye: togglePassword ? "visibility" : "visibility-off",
+    }))
   };
 
   render() {

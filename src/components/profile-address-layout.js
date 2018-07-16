@@ -36,6 +36,27 @@ import locale from "../locales/pt-BR";
 const LATITUDE_DELTA = 0.010;
 const LONGITUDE_DELTA = 0.010;
 
+const enhance = compose(
+  withStateHandlers(
+    { zipCode: "" },
+    {
+      onSetZipCode: () => value => ({
+        zipCode: value,
+      }),
+    }
+  ),
+  withHandlers({
+    onSearch: ({ zipCode, onSearch }) => () => {
+      Keyboard.dismiss();
+      onSearch(zipCode);
+    },
+    onSave: ({ location, onSave }) => () => {
+      Keyboard.dismiss();
+      onSave(location);
+    },
+  })
+);
+
 class ProfileAddressLayout extends Component {
   static propTypes = {
     isFetchingLocation: PropTypes.bool,
@@ -219,26 +240,5 @@ class ProfileAddressLayout extends Component {
     );
   }
 }
-
-const enhance = compose(
-  withStateHandlers(
-    { zipCode: "" },
-    {
-      onSetZipCode: () => value => ({
-        zipCode: value,
-      }),
-    }
-  ),
-  withHandlers({
-    onSearch: ({ zipCode, onSearch }) => () => {
-      Keyboard.dismiss();
-      onSearch(zipCode);
-    },
-    onSave: ({ location, onSave }) => () => {
-      Keyboard.dismiss();
-      onSave(location);
-    },
-  })
-);
 
 export default enhance(ProfileAddressLayout);

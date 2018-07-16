@@ -1,8 +1,6 @@
 # Next
 
 * [PR #421] New layout at sign in and sign up
-  - Run `yarn install`
-  - Run `react-native link`
 * [PR #419] Add new layout at plip details
 * [PR #418] Add new layout at plips view with tabs
 * [PR #417] Update to RN 0.55.4

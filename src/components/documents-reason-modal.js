@@ -135,7 +135,7 @@ class DocumentsReasonModal extends Component {
           </View>
           <View style={styles.buttonPanel}>
             <TouchableOpacity onPress={onToggleReasonEnabled} >
-              <EvilIcons name="close-o" size={44} color={"#A9A9A9"} />
+              <EvilIcons name="close-o" size={44} color="#A9A9A9" />
             </TouchableOpacity>
           </View>
         </Animated.View>

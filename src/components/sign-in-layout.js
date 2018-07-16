@@ -22,6 +22,7 @@ import locale from "../locales/pt-BR";
 
 import styles from "../styles/sign-in-layout";
 
+import Logo from "../images/Logo-alt.png"
 
 class SignInLayout extends Component {
   state = {};
@@ -85,7 +86,7 @@ class SignInLayout extends Component {
     return (
       <View>
         <Image
-          source={require("../images/Logo-alt.png")}
+          source={Logo}
           style={styles.logo}
         />
 
@@ -127,7 +128,7 @@ class SignInLayout extends Component {
   renderContinueButton() {
     return (
       <View style={styles.continueButtonContainer}>
-        <RoundedButton title={locale.continue} action={this.onSubmit.bind(this)} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+        <RoundedButton title={locale.continue} action={this.onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
       </View>
     );
   }
@@ -159,9 +160,11 @@ class SignInLayout extends Component {
   }
 
   renderFBLogin() {
+    const { onFacebookLogin } = this.props;
+
     return (
       <FBLoginButton
-        onPress={this.onFacebookLogin}
+        onPress={onFacebookLogin}
         style={{marginHorizontal: 20}}
       />
     );
@@ -190,15 +193,13 @@ class SignInLayout extends Component {
 
   onBack = () => this.props.onBack();
 
-  onFacebookLogin = () => this.props.onFacebookLogin();
-
   onForgotPassword = () => this.props.onForgotPassword();
 
   onOpenURL = (url) => this.props.onOpenURL(url);
 
   onSignUp = () => this.props.onSignUp();
 
-  onSubmit() {
+  onSubmit = () => {
     const { email, password } = this.state;
     const { onSignIn } = this.props;
 
