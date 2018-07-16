@@ -78,7 +78,7 @@ function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
       yield put(logginSucceeded(newAuth));
 
       yield put(savingProfile(false));
-      yield put(navigate("profileSignUp"));
+      yield put(profileStateMachine());
       yield put(logEvent({ name: "app_signup" }));
     } catch(e) {
       logError(e, { tag: "saveMainProfile" });
@@ -131,7 +131,7 @@ function* saveZipCodeProfile({ mobileApi }) {
 
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
-      yield put(navigate("profileConclude"))
+      yield put(profileStateMachine())
       yield put(logEvent({ name: "completed_zip_code" }));
     } catch (e) {
       logError(e, { tag: "saveZipCodeProfile" });

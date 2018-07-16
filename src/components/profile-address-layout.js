@@ -71,6 +71,7 @@ class ProfileAddressLayout extends Component {
     onSave: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
     onSetZipCode: PropTypes.func.isRequired,
+    onSigningUp: PropTypes.func.isRequired,
   }
 
   get validSearch() {
@@ -116,7 +117,9 @@ class ProfileAddressLayout extends Component {
   }
 
   componentDidMount() {
-    const { onRequestLocation } = this.props;
+    const { onRequestLocation, onSigningUp } = this.props;
+
+    onSigningUp();
     onRequestLocation({ message: locale.permissions.locationForZipCode });
   }
 

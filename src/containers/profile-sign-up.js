@@ -13,6 +13,7 @@ import {
   navigate,
   openURL,
   profileUpdate,
+  signingUp,
 } from "../actions";
 
 import {
@@ -48,6 +49,7 @@ const mapDispatchToProps = dispatch => ({
     }))
   },
   onOpenURL: url => dispatch(openURL(url)),
+  onSigningUp: () => dispatch(signingUp(true)),
   onTSERequested: () => dispatch(navigate("tse")),
 });
 

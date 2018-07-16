@@ -74,4 +74,8 @@ export const isProfileComplete =
     isPhoneProfileComplete,
   ]);
 
+export const isSigningUpComplete = state => {
+  return isProfileComplete && !state.profile.isSigningUp;
+}
+
 export const isValidatingProfile = state => state.profile.validatingProfile;

@@ -48,8 +48,15 @@ class SignUpLayout extends Component {
     onSetEmail: PropTypes.func.isRequired,
     onSetPassword: PropTypes.func.isRequired,
     onSetTermsAccepted: PropTypes.func.isRequired,
+    onSigningUp: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onTermsRequested: PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    const { onSigningUp } = this.props;
+
+    onSigningUp();
   }
 
   get validForm() {

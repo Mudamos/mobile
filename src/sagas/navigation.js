@@ -13,6 +13,7 @@ import {
   isMainProfileComplete,
   isWalletProfileComplete,
   isDetailProfileComplete,
+  isSigningUpComplete,
 } from "../selectors";
 
 import { navigate } from "../actions";
@@ -74,6 +75,7 @@ export function* profileScreenForCurrentUser() {
     "profileSignUp",
     "profileAddress",
     "profileWallet",
+    "profileConclude",
   ];
 
   const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
@@ -82,6 +84,7 @@ export function* profileScreenForCurrentUser() {
     yield select(isDetailProfileComplete),
     yield select(isAddressProfileComplete),
     yield select(isWalletProfileComplete),
+    yield select(isSigningUpComplete),
   ];
 
   const goToScreen = firstScreenNotDone(screensDone);

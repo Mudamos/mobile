@@ -13,6 +13,7 @@ import {
 import {
   navigate,
   openURL,
+  signingUp,
   setCurrentPlip,
   sharePlip,
 } from "../actions";
@@ -27,6 +28,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onBack: () =>  dispatch(navigate("plipsNav")),
+  onConcludeSignUp: () => dispatch(signingUp(false)),
   onOpenURL: url => dispatch(openURL(url)),
   onGoToPlip: plip => {
     dispatch(navigate("showPlip"));

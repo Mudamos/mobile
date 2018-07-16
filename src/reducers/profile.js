@@ -13,6 +13,8 @@ export default (state = initialState, action) => {
       return { ...state, profileFetchError: payload.profileFetchError };
     case "PROFILE_SAVING":
       return { ...state, isSaving: payload.isSaving, errors: null, hasError: false };
+    case "SIGNING_UP":
+      return { ...state, isSigningUp: payload.isSigningUp };
     case "PROFILE_SENDING_PHONE_VALIDATION":
       return {
         ...state,

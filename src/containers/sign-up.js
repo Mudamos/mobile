@@ -15,6 +15,7 @@ import {
   openURL,
   profileSaveMain,
   signingPlip,
+  signingUp,
 } from "../actions";
 
 import {
@@ -47,6 +48,7 @@ const mapDispatchToProps = dispatch => ({
   },
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
   onOpenURL: url => dispatch(openURL(url)),
+  onSigningUp: () => dispatch(signingUp(true)),
   onTermsRequested: () => dispatch(openURL(TERMS_OF_USE_URL)),
 });
 

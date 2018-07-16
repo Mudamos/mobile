@@ -29,9 +29,16 @@ export default class ProfileConcludeLayout extends Component {
     plipsSignInfo: PropTypes.object,
     userSignInfo: PropTypes.object,
     onBack: PropTypes.func.isRequired,
+    onConcludeSignUp: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func,
     onOpenURL: PropTypes.func.isRequired,
     onShare: PropTypes.func,
+  }
+
+  componentDidMount() {
+    const { onConcludeSignUp } = this.props;
+
+    onConcludeSignUp();
   }
 
   render() {

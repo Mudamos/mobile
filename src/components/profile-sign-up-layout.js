@@ -53,6 +53,7 @@ class ProfileSignUpLayout extends Component {
     onSetBirthdate: PropTypes.func.isRequired,
     onSetName: PropTypes.func.isRequired,
     onSetVoteCard: PropTypes.func.isRequired,
+    onSigningUp: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onTSERequested: PropTypes.func.isRequired,
   }
@@ -60,6 +61,12 @@ class ProfileSignUpLayout extends Component {
   state = {
     reasonEnabled: false,
   };
+
+  componentDidMount() {
+    const { onSigningUp } = this.props;
+
+    onSigningUp();
+  }
 
   get validForm() {
     const {

@@ -32,6 +32,11 @@ export const savingProfile = isSaving => ({
   payload: { isSaving },
 });
 
+export const signingUp = isSigningUp => ({
+  type: "SIGNING_UP",
+  payload: { isSigningUp },
+});
+
 export const sendingPhoneValidation = isSendingValidation => ({
   type: "PROFILE_SENDING_PHONE_VALIDATION",
   payload: { isSendingValidation },
