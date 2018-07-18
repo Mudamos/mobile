@@ -39,6 +39,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onBack: () => {
     dispatch(clearProfileSaveErrors());
+    dispatch(signingUp(false));
     dispatch(navigate("plipsNav"));
   },
   onSave: ({ birthdate, name, voteCard }) => {

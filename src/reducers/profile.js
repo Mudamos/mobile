@@ -59,6 +59,7 @@ export default (state = initialState, action) => {
         errors: null,
         hasError: false,
         isSendingPhoneValidation: false,
+        isSigningUp: false,
         phoneJustValidated: false,
         profileFetchError: false,
         sendValidationErrors: null,

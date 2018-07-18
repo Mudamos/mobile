@@ -318,9 +318,7 @@ function* updateProfile({ mobileApi }) {
 
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
-      if (voteIdCard) {
-        yield put(navigate("profileAddress"));
-      }
+      yield put(profileStateMachine());
       yield call([Toast, Toast.show], locale.profileUpdated);
     } catch (e) {
       logError(e, { tag: "updateProfile" });

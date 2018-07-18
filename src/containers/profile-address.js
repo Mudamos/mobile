@@ -58,7 +58,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onBack: () =>  dispatch(navigate("plipsNav")),
+  onBack: () =>  {
+    dispatch(signingUp(false));
+    dispatch(navigate("plipsNav"));
+  },
   onDontKnowZipCode: () => dispatch(openURL(CORREIOS_URL)),
   onOpenURL: url => dispatch(openURL(url)),
   onRequestLocation: ({ message }) => dispatch(requestUserLocation({ message })),

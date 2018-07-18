@@ -11,7 +11,7 @@ import {
 import {
   clearProfileSaveErrors,
   facebookUserLogIn,
-  navigateBack,
+  navigate,
   openURL,
   profileSaveMain,
   signingPlip,
@@ -35,8 +35,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onBack: () => {
     dispatch(clearProfileSaveErrors());
+    dispatch(signingUp(false));
     dispatch(signingPlip(null)); // Clear the user plip sign intention if they gave up
-    dispatch(navigateBack());
+    dispatch(navigate("plipsNav"));
   },
   onCreate: ({ cpf, email, password, termsAccepted }) => {
     dispatch(profileSaveMain({
