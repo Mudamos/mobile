@@ -55,7 +55,7 @@ function* login({ mobileApi, sessionStore, Crypto }) {
       const user = User.fromJson(response.user);
 
       yield put(updatedUserProfile({ user }));
-      yield put(profileStateMachine({ type: "reset" }));
+      yield put(profileStateMachine());
 
       yield put(logEvent({ name: "facebook_login" }));
     } catch(e) {

@@ -20,7 +20,7 @@ import {
   extractNumbers,
   fromISODate,
   toISODate,
-  zipCodeMask,
+  voteCardMask,
 } from "../utils";
 
 
@@ -32,7 +32,7 @@ const mapStateToProps = state => {
     isSaving: isSavingProfile(state),
     previousName: user ? user.name : null,
     previousBirthdate: user && user.birthdate ? fromISODate(user.birthdate) : null,
-    previousZipCode: user && user.zipCode ? zipCodeMask(user.zipCode) : null,
+    previousVoteCard: user && user.voteCard ? voteCardMask(user.voteCard) : null,
   };
 };
 

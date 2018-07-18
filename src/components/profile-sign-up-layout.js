@@ -36,6 +36,26 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 import styles from "../styles/profile-sign-up-layout";
 
+const enhance = compose(
+  withStateHandlers(
+    { birthdate: "", name: "", voteCard: "" },
+    {
+      onSetBirthdate: () => value => ({
+        birthdate: value,
+      }),
+      onSetName: () => value => ({
+        name: value,
+      }),
+      onSetVoteCard: () => value => ({
+        voteCard: value,
+      }),
+    }
+  ),
+  withHandlers({
+    onSubmit: ({ birthdate, name, voteCard, onSave }) => () => onSave({ birthdate, name, voteCard }),
+  })
+);
+
 class ProfileSignUpLayout extends Component {
   static propTypes = {
     birthdate: PropTypes.string,
@@ -44,9 +64,8 @@ class ProfileSignUpLayout extends Component {
     name: PropTypes.string,
     previousBirthdate: PropTypes.string,
     previousName: PropTypes.string,
-    previousZipCode: PropTypes.string,
+    previousVoteCard: PropTypes.string,
     voteCard: PropTypes.string,
-    zipCode: PropTypes.string,
     onBack: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
@@ -63,7 +82,19 @@ class ProfileSignUpLayout extends Component {
   };
 
   componentDidMount() {
-    const { onSigningUp } = this.props;
+    const { previousName, previousBirthdate, previousVoteCard, onSetName, onSetBirthdate, onSetVoteCard, onSigningUp } = this.props;
+
+    if (previousBirthdate) {
+      onSetBirthdate(previousBirthdate);
+    }
+
+    if (previousName) {
+      onSetName(previousName);
+    }
+
+    if (previousVoteCard) {
+      onSetVoteCard(previousVoteCard);
+    }
 
     onSigningUp();
   }
@@ -200,25 +231,5 @@ class ProfileSignUpLayout extends Component {
     );
   }
 }
-
-const enhance = compose(
-  withStateHandlers(
-    { birthdate: "", name: "", voteCard: "" },
-    {
-      onSetBirthdate: () => value => ({
-        birthdate: value,
-      }),
-      onSetName: () => value => ({
-        name: value,
-      }),
-      onSetVoteCard: () => value => ({
-        voteCard: value,
-      }),
-    }
-  ),
-  withHandlers({
-    onSubmit: ({ birthdate, name, voteCard, onSave }) => () => onSave({ birthdate, name, voteCard }),
-  })
-);
 
 export default enhance(ProfileSignUpLayout);
