@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import SignUpLayout from "../components/sign-up-layout";
 
 import {
+  cpfMask,
   extractNumbers,
 } from "../utils";
 
@@ -19,6 +20,7 @@ import {
 } from "../actions";
 
 import {
+  currentUser,
   isLoggingIn,
   isSavingProfile,
   profileSaveErrors,
@@ -26,11 +28,19 @@ import {
 
 const TERMS_OF_USE_URL = Config.MUDAMOS_WEB_API_URL + "/institucional/termos-de-uso";
 
-const mapStateToProps = state => ({
-  createErrors: profileSaveErrors(state),
-  isCreating: isSavingProfile(state),
-  isLoggingIn: isLoggingIn(state),
-});
+const mapStateToProps = state => {
+  const user = currentUser(state);
+
+  return {
+    createErrors: profileSaveErrors(state),
+    isCreating: isSavingProfile(state),
+    isFacebookUser: user ? user.profileType === "facebook" : null,
+    isLoggingIn: isLoggingIn(state),
+    userCpf: user ? cpfMask(user.cpf) : null,
+    userEmail: user ? user.email : null,
+    userTermsAccepted: user ? user.termsAccepted : null,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   onBack: () => {
@@ -44,6 +54,13 @@ const mapDispatchToProps = dispatch => ({
       cpf: extractNumbers(cpf),
       email,
       password,
+      termsAccepted,
+    }))
+  },
+  onUpdate: ({ cpf, email, termsAccepted }) => {
+    dispatch(profileSaveMain({
+      cpf: extractNumbers(cpf),
+      email,
       termsAccepted,
     }))
   },

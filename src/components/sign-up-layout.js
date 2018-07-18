@@ -31,15 +31,49 @@ import { errorForField } from "../utils";
 
 import styles from "../styles/sign-up-layout";
 
+const enhance = compose(
+  withStateHandlers(
+    { cpf: "", email: "", password: "", termsAccepted: false },
+    {
+      onSetCpf: () => value => ({
+        cpf: value,
+      }),
+      onSetEmail: () => value => ({
+        email: value,
+      }),
+      onSetPassword: () => value => ({
+        password: value,
+      }),
+      onSetTermsAccepted: () => value => ({
+        termsAccepted: value.checked,
+      }),
+    }
+  ),
+  withHandlers({
+    onSubmit: ({ userEmail, email, cpf, password, termsAccepted, isFacebookUser, onCreate, onUpdate }) => () => {
+      if (isFacebookUser) {
+        const currentEmail = email || userEmail;
+        return onUpdate({ cpf, email: currentEmail, termsAccepted })
+      } else {
+        return onCreate({ cpf, email, password, termsAccepted });
+      }
+    },
+  })
+);
+
 class SignUpLayout extends Component {
   static propTypes = {
     cpf: PropTypes.string,
     createErrors: PropTypes.array,
     email: PropTypes.string,
     isCreating: PropTypes.bool,
+    isFacebookUser: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
     password: PropTypes.string,
     termsAccepted: PropTypes.bool,
+    userCpf: PropTypes.string,
+    userEmail: PropTypes.string,
+    userTermsAccepted: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
     onCreate: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
@@ -51,25 +85,45 @@ class SignUpLayout extends Component {
     onSigningUp: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onTermsRequested: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    const { onSigningUp } = this.props;
+    const { userCpf, userEmail, userTermsAccepted, onSetCpf, onSetEmail, onSetTermsAccepted, onSigningUp } = this.props;
+
+    if (userCpf) {
+      onSetCpf(userCpf);
+    }
+
+    if (userEmail) {
+      onSetEmail(userEmail);
+    }
+
+    if (userTermsAccepted) {
+      onSetTermsAccepted({checked: userTermsAccepted});
+    }
 
     onSigningUp();
   }
 
   get validForm() {
-    const { email, cpf, password, termsAccepted } = this.props;
+    const { email, cpf, isFacebookUser, password, termsAccepted } = this.props;
 
     const validCpf = String(cpf).length === 14;
 
-    return [
-      validCpf,
-      email,
-      password,
-      termsAccepted,
-    ].every(v => v);
+    if (isFacebookUser) {
+      return [
+        validCpf,
+        termsAccepted,
+      ].every(v => v);
+    } else {
+      return [
+        validCpf,
+        email,
+        password,
+        termsAccepted,
+      ].every(v => v);
+    }
   }
 
   get createEnabled() {
@@ -86,8 +140,10 @@ class SignUpLayout extends Component {
     const {
       email,
       cpf,
+      isFacebookUser,
       password,
       termsAccepted,
+      userEmail,
       onOpenURL,
       onSetEmail,
       onSetCpf,
@@ -119,28 +175,32 @@ class SignUpLayout extends Component {
                 ref={ref => this.cpfInput = ref}
               />
 
-              <MDTextInput
-                placeholder={locale.emailForAccess}
-                value={email}
-                onChangeText={onSetEmail}
-                hasError={!!errorForField("email", createErrors)}
-                error={errorForField("email", createErrors)}
-                keyboardType="email-address"
-                onSubmitEditing={() => this.emailInput.blur()}
-                ref={ref => this.emailInput = ref}
-                autoCapitalize="none"
-              />
+              { !userEmail &&
+                <MDTextInput
+                  placeholder={locale.emailForAccess}
+                  value={email}
+                  onChangeText={onSetEmail}
+                  hasError={!!errorForField("email", createErrors)}
+                  error={errorForField("email", createErrors)}
+                  keyboardType="email-address"
+                  onSubmitEditing={() => this.emailInput.blur()}
+                  ref={ref => this.emailInput = ref}
+                  autoCapitalize="none"
+                />
+              }
 
-              <MDTextInput
-                placeholder={locale.choosePassword}
-                value={password}
-                onChangeText={onSetPassword}
-                password={true}
-                hasError={!!errorForField("password", createErrors)}
-                error={errorForField("password", createErrors)}
-                onSubmitEditing={() => this.passwordInput.blur()}
-                ref={ref => this.passwordInput = ref}
-              />
+              { !isFacebookUser &&
+                <MDTextInput
+                  placeholder={locale.choosePassword}
+                  value={password}
+                  onChangeText={onSetPassword}
+                  password={true}
+                  hasError={!!errorForField("password", createErrors)}
+                  error={errorForField("password", createErrors)}
+                  onSubmitEditing={() => this.passwordInput.blur()}
+                  ref={ref => this.passwordInput = ref}
+                />
+              }
 
               <View style={styles.termsAcceptedContainer}>
                 <Checkbox
@@ -180,28 +240,5 @@ class SignUpLayout extends Component {
     );
   }
 }
-
-const enhance = compose(
-  withStateHandlers(
-    { cpf: "", email: "", password: "", termsAccepted: false },
-    {
-      onSetCpf: () => value => ({
-        cpf: value,
-      }),
-      onSetEmail: () => value => ({
-        email: value,
-      }),
-      onSetPassword: () => value => ({
-        password: value,
-      }),
-      onSetTermsAccepted: () => value => ({
-        termsAccepted: value.checked,
-      }),
-    }
-  ),
-  withHandlers({
-    onSubmit: ({ email, cpf, password, termsAccepted, onCreate }) => () => onCreate({ cpf, email, password, termsAccepted }),
-  })
-);
 
 export default enhance(SignUpLayout);

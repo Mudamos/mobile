@@ -10,6 +10,7 @@ import { logout } from "./session";
 
 import {
   isAddressProfileComplete,
+  isFacebookMainProfileComplete,
   isMainProfileComplete,
   isWalletProfileComplete,
   isDetailProfileComplete,
@@ -71,6 +72,7 @@ function* userProfileNavigator() {
 
 export function* profileScreenForCurrentUser() {
   const screenKeys = [
+    "signUp",
     "signIn",
     "profileSignUp",
     "profileAddress",
@@ -80,6 +82,7 @@ export function* profileScreenForCurrentUser() {
 
   const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
   const screensDone = [
+    yield select(isFacebookMainProfileComplete),
     yield select(isMainProfileComplete),
     yield select(isDetailProfileComplete),
     yield select(isAddressProfileComplete),
