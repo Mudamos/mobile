@@ -58,6 +58,13 @@ const enhance = compose(
         return onCreate({ cpf, email, password, termsAccepted });
       }
     },
+    onBackOrHome: ({ userEmail, onHome, onBack }) => () => {
+      if (userEmail) {
+        onHome();
+      } else {
+        onBack();
+      }
+    },
   })
 );
 
@@ -74,7 +81,7 @@ class SignUpLayout extends Component {
     userCpf: PropTypes.string,
     userEmail: PropTypes.string,
     userTermsAccepted: PropTypes.bool,
-    onBack: PropTypes.func.isRequired,
+    onBackOrHome: PropTypes.func.isRequired,
     onCreate: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
@@ -231,10 +238,11 @@ class SignUpLayout extends Component {
   }
 
   renderNavBar() {
-    const { onBack } = this.props;
+    const { onBackOrHome } = this.props;
+
     return (
       <NavigationBar
-        leftView={<BackButton onPress={onBack} />}
+        leftView={<BackButton onPress={onBackOrHome} />}
         middleView={<HeaderLogo />}
       />
     );

@@ -13,6 +13,7 @@ import {
   clearProfileSaveErrors,
   facebookUserLogIn,
   navigate,
+  navigateBack,
   openURL,
   profileSaveMain,
   signingPlip,
@@ -44,6 +45,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onBack: () => {
+    dispatch(clearProfileSaveErrors());
+    dispatch(signingUp(false));
+    dispatch(signingPlip(null)); // Clear the user plip sign intention if they gave up
+    dispatch(navigateBack());
+  },
+  onHome: () => {
     dispatch(clearProfileSaveErrors());
     dispatch(signingUp(false));
     dispatch(signingPlip(null)); // Clear the user plip sign intention if they gave up
