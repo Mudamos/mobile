@@ -68,6 +68,10 @@ export const wasPhoneValidated = state => state.profile.phoneJustValidated;
 
 export const getSearchedVoteCardId = state => state.profile.voteCardId;
 
+export const getTempName = state => state.profile.tempName;
+
+export const getTempBirthdate = state => state.profile.tempBirthdate;
+
 export const getCurrentUserAvatar = state => {
   const user = currentUser(state) || new User();
   return user.avatar;

@@ -169,6 +169,7 @@ const translations = {
   voteCard: "Título de Eleitor",
   voterBirthDay: "Data de nascimento",
   voterName: "Nome do eleitor",
+  voterMotherName: "Nome da mãe",
   willCreateNewWallet: "Vamos agora criar uma nova assinatura para você.",
   whatIsMudamos: "Mudamos é uma iniciativa do Instituto de Tecnologia e Sociedade do Rio de Janeiro (ITS Rio), premiada e financiada exclusivamente pelo prêmio Desafio Google de Impacto Social, conquistado em 2016.",
   whyDoWeeNeedPermission: "Por que precisamos da permissão?",

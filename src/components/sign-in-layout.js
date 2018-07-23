@@ -51,6 +51,7 @@ class SignInLayout extends Component {
   render() {
     const {
       isLoggingIn,
+      onOpenURL,
     } = this.props;
 
     return (
@@ -73,7 +74,7 @@ class SignInLayout extends Component {
 
             {this.renderLinkToSignUp()}
 
-            <StaticFooter onOpenURL={this.onOpenURL} />
+            <StaticFooter onOpenURL={onOpenURL} />
           </ScrollView>
         </Layout>
 
@@ -152,9 +153,11 @@ class SignInLayout extends Component {
   }
 
   renderNavBar() {
+    const { onBack } = this.props;
+
     return (
       <NavigationBar
-        leftView={<BackButton onPress={this.onBack} />}
+        leftView={<BackButton onPress={onBack} />}
       />
     );
   }
@@ -171,8 +174,10 @@ class SignInLayout extends Component {
   }
 
   renderForgotPassword() {
+    const { onForgotPassword } = this.props;
+
     return (
-      <TouchableOpacity onPress={this.onForgotPassword}>
+      <TouchableOpacity onPress={onForgotPassword}>
         <Text style={styles.forgotPassword}>
           {locale.forgotPasswordTitle}
         </Text>
@@ -181,23 +186,17 @@ class SignInLayout extends Component {
   }
 
   renderLinkToSignUp() {
+    const { onSignUp } = this.props;
+
     return (
       <View style={styles.signUpContainer}>
         <Text style={styles.registerTitle}>Não tem cadastro?</Text>
-        <TouchableOpacity onPress={this.onSignUp}>
+        <TouchableOpacity onPress={onSignUp}>
           <Text style={styles.registerLink}>Cadastre-se</Text>
         </TouchableOpacity>
       </View>
     );
   }
-
-  onBack = () => this.props.onBack();
-
-  onForgotPassword = () => this.props.onForgotPassword();
-
-  onOpenURL = (url) => this.props.onOpenURL(url);
-
-  onSignUp = () => this.props.onSignUp();
 
   onSubmit = () => {
     const { email, password } = this.state;

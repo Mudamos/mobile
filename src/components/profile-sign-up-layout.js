@@ -65,12 +65,14 @@ class ProfileSignUpLayout extends Component {
     previousBirthdate: PropTypes.string,
     previousName: PropTypes.string,
     previousVoteCard: PropTypes.string,
+    searchedVoteCardId: PropTypes.string,
     voteCard: PropTypes.string,
     onBack: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onSetBirthdate: PropTypes.func.isRequired,
     onSetName: PropTypes.func.isRequired,
+    onSetTempTSEValues: PropTypes.func.isRequired,
     onSetVoteCard: PropTypes.func.isRequired,
     onSigningUp: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
@@ -97,6 +99,14 @@ class ProfileSignUpLayout extends Component {
     }
 
     onSigningUp();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { searchedVoteCardId, onSetVoteCard } = this.props;
+
+    if (prevProps.searchedVoteCardId !== searchedVoteCardId) {
+      onSetVoteCard(searchedVoteCardId);
+    }
   }
 
   get validForm() {
@@ -130,6 +140,12 @@ class ProfileSignUpLayout extends Component {
     this.setState(({ reasonEnabled }) => ({ reasonEnabled: !reasonEnabled }));
   }
 
+  onTSERequested = () => {
+    const { onTSERequested, birthdate, name, onSetTempTSEValues } = this.props;
+    onSetTempTSEValues({ name, birthdate });
+    onTSERequested();
+  }
+
   render() {
     const {
       birthdate,
@@ -142,7 +158,6 @@ class ProfileSignUpLayout extends Component {
       onSetName,
       onSetBirthdate,
       onSetVoteCard,
-      onTSERequested,
     } = this.props;
 
     const { reasonEnabled } = this.state;
@@ -201,7 +216,7 @@ class ProfileSignUpLayout extends Component {
                 onSubmitEditing={() => this.cardInput.blur()}
                 ref={ref => this.cardInput = ref}
               />
-              <TouchableOpacity onPress={onTSERequested} style={styles.cantRememberVoteCardContainer}>
+              <TouchableOpacity onPress={this.onTSERequested} style={styles.cantRememberVoteCardContainer}>
                 <Text style={styles.cantRememberVoteCardText}>
                   {locale.cantRememberVoteCard}
                 </Text>

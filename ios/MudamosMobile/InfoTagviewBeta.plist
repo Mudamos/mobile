@@ -58,7 +58,7 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>apps.tse.jus.br</key>
+			<key>www.tse.jus.br</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>

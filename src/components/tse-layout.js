@@ -126,7 +126,7 @@ export default class TSELayout extends Component {
       <View style={styles.page}>
         <View style={[styles.hPadded]}>
           <Text style={styles.tutorialText}>
-            {locale.tseTutorial3} <Text style={[styles.tutorialText, styles.reference]}>{locale.voterName}</Text> e <Text style={[styles.tutorialText, styles.reference]}>{locale.voterBirthDay}</Text>.
+            {locale.tseTutorial3} <Text style={[styles.tutorialText, styles.reference]}>{locale.voterName}</Text>, <Text style={[styles.tutorialText, styles.reference]}>{locale.voterBirthDay}</Text> e <Text style={[styles.tutorialText, styles.reference]}>{locale.voterMotherName}</Text>.
           </Text>
         </View>
 

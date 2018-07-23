@@ -4,6 +4,7 @@ import ProfileSignUpLayout from "../components/profile-sign-up-layout";
 
 import {
   currentUser,
+  getSearchedVoteCardId,
   isSavingProfile,
   profileSaveErrors,
 } from "../selectors";
@@ -13,6 +14,8 @@ import {
   navigate,
   openURL,
   profileUpdate,
+  setTempBirthdate,
+  setTempName,
   signingUp,
 } from "../actions";
 
@@ -33,6 +36,7 @@ const mapStateToProps = state => {
     previousName: user ? user.name : null,
     previousBirthdate: user && user.birthdate ? fromISODate(user.birthdate) : null,
     previousVoteCard: user && user.voteCard ? voteCardMask(user.voteCard) : null,
+    searchedVoteCardId: voteCardMask(getSearchedVoteCardId(state)),
   };
 };
 
@@ -50,6 +54,10 @@ const mapDispatchToProps = dispatch => ({
     }))
   },
   onOpenURL: url => dispatch(openURL(url)),
+  onSetTempTSEValues: ({ birthdate, name }) => {
+    dispatch(setTempName({ name }));
+    dispatch(setTempBirthdate({ birthdate }));
+  },
   onSigningUp: () => dispatch(signingUp(true)),
   onTSERequested: () => dispatch(navigate("tse")),
 });
