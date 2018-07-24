@@ -44,17 +44,16 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onBack: () => {
+  onNavigate: scene => {
     dispatch(clearProfileSaveErrors());
     dispatch(signingUp(false));
     dispatch(signingPlip(null)); // Clear the user plip sign intention if they gave up
-    dispatch(navigateBack());
-  },
-  onHome: () => {
-    dispatch(clearProfileSaveErrors());
-    dispatch(signingUp(false));
-    dispatch(signingPlip(null)); // Clear the user plip sign intention if they gave up
-    dispatch(navigate("plipsNav"));
+
+    if (scene === "back") {
+      dispatch(navigateBack());
+    } else {
+      dispatch(navigate(scene));
+    }
   },
   onCreate: ({ cpf, email, password, termsAccepted }) => {
     dispatch(profileSaveMain({

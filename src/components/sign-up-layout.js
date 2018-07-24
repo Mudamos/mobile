@@ -58,11 +58,11 @@ const enhance = compose(
         return onCreate({ cpf, email, password, termsAccepted });
       }
     },
-    onBackOrHome: ({ userEmail, onHome, onBack }) => () => {
+    onBackOrHome: ({ userEmail, onNavigate }) => () => {
       if (userEmail) {
-        onHome();
+        onNavigate("plipsNav");
       } else {
-        onBack();
+        onNavigate("back");
       }
     },
   })
@@ -84,6 +84,7 @@ class SignUpLayout extends Component {
     onBackOrHome: PropTypes.func.isRequired,
     onCreate: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
+    onNavigate: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onSetCpf: PropTypes.func.isRequired,
     onSetEmail: PropTypes.func.isRequired,
@@ -137,6 +138,12 @@ class SignUpLayout extends Component {
     return this.validForm;
   }
 
+  onBack = () => {
+    const { onNavigate } = this.props;
+
+    onNavigate("back");
+  }
+
   render() {
     const {
       createErrors,
@@ -177,6 +184,7 @@ class SignUpLayout extends Component {
                 placeholder={locale.cpf.toUpperCase()}
                 hasError={!!errorForField("cpf", createErrors)}
                 error={errorForField("cpf", createErrors)}
+                errorLink={this.onBack}
                 hint="Ex: 000.000.000-00"
                 onSubmitEditing={() => this.cpfInput.blur()}
                 ref={ref => this.cpfInput = ref}
@@ -189,6 +197,7 @@ class SignUpLayout extends Component {
                   onChangeText={onSetEmail}
                   hasError={!!errorForField("email", createErrors)}
                   error={errorForField("email", createErrors)}
+                  errorLink={this.onBack}
                   keyboardType="email-address"
                   onSubmitEditing={() => this.emailInput.blur()}
                   ref={ref => this.emailInput = ref}

@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
@@ -14,7 +15,7 @@ import {
 } from "react-native-material-kit";
 
 const selectionColor = "rgba(255, 255, 255, 0.5)";
-const errorColor = "#ffff00";
+const errorColor = "#DB4437";
 const whiteTransparent = "rgba(255,255,255,0.7)";
 
 const style = StyleSheet.create({
@@ -30,6 +31,7 @@ const style = StyleSheet.create({
   },
   errorText: {
     color: errorColor,
+    fontSize: 11,
   },
   eyeIcon: {
     position: "absolute",
@@ -52,6 +54,7 @@ const style = StyleSheet.create({
 export default class MDTextInput extends Component {
   static propTypes = {
     error: PropTypes.string,
+    errorLink: PropTypes.func,
     hasError: PropTypes.bool,
     hint: PropTypes.string,
     mdContainerStyle: PropTypes.object,
@@ -105,6 +108,7 @@ export default class MDTextInput extends Component {
 
   render() {
     const {
+      errorLink,
       hasError,
       mdContainerStyle,
       mdErrorTextStyle,
@@ -147,9 +151,11 @@ export default class MDTextInput extends Component {
 
         {
           this.message &&
-            <Text style={[style.hint, mdHintTextStyle, hasError && style.errorText, hasError && mdErrorTextStyle]}>
-              {this.message}
-            </Text>
+            <TouchableOpacity onPress={errorLink}>
+              <Text style={[style.hint, mdHintTextStyle, hasError && style.errorText, hasError && mdErrorTextStyle]}>
+                {this.message}
+              </Text>
+            </TouchableOpacity>
         }
       </View>
     );
