@@ -14,8 +14,6 @@ import {
   navigate,
   openURL,
   profileUpdate,
-  setTempBirthdate,
-  setTempName,
   signingUp,
 } from "../actions";
 
@@ -54,12 +52,8 @@ const mapDispatchToProps = dispatch => ({
     }))
   },
   onOpenURL: url => dispatch(openURL(url)),
-  onSetTempTSEValues: ({ birthdate, name }) => {
-    dispatch(setTempName({ name }));
-    dispatch(setTempBirthdate({ birthdate }));
-  },
   onSigningUp: () => dispatch(signingUp(true)),
-  onTSERequested: () => dispatch(navigate("tse")),
+  onTSERequested: ({ birthdate, name }) => dispatch(navigate("tse", { birthdate, name })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileSignUpLayout);

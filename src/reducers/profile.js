@@ -15,10 +15,6 @@ export default (state = initialState, action) => {
       return { ...state, isSaving: payload.isSaving, errors: null, hasError: false };
     case "SIGNING_UP":
       return { ...state, isSigningUp: payload.isSigningUp };
-    case "SET_TEMP_BIRTHDATE":
-      return { ...state, tempBirthdate: payload.birthdate };
-    case "SET_TEMP_NAME":
-      return { ...state, tempName: payload.name };
     case "PROFILE_SENDING_PHONE_VALIDATION":
       return {
         ...state,

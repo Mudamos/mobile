@@ -118,13 +118,3 @@ export const profileValidationCompleted = ({ error }) => ({
   type: "PROFILE_VALIDATE_COMPLETED",
   payload: { error },
 });
-
-export const setTempBirthdate = ({ birthdate }) => ({
-  type: "SET_TEMP_BIRTHDATE",
-  payload: { birthdate },
-});
-
-export const setTempName = ({ name }) => ({
-  type: "SET_TEMP_NAME",
-  payload: { name },
-});

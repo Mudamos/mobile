@@ -72,7 +72,6 @@ class ProfileSignUpLayout extends Component {
     onSave: PropTypes.func.isRequired,
     onSetBirthdate: PropTypes.func.isRequired,
     onSetName: PropTypes.func.isRequired,
-    onSetTempTSEValues: PropTypes.func.isRequired,
     onSetVoteCard: PropTypes.func.isRequired,
     onSigningUp: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
@@ -141,9 +140,8 @@ class ProfileSignUpLayout extends Component {
   }
 
   onTSERequested = () => {
-    const { onTSERequested, birthdate, name, onSetTempTSEValues } = this.props;
-    onSetTempTSEValues({ name, birthdate });
-    onTSERequested();
+    const { onTSERequested, birthdate, name } = this.props;
+    onTSERequested({ birthdate, name });
   }
 
   render() {

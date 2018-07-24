@@ -6,11 +6,6 @@ import {
 } from "../actions";
 
 import {
-  getTempBirthdate,
-  getTempName,
-} from "../selectors";
-
-import {
   log,
   logError,
 } from "../utils";
@@ -112,10 +107,10 @@ const jsCode = ({ birthdate, name }) => {
   `;
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   injectedJavaScript: jsCode({
-    birthdate: getTempBirthdate(state),
-    name: getTempName(state),
+    birthdate: ownProps.birthdate,
+    name: ownProps.name,
   }),
 });
 
