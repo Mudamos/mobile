@@ -75,6 +75,7 @@ class SignUpLayout extends Component {
     email: PropTypes.string,
     isCreating: PropTypes.bool,
     isFacebookUser: PropTypes.bool,
+    isLogged: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
     password: PropTypes.string,
     termsAccepted: PropTypes.bool,
@@ -84,6 +85,7 @@ class SignUpLayout extends Component {
     onBackOrHome: PropTypes.func.isRequired,
     onCreate: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
+    onLogout: PropTypes.func.isRequired,
     onNavigate: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onSetCpf: PropTypes.func.isRequired,
@@ -139,9 +141,13 @@ class SignUpLayout extends Component {
   }
 
   onBack = () => {
-    const { onNavigate } = this.props;
+    const { isLogged, onNavigate, onLogout } = this.props;
 
     onNavigate("back");
+
+    if (isLogged) {
+      onLogout();
+    }
   }
 
   render() {

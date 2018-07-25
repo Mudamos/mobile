@@ -12,6 +12,7 @@ import {
 import {
   clearProfileSaveErrors,
   facebookUserLogIn,
+  logout,
   navigate,
   navigateBack,
   openURL,
@@ -71,6 +72,7 @@ const mapDispatchToProps = dispatch => ({
       termsAccepted,
     }))
   },
+  onLogout: () => dispatch(logout()),
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
   onOpenURL: url => dispatch(openURL(url)),
   onSigningUp: () => dispatch(signingUp(true)),
