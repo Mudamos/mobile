@@ -6,16 +6,16 @@ import {
 
 import TransparentFlatButton from "./transparent-flat-button";
 import FAIcon from "react-native-vector-icons/FontAwesome";
+import { StyleSheet } from "react-native";
 
 import locale from "../locales/pt-BR";
 
 import styles from "../styles/fb-login-button";
 
-
 export default class FBLoginButton extends Component {
   render() {
     return (
-      <TransparentFlatButton {...this.props}>
+      <TransparentFlatButton {...this.props} style={StyleSheet.flatten(styles.button)}>
         <View style={styles.container}>
           <FAIcon
             name="facebook-official"

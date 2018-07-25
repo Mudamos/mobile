@@ -168,7 +168,6 @@ class SignInLayout extends Component {
     return (
       <FBLoginButton
         onPress={onFacebookLogin}
-        style={{marginHorizontal: 20}}
       />
     );
   }
