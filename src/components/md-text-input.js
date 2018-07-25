@@ -151,11 +151,17 @@ export default class MDTextInput extends Component {
 
         {
           this.message &&
-            <TouchableOpacity onPress={errorLink}>
+            hasError ?
+              <TouchableOpacity onPress={errorLink}>
+                <Text style={[style.hint, mdHintTextStyle, hasError && style.errorText, hasError && mdErrorTextStyle]}>
+                  {this.message}
+                </Text>
+              </TouchableOpacity>
+            :
               <Text style={[style.hint, mdHintTextStyle, hasError && style.errorText, hasError && mdErrorTextStyle]}>
                 {this.message}
               </Text>
-            </TouchableOpacity>
+
         }
       </View>
     );

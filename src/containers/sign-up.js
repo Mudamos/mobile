@@ -36,6 +36,7 @@ const mapStateToProps = state => {
     createErrors: profileSaveErrors(state),
     isCreating: isSavingProfile(state),
     isFacebookUser: user ? user.profileType === "facebook" : null,
+    isLogged: !!user,
     isLoggingIn: isLoggingIn(state),
     userCpf: user ? cpfMask(user.cpf) : null,
     userEmail: user ? user.email : null,

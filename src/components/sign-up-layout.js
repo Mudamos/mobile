@@ -58,8 +58,8 @@ const enhance = compose(
         return onCreate({ cpf, email, password, termsAccepted });
       }
     },
-    onBackOrHome: ({ userEmail, onNavigate }) => () => {
-      if (userEmail) {
+    onBackOrHome: ({ isLogged, onNavigate }) => () => {
+      if (isLogged) {
         onNavigate("plipsNav");
       } else {
         onNavigate("back");
