@@ -117,13 +117,14 @@ class SignUpLayout extends Component {
   }
 
   get validForm() {
-    const { email, cpf, isFacebookUser, password, termsAccepted } = this.props;
+    const { email, cpf, userEmail, isFacebookUser, password, termsAccepted } = this.props;
 
     const validCpf = String(cpf).length === 14;
 
     if (isFacebookUser) {
       return [
         validCpf,
+        userEmail || email,
         termsAccepted,
       ].every(v => v);
     } else {
