@@ -106,11 +106,11 @@ class ProfileAddressLayout extends Component {
   componentDidUpdate(prevProps) {
     const { zipCode, onSearch, onSetZipCode, location } = this.props;
 
-    if(prevProps.zipCode !== zipCode || prevProps.location !== location) {
-      if(location && !prevProps.location) {
+    if (prevProps.zipCode !== zipCode || prevProps.location !== location) {
+      if (location && !prevProps.location) {
         onSetZipCode(zipCodeMask(location.zipCode));
       }
-      if(this.searchEnabled && prevProps.zipCode !== zipCode && zipCode.length === 9) {
+      if (this.searchEnabled && prevProps.zipCode !== zipCode && zipCode.length === 9) {
         onSearch();
       }
     }

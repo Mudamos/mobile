@@ -52,7 +52,7 @@ export default class ProfilePhoneCodeLayout extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.isValidated && !this.state.showSignUpSuccess) {
+    if (nextProps.isValidated && !this.state.showSignUpSuccess) {
       this.setState({ showSignUpSuccess: true });
     }
   }
