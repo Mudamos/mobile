@@ -28,6 +28,8 @@ class SignInLayout extends Component {
   state = {};
 
   static propTypes = {
+    isFacebookLogged: PropTypes.bool,
+    isLogged: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
@@ -50,6 +52,8 @@ class SignInLayout extends Component {
 
   render() {
     const {
+      isFacebookLogged,
+      isLogged,
       isLoggingIn,
       onOpenURL,
     } = this.props;
@@ -78,7 +82,7 @@ class SignInLayout extends Component {
           </ScrollView>
         </Layout>
 
-        <PageLoader isVisible={isLoggingIn} />
+        <PageLoader isVisible={isLoggingIn || isLogged || isFacebookLogged} />
       </View>
     );
   }

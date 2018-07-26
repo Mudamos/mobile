@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import SignInLayout from "../components/sign-in-layout";
 
 import {
+  isFacebookLoggedIn,
   isLoggingIn,
+  currentUser,
 } from "../selectors";
 
 import {
@@ -14,9 +16,13 @@ import {
   openURL,
 } from "../actions";
 
-const mapStateToProps = state => ({
-  isLoggingIn: isLoggingIn(state),
-});
+const mapStateToProps = state => {
+  return {
+    isLoggingIn: isLoggingIn(state),
+    isLogged: !!currentUser(state),
+    isFacebookLogged: isFacebookLoggedIn(state),
+  };
+}
 
 const mapDispatchToProps = dispatch => ({
   onBack: () => dispatch(navigateBack()),
