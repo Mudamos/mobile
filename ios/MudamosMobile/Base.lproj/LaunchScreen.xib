@@ -18,7 +18,7 @@
                     <rect key="frame" x="130" y="190" width="220" height="100"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.53333333333333333" green="0.23921568627450979" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.37647058823529" green="0" blue="0.66666666666666666" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="KwI-fZ-viW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="9IR-7h-8ag"/>
                 <constraint firstItem="KwI-fZ-viW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="FAt-x2-11N"/>

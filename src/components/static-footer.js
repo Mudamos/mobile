@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 
 const enhance = compose(
   withHandlers({
-    onFacebook: ({ onOpenURL }) => () => onOpenURL("https://www.facebook.com/ITSriodejaneiro"),
+    onFacebook: ({ onOpenURL }) => () => onOpenURL("https://www.facebook.com/mudamos/"),
     onInstagram: ({ onOpenURL }) => () => onOpenURL("https://www.instagram.com/itsriodejaneiro/"),
     onTwitter: ({ onOpenURL }) => () => onOpenURL("https://twitter.com/itsriodejaneiro"),
   })

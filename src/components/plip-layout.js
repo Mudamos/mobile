@@ -71,6 +71,7 @@ export default class PlipLayout extends Component {
     userSignDate: PropTypes.object,
     onBack: PropTypes.func.isRequired,
     onFetchPlipRelatedInfo: PropTypes.func.isRequired,
+    onLogin: PropTypes.func.isRequired,
     onOpenSigners: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
@@ -241,13 +242,16 @@ export default class PlipLayout extends Component {
   renderSignButton() {
     const {
       userSignDate,
+      user,
+      onLogin,
     } = this.props;
 
     const willSign = !userSignDate && this.signatureEnabled;
     const willShare = userSignDate || !this.signatureEnabled;
+    const shouldLogin = !user && this.signatureEnabled
 
-    const title = willSign && locale.iWannaMakeTheDifference || willShare && locale.makeTheDifferenceAndShare;
-    const onPress = willSign && this.onToggleSignModal || willShare && this.onShare;
+    const title = (shouldLogin || willSign) && locale.iWannaMakeTheDifference || willShare && locale.makeTheDifferenceAndShare;
+    const onPress = shouldLogin && onLogin || willSign && this.onToggleSignModal || willShare && this.onShare;
     const iconName = willSign && "check-circle" || willShare && "share";
 
     return (

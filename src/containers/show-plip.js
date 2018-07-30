@@ -115,6 +115,7 @@ const mapDispatchToProps = dispatch => ({
   onFetchPlipRelatedInfo: plipId => dispatch(fetchPlipRelatedInfo(plipId)),
   onOpenSigners: plipId => dispatch(navigate("signers", { plipId })),
   onOpenURL: url => dispatch(openURL(url)),
+  onLogin: () => dispatch(navigate("signIn")),
   onPlipSign: plip => dispatch(signPlip({ plip })),
   onRetryAppLink: () => dispatch(handleAppLink()),
   onShare: plip => dispatch(sharePlip(plip)),

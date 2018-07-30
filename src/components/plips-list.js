@@ -21,6 +21,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import RetryButton from "./retry-button";
 import NetworkImage from "./network-image";
 import FlatButton from "./flat-button";
+import StaticFooter from "./static-footer";
 
 import styles from "../styles/plips-list";
 
@@ -82,6 +83,7 @@ export default class PlipsList extends Component {
       errorFetchingPlips: error,
       isFetchingPlips,
       isRefreshingPlips,
+      onOpenURL,
       plips,
     } = this.props;
 
@@ -120,6 +122,16 @@ export default class PlipsList extends Component {
     );
   }
 
+  renderStaticFooter() {
+    const { onOpenURL } = this.props;
+
+    return (
+      <View style={styles.footerContainer}>
+        <StaticFooter onOpenURL={onOpenURL} />
+      </View>
+    )
+  }
+
   renderListView({ plips, isRefreshingPlips }) {
     const {
       currentUser,
@@ -156,7 +168,7 @@ export default class PlipsList extends Component {
             tintColor="black"
           />
         }
-        ListFooterComponent={isFetchingPlipsNextPage && this.renderInnerLoader({ animating: true })}
+        ListFooterComponent={isFetchingPlipsNextPage && this.renderInnerLoader({ animating: true }) || !hasNextPage && !isRefreshingPlips && this.renderStaticFooter()}
       />
     );
   }
@@ -317,7 +329,10 @@ class Plip extends Component {
     const customTotalSignatures = calcCustomTotalSignatures(signaturesCount);
 
     return (
-      <View style={styles.pliView}>
+      <TouchableOpacity
+        onPress={this.onGoToPlip}
+        style={styles.plipView}
+      >
         <View style={styles.plipImageView}>
           <NetworkImage
             source={{uri: cover}}
@@ -325,7 +340,7 @@ class Plip extends Component {
             resizeMode="cover"
           />
         </View>
-        <View>
+        <View style={styles.plipMainContainer}>
           <View style={[styles.plipHeaderContainer, hasSigned ? styles.plipHeaderContainerSigned : styles.plipHeaderContainerNotSigned]}>
             <View style={styles.plipTitleContainer}>
               <Text
@@ -364,7 +379,7 @@ class Plip extends Component {
             {this.renderDetailLinkButton()}
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -425,7 +440,7 @@ class Plip extends Component {
     const verbose = (customTotalSignatures > 1) ? locale.signatures.toLowerCase() : locale.signature.toLowerCase();
 
     return(
-      <Text>
+      <Text style={styles.plipSignatureText}>
         {hasMoreThan10 && "+ de" } {customTotalSignatures} {verbose}
       </Text>
     );

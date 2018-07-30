@@ -51,6 +51,7 @@ export default StyleSheet.create({
     marginRight: 16,
   },
   mediumText: {
+    flex: 1,
     fontFamily: "roboto",
     fontSize: 13,
     lineHeight: 15,
