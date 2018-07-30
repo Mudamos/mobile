@@ -1,5 +1,6 @@
 # Next
 
+* [PR #423] Adjust new layout following guidelines passed by ITS
 * [PR #419] Add new layout at plip details
 * [PR #418] Add new layout at plips view with tabs
 * [PR #417] Update to RN 0.55.4
