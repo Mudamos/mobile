@@ -200,7 +200,7 @@ class ProfileAddressLayout extends Component {
           </Text>
         </TouchableOpacity>
       </View>
-  );
+    );
   }
 
   renderNavBar() {

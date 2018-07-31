@@ -40,15 +40,9 @@ const enhance = compose(
   withStateHandlers(
     { birthdate: "", name: "", voteCard: "" },
     {
-      onSetBirthdate: () => value => ({
-        birthdate: value,
-      }),
-      onSetName: () => value => ({
-        name: value,
-      }),
-      onSetVoteCard: () => value => ({
-        voteCard: value,
-      }),
+      onSetBirthdate: () => birthdate => ({ birthdate }),
+      onSetName: () => name => ({ name }),
+      onSetVoteCard: () => voteCard => ({ voteCard }),
     }
   ),
   withHandlers({

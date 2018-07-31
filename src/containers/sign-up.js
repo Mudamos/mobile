@@ -28,7 +28,7 @@ import {
   profileSaveErrors,
 } from "../selectors";
 
-const TERMS_OF_USE_URL = Config.MUDAMOS_WEB_API_URL + "/institucional/termos-de-uso";
+const TERMS_OF_USE_URL = `${Config.MUDAMOS_WEB_API_URL}/institucional/termos-de-uso`;
 
 const mapStateToProps = state => {
   const user = currentUser(state);
