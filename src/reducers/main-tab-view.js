@@ -3,6 +3,7 @@ const initialState = {
   routes: [
     { key: "national", title: "Nacional" },
     { key: "myLocation", title: "Minha localidade" },
+    { key: "all", title: "Todos" },
     { key: "signed", title: "Assinados" },
     { key: "favorites", title: "Favoritos" },
   ],

@@ -10,12 +10,11 @@ import { logout } from "./session";
 
 import {
   isAddressProfileComplete,
-  isDocumentsProfileComplete,
+  isFacebookMainProfileComplete,
   isMainProfileComplete,
-  isAvatarProfileComplete,
-  isBirthProfileComplete,
-  isPhoneProfileComplete,
   isWalletProfileComplete,
+  isDetailProfileComplete,
+  isSigningUpComplete,
 } from "../selectors";
 
 import { navigate } from "../actions";
@@ -73,24 +72,22 @@ function* userProfileNavigator() {
 
 export function* profileScreenForCurrentUser() {
   const screenKeys = [
-    "profileMissingFields",
-    "profileAvatar",
-    "profileBirth",
+    "signUp",
+    "signIn",
+    "profileSignUp",
     "profileAddress",
-    "profileDocuments",
     "profileWallet",
-    "profilePhone",
+    "profileConclude",
   ];
 
   const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
   const screensDone = [
+    yield select(isFacebookMainProfileComplete),
     yield select(isMainProfileComplete),
-    yield select(isAvatarProfileComplete),
-    yield select(isBirthProfileComplete),
+    yield select(isDetailProfileComplete),
     yield select(isAddressProfileComplete),
-    yield select(isDocumentsProfileComplete),
     yield select(isWalletProfileComplete),
-    yield select(isPhoneProfileComplete),
+    yield select(isSigningUpComplete),
   ];
 
   const goToScreen = firstScreenNotDone(screensDone);

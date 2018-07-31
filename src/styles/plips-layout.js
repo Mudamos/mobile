@@ -67,7 +67,7 @@ export default StyleSheet.create({
     textDecorationLine: "underline",
   },
   navigationBar: {
-    backgroundColor: "#883DE1",
+    backgroundColor: "#6000AA",
   },
   plipImage: {
     minWidth: windowWidth,

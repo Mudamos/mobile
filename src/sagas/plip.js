@@ -361,7 +361,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
 
       if (!user) {
         yield put(logEvent({ name: "signup_through_sign_button" }));
-        return yield put(navigate("signUp"));
+        return yield put(navigate("signIn"));
       }
 
       const validWallet = yield call(validateLocalWallet, { walletStore });

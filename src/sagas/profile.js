@@ -46,11 +46,12 @@ import { validateLocalWallet } from "./wallet";
 function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
   yield takeLatest("PROFILE_SAVE_MAIN", function* ({ payload }) {
     try {
-      const { name, email, password } = payload;
-      const apiPayload = { user: { name } };
+      const { cpf, email, password, termsAccepted } = payload;
+      const apiPayload = { user: { cpf } };
 
       if (email) apiPayload.user.email = email;
       if (password) apiPayload.user.password = password;
+      if (termsAccepted) apiPayload.user.termsAccepted = termsAccepted ? 1 : 0;
 
       yield put(savingProfile(true));
 
@@ -60,7 +61,7 @@ function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
         const currentSigningPlip = yield select(getCurrentSigningPlip);
         if (currentSigningPlip) apiPayload.plipId = currentSigningPlip.id;
 
-        const message = [apiPayload.user.name, apiPayload.user.email, apiPayload.user.password].join(";");
+        const message = [apiPayload.user.cpf, apiPayload.user.email, apiPayload.user.password, apiPayload.user.termsAccepted].join(";");
         apiPayload.block = yield call(blockBuilder, { message, mobileApi, Crypto });
       }
 
@@ -130,7 +131,7 @@ function* saveZipCodeProfile({ mobileApi }) {
 
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
-      yield put(profileStateMachine());
+      yield put(profileStateMachine())
       yield put(logEvent({ name: "completed_zip_code" }));
     } catch (e) {
       logError(e, { tag: "saveZipCodeProfile" });
@@ -306,17 +307,18 @@ function* saveAvatarProfile({ mobileApi }) {
 function* updateProfile({ mobileApi }) {
   yield takeLatest("PROFILE_UPDATE", function* ({ payload }) {
     try {
-      const { birthdate, name, zipCode } = payload;
+      const { birthdate, name, zipCode, voteIdCard } = payload;
 
       yield put(savingProfile(true));
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.updateProfile, authToken, { birthdate, name, zipCode });
+      const response = yield call(mobileApi.updateProfile, authToken, { birthdate, name, zipCode, voteIdCard });
 
       const user = User.fromJson(response.user);
 
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
+      yield put(profileStateMachine());
       yield call([Toast, Toast.show], locale.profileUpdated);
     } catch (e) {
       logError(e, { tag: "updateProfile" });

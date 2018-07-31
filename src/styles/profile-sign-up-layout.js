@@ -4,6 +4,15 @@ export default StyleSheet.create({
   breadcrumb: {
     marginVertical: 15,
   },
+  cantRememberVoteCardText: {
+    color: "#FFF",
+    fontSize: 10,
+  },
+  cantRememberVoteCardContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+    marginTop: -15,
+  },
   container: {
     backgroundColor: "#6000AA",
     flex: 1,
@@ -21,11 +30,11 @@ export default StyleSheet.create({
     marginTop: 5,
     fontSize: 10,
   },
-  headerTitleText: {
+  headerTitle: {
     alignSelf: "center",
     color: "#fff",
     fontSize: 20,
-    fontWeight: "700",
+    fontWeight: "500",
     marginHorizontal: 30,
     marginTop: 12,
     textAlign: "center",
@@ -93,11 +102,18 @@ export default StyleSheet.create({
   termsAcceptedText: {
     fontSize: 12,
   },
-  termsAcceptedLink: {
-    fontWeight: "500",
-    marginLeft: 4,
-  },
   text: {
+    color: "#FFF",
+  },
+  warningContainer: {
+    alignItems: "center",
+    flex: 1,
+    flexDirection: "row",
+    marginHorizontal: 33,
+    marginTop: 20,
+  },
+  whyDocumentsText: {
+    marginHorizontal: 10,
     color: "#FFF",
   },
 });
