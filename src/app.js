@@ -64,7 +64,7 @@ const scenes = Actions.create(
     <Scene key="changePassword" component={ChangePasswordContainer} hideNavBar={true} />
     <Scene key="profileUpdate" component={ProfileUpdateContainer} hideNavBar={true} />
 
-    <Scene key="tse" component={TSEContainer} hideNavBar={true} direction="vertical" />
+    <Scene key="tse" component={TSEContainer} hideNavBar={true} />
     <Scene key="showVideo" component={ShowVideoContainer} hideNavBar={true} direction="vertical" />
   </Scene>
 );

@@ -55,9 +55,11 @@ const jsCode = ({ birthdate, name }) => {
 
       document.getElementById("nav-principal").outerHTML = "";
       document.getElementById("search").outerHTML = "";
-      while (document.getElementsByClassName('help-block')[0]) {
-          document.getElementsByClassName('help-block')[0].remove();
-      }
+      Array.from(document.getElementsByClassName("help-block")).forEach(
+        (element, index, array) => {
+          element.remove();
+        }
+      );
 
       const getVoteCardId = () => {
         const labels = document.getElementById("resposta-local-votacao");
