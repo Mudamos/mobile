@@ -260,7 +260,7 @@ export default class PlipsList extends Component {
   }
 }
 
-class Plip extends Component {
+export class Plip extends Component {
   static propTypes = {
     cover: PropTypes.string,
     hasSigned: PropTypes.bool,

@@ -62,7 +62,6 @@ function appError({ type, payload }) {
       return showToast(locale.errors.shareLinkError);
     case "PASSWORD_CHANGE_FORGOT_ERROR":
     case "PROFILE_SENDING_PHONE_VALIDATION_ERROR":
-    case "PROFILE_USER_SAVE_FAILURE":
     case "ADDRESS_ZIP_CODE_SEARCH_ERROR":
       return handleWithPayload();
   }

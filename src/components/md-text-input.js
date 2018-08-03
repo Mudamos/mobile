@@ -4,15 +4,18 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
+
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 import {
   MKTextField,
 } from "react-native-material-kit";
 
 const selectionColor = "rgba(255, 255, 255, 0.5)";
-const errorColor = "#ffff00";
+const errorColor = "#DB4437";
 const whiteTransparent = "rgba(255,255,255,0.7)";
 
 const style = StyleSheet.create({
@@ -28,6 +31,12 @@ const style = StyleSheet.create({
   },
   errorText: {
     color: errorColor,
+    fontSize: 11,
+  },
+  eyeIcon: {
+    position: "absolute",
+    top: 30,
+    right: 0,
   },
   textFieldStyle: {
     height: 48,
@@ -45,6 +54,7 @@ const style = StyleSheet.create({
 export default class MDTextInput extends Component {
   static propTypes = {
     error: PropTypes.string,
+    errorLink: PropTypes.func,
     hasError: PropTypes.bool,
     hint: PropTypes.string,
     mdContainerStyle: PropTypes.object,
@@ -67,6 +77,11 @@ export default class MDTextInput extends Component {
     underlineEnabled: true,
   }
 
+  state = {
+    icEye: "visibility-off",
+    togglePassword: true,
+  }
+
   input = null;
 
   setInput = component => this.input = component;
@@ -84,8 +99,16 @@ export default class MDTextInput extends Component {
     return hasError ? error : hint;
   }
 
+  changePasswordType = () => {
+    this.setState(({ togglePassword }) => ({
+      togglePassword: !togglePassword,
+      icEye: togglePassword ? "visibility" : "visibility-off",
+    }))
+  };
+
   render() {
     const {
+      errorLink,
       hasError,
       mdContainerStyle,
       mdErrorTextStyle,
@@ -94,16 +117,19 @@ export default class MDTextInput extends Component {
       floatingLabelFont,
       underlineEnabled,
       selectionColor,
+      password,
 
       ...textFieldProps
     } = this.props;
+
+    const { icEye, togglePassword } = this.state;
 
     return (
       <View style={[style.container, mdContainerStyle]}>
 
         <MKTextField
           {...textFieldProps}
-
+          password={password && togglePassword}
           ref={this.setInput}
           tintColor={this.tintColor}
           selectionColor={selectionColor}
@@ -113,12 +139,29 @@ export default class MDTextInput extends Component {
           underlineSize={underlineEnabled ? 1 : 0}
           underlineEnabled={underlineEnabled}
         />
+        { password &&
+          <Icon
+            style={style.eyeIcon}
+            name={icEye}
+            size={24}
+            color="#fff"
+            onPress={this.changePasswordType}
+          />
+        }
 
         {
           this.message &&
-            <Text style={[style.hint, mdHintTextStyle, hasError && style.errorText, hasError && mdErrorTextStyle]}>
-              {this.message}
-            </Text>
+            hasError ?
+              <TouchableOpacity onPress={errorLink}>
+                <Text style={[style.hint, mdHintTextStyle, hasError && style.errorText, hasError && mdErrorTextStyle]}>
+                  {this.message}
+                </Text>
+              </TouchableOpacity>
+            :
+              <Text style={[style.hint, mdHintTextStyle, hasError && style.errorText, hasError && mdErrorTextStyle]}>
+                {this.message}
+              </Text>
+
         }
       </View>
     );

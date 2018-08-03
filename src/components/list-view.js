@@ -28,7 +28,7 @@ export default class MyListView extends Component {
         ref={ref => this.ref = ref}
 
         onLayout={(...args) => {
-          if(onLayout) onLayout(...args);
+          if (onLayout) onLayout(...args);
 
           if (this.state.isFirstRender && scrollTo && this.ref) {
             this.ref.scrollTo(scrollTo);

@@ -5,8 +5,8 @@ import {
   logginSucceeded,
   finishedLogIn,
   logInError,
-  updatedUserProfile,
   profileStateMachine,
+  updatedUserProfile,
   clearSession,
   logEvent,
 } from "../actions";

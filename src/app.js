@@ -14,14 +14,9 @@ import {
   PlipsContainer,
   PlipViewerContainer,
   ProfileAddressContainer,
-  ProfileAddressConfirmContainer,
-  ProfileAvatarContainer,
-  ProfileBirthContainer,
-  ProfileDocumentsContainer,
-  ProfileMissingFieldsContainer,
-  ProfilePhoneContainer,
-  ProfilePhoneCodeContainer,
+  ProfileConcludeContainer,
   ProfileUpdateContainer,
+  ProfileSignUpContainer,
   ProfileWalletContainer,
   ShowVideoContainer,
   SignersContainer,
@@ -56,7 +51,12 @@ const scenes = Actions.create(
     <Scene key="signers" component={SignersContainer} hideNavBar={true} />
 
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
+
     <Scene key="signUp" component={SignUpContainer} hideNavBar={true} title="Identificação" />
+    <Scene key="profileSignUp" component={ProfileSignUpContainer} hideNavBar={true} title="Dados Pessoais"/>
+    <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
+    <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
+    <Scene key="profileConclude" component={ProfileConcludeContainer} hideNavBar={true} title="Conclude" />
 
     <Scene key="forgotPassword" component={ForgotPasswordContainer} hideNavBar={true} />
     <Scene key="changeForgotPassword" component={ChangeForgotPasswordContainer} hideNavBar={true} />
@@ -64,17 +64,7 @@ const scenes = Actions.create(
     <Scene key="changePassword" component={ChangePasswordContainer} hideNavBar={true} />
     <Scene key="profileUpdate" component={ProfileUpdateContainer} hideNavBar={true} />
 
-    <Scene key="profileMissingFields" component={ProfileMissingFieldsContainer} hideNavBar={true} title="Confirme suas informações" />
-    <Scene key="profileAvatar" component={ProfileAvatarContainer} hideNavBar={true} />
-    <Scene key="profileBirth" component={ProfileBirthContainer} hideNavBar={true} title="Data de Nascimento" />
-    <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
-    <Scene key="profileAddressConfirm" component={ProfileAddressConfirmContainer} hideNavBar={true} title="CEP" />
-    <Scene key="profileDocuments" component={ProfileDocumentsContainer} hideNavBar={true} title="Informe seus documentos" />
-    <Scene key="profilePhone" component={ProfilePhoneContainer} hideNavBar={true} title="Telefone" />
-    <Scene key="profilePhoneCode" component={ProfilePhoneCodeContainer} hideNavBar={true} title="Telefone" />
-    <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
-
-    <Scene key="tse" component={TSEContainer} hideNavBar={true} direction="vertical" />
+    <Scene key="tse" component={TSEContainer} hideNavBar={true} />
     <Scene key="showVideo" component={ShowVideoContainer} hideNavBar={true} direction="vertical" />
   </Scene>
 );

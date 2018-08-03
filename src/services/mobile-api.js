@@ -257,11 +257,16 @@ const changePassword = ({ client }) => (authToken, { currentPassword, newPasswor
     .send({ user: { currentPassword, newPassword } })
     .then(getData);
 
-const updateProfile = ({ client }) => (authToken, { birthdate, name, zipCode }) =>
+const updateProfile = ({ client }) => (authToken, { birthdate, name, voteIdCard, zipCode }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
     .post("/users/profile/update")
-    .send({ user: { birthday: birthdate, name, zipcode: zipCode }})
+    .send({ user: {
+      birthday: birthdate || "",
+      name: name || "",
+      zipcode: zipCode || "",
+      voteidcard: voteIdCard || "",
+    }})
     .then(getData);
 
 const fetchShortPlipSigners = ({ client }) => (authToken, { plipId }) =>
@@ -347,6 +352,7 @@ const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatar
 export default function MobileApi(host) {
   const v1Client = requester({ host, version: "v1" });
   const v2Client = requester({ host, version: "v2" });
+  const v3Client = requester({ host, version: "v3" });
 
   return {
     changePassword: changePassword({ client: v1Client }),
@@ -361,7 +367,7 @@ export default function MobileApi(host) {
     plipSignInfo: plipSignInfo({ client: v1Client }),
     profile: profile({ client: v1Client }),
     retrievePassword: retrievePassword({ client: v2Client }),
-    reverseSearchZipCode: reverseSearchZipCode({ client: v2Client }),
+    reverseSearchZipCode: reverseSearchZipCode({ client: v3Client }),
     saveAvatar: upload({ endpoint: `${host}/api/v1/profile/photo` }),
     saveBirthdate: saveBirthdate({ client: v1Client }),
     saveDocuments: saveDocuments({ client: v1Client }),
@@ -372,9 +378,9 @@ export default function MobileApi(host) {
     sendPhoneValidation: sendPhoneValidation({ client: v1Client }),
     signIn: signIn({ client: v1Client }),
     signMessage: signMessage({ client: v1Client }),
-    signUp: signUp({ client: v2Client }),
+    signUp: signUp({ client: v3Client }),
     signPlip: signPlip({ client: v1Client }),
-    updateProfile: updateProfile({ client: v1Client }),
+    updateProfile: updateProfile({ client: v3Client }),
     userSignInfo: userSignInfo({ client: v1Client }),
   };
 }

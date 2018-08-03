@@ -6,7 +6,6 @@ import {
   addressReverseZipCodeSearchError,
   addressFound,
   clearLocation,
-  navigate,
   unauthorized,
 } from "../actions";
 
@@ -19,7 +18,6 @@ import {
 } from "../utils";
 
 import { Address } from "../models";
-
 
 function* searchZipCode({ mobileApi }) {
   yield takeLatest("ADDRESS_ZIP_CODE_SEARCH", function* ({ payload }) {
@@ -34,7 +32,6 @@ function* searchZipCode({ mobileApi }) {
       yield put(addressFound(Address.fromJson(response)));
       yield put(addressZipCodeSearching(false));
       yield put(clearLocation());
-      yield put(navigate("profileAddressConfirm"));
     } catch(e) {
       logError(e, { tag: "searchZipCode" });
 
@@ -61,7 +58,6 @@ function* searchZipCodeWithCoords({ mobileApi }) {
       if (response && response.zipcode) {
         yield put(addressFound(Address.fromJson(response)));
         yield put(clearLocation());
-        yield put(navigate("profileAddressConfirm"));
       }
 
       yield put(addressZipCodeSearching(false));

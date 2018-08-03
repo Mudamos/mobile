@@ -47,6 +47,8 @@ export default class MainTabView extends Component {
       return <PlipsList {...this.props} />;
     case "myLocation":
       return <PlipsList {...this.props} />;
+    case "all":
+      return <PlipsList {...this.props} />;
     case "signed":
       return <PlipsList {...this.props} />;
     case "favorites":

@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  buttonDisable: {
+    backgroundColor: "#AAA",
+  },
   full: {
     flex: 1,
     alignItems: "center",
@@ -58,19 +61,44 @@ export default class RoundedButton extends Component {
   static propTypes = {
     action: PropTypes.func.isRequired,
     buttonStyle: ViewPropTypes.style,
+    enabled: PropTypes.bool,
     icon: PropTypes.string,
     iconColor: PropTypes.string,
     iconStyle: ViewPropTypes.style,
     subtitle: PropTypes.string,
-    subtitleStyle: ViewPropTypes.style,
+    subtitleStyle: Text.propTypes.style,
     title: PropTypes.string.isRequired,
-    titleStyle: ViewPropTypes.style,
+    titleStyle: Text.propTypes.style,
   };
+
+  static defaultProps = {
+    enabled: true,
+  }
 
   render() {
     const {
       action,
+      enabled,
+    } = this.props;
+
+
+    if (enabled) {
+      return (
+        <TouchableOpacity
+          onPress={action}
+        >
+          {this.renderButton()}
+        </TouchableOpacity>
+      );
+    } else {
+      return this.renderButton();
+    }
+  }
+
+  renderButton() {
+    const {
       buttonStyle,
+      enabled,
       icon,
       iconColor,
       iconStyle,
@@ -80,31 +108,27 @@ export default class RoundedButton extends Component {
       titleStyle,
     } = this.props;
 
-    return (
-      <TouchableOpacity
-        onPress={action}
-      >
-        <View style={styles.full}>
-          <View style={[styles.defaultButtonContainer, buttonStyle]}>
-            { icon &&
-              <Icon
-                name={icon}
-                size={24}
-                color= { iconColor ? iconColor : "#000" }
-                style={[styles.actionIcon, iconStyle]}
-              />
-            }
-            <View style={styles.titleContainer}>
-              <Text style={[styles.actionTitle, titleStyle]}>{title.toUpperCase()}</Text>
-            </View>
-          </View>
-          { subtitle &&
-            <Text style={[styles.actionSubtitle, subtitleStyle]}>
-              {subtitle}
-            </Text>
+    return(
+      <View style={styles.full}>
+        <View style={[styles.defaultButtonContainer, buttonStyle, !enabled && styles.buttonDisable]}>
+          { icon &&
+            <Icon
+              name={icon}
+              size={24}
+              color= { iconColor ? iconColor : "#000" }
+              style={[styles.actionIcon, iconStyle]}
+            />
           }
+          <View style={styles.titleContainer}>
+            <Text style={[styles.actionTitle, titleStyle]}>{title.toUpperCase()}</Text>
+          </View>
         </View>
-      </TouchableOpacity>
+        { subtitle &&
+          <Text style={[styles.actionSubtitle, subtitleStyle]}>
+            {subtitle}
+          </Text>
+        }
+      </View>
     );
   }
 }
