@@ -8,7 +8,7 @@ const { width: windowWidth } = Dimensions.get("window");
 export default StyleSheet.create({
   footerContainer: {
     flex: 1,
-    paddingHorizontal: 27,
+    marginTop: 18,
   },
   full: {
     flex: 1,
@@ -50,14 +50,35 @@ export default StyleSheet.create({
     marginBottom: 5,
   },
   plipImage: {
-    minWidth: windowWidth,
+    maxWidth: windowWidth,
     ...StyleSheet.absoluteFillObject,
   },
   rowContainer: {
     backgroundColor: "#FFF",
   },
+  plipView: {
+    backgroundColor: "#FFF",
+    marginVertical: 10,
+    marginHorizontal: 16,
+    borderWidth: 1,
+    borderColor: "rgb(220,220,220)",
+    borderRadius: 10,
+    elevation: 5,
+    shadowColor: "rgb(200,200,200)",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 1.0,
+    shadowRadius: 2,
+  },
   plipImageView: {
     height: 200,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    overflow: "hidden",
+  },
+  plipMainContainer: {
+  borderBottomLeftRadius: 10,
+  borderBottomRightRadius: 10,
+  overflow: "hidden",
   },
   plipHeaderContainer: {
     paddingVertical: 15,
@@ -112,6 +133,9 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  plipSignatureText: {
+    fontSize: 12,
+  },
   plipOptions: {
     flex: 1,
     flexDirection: "row",
@@ -123,8 +147,6 @@ export default StyleSheet.create({
     paddingHorizontal: 25,
     borderTopWidth: 1,
     borderTopColor: "#0000001F",
-    borderBottomWidth: 1,
-    borderBottomColor: "#0000001F",
     backgroundColor: "#FFF",
   },
   plipDetailsLink: {
