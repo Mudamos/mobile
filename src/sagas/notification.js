@@ -65,7 +65,7 @@ function* updateOneSignalProfile() {
       if (different(info, newAttrs)) {
         yield all([
           call([OneSignal, OneSignal.sendTags], getUserTags(newAttrs)),
-          call([OneSignal, OneSignal.syncHashedEmail], newAttrs.email || "-"),
+          call([OneSignal, OneSignal.syncHashedEmail], newAttrs.email),
         ]);
 
         yield put(oneSignalUserInfoUpdated(newAttrs));
@@ -120,7 +120,7 @@ function* clearOneSinalProfileInfo() {
 
       yield all([
         call([OneSignal, OneSignal.sendTags], getUserTags(newAttrs)),
-        call([OneSignal, OneSignal.syncHashedEmail], newAttrs.email || "-"),
+        call([OneSignal, OneSignal.syncHashedEmail], newAttrs.email),
       ]);
     } catch(e) {
       logError(e, { tag: "clearOneSinalProfileInfo" });
