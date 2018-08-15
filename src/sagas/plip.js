@@ -12,6 +12,7 @@ import {
   reject,
   splitEvery,
   take,
+  uniqBy,
   zip,
 } from "ramda";
 
@@ -133,7 +134,10 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
         put(appReady(true)),
       ]);
 
-      const plipIds = (paginatedPlips.plips || []).map(prop("id"));
+      const id = prop("id");
+      const plips = [...nationwide.plips,...userLocation.plips,...signed.plips];
+      const uniqPlips = uniqBy(id, plips);
+      const plipIds = uniqPlips.map(id);
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
     } catch (e) {
