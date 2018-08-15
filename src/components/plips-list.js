@@ -238,7 +238,7 @@ export default class PlipsList extends Component {
   }
 
   plipImage(plip) {
-    return plip.cycle && plip.cycle.pictures && plip.cycle.pictures.thumb;
+    return plip && plip.pictureThumb;
   }
 
   onRefresh = () => {
@@ -348,7 +348,7 @@ export class Plip extends Component {
                 numberOfLines={1}
                 ellipsizeMode="tail"
               >
-                {plip.phase.name}
+                {plip.title}
               </Text>
             </View>
             { hasSigned &&
@@ -362,7 +362,7 @@ export class Plip extends Component {
           </View>
           <View style={styles.plipSubtitleContainer}>
             <Text>
-              {plip.phase.description}
+              {plip.subtitle}
             </Text>
           </View>
           <View style={styles.plipOptionsContainer}>

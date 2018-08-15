@@ -47,9 +47,9 @@ function* sharePlip() {
         url: plip.shareLink ? plip.shareLink : plip.plipUrl,
         subject: plip.callToAction,
         message: locale.shareMessage({
-          description: plip.phase.description,
-          name: plip.phase.name,
-          hashtag: hashtagfy("Mudamos", plip.phase.name),
+          description: plip.subtitle,
+          name: plip.title,
+          hashtag: hashtagfy("Mudamos", plip.title),
         }),
       };
 

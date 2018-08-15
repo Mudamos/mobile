@@ -82,14 +82,12 @@ export default class PlipLayout extends Component {
 
   get plipName() {
     const { plip } = this.props;
-    if (!plip) return;
-
-    return plip.phase && plip.phase.name;
+    return plip && plip.title;
   }
 
   get plipImage() {
     const { plip } = this.props;
-    return plip && plip.cycle && plip.cycle.pictures && plip.cycle.pictures.thumb;
+    return plip && plip.pictureThumb;
   }
 
   get plipPresentation() {
@@ -99,7 +97,7 @@ export default class PlipLayout extends Component {
 
   get plipDescription() {
     const { plip } = this.props;
-    return plip && plip.phase && plip.phase.description;
+    return plip && plip.subtitle;
   }
 
   get daysLeft() {
@@ -107,7 +105,7 @@ export default class PlipLayout extends Component {
     if (!plip) return;
 
     const start = moment();
-    const end = moment(plip.phase.finalDate);
+    const end = moment(plip.finalDate);
 
     // No days left because there are no more seconds left
     if (end.diff(start, "seconds") < 0) return;

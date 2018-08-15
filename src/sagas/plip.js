@@ -96,7 +96,7 @@ const buildSignMessage = ({ user, plip }) => [
   user.zipCode,
   user.voteCard,
   moment().toISOString(),
-  plip.cycle.name,
+  plip.title,
   plip.id,
 ].join(";");
 
@@ -625,11 +625,11 @@ function* loadStorePlipsInfo({ mobileApi }) {
 }
 
 function eligibleToSignPlip({ plip, user }) {
-  const { scope, uf, city } = plip.scopeCoverage;
+  const { scopeCoverage: scope, uf, cityName } = plip;
   const { uf: userUF, city: userCityName } = user.address;
 
   const matchUF = () => userUF.toLowerCase() === uf.toLowerCase();
-  const matchCity = () => userUF.toLowerCase() === city.uf.toLowerCase() && userCityName.toLowerCase() === city.name.toLowerCase();
+  const matchCity = () => userUF.toLowerCase() === uf.toLowerCase() && userCityName.toLowerCase() === cityName.toLowerCase();
 
   switch (scope) {
     case NATIONWIDE_SCOPE: return true;

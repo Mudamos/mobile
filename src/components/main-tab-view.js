@@ -32,6 +32,10 @@ const initialLayout = {
 export default class MainTabView extends Component {
   static propTypes = {
     tabViewState: TabViewType,
+    nationwidePlips: PropTypes.array,
+    userLocationPlips: PropTypes.array,
+    allPlips: PropTypes.array,
+    signedPlips: PropTypes.array,
     onMainTabChange: PropTypes.func.isRequired,
   };
 
@@ -42,17 +46,24 @@ export default class MainTabView extends Component {
   };
 
   renderScene = ({ route }) => {
+    const {
+      nationwidePlips,
+      userLocationPlips,
+      allPlips,
+      signedPlips,
+    } = this.props;
+
     switch (route.key) {
     case "national":
-      return <PlipsList {...this.props} />;
+      return <PlipsList {...this.props} plips={nationwidePlips}/>;
     case "myLocation":
-      return <PlipsList {...this.props} />;
+      return <PlipsList {...this.props} plips={userLocationPlips}/>;
     case "all":
-      return <PlipsList {...this.props} />;
+      return <PlipsList {...this.props} plips={nationwidePlips}/>;
     case "signed":
-      return <PlipsList {...this.props} />;
+      return <PlipsList {...this.props} plips={signedPlips}/>;
     case "favorites":
-      return <PlipsList {...this.props} />;
+      return <PlipsList {...this.props} plips={nationwidePlips}/>;
     default:
       return null;
     }

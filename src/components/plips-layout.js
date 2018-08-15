@@ -33,7 +33,10 @@ export default class PlipsLayout extends Component {
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
     openMenu: PropTypes.func.isRequired,
-    plips: PropTypes.array,
+    nationwidePlips: PropTypes.array,
+    userLocationPlips: PropTypes.array,
+    allPlips: PropTypes.array,
+    signedPlips: PropTypes.array,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
     signatureGoals: PropTypes.shape({
