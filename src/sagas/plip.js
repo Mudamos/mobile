@@ -35,6 +35,9 @@ import {
 
 import {
   allPlipsFetched,
+  nationwidePlipsFetched,
+  plipsByLocationFetched,
+  signedPlipsFetched,
   appReady,
   plipsFetchError,
   plipsFetchNextPageError,
@@ -65,7 +68,12 @@ import {
 
 import {
   currentAuthToken,
+  currentUserCity,
+  currentUserUf,
   findPlips,
+  findNationwidePlips,
+  findUserLocationPlips,
+  findSignedPlips,
   getCurrentSigningPlip,
   getPlipSignatureGoals,
   getCurrentPlipsPage,
@@ -109,9 +117,16 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
     try {
       yield put(fetchingPlips(true));
       const response = yield call(fetchPlips, { mudamosWebApi });
+      const nationwide = yield call(fetchNationwidePlips, { mobileApi });
+      const userLocation = yield call(fetchByUserLocationPlips, { mobileApi });
+      const signed = yield call(fetchSignedPlips, { mobileApi });
+
       const paginatedPlips = yield call(paginatePlips, response);
 
       yield all([
+        put(nationwidePlipsFetched(nationwide)),
+        put(plipsByLocationFetched(userLocation)),
+        put(signedPlipsFetched(signed)),
         put(allPlipsFetched(response)),
         put(plipsFetched(paginatedPlips)),
         put(fetchingPlips(false)),
@@ -202,6 +217,74 @@ function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
     const uniqById = reject(pipe(id, containInIds));
 
     return { ...response, plips: uniqById(response.plips) };
+}
+
+function* fetchNationwidePlips({ mobileApi, page = 0 }) {
+  const limit = PLIPS_PER_PAGE;
+  const scope = "nationwide";
+  const includeCauses = true;
+
+  const response = yield call(mobileApi.listPlips, {
+    includeCauses,
+    limit,
+    page,
+    scope,
+  });
+
+  const id = prop("id");
+  const currentPlips = yield select(findNationwidePlips);
+  const currentIds = currentPlips.map(id);
+  const containInIds = flip(contains)(currentIds);
+  const uniqById = reject(pipe(id, containInIds));
+
+  return { ...response, plips: uniqById(response.plips) };
+}
+
+function* fetchByUserLocationPlips({ mobileApi, page = 0 }) {
+  const limit = PLIPS_PER_PAGE;
+  const scope = "citywide";
+  const city = yield select(currentUserCity);
+  const uf = yield select(currentUserUf);
+  const includeCauses = false;
+
+  const response = yield call(mobileApi.listPlips, {
+    city,
+    uf,
+    includeCauses,
+    limit,
+    page,
+    scope,
+  });
+
+  const id = prop("id");
+  const currentPlips = yield select(findUserLocationPlips);
+  const currentIds = currentPlips.map(id);
+  const containInIds = flip(contains)(currentIds);
+  const uniqById = reject(pipe(id, containInIds));
+
+  return { ...response, plips: uniqById(response.plips) };
+}
+
+function* fetchSignedPlips({ mobileApi, page = 0 }) {
+  const limit = PLIPS_PER_PAGE;
+  const scope = "all";
+  const includeCauses = true;
+  const authToken = yield select(currentAuthToken);
+
+  const response = yield call(mobileApi.listSignedPlips, authToken, {
+    includeCauses,
+    limit,
+    page,
+    scope,
+  });
+
+  const id = prop("id");
+  const currentPlips = yield select(findSignedPlips);
+  const currentIds = currentPlips.map(id);
+  const containInIds = flip(contains)(currentIds);
+  const uniqById = reject(pipe(id, containInIds));
+
+  return { ...response, plips: uniqById(response.plips) };
 }
 
 function* plipsNextPage() {

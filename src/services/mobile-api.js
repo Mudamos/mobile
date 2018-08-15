@@ -14,6 +14,12 @@ import { identity } from "ramda";
 
 import { UnauthorizedError } from "../models/net-error";
 
+const getPagination = ({ response, ...args }) => ({
+  page: parseInt(response.headers.get("X-Page") || 0, 10),
+  nextPage: parseInt(response.headers.get("X-Next-Page"), 10) || null,
+
+  ...args,
+});
 
 const requester = ({ host, version }) => {
   let builder = farfetch;
@@ -289,6 +295,52 @@ const fetchOfflinePlipSigners = ({ client }) => ({ plipId }) =>
     .get(`/petition/${plipId}/true/votes/friends`)
     .then(getData);
 
+const listPlips = ({ client }) => ({
+  city,
+  uf,
+  includeCauses,
+  limit,
+  page,
+  scope,
+}) => {
+  const qs = buildQueryString({
+    city,
+    uf,
+    includeCauses,
+    limit,
+    page,
+    scope,
+  });
+
+  return client
+    .get(`/petitions/pagination?${qs}`)
+    .then(getPagination)
+    .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+};
+
+const listSignedPlips = ({ client }) => (authToken, {
+  city,
+  uf,
+  includeCauses,
+  limit,
+  page,
+  scope,
+}) => {
+  const qs = buildQueryString({
+    city,
+    uf,
+    includeCauses,
+    limit,
+    page,
+    scope,
+  });
+
+  return authorizedClient(client, authToken)
+    .get(`/petitions/pagination/sign?${qs}`)
+    .then(getPagination)
+    .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+};
+
 const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatarURL }) => {
   let progressListener = identity;
   const request = new XMLHttpRequest;
@@ -363,6 +415,8 @@ export default function MobileApi(host) {
     fetchPlipSigners: fetchPlipSigners({ client: v1Client }),
     fetchOfflineShortPlipSigners: fetchOfflineShortPlipSigners({ client: v1Client }),
     fetchShortPlipSigners: fetchShortPlipSigners({ client: v1Client }),
+    listPlips: listPlips({ client: v3Client}),
+    listSignedPlips: listSignedPlips({ client: v3Client }),
     logout: logout({ client: v1Client }),
     plipSignInfo: plipSignInfo({ client: v1Client }),
     profile: profile({ client: v1Client }),

@@ -73,6 +73,16 @@ export const getCurrentUserAvatar = state => {
   return user.avatar;
 }
 
+export const currentUserCity = state => {
+  const user = currentUser(state) || new User();
+  return user.address.city;
+}
+
+export const currentUserUf = state => {
+  const user = currentUser(state) || new User();
+  return user.address.uf;
+}
+
 export const isProfileComplete =
   allPass([
     isMainProfileComplete,

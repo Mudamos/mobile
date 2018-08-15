@@ -35,6 +35,14 @@ export const findPlip = id => state =>
 
 export const findPlips = state => state.plip.plips || [];
 
+export const findNationwidePlips = state => state.plip.nationwide || [];
+
+export const findUserLocationPlips = state => state.plip.userLocation || [];
+
+export const findAllPlips = state => state.plip.plips || [];
+
+export const findSignedPlips = state => state.plip.signed || [];
+
 export const sortPlips = plips => state => {
   const user = currentUser(state);
   const address = (user || {}).address;

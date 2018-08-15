@@ -35,6 +35,21 @@ export const allPlipsFetched = ({ plips }) => ({
   payload: { plips },
 });
 
+export const nationwidePlipsFetched = ({ plips }) => ({
+  type: "NATIONWIDE_PLIPS_FETCHED",
+  payload: { plips },
+});
+
+export const plipsByLocationFetched = ({ plips }) => ({
+  type: "PLIPS_BY_USER_LOCATION_FETCHED",
+  payload: { plips },
+});
+
+export const signedPlipsFetched = ({ plips }) => ({
+  type: "SIGNED_PLIPS_FETCHED",
+  payload: { plips },
+});
+
 export const isRefreshingPlips = isRefreshing => ({
   type: "PLIPS_REFRESHING_PLIPS",
   payload: { isRefreshing },

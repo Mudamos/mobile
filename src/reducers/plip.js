@@ -7,6 +7,9 @@ const initialState = {
   isFetchingPlipsNextPage: false,
   isRefreshingPlips: false,
   plips: [],
+  nationwide: [],
+  userLocation: [],
+  signed: [],
   currentPlip: null,
 };
 
@@ -18,6 +21,15 @@ export default (state = initialState, action) => {
   switch (type) {
     case "ALL_PLIPS_FETCHED": {
       return { ...state, allPlips: payload.plips };
+    }
+    case "NATIONWIDE_PLIPS_FETCHED": {
+      return { ...state, nationwide: [...state.nationwide, ...payload.plips] };
+    }
+    case "PLIPS_BY_USER_LOCATION_FETCHED": {
+      return { ...state, userLocation: [...state.userLocation, ...payload.plips] };
+    }
+    case "SIGNED_PLIPS_FETCHED": {
+      return { ...state, signed: [...state.signed, ...payload.plips] };
     }
     case "FETCH_PLIPS_NEXT_PAGE": {
       return {
