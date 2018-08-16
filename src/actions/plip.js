@@ -30,29 +30,29 @@ export const plipsFetched = ({ plips, page, nextPage }) => ({
   payload: { plips, page, nextPage },
 });
 
-export const allPlipsFetched = ({ plips }) => ({
+export const allPlipsFetched = ({ plips, page, nextPage }) => ({
   type: "ALL_PLIPS_FETCHED",
-  payload: { plips },
+  payload: { plips, page, nextPage },
 });
 
-export const nationwidePlipsFetched = ({ plips }) => ({
+export const nationwidePlipsFetched = ({ plips, page, nextPage }) => ({
   type: "NATIONWIDE_PLIPS_FETCHED",
-  payload: { plips },
+  payload: { plips, page, nextPage },
 });
 
-export const plipsByLocationFetched = ({ plips }) => ({
+export const plipsByLocationFetched = ({ plips, page, nextPage }) => ({
   type: "PLIPS_BY_USER_LOCATION_FETCHED",
-  payload: { plips },
+  payload: { plips, page, nextPage },
 });
 
-export const signedPlipsFetched = ({ plips }) => ({
+export const signedPlipsFetched = ({ plips, page, nextPage }) => ({
   type: "SIGNED_PLIPS_FETCHED",
-  payload: { plips },
+  payload: { plips, page, nextPage },
 });
 
-export const favoritePlipsFetched = ({ plips }) => ({
+export const favoritePlipsFetched = ({ plips, page, nextPage }) => ({
   type: "FAVORITE_PLIPS_FETCHED",
-  payload: { plips },
+  payload: { plips, page, nextPage },
 });
 
 export const isRefreshingPlips = isRefreshing => ({

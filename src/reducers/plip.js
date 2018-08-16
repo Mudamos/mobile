@@ -7,11 +7,21 @@ const initialState = {
   isFetchingPlipsNextPage: false,
   isRefreshingPlips: false,
   plips: [],
-  allPlips: [],
-  nationwide: [],
-  userLocation: [],
-  signed: [],
-  favorite: [],
+  allPlips: {
+    plips: []
+  },
+  nationwide: {
+    plips: []
+  },
+  userLocation: {
+    plips: []
+  },
+  signed: {
+    plips: []
+  },
+  favorite: {
+    plips: []
+  },
   currentPlip: null,
 };
 
@@ -22,19 +32,54 @@ export default (state = initialState, action) => {
 
   switch (type) {
     case "ALL_PLIPS_FETCHED": {
-      return { ...state, allPlips: [...state.allPlips, ...payload.plips] };
+      return {
+        ...state,
+        allPlips: {
+          plips: [...state.allPlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage
+        },
+      };
     }
     case "NATIONWIDE_PLIPS_FETCHED": {
-      return { ...state, nationwide: [...state.nationwide, ...payload.plips] };
+      return {
+        ...state,
+        nationwide: {
+          plips: [...state.nationwide.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage
+        },
+      };
     }
     case "PLIPS_BY_USER_LOCATION_FETCHED": {
-      return { ...state, userLocation: [...state.userLocation, ...payload.plips] };
+      return {
+        ...state,
+        userLocation: {
+          plips: [...state.userLocation.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage
+        },
+      };
     }
     case "SIGNED_PLIPS_FETCHED": {
-      return { ...state, signed: [...state.signed, ...payload.plips] };
+      return {
+        ...state,
+        signed: {
+          plips: [...state.signed.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage
+        },
+      };
     }
     case "FAVORITE_PLIPS_FETCHED": {
-      return { ...state, favorite: [...state.favorite, ...payload.plips] }
+      return {
+        ...state,
+        favorite: {
+          plips: [...state.favorite.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage
+        },
+      }
     }
     case "FETCH_PLIPS_NEXT_PAGE": {
       return {

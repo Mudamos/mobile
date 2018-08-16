@@ -34,15 +34,15 @@ export const findPlip = id => state =>
 
 export const findPlips = state => state.plip.plips || [];
 
-export const findNationwidePlips = state => state.plip.nationwide || [];
+export const findNationwidePlips = state => state.plip.nationwide.plips || [];
 
-export const findUserLocationPlips = state => state.plip.userLocation || [];
+export const findUserLocationPlips = state => state.plip.userLocation.plips || [];
 
-export const findAllPlips = state => state.plip.allPlips || [];
+export const findAllPlips = state => state.plip.allPlips.plips || [];
 
-export const findUserFavoritePlips = state => state.plip.favorite || [];
+export const findUserFavoritePlips = state => state.plip.favorite.plips || [];
 
-export const findSignedPlips = state => state.plip.signed || [];
+export const findSignedPlips = state => state.plip.signed.plips || [];
 
 export const sortPlips = plips => state => {
   const user = currentUser(state);
