@@ -39,6 +39,7 @@ import {
   nationwidePlipsFetched,
   plipsByLocationFetched,
   signedPlipsFetched,
+  favoritePlipsFetched,
   appReady,
   plipsFetchError,
   plipsFetchNextPageError,
@@ -72,8 +73,10 @@ import {
   currentUserCity,
   currentUserUf,
   findPlips,
+  findAllPlips,
   findNationwidePlips,
   findUserLocationPlips,
+  findUserFavoritePlips,
   findSignedPlips,
   getCurrentSigningPlip,
   getPlipSignatureGoals,
@@ -120,7 +123,9 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
       const response = yield call(fetchPlips, { mudamosWebApi });
       const nationwide = yield call(fetchNationwidePlips, { mobileApi });
       const userLocation = yield call(fetchByUserLocationPlips, { mobileApi });
+      const allPlips = yield call(fetchAllPlips, { mobileApi });
       const signed = yield call(fetchSignedPlips, { mobileApi });
+      const favorite = yield call(listFavoritePlips, { mobileApi });
 
       const paginatedPlips = yield call(paginatePlips, response);
 
@@ -128,14 +133,21 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
         put(nationwidePlipsFetched(nationwide)),
         put(plipsByLocationFetched(userLocation)),
         put(signedPlipsFetched(signed)),
-        put(allPlipsFetched(response)),
+        put(favoritePlipsFetched(favorite)),
+        put(allPlipsFetched(allPlips)),
         put(plipsFetched(paginatedPlips)),
         put(fetchingPlips(false)),
         put(appReady(true)),
       ]);
 
       const id = prop("id");
-      const plips = [...nationwide.plips,...userLocation.plips,...signed.plips];
+      const plips = [
+        ...nationwide.plips,
+        ...userLocation.plips,
+        ...signed.plips,
+        ...favorite.plips,
+        ...allPlips.plips
+      ];
       const uniqPlips = uniqBy(id, plips);
       const plipIds = uniqPlips.map(id);
 
@@ -249,7 +261,7 @@ function* fetchByUserLocationPlips({ mobileApi, page = 0 }) {
   const scope = "citywide";
   const city = yield select(currentUserCity);
   const uf = yield select(currentUserUf);
-  const includeCauses = false;
+  const includeCauses = true;
 
   const response = yield call(mobileApi.listPlips, {
     city,
@@ -262,6 +274,27 @@ function* fetchByUserLocationPlips({ mobileApi, page = 0 }) {
 
   const id = prop("id");
   const currentPlips = yield select(findUserLocationPlips);
+  const currentIds = currentPlips.map(id);
+  const containInIds = flip(contains)(currentIds);
+  const uniqById = reject(pipe(id, containInIds));
+
+  return { ...response, plips: uniqById(response.plips) };
+}
+
+function* fetchAllPlips({ mobileApi, page = 0 }) {
+  const limit = PLIPS_PER_PAGE;
+  const scope = "all";
+  const includeCauses = true;
+
+  const response = yield call(mobileApi.listPlips, {
+    includeCauses,
+    limit,
+    page,
+    scope,
+  });
+
+  const id = prop("id");
+  const currentPlips = yield select(findAllPlips);
   const currentIds = currentPlips.map(id);
   const containInIds = flip(contains)(currentIds);
   const uniqById = reject(pipe(id, containInIds));
@@ -284,6 +317,28 @@ function* fetchSignedPlips({ mobileApi, page = 0 }) {
 
   const id = prop("id");
   const currentPlips = yield select(findSignedPlips);
+  const currentIds = currentPlips.map(id);
+  const containInIds = flip(contains)(currentIds);
+  const uniqById = reject(pipe(id, containInIds));
+
+  return { ...response, plips: uniqById(response.plips) };
+}
+
+function* listFavoritePlips({ mobileApi, page = 0 }) {
+  const limit = PLIPS_PER_PAGE;
+  const scope = "all";
+  const includeCauses = true;
+  const authToken = yield select(currentAuthToken);
+
+  const response = yield call(mobileApi.listFavoritePlips, authToken, {
+    includeCauses,
+    limit,
+    page,
+    scope,
+  });
+
+  const id = prop("id");
+  const currentPlips = yield select(findUserFavoritePlips);
   const currentIds = currentPlips.map(id);
   const containInIds = flip(contains)(currentIds);
   const uniqById = reject(pipe(id, containInIds));

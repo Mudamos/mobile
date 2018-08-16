@@ -341,6 +341,29 @@ const listSignedPlips = ({ client }) => (authToken, {
     .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
 };
 
+const listFavoritePlips = ({ client }) => (authToken, {
+  city,
+  uf,
+  includeCauses,
+  limit,
+  page,
+  scope,
+}) => {
+  const qs = buildQueryString({
+    city,
+    uf,
+    includeCauses,
+    limit,
+    page,
+    scope,
+  });
+
+  return authorizedClient(client, authToken)
+    .get(`/petitions/pagination/favorite?${qs}`)
+    .then(getPagination)
+    .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+};
+
 const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatarURL }) => {
   let progressListener = identity;
   const request = new XMLHttpRequest;
@@ -415,7 +438,8 @@ export default function MobileApi(host) {
     fetchPlipSigners: fetchPlipSigners({ client: v1Client }),
     fetchOfflineShortPlipSigners: fetchOfflineShortPlipSigners({ client: v1Client }),
     fetchShortPlipSigners: fetchShortPlipSigners({ client: v1Client }),
-    listPlips: listPlips({ client: v3Client}),
+    listPlips: listPlips({ client: v3Client }),
+    listFavoritePlips: listFavoritePlips({ client: v3Client }),
     listSignedPlips: listSignedPlips({ client: v3Client }),
     logout: logout({ client: v1Client }),
     plipSignInfo: plipSignInfo({ client: v1Client }),

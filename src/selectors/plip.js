@@ -38,7 +38,9 @@ export const findNationwidePlips = state => state.plip.nationwide || [];
 
 export const findUserLocationPlips = state => state.plip.userLocation || [];
 
-export const findAllPlips = state => state.plip.plips || [];
+export const findAllPlips = state => state.plip.allPlips || [];
+
+export const findUserFavoritePlips = state => state.plip.favorite || [];
 
 export const findSignedPlips = state => state.plip.signed || [];
 

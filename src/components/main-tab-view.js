@@ -35,6 +35,7 @@ export default class MainTabView extends Component {
     nationwidePlips: PropTypes.array,
     userLocationPlips: PropTypes.array,
     allPlips: PropTypes.array,
+    favoritePlips: PropTypes.array,
     signedPlips: PropTypes.array,
     onMainTabChange: PropTypes.func.isRequired,
   };
@@ -50,6 +51,7 @@ export default class MainTabView extends Component {
       nationwidePlips,
       userLocationPlips,
       allPlips,
+      favoritePlips,
       signedPlips,
     } = this.props;
 
@@ -59,11 +61,11 @@ export default class MainTabView extends Component {
     case "myLocation":
       return <PlipsList {...this.props} plips={userLocationPlips}/>;
     case "all":
-      return <PlipsList {...this.props} plips={nationwidePlips}/>;
+      return <PlipsList {...this.props} plips={allPlips}/>;
     case "signed":
       return <PlipsList {...this.props} plips={signedPlips}/>;
     case "favorites":
-      return <PlipsList {...this.props} plips={nationwidePlips}/>;
+      return <PlipsList {...this.props} plips={favoritePlips}/>;
     default:
       return null;
     }

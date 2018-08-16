@@ -50,6 +50,11 @@ export const signedPlipsFetched = ({ plips }) => ({
   payload: { plips },
 });
 
+export const favoritePlipsFetched = ({ plips }) => ({
+  type: "FAVORITE_PLIPS_FETCHED",
+  payload: { plips },
+});
+
 export const isRefreshingPlips = isRefreshing => ({
   type: "PLIPS_REFRESHING_PLIPS",
   payload: { isRefreshing },
