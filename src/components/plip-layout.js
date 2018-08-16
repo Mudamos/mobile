@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import {
+  eligibleToSignPlip,
   formatNumber,
   moment,
 } from "../utils";
@@ -242,15 +243,16 @@ export default class PlipLayout extends Component {
       userSignDate,
       user,
       onLogin,
+      plip,
     } = this.props;
 
-    const willSign = !userSignDate && this.signatureEnabled;
-    const willShare = userSignDate || !this.signatureEnabled;
+    const canSign = eligibleToSignPlip({ plip, user });
+    const willSign = canSign && !userSignDate && this.signatureEnabled;
     const shouldLogin = !user && this.signatureEnabled
 
-    const title = (shouldLogin || willSign) && locale.iWannaMakeTheDifference || willShare && locale.makeTheDifferenceAndShare;
-    const onPress = shouldLogin && onLogin || willSign && this.onToggleSignModal || willShare && this.onShare;
-    const iconName = willSign && "check-circle" || willShare && "share";
+    const title = (shouldLogin || willSign) && locale.iWannaMakeTheDifference || locale.makeTheDifferenceAndShare;
+    const onPress = shouldLogin && onLogin || willSign && this.onToggleSignModal || this.onShare;
+    const iconName = willSign && "check-circle" || "share";
 
     return (
       <View style={styles.signButton}>

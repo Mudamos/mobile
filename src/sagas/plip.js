@@ -18,6 +18,7 @@ import {
 
 import {
   different,
+  eligibleToSignPlip,
   homeSceneKey,
   isBlank,
   isPresent,
@@ -29,10 +30,6 @@ import {
   STATEWIDE_SCOPE,
   CITYWIDE_SCOPE,
 } from "../utils";
-
-import {
-  isNationalCause,
-} from "../models";
 
 import {
   allPlipsFetched,
@@ -677,20 +674,6 @@ function* loadStorePlipsInfo({ mobileApi }) {
       logError(e, { tag: "loadStorePlipsInfo" });
     }
   });
-}
-
-function eligibleToSignPlip({ plip, user }) {
-  const { scopeCoverage: scope, uf, cityName } = plip;
-  const { uf: userUF, city: userCityName } = user.address;
-
-  const matchUF = () => userUF.toLowerCase() === uf.toLowerCase();
-  const matchCity = () => userUF.toLowerCase() === uf.toLowerCase() && userCityName.toLowerCase() === cityName.toLowerCase();
-
-  switch (scope) {
-    case NATIONWIDE_SCOPE: return true;
-    case STATEWIDE_SCOPE: return isBlank(userUF) || isNationalCause(plip) || matchUF();
-    case CITYWIDE_SCOPE: return isBlank(userCityName) || isNationalCause(plip) || matchCity();
-  }
 }
 
 export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError }) {

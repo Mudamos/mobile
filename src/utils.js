@@ -38,6 +38,8 @@ import "numeral/locales/pt-br";
 import moment from "moment";
 import "moment/locale/pt-br";
 
+import { isNationalCause } from "./models";
+
 const DEFAULT_LOCALE = "pt-br";
 
 moment.locale(DEFAULT_LOCALE);
@@ -233,3 +235,17 @@ export const backoff = (fn, { attempts, delay: duration = 100 } = {}) =>
       delay: duration * 2,
     }))
     : Promise.reject(err));
+
+export const eligibleToSignPlip = ({ plip, user }) => {
+  const { scopeCoverage: scope, uf, cityName } = plip;
+  const { uf: userUF, city: userCityName } = user.address;
+
+  const matchUF = () => userUF.toLowerCase() === uf.toLowerCase();
+  const matchCity = () => userUF.toLowerCase() === uf.toLowerCase() && userCityName.toLowerCase() === cityName.toLowerCase();
+
+  switch (scope) {
+    case NATIONWIDE_SCOPE: return true;
+    case STATEWIDE_SCOPE: return isBlank(userUF) || isNationalCause(plip) || matchUF();
+    case CITYWIDE_SCOPE: return isBlank(userCityName) || isNationalCause(plip) || matchCity();
+  }
+}
