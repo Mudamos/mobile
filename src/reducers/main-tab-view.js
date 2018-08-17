@@ -1,11 +1,11 @@
 const initialState = {
   index: 0,
   routes: [
-    { key: "national", title: "Nacional" },
-    { key: "myLocation", title: "Minha localidade" },
-    { key: "all", title: "Todos" },
-    { key: "signed", title: "Assinados" },
-    { key: "favorites", title: "Favoritos" },
+    { key: "nationwidePlips", title: "Nacional" },
+    { key: "userLocationPlips", title: "Minha localidade" },
+    { key: "allPlips", title: "Todos" },
+    { key: "signedPlips", title: "Assinados" },
+    { key: "favoritePlips", title: "Favoritos" },
   ],
 };
 

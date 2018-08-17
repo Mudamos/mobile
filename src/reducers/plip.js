@@ -8,19 +8,19 @@ const initialState = {
   isRefreshingPlips: false,
   plips: [],
   allPlips: {
-    plips: []
+    plips: [],
   },
-  nationwide: {
-    plips: []
+  nationwidePlips: {
+    plips: [],
   },
-  userLocation: {
-    plips: []
+  userLocationPlips: {
+    plips: [],
   },
-  signed: {
-    plips: []
+  signedPlips: {
+    plips: [],
   },
-  favorite: {
-    plips: []
+  favoritePlips: {
+    plips: [],
   },
   currentPlip: null,
 };
@@ -44,8 +44,8 @@ export default (state = initialState, action) => {
     case "NATIONWIDE_PLIPS_FETCHED": {
       return {
         ...state,
-        nationwide: {
-          plips: [...state.nationwide.plips, ...payload.plips],
+        nationwidePlips: {
+          plips: [...state.nationwidePlips.plips, ...payload.plips],
           page: payload.page,
           nextPage: payload.nextPage
         },
@@ -54,8 +54,8 @@ export default (state = initialState, action) => {
     case "PLIPS_BY_USER_LOCATION_FETCHED": {
       return {
         ...state,
-        userLocation: {
-          plips: [...state.userLocation.plips, ...payload.plips],
+        userLocationPlips: {
+          plips: [...state.userLocationPlips.plips, ...payload.plips],
           page: payload.page,
           nextPage: payload.nextPage
         },
@@ -64,8 +64,8 @@ export default (state = initialState, action) => {
     case "SIGNED_PLIPS_FETCHED": {
       return {
         ...state,
-        signed: {
-          plips: [...state.signed.plips, ...payload.plips],
+        signedPlips: {
+          plips: [...state.signedPlips.plips, ...payload.plips],
           page: payload.page,
           nextPage: payload.nextPage
         },
@@ -74,8 +74,8 @@ export default (state = initialState, action) => {
     case "FAVORITE_PLIPS_FETCHED": {
       return {
         ...state,
-        favorite: {
-          plips: [...state.favorite.plips, ...payload.plips],
+        favoritePlips: {
+          plips: [...state.favoritePlips.plips, ...payload.plips],
           page: payload.page,
           nextPage: payload.nextPage
         },
