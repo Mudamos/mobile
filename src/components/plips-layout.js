@@ -28,7 +28,6 @@ export default class PlipsLayout extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
-    hasNextPage: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
@@ -37,6 +36,11 @@ export default class PlipsLayout extends Component {
     userLocationPlips: PropTypes.array,
     allPlips: PropTypes.array,
     signedPlips: PropTypes.array,
+    nationwidePlipsNextPage: PropTypes.number,
+    userLocationPlipsNextPage: PropTypes.number,
+    favoritePlipsNextPage: PropTypes.number,
+    allPlipsNextPage: PropTypes.number,
+    signedPlipsNextPage: PropTypes.number,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
     signatureGoals: PropTypes.shape({

@@ -2,8 +2,9 @@ export const fetchPlips = () => ({
   type: "FETCH_PLIPS",
 });
 
-export const fetchPlipsNextPage = () => ({
+export const fetchPlipsNextPage = ({ typeList, nextPage }) => ({
   type: "FETCH_PLIPS_NEXT_PAGE",
+  payload: { typeList, nextPage },
 });
 
 export const refreshPlips = () => ({

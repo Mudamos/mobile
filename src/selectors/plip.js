@@ -44,6 +44,16 @@ export const findUserFavoritePlips = state => state.plip.favoritePlips.plips || 
 
 export const findSignedPlips = state => state.plip.signedPlips.plips || [];
 
+export const findNationwidePlipsNextPage = state => state.plip.nationwidePlips.nextPage;
+
+export const findUserLocationPlipsNextPage = state => state.plip.userLocationPlips.nextPage;
+
+export const findAllPlipsNextPage = state => state.plip.allPlips.nextPage;
+
+export const findUserFavoritePlipsNextPage = state => state.plip.favoritePlips.nextPage;
+
+export const findSignedPlipsNextPage = state => state.plip.signedPlips.nextPage;
+
 export const sortPlips = plips => state => {
   const user = currentUser(state);
   const address = (user || {}).address;

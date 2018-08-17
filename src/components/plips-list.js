@@ -35,17 +35,18 @@ export default class PlipsList extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
-    hasNextPage: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
     openMenu: PropTypes.func.isRequired,
     plips: PropTypes.array,
     plipsSignInfo: PropTypes.object.isRequired,
+    nextPage: PropTypes.number,
     remoteLinks: RemoteLinksType,
     signatureGoals: PropTypes.shape({
       [PropTypes.string]: SignatureGoalsType,
     }).isRequired,
+    typeList: PropTypes.string.isRequired,
     userSignInfo: PropTypes.object.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
@@ -68,14 +69,20 @@ export default class PlipsList extends Component {
   }
 
   onFetchPlipsNextPage = () => {
-    const { isFetchingPlipsNextPage, onFetchPlipsNextPage } = this.props;
+    const { isFetchingPlipsNextPage, onFetchPlipsNextPage, nextPage, typeList } = this.props;
 
-    if (!isFetchingPlipsNextPage) onFetchPlipsNextPage();
+    if (!isFetchingPlipsNextPage) onFetchPlipsNextPage({ typeList, nextPage });
   };
 
   plipSignatureGoals(plipId) {
     const { signatureGoals } = this.props;
     return signatureGoals[plipId];
+  }
+
+  get hasNextPage() {
+    const { nextPage } = this.props;
+
+    return !!nextPage;
   }
 
   render() {
@@ -135,7 +142,6 @@ export default class PlipsList extends Component {
   renderListView({ plips, isRefreshingPlips }) {
     const {
       currentUser,
-      hasNextPage,
       isFetchingPlipsNextPage,
       plipsSignInfo,
       userSignInfo,
@@ -158,7 +164,7 @@ export default class PlipsList extends Component {
         data={plips}
         renderItem={this.renderCommonRow}
         extraData={extraData}
-        onEndReached={hasNextPage ? this.onFetchPlipsNextPage : null}
+        onEndReached={this.hasNextPage ? this.onFetchPlipsNextPage : null}
         onEndReachedThreshold={0.9}
         refreshing={isRefreshingPlips}
         refreshControl={
@@ -168,7 +174,7 @@ export default class PlipsList extends Component {
             tintColor="black"
           />
         }
-        ListFooterComponent={isFetchingPlipsNextPage && this.renderInnerLoader({ animating: true }) || !hasNextPage && !isRefreshingPlips && this.renderStaticFooter()}
+        ListFooterComponent={isFetchingPlipsNextPage && this.renderInnerLoader({ animating: true }) || !this.hasNextPage && !isRefreshingPlips && this.renderStaticFooter()}
       />
     );
   }

@@ -9,18 +9,28 @@ const initialState = {
   plips: [],
   allPlips: {
     plips: [],
+    page: null,
+    nextPage: null,
   },
   nationwidePlips: {
     plips: [],
+    page: null,
+    nextPage: null,
   },
   userLocationPlips: {
     plips: [],
+    page: null,
+    nextPage: null,
   },
   signedPlips: {
     plips: [],
+    page: null,
+    nextPage: null,
   },
   favoritePlips: {
     plips: [],
+    page: null,
+    nextPage: null,
   },
   currentPlip: null,
 };
@@ -39,6 +49,7 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage
         },
+        isFetchingPlipsNextPage: false,
       };
     }
     case "NATIONWIDE_PLIPS_FETCHED": {
@@ -49,6 +60,7 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage
         },
+        isFetchingPlipsNextPage: false,
       };
     }
     case "PLIPS_BY_USER_LOCATION_FETCHED": {
@@ -59,6 +71,7 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage
         },
+        isFetchingPlipsNextPage: false,
       };
     }
     case "SIGNED_PLIPS_FETCHED": {
@@ -69,6 +82,7 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage
         },
+        isFetchingPlipsNextPage: false,
       };
     }
     case "FAVORITE_PLIPS_FETCHED": {
@@ -79,6 +93,7 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage
         },
+        isFetchingPlipsNextPage: false,
       }
     }
     case "FETCH_PLIPS_NEXT_PAGE": {

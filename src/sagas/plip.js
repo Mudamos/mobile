@@ -162,13 +162,42 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
 }
 
 function* fetchPlipsNextPageSaga({ mobileApi }) {
-  yield takeLatest("FETCH_PLIPS_NEXT_PAGE", function* () {
+  yield takeLatest("FETCH_PLIPS_NEXT_PAGE", function* (action) {
     try {
       // debounce
       yield call(delay, 500);
 
-      const response = yield call(plipsNextPage);
-      yield put(plipsFetched(response));
+      const { typeList, nextPage } = action.payload;
+
+      let response = {};
+
+      switch(typeList) {
+        case "allPlips": {
+          response = yield call(fetchAllPlips, { mobileApi, page: nextPage });
+          yield put(allPlipsFetched(response));
+          break;
+        }
+        case "favoritePlips": {
+          response = yield call(listFavoritePlips, { mobileApi, page: nextPage });
+          yield put(favoritePlipsFetched(response));
+          break;
+        }
+        case "nationwidePlips": {
+          response = yield call(fetchNationwidePlips, { mobileApi, page: nextPage });
+          yield put(nationwidePlipsFetched(response));
+          break;
+        }
+        case "signedPlips": {
+          response = yield call(fetchSignedPlips, { mobileApi, page: nextPage });
+          yield put(signedPlipsFetched(response));
+          break;
+        }
+        case "userLocationPlips": {
+          response = yield call(fetchByUserLocationPlips, { mobileApi, page: nextPage });
+          yield put(plipsByLocationFetched(response));
+          break;
+        }
+      }
 
       const plipIds = (response.plips || []).map(prop("id"));
 

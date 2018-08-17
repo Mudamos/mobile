@@ -53,19 +53,24 @@ export default class MainTabView extends Component {
       allPlips,
       favoritePlips,
       signedPlips,
+      nationwidePlipsNextPage,
+      userLocationPlipsNextPage,
+      favoritePlipsNextPage,
+      allPlipsNextPage,
+      signedPlipsNextPage,
     } = this.props;
 
     switch (route.key) {
-    case "national":
-      return <PlipsList {...this.props} plips={nationwidePlips}/>;
-    case "myLocation":
-      return <PlipsList {...this.props} plips={userLocationPlips}/>;
-    case "all":
-      return <PlipsList {...this.props} plips={allPlips}/>;
-    case "signed":
-      return <PlipsList {...this.props} plips={signedPlips}/>;
-    case "favorites":
-      return <PlipsList {...this.props} plips={favoritePlips}/>;
+    case "nationwidePlips":
+      return <PlipsList {...this.props} typeList={route.key} plips={nationwidePlips} nextPage={nationwidePlipsNextPage}/>;
+    case "userLocationPlips":
+      return <PlipsList {...this.props} typeList={route.key} plips={userLocationPlips} nextPage={userLocationPlipsNextPage}/>;
+    case "allPlips":
+      return <PlipsList {...this.props} typeList={route.key} plips={allPlips} nextPage={allPlipsNextPage}/>;
+    case "signedPlips":
+      return <PlipsList {...this.props} typeList={route.key} plips={signedPlips} nextPage={signedPlipsNextPage}/>;
+    case "favoritePlips":
+      return <PlipsList {...this.props} typeList={route.key} plips={favoritePlips} nextPage={favoritePlipsNextPage}/>;
     default:
       return null;
     }
