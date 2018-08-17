@@ -169,32 +169,45 @@ function* fetchPlipsNextPageSaga({ mobileApi }) {
 
       const { typeList, nextPage } = action.payload;
 
+      const currentAllPlips = yield select(findAllPlips);
+      const currentNationwidePlips = yield select(findNationwidePlips);
+      const currentUserLocationPlips = yield select(findUserLocationPlips);
+      const currentUserFavoritePlips = yield select(findUserFavoritePlips);
+      const currentSignedPlips = yield select(findSignedPlips);
+
       let response = {};
+
+      const appendPlips = (response, plips) => ({ ...response, plips: [...plips, ...response.plips] });
 
       switch(typeList) {
         case "allPlips": {
           response = yield call(fetchAllPlips, { mobileApi, page: nextPage });
-          yield put(allPlipsFetched(response));
+          const plips = appendPlips(response, currentAllPlips);
+          yield put(allPlipsFetched(plips));
           break;
         }
         case "favoritePlips": {
           response = yield call(listFavoritePlips, { mobileApi, page: nextPage });
-          yield put(favoritePlipsFetched(response));
+          const plips = appendPlips(response, currentUserFavoritePlips);
+          yield put(favoritePlipsFetched(plips));
           break;
         }
         case "nationwidePlips": {
           response = yield call(fetchNationwidePlips, { mobileApi, page: nextPage });
-          yield put(nationwidePlipsFetched(response));
+          const plips = appendPlips(response, currentNationwidePlips);
+          yield put(nationwidePlipsFetched(plips));
           break;
         }
         case "signedPlips": {
           response = yield call(fetchSignedPlips, { mobileApi, page: nextPage });
-          yield put(signedPlipsFetched(response));
+          const plips = appendPlips(response, currentSignedPlips);
+          yield put(signedPlipsFetched(plips));
           break;
         }
         case "userLocationPlips": {
           response = yield call(fetchByUserLocationPlips, { mobileApi, page: nextPage });
-          yield put(plipsByLocationFetched(response));
+          const plips = appendPlips(response, currentUserLocationPlips);
+          yield put(plipsByLocationFetched(plips));
           break;
         }
       }
@@ -211,21 +224,49 @@ function* fetchPlipsNextPageSaga({ mobileApi }) {
 }
 
 function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
-  yield takeLatest("PLIPS_REFRESH_PLIPS", function* () {
+  yield takeLatest("PLIPS_REFRESH_PLIPS", function* (action) {
     try {
+      const { typeList } = action.payload;
+
       yield put(isRefreshingPlips(true));
-      const response = yield call(fetchPlips, { page: 1, mudamosWebApi });
-      const paginatedPlips = yield call(paginatePlips, response);
+
+      let response = {};
+
+      switch(typeList) {
+        case "allPlips": {
+          response = yield call(fetchAllPlips, { mobileApi, page: 0 });
+          yield put(allPlipsFetched(response));
+          break;
+        }
+        case "favoritePlips": {
+          response = yield call(listFavoritePlips, { mobileApi, page: 0 });
+          yield put(favoritePlipsFetched(response));
+          break;
+        }
+        case "nationwidePlips": {
+          response = yield call(fetchNationwidePlips, { mobileApi, page: 0 });
+          yield put(nationwidePlipsFetched(response));
+          break;
+        }
+        case "signedPlips": {
+          response = yield call(fetchSignedPlips, { mobileApi, page: 0 });
+          yield put(signedPlipsFetched(response));
+          break;
+        }
+        case "userLocationPlips": {
+          response = yield call(fetchByUserLocationPlips, { mobileApi, page: 0 });
+          yield put(plipsByLocationFetched(response));
+          break;
+        }
+      }
+      console.log(response);
+
+      const plipIds = (response.plips || []).map(prop("id"));
 
       yield all([
-        put(allPlipsFetched(response)),
-        put(plipsFetched(paginatedPlips)),
+        call(fetchPlipsRelatedInfo, { mobileApi, plipIds }),
         put(isRefreshingPlips(false)),
       ]);
-
-      const plipIds = (paginatedPlips.plips || []).map(prop("id"));
-
-      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
     } catch (e) {
       logError(e);
 
@@ -273,13 +314,7 @@ function* fetchNationwidePlips({ mobileApi, page = 0 }) {
     scope,
   });
 
-  const id = prop("id");
-  const currentPlips = yield select(findNationwidePlips);
-  const currentIds = currentPlips.map(id);
-  const containInIds = flip(contains)(currentIds);
-  const uniqById = reject(pipe(id, containInIds));
-
-  return { ...response, plips: uniqById(response.plips) };
+  return { ...response, plips: response.plips }
 }
 
 function* fetchByUserLocationPlips({ mobileApi, page = 0 }) {
@@ -298,13 +333,7 @@ function* fetchByUserLocationPlips({ mobileApi, page = 0 }) {
     scope,
   });
 
-  const id = prop("id");
-  const currentPlips = yield select(findUserLocationPlips);
-  const currentIds = currentPlips.map(id);
-  const containInIds = flip(contains)(currentIds);
-  const uniqById = reject(pipe(id, containInIds));
-
-  return { ...response, plips: uniqById(response.plips) };
+  return { ...response, plips: response.plips }
 }
 
 function* fetchAllPlips({ mobileApi, page = 0 }) {
@@ -319,13 +348,7 @@ function* fetchAllPlips({ mobileApi, page = 0 }) {
     scope,
   });
 
-  const id = prop("id");
-  const currentPlips = yield select(findAllPlips);
-  const currentIds = currentPlips.map(id);
-  const containInIds = flip(contains)(currentIds);
-  const uniqById = reject(pipe(id, containInIds));
-
-  return { ...response, plips: uniqById(response.plips) };
+  return { ...response, plips: response.plips }
 }
 
 function* fetchSignedPlips({ mobileApi, page = 0 }) {
@@ -341,13 +364,7 @@ function* fetchSignedPlips({ mobileApi, page = 0 }) {
     scope,
   });
 
-  const id = prop("id");
-  const currentPlips = yield select(findSignedPlips);
-  const currentIds = currentPlips.map(id);
-  const containInIds = flip(contains)(currentIds);
-  const uniqById = reject(pipe(id, containInIds));
-
-  return { ...response, plips: uniqById(response.plips) };
+  return { ...response, plips: response.plips }
 }
 
 function* listFavoritePlips({ mobileApi, page = 0 }) {
@@ -363,13 +380,7 @@ function* listFavoritePlips({ mobileApi, page = 0 }) {
     scope,
   });
 
-  const id = prop("id");
-  const currentPlips = yield select(findUserFavoritePlips);
-  const currentIds = currentPlips.map(id);
-  const containInIds = flip(contains)(currentIds);
-  const uniqById = reject(pipe(id, containInIds));
-
-  return { ...response, plips: uniqById(response.plips) };
+  return { ...response, plips: response.plips }
 }
 
 function* plipsNextPage() {

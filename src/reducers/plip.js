@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allPlips: {
-          plips: [...state.allPlips.plips, ...payload.plips],
+          plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage
         },
@@ -56,7 +56,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         nationwidePlips: {
-          plips: [...state.nationwidePlips.plips, ...payload.plips],
+          plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage
         },
@@ -67,7 +67,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userLocationPlips: {
-          plips: [...state.userLocationPlips.plips, ...payload.plips],
+          plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage
         },
@@ -78,7 +78,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         signedPlips: {
-          plips: [...state.signedPlips.plips, ...payload.plips],
+          plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage
         },
@@ -89,7 +89,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         favoritePlips: {
-          plips: [...state.favoritePlips.plips, ...payload.plips],
+          plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage
         },

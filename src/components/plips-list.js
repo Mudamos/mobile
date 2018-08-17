@@ -250,9 +250,10 @@ export default class PlipsList extends Component {
   onRefresh = () => {
     const {
       onRefresh,
+      typeList,
     } = this.props;
 
-    onRefresh();
+    onRefresh({ typeList });
   }
 
   onSendYourIdea = () => {

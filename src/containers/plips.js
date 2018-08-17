@@ -355,7 +355,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch(logout()),
   onOpenURL: url => dispatch(openURL(url)),
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
-  onRefresh: () => dispatch(refreshPlips()),
+  onRefresh: ({ typeList }) => dispatch(refreshPlips({ typeList })),
   onSignIn: () => dispatch(navigate("signIn")),
   onMainTabChange: ({ index }) => dispatch(updateMainTabViewIndex(index)),
   onTellAFriend: () => dispatch(tellAFriend()),

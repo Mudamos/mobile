@@ -7,8 +7,9 @@ export const fetchPlipsNextPage = ({ typeList, nextPage }) => ({
   payload: { typeList, nextPage },
 });
 
-export const refreshPlips = () => ({
+export const refreshPlips = ({ typeList }) => ({
   type: "PLIPS_REFRESH_PLIPS",
+  payload: { typeList },
 });
 
 export const fetchingPlips = isFetching => ({
