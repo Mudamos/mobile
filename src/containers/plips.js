@@ -43,11 +43,9 @@ import {
   currentUser as getCurrentUser,
   getMainTabView,
   getUserSignInfo,
-  hasPlipsNextPage,
   isFetchingProfile,
   isUserFirstTime,
   isUserLoggedIn,
-  findPlips,
   findNationwidePlips,
   findUserLocationPlips,
   findUserFavoritePlips,
@@ -94,6 +92,7 @@ class Container extends Component {
   };
 
   static propTypes = {
+    allPlips: PropTypes.array,
     currentSigningPlip: PropTypes.object,
     currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
@@ -105,10 +104,9 @@ class Container extends Component {
     isUserLoggedIn: PropTypes.bool,
     isValidatingProfile: PropTypes.bool,
     nationwidePlips: PropTypes.array,
-    userLocationPlips: PropTypes.array,
-    allPlips: PropTypes.array,
-    signedPlips: PropTypes.array,
     remoteLinks: RemoteLinksType,
+    signedPlips: PropTypes.array,
+    userLocationPlips: PropTypes.array,
     onAvatarChanged: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
     onFetchProfile: PropTypes.func.isRequired,

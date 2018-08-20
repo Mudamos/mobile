@@ -252,7 +252,7 @@ export default class PlipLayout extends Component {
 
     const title = (shouldLogin || willSign) && locale.iWannaMakeTheDifference || locale.makeTheDifferenceAndShare;
     const onPress = shouldLogin && onLogin || willSign && this.onToggleSignModal || this.onShare;
-    const iconName = willSign && "check-circle" || "share";
+    const iconName = (shouldLogin || willSign) && "check-circle" || "share";
 
     return (
       <View style={styles.signButton}>

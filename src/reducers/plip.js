@@ -47,7 +47,7 @@ export default (state = initialState, action) => {
         allPlips: {
           plips: payload.plips,
           page: payload.page,
-          nextPage: payload.nextPage
+          nextPage: payload.nextPage,
         },
         isFetchingPlipsNextPage: false,
       };
@@ -58,7 +58,7 @@ export default (state = initialState, action) => {
         nationwidePlips: {
           plips: payload.plips,
           page: payload.page,
-          nextPage: payload.nextPage
+          nextPage: payload.nextPage,
         },
         isFetchingPlipsNextPage: false,
       };
@@ -69,7 +69,7 @@ export default (state = initialState, action) => {
         userLocationPlips: {
           plips: payload.plips,
           page: payload.page,
-          nextPage: payload.nextPage
+          nextPage: payload.nextPage,
         },
         isFetchingPlipsNextPage: false,
       };
@@ -80,7 +80,7 @@ export default (state = initialState, action) => {
         signedPlips: {
           plips: payload.plips,
           page: payload.page,
-          nextPage: payload.nextPage
+          nextPage: payload.nextPage,
         },
         isFetchingPlipsNextPage: false,
       };
@@ -91,7 +91,7 @@ export default (state = initialState, action) => {
         favoritePlips: {
           plips: payload.plips,
           page: payload.page,
-          nextPage: payload.nextPage
+          nextPage: payload.nextPage,
         },
         isFetchingPlipsNextPage: false,
       }

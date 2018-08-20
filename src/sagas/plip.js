@@ -3,15 +3,7 @@ import { all, call, spawn, put, select, fork, takeEvery, takeLatest } from "redu
 import { delay } from "redux-saga";
 
 import {
-  chain,
-  contains,
-  flip,
-  identity,
-  pipe,
   prop,
-  reject,
-  splitEvery,
-  take,
   uniqBy,
   zip,
 } from "ramda";
@@ -20,15 +12,11 @@ import {
   different,
   eligibleToSignPlip,
   homeSceneKey,
-  isBlank,
   isPresent,
   isDev,
   isUnauthorized,
   logError,
   moment,
-  NATIONWIDE_SCOPE,
-  STATEWIDE_SCOPE,
-  CITYWIDE_SCOPE,
 } from "../utils";
 
 import {
@@ -40,7 +28,6 @@ import {
   appReady,
   plipsFetchError,
   plipsFetchNextPageError,
-  plipsFetched,
   fetchPlipRelatedInfoError,
   fetchingPlips,
   fetchingPlipRelatedInfo,
@@ -78,10 +65,6 @@ import {
   findSignedPlips,
   getCurrentSigningPlip,
   getPlipSignatureGoals,
-  getCurrentPlipsPage,
-  getNextPlipsPage,
-  listAllPlips,
-  sortPlips,
   isUserLoggedIn,
   getIneligiblePlipReasonForScope,
 } from "../selectors";
@@ -103,7 +86,7 @@ const buildSignMessage = ({ user, plip }) => [
 
 const PLIPS_PER_PAGE = 4;
 
-function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
+function* fetchPlipsSaga({ mobileApi }) {
   yield takeLatest("FETCH_PLIPS", function* () {
     try {
       yield put(fetchingPlips(true));
@@ -129,7 +112,7 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
         ...userLocation.plips,
         ...signed.plips,
         ...favorite.plips,
-        ...allPlips.plips
+        ...allPlips.plips,
       ];
       const uniqPlips = uniqBy(id, plips);
       const plipIds = uniqPlips.map(id);
@@ -209,7 +192,7 @@ function* fetchPlipsNextPageSaga({ mobileApi }) {
   });
 }
 
-function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
+function* refreshPlipsSaga({ mobileApi }) {
   yield takeLatest("PLIPS_REFRESH_PLIPS", function* (action) {
     try {
       const { typeList } = action.payload;

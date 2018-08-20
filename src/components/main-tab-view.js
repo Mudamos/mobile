@@ -31,12 +31,17 @@ const initialLayout = {
 
 export default class MainTabView extends Component {
   static propTypes = {
-    tabViewState: TabViewType,
-    nationwidePlips: PropTypes.array,
-    userLocationPlips: PropTypes.array,
     allPlips: PropTypes.array,
+    allPlipsNextPage: PropTypes.number,
     favoritePlips: PropTypes.array,
+    favoritePlipsNextPage: PropTypes.number,
+    nationwidePlips: PropTypes.array,
+    nationwidePlipsNextPage: PropTypes.number,
     signedPlips: PropTypes.array,
+    signedPlipsNextPage: PropTypes.number,
+    tabViewState: TabViewType,
+    userLocationPlips: PropTypes.array,
+    userLocationPlipsNextPage: PropTypes.number,
     onMainTabChange: PropTypes.func.isRequired,
   };
 

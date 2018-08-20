@@ -237,6 +237,8 @@ export const backoff = (fn, { attempts, delay: duration = 100 } = {}) =>
     : Promise.reject(err));
 
 export const eligibleToSignPlip = ({ plip, user }) => {
+  if (!user || !plip) return;
+
   const { scopeCoverage: scope, uf, cityName } = plip;
   const { uf: userUF, city: userCityName } = user.address;
 

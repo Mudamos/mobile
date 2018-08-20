@@ -38,10 +38,10 @@ export default class PlipsList extends Component {
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
+    nextPage: PropTypes.number,
     openMenu: PropTypes.func.isRequired,
     plips: PropTypes.array,
     plipsSignInfo: PropTypes.object.isRequired,
-    nextPage: PropTypes.number,
     remoteLinks: RemoteLinksType,
     signatureGoals: PropTypes.shape({
       [PropTypes.string]: SignatureGoalsType,
@@ -90,7 +90,6 @@ export default class PlipsList extends Component {
       errorFetchingPlips: error,
       isFetchingPlips,
       isRefreshingPlips,
-      onOpenURL,
       plips,
     } = this.props;
 
