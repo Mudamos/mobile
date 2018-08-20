@@ -631,6 +631,7 @@ function* loadStorePlipsInfo({ mobileApi }) {
       }
 
       if (different(newLocation, oldUserLocation)) {
+        oldUserLocation = newLocation;
         yield call(fetch);
       }
     } catch(e) {
