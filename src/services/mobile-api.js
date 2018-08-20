@@ -335,10 +335,14 @@ const listSignedPlips = ({ client }) => (authToken, {
     scope,
   });
 
-  return authorizedClient(client, authToken)
-    .get(`/petitions/pagination/sign?${qs}`)
-    .then(getPagination)
-    .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+  if (authToken) {
+    return authorizedClient(client, authToken)
+      .get(`/petitions/pagination/sign?${qs}`)
+      .then(getPagination)
+      .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+  } else {
+    return ({plips: [], page: null, nextPage: null});
+  }
 };
 
 const listFavoritePlips = ({ client }) => (authToken, {
@@ -358,10 +362,14 @@ const listFavoritePlips = ({ client }) => (authToken, {
     scope,
   });
 
-  return authorizedClient(client, authToken)
-    .get(`/petitions/pagination/favorite?${qs}`)
-    .then(getPagination)
-    .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+  if (authToken) {
+    return authorizedClient(client, authToken)
+      .get(`/petitions/pagination/favorite?${qs}`)
+      .then(getPagination)
+      .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+  } else {
+    return ({plips: [], page: null, nextPage: null});
+  }
 };
 
 const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatarURL }) => {
