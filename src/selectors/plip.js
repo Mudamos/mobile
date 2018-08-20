@@ -30,9 +30,25 @@ export const isFetchingPlipsNextPage = state => state.plip.isFetchingPlipsNextPa
 export const isRefreshingPlips = state => state.plip.isRefreshingPlips;
 
 export const findPlip = id => state =>
-  (state.plip.plips || []).find(propEq("id", id));
+  (findPlips(state) || []).find(propEq("id", id));
 
-export const findPlips = state => state.plip.plips || [];
+export const findPlips = state => {
+  const {
+    nationwidePlips,
+    userLocationPlips,
+    allPlips,
+    favoritePlips,
+    signedPlips,
+  } = state.plip;
+
+  return [
+    ...nationwidePlips.plips,
+    ...userLocationPlips.plips,
+    ...allPlips.plips,
+    ...favoritePlips.plips,
+    ...signedPlips.plips,
+  ] || [];
+}
 
 export const findNationwidePlips = state => state.plip.nationwidePlips.plips || [];
 
@@ -174,7 +190,7 @@ export const getPlipSignatureGoals = plipId => state => {
 };
 
 export const getPlipsSignatureGoals = state =>
-  (state.plip.plips || []).reduce((memo, { id }) => ({
+  (findPlips(state) || []).reduce((memo, { id }) => ({
     ...memo,
     [id]: getPlipSignatureGoals(id)(state),
   }), {});
@@ -190,7 +206,5 @@ export const findPlipBySlug = slug => state => {
     });
   }
 }
-
-export const allNationalPlips = state => state.plip.allPlips && state.plip.allPlips.filter(plip => isNationalCause(plip))
 
 export const mostRecentNationalPlip = state => findNationwidePlips(state) && findNationwidePlips(state)[0]

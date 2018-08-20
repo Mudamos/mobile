@@ -66,10 +66,11 @@ import {
 } from "../actions";
 
 import {
+  isAppReady,
+  isFetchingPlips,
   currentAuthToken,
   currentUserCity,
   currentUserUf,
-  findPlips,
   findAllPlips,
   findNationwidePlips,
   findUserLocationPlips,
@@ -343,27 +344,6 @@ function* listFavoritePlips({ mobileApi, page = 0 }) {
   return { ...response, plips: response.plips }
 }
 
-function* resortPlips() {
-  const allPlips = yield select(listAllPlips);
-  const { plips, nextPage, currentPage } = yield all({
-    plips: select(sortPlips(allPlips)),
-    nextPage: select(getNextPlipsPage),
-    currentPage: select(getCurrentPlipsPage),
-  });
-
-  const compact = chain(identity);
-  const paginatedPlips = splitEvery(PLIPS_PER_PAGE, plips);
-  const currentPlips = take(currentPage, paginatedPlips);
-
-  const response = {
-    page: currentPage,
-    nextPage,
-    plips: compact(currentPlips),
-  };
-
-  yield put(plipsFetched(response));
-}
-
 function* fetchPlipRelatedInfo({ mobileApi }) {
   yield takeLatest("PLIP_FETCH_PLIP_RELATED_INFO", function* ({ payload }) {
     try {
@@ -604,13 +584,40 @@ function* loadStorePlipsInfo({ mobileApi }) {
 
   function* fetch() {
     try {
-      const plips = yield select(findPlips);
-      const plipIds = (plips || []).map(prop("id"));
-      if (!plipIds.length) return;
+      const ready = yield select(isAppReady);
+      const isFetching = yield select(isFetchingPlips);
+      if (!ready || isFetching) return;
+
+      yield put(fetchingPlips(true));
+      const allPlips = yield call(fetchAllPlips, { mobileApi, page: 0 });
+      const favorite = yield call(listFavoritePlips, { mobileApi, page: 0 });
+      const nationwide = yield call(fetchNationwidePlips, { mobileApi, page: 0 });
+      const signed = yield call(fetchSignedPlips, { mobileApi, page: 0 });
+      const userLocation = yield call(fetchByUserLocationPlips, { mobileApi, page: 0 });
+
+
+      yield all([
+        put(allPlipsFetched(allPlips)),
+        put(favoritePlipsFetched(favorite)),
+        put(nationwidePlipsFetched(nationwide)),
+        put(signedPlipsFetched(signed)),
+        put(plipsByLocationFetched(userLocation)),
+        put(fetchingPlips(false)),
+      ]);
+
+      const plipIds = ([
+        ...allPlips.plips,
+        ...favorite.plips,
+        ...nationwide.plips,
+        ...signed.plips,
+        ...userLocation.plips,
+      ] || []).map(prop("id"));
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
-    } catch(e) {
-      logError(e, { tag: "loadStorePlipsInfo" });
+    } catch (e) {
+      logError(e,  { tag: "loadStorePlipsInfo" });
+
+      yield put(fetchingPlips(false));
     }
   }
 
@@ -619,7 +626,6 @@ function* loadStorePlipsInfo({ mobileApi }) {
   });
 
   yield takeLatest("SESSION_USER_LOGGED_OUT", function* () {
-    yield call(resortPlips);
     yield call(fetch);
   });
 
@@ -635,7 +641,6 @@ function* loadStorePlipsInfo({ mobileApi }) {
         oldUserLocation = newLocation;
 
         if (isPresent(newLocation.uf) && isPresent(newLocation.city)) {
-          yield call(resortPlips);
           yield call(fetch);
         }
 
@@ -643,7 +648,6 @@ function* loadStorePlipsInfo({ mobileApi }) {
       }
 
       if (different(newLocation, oldUserLocation)) {
-        yield call(resortPlips);
         yield call(fetch);
       }
     } catch(e) {
