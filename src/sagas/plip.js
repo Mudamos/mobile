@@ -102,29 +102,15 @@ const buildSignMessage = ({ user, plip }) => [
 
 const PLIPS_PER_PAGE = 4;
 
-function* paginatePlips({ plips }) {
-  const allPlips = yield select(sortPlips(plips || []));
-  const paginate = take(PLIPS_PER_PAGE);
-
-  return {
-    page: 1,
-    nextPage: allPlips.length > PLIPS_PER_PAGE ? 2 : null,
-    plips: paginate(allPlips),
-  };
-}
-
 function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
   yield takeLatest("FETCH_PLIPS", function* () {
     try {
       yield put(fetchingPlips(true));
-      const response = yield call(fetchPlips, { mudamosWebApi });
       const nationwide = yield call(fetchNationwidePlips, { mobileApi });
       const userLocation = yield call(fetchByUserLocationPlips, { mobileApi });
       const allPlips = yield call(fetchAllPlips, { mobileApi });
       const signed = yield call(fetchSignedPlips, { mobileApi });
       const favorite = yield call(listFavoritePlips, { mobileApi });
-
-      const paginatedPlips = yield call(paginatePlips, response);
 
       yield all([
         put(nationwidePlipsFetched(nationwide)),
@@ -132,7 +118,6 @@ function* fetchPlipsSaga({ mobileApi, mudamosWebApi }) {
         put(signedPlipsFetched(signed)),
         put(favoritePlipsFetched(favorite)),
         put(allPlipsFetched(allPlips)),
-        put(plipsFetched(paginatedPlips)),
         put(fetchingPlips(false)),
         put(appReady(true)),
       ]);
@@ -259,7 +244,6 @@ function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
           break;
         }
       }
-      console.log(response);
 
       const plipIds = (response.plips || []).map(prop("id"));
 
@@ -276,30 +260,6 @@ function* refreshPlipsSaga({ mobileApi, mudamosWebApi }) {
       ]);
     }
   });
-}
-
-function* fetchPlips({ mudamosWebApi, page = 1, uf, cityId }) {
-  // Because we are ordering client side, we must fetch "all" plips
-  const limit = 100;
-  const scope = "all";
-  const includeCauses = true;
-
-  const response = yield call(mudamosWebApi.listPlips, {
-    cityId,
-    includeCauses,
-    limit,
-    page,
-    scope,
-    uf,
-  });
-
-    const id = prop("id");
-    const currentPlips = yield select(findPlips);
-    const currentIds = currentPlips.map(id);
-    const containInIds = flip(contains)(currentIds);
-    const uniqById = reject(pipe(id, containInIds));
-
-    return { ...response, plips: uniqById(response.plips) };
 }
 
 function* fetchNationwidePlips({ mobileApi, page = 0 }) {
@@ -381,30 +341,6 @@ function* listFavoritePlips({ mobileApi, page = 0 }) {
   });
 
   return { ...response, plips: response.plips }
-}
-
-function* plipsNextPage() {
-  const allPlips = yield select(listAllPlips);
-  const { plips, nextPage, currentPage } = yield all({
-    plips: select(sortPlips(allPlips)),
-    nextPage: select(getNextPlipsPage),
-    currentPage: select(getCurrentPlipsPage),
-  });
-
-  if (!nextPage) {
-    return { page: currentPage, nextPage: null, plips: [] };
-  }
-
-  const compact = chain(identity);
-  const paginatedPlips = splitEvery(PLIPS_PER_PAGE, plips);
-  const currentPlips = take(nextPage, paginatedPlips);
-  const hasNext = (paginatedPlips[nextPage + 1] || []).length > 0;
-
-  return {
-    page: nextPage,
-    nextPage: hasNext ? nextPage + 1 : null,
-    plips: compact(currentPlips),
-  };
 }
 
 function* resortPlips() {
