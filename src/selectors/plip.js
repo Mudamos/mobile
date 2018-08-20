@@ -195,14 +195,14 @@ export const getPlipsSignatureGoals = state =>
     [id]: getPlipSignatureGoals(id)(state),
   }), {});
 
-export const findPlipBySlug = slug => state => {
+export const findPlipByPath = path => state => {
   const plips = findPlips(state);
 
   if (plips) {
     return plips.find(plip => {
-      const plipSlug = /\S+\/(\S+)\/plugins\/peticao\/?$/.exec(plip.plipUrl);
+      const plipPath = /\S+(\/temas\/\S+\/plugins\/peticao)\/?$/.exec(plip.plipUrl);
 
-      if (plipSlug && plipSlug[1] === slug) {
+      if (plipPath && plipPath[1] === path) {
         return true;
       }
     });

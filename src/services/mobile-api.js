@@ -302,7 +302,7 @@ const listPlips = ({ client }) => ({
   limit,
   page,
   scope,
-  slug,
+  path,
 }) => {
   const qs = buildQueryString({
     city,
@@ -311,7 +311,7 @@ const listPlips = ({ client }) => ({
     limit,
     page,
     scope,
-    slug,
+    path,
   });
 
   return client
@@ -327,7 +327,7 @@ const listSignedPlips = ({ client }) => (authToken, {
   limit,
   page,
   scope,
-  slug,
+  path,
 }) => {
   const qs = buildQueryString({
     city,
@@ -336,7 +336,7 @@ const listSignedPlips = ({ client }) => (authToken, {
     limit,
     page,
     scope,
-    slug,
+    path,
   });
 
   if (authToken) {
@@ -356,7 +356,7 @@ const listFavoritePlips = ({ client }) => (authToken, {
   limit,
   page,
   scope,
-  slug,
+  path,
 }) => {
   const qs = buildQueryString({
     city,
@@ -365,7 +365,7 @@ const listFavoritePlips = ({ client }) => (authToken, {
     limit,
     page,
     scope,
-    slug,
+    path,
   });
 
   if (authToken) {

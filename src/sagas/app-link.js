@@ -12,7 +12,7 @@ import {
 } from "../actions";
 
 import {
-  findPlipBySlug,
+  findPlipByPath,
   getAppLinkUrl,
   handlingAppLinkError,
 } from "../selectors";
@@ -47,14 +47,14 @@ function* handlePlip({ mobileApi }) {
   yield takeLatest("HANDLE_APP_LINK", function* () {
     const url = yield select(getAppLinkUrl);
 
-    const slugMatches = /\S+\/(\S+)\/plugins\/peticao\/?$/.exec(url);
+    const pathMatches = /\S+(\/temas\/\S+\/plugins\/peticao)\/?$/.exec(url);
 
-    if (slugMatches != null) {
+    if (pathMatches != null) {
       try {
         yield put(navigate("showPlip"));
 
-        const slug = slugMatches[1];
-        const foundPlip = yield select(findPlipBySlug(slug));
+        const path = pathMatches[1];
+        const foundPlip = yield select(findPlipByPath(path));
 
         if (foundPlip) {
           yield put(setCurrentPlip(foundPlip));
@@ -64,7 +64,7 @@ function* handlePlip({ mobileApi }) {
             limit: 1,
             page: 0,
             scope: "all",
-            slug,
+            path,
            });
           const plip = head(response.plips);
           yield put(setCurrentPlip(plip));
