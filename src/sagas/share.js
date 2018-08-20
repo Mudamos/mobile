@@ -44,7 +44,7 @@ function* sharePlip() {
       const { plip } = payload;
 
       const shareOptions = {
-        url: plip.shareLink ? plip.shareLink : plip.plipUrl,
+        url: plip.sharelink ? plip.sharelink : plip.plipUrl,
         subject: plip.callToAction,
         message: locale.shareMessage({
           description: plip.subtitle,

@@ -70,5 +70,5 @@ export default function* rootSaga({
   yield spawn(walletSaga, { mobileApi, walletStore });
   yield fork(setupSaga, { mobileApi, mudamosSigner, sessionStore });
   yield spawn(appStateSaga);
-  yield fork(appLinkSaga, { mudamosWebApi, mudDynamicLink });
+  yield fork(appLinkSaga, { mobileApi, mudDynamicLink });
 }
