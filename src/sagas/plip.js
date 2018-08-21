@@ -495,6 +495,13 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
         yield put(plipUserSignInfo({ plipId: plip.id, info: apiResult.signMessage }));
         yield put(plipJustSigned({ plipId: plip.id })); //Marks the flow end
         yield put(signingPlip(null));
+
+        // Update Signed Plips
+        const signedPlips = yield call(fetchSignedPlips, { mobileApi, page: 0 });
+        yield put(signedPlipsFetched(signedPlips));
+        const plipIds = (signedPlips.plips || []).map(prop("id"));
+        yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+
       } catch (e) {
         logError(e);
         if (isDev) console.log("is wallet invalid?", apiError.isInvalidWallet(e), e.errorCode, e);
