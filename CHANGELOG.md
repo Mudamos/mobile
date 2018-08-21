@@ -1,5 +1,6 @@
 # Next
 
+* [PR #429] Update app to paginate plips from mobile api
 * [PR #426] Fix OneSignal crash
 * [PR #423] Adjust new layout following guidelines passed by ITS
 * [PR #421] New layout at sign in and sign up
