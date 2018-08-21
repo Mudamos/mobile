@@ -54,8 +54,6 @@ import {
 } from "../actions";
 
 import {
-  isAppReady,
-  isFetchingPlips,
   currentAuthToken,
   currentUserCity,
   currentUserUf,
@@ -570,7 +568,7 @@ function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
   return yield all(plipIds.map(plipId => call(fetchUserSignInfo, { mobileApi, plipId })));
 }
 
-function* loadStorePlipsInfo({ mobileApi }) {
+function* loadStorePlipsInfo() {
   let oldUserLocation;
 
   yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
@@ -619,5 +617,5 @@ export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiEr
   yield spawn(fetchPlipSignersSaga, { mobileApi });
   yield spawn(fetchPlipRelatedInfo, { mobileApi });
   yield fork(fetchAllPlips, { mobileApi })
-  yield fork(loadStorePlipsInfo, { mobileApi });
+  yield fork(loadStorePlipsInfo);
 }
