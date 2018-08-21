@@ -29,6 +29,7 @@ import {
   plipsFetchError,
   plipsFetchNextPageError,
   fetchPlipRelatedInfoError,
+  fetchPlips,
   fetchingPlips,
   fetchingPlipRelatedInfo,
   fetchingPlipSigners,
@@ -572,51 +573,12 @@ function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
 function* loadStorePlipsInfo({ mobileApi }) {
   let oldUserLocation;
 
-  function* fetch() {
-    try {
-      const ready = yield select(isAppReady);
-      const isFetching = yield select(isFetchingPlips);
-      if (!ready || isFetching) return;
-
-      yield put(fetchingPlips(true));
-      const allPlips = yield call(fetchAllPlips, { mobileApi, page: 0 });
-      const favorite = yield call(listFavoritePlips, { mobileApi, page: 0 });
-      const nationwide = yield call(fetchNationwidePlips, { mobileApi, page: 0 });
-      const signed = yield call(fetchSignedPlips, { mobileApi, page: 0 });
-      const userLocation = yield call(fetchByUserLocationPlips, { mobileApi, page: 0 });
-
-
-      yield all([
-        put(allPlipsFetched(allPlips)),
-        put(favoritePlipsFetched(favorite)),
-        put(nationwidePlipsFetched(nationwide)),
-        put(signedPlipsFetched(signed)),
-        put(plipsByLocationFetched(userLocation)),
-        put(fetchingPlips(false)),
-      ]);
-
-      const plipIds = ([
-        ...allPlips.plips,
-        ...favorite.plips,
-        ...nationwide.plips,
-        ...signed.plips,
-        ...userLocation.plips,
-      ] || []).map(prop("id"));
-
-      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
-    } catch (e) {
-      logError(e,  { tag: "loadStorePlipsInfo" });
-
-      yield put(fetchingPlips(false));
-    }
-  }
-
   yield takeLatest("SESSION_LOGGIN_SUCCEEDED", function* () {
-    yield call(fetch);
+    yield put(fetchPlips());
   });
 
   yield takeLatest("SESSION_USER_LOGGED_OUT", function* () {
-    yield call(fetch);
+    yield put(fetchPlips());
   });
 
   yield takeLatest("PROFILE_USER_UPDATED", function* ({ payload: { currentUser }}) {
@@ -627,11 +589,12 @@ function* loadStorePlipsInfo({ mobileApi }) {
       }
 
       const newLocation = { uf: currentUser.address.uf, city: currentUser.address.city };
+
       if (!oldUserLocation) {
         oldUserLocation = newLocation;
 
         if (isPresent(newLocation.uf) && isPresent(newLocation.city)) {
-          yield call(fetch);
+          yield put(fetchPlips());
         }
 
         return;
@@ -639,7 +602,7 @@ function* loadStorePlipsInfo({ mobileApi }) {
 
       if (different(newLocation, oldUserLocation)) {
         oldUserLocation = newLocation;
-        yield call(fetch);
+        yield put(fetchPlips());
       }
     } catch(e) {
       logError(e, { tag: "loadStorePlipsInfo" });
@@ -655,5 +618,6 @@ export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiEr
   yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
   yield spawn(fetchPlipRelatedInfo, { mobileApi });
+  yield fork(fetchAllPlips, { mobileApi })
   yield fork(loadStorePlipsInfo, { mobileApi });
 }
