@@ -35,6 +35,11 @@ export default class MainTabView extends Component {
     allPlipsNextPage: PropTypes.number,
     favoritePlips: PropTypes.array,
     favoritePlipsNextPage: PropTypes.number,
+    loadedAllPlips: PropTypes.bool,
+    loadedNationwidePlips: PropTypes.bool,
+    loadedSignedPlips: PropTypes.bool,
+    loadedUserFavoritePlips: PropTypes.bool,
+    loadedUserLocationPlips: PropTypes.bool,
     nationwidePlips: PropTypes.array,
     nationwidePlipsNextPage: PropTypes.number,
     signedPlips: PropTypes.array,
@@ -63,19 +68,24 @@ export default class MainTabView extends Component {
       favoritePlipsNextPage,
       allPlipsNextPage,
       signedPlipsNextPage,
+      loadedAllPlips,
+      loadedNationwidePlips,
+      loadedSignedPlips,
+      loadedUserFavoritePlips,
+      loadedUserLocationPlips,
     } = this.props;
 
     switch (route.key) {
     case "nationwidePlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={nationwidePlips} nextPage={nationwidePlipsNextPage}/>;
+      return <PlipsList {...this.props} typeList={route.key} plips={nationwidePlips} nextPage={nationwidePlipsNextPage} hasLoadedPlips={loadedNationwidePlips}/>;
     case "userLocationPlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={userLocationPlips} nextPage={userLocationPlipsNextPage}/>;
+      return <PlipsList {...this.props} typeList={route.key} plips={userLocationPlips} nextPage={userLocationPlipsNextPage} hasLoadedPlips={loadedUserLocationPlips}/>;
     case "allPlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={allPlips} nextPage={allPlipsNextPage}/>;
+      return <PlipsList {...this.props} typeList={route.key} plips={allPlips} nextPage={allPlipsNextPage} hasLoadedPlips={loadedAllPlips}/>;
     case "signedPlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={signedPlips} nextPage={signedPlipsNextPage}/>;
+      return <PlipsList {...this.props} typeList={route.key} plips={signedPlips} nextPage={signedPlipsNextPage} hasLoadedPlips={loadedSignedPlips}/>;
     case "favoritePlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={favoritePlips} nextPage={favoritePlipsNextPage}/>;
+      return <PlipsList {...this.props} typeList={route.key} plips={favoritePlips} nextPage={favoritePlipsNextPage} hasLoadedPlips={loadedUserFavoritePlips}/>;
     default:
       return null;
     }

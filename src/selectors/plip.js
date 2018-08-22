@@ -50,6 +50,16 @@ export const findPlips = state => {
   ] || [];
 }
 
+export const hasLoadedNationwidePlips = state => !!state.plip.nationwidePlips.loaded;
+
+export const hasLoadedUserLocationPlips = state => !!state.plip.userLocationPlips.loaded;
+
+export const hasLoadedAllPlips = state => !!state.plip.allPlips.loaded;
+
+export const hasLoadedUserFavoritePlips = state => !!state.plip.favoritePlips.loaded;
+
+export const hasLoadedSignedPlips = state => !!state.plip.signedPlips.loaded;
+
 export const findNationwidePlips = state => state.plip.nationwidePlips.plips || [];
 
 export const findUserLocationPlips = state => state.plip.userLocationPlips.plips || [];

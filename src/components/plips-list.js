@@ -34,6 +34,7 @@ export default class PlipsList extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
     errorFetchingPlips: PropTypes.bool,
+    hasLoadedPlips: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
@@ -79,6 +80,7 @@ export default class PlipsList extends Component {
   render() {
     const {
       errorFetchingPlips: error,
+      hasLoadedPlips,
       isFetchingPlips,
       isRefreshingPlips,
       plips,
@@ -100,7 +102,7 @@ export default class PlipsList extends Component {
             })
         }
 
-        {!!shouldShowNoPlips && this.renderNoPlips()}
+        {!!shouldShowNoPlips && !isFetchingPlips && hasLoadedPlips && this.renderNoPlips()}
         {error && this.renderRetry()}
         {isFetchingPlips && this.renderInnerLoader({ animating: isFetchingPlips })}
       </View>

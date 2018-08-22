@@ -345,7 +345,7 @@ const listSignedPlips = ({ client }) => (authToken, {
       .then(getPagination)
       .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
   } else {
-    return Promise.resolve({plips: [], page: null, nextPage: null});
+    return Promise.resolve({plips: [], page: 0, nextPage: null});
   }
 };
 
@@ -374,7 +374,7 @@ const listFavoritePlips = ({ client }) => (authToken, {
       .then(getPagination)
       .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
   } else {
-    return Promise.resolve({plips: [], page: null, nextPage: null});
+    return Promise.resolve({plips: [], page: 0, nextPage: null});
   }
 };
 

@@ -11,26 +11,31 @@ const initialState = {
     plips: [],
     page: null,
     nextPage: null,
+    loaded: false,
   },
   nationwidePlips: {
     plips: [],
     page: null,
     nextPage: null,
+    loaded: false,
   },
   userLocationPlips: {
     plips: [],
     page: null,
     nextPage: null,
+    loaded: false,
   },
   signedPlips: {
     plips: [],
     page: null,
     nextPage: null,
+    loaded: false,
   },
   favoritePlips: {
     plips: [],
     page: null,
     nextPage: null,
+    loaded: false,
   },
   currentPlip: null,
 };
@@ -45,55 +50,115 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allPlips: {
+          plips: [...state.allPlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+        },
+        isFetchingPlipsNextPage: false,
+      };
+    }
+    case "REFRESH_ALL_PLIPS": {
+      return {
+        ...state,
+        allPlips: {
           plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage,
+          loaded: true,
         },
-        isFetchingPlipsNextPage: false,
       };
     }
     case "NATIONWIDE_PLIPS_FETCHED": {
       return {
         ...state,
         nationwidePlips: {
+          plips: [...state.nationwidePlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+        },
+        isFetchingPlipsNextPage: false,
+      };
+    }
+    case "REFRESH_NATIONWIDE_PLIPS": {
+      return {
+        ...state,
+        nationwidePlips: {
           plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage,
+          loaded: true,
         },
-        isFetchingPlipsNextPage: false,
       };
     }
     case "PLIPS_BY_USER_LOCATION_FETCHED": {
       return {
         ...state,
         userLocationPlips: {
+          plips: [...state.userLocationPlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+        },
+        isFetchingPlipsNextPage: false,
+      };
+    }
+    case "REFRESH_PLIPS_BY_USER_LOCATION": {
+      return {
+        ...state,
+        userLocationPlips: {
           plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage,
+          loaded: true,
         },
-        isFetchingPlipsNextPage: false,
       };
     }
     case "SIGNED_PLIPS_FETCHED": {
       return {
         ...state,
         signedPlips: {
+          plips: [...state.signedPlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+        },
+        isFetchingPlipsNextPage: false,
+      };
+    }
+    case "REFRESH_SIGNED_PLIPS": {
+      return {
+        ...state,
+        signedPlips: {
           plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage,
+          loaded: true,
         },
-        isFetchingPlipsNextPage: false,
       };
     }
     case "FAVORITE_PLIPS_FETCHED": {
       return {
         ...state,
         favoritePlips: {
+          plips: [...state.favoritePlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+        },
+        isFetchingPlipsNextPage: false,
+      }
+    }
+    case "REFRESH_FAVORITE_PLIPS": {
+      return {
+        ...state,
+        favoritePlips: {
           plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage,
+          loaded: true,
         },
-        isFetchingPlipsNextPage: false,
       }
     }
     case "FETCH_PLIPS_NEXT_PAGE": {
@@ -119,14 +184,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         errorFetchingPlips: true,
-      };
-    case "PLIPS_FETCHED":
-      return {
-        ...state,
-        plips: payload.plips,
-        currentPlipsPage: payload.page,
-        nextPlipsPage: payload.nextPage,
-        isFetchingPlipsNextPage: false,
       };
     case "PLIPS_REFRESHING_PLIPS":
       return {

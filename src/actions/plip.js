@@ -27,8 +27,28 @@ export const plipsFetchNextPageError = error => ({
   payload: { error },
 });
 
-export const plipsFetched = ({ plips, page, nextPage }) => ({
-  type: "PLIPS_FETCHED",
+export const refreshAllPlips = ({ plips, page, nextPage }) => ({
+  type: "REFRESH_ALL_PLIPS",
+  payload: { plips, page, nextPage },
+});
+
+export const refreshNationwidePlips = ({ plips, page, nextPage }) => ({
+  type: "REFRESH_NATIONWIDE_PLIPS",
+  payload: { plips, page, nextPage },
+});
+
+export const refreshPlipsByLocation = ({ plips, page, nextPage }) => ({
+  type: "REFRESH_PLIPS_BY_USER_LOCATION",
+  payload: { plips, page, nextPage },
+});
+
+export const refreshSignedPlips = ({ plips, page, nextPage }) => ({
+  type: "REFRESH_SIGNED_PLIPS",
+  payload: { plips, page, nextPage },
+});
+
+export const refreshFavoritePlips = ({ plips, page, nextPage }) => ({
+  type: "REFRESH_FAVORITE_PLIPS",
   payload: { plips, page, nextPage },
 });
 

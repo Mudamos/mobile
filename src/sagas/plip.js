@@ -3,6 +3,7 @@ import { all, call, spawn, put, select, fork, takeEvery, takeLatest } from "redu
 import { delay } from "redux-saga";
 
 import {
+  isEmpty,
   prop,
   uniqBy,
   zip,
@@ -36,6 +37,7 @@ import {
   fetchPlipSignersError,
   fetchingShortPlipSigners,
   invalidatePhone,
+  isAppReady,
   isRefreshingPlips,
   isSigningPlip,
   logEvent,
@@ -47,6 +49,11 @@ import {
   plipSignError,
   plipUserSignInfo,
   profileStateMachine,
+  refreshAllPlips,
+  refreshNationwidePlips,
+  refreshPlipsByLocation,
+  refreshSignedPlips,
+  refreshFavoritePlips,
   signPlip as signPlipAction,
   signingPlip,
   shortPlipSigners,
@@ -62,6 +69,7 @@ import {
   findUserLocationPlips,
   findUserFavoritePlips,
   findSignedPlips,
+  getCurrentMainTabView,
   getCurrentSigningPlip,
   getPlipSignatureGoals,
   isUserLoggedIn,
@@ -85,34 +93,83 @@ const buildSignMessage = ({ user, plip }) => [
 
 const PLIPS_PER_PAGE = 4;
 
+function* fetchPlipsMainTab({ mobileApi }) {
+  yield takeLatest("UPDATE_MAIN_TAB_VIEW_INDEX", function* () {
+    const mainTabViewKey = yield select(getCurrentMainTabView);
+
+    let plips = [];
+
+    switch(mainTabViewKey) {
+      case "allPlips": {
+        plips = yield select(findAllPlips);
+        break;
+      }
+      case "favoritePlips": {
+        plips = yield select(findUserFavoritePlips);
+        break;
+      }
+      case "nationwidePlips": {
+        plips = yield select(findNationwidePlips);
+        break;
+      }
+      case "signedPlips": {
+        plips = yield select(findSignedPlips);
+        break;
+      }
+      case "userLocationPlips": {
+        plips = yield select(findUserLocationPlips);
+        break;
+      }
+    }
+
+    yield isEmpty(plips) && put(fetchPlips());;
+  });
+}
+
 function* fetchPlipsSaga({ mobileApi }) {
   yield takeLatest("FETCH_PLIPS", function* () {
     try {
       yield put(fetchingPlips(true));
-      const nationwide = yield call(fetchNationwidePlips, { mobileApi });
-      const userLocation = yield call(fetchByUserLocationPlips, { mobileApi });
-      const allPlips = yield call(fetchAllPlips, { mobileApi });
-      const signed = yield call(fetchSignedPlips, { mobileApi });
-      const favorite = yield call(listFavoritePlips, { mobileApi });
+
+      const mainTabViewKey = yield select(getCurrentMainTabView);
+
+      let response = {};
+
+      switch(mainTabViewKey) {
+        case "allPlips": {
+          response = yield call(fetchAllPlips, { mobileApi });
+          break;
+        }
+        case "favoritePlips": {
+          response = yield call(listFavoritePlips, { mobileApi });
+          break;
+        }
+        case "nationwidePlips": {
+          response = yield call(fetchNationwidePlips, { mobileApi });
+          break;
+        }
+        case "signedPlips": {
+          response = yield call(fetchSignedPlips, { mobileApi });
+          break;
+        }
+        case "userLocationPlips": {
+          response = yield call(fetchByUserLocationPlips, { mobileApi });
+          break;
+        }
+      }
 
       yield all([
-        put(nationwidePlipsFetched(nationwide)),
-        put(plipsByLocationFetched(userLocation)),
-        put(signedPlipsFetched(signed)),
-        put(favoritePlipsFetched(favorite)),
-        put(allPlipsFetched(allPlips)),
+        (mainTabViewKey === "allPlips") ? put(refreshAllPlips(response)) : Promise.resolve(),
+        (mainTabViewKey === "favoritePlips") ? put(refreshFavoritePlips(response)) : Promise.resolve(),
+        (mainTabViewKey === "nationwidePlips") ? put(refreshNationwidePlips(response)) : Promise.resolve(),
+        (mainTabViewKey === "signedPlips") ? put(refreshSignedPlips(response)) : Promise.resolve(),
+        (mainTabViewKey === "userLocationPlips") ? put(refreshPlipsByLocation(response)) : Promise.resolve(),
         put(fetchingPlips(false)),
-        put(appReady(true)),
+        !isAppReady ? put(appReady(true)) : Promise.resolve(),
       ]);
 
       const id = prop("id");
-      const plips = [
-        ...nationwide.plips,
-        ...userLocation.plips,
-        ...signed.plips,
-        ...favorite.plips,
-        ...allPlips.plips,
-      ];
+      const plips = response.plips;
       const uniqPlips = uniqBy(id, plips);
       const plipIds = uniqPlips.map(id);
 
@@ -123,7 +180,7 @@ function* fetchPlipsSaga({ mobileApi }) {
       yield all([
         put(fetchingPlips(false)),
         put(plipsFetchError(e)),
-        put(appReady(true)),
+        !isAppReady ? put(appReady(true)) : Promise.resolve(),
       ]);
     }
   });
@@ -145,37 +202,30 @@ function* fetchPlipsNextPageSaga({ mobileApi }) {
 
       let response = {};
 
-      const appendPlips = (response, plips) => ({ ...response, plips: [...plips, ...response.plips] });
-
       switch(typeList) {
         case "allPlips": {
           response = yield call(fetchAllPlips, { mobileApi, page: nextPage });
-          const plips = appendPlips(response, currentAllPlips);
-          yield put(allPlipsFetched(plips));
+          yield put(allPlipsFetched(response));
           break;
         }
         case "favoritePlips": {
           response = yield call(listFavoritePlips, { mobileApi, page: nextPage });
-          const plips = appendPlips(response, currentUserFavoritePlips);
-          yield put(favoritePlipsFetched(plips));
+          yield put(favoritePlipsFetched(response));
           break;
         }
         case "nationwidePlips": {
           response = yield call(fetchNationwidePlips, { mobileApi, page: nextPage });
-          const plips = appendPlips(response, currentNationwidePlips);
-          yield put(nationwidePlipsFetched(plips));
+          yield put(nationwidePlipsFetched(response));
           break;
         }
         case "signedPlips": {
           response = yield call(fetchSignedPlips, { mobileApi, page: nextPage });
-          const plips = appendPlips(response, currentSignedPlips);
-          yield put(signedPlipsFetched(plips));
+          yield put(signedPlipsFetched(response));
           break;
         }
         case "userLocationPlips": {
           response = yield call(fetchByUserLocationPlips, { mobileApi, page: nextPage });
-          const plips = appendPlips(response, currentUserLocationPlips);
-          yield put(plipsByLocationFetched(plips));
+          yield put(plipsByLocationFetched(response));
           break;
         }
       }
@@ -203,27 +253,27 @@ function* refreshPlipsSaga({ mobileApi }) {
       switch(typeList) {
         case "allPlips": {
           response = yield call(fetchAllPlips, { mobileApi, page: 0 });
-          yield put(allPlipsFetched(response));
+          yield put(refreshAllPlips(response));
           break;
         }
         case "favoritePlips": {
           response = yield call(listFavoritePlips, { mobileApi, page: 0 });
-          yield put(favoritePlipsFetched(response));
+          yield put(refreshFavoritePlips(response));
           break;
         }
         case "nationwidePlips": {
           response = yield call(fetchNationwidePlips, { mobileApi, page: 0 });
-          yield put(nationwidePlipsFetched(response));
+          yield put(refreshNationwidePlips(response));
           break;
         }
         case "signedPlips": {
           response = yield call(fetchSignedPlips, { mobileApi, page: 0 });
-          yield put(signedPlipsFetched(response));
+          yield put(refreshSignedPlips(response));
           break;
         }
         case "userLocationPlips": {
           response = yield call(fetchByUserLocationPlips, { mobileApi, page: 0 });
-          yield put(plipsByLocationFetched(response));
+          yield put(refreshPlipsByLocation(response));
           break;
         }
       }
@@ -609,8 +659,9 @@ function* loadStorePlipsInfo() {
 }
 
 export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError }) {
-  yield fork(fetchPlipsSaga, { mobileApi, mudamosWebApi });
-  yield fork(refreshPlipsSaga, { mobileApi, mudamosWebApi });
+  yield fork(fetchPlipsMainTab, { mobileApi });
+  yield fork(fetchPlipsSaga, { mobileApi });
+  yield fork(refreshPlipsSaga, { mobileApi });
   yield fork(fetchPlipsNextPageSaga, { mobileApi });
   yield spawn(signPlip, { mobileApi, walletStore, apiError });
   yield spawn(updatePlipSignInfoSaga, { mobileApi });

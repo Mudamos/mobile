@@ -59,6 +59,11 @@ import {
   findRemoteLinks,
   findPlipsSignInfo,
   getCurrentSigningPlip,
+  hasLoadedAllPlips,
+  hasLoadedNationwidePlips,
+  hasLoadedSignedPlips,
+  hasLoadedUserFavoritePlips,
+  hasLoadedUserLocationPlips,
   isValidatingProfile,
 } from "../selectors";
 
@@ -323,6 +328,11 @@ const mapStateToProps = state => ({
   nationwidePlips: findNationwidePlips(state),
   userLocationPlips: findUserLocationPlips(state),
   favoritePlips: findUserFavoritePlips(state),
+  loadedAllPlips: hasLoadedAllPlips(state),
+  loadedNationwidePlips: hasLoadedNationwidePlips(state),
+  loadedSignedPlips: hasLoadedSignedPlips(state),
+  loadedUserFavoritePlips: hasLoadedUserFavoritePlips(state),
+  loadedUserLocationPlips: hasLoadedUserLocationPlips(state),
   allPlips: findAllPlips(state),
   signedPlips: findSignedPlips(state),
   nationwidePlipsNextPage: findNationwidePlipsNextPage(state),
