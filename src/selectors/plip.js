@@ -70,69 +70,6 @@ export const findUserFavoritePlipsNextPage = state => state.plip.favoritePlips.n
 
 export const findSignedPlipsNextPage = state => state.plip.signedPlips.nextPage;
 
-export const sortPlips = plips => state => {
-  const user = currentUser(state);
-  const address = (user || {}).address;
-  const normalize = str => (str || "").toLowerCase();
-  const getTime = date => moment(date).toDate().getTime();
-  const orderPlips = plips => sort((a, b) => getTime(b.initialDate) - getTime(a.initialDate), plips || []);
-  // There is no concept for signed unsigned anymore
-  const groupBySignature = groupBy(() => "unsigned");
-
-  const userCityPlips = plips.filter(plip => {
-    const { scopeCoverage, uf, cityName } = plip;
-
-    return !isNationalCause(plip) && scopeCoverage === CITYWIDE_SCOPE &&
-           address &&
-           normalize(address.uf) === normalize(uf) &&
-           normalize(address.city) === normalize(cityName);
-  }).filter(({ id }) => !hasUserSignedPlip(id)(state));
-
-  const userStatePlips = plips.filter(plip => {
-    const { scopeCoverage, uf } = plip;
-
-    return !isNationalCause(plip) && scopeCoverage === STATEWIDE_SCOPE &&
-           address &&
-           normalize(address.uf) === normalize(uf);
-  }).filter(({ id }) => !hasUserSignedPlip(id)(state));
-
-  const unsignedNationwidePlips = plips
-    .filter(({ scopeCoverage }) => scopeCoverage === NATIONWIDE_SCOPE)
-    .filter(({ id }) => !hasUserSignedPlip(id)(state));
-
-  const filteredIds = [
-    ...userCityPlips,
-    ...userStatePlips,
-    ...unsignedNationwidePlips,
-  ].map(prop("id"));
-
-  const others = plips.filter(pipe(prop("id"), excludes(filteredIds)));
-
-  const signedNationwide = others.filter(({ scopeCoverage }) => scopeCoverage === NATIONWIDE_SCOPE);
-  const otherStatewide = groupBySignature(others.filter(plip => !isNationalCause(plip) && plip.scopeCoverage === STATEWIDE_SCOPE));
-  const otherCitywide = groupBySignature(others.filter(plip => !isNationalCause(plip) && plip.scopeCoverage === CITYWIDE_SCOPE));
-
-  const stateNationalCause = groupBySignature(others.filter(plip => isNationalCause(plip) && plip.scopeCoverage === STATEWIDE_SCOPE));
-  const cityNationalCause = groupBySignature(others.filter(plip => isNationalCause(plip) && plip.scopeCoverage === CITYWIDE_SCOPE));
-
-  return [
-    ...orderPlips(userCityPlips),
-    ...(user ? orderPlips(cityNationalCause["unsigned"]) : []),
-    ...orderPlips(userStatePlips),
-    ...(user ? orderPlips(stateNationalCause["unsigned"]) : []),
-    ...orderPlips(unsignedNationwidePlips),
-    ...(user ? [] : orderPlips(cityNationalCause["unsigned"])),
-    ...(user ? [] : orderPlips(stateNationalCause["unsigned"])),
-    ...orderPlips(otherStatewide["unsigned"]),
-    ...orderPlips(otherCitywide["unsigned"]),
-    ...orderPlips(signedNationwide),
-    ...orderPlips(otherStatewide["signed"]),
-    ...orderPlips(stateNationalCause["signed"]),
-    ...orderPlips(otherCitywide["signed"]),
-    ...orderPlips(cityNationalCause["signed"]),
-  ];
-};
-
 export const listAllPlips = state => state.plip.allPlips;
 
 export const getNextPlipsPage = state => state.plip.nextPlipsPage;
