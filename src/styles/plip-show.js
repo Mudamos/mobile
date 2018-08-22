@@ -251,12 +251,12 @@ export default StyleSheet.create({
     bottom: 0,
     right: 0,
   },
-  signaturesAndGoals: {
+  signaturesAndGoal: {
     color: "#000",
     paddingHorizontal: 10,
     paddingTop: 20,
   },
-  signaturesAndGoalsContainer: {
+  signaturesAndGoalContainer: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "flex-end",

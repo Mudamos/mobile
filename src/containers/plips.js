@@ -59,7 +59,6 @@ import {
   findRemoteLinks,
   findPlipsSignInfo,
   getCurrentSigningPlip,
-  getPlipsSignatureGoals,
   isValidatingProfile,
 } from "../selectors";
 
@@ -333,7 +332,6 @@ const mapStateToProps = state => ({
   signedPlipsNextPage: findSignedPlipsNextPage(state),
   remoteLinks: findRemoteLinks(state),
   plipsSignInfo: findPlipsSignInfo(state),
-  signatureGoals: getPlipsSignatureGoals(state),
   tabViewState: getMainTabView(state),
   userSignInfo: getUserSignInfo(state),
 });

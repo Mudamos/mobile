@@ -21,7 +21,6 @@ import styles from "../styles/plips-layout";
 
 import {
   RemoteLinksType,
-  SignatureGoalsType,
 } from "../prop-types";
 
 export default class PlipsLayout extends Component {
@@ -40,9 +39,6 @@ export default class PlipsLayout extends Component {
     openMenu: PropTypes.func.isRequired,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
-    signatureGoals: PropTypes.shape({
-      [PropTypes.string]: SignatureGoalsType,
-    }).isRequired,
     signedPlips: PropTypes.array,
     signedPlipsNextPage: PropTypes.number,
     tabViewState: TabViewType,

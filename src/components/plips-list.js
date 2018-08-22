@@ -28,7 +28,6 @@ import styles from "../styles/plips-list";
 import locale from "../locales/pt-BR";
 import {
   RemoteLinksType,
-  SignatureGoalsType,
 } from "../prop-types";
 
 export default class PlipsList extends Component {
@@ -43,9 +42,6 @@ export default class PlipsList extends Component {
     plips: PropTypes.array,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
-    signatureGoals: PropTypes.shape({
-      [PropTypes.string]: SignatureGoalsType,
-    }).isRequired,
     typeList: PropTypes.string.isRequired,
     userSignInfo: PropTypes.object.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
@@ -73,11 +69,6 @@ export default class PlipsList extends Component {
 
     if (!isFetchingPlipsNextPage) onFetchPlipsNextPage({ typeList, nextPage });
   };
-
-  plipSignatureGoals(plipId) {
-    const { signatureGoals } = this.props;
-    return signatureGoals[plipId];
-  }
 
   get hasNextPage() {
     const { nextPage } = this.props;
@@ -144,14 +135,12 @@ export default class PlipsList extends Component {
       isFetchingPlipsNextPage,
       plipsSignInfo,
       userSignInfo,
-      signatureGoals,
     } = this.props;
 
     const extraData = {
       currentUser,
       plipsSignInfo,
       userSignInfo,
-      signatureGoals,
     };
 
     return (

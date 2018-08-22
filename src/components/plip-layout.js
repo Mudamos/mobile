@@ -44,10 +44,6 @@ import styles, {
 
 import locale from "../locales/pt-BR";
 
-import {
-  SignatureGoalsType,
-} from "../prop-types";
-
 export default class PlipLayout extends Component {
   state = {
     isSignModalVisible: false,
@@ -65,7 +61,6 @@ export default class PlipLayout extends Component {
     remoteConfig: PropTypes.shape({
       authenticatedSignersButtonTitle: PropTypes.string,
     }),
-    signatureGoals: SignatureGoalsType,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     user: PropTypes.object,
@@ -127,12 +122,12 @@ export default class PlipLayout extends Component {
   }
 
   get plipProgress() {
-    const { plip, plipSignInfo, signatureGoals } = this.props;
+    const { plip, plipSignInfo } = this.props;
 
-    if (!plip || !signatureGoals.currentSignatureGoal) return 0;
+    if (!plip) return 0;
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
-    const total = signatureGoals.finalGoal;
+    const total = plip.totalSignaturesRequired;
     const progress = clamp(0, 1, count / total);
 
     return progress;
@@ -341,19 +336,19 @@ export default class PlipLayout extends Component {
   renderSignaturesCount() {
     const {
       plipSignInfo,
-      signatureGoals,
+      plip,
     } = this.props;
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
 
-    const signaturesAndGoals = {
+    const signaturesAndGoal = {
       signatures: formatNumber(count),
-      goal: formatNumber(signatureGoals.finalGoal),
+      goal: formatNumber(plip.totalSignaturesRequired),
     }
 
     return (
-      <View style={styles.signaturesAndGoalsContainer}>
-        <Text style={styles.signaturesAndGoals}>{locale.signaturesAndGoals(signaturesAndGoals)}</Text>
+      <View style={styles.signaturesAndGoalContainer}>
+        <Text style={styles.signaturesAndGoal}>{locale.signaturesAndGoal(signaturesAndGoal)}</Text>
       </View>
     );
   }

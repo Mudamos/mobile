@@ -134,7 +134,7 @@ const translations = {
   sign: "Assinar",
   signature: "Assinatura",
   signatures: "Assinaturas",
-  signaturesAndGoals: ({ signatures, goal }) =>  `Assinaturas: ${signatures} Meta: ${goal}`,
+  signaturesAndGoal: ({ signatures, goal }) =>  `Assinaturas: ${signatures} Meta: ${goal}`,
   signPlip: "Assinar Projeto de Lei",
   signupSuccessModalText: "Seu celular foi validado e agora você já pode assinar projetos de lei de iniciativa popular.",
   signed: "Assinado",
