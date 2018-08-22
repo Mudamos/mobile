@@ -201,25 +201,60 @@ export default class PlipsList extends Component {
   renderCommonRow = this.renderRow({ height: 360, margin: 0 });
 
   renderNoPlips() {
-    return (
-      <View style={styles.noProjectsContainer}>
-        <View style={styles.noProjectsInnerContainer}>
-          <Image
-            source={require("../images/plip-page.png")}
-            style={styles.noProjectsIcon}
-          />
+    const { typeList, currentUser } = this.props;
 
-          <Text style={styles.noProjectsText}>{locale.noProjectsYet}</Text>
-        </View>
+    const isLogged = !!currentUser;
 
-        <FlatButton
-          title={locale.links.sendYourIdea.toUpperCase()}
-          onPress={this.onSendYourIdea}
-          style={{backgroundColor: "#00c084" }}
-          textStyle={{color: "#fff"}}
-        />
-      </View>
-    );
+    switch(typeList) {
+      case "signedPlips":
+        return (
+          <View style={styles.noProjectsContainer}>
+            <View style={styles.noProjectsInnerContainer}>
+              <Image
+                source={require("../images/plip-page.png")}
+                style={styles.noProjectsIcon}
+              />
+
+              <Text style={styles.noProjectsText}>{isLogged ? locale.noSignedProjects : locale.youShouldBeLoggedToSeeYourSignedProjects}</Text>
+            </View>
+          </View>
+        );
+
+      case "favoritePlips":
+        return (
+          <View style={styles.noProjectsContainer}>
+            <View style={styles.noProjectsInnerContainer}>
+              <Image
+                source={require("../images/plip-page.png")}
+                style={styles.noProjectsIcon}
+              />
+
+              <Text style={styles.noProjectsText}>{isLogged ? locale.noFavoriteProjects : locale.youShouldBeLoggedToSeeYourFavoriteProjects}</Text>
+            </View>
+          </View>
+        );
+
+      default:
+        return (
+          <View style={styles.noProjectsContainer}>
+            <View style={styles.noProjectsInnerContainer}>
+              <Image
+                source={require("../images/plip-page.png")}
+                style={styles.noProjectsIcon}
+              />
+
+              <Text style={styles.noProjectsText}>{locale.noProjectsYet}</Text>
+            </View>
+
+            <FlatButton
+              title={locale.links.sendYourIdea.toUpperCase()}
+              onPress={this.onSendYourIdea}
+              style={{backgroundColor: "#00c084" }}
+              textStyle={{color: "#fff"}}
+            />
+          </View>
+        );
+    }
   }
 
   renderRetry() {
