@@ -177,14 +177,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetchingPlips: payload.isFetching,
-        errorFetchingPlips: false,
       };
     }
-    case "ERROR_FETCHING_PLIPS":
-      return {
-        ...state,
-        errorFetchingPlips: true,
-      };
     case "PLIPS_REFRESHING_PLIPS":
       return {
         ...state,

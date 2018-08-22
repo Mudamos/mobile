@@ -26,7 +26,6 @@ import {
   getCurrentPlipShortSignersInfo,
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
-  getPlipSignatureGoals,
   handlingAppLinkError,
   hasUserJustSignedPlip,
   listRemoteConfig,

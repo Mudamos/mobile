@@ -93,7 +93,7 @@ const buildSignMessage = ({ user, plip }) => [
 
 const PLIPS_PER_PAGE = 4;
 
-function* fetchPlipsMainTab({ mobileApi }) {
+function* fetchPlipsMainTab() {
   yield takeLatest("UPDATE_MAIN_TAB_VIEW_INDEX", function* () {
     const mainTabViewKey = yield select(getCurrentMainTabView);
 
@@ -122,7 +122,9 @@ function* fetchPlipsMainTab({ mobileApi }) {
       }
     }
 
-    yield isEmpty(plips) && put(fetchPlips());;
+    if (isEmpty(plips)) {
+      yield put(fetchPlips());
+    }
   });
 }
 
@@ -193,12 +195,6 @@ function* fetchPlipsNextPageSaga({ mobileApi }) {
       yield call(delay, 500);
 
       const { typeList, nextPage } = action.payload;
-
-      const currentAllPlips = yield select(findAllPlips);
-      const currentNationwidePlips = yield select(findNationwidePlips);
-      const currentUserLocationPlips = yield select(findUserLocationPlips);
-      const currentUserFavoritePlips = yield select(findUserFavoritePlips);
-      const currentSignedPlips = yield select(findSignedPlips);
 
       let response = {};
 
@@ -658,8 +654,8 @@ function* loadStorePlipsInfo() {
   });
 }
 
-export default function* plipSaga({ mobileApi, mudamosWebApi, walletStore, apiError }) {
-  yield fork(fetchPlipsMainTab, { mobileApi });
+export default function* plipSaga({ mobileApi, walletStore, apiError }) {
+  yield fork(fetchPlipsMainTab);
   yield fork(fetchPlipsSaga, { mobileApi });
   yield fork(refreshPlipsSaga, { mobileApi });
   yield fork(fetchPlipsNextPageSaga, { mobileApi });

@@ -1,24 +1,5 @@
 import {
-  CITYWIDE_SCOPE,
-  STATEWIDE_SCOPE,
-  NATIONWIDE_SCOPE,
-
-  excludes,
-  moment,
-} from "../utils";
-
-import {
-  isNationalCause,
-} from "../models";
-
-import { currentUser } from "./profile";
-
-import {
-  groupBy,
-  pipe,
-  prop,
   propEq,
-  sort,
 } from "ramda";
 
 export const errorFetchingPlips = state => state.plip.errorFetchingPlips;

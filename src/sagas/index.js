@@ -36,7 +36,6 @@ export default function* rootSaga({
   localStorage,
   locationService,
   mudamosSigner,
-  mudamosWebApi,
   mobileApi,
   mudDynamicLink,
   permissionService,
@@ -56,7 +55,7 @@ export default function* rootSaga({
   yield spawn(notificationSaga);
   yield spawn(passwordSaga, { mobileApi, sessionStore, Crypto });
   yield spawn(permissionSaga, { permissionService });
-  yield spawn(plipSaga, { apiError, localStorage, mobileApi, mudamosWebApi, walletStore });
+  yield spawn(plipSaga, { apiError, localStorage, mobileApi, walletStore });
   yield spawn(profileSaga, { dispatch, mobileApi, DeviceInfo, sessionStore, Crypto, walletStore });
   yield spawn(stateSaga, { repositories });
   yield spawn(errorSaga);
