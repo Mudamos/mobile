@@ -744,11 +744,11 @@ function* toggleFavoritePlipSaga({ mobileApi }) {
 
     if (!loggedIn) return;
 
-    const response = yield call(mobileApi.toggleFavoritePlip, authToken, { detailId });
+    const { action: responseAction, favorite: response } = yield call(mobileApi.toggleFavoritePlip, authToken, { detailId });
 
     const favoriteInfo = zip([detailId], [response]).reduce((memo, [id, result]) => {
-      const inserted = result.favorite.action === "insert";
-      memo[id] = inserted ? response.favorite : null;
+      const inserted = responseAction === "insert";
+      memo[id] = inserted ? response.favorite : {};
       return memo;
     }, {});
 
