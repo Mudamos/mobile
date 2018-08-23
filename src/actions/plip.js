@@ -17,14 +17,17 @@ export const fetchingPlips = isFetching => ({
   payload: { isFetching },
 });
 
-export const plipsFetchError = error => ({
-  type: "ERROR_FETCHING_PLIPS",
-  payload: { error },
-});
-
 export const plipsFetchNextPageError = error => ({
   type: "FETCHING_PLIPS_NEXT_PAGE_ERROR",
   payload: { error },
+});
+
+export const resetUserPlips = () => ({
+  type: "RESET_USER_PLIPS",
+});
+
+export const resetUserLocationPlips = () => ({
+  type: "RESET_USER_LOCATION_PLIPS",
 });
 
 export const refreshAllPlips = ({ plips, page, nextPage }) => ({
@@ -81,6 +84,32 @@ export const isRefreshingPlips = isRefreshing => ({
   type: "PLIPS_REFRESHING_PLIPS",
   payload: { isRefreshing },
 });
+
+export const allPlipsError = error => ({
+  type: "ALL_PLIPS_ERROR",
+  payload: { error },
+});
+
+export const nationwidePlipsError = error => ({
+  type: "NATIONWIDE_PLIPS_ERROR",
+  payload: { error },
+});
+
+export const plipsByLocationError = error => ({
+  type: "PLIPS_BY_USER_LOCATION_ERROR",
+  payload: { error },
+});
+
+export const signedPlipsError = error => ({
+  type: "SIGNED_PLIPS_ERROR",
+  payload: { error },
+});
+
+export const favoritePlipsError = error => ({
+  type: "FAVORITE_PLIPS_ERROR",
+  payload: { error },
+});
+
 
 export const plipsRefreshError = error => ({
   type: "PLIPS_REFRESH_ERROR",

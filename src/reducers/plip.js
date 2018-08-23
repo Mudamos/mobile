@@ -2,7 +2,6 @@ const initialState = {
   userSignInfo: {},
   justSignedPlips: {},
   plipsSignInfo: {},
-  errorFetchingPlips: false,
   isFetchingPlips: false,
   isFetchingPlipsNextPage: false,
   isRefreshingPlips: false,
@@ -12,30 +11,35 @@ const initialState = {
     page: null,
     nextPage: null,
     loaded: false,
+    error: null,
   },
   nationwidePlips: {
     plips: [],
     page: null,
     nextPage: null,
     loaded: false,
+    error: null,
   },
   userLocationPlips: {
     plips: [],
     page: null,
     nextPage: null,
     loaded: false,
+    error: null,
   },
   signedPlips: {
     plips: [],
     page: null,
     nextPage: null,
     loaded: false,
+    error: null,
   },
   favoritePlips: {
     plips: [],
     page: null,
     nextPage: null,
     loaded: false,
+    error: null,
   },
   currentPlip: null,
 };
@@ -46,6 +50,44 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case "RESET_USER_PLIPS": {
+      return {
+        ...state,
+        userLocationPlips: {
+          plips: [],
+          page: null,
+          nextPage: null,
+          loaded: false,
+          error: null,
+        },
+        signedPlips: {
+          plips: [],
+          page: null,
+          nextPage: null,
+          loaded: false,
+          error: null,
+        },
+        favoritePlips: {
+          plips: [],
+          page: null,
+          nextPage: null,
+          loaded: false,
+          error: null,
+        },
+      }
+    }
+    case "RESET_USER_LOCATION_PLIPS": {
+      return {
+        ...state,
+        userLocationPlips: {
+          plips: [],
+          page: null,
+          nextPage: null,
+          loaded: false,
+          error: null,
+        },
+      }
+    }
     case "ALL_PLIPS_FETCHED": {
       return {
         ...state,
@@ -54,8 +96,17 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
+          error: null,
         },
         isFetchingPlipsNextPage: false,
+      };
+    }
+    case "ALL_PLIPS_ERROR": {
+      return {
+        ...state,
+        allPlips: {
+          error: payload.error,
+        },
       };
     }
     case "REFRESH_ALL_PLIPS": {
@@ -66,6 +117,7 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
+          error: null,
         },
       };
     }
@@ -77,8 +129,17 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
+          error: null,
         },
         isFetchingPlipsNextPage: false,
+      };
+    }
+    case "NATIONWIDE_PLIPS_ERROR": {
+      return {
+        ...state,
+        nationwidePlips: {
+          error: payload.error,
+        },
       };
     }
     case "REFRESH_NATIONWIDE_PLIPS": {
@@ -89,6 +150,7 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
+          error: null,
         },
       };
     }
@@ -100,8 +162,17 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
+          error: null,
         },
         isFetchingPlipsNextPage: false,
+      };
+    }
+    case "PLIPS_BY_USER_LOCATION_ERROR": {
+      return {
+        ...state,
+        userLocationPlips: {
+          error: payload.error,
+        },
       };
     }
     case "REFRESH_PLIPS_BY_USER_LOCATION": {
@@ -112,6 +183,7 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
+          error: null,
         },
       };
     }
@@ -123,8 +195,17 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
+          error: null,
         },
         isFetchingPlipsNextPage: false,
+      };
+    }
+    case "SIGNED_PLIPS_ERROR": {
+      return {
+        ...state,
+        signedPlips: {
+          error: payload.error,
+        },
       };
     }
     case "REFRESH_SIGNED_PLIPS": {
@@ -135,6 +216,7 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
+          error: null,
         },
       };
     }
@@ -146,8 +228,17 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
+          error: null,
         },
         isFetchingPlipsNextPage: false,
+      }
+    }
+    case "FAVORITE_PLIPS_ERROR": {
+      return {
+        ...state,
+        favoritePlips: {
+          error: payload.error,
+        },
       }
     }
     case "REFRESH_FAVORITE_PLIPS": {
@@ -158,6 +249,7 @@ export default (state = initialState, action) => {
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
+          error: null,
         },
       }
     }

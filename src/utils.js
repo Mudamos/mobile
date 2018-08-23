@@ -59,6 +59,8 @@ export const STATEWIDE_SCOPE = "statewide";
 
 export const CITYWIDE_SCOPE = "citywide";
 
+export const ALL_SCOPE = "all";
+
 export const different = complement(equals);
 
 export const isNationwideScope = scope => scope === NATIONWIDE_SCOPE;

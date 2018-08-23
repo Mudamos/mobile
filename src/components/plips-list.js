@@ -33,7 +33,7 @@ import {
 export default class PlipsList extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
-    errorFetchingPlips: PropTypes.bool,
+    fetchingError: PropTypes.bool,
     hasLoadedPlips: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
@@ -79,7 +79,7 @@ export default class PlipsList extends Component {
 
   render() {
     const {
-      errorFetchingPlips: error,
+      fetchingError: error,
       hasLoadedPlips,
       isFetchingPlips,
       isRefreshingPlips,

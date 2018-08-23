@@ -28,7 +28,6 @@ export default class PlipsLayout extends Component {
     allPlips: PropTypes.array,
     allPlipsNextPage: PropTypes.number,
     currentUser: PropTypes.object,
-    errorFetchingPlips: PropTypes.bool,
     favoritePlips: PropTypes.array,
     favoritePlipsNextPage: PropTypes.number,
     isFetchingPlips: PropTypes.bool,

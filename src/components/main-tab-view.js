@@ -33,6 +33,11 @@ export default class MainTabView extends Component {
   static propTypes = {
     allPlips: PropTypes.array,
     allPlipsNextPage: PropTypes.number,
+    errorFetchingAllPlips: PropTypes.bool,
+    errorFetchingNationwidePlips: PropTypes.bool,
+    errorFetchingSignedPlips: PropTypes.bool,
+    errorFetchingUserFavoritePlips: PropTypes.bool,
+    errorFetchingUserLocationPlips: PropTypes.bool,
     favoritePlips: PropTypes.array,
     favoritePlipsNextPage: PropTypes.number,
     loadedAllPlips: PropTypes.bool,
@@ -73,19 +78,24 @@ export default class MainTabView extends Component {
       loadedSignedPlips,
       loadedUserFavoritePlips,
       loadedUserLocationPlips,
+      errorFetchingAllPlips,
+      errorFetchingNationwidePlips,
+      errorFetchingSignedPlips,
+      errorFetchingUserFavoritePlips,
+      errorFetchingUserLocationPlips,
     } = this.props;
 
     switch (route.key) {
     case "nationwidePlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={nationwidePlips} nextPage={nationwidePlipsNextPage} hasLoadedPlips={loadedNationwidePlips}/>;
+      return <PlipsList {...this.props} typeList={route.key} plips={nationwidePlips} nextPage={nationwidePlipsNextPage} hasLoadedPlips={loadedNationwidePlips} fetchingError={errorFetchingNationwidePlips}/>;
     case "userLocationPlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={userLocationPlips} nextPage={userLocationPlipsNextPage} hasLoadedPlips={loadedUserLocationPlips}/>;
+      return <PlipsList {...this.props} typeList={route.key} plips={userLocationPlips} nextPage={userLocationPlipsNextPage} hasLoadedPlips={loadedUserLocationPlips} fetchingError={errorFetchingUserLocationPlips}/>;
     case "allPlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={allPlips} nextPage={allPlipsNextPage} hasLoadedPlips={loadedAllPlips}/>;
+      return <PlipsList {...this.props} typeList={route.key} plips={allPlips} nextPage={allPlipsNextPage} hasLoadedPlips={loadedAllPlips} fetchingError={errorFetchingAllPlips}/>;
     case "signedPlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={signedPlips} nextPage={signedPlipsNextPage} hasLoadedPlips={loadedSignedPlips}/>;
+      return <PlipsList {...this.props} typeList={route.key} plips={signedPlips} nextPage={signedPlipsNextPage} hasLoadedPlips={loadedSignedPlips} fetchingError={errorFetchingSignedPlips}/>;
     case "favoritePlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={favoritePlips} nextPage={favoritePlipsNextPage} hasLoadedPlips={loadedUserFavoritePlips}/>;
+      return <PlipsList {...this.props} typeList={route.key} plips={favoritePlips} nextPage={favoritePlipsNextPage} hasLoadedPlips={loadedUserFavoritePlips} fetchingError={errorFetchingUserFavoritePlips}/>;
     default:
       return null;
     }
