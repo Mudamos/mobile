@@ -384,6 +384,13 @@ const listSignedPlipsByUser = ({ client }) => authToken =>
     .get("/users/petitions")
     .then(getData);
 
+const toggleFavoritePlip = ({ client }) => (authToken, { plipId }) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post(`/petitions/favorite/update/`)
+    .send({ petition: { id: plipId }})
+    .then(getData);
+
 const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatarURL }) => {
   let progressListener = identity;
   const request = new XMLHttpRequest;
@@ -465,6 +472,7 @@ export default function MobileApi(host) {
     logout: logout({ client: v1Client }),
     plipSignInfo: plipSignInfo({ client: v1Client }),
     userFavoriteInfoByVersion: userFavoriteInfoByVersion({ client: v3Client }),
+    toggleFavoritePlip: toggleFavoritePlip({ client: v3Client }),
     profile: profile({ client: v1Client }),
     retrievePassword: retrievePassword({ client: v2Client }),
     reverseSearchZipCode: reverseSearchZipCode({ client: v3Client }),

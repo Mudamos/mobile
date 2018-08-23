@@ -32,6 +32,7 @@ import {
   userFirstTimeDone,
   validateProfile,
   setCurrentPlip,
+  toggleFavorite,
 } from "../actions";
 
 import {
@@ -159,6 +160,7 @@ class Container extends Component {
     onShare: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
     onTellAFriend: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
     onValidateProfile: PropTypes.func.isRequired,
   };
 
@@ -418,6 +420,7 @@ const mapDispatchToProps = dispatch => ({
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),
   onShare: plip => dispatch(sharePlip(plip)),
+  onToggleFavorite: plipId => dispatch(toggleFavorite({ plipId })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

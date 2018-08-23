@@ -309,4 +309,9 @@ export const plipsFavoriteInfoFetched = ({ favoriteInfo }) => ({
 export const setCurrentPlip = plip => ({
   type: "SET_CURRENT_PLIP",
   payload: { plip },
-})
+});
+
+export const toggleFavorite = ({ plipId }) => ({
+  type: "TOGGLE_FAVORITE",
+  payload: { plipId },
+});

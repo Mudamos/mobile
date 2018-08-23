@@ -57,6 +57,7 @@ export default class PlipsList extends Component {
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
   }
 
   plipListKey = item => String(item.id);
@@ -181,6 +182,7 @@ export default class PlipsList extends Component {
       plipsFavoriteInfo,
       plipsSignInfo,
       userSignInfo,
+      onToggleFavorite,
     } = this.props;
 
     const plipSignInfo = plipsSignInfo && plipsSignInfo[plip.id];
@@ -201,6 +203,7 @@ export default class PlipsList extends Component {
         onShare={this.onShare}
         onGoToPlip={this.onGoToPlip}
         isFavorite={isFavorite}
+        onToggleFavorite={onToggleFavorite}
 
         height={height}
         margin={margin}
@@ -315,6 +318,7 @@ export class Plip extends Component {
     user: PropTypes.object,
     onGoToPlip: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
   }
 
   shouldComponentUpdate(nextProps) {
@@ -336,6 +340,12 @@ export class Plip extends Component {
     const { plip, onGoToPlip } = this.props;
 
     onGoToPlip(plip);
+  }
+
+  onToggleFavorite = () => {
+    const { plip, onToggleFavorite } = this.props;
+
+    onToggleFavorite(plip.detailId);
   }
 
   onShare = () => {
@@ -438,7 +448,6 @@ export class Plip extends Component {
     );
   }
 
-  // TODO Add Favorite link
   renderFavoriteButton() {
     const {
       isFavorite,
@@ -448,6 +457,7 @@ export class Plip extends Component {
 
     return (
       <TouchableOpacity
+        onPress={this.onToggleFavorite}
       >
         <Icon
           name={iconShape}

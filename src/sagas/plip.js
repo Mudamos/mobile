@@ -257,7 +257,7 @@ function* fetchPlipsSaga({ mobileApi }) {
       const plips = response.plips;
       const plipIds = plips.map(id);
 
-      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds, detailIds });
     } catch (e) {
       logError(e);
 
@@ -725,6 +725,29 @@ function* fetchUserFavoriteInfo({ mobileApi, plipIds }) {
   return yield all(calls);
 }
 
+function* toggleFavoritePlipSaga({ mobileApi }) {
+  yield takeLatest("TOGGLE_FAVORITE", function* (action) {
+    const { plipId } = action.payload;
+    const authToken = yield select(currentAuthToken);
+    const loggedIn = yield select(isUserLoggedIn);
+
+    if (!loggedIn) return;
+
+    const response = yield call(mobileApi.toggleFavoritePlip, authToken, { plipId });
+
+    console.log(response);
+
+    const plipFavoriteResults = yield call(mobileApi.userFavoriteInfoByVersion, authToken, { plipId });
+
+    const favoriteInfo = zip([plipId], plipFavoriteResults).reduce((memo, [id, result]) => {
+      memo[id] = result.favorite;
+      return memo;
+    }, {});
+
+    yield put(plipsFavoriteInfoFetched({ favoriteInfo }));
+  });
+}
+
 function* loadStorePlipsInfo() {
   let oldUserLocation;
 
@@ -779,6 +802,7 @@ export default function* plipSaga({ mobileApi, walletStore, apiError }) {
   yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
   yield spawn(fetchPlipRelatedInfo, { mobileApi });
-  yield fork(fetchAllPlips, { mobileApi })
+  yield fork(fetchAllPlips, { mobileApi });
+  yield fork(toggleFavoritePlipSaga, { mobileApi });
   yield fork(loadStorePlipsInfo);
 }
