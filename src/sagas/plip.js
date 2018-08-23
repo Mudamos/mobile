@@ -82,7 +82,6 @@ import {
   findSignedPlips,
   getCurrentMainTabView,
   getCurrentSigningPlip,
-  getPlipSignatureGoals,
   isAppReady,
   isUserLoggedIn,
   getIneligiblePlipReasonForScope,
