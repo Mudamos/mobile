@@ -130,6 +130,9 @@ export default (state = initialState, action) => {
         ...state,
         allPlips: {
           ...state.allPlips,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
           error: payload.error,
         },
       };
@@ -192,6 +195,9 @@ export default (state = initialState, action) => {
         ...state,
         nationwidePlips: {
           ...state.nationwidePlips,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
           error: payload.error,
         },
       };
@@ -254,6 +260,9 @@ export default (state = initialState, action) => {
         ...state,
         userLocationPlips: {
           ...state.userLocationPlips,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
           error: payload.error,
         },
       };
@@ -316,6 +325,9 @@ export default (state = initialState, action) => {
         ...state,
         signedPlips: {
           ...state.signedPlips,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
           error: payload.error,
         },
       };
@@ -378,6 +390,9 @@ export default (state = initialState, action) => {
         ...state,
         favoritePlips: {
           ...state.favoritePlips,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
           error: payload.error,
         },
       }

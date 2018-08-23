@@ -51,3 +51,9 @@ export const calcCustomTotalSignatures = (signaturesCount) => {
 
   return Math.floor(signatures) * Math.pow(10, signaturesLength);
 }
+
+export const FETCH_ERROR = "FETCH_ERROR";
+
+export const FETCH_NEXT_PAGE_ERROR = "FETCH_NEXT_PAGE_ERROR";
+
+export const REFRESH_ERROR = "REFRESH_ERROR";

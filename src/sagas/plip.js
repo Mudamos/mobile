@@ -99,6 +99,9 @@ import {
 
 import {
   getMainTabViewKeyByIndex,
+  FETCH_ERROR,
+  FETCH_NEXT_PAGE_ERROR,
+  REFRESH_ERROR,
 } from "../models";
 
 import { fetchProfile } from "./profile";
@@ -166,7 +169,7 @@ function* fetch({ mobileApi, key  }) {
   }
 }
 
-function* getPlipError({ key, error }) {
+function* setPlipError({ key, error }) {
   switch(key) {
     case "allPlips":
       return yield put(allPlipsError(error));
@@ -237,7 +240,6 @@ function* fetchingNextPage({ key, status }) {
 function* fetchPlipsSaga({ mobileApi }) {
   yield takeLatest("FETCH_PLIPS", function* () {
     try {
-
       const isReady = yield select(isAppReady);
       const mainTabViewKey = yield select(getCurrentMainTabView);
 
@@ -270,9 +272,8 @@ function* fetchPlipsSaga({ mobileApi }) {
       const isReady = yield select(isAppReady);
       const mainTabViewKey = yield select(getCurrentMainTabView);
 
-      yield call(getPlipError, { key: mainTabViewKey, error: e });
-
       yield all([
+        call(setPlipError, { key: mainTabViewKey, error: { type: FETCH_ERROR, message: e }}),
         call(fetchingPlips, { key: mainTabViewKey, status: false }),
         !isReady ? put(appReady(true)) : Promise.resolve(),
       ]);
@@ -332,7 +333,10 @@ function* fetchPlipsNextPageSaga({ mobileApi }) {
 
       logError(e, { tag: `${typeList} nextPage(${nextPage})` });
 
-      yield put(plipsFetchNextPageError({ typeList, nextPage, error: e }));
+      yield all([
+        call(setPlipError, { key: typeList, error: { type: FETCH_NEXT_PAGE_ERROR, message: e }}),
+        call(fetchingNextPage, { key: typeList, status: false }),
+      ]);
     }
   });
 }
@@ -388,7 +392,7 @@ function* refreshPlipsSaga({ mobileApi }) {
       logError(e, { tag: `${typeList} refresh` });
 
       yield all([
-        put(plipsRefreshError({ typeList, error: e })),
+        call(setPlipError, { key: typeList, error: { type: REFRESH_ERROR ,message: e }}),
         call(refreshingPlips, { key: typeList, status: false }),
       ]);
     }
