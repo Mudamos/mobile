@@ -223,15 +223,11 @@ const userSignInfo = ({ client }) => (authToken, plipId) =>
     .get(`/users/message/${plipId}`)
     .then(getData);
 
-const plipSignInfo = ({ client }) => ({ authToken, plipId, initialGoal, finalGoal }) => {
+const plipSignInfo = ({ client }) => ({ authToken, plipId }) => {
   const api =  authToken ? authorizedClient(client, authToken) : client;
-  const qs = buildQueryString({
-    initial_goal: initialGoal,
-    final_goal: finalGoal,
-  });
 
   return api
-    .get(`/petition/${plipId}/info?${qs}`)
+    .get(`/petition/${plipId}/info`)
     .then(getData);
 };
 

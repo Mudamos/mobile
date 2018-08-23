@@ -631,11 +631,9 @@ function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
 
 function* fetchPlipsSignInfo({ mobileApi, plipIds }) {
   const authToken = yield select(currentAuthToken);
-  const goals = yield all(plipIds.map(id => select(getPlipSignatureGoals(id))));
 
-  const calls = zip(plipIds, goals)
-    .map(([plipId, { initialGoal, finalGoal }]) =>
-      call(mobileApi.plipSignInfo, { authToken, plipId, initialGoal, finalGoal }));
+  const calls = plipIds
+    .map(plipId => call(mobileApi.plipSignInfo, { authToken, plipId }));
 
   return yield all(calls);
 }
