@@ -2,11 +2,23 @@ import {
   propEq,
 } from "ramda";
 
-export const isFetchingPlips = state => state.plip.isFetchingPlips;
+export const isFetchingAllPlips = state => state.plip.allPlips.isFetching;
+export const isFetchingNationwidePlips = state => state.plip.nationwidePlips.isFetching;
+export const isFetchingPlipsByLocation = state => state.plip.userLocationPlips.isFetching;
+export const isFetchingSignedPlips = state => state.plip.signedPlips.isFetching;
+export const isFetchingFavoritePlips = state => state.plip.favoritePlips.isFetching;
 
-export const isFetchingPlipsNextPage = state => state.plip.isFetchingPlipsNextPage;
+export const isFetchingPlipsNextPageAllPlips = state => state.plip.allPlips.isFetchingNextPage;
+export const isFetchingPlipsNextPageNationwidePlips = state => state.plip.nationwidePlips.isFetchingNextPage;
+export const isFetchingPlipsNextPagePlipsByLocation = state => state.plip.userLocationPlips.isFetchingNextPage;
+export const isFetchingPlipsNextPageSignedPlips = state => state.plip.signedPlips.isFetchingNextPage;
+export const isFetchingPlipsNextPageFavoritePlips = state => state.plip.favoritePlips.isFetchingNextPage;
 
-export const isRefreshingPlips = state => state.plip.isRefreshingPlips;
+export const isRefreshingAllPlips = state => state.plip.allPlips.isRefreshing;
+export const isRefreshingNationwidePlips = state => state.plip.nationwidePlips.isRefreshing;
+export const isRefreshingPlipsByLocation = state => state.plip.userLocationPlips.isRefreshing;
+export const isRefreshingSignedPlips = state => state.plip.signedPlips.isRefreshing;
+export const isRefreshingFavoritePlips = state => state.plip.favoritePlips.isRefreshing;
 
 export const findPlip = id => state =>
   (findPlips(state) || []).find(propEq("id", id));

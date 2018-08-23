@@ -2,15 +2,15 @@ const initialState = {
   userSignInfo: {},
   justSignedPlips: {},
   plipsSignInfo: {},
-  isFetchingPlips: false,
-  isFetchingPlipsNextPage: false,
-  isRefreshingPlips: false,
   plips: [],
   allPlips: {
     plips: [],
     page: null,
     nextPage: null,
     loaded: false,
+    isRefreshing: false,
+    isFetching: false,
+    isFetchingNextPage: false,
     error: null,
   },
   nationwidePlips: {
@@ -18,6 +18,9 @@ const initialState = {
     page: null,
     nextPage: null,
     loaded: false,
+    isRefreshing: false,
+    isFetching: false,
+    isFetchingNextPage: false,
     error: null,
   },
   userLocationPlips: {
@@ -25,6 +28,9 @@ const initialState = {
     page: null,
     nextPage: null,
     loaded: false,
+    isRefreshing: false,
+    isFetching: false,
+    isFetchingNextPage: false,
     error: null,
   },
   signedPlips: {
@@ -32,6 +38,9 @@ const initialState = {
     page: null,
     nextPage: null,
     loaded: false,
+    isRefreshing: false,
+    isFetching: false,
+    isFetchingNextPage: false,
     error: null,
   },
   favoritePlips: {
@@ -39,6 +48,9 @@ const initialState = {
     page: null,
     nextPage: null,
     loaded: false,
+    isRefreshing: false,
+    isFetching: false,
+    isFetchingNextPage: false,
     error: null,
   },
   currentPlip: null,
@@ -58,6 +70,9 @@ export default (state = initialState, action) => {
           page: null,
           nextPage: null,
           loaded: false,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
           error: null,
         },
         signedPlips: {
@@ -65,6 +80,9 @@ export default (state = initialState, action) => {
           page: null,
           nextPage: null,
           loaded: false,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
           error: null,
         },
         favoritePlips: {
@@ -72,6 +90,9 @@ export default (state = initialState, action) => {
           page: null,
           nextPage: null,
           loaded: false,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
           error: null,
         },
       }
@@ -84,6 +105,9 @@ export default (state = initialState, action) => {
           page: null,
           nextPage: null,
           loaded: false,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
           error: null,
         },
       }
@@ -92,19 +116,20 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allPlips: {
+          ...state.allPlips,
           plips: [...state.allPlips.plips, ...payload.plips],
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
         },
-        isFetchingPlipsNextPage: false,
       };
     }
     case "ALL_PLIPS_ERROR": {
       return {
         ...state,
         allPlips: {
+          ...state.allPlips,
           error: payload.error,
         },
       };
@@ -113,6 +138,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allPlips: {
+          ...state.allPlips,
           plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage,
@@ -121,23 +147,51 @@ export default (state = initialState, action) => {
         },
       };
     }
+    case "REFRESHING_ALL_PLIPS": {
+      return {
+        ...state,
+        allPlips: {
+          ...state.allPlips,
+          isRefreshing: payload.isRefreshing,
+        },
+      };
+    }
+    case "FETCHING_ALL_PLIPS": {
+      return {
+        ...state,
+        allPlips: {
+          ...state.allPlips,
+          isFetching: payload.isFetching,
+        },
+      };
+    }
+    case "FETCHING_ALL_PLIPS_NEXT_PAGE": {
+      return {
+        ...state,
+        allPlips: {
+          ...state.allPlips,
+          isFetchingNextPage: payload.isFetchingNextPage,
+        },
+      };
+    }
     case "NATIONWIDE_PLIPS_FETCHED": {
       return {
         ...state,
         nationwidePlips: {
+          ...state.nationwidePlips,
           plips: [...state.nationwidePlips.plips, ...payload.plips],
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
         },
-        isFetchingPlipsNextPage: false,
       };
     }
     case "NATIONWIDE_PLIPS_ERROR": {
       return {
         ...state,
         nationwidePlips: {
+          ...state.nationwidePlips,
           error: payload.error,
         },
       };
@@ -146,6 +200,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         nationwidePlips: {
+          ...state.nationwidePlips,
           plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage,
@@ -154,23 +209,51 @@ export default (state = initialState, action) => {
         },
       };
     }
+    case "REFRESHING_NATIONWIDE_PLIPS": {
+      return {
+        ...state,
+        nationwidePlips: {
+          ...state.nationwidePlips,
+          isRefreshing: payload.isRefreshing,
+        },
+      };
+    }
+    case "FETCHING_NATIONWIDE_PLIPS": {
+      return {
+        ...state,
+        nationwidePlips: {
+          ...state.nationwidePlips,
+          isFetching: payload.isFetching,
+        },
+      };
+    }
+    case "FETCHING_NATIONWIDE_PLIPS_NEXT_PAGE": {
+      return {
+        ...state,
+        nationwidePlips: {
+          ...state.nationwidePlips,
+          isFetchingNextPage: payload.isFetchingNextPage,
+        },
+      };
+    }
     case "PLIPS_BY_USER_LOCATION_FETCHED": {
       return {
         ...state,
         userLocationPlips: {
+          ...state.userLocationPlips,
           plips: [...state.userLocationPlips.plips, ...payload.plips],
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
         },
-        isFetchingPlipsNextPage: false,
       };
     }
     case "PLIPS_BY_USER_LOCATION_ERROR": {
       return {
         ...state,
         userLocationPlips: {
+          ...state.userLocationPlips,
           error: payload.error,
         },
       };
@@ -179,6 +262,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userLocationPlips: {
+          ...state.userLocationPlips,
           plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage,
@@ -187,23 +271,51 @@ export default (state = initialState, action) => {
         },
       };
     }
+    case "REFRESHING_PLIPS_BY_USER_LOCATION": {
+      return {
+        ...state,
+        userLocationPlips: {
+          ...state.userLocationPlips,
+          isRefreshing: payload.isRefreshing,
+        },
+      };
+    }
+    case "FETCHING_PLIPS_BY_USER_LOCATION": {
+      return {
+        ...state,
+        userLocationPlips: {
+          ...state.userLocationPlips,
+          isFetching: payload.isFetching,
+        },
+      };
+    }
+    case "FETCHING_PLIPS_BY_USER_LOCATION_NEXT_PAGE": {
+      return {
+        ...state,
+        userLocationPlips: {
+          ...state.userLocationPlips,
+          isFetchingNextPage: payload.isFetchingNextPage,
+        },
+      };
+    }
     case "SIGNED_PLIPS_FETCHED": {
       return {
         ...state,
         signedPlips: {
+          ...state.signedPlips,
           plips: [...state.signedPlips.plips, ...payload.plips],
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
         },
-        isFetchingPlipsNextPage: false,
       };
     }
     case "SIGNED_PLIPS_ERROR": {
       return {
         ...state,
         signedPlips: {
+          ...state.signedPlips,
           error: payload.error,
         },
       };
@@ -212,6 +324,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         signedPlips: {
+          ...state.signedPlips,
           plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage,
@@ -220,23 +333,51 @@ export default (state = initialState, action) => {
         },
       };
     }
+    case "REFRESHING_SIGNED_PLIPS": {
+      return {
+        ...state,
+        signedPlips: {
+          ...state.signedPlips,
+          isRefreshing: payload.isRefreshing,
+        },
+      };
+    }
+    case "FETCHING_SIGNED_PLIPS": {
+      return {
+        ...state,
+        signedPlips: {
+          ...state.signedPlips,
+          isFetching: payload.isFetching,
+        },
+      };
+    }
+    case "FETCHING_SIGNED_PLIPS_NEXT_PAGE": {
+      return {
+        ...state,
+        signedPlips: {
+          ...state.signedPlips,
+          isFetchingNextPage: payload.isFetchingNextPage,
+        },
+      };
+    }
     case "FAVORITE_PLIPS_FETCHED": {
       return {
         ...state,
         favoritePlips: {
+          ...state.favoritePlips,
           plips: [...state.favoritePlips.plips, ...payload.plips],
           page: payload.page,
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
         },
-        isFetchingPlipsNextPage: false,
       }
     }
     case "FAVORITE_PLIPS_ERROR": {
       return {
         ...state,
         favoritePlips: {
+          ...state.favoritePlips,
           error: payload.error,
         },
       }
@@ -245,6 +386,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         favoritePlips: {
+          ...state.favoritePlips,
           plips: payload.plips,
           page: payload.page,
           nextPage: payload.nextPage,
@@ -253,29 +395,33 @@ export default (state = initialState, action) => {
         },
       }
     }
-    case "FETCH_PLIPS_NEXT_PAGE": {
+    case "REFRESHING_FAVORITE_PLIPS": {
       return {
         ...state,
-        isFetchingPlipsNextPage: true,
+        favoritePlips: {
+          ...state.favoritePlips,
+          isRefreshing: payload.isRefreshing,
+        },
       };
     }
-    case "FETCHING_PLIPS_NEXT_PAGE_ERROR": {
+    case "FETCHING_FAVORITE_PLIPS": {
       return {
         ...state,
-        isFetchingPlipsNextPage: false,
+        favoritePlips: {
+          ...state.favoritePlips,
+          isFetching: payload.isFetching,
+        },
       };
     }
-    case "PLIPS_FETCHING": {
+    case "FETCHING_FAVORITE_PLIPS_NEXT_PAGE": {
       return {
         ...state,
-        isFetchingPlips: payload.isFetching,
+        favoritePlips: {
+          ...state.favoritePlips,
+          isFetchingNextPage: payload.isFetchingNextPage,
+        },
       };
     }
-    case "PLIPS_REFRESHING_PLIPS":
-      return {
-        ...state,
-        isRefreshingPlips: payload.isRefreshing,
-      };
     case "PLIP_SIGNING":
       return {
         ...state,

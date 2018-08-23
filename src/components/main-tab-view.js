@@ -40,6 +40,21 @@ export default class MainTabView extends Component {
     errorFetchingUserLocationPlips: PropTypes.bool,
     favoritePlips: PropTypes.array,
     favoritePlipsNextPage: PropTypes.number,
+    isFetchingAllPlips: PropTypes.bool.isRequired,
+    isFetchingFavoritePlips: PropTypes.bool.isRequired,
+    isFetchingNationwidePlips: PropTypes.bool.isRequired,
+    isFetchingPlipsByLocation: PropTypes.bool.isRequired,
+    isFetchingPlipsNextPageAllPlips: PropTypes.bool.isRequired,
+    isFetchingPlipsNextPageFavoritePlips: PropTypes.bool.isRequired,
+    isFetchingPlipsNextPageNationwidePlips: PropTypes.bool.isRequired,
+    isFetchingPlipsNextPagePlipsByLocation: PropTypes.bool.isRequired,
+    isFetchingPlipsNextPageSignedPlips: PropTypes.bool.isRequired,
+    isFetchingSignedPlips: PropTypes.bool.isRequired,
+    isRefreshingAllPlips: PropTypes.bool.isRequired,
+    isRefreshingFavoritePlips: PropTypes.bool.isRequired,
+    isRefreshingNationwidePlips: PropTypes.bool.isRequired,
+    isRefreshingPlipsByLocation: PropTypes.bool.isRequired,
+    isRefreshingSignedPlips: PropTypes.bool.isRequired,
     loadedAllPlips: PropTypes.bool,
     loadedNationwidePlips: PropTypes.bool,
     loadedSignedPlips: PropTypes.bool,
@@ -83,19 +98,79 @@ export default class MainTabView extends Component {
       errorFetchingSignedPlips,
       errorFetchingUserFavoritePlips,
       errorFetchingUserLocationPlips,
+      isFetchingAllPlips,
+      isFetchingFavoritePlips,
+      isFetchingNationwidePlips,
+      isFetchingPlipsByLocation,
+      isFetchingSignedPlips,
+      isFetchingPlipsNextPageAllPlips,
+      isFetchingPlipsNextPageFavoritePlips,
+      isFetchingPlipsNextPageNationwidePlips,
+      isFetchingPlipsNextPagePlipsByLocation,
+      isFetchingPlipsNextPageSignedPlips,
+      isRefreshingAllPlips,
+      isRefreshingFavoritePlips,
+      isRefreshingNationwidePlips,
+      isRefreshingPlipsByLocation,
+      isRefreshingSignedPlips,
     } = this.props;
 
     switch (route.key) {
     case "nationwidePlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={nationwidePlips} nextPage={nationwidePlipsNextPage} hasLoadedPlips={loadedNationwidePlips} fetchingError={errorFetchingNationwidePlips}/>;
+      return <PlipsList
+        {...this.props}
+        typeList={route.key}
+        plips={nationwidePlips}
+        nextPage={nationwidePlipsNextPage}
+        hasLoadedPlips={loadedNationwidePlips}
+        isFetchingPlips={isFetchingNationwidePlips}
+        isFetchingPlipsNextPage={isFetchingPlipsNextPageNationwidePlips}
+        isRefreshingPlips={isRefreshingNationwidePlips}
+        fetchingError={errorFetchingNationwidePlips}/>;
     case "userLocationPlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={userLocationPlips} nextPage={userLocationPlipsNextPage} hasLoadedPlips={loadedUserLocationPlips} fetchingError={errorFetchingUserLocationPlips}/>;
+      return <PlipsList
+        {...this.props}
+        typeList={route.key}
+        plips={userLocationPlips}
+        nextPage={userLocationPlipsNextPage}
+        hasLoadedPlips={loadedUserLocationPlips}
+        isFetchingPlips={isFetchingPlipsByLocation}
+        isFetchingPlipsNextPage={isFetchingPlipsNextPagePlipsByLocation}
+        isRefreshingPlips={isRefreshingPlipsByLocation}
+        fetchingError={errorFetchingUserLocationPlips}/>;
     case "allPlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={allPlips} nextPage={allPlipsNextPage} hasLoadedPlips={loadedAllPlips} fetchingError={errorFetchingAllPlips}/>;
+      return <PlipsList
+        {...this.props}
+        typeList={route.key}
+        plips={allPlips}
+        nextPage={allPlipsNextPage}
+        hasLoadedPlips={loadedAllPlips}
+        isFetchingPlips={isFetchingAllPlips}
+        isFetchingPlipsNextPage={isFetchingPlipsNextPageAllPlips}
+        isRefreshingPlips={isRefreshingAllPlips}
+        fetchingError={errorFetchingAllPlips}/>;
     case "signedPlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={signedPlips} nextPage={signedPlipsNextPage} hasLoadedPlips={loadedSignedPlips} fetchingError={errorFetchingSignedPlips}/>;
+      return <PlipsList
+        {...this.props}
+        typeList={route.key}
+        plips={signedPlips}
+        nextPage={signedPlipsNextPage}
+        hasLoadedPlips={loadedSignedPlips}
+        isFetchingPlips={isFetchingSignedPlips}
+        isFetchingPlipsNextPage={isFetchingPlipsNextPageSignedPlips}
+        isRefreshingPlips={isRefreshingSignedPlips}
+        fetchingError={errorFetchingSignedPlips}/>;
     case "favoritePlips":
-      return <PlipsList {...this.props} typeList={route.key} plips={favoritePlips} nextPage={favoritePlipsNextPage} hasLoadedPlips={loadedUserFavoritePlips} fetchingError={errorFetchingUserFavoritePlips}/>;
+      return <PlipsList
+        {...this.props}
+        typeList={route.key}
+        plips={favoritePlips}
+        nextPage={favoritePlipsNextPage}
+        hasLoadedPlips={loadedUserFavoritePlips}
+        isFetchingPlips={isFetchingFavoritePlips}
+        isFetchingPlipsNextPage={isFetchingPlipsNextPageFavoritePlips}
+        isRefreshingPlips={isRefreshingFavoritePlips}
+        fetchingError={errorFetchingUserFavoritePlips}/>;
     default:
       return null;
     }
