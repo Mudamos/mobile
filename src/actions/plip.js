@@ -311,7 +311,7 @@ export const setCurrentPlip = plip => ({
   payload: { plip },
 });
 
-export const toggleFavorite = ({ plipId }) => ({
+export const toggleFavorite = ({ detailId }) => ({
   type: "TOGGLE_FAVORITE",
-  payload: { plipId },
+  payload: { detailId },
 });

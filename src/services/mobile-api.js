@@ -231,9 +231,9 @@ const plipSignInfo = ({ client }) => ({ authToken, plipId }) => {
     .then(getData);
 };
 
-const userFavoriteInfoByVersion = ({ client }) => ( authToken, { plipId }) =>
+const userFavoriteInfo = ({ client }) => ( authToken, { detailId }) =>
   authorizedClient(client, authToken)
-    .get(`/petitions/favorite/${plipId}/info`)
+    .get(`/petitions/favorite/${detailId}/info`)
     .then(getData)
 
 const logout = ({ client }) => authToken =>
@@ -384,11 +384,11 @@ const listSignedPlipsByUser = ({ client }) => authToken =>
     .get("/users/petitions")
     .then(getData);
 
-const toggleFavoritePlip = ({ client }) => (authToken, { plipId }) =>
+const toggleFavoritePlip = ({ client }) => (authToken, { detailId }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
     .post(`/petitions/favorite/update/`)
-    .send({ petition: { id: plipId }})
+    .send({ petition: { id: detailId }})
     .then(getData);
 
 const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatarURL }) => {
@@ -471,7 +471,7 @@ export default function MobileApi(host) {
     listSignedPlipsByUser: listSignedPlipsByUser({ client: v3Client }),
     logout: logout({ client: v1Client }),
     plipSignInfo: plipSignInfo({ client: v1Client }),
-    userFavoriteInfoByVersion: userFavoriteInfoByVersion({ client: v3Client }),
+    userFavoriteInfo: userFavoriteInfo({ client: v3Client }),
     toggleFavoritePlip: toggleFavoritePlip({ client: v3Client }),
     profile: profile({ client: v1Client }),
     retrievePassword: retrievePassword({ client: v2Client }),

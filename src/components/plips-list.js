@@ -186,7 +186,7 @@ export default class PlipsList extends Component {
     } = this.props;
 
     const plipSignInfo = plipsSignInfo && plipsSignInfo[plip.id];
-    const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.id];
+    const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
     const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);
     const plipUserSignInfo = userSignInfo && userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);

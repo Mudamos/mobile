@@ -468,7 +468,7 @@ export default class PlipLayout extends Component {
       plipsFavoriteInfo,
     } = this.props;
 
-    const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.id];
+    const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
     const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);
 
     const iconColor = isFavorite ? "rgb(255, 255, 255)" : "rgba(0, 0, 0, .5)"

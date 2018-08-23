@@ -254,10 +254,13 @@ function* fetchPlipsSaga({ mobileApi }) {
       ]);
 
       const id = prop("id");
-      const plips = response.plips;
-      const plipIds = plips.map(id);
+      const detailId = prop("detailId");
 
-      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds, detailIds });
+      const plips = response.plips || [];
+      const plipIds = plips.map(id);
+      const plipDetailIds = plips.map(detailId);
+
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds, plipDetailIds });
     } catch (e) {
       logError(e);
 
@@ -313,11 +316,14 @@ function* fetchPlipsNextPageSaga({ mobileApi }) {
 
       const response = yield call(fetchNextPage, { mobileApi, key: typeList, nextPage });
 
-      yield call(fetchingNextPage, { key: typeList, status: false });
+      const id = prop("id");
+      const detailId = prop("detailId");
 
-      const plipIds = (response.plips || []).map(prop("id"));
+      const plips = response.plips || [];
+      const plipIds = plips.map(id);
+      const plipDetailIds = plips.map(detailId);
 
-      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds, plipDetailIds });
     } catch (e) {
       logError(e, { tag: `${typeList} nextPage(${nextPage})` });
 
@@ -368,10 +374,15 @@ function* refreshPlipsSaga({ mobileApi }) {
 
       const response = yield call(refreshPlips, { mobileApi, key: typeList});
 
-      const plipIds = (response.plips || []).map(prop("id"));
+      const id = prop("id");
+      const detailId = prop("detailId");
+
+      const plips = response.plips || [];
+      const plipIds = plips.map(id);
+      const plipDetailIds = plips.map(detailId);
 
       yield all([
-        call(fetchPlipsRelatedInfo, { mobileApi, plipIds }),
+        call(fetchPlipsRelatedInfo, { mobileApi, plipIds, plipDetailIds }),
         call(refreshingPlips, { key: typeList, status: false }),
       ]);
     } catch (e) {
@@ -670,7 +681,7 @@ function* invalidateWalletAndNavigate(params = {}) {
   yield put(profileStateMachine(params));
 }
 
-function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
+function* fetchPlipsRelatedInfo({ mobileApi, plipIds, plipDetailIds }) {
   try {
     if (!plipIds || !plipIds.length) return;
 
@@ -681,21 +692,21 @@ function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
       loggedIn ? call(fetchPlipsUserSignInfo, { mobileApi, plipIds }) : Promise.resolve(),
     ]);
 
-    const plipFavoriteResults = loggedIn ? yield call(fetchUserFavoriteInfo, { mobileApi, plipIds }) : [];
-
     const signInfo = zip(plipIds, plipSignResults).reduce((memo, [id, result]) => {
       memo[id] = result.info;
       return memo;
     }, {});
 
-    const favoriteInfo = zip(plipIds, plipFavoriteResults).reduce((memo, [id, result]) => {
+    const plipFavoriteResults = loggedIn && plipDetailIds ? yield call(fetchUserFavoriteInfo, { mobileApi, plipDetailIds }) : [];
+
+    const favoriteInfo = zip(plipDetailIds || [], plipFavoriteResults).reduce((memo, [id, result]) => {
       memo[id] = result.favorite;
       return memo;
     }, {});
 
     yield all([
       put(plipsSignInfoFetched({ signInfo })),
-      put(plipsFavoriteInfoFetched({ favoriteInfo })),
+      plipDetailIds ? put(plipsFavoriteInfoFetched({ favoriteInfo })) : Promise.resolve(),
     ]);
   } catch(e) {
     logError(e, { tag: "fetchPlipsRelatedInfo" });
@@ -715,32 +726,29 @@ function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
   return yield all(plipIds.map(plipId => call(fetchUserSignInfo, { mobileApi, plipId })));
 }
 
-function* fetchUserFavoriteInfo({ mobileApi, plipIds }) {
+function* fetchUserFavoriteInfo({ mobileApi, plipDetailIds }) {
   const authToken = yield select(currentAuthToken);
 
-  const calls = plipIds
-    .map(plipId =>
-      call(mobileApi.userFavoriteInfoByVersion, authToken, { plipId }));
+  const calls = plipDetailIds
+    .map(detailId =>
+      call(mobileApi.userFavoriteInfo, authToken, { detailId }));
 
   return yield all(calls);
 }
 
 function* toggleFavoritePlipSaga({ mobileApi }) {
   yield takeLatest("TOGGLE_FAVORITE", function* (action) {
-    const { plipId } = action.payload;
+    const { detailId } = action.payload;
     const authToken = yield select(currentAuthToken);
     const loggedIn = yield select(isUserLoggedIn);
 
     if (!loggedIn) return;
 
-    const response = yield call(mobileApi.toggleFavoritePlip, authToken, { plipId });
+    const response = yield call(mobileApi.toggleFavoritePlip, authToken, { detailId });
 
-    console.log(response);
-
-    const plipFavoriteResults = yield call(mobileApi.userFavoriteInfoByVersion, authToken, { plipId });
-
-    const favoriteInfo = zip([plipId], plipFavoriteResults).reduce((memo, [id, result]) => {
-      memo[id] = result.favorite;
+    const favoriteInfo = zip([detailId], [response]).reduce((memo, [id, result]) => {
+      const inserted = result.favorite.action === "insert";
+      memo[id] = inserted ? response.favorite : null;
       return memo;
     }, {});
 

@@ -420,7 +420,7 @@ const mapDispatchToProps = dispatch => ({
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),
   onShare: plip => dispatch(sharePlip(plip)),
-  onToggleFavorite: plipId => dispatch(toggleFavorite({ plipId })),
+  onToggleFavorite: detailId => dispatch(toggleFavorite({ detailId })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);
