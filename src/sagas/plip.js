@@ -543,7 +543,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       const isElegible = yield call(eligibleToSignPlip, { user, plip });
 
       if (!isElegible) {
-        const reason = yield select(getIneligiblePlipReasonForScope(plip.scopeCoverage.scope));
+        const reason = yield select(getIneligiblePlipReasonForScope(plip.scopeCoverage));
 
         Alert.alert(
           null,
