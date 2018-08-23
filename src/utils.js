@@ -244,12 +244,8 @@ export const eligibleToSignPlip = ({ plip, user }) => {
   const { scopeCoverage: scope, uf, cityName } = plip;
   const { uf: userUF, city: userCityName } = user.address;
 
-  console.log(user, userUF, uf, userCityName, cityName);
-
   const matchUF = () => userUF && uf && userUF.toLowerCase() === uf.toLowerCase();
   const matchCity = () => userUF && uf && userCityName && cityName && userUF.toLowerCase() === uf.toLowerCase() && userCityName.toLowerCase() === cityName.toLowerCase();
-
-  console.log(isNationalCause(plip), plip)
 
   switch (scope) {
     case NATIONWIDE_SCOPE: return true;
