@@ -2,12 +2,6 @@ import {
   propEq,
 } from "ramda";
 
-import {
-  FETCH_ERROR,
-  FETCH_NEXT_PAGE_ERROR,
-  REFRESH_ERROR,
-} from "../models";
-
 export const isFetchingAllPlips = state => state.plip.allPlips.isFetching;
 export const isFetchingNationwidePlips = state => state.plip.nationwidePlips.isFetching;
 export const isFetchingPlipsByLocation = state => state.plip.userLocationPlips.isFetching;
@@ -57,30 +51,15 @@ export const hasLoadedUserFavoritePlips = state => !!state.plip.favoritePlips.lo
 
 export const hasLoadedSignedPlips = state => !!state.plip.signedPlips.loaded;
 
-export const errorFetchingNationwidePlips = state => {
-  const error = state.plip.nationwidePlips.error;
-  return error && error.type === FETCH_ERROR
-};
+export const errorFetchingNationwidePlips = state => state.plip.nationwidePlips.error;
 
-export const errorFetchingUserLocationPlips = state => {
-  const error = state.plip.userLocationPlips.error;
-  return error && error.type === FETCH_ERROR
-};
+export const errorFetchingUserLocationPlips = state => state.plip.userLocationPlips.error;
 
-export const errorFetchingAllPlips = state => {
-  const error = state.plip.allPlips.error;
-  return error && error.type === FETCH_ERROR
-};
+export const errorFetchingAllPlips = state => state.plip.allPlips.error;
 
-export const errorFetchingUserFavoritePlips = state => {
-  const error = state.plip.favoritePlips.error;
-  return error && error.type === FETCH_ERROR
-};
+export const errorFetchingUserFavoritePlips = state => state.plip.favoritePlips.error;
 
-export const errorFetchingSignedPlips = state => {
-  const error = state.plip.signedPlips.error;
-  return error && error.type === FETCH_ERROR
-};
+export const errorFetchingSignedPlips = state => state.plip.signedPlips.error;
 
 export const findNationwidePlips = state => state.plip.nationwidePlips.plips || [];
 

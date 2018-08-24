@@ -99,9 +99,6 @@ import {
 
 import {
   getMainTabViewKeyByIndex,
-  FETCH_ERROR,
-  FETCH_NEXT_PAGE_ERROR,
-  REFRESH_ERROR,
 } from "../models";
 
 import { fetchProfile } from "./profile";
@@ -238,13 +235,13 @@ function* fetchingNextPage({ key, status }) {
 }
 
 function* fetchPlipsSaga({ mobileApi }) {
-  yield takeLatest("FETCH_PLIPS", function* () {
+  yield takeEvery("FETCH_PLIPS", function* () {
+    const isReady = yield select(isAppReady);
+    const mainTabViewKey = yield select(getCurrentMainTabView);
+
+    yield call(fetchingPlips, { key: mainTabViewKey, status: true });
+
     try {
-      const isReady = yield select(isAppReady);
-      const mainTabViewKey = yield select(getCurrentMainTabView);
-
-      yield call(fetchingPlips, { key: mainTabViewKey, status: true });
-
       const response = yield call(fetch, { mobileApi, key: mainTabViewKey });
 
       yield all([
@@ -255,12 +252,6 @@ function* fetchPlipsSaga({ mobileApi }) {
         (mainTabViewKey === "userLocationPlips") ? put(refreshPlipsByLocation(response)) : Promise.resolve(),
       ]);
 
-      yield call(fetchingPlips, { key: mainTabViewKey, status: false });
-
-      if (!isReady) {
-        yield put(appReady(true))
-      }
-
       const id = prop("id");
       const plips = response.plips;
       const plipIds = plips.map(id);
@@ -269,15 +260,13 @@ function* fetchPlipsSaga({ mobileApi }) {
     } catch (e) {
       logError(e);
 
-      const isReady = yield select(isAppReady);
-      const mainTabViewKey = yield select(getCurrentMainTabView);
-
-      yield all([
-        call(setPlipError, { key: mainTabViewKey, error: { type: FETCH_ERROR, message: e }}),
-        call(fetchingPlips, { key: mainTabViewKey, status: false }),
-        !isReady ? put(appReady(true)) : Promise.resolve(),
-      ]);
+      yield call(setPlipError, { key: mainTabViewKey, error: e });
     }
+
+    yield all([
+      call(fetchingPlips, { key: mainTabViewKey, status: false }),
+      !isReady ? put(appReady(true)) : Promise.resolve(),
+    ]);
   });
 }
 
@@ -334,7 +323,7 @@ function* fetchPlipsNextPageSaga({ mobileApi }) {
       logError(e, { tag: `${typeList} nextPage(${nextPage})` });
 
       yield all([
-        call(setPlipError, { key: typeList, error: { type: FETCH_NEXT_PAGE_ERROR, message: e }}),
+        put(plipsFetchNextPageError(e)),
         call(fetchingNextPage, { key: typeList, status: false }),
       ]);
     }
@@ -392,8 +381,8 @@ function* refreshPlipsSaga({ mobileApi }) {
       logError(e, { tag: `${typeList} refresh` });
 
       yield all([
-        call(setPlipError, { key: typeList, error: { type: REFRESH_ERROR ,message: e }}),
-        call(refreshingPlips, { key: typeList, status: false }),
+        put(plipsRefreshError(e)),
+        call(refreshingPlips, { key: typeList, status: false } ),
       ]);
     }
   });
