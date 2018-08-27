@@ -76,6 +76,7 @@ export default class PlipLayout extends Component {
     onPlipSign: PropTypes.func.isRequired,
     onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
 
@@ -462,6 +463,12 @@ export default class PlipLayout extends Component {
     );
   }
 
+  onToggleFavorite = () => {
+    const { plip, onToggleFavorite } = this.props;
+
+    onToggleFavorite(plip.detailId);
+  }
+
   renderFavoriteButton() {
     const {
       plip,
@@ -475,6 +482,7 @@ export default class PlipLayout extends Component {
 
     return (
       <TouchableOpacity
+        onPress={this.onToggleFavorite}
       >
         <Icon
           name="favorite"

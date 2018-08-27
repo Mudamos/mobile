@@ -14,6 +14,7 @@ import {
   removeJustSignedPlip,
   sharePlip,
   signPlip,
+  toggleFavorite,
 } from "../actions";
 
 import {
@@ -56,6 +57,7 @@ class Container extends Component {
     onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
 
@@ -121,6 +123,7 @@ const mapDispatchToProps = dispatch => ({
   onRetryAppLink: () => dispatch(handleAppLink()),
   onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
+  onToggleFavorite: detailId => dispatch(toggleFavorite({ detailId })),
   onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),
 });
 
