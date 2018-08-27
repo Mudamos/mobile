@@ -84,6 +84,12 @@ export default class PlipsList extends Component {
     return !!nextPage;
   }
 
+  get isFavoriteList() {
+    const { typeList } = this.props;
+
+    return typeList === "favoritePlips"
+  }
+
   render() {
     const {
       fetchingError: error,
@@ -202,7 +208,7 @@ export default class PlipsList extends Component {
         hasSigned={hasSigned}
         onShare={this.onShare}
         onGoToPlip={this.onGoToPlip}
-        isFavorite={isFavorite}
+        isFavorite={isFavorite || this.isFavoriteList}
         onToggleFavorite={onToggleFavorite}
 
         height={height}

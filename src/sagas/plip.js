@@ -737,22 +737,30 @@ function* fetchUserFavoriteInfo({ mobileApi, plipDetailIds }) {
 }
 
 function* toggleFavoritePlipSaga({ mobileApi }) {
-  yield takeLatest("TOGGLE_FAVORITE", function* (action) {
-    const { detailId } = action.payload;
-    const authToken = yield select(currentAuthToken);
-    const loggedIn = yield select(isUserLoggedIn);
+  yield takeEvery("TOGGLE_FAVORITE", function* (action) {
+    try {
+      const { detailId } = action.payload;
+      const authToken = yield select(currentAuthToken);
+      const loggedIn = yield select(isUserLoggedIn);
 
-    if (!loggedIn) return;
+      if (!loggedIn) return;
 
-    const { action: responseAction, favorite: response } = yield call(mobileApi.toggleFavoritePlip, authToken, { detailId });
+      const { action: responseAction, favorite: response } = yield call(mobileApi.toggleFavoritePlip, authToken, { detailId });
 
-    const favoriteInfo = zip([detailId], [response]).reduce((memo, [id, result]) => {
-      const inserted = responseAction === "insert";
-      memo[id] = inserted ? response.favorite : {};
-      return memo;
-    }, {});
+      const favoriteInfo = zip([detailId], [response]).reduce((memo, [id, result]) => {
+        const inserted = responseAction === "insert";
+        memo[id] = inserted ? response.favorite : {};
+        return memo;
+      }, {});
 
-    yield put(plipsFavoriteInfoFetched({ favoriteInfo }));
+      yield all([
+        put(plipsFavoriteInfoFetched({ favoriteInfo })),
+        call(refreshPlips, { mobileApi, key: "favoritePlips" }),
+      ]);
+
+    } catch(e) {
+      logError(e, { tag: "toggleFavoritePlipSaga" });
+    }
   });
 }
 
