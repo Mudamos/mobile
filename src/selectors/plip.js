@@ -51,15 +51,15 @@ export const hasLoadedUserFavoritePlips = state => !!state.plip.favoritePlips.lo
 
 export const hasLoadedSignedPlips = state => !!state.plip.signedPlips.loaded;
 
-export const errorFetchingNationwidePlips = state => state.plip.nationwidePlips.error;
+export const errorFetchingNationwidePlips = state => !!state.plip.nationwidePlips.error;
 
-export const errorFetchingUserLocationPlips = state => state.plip.userLocationPlips.error;
+export const errorFetchingUserLocationPlips = state => !!state.plip.userLocationPlips.error;
 
-export const errorFetchingAllPlips = state => state.plip.allPlips.error;
+export const errorFetchingAllPlips = state => !!state.plip.allPlips.error;
 
-export const errorFetchingUserFavoritePlips = state => state.plip.favoritePlips.error;
+export const errorFetchingUserFavoritePlips = state => !!state.plip.favoritePlips.error;
 
-export const errorFetchingSignedPlips = state => state.plip.signedPlips.error;
+export const errorFetchingSignedPlips = state => !!state.plip.signedPlips.error;
 
 export const findNationwidePlips = state => state.plip.nationwidePlips.plips || [];
 

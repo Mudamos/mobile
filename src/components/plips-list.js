@@ -154,13 +154,13 @@ export default class PlipsList extends Component {
         data={plips}
         renderItem={this.renderCommonRow}
         extraData={extraData}
-        onEndReached={this.hasNextPage ? this.onFetchPlipsNextPage : null}
+        onEndReached={(this.hasNextPage && !isFetchingPlipsNextPage) ? this.onFetchPlipsNextPage : null}
         onEndReachedThreshold={0.9}
         refreshing={isRefreshingPlips}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshingPlips}
-            onRefresh={this.onRefresh}
+            onRefresh={!isRefreshingPlips ? this.onRefresh : null}
             tintColor="black"
           />
         }

@@ -162,7 +162,7 @@ function* fetch({ mobileApi, key  }) {
     case "userLocationPlips":
       return yield call(fetchByUserLocationPlips, { mobileApi });
     default:
-      return Promise.resolve();
+      return;
   }
 }
 
@@ -179,7 +179,7 @@ function* setPlipError({ key, error }) {
     case "userLocationPlips":
       return yield put(plipsByLocationError(error));
     default:
-      return Promise.resolve();
+      return;
   }
 }
 
@@ -196,7 +196,7 @@ function* fetchingPlips({ key, status }) {
     case "userLocationPlips":
       return yield put(fetchingPlipsByLocation(status));
     default:
-      return Promise.resolve();
+      return;
   }
 }
 
@@ -213,7 +213,7 @@ function* refreshingPlips({ key, status }) {
     case "userLocationPlips":
       return yield put(refreshingPlipsByLocation(status));
     default:
-      return Promise.resolve();
+      return;
   }
 }
 
@@ -230,7 +230,7 @@ function* fetchingNextPage({ key, status }) {
     case "userLocationPlips":
       return yield put(fetchingPlipsByLocationNextPage(status));
     default:
-      return Promise.resolve();
+      return;
   }
 }
 
@@ -301,12 +301,12 @@ function* fetchNextPage({ mobileApi, key, nextPage }) {
 }
 
 function* fetchPlipsNextPageSaga({ mobileApi }) {
-  yield takeLatest("FETCH_PLIPS_NEXT_PAGE", function* (action) {
+  yield takeEvery("FETCH_PLIPS_NEXT_PAGE", function* (action) {
+    const { typeList, nextPage } = action.payload;
+
     try {
       // debounce
       yield call(delay, 500);
-
-      const { typeList, nextPage } = action.payload;
 
       yield call(fetchingNextPage, { key: typeList, status: true });
 
@@ -318,8 +318,6 @@ function* fetchPlipsNextPageSaga({ mobileApi }) {
 
       yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
     } catch (e) {
-      const { typeList, nextPage } = action.payload;
-
       logError(e, { tag: `${typeList} nextPage(${nextPage})` });
 
       yield all([
@@ -361,10 +359,10 @@ function* refreshPlips({ mobileApi, key }) {
 }
 
 function* refreshPlipsSaga({ mobileApi }) {
-  yield takeLatest("PLIPS_REFRESH_PLIPS", function* (action) {
-    try {
-      const { typeList } = action.payload;
+  yield takeEvery("PLIPS_REFRESH_PLIPS", function* (action) {
+    const { typeList } = action.payload;
 
+    try {
       yield call(refreshingPlips, { key: typeList, status: true });
 
       const response = yield call(refreshPlips, { mobileApi, key: typeList});
@@ -376,8 +374,6 @@ function* refreshPlipsSaga({ mobileApi }) {
         call(refreshingPlips, { key: typeList, status: false }),
       ]);
     } catch (e) {
-      const { typeList } = action.payload;
-
       logError(e, { tag: `${typeList} refresh` });
 
       yield all([
