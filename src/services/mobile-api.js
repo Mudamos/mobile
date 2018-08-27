@@ -374,6 +374,11 @@ const listFavoritePlips = ({ client }) => (authToken, {
   }
 };
 
+const listSignPlipsByUser = ({ client }) => authToken =>
+  authorizedClient(client, authToken)
+    .get("/users/petitions")
+    .then(getData);
+
 const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatarURL }) => {
   let progressListener = identity;
   const request = new XMLHttpRequest;
@@ -451,6 +456,7 @@ export default function MobileApi(host) {
     listPlips: listPlips({ client: v3Client }),
     listFavoritePlips: listFavoritePlips({ client: v3Client }),
     listSignedPlips: listSignedPlips({ client: v3Client }),
+    listSignPlipsByUser: listSignPlipsByUser({ client: v3Client }),
     logout: logout({ client: v1Client }),
     plipSignInfo: plipSignInfo({ client: v1Client }),
     profile: profile({ client: v1Client }),
