@@ -239,7 +239,7 @@ const plipSignInfo = ({ client }) => ({ authToken, plipId }) => {
 
 const userFavoriteInfo = ({ client }) => ( authToken, { detailId }) =>
   authorizedClient(client, authToken)
-    .get(`/petitions/favorite/${detailId}/info`)
+    .get(`/favorites/${detailId}/info`)
     .then(getData)
 
 const logout = ({ client }) => authToken =>
@@ -393,7 +393,7 @@ const listSignedPlipsByUser = ({ client }) => authToken =>
 const toggleFavoritePlip = ({ client }) => (authToken, { detailId }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
-    .post(`/petitions/favorite/update/`)
+    .post(`/favorites/update/`)
     .send({ petition: { id: detailId }})
     .then(getAction)
     .then(({ json, action }) => ({ action, favorite: getData({ json }) }));
