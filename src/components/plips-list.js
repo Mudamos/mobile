@@ -40,6 +40,7 @@ export default class PlipsList extends Component {
     currentUser: PropTypes.object,
     fetchingError: PropTypes.bool,
     hasLoadedPlips: PropTypes.bool,
+    isFavoringPlip: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
@@ -318,6 +319,7 @@ export class Plip extends Component {
     height: PropTypes.number.isRequired,
     index: PropTypes.number.isRequired,
     isFavorite: PropTypes.bool,
+    isFavoringPlip: PropTypes.bool,
     margin: PropTypes.number.isRequired,
     plip: PropTypes.object.isRequired,
     signaturesCount: PropTypes.number,
@@ -349,9 +351,9 @@ export class Plip extends Component {
   }
 
   onToggleFavorite = () => {
-    const { plip, onToggleFavorite } = this.props;
+    const { plip, onToggleFavorite, isFavoringPlip } = this.props;
 
-    onToggleFavorite(plip.detailId);
+    !isFavoringPlip && onToggleFavorite(plip.detailId);
   }
 
   onShare = () => {

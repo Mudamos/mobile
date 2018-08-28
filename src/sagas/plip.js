@@ -60,6 +60,7 @@ import {
   fetchPlipSignersError,
   fetchingShortPlipSigners,
   invalidatePhone,
+  isFavoringPlips,
   isSigningPlip,
   logEvent,
   navigate,
@@ -744,6 +745,7 @@ function* toggleFavoritePlipSaga({ mobileApi }) {
       const loggedIn = yield select(isUserLoggedIn);
 
       if (!loggedIn) return;
+      yield put(isFavoringPlips(true));
 
       const { action: responseAction, favorite: response } = yield call(mobileApi.toggleFavoritePlip, authToken, { detailId });
 
@@ -761,6 +763,8 @@ function* toggleFavoritePlipSaga({ mobileApi }) {
     } catch(e) {
       logError(e, { tag: "toggleFavoritePlipSaga" });
     }
+
+    yield put(isFavoringPlips(false));
   });
 }
 
