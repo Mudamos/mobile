@@ -75,16 +75,13 @@ function* signedPlips({ mobileApi }) {
       yield call(delay, 3000);
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.listSignPlipsByUser, authToken);
+      const response = yield call(mobileApi.listSignedPlipsByUser, authToken);
       const plips = response.petitions;
 
-      const plipsId = plips.map(plip => plip.idPetition);
-      const plipshasVoted = plips.map(plip => plip.hasVoted ? true : false);
-
-      const plipsTags = plipsId.map(signedPlipTag);
-      const plipshasVotedToS = plipshasVoted.map(String);
-
-      const tags = zipObj(plipsTags, plipshasVotedToS);
+      const tags = zipObj(
+        plips.map(plip => signedPlipTag(plip.idPetition)),
+        plips.map(plip => plip.hasVoted ? "true" : "false"),
+      );
 
       yield call([OneSignal, OneSignal.sendTags], tags);
     } catch(e) {
