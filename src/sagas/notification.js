@@ -15,7 +15,6 @@ import {
 
 import {
   concat,
-  flip,
   fromPairs,
   map,
   pick,
@@ -75,12 +74,15 @@ function* signedPlips({ mobileApi }) {
       yield call(delay, 3000);
 
       const authToken = yield select(currentAuthToken);
+
+      if (!authToken) return;
+
       const response = yield call(mobileApi.listSignedPlipsByUser, authToken);
       const plips = response.petitions;
 
       const tags = zipObj(
         plips.map(plip => signedPlipTag(plip.idPetition)),
-        plips.map(plip => plip.hasVoted ? "true" : "false"),
+        plips.map(prop("hasVoted")).map(String),
       );
 
       yield call([OneSignal, OneSignal.sendTags], tags);
