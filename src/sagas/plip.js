@@ -753,7 +753,7 @@ function* toggleFavoritePlipSaga({ mobileApi }) {
 
       const favoriteInfo = zip([detailId], [response]).reduce((memo, [id, result]) => {
         const inserted = responseAction === "insert";
-        memo[id] = inserted ? response.favorite : {};
+        memo[id] = inserted ? result.favorite : {};
         return memo;
       }, {});
 

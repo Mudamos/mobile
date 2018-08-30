@@ -393,7 +393,7 @@ const listSignedPlipsByUser = ({ client }) => authToken =>
 const toggleFavoritePlip = ({ client }) => (authToken, { detailId }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
-    .post(`/favorites/update/`)
+    .post("/favorites/update/")
     .send({ petition: { id: detailId }})
     .then(getAction)
     .then(({ json, action }) => ({ action, favorite: getData({ json }) }));

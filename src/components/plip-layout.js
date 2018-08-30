@@ -54,14 +54,14 @@ export default class PlipLayout extends Component {
   static propTypes = {
     errorFetching: PropTypes.bool,
     errorHandlingAppLink: PropTypes.bool,
-    isFetchingPlipRelatedInfo: PropTypes.bool,
     isFavoringPlips: PropTypes.bool,
+    isFetchingPlipRelatedInfo: PropTypes.bool,
     isRemainingDaysEnabled: PropTypes.bool,
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
     plip: PropTypes.object,
-    plipsFavoriteInfo: PropTypes.object,
     plipSignInfo: PropTypes.object,
+    plipsFavoriteInfo: PropTypes.object,
     remoteConfig: PropTypes.shape({
       authenticatedSignersButtonTitle: PropTypes.string,
     }),

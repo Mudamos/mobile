@@ -547,7 +547,7 @@ export default (state = initialState, action) => {
     case "PLIP_PLIPS_FAVORITE_INFO_FETCHED":
       return {
         ...state,
-        plipsFavoriteInfo: { ...state.plipsFavoriteInfo, ...payload.favoriteInfo}
+        plipsFavoriteInfo: { ...state.plipsFavoriteInfo, ...payload.favoriteInfo },
       };
     case "PLIP_CLEAR_INFO":
       return {
