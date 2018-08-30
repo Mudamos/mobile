@@ -1,12 +1,10 @@
+import {
+  defaultMainTabViewRoutes,
+} from "../models";
+
 const initialState = {
   index: 0,
-  routes: [
-    { key: "national", title: "Nacional" },
-    { key: "myLocation", title: "Minha localidade" },
-    { key: "all", title: "Todos" },
-    { key: "signed", title: "Assinados" },
-    { key: "favorites", title: "Favoritos" },
-  ],
+  routes: defaultMainTabViewRoutes,
 };
 
 export default (state = initialState, action) => {

@@ -21,25 +21,31 @@ import styles from "../styles/plips-layout";
 
 import {
   RemoteLinksType,
-  SignatureGoalsType,
 } from "../prop-types";
 
 export default class PlipsLayout extends Component {
   static propTypes = {
+    allPlips: PropTypes.array,
+    allPlipsNextPage: PropTypes.number,
     currentUser: PropTypes.object,
-    errorFetchingPlips: PropTypes.bool,
-    hasNextPage: PropTypes.bool,
-    isFetchingPlips: PropTypes.bool,
-    isFetchingPlipsNextPage: PropTypes.bool,
+    favoritePlips: PropTypes.array,
+    favoritePlipsNextPage: PropTypes.number,
     isRefreshingPlips: PropTypes.bool,
+    loadedAllPlips: PropTypes.bool,
+    loadedNationwidePlips: PropTypes.bool,
+    loadedSignedPlips: PropTypes.bool,
+    loadedUserFavoritePlips: PropTypes.bool,
+    loadedUserLocationPlips: PropTypes.bool,
+    nationwidePlips: PropTypes.array,
+    nationwidePlipsNextPage: PropTypes.number,
     openMenu: PropTypes.func.isRequired,
-    plips: PropTypes.array,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
-    signatureGoals: PropTypes.shape({
-      [PropTypes.string]: SignatureGoalsType,
-    }).isRequired,
+    signedPlips: PropTypes.array,
+    signedPlipsNextPage: PropTypes.number,
     tabViewState: TabViewType,
+    userLocationPlips: PropTypes.array,
+    userLocationPlipsNextPage: PropTypes.number,
     userSignInfo: PropTypes.object.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,

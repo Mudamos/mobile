@@ -28,24 +28,22 @@ import styles from "../styles/plips-list";
 import locale from "../locales/pt-BR";
 import {
   RemoteLinksType,
-  SignatureGoalsType,
 } from "../prop-types";
 
 export default class PlipsList extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
-    errorFetchingPlips: PropTypes.bool,
-    hasNextPage: PropTypes.bool,
+    fetchingError: PropTypes.bool,
+    hasLoadedPlips: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
+    nextPage: PropTypes.number,
     openMenu: PropTypes.func.isRequired,
     plips: PropTypes.array,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
-    signatureGoals: PropTypes.shape({
-      [PropTypes.string]: SignatureGoalsType,
-    }).isRequired,
+    typeList: PropTypes.string.isRequired,
     userSignInfo: PropTypes.object.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
@@ -68,22 +66,23 @@ export default class PlipsList extends Component {
   }
 
   onFetchPlipsNextPage = () => {
-    const { isFetchingPlipsNextPage, onFetchPlipsNextPage } = this.props;
+    const { isFetchingPlipsNextPage, onFetchPlipsNextPage, nextPage, typeList } = this.props;
 
-    if (!isFetchingPlipsNextPage) onFetchPlipsNextPage();
+    if (!isFetchingPlipsNextPage) onFetchPlipsNextPage({ typeList, nextPage });
   };
 
-  plipSignatureGoals(plipId) {
-    const { signatureGoals } = this.props;
-    return signatureGoals[plipId];
+  get hasNextPage() {
+    const { nextPage } = this.props;
+
+    return !!nextPage;
   }
 
   render() {
     const {
-      errorFetchingPlips: error,
+      fetchingError: error,
+      hasLoadedPlips,
       isFetchingPlips,
       isRefreshingPlips,
-      onOpenURL,
       plips,
     } = this.props;
 
@@ -103,7 +102,7 @@ export default class PlipsList extends Component {
             })
         }
 
-        {!!shouldShowNoPlips && this.renderNoPlips()}
+        {!!shouldShowNoPlips && !isFetchingPlips && hasLoadedPlips && this.renderNoPlips()}
         {error && this.renderRetry()}
         {isFetchingPlips && this.renderInnerLoader({ animating: isFetchingPlips })}
       </View>
@@ -135,18 +134,15 @@ export default class PlipsList extends Component {
   renderListView({ plips, isRefreshingPlips }) {
     const {
       currentUser,
-      hasNextPage,
       isFetchingPlipsNextPage,
       plipsSignInfo,
       userSignInfo,
-      signatureGoals,
     } = this.props;
 
     const extraData = {
       currentUser,
       plipsSignInfo,
       userSignInfo,
-      signatureGoals,
     };
 
     return (
@@ -158,17 +154,17 @@ export default class PlipsList extends Component {
         data={plips}
         renderItem={this.renderCommonRow}
         extraData={extraData}
-        onEndReached={hasNextPage ? this.onFetchPlipsNextPage : null}
+        onEndReached={(this.hasNextPage && !isFetchingPlipsNextPage) ? this.onFetchPlipsNextPage : null}
         onEndReachedThreshold={0.9}
         refreshing={isRefreshingPlips}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshingPlips}
-            onRefresh={this.onRefresh}
+            onRefresh={!isRefreshingPlips ? this.onRefresh : null}
             tintColor="black"
           />
         }
-        ListFooterComponent={isFetchingPlipsNextPage && this.renderInnerLoader({ animating: true }) || !hasNextPage && !isRefreshingPlips && this.renderStaticFooter()}
+        ListFooterComponent={isFetchingPlipsNextPage && this.renderInnerLoader({ animating: true }) || !this.hasNextPage && !isRefreshingPlips && this.renderStaticFooter()}
       />
     );
   }
@@ -205,25 +201,60 @@ export default class PlipsList extends Component {
   renderCommonRow = this.renderRow({ height: 360, margin: 0 });
 
   renderNoPlips() {
-    return (
-      <View style={styles.noProjectsContainer}>
-        <View style={styles.noProjectsInnerContainer}>
-          <Image
-            source={require("../images/plip-page.png")}
-            style={styles.noProjectsIcon}
-          />
+    const { typeList, currentUser } = this.props;
 
-          <Text style={styles.noProjectsText}>{locale.noProjectsYet}</Text>
-        </View>
+    const isLogged = !!currentUser;
 
-        <FlatButton
-          title={locale.links.sendYourIdea.toUpperCase()}
-          onPress={this.onSendYourIdea}
-          style={{backgroundColor: "#00c084" }}
-          textStyle={{color: "#fff"}}
-        />
-      </View>
-    );
+    switch(typeList) {
+      case "signedPlips":
+        return (
+          <View style={styles.noProjectsContainer}>
+            <View style={styles.noProjectsInnerContainer}>
+              <Image
+                source={require("../images/plip-page.png")}
+                style={styles.noProjectsIcon}
+              />
+
+              <Text style={styles.noProjectsText}>{isLogged ? locale.noSignedProjects : locale.youShouldBeLoggedToSeeYourSignedProjects}</Text>
+            </View>
+          </View>
+        );
+
+      case "favoritePlips":
+        return (
+          <View style={styles.noProjectsContainer}>
+            <View style={styles.noProjectsInnerContainer}>
+              <Image
+                source={require("../images/plip-page.png")}
+                style={styles.noProjectsIcon}
+              />
+
+              <Text style={styles.noProjectsText}>{isLogged ? locale.noFavoriteProjects : locale.youShouldBeLoggedToSeeYourFavoriteProjects}</Text>
+            </View>
+          </View>
+        );
+
+      default:
+        return (
+          <View style={styles.noProjectsContainer}>
+            <View style={styles.noProjectsInnerContainer}>
+              <Image
+                source={require("../images/plip-page.png")}
+                style={styles.noProjectsIcon}
+              />
+
+              <Text style={styles.noProjectsText}>{locale.noProjectsYet}</Text>
+            </View>
+
+            <FlatButton
+              title={locale.links.sendYourIdea.toUpperCase()}
+              onPress={this.onSendYourIdea}
+              style={{backgroundColor: "#00c084" }}
+              textStyle={{color: "#fff"}}
+            />
+          </View>
+        );
+    }
   }
 
   renderRetry() {
@@ -238,15 +269,16 @@ export default class PlipsList extends Component {
   }
 
   plipImage(plip) {
-    return plip.cycle && plip.cycle.pictures && plip.cycle.pictures.thumb;
+    return plip && plip.pictureThumb;
   }
 
   onRefresh = () => {
     const {
       onRefresh,
+      typeList,
     } = this.props;
 
-    onRefresh();
+    onRefresh({ typeList });
   }
 
   onSendYourIdea = () => {
@@ -348,7 +380,7 @@ export class Plip extends Component {
                 numberOfLines={1}
                 ellipsizeMode="tail"
               >
-                {plip.phase.name}
+                {plip.title}
               </Text>
             </View>
             { hasSigned &&
@@ -362,7 +394,7 @@ export class Plip extends Component {
           </View>
           <View style={styles.plipSubtitleContainer}>
             <Text>
-              {plip.phase.description}
+              {plip.subtitle}
             </Text>
           </View>
           <View style={styles.plipOptionsContainer}>

@@ -2,11 +2,57 @@ const initialState = {
   userSignInfo: {},
   justSignedPlips: {},
   plipsSignInfo: {},
-  errorFetchingPlips: false,
-  isFetchingPlips: false,
-  isFetchingPlipsNextPage: false,
-  isRefreshingPlips: false,
   plips: [],
+  allPlips: {
+    plips: [],
+    page: null,
+    nextPage: null,
+    loaded: false,
+    isRefreshing: false,
+    isFetching: false,
+    isFetchingNextPage: false,
+    error: null,
+  },
+  nationwidePlips: {
+    plips: [],
+    page: null,
+    nextPage: null,
+    loaded: false,
+    isRefreshing: false,
+    isFetching: false,
+    isFetchingNextPage: false,
+    error: null,
+  },
+  userLocationPlips: {
+    plips: [],
+    page: null,
+    nextPage: null,
+    loaded: false,
+    isRefreshing: false,
+    isFetching: false,
+    isFetchingNextPage: false,
+    error: null,
+  },
+  signedPlips: {
+    plips: [],
+    page: null,
+    nextPage: null,
+    loaded: false,
+    isRefreshing: false,
+    isFetching: false,
+    isFetchingNextPage: false,
+    error: null,
+  },
+  favoritePlips: {
+    plips: [],
+    page: null,
+    nextPage: null,
+    loaded: false,
+    isRefreshing: false,
+    isFetching: false,
+    isFetchingNextPage: false,
+    error: null,
+  },
   currentPlip: null,
 };
 
@@ -16,46 +62,381 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case "RESET_USER_PLIPS": {
+      return {
+        ...state,
+        userLocationPlips: {
+          plips: [],
+          page: null,
+          nextPage: null,
+          loaded: false,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
+          error: null,
+        },
+        signedPlips: {
+          plips: [],
+          page: null,
+          nextPage: null,
+          loaded: false,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
+          error: null,
+        },
+        favoritePlips: {
+          plips: [],
+          page: null,
+          nextPage: null,
+          loaded: false,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
+          error: null,
+        },
+      }
+    }
+    case "RESET_USER_LOCATION_PLIPS": {
+      return {
+        ...state,
+        userLocationPlips: {
+          plips: [],
+          page: null,
+          nextPage: null,
+          loaded: false,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
+          error: null,
+        },
+      }
+    }
     case "ALL_PLIPS_FETCHED": {
-      return { ...state, allPlips: payload.plips };
-    }
-    case "FETCH_PLIPS_NEXT_PAGE": {
       return {
         ...state,
-        isFetchingPlipsNextPage: true,
+        allPlips: {
+          ...state.allPlips,
+          plips: [...state.allPlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+          error: null,
+        },
       };
     }
-    case "FETCHING_PLIPS_NEXT_PAGE_ERROR": {
+    case "ALL_PLIPS_ERROR": {
       return {
         ...state,
-        isFetchingPlipsNextPage: false,
+        allPlips: {
+          ...state.allPlips,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
+          error: payload.error,
+        },
       };
     }
-    case "PLIPS_FETCHING": {
+    case "REFRESH_ALL_PLIPS": {
       return {
         ...state,
-        isFetchingPlips: payload.isFetching,
-        errorFetchingPlips: false,
+        allPlips: {
+          ...state.allPlips,
+          plips: payload.plips,
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+          error: null,
+        },
       };
     }
-    case "ERROR_FETCHING_PLIPS":
+    case "REFRESHING_ALL_PLIPS": {
       return {
         ...state,
-        errorFetchingPlips: true,
+        allPlips: {
+          ...state.allPlips,
+          isRefreshing: payload.isRefreshing,
+        },
       };
-    case "PLIPS_FETCHED":
+    }
+    case "FETCHING_ALL_PLIPS": {
       return {
         ...state,
-        plips: payload.plips,
-        currentPlipsPage: payload.page,
-        nextPlipsPage: payload.nextPage,
-        isFetchingPlipsNextPage: false,
+        allPlips: {
+          ...state.allPlips,
+          isFetching: payload.isFetching,
+        },
       };
-    case "PLIPS_REFRESHING_PLIPS":
+    }
+    case "FETCHING_ALL_PLIPS_NEXT_PAGE": {
       return {
         ...state,
-        isRefreshingPlips: payload.isRefreshing,
+        allPlips: {
+          ...state.allPlips,
+          isFetchingNextPage: payload.isFetchingNextPage,
+        },
       };
+    }
+    case "NATIONWIDE_PLIPS_FETCHED": {
+      return {
+        ...state,
+        nationwidePlips: {
+          ...state.nationwidePlips,
+          plips: [...state.nationwidePlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+          error: null,
+        },
+      };
+    }
+    case "NATIONWIDE_PLIPS_ERROR": {
+      return {
+        ...state,
+        nationwidePlips: {
+          ...state.nationwidePlips,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
+          error: payload.error,
+        },
+      };
+    }
+    case "REFRESH_NATIONWIDE_PLIPS": {
+      return {
+        ...state,
+        nationwidePlips: {
+          ...state.nationwidePlips,
+          plips: payload.plips,
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+          error: null,
+        },
+      };
+    }
+    case "REFRESHING_NATIONWIDE_PLIPS": {
+      return {
+        ...state,
+        nationwidePlips: {
+          ...state.nationwidePlips,
+          isRefreshing: payload.isRefreshing,
+        },
+      };
+    }
+    case "FETCHING_NATIONWIDE_PLIPS": {
+      return {
+        ...state,
+        nationwidePlips: {
+          ...state.nationwidePlips,
+          isFetching: payload.isFetching,
+        },
+      };
+    }
+    case "FETCHING_NATIONWIDE_PLIPS_NEXT_PAGE": {
+      return {
+        ...state,
+        nationwidePlips: {
+          ...state.nationwidePlips,
+          isFetchingNextPage: payload.isFetchingNextPage,
+        },
+      };
+    }
+    case "PLIPS_BY_USER_LOCATION_FETCHED": {
+      return {
+        ...state,
+        userLocationPlips: {
+          ...state.userLocationPlips,
+          plips: [...state.userLocationPlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+          error: null,
+        },
+      };
+    }
+    case "PLIPS_BY_USER_LOCATION_ERROR": {
+      return {
+        ...state,
+        userLocationPlips: {
+          ...state.userLocationPlips,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
+          error: payload.error,
+        },
+      };
+    }
+    case "REFRESH_PLIPS_BY_USER_LOCATION": {
+      return {
+        ...state,
+        userLocationPlips: {
+          ...state.userLocationPlips,
+          plips: payload.plips,
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+          error: null,
+        },
+      };
+    }
+    case "REFRESHING_PLIPS_BY_USER_LOCATION": {
+      return {
+        ...state,
+        userLocationPlips: {
+          ...state.userLocationPlips,
+          isRefreshing: payload.isRefreshing,
+        },
+      };
+    }
+    case "FETCHING_PLIPS_BY_USER_LOCATION": {
+      return {
+        ...state,
+        userLocationPlips: {
+          ...state.userLocationPlips,
+          isFetching: payload.isFetching,
+        },
+      };
+    }
+    case "FETCHING_PLIPS_BY_USER_LOCATION_NEXT_PAGE": {
+      return {
+        ...state,
+        userLocationPlips: {
+          ...state.userLocationPlips,
+          isFetchingNextPage: payload.isFetchingNextPage,
+        },
+      };
+    }
+    case "SIGNED_PLIPS_FETCHED": {
+      return {
+        ...state,
+        signedPlips: {
+          ...state.signedPlips,
+          plips: [...state.signedPlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+          error: null,
+        },
+      };
+    }
+    case "SIGNED_PLIPS_ERROR": {
+      return {
+        ...state,
+        signedPlips: {
+          ...state.signedPlips,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
+          error: payload.error,
+        },
+      };
+    }
+    case "REFRESH_SIGNED_PLIPS": {
+      return {
+        ...state,
+        signedPlips: {
+          ...state.signedPlips,
+          plips: payload.plips,
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+          error: null,
+        },
+      };
+    }
+    case "REFRESHING_SIGNED_PLIPS": {
+      return {
+        ...state,
+        signedPlips: {
+          ...state.signedPlips,
+          isRefreshing: payload.isRefreshing,
+        },
+      };
+    }
+    case "FETCHING_SIGNED_PLIPS": {
+      return {
+        ...state,
+        signedPlips: {
+          ...state.signedPlips,
+          isFetching: payload.isFetching,
+        },
+      };
+    }
+    case "FETCHING_SIGNED_PLIPS_NEXT_PAGE": {
+      return {
+        ...state,
+        signedPlips: {
+          ...state.signedPlips,
+          isFetchingNextPage: payload.isFetchingNextPage,
+        },
+      };
+    }
+    case "FAVORITE_PLIPS_FETCHED": {
+      return {
+        ...state,
+        favoritePlips: {
+          ...state.favoritePlips,
+          plips: [...state.favoritePlips.plips, ...payload.plips],
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+          error: null,
+        },
+      }
+    }
+    case "FAVORITE_PLIPS_ERROR": {
+      return {
+        ...state,
+        favoritePlips: {
+          ...state.favoritePlips,
+          isRefreshing: false,
+          isFetching: false,
+          isFetchingNextPage: false,
+          error: payload.error,
+        },
+      }
+    }
+    case "REFRESH_FAVORITE_PLIPS": {
+      return {
+        ...state,
+        favoritePlips: {
+          ...state.favoritePlips,
+          plips: payload.plips,
+          page: payload.page,
+          nextPage: payload.nextPage,
+          loaded: true,
+          error: null,
+        },
+      }
+    }
+    case "REFRESHING_FAVORITE_PLIPS": {
+      return {
+        ...state,
+        favoritePlips: {
+          ...state.favoritePlips,
+          isRefreshing: payload.isRefreshing,
+        },
+      };
+    }
+    case "FETCHING_FAVORITE_PLIPS": {
+      return {
+        ...state,
+        favoritePlips: {
+          ...state.favoritePlips,
+          isFetching: payload.isFetching,
+        },
+      };
+    }
+    case "FETCHING_FAVORITE_PLIPS_NEXT_PAGE": {
+      return {
+        ...state,
+        favoritePlips: {
+          ...state.favoritePlips,
+          isFetchingNextPage: payload.isFetchingNextPage,
+        },
+      };
+    }
     case "PLIP_SIGNING":
       return {
         ...state,

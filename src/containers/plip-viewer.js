@@ -23,7 +23,7 @@ import PlipViewerLayout from "../components/plip-viewer-layout";
 const onPlipSign = ({ dispatch, plip }) => {
   Alert.alert(
     null,
-    `${locale.doYouWantToSign} "${plip.phase.name}"?`,
+    `${locale.doYouWantToSign} "${plip.title}"?`,
     [
       {text: locale.cancel, onPress: () => {}, style: "cancel"},
       {text: locale.yes, onPress: () => dispatch(signPlip({ plip }))},

@@ -42,7 +42,7 @@ export default class PlipViewerLayout extends Component {
 
   get plipName() {
     const { plip } = this.props;
-    return plip.phase.name;
+    return plip && plip.title;
   }
 
   get callToAction() {
@@ -57,7 +57,7 @@ export default class PlipViewerLayout extends Component {
     if (!plip) return;
 
     const start = moment();
-    const end = moment(plip.phase.finalDate);
+    const end = moment(plip.finalDate);
 
     // No days left because there are no more seconds left
     if (end.diff(start, "seconds") < 0) return;

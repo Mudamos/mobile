@@ -80,7 +80,7 @@ export default class ProfileConcludeLayout extends Component {
     const plipSignInfo = plipsSignInfo && plip && plipsSignInfo[plip.id];
     const plipUserSignInfo = userSignInfo && plip && userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
-    const cover = plip && plip.cycle && plip.cycle.pictures && plip.cycle.pictures.thumb;
+    const cover = plip && plip.pictureThumb;
 
     const onGoToPlip = plip => {
       const { onGoToPlip } = this.props;

@@ -14,6 +14,12 @@ import { identity } from "ramda";
 
 import { UnauthorizedError } from "../models/net-error";
 
+const getPagination = ({ response, ...args }) => ({
+  page: parseInt(response.headers.get("X-Page") || 0, 10),
+  nextPage: parseInt(response.headers.get("X-Next-Page"), 10) || null,
+
+  ...args,
+});
 
 const requester = ({ host, version }) => {
   let builder = farfetch;
@@ -217,15 +223,11 @@ const userSignInfo = ({ client }) => (authToken, plipId) =>
     .get(`/users/message/${plipId}`)
     .then(getData);
 
-const plipSignInfo = ({ client }) => ({ authToken, plipId, initialGoal, finalGoal }) => {
+const plipSignInfo = ({ client }) => ({ authToken, plipId }) => {
   const api =  authToken ? authorizedClient(client, authToken) : client;
-  const qs = buildQueryString({
-    initial_goal: initialGoal,
-    final_goal: finalGoal,
-  });
 
   return api
-    .get(`/petition/${plipId}/info?${qs}`)
+    .get(`/petition/${plipId}/info`)
     .then(getData);
 };
 
@@ -287,6 +289,94 @@ const fetchPlipSigners = ({ client }) => (authToken, { plipId }) =>
 const fetchOfflinePlipSigners = ({ client }) => ({ plipId }) =>
   client
     .get(`/petition/${plipId}/true/votes/friends`)
+    .then(getData);
+
+const listPlips = ({ client }) => ({
+  city,
+  uf,
+  includeCauses,
+  limit,
+  page,
+  scope,
+  path,
+}) => {
+  const qs = buildQueryString({
+    city,
+    uf,
+    includeCauses,
+    limit,
+    page,
+    scope,
+    path,
+  });
+
+  return client
+    .get(`/petitions/pagination?${qs}`)
+    .then(getPagination)
+    .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+};
+
+const listSignedPlips = ({ client }) => (authToken, {
+  city,
+  uf,
+  includeCauses,
+  limit,
+  page,
+  scope,
+  path,
+}) => {
+  const qs = buildQueryString({
+    city,
+    uf,
+    includeCauses,
+    limit,
+    page,
+    scope,
+    path,
+  });
+
+  if (authToken) {
+    return authorizedClient(client, authToken)
+      .get(`/petitions/pagination/sign?${qs}`)
+      .then(getPagination)
+      .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+  } else {
+    return Promise.resolve({plips: [], page: 0, nextPage: null});
+  }
+};
+
+const listFavoritePlips = ({ client }) => (authToken, {
+  city,
+  uf,
+  includeCauses,
+  limit,
+  page,
+  scope,
+  path,
+}) => {
+  const qs = buildQueryString({
+    city,
+    uf,
+    includeCauses,
+    limit,
+    page,
+    scope,
+    path,
+  });
+
+  if (authToken) {
+    return authorizedClient(client, authToken)
+      .get(`/petitions/pagination/favorite?${qs}`)
+      .then(getPagination)
+      .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+  } else {
+    return Promise.resolve({plips: [], page: 0, nextPage: null});
+  }
+};
+
+const listSignedPlipsByUser = ({ client }) => authToken =>
+  authorizedClient(client, authToken)
+    .get("/users/petitions")
     .then(getData);
 
 const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatarURL }) => {
@@ -363,6 +453,10 @@ export default function MobileApi(host) {
     fetchPlipSigners: fetchPlipSigners({ client: v1Client }),
     fetchOfflineShortPlipSigners: fetchOfflineShortPlipSigners({ client: v1Client }),
     fetchShortPlipSigners: fetchShortPlipSigners({ client: v1Client }),
+    listPlips: listPlips({ client: v3Client }),
+    listFavoritePlips: listFavoritePlips({ client: v3Client }),
+    listSignedPlips: listSignedPlips({ client: v3Client }),
+    listSignedPlipsByUser: listSignedPlipsByUser({ client: v3Client }),
     logout: logout({ client: v1Client }),
     plipSignInfo: plipSignInfo({ client: v1Client }),
     profile: profile({ client: v1Client }),

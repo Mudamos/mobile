@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import {
+  eligibleToSignPlip,
   formatNumber,
   moment,
 } from "../utils";
@@ -43,10 +44,6 @@ import styles, {
 
 import locale from "../locales/pt-BR";
 
-import {
-  SignatureGoalsType,
-} from "../prop-types";
-
 export default class PlipLayout extends Component {
   state = {
     isSignModalVisible: false,
@@ -64,7 +61,6 @@ export default class PlipLayout extends Component {
     remoteConfig: PropTypes.shape({
       authenticatedSignersButtonTitle: PropTypes.string,
     }),
-    signatureGoals: SignatureGoalsType,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     user: PropTypes.object,
@@ -82,14 +78,12 @@ export default class PlipLayout extends Component {
 
   get plipName() {
     const { plip } = this.props;
-    if (!plip) return;
-
-    return plip.phase && plip.phase.name;
+    return plip && plip.title;
   }
 
   get plipImage() {
     const { plip } = this.props;
-    return plip && plip.cycle && plip.cycle.pictures && plip.cycle.pictures.thumb;
+    return plip && plip.pictureThumb;
   }
 
   get plipPresentation() {
@@ -99,7 +93,7 @@ export default class PlipLayout extends Component {
 
   get plipDescription() {
     const { plip } = this.props;
-    return plip && plip.phase && plip.phase.description;
+    return plip && plip.subtitle;
   }
 
   get daysLeft() {
@@ -107,7 +101,7 @@ export default class PlipLayout extends Component {
     if (!plip) return;
 
     const start = moment();
-    const end = moment(plip.phase.finalDate);
+    const end = moment(plip.finalDate);
 
     // No days left because there are no more seconds left
     if (end.diff(start, "seconds") < 0) return;
@@ -128,12 +122,12 @@ export default class PlipLayout extends Component {
   }
 
   get plipProgress() {
-    const { plip, plipSignInfo, signatureGoals } = this.props;
+    const { plip, plipSignInfo } = this.props;
 
-    if (!plip || !signatureGoals.currentSignatureGoal) return 0;
+    if (!plip) return 0;
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
-    const total = signatureGoals.finalGoal;
+    const total = plip.totalSignaturesRequired;
     const progress = clamp(0, 1, count / total);
 
     return progress;
@@ -244,15 +238,16 @@ export default class PlipLayout extends Component {
       userSignDate,
       user,
       onLogin,
+      plip,
     } = this.props;
 
-    const willSign = !userSignDate && this.signatureEnabled;
-    const willShare = userSignDate || !this.signatureEnabled;
+    const canSign = eligibleToSignPlip({ plip, user });
+    const willSign = canSign && !userSignDate && this.signatureEnabled;
     const shouldLogin = !user && this.signatureEnabled
 
-    const title = (shouldLogin || willSign) && locale.iWannaMakeTheDifference || willShare && locale.makeTheDifferenceAndShare;
-    const onPress = shouldLogin && onLogin || willSign && this.onToggleSignModal || willShare && this.onShare;
-    const iconName = willSign && "check-circle" || willShare && "share";
+    const title = (shouldLogin || willSign) && locale.iWannaMakeTheDifference || locale.makeTheDifferenceAndShare;
+    const onPress = shouldLogin && onLogin || willSign && this.onToggleSignModal || this.onShare;
+    const iconName = (shouldLogin || willSign) && "check-circle" || "share";
 
     return (
       <View style={styles.signButton}>
@@ -341,19 +336,19 @@ export default class PlipLayout extends Component {
   renderSignaturesCount() {
     const {
       plipSignInfo,
-      signatureGoals,
+      plip,
     } = this.props;
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
 
-    const signaturesAndGoals = {
+    const signaturesAndGoal = {
       signatures: formatNumber(count),
-      goal: formatNumber(signatureGoals.finalGoal),
+      goal: formatNumber(plip.totalSignaturesRequired),
     }
 
     return (
-      <View style={styles.signaturesAndGoalsContainer}>
-        <Text style={styles.signaturesAndGoals}>{locale.signaturesAndGoals(signaturesAndGoals)}</Text>
+      <View style={styles.signaturesAndGoalContainer}>
+        <Text style={styles.signaturesAndGoal}>{locale.signaturesAndGoal(signaturesAndGoal)}</Text>
       </View>
     );
   }
