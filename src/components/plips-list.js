@@ -92,6 +92,17 @@ export default class PlipsList extends Component {
     return typeList === "favoritePlips";
   }
 
+  componentDidUpdate(prevProps) {
+    const {
+      isSearchingPlips,
+      typeList,
+    } = this.props
+
+    if (typeList == "allPlips" && isSearchingPlips && isSearchingPlips !== prevProps.isSearchingPlips) {
+      this.flatList && this.flatList.scrollToOffset({ offset: 1, animated: true });
+    }
+  }
+
   render() {
     const {
       fetchingError: error,
@@ -149,6 +160,7 @@ export default class PlipsList extends Component {
   renderListView({ plips, isRefreshingPlips }) {
     const {
       currentUser,
+      isFetchingPlips,
       isFetchingPlipsNextPage,
       plipsSignInfo,
       userSignInfo,
@@ -161,6 +173,8 @@ export default class PlipsList extends Component {
       userSignInfo,
     };
 
+    if(isFetchingPlips) return null;
+
     return (
       <FlatList
         style={styles.listView}
@@ -172,6 +186,7 @@ export default class PlipsList extends Component {
         extraData={extraData}
         onEndReached={(this.hasNextPage && !isFetchingPlipsNextPage) ? this.onFetchPlipsNextPage : null}
         onEndReachedThreshold={0.9}
+        ref={(ref) => { this.flatList = ref; }}
         refreshing={isRefreshingPlips || isSearchingPlips}
         refreshControl={
           <RefreshControl
@@ -180,7 +195,10 @@ export default class PlipsList extends Component {
             tintColor="black"
           />
         }
-        ListFooterComponent={isFetchingPlipsNextPage && this.renderInnerLoader({ animating: true }) || !this.hasNextPage && !isRefreshingPlips && this.renderStaticFooter()}
+        ListFooterComponent={
+          isFetchingPlipsNextPage ?
+            this.renderInnerLoader({ animating: true }) :
+            !this.hasNextPage && !isRefreshingPlips && this.renderStaticFooter()}
       />
     );
   }
@@ -193,7 +211,10 @@ export default class PlipsList extends Component {
       userSignInfo,
       onToggleFavorite,
       isAddingFavoritePlip,
+      isFetchingPlips,
     } = this.props;
+
+    if (isFetchingPlips) return;
 
     const plipSignInfo = plipsSignInfo && plipsSignInfo[plip.id];
     const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
