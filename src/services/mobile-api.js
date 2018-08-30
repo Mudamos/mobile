@@ -21,12 +21,6 @@ const getPagination = ({ response, ...args }) => ({
   ...args,
 });
 
-const getAction = ({ response, ...args }) => ({
-  action: response.headers.get("X-Action") || null,
-
-  ...args,
-});
-
 const requester = ({ host, version }) => {
   let builder = farfetch;
 
@@ -395,8 +389,7 @@ const toggleFavoritePlip = ({ client }) => (authToken, { detailId }) =>
     .use(serializeJson)
     .post("/favorites/update/")
     .send({ petition: { id: detailId }})
-    .then(getAction)
-    .then(({ json, action }) => ({ action, favorite: getData({ json }) }));
+    .then(getData)
 
 const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatarURL }) => {
   let progressListener = identity;
