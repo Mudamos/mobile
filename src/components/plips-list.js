@@ -40,7 +40,7 @@ export default class PlipsList extends Component {
     currentUser: PropTypes.object,
     fetchingError: PropTypes.bool,
     hasLoadedPlips: PropTypes.bool,
-    isFavoringPlip: PropTypes.bool,
+    isFavoringPlips: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
@@ -190,6 +190,7 @@ export default class PlipsList extends Component {
       plipsSignInfo,
       userSignInfo,
       onToggleFavorite,
+      isFavoringPlips,
     } = this.props;
 
     const plipSignInfo = plipsSignInfo && plipsSignInfo[plip.id];
@@ -210,6 +211,7 @@ export default class PlipsList extends Component {
         onShare={this.onShare}
         onGoToPlip={this.onGoToPlip}
         isFavorite={isFavorite || this.isFavoriteList}
+        isFavoringPlips={isFavoringPlips}
         onToggleFavorite={onToggleFavorite}
 
         height={height}
@@ -319,7 +321,7 @@ export class Plip extends Component {
     height: PropTypes.number.isRequired,
     index: PropTypes.number.isRequired,
     isFavorite: PropTypes.bool,
-    isFavoringPlip: PropTypes.bool,
+    isFavoringPlips: PropTypes.bool,
     margin: PropTypes.number.isRequired,
     plip: PropTypes.object.isRequired,
     signaturesCount: PropTypes.number,
@@ -340,6 +342,7 @@ export class Plip extends Component {
       || props.signaturesCount !== nextProps.signaturesCount
       || props.isFavorite !== nextProps.isFavorite
       || props.hasSigned !== nextProps.hasSigned
+      || props.isFavoringPlips !== nextProps.isFavoringPlips
 
       return shouldUpdate;
   }
@@ -351,9 +354,9 @@ export class Plip extends Component {
   }
 
   onToggleFavorite = () => {
-    const { plip, onToggleFavorite, isFavoringPlip } = this.props;
+    const { plip, onToggleFavorite, isFavoringPlips } = this.props;
 
-    !isFavoringPlip && onToggleFavorite(plip.detailId);
+    !isFavoringPlips && onToggleFavorite(plip.detailId);
   }
 
   onShare = () => {

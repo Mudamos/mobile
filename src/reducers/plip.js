@@ -462,6 +462,11 @@ export default (state = initialState, action) => {
         ...state,
         isFavoring: payload.isFavoring,
       };
+    case "TOGGLE_FAVORITE":
+      return {
+        ...state,
+        isFavoring: true,
+      };
     case "PLIP_JUST_SIGNED":
       return {
         ...state,

@@ -55,7 +55,7 @@ export default class PlipLayout extends Component {
     errorFetching: PropTypes.bool,
     errorHandlingAppLink: PropTypes.bool,
     isFetchingPlipRelatedInfo: PropTypes.bool,
-    isFavoringPlip: PropTypes.bool,
+    isFavoringPlips: PropTypes.bool,
     isRemainingDaysEnabled: PropTypes.bool,
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
@@ -465,9 +465,9 @@ export default class PlipLayout extends Component {
   }
 
   onToggleFavorite = () => {
-    const { plip, onToggleFavorite, isFavoringPlip } = this.props;
+    const { plip, onToggleFavorite, isFavoringPlips } = this.props;
 
-    !isFavoringPlip && onToggleFavorite(plip.detailId);
+    !isFavoringPlips && onToggleFavorite(plip.detailId);
   }
 
   renderFavoriteButton() {

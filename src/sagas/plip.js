@@ -744,8 +744,10 @@ function* toggleFavoritePlipSaga({ mobileApi }) {
       const authToken = yield select(currentAuthToken);
       const loggedIn = yield select(isUserLoggedIn);
 
-      if (!loggedIn) return;
-      yield put(isFavoringPlips(true));
+      if (!loggedIn) {
+        yield put(isFavoringPlips(false));
+        return;
+      }
 
       const { action: responseAction, favorite: response } = yield call(mobileApi.toggleFavoritePlip, authToken, { detailId });
 
