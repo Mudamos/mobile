@@ -127,6 +127,8 @@ export default (state = initialState, action) => {
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
+          isFetching: false,
+          isFetchingNextPage: false,
         },
       };
     }
@@ -192,6 +194,8 @@ export default (state = initialState, action) => {
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
+          isFetching: false,
+          isFetchingNextPage: false,
         },
       };
     }
@@ -257,6 +261,8 @@ export default (state = initialState, action) => {
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
+          isFetching: false,
+          isFetchingNextPage: false,
         },
       };
     }
@@ -322,6 +328,8 @@ export default (state = initialState, action) => {
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
+          isFetching: false,
+          isFetchingNextPage: false,
         },
       };
     }
@@ -387,6 +395,8 @@ export default (state = initialState, action) => {
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
+          isFetching: false,
+          isFetchingNextPage: false,
         },
       }
     }
