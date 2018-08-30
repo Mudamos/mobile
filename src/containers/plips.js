@@ -73,6 +73,7 @@ import {
   findUserFavoritePlipsNextPage,
   findSignedPlipsNextPage,
   findRemoteLinks,
+  findPlipsFavoriteInfo,
   findPlipsSignInfo,
   getCurrentSigningPlip,
   hasLoadedAllPlips,
@@ -393,6 +394,7 @@ const mapStateToProps = state => ({
   plipsSignInfo: findPlipsSignInfo(state),
   tabViewState: getMainTabView(state),
   userSignInfo: getUserSignInfo(state),
+  plipsFavoriteInfo: findPlipsFavoriteInfo(state),
 });
 
 const mapDispatchToProps = dispatch => ({

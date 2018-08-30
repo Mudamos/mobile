@@ -2,6 +2,10 @@ const initialState = {
   userSignInfo: {},
   justSignedPlips: {},
   plipsSignInfo: {},
+  plipsFavoriteInfo: {},
+  isFetchingPlips: false,
+  isFetchingPlipsNextPage: false,
+  isRefreshingPlips: false,
   plips: [],
   allPlips: {
     plips: [],
@@ -518,6 +522,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         plipsSignInfo: { ...state.plipsSignInfo, ...payload.signInfo },
+      };
+    case "PLIP_PLIPS_FAVORITE_INFO_FETCHED":
+      return {
+        ...state,
+        plipsFavoriteInfo: { ...state.plipsFavoriteInfo, ...payload.favoriteInfo}
       };
     case "PLIP_CLEAR_INFO":
       return {

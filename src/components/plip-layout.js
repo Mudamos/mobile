@@ -13,6 +13,8 @@ import {
   eligibleToSignPlip,
   formatNumber,
   moment,
+  notEmpty,
+  notNil,
 } from "../utils";
 
 import PropTypes from "prop-types";
@@ -57,6 +59,7 @@ export default class PlipLayout extends Component {
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
     plip: PropTypes.object,
+    plipsFavoriteInfo: PropTypes.object,
     plipSignInfo: PropTypes.object,
     remoteConfig: PropTypes.shape({
       authenticatedSignersButtonTitle: PropTypes.string,
@@ -460,6 +463,16 @@ export default class PlipLayout extends Component {
   }
 
   renderFavoriteButton() {
+    const {
+      plip,
+      plipsFavoriteInfo,
+    } = this.props;
+
+    const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.id];
+    const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);
+
+    const iconColor = isFavorite ? "rgb(255, 255, 255)" : "rgba(0, 0, 0, .5)"
+
     return (
       <TouchableOpacity
       >
@@ -467,7 +480,7 @@ export default class PlipLayout extends Component {
           name="favorite"
           style={styles.favoriteIcon}
           size={30}
-          color="rgba(0, 0, 0, .5)"
+          color={iconColor}
         />
       </TouchableOpacity>
     );

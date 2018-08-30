@@ -86,6 +86,10 @@ export const isDev = __DEV__;
 
 export const compact = list => reject(isNil, list);
 
+export const notEmpty = complement(isEmpty);
+
+export const notNil = complement(isNil)
+
 export const log = (message, { level = "DEBUG", tag } = {}, ...args) => isDev && console.log(toLogTag(level, tag), message, ...args);
 
 export const logError = (error, { tag } = {}) => log(error.message, { level: "ERROR", tag }, error.stack, error);

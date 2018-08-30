@@ -124,6 +124,8 @@ export const fetchPlipRelatedInfoError = state => state.plip.fetchPlipRelatedInf
 
 export const findPlipsSignInfo = state => state.plip.plipsSignInfo;
 
+export const findPlipsFavoriteInfo = state => state.plip.plipsFavoriteInfo;
+
 export const findPlipByPath = path => state => {
   const plips = findPlips(state);
 

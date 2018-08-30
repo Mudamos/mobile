@@ -64,6 +64,7 @@ import {
   logEvent,
   navigate,
   plipsSignInfoFetched,
+  plipsFavoriteInfoFetched,
   plipJustSigned,
   plipsRefreshError,
   plipSigners,
@@ -680,12 +681,22 @@ function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
       loggedIn ? call(fetchPlipsUserSignInfo, { mobileApi, plipIds }) : Promise.resolve(),
     ]);
 
+    const plipFavoriteResults = loggedIn ? yield call(fetchUserFavoriteInfo, { mobileApi, plipIds }) : [];
+
     const signInfo = zip(plipIds, plipSignResults).reduce((memo, [id, result]) => {
       memo[id] = result.info;
       return memo;
     }, {});
 
-    yield put(plipsSignInfoFetched({ signInfo }));
+    const favoriteInfo = zip(plipIds, plipFavoriteResults).reduce((memo, [id, result]) => {
+      memo[id] = result.favorite;
+      return memo;
+    }, {});
+
+    yield all([
+      put(plipsSignInfoFetched({ signInfo })),
+      put(plipsFavoriteInfoFetched({ favoriteInfo })),
+    ]);
   } catch(e) {
     logError(e, { tag: "fetchPlipsRelatedInfo" });
   }
@@ -702,6 +713,16 @@ function* fetchPlipsSignInfo({ mobileApi, plipIds }) {
 
 function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
   return yield all(plipIds.map(plipId => call(fetchUserSignInfo, { mobileApi, plipId })));
+}
+
+function* fetchUserFavoriteInfo({ mobileApi, plipIds }) {
+  const authToken = yield select(currentAuthToken);
+
+  const calls = plipIds
+    .map(plipId =>
+      call(mobileApi.userFavoriteInfoByVersion, authToken, { plipId }));
+
+  return yield all(calls);
 }
 
 function* loadStorePlipsInfo() {

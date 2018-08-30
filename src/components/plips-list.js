@@ -30,6 +30,11 @@ import {
   RemoteLinksType,
 } from "../prop-types";
 
+import {
+  notEmpty,
+  notNil,
+} from "../utils";
+
 export default class PlipsList extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
@@ -41,6 +46,7 @@ export default class PlipsList extends Component {
     nextPage: PropTypes.number,
     openMenu: PropTypes.func.isRequired,
     plips: PropTypes.array,
+    plipsFavoriteInfo: PropTypes.object,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
     typeList: PropTypes.string.isRequired,
@@ -172,11 +178,14 @@ export default class PlipsList extends Component {
   renderRow = ({ height, margin }) => ({ item: plip, index }) => {
     const {
       currentUser,
+      plipsFavoriteInfo,
       plipsSignInfo,
       userSignInfo,
     } = this.props;
 
     const plipSignInfo = plipsSignInfo && plipsSignInfo[plip.id];
+    const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.id];
+    const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);
     const plipUserSignInfo = userSignInfo && userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
     const cover = this.plipImage(plip);
@@ -191,6 +200,7 @@ export default class PlipsList extends Component {
         hasSigned={hasSigned}
         onShare={this.onShare}
         onGoToPlip={this.onGoToPlip}
+        isFavorite={isFavorite}
 
         height={height}
         margin={margin}
@@ -298,6 +308,7 @@ export class Plip extends Component {
     hasSigned: PropTypes.bool,
     height: PropTypes.number.isRequired,
     index: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool,
     margin: PropTypes.number.isRequired,
     plip: PropTypes.object.isRequired,
     signaturesCount: PropTypes.number,
@@ -315,6 +326,7 @@ export class Plip extends Component {
       || props.margin !== nextProps.margin
       || props.user !== nextProps.user
       || props.signaturesCount !== nextProps.signaturesCount
+      || props.isFavorite !== nextProps.isFavorite
       || props.hasSigned !== nextProps.hasSigned
 
       return shouldUpdate;
@@ -428,11 +440,17 @@ export class Plip extends Component {
 
   // TODO Add Favorite link
   renderFavoriteButton() {
+    const {
+      isFavorite,
+    } = this.props;
+
+    const iconShape = isFavorite ? "favorite-border" : "favorite"
+
     return (
       <TouchableOpacity
       >
         <Icon
-          name="favorite"
+          name={iconShape}
           style={styles.favoriteIcon}
           size={30}
           color="rgba(0, 0, 0, .5)"

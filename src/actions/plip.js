@@ -301,6 +301,11 @@ export const plipsSignInfoFetched = ({ signInfo }) => ({
   payload: { signInfo },
 });
 
+export const plipsFavoriteInfoFetched = ({ favoriteInfo }) => ({
+  type: "PLIP_PLIPS_FAVORITE_INFO_FETCHED",
+  payload: { favoriteInfo },
+});
+
 export const setCurrentPlip = plip => ({
   type: "SET_CURRENT_PLIP",
   payload: { plip },

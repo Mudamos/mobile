@@ -231,6 +231,11 @@ const plipSignInfo = ({ client }) => ({ authToken, plipId }) => {
     .then(getData);
 };
 
+const userFavoriteInfoByVersion = ({ client }) => ( authToken, { plipId }) =>
+  authorizedClient(client, authToken)
+    .get(`/petitions/favorite/${plipId}/info`)
+    .then(getData)
+
 const logout = ({ client }) => authToken =>
   authorizedClient(client, authToken)
     .post("/auth/logout")
@@ -459,6 +464,7 @@ export default function MobileApi(host) {
     listSignedPlipsByUser: listSignedPlipsByUser({ client: v3Client }),
     logout: logout({ client: v1Client }),
     plipSignInfo: plipSignInfo({ client: v1Client }),
+    userFavoriteInfoByVersion: userFavoriteInfoByVersion({ client: v3Client }),
     profile: profile({ client: v1Client }),
     retrievePassword: retrievePassword({ client: v2Client }),
     reverseSearchZipCode: reverseSearchZipCode({ client: v3Client }),
