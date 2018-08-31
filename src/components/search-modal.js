@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import SearchBar from "react-native-searchbar";
+import SearchBar from "./search-bar";
+
+import locale from "../locales/pt-BR";
 
 const styles = StyleSheet.create({
   background: {
@@ -75,6 +77,11 @@ class SearchModal extends Component {
           ref={ref => this.searchBar = ref}
           onBack={onClearSearch}
           handleChangeText={onSearch}
+          placeholder={locale.typeCityOrProjectLaw}
+          phoneValidationCodeSent={"#828282"}
+          backgroundColor={"#6000AA"}
+          iconColor={"#6000AA"}
+          fontSize={15}
           onSubmitEditing={this.onSearch} />
       </Animated.View>
     );

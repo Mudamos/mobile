@@ -168,6 +168,7 @@ const translations = {
   tseTutorial8: "Uma vez completada essa etapa clique em",
   tseTutorial9: "O seu título de eleitor será preenchido automaticamente em seu cadastro!",
   typeCode: "Digite o código de 5 dígitos",
+  typeCityOrProjectLaw: "Digite uma cidade ou projeto de lei",
   validProfile: "Perfil válido!",
   verify: "Verificar",
   voteCard: "Título de Eleitor",
