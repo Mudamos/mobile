@@ -28,6 +28,7 @@ const mapStateToProps = state => {
   return {
     errors: profileSaveErrors(state),
     isSaving: isSavingProfile(state),
+    previousAvatar: user ? user.avatar : null,
     previousName: user ? user.name : null,
     previousBirthdate: user && user.birthdate ? fromISODate(user.birthdate) : null,
     previousZipCode: user && user.zipCode ? zipCodeMask(user.zipCode) : null,

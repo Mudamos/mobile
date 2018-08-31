@@ -12,5 +12,10 @@ export default StyleSheet.create({
   },
   container: {
     backgroundColor: "transparent",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  floatingText: {
+    position: "absolute",
   },
 });

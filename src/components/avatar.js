@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
+  Text,
   Image,
   ViewPropTypes,
   TouchableOpacity,
@@ -16,6 +17,7 @@ export default class Avatar extends Component {
   static propTypes = {
     avatarStyle: ViewPropTypes.style,
     defaultPicture: PropTypes.any,
+    editText: PropTypes.bool,
     imageStyle: Image.propTypes.style,
     size: PropTypes.number,
     source: PropTypes.object,
@@ -24,6 +26,7 @@ export default class Avatar extends Component {
 
   static defaultProps = {
     defaultPicture: require("../images/default-avatar.jpg"),
+    editText: false,
     size: 100,
   }
 
@@ -37,6 +40,7 @@ export default class Avatar extends Component {
       avatarStyle,
       size,
       onPress,
+      editText,
     } = this.props;
 
     return (
@@ -53,6 +57,7 @@ export default class Avatar extends Component {
           }, avatarStyle]}
           imageStyle={styles.imageBubble}
         />
+        { editText && <Text style={styles.floatingText}>Editar</Text> }
       </TouchableOpacity>
     );
   }
