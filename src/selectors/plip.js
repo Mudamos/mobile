@@ -93,6 +93,8 @@ export const hasPlipsNextPage = state => !!getNextPlipsPage(state);
 
 export const isSigningPlip = state => state.plip.isSigning;
 
+export const isAddingFavoritePlip = state => state.plip.isAddingFavorite;
+
 export const getUserSignInfo = state => state.plip.userSignInfo;
 
 export const getPlipSignInfo = id => state => (findPlipsSignInfo(state) || {})[id];
@@ -123,6 +125,8 @@ export const isFetchingPlipRelatedInfo = state => state.plip.isFetchingPlipRelat
 export const fetchPlipRelatedInfoError = state => state.plip.fetchPlipRelatedInfoError;
 
 export const findPlipsSignInfo = state => state.plip.plipsSignInfo;
+
+export const findPlipsFavoriteInfo = state => state.plip.plipsFavoriteInfo;
 
 export const findPlipByPath = path => state => {
   const plips = findPlips(state);

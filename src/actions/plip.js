@@ -150,6 +150,11 @@ export const fetchingFavoritePlipsNextPage = isFetchingNextPage => ({
   payload: { isFetchingNextPage },
 });
 
+export const isAddingFavoritePlip = isAddingFavorite => ({
+  type: "ADDING_FAVORITE_PLIP",
+  payload: { isAddingFavorite },
+});
+
 export const allPlipsError = error => ({
   type: "ALL_PLIPS_ERROR",
   payload: { error },
@@ -301,7 +306,17 @@ export const plipsSignInfoFetched = ({ signInfo }) => ({
   payload: { signInfo },
 });
 
+export const plipsFavoriteInfoFetched = ({ favoriteInfo }) => ({
+  type: "PLIP_PLIPS_FAVORITE_INFO_FETCHED",
+  payload: { favoriteInfo },
+});
+
 export const setCurrentPlip = plip => ({
   type: "SET_CURRENT_PLIP",
   payload: { plip },
-})
+});
+
+export const toggleFavorite = ({ detailId }) => ({
+  type: "TOGGLE_FAVORITE",
+  payload: { detailId },
+});

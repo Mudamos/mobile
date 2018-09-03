@@ -14,12 +14,15 @@ import {
   removeJustSignedPlip,
   sharePlip,
   signPlip,
+  toggleFavorite,
 } from "../actions";
 
 import {
   currentUser,
   getCurrentPlip,
   fetchPlipRelatedInfoError,
+  findPlipsFavoriteInfo,
+  isAddingFavoritePlip,
   isFetchingPlipRelatedInfo,
   isRemainingDaysEnabled,
   isSigningPlip,
@@ -38,11 +41,13 @@ class Container extends Component {
   static propTypes = {
     errorFetching: PropTypes.bool,
     errorHandlingAppLink: PropTypes.bool,
+    isAddingFavoritePlip: PropTypes.bool,
     isFetchingPlipRelatedInfo: PropTypes.bool,
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
+    plipsFavoriteInfo: PropTypes.object,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     userSignDate: PropTypes.object,
@@ -54,6 +59,7 @@ class Container extends Component {
     onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
 
@@ -92,10 +98,12 @@ const mapStateToProps = state => {
     plip: getCurrentPlip(state),
     errorFetching: fetchPlipRelatedInfoError(state),
     errorHandlingAppLink: handlingAppLinkError(state),
+    isAddingFavoritePlip: isAddingFavoritePlip(state),
     isFetchingPlipRelatedInfo: isFetchingPlipRelatedInfo(state),
     isRemainingDaysEnabled: isRemainingDaysEnabled(state),
     isSigning: isSigningPlip(state),
     justSignedPlip: plipId ? hasUserJustSignedPlip(state, plipId) : false,
+    plipsFavoriteInfo: findPlipsFavoriteInfo(state),
     plipSignInfo: plipSignInfo,
     remoteConfig: listRemoteConfig(state),
     signers: currentPlipShortSignersInfo.users,
@@ -118,6 +126,7 @@ const mapDispatchToProps = dispatch => ({
   onRetryAppLink: () => dispatch(handleAppLink()),
   onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
+  onToggleFavorite: detailId => dispatch(toggleFavorite({ detailId })),
   onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),
 });
 

@@ -13,6 +13,8 @@ import {
   eligibleToSignPlip,
   formatNumber,
   moment,
+  notEmpty,
+  notNil,
 } from "../utils";
 
 import PropTypes from "prop-types";
@@ -52,12 +54,14 @@ export default class PlipLayout extends Component {
   static propTypes = {
     errorFetching: PropTypes.bool,
     errorHandlingAppLink: PropTypes.bool,
+    isAddingFavoritePlip: PropTypes.bool,
     isFetchingPlipRelatedInfo: PropTypes.bool,
     isRemainingDaysEnabled: PropTypes.bool,
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
+    plipsFavoriteInfo: PropTypes.object,
     remoteConfig: PropTypes.shape({
       authenticatedSignersButtonTitle: PropTypes.string,
     }),
@@ -73,6 +77,7 @@ export default class PlipLayout extends Component {
     onPlipSign: PropTypes.func.isRequired,
     onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
 
@@ -459,15 +464,32 @@ export default class PlipLayout extends Component {
     );
   }
 
+  onToggleFavorite = () => {
+    const { plip, onToggleFavorite, isAddingFavoritePlip } = this.props;
+
+    !isAddingFavoritePlip && onToggleFavorite(plip.detailId);
+  }
+
   renderFavoriteButton() {
+    const {
+      plip,
+      plipsFavoriteInfo,
+    } = this.props;
+
+    const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
+    const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);
+
+    const iconColor = isFavorite ? "rgb(255, 255, 255)" : "rgba(0, 0, 0, .5)"
+
     return (
       <TouchableOpacity
+        onPress={this.onToggleFavorite}
       >
         <Icon
           name="favorite"
           style={styles.favoriteIcon}
           size={30}
-          color="rgba(0, 0, 0, .5)"
+          color={iconColor}
         />
       </TouchableOpacity>
     );

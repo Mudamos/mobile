@@ -2,6 +2,11 @@ const initialState = {
   userSignInfo: {},
   justSignedPlips: {},
   plipsSignInfo: {},
+  plipsFavoriteInfo: {},
+  isFetchingPlips: false,
+  isAddingFavorite: false,
+  isFetchingPlipsNextPage: false,
+  isRefreshingPlips: false,
   plips: [],
   allPlips: {
     plips: [],
@@ -122,6 +127,8 @@ export default (state = initialState, action) => {
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
+          isFetching: false,
+          isFetchingNextPage: false,
         },
       };
     }
@@ -187,6 +194,8 @@ export default (state = initialState, action) => {
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
+          isFetching: false,
+          isFetchingNextPage: false,
         },
       };
     }
@@ -252,6 +261,8 @@ export default (state = initialState, action) => {
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
+          isFetching: false,
+          isFetchingNextPage: false,
         },
       };
     }
@@ -317,6 +328,8 @@ export default (state = initialState, action) => {
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
+          isFetching: false,
+          isFetchingNextPage: false,
         },
       };
     }
@@ -382,6 +395,8 @@ export default (state = initialState, action) => {
           nextPage: payload.nextPage,
           loaded: true,
           error: null,
+          isFetching: false,
+          isFetchingNextPage: false,
         },
       }
     }
@@ -441,6 +456,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isSigning: payload.isSigning,
+      };
+    case "ADDING_FAVORITE_PLIP":
+      return {
+        ...state,
+        isAddingFavorite: payload.isAddingFavorite,
+      };
+    case "TOGGLE_FAVORITE":
+      return {
+        ...state,
+        isAddingFavorite: true,
       };
     case "PLIP_JUST_SIGNED":
       return {
@@ -518,6 +543,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         plipsSignInfo: { ...state.plipsSignInfo, ...payload.signInfo },
+      };
+    case "PLIP_PLIPS_FAVORITE_INFO_FETCHED":
+      return {
+        ...state,
+        plipsFavoriteInfo: { ...state.plipsFavoriteInfo, ...payload.favoriteInfo },
       };
     case "PLIP_CLEAR_INFO":
       return {

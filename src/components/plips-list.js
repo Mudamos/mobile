@@ -30,17 +30,24 @@ import {
   RemoteLinksType,
 } from "../prop-types";
 
+import {
+  notEmpty,
+  notNil,
+} from "../utils";
+
 export default class PlipsList extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
     fetchingError: PropTypes.bool,
     hasLoadedPlips: PropTypes.bool,
+    isAddingFavoritePlip: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
     nextPage: PropTypes.number,
     openMenu: PropTypes.func.isRequired,
     plips: PropTypes.array,
+    plipsFavoriteInfo: PropTypes.object,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
     typeList: PropTypes.string.isRequired,
@@ -51,6 +58,7 @@ export default class PlipsList extends Component {
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
   }
 
   plipListKey = item => String(item.id);
@@ -75,6 +83,12 @@ export default class PlipsList extends Component {
     const { nextPage } = this.props;
 
     return !!nextPage;
+  }
+
+  get isFavoriteList() {
+    const { typeList } = this.props;
+
+    return typeList === "favoritePlips";
   }
 
   render() {
@@ -172,11 +186,16 @@ export default class PlipsList extends Component {
   renderRow = ({ height, margin }) => ({ item: plip, index }) => {
     const {
       currentUser,
+      plipsFavoriteInfo,
       plipsSignInfo,
       userSignInfo,
+      onToggleFavorite,
+      isAddingFavoritePlip,
     } = this.props;
 
     const plipSignInfo = plipsSignInfo && plipsSignInfo[plip.id];
+    const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
+    const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);
     const plipUserSignInfo = userSignInfo && userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
     const cover = this.plipImage(plip);
@@ -191,6 +210,9 @@ export default class PlipsList extends Component {
         hasSigned={hasSigned}
         onShare={this.onShare}
         onGoToPlip={this.onGoToPlip}
+        isFavorite={isFavorite || this.isFavoriteList}
+        isAddingFavoritePlip={isAddingFavoritePlip}
+        onToggleFavorite={onToggleFavorite}
 
         height={height}
         margin={margin}
@@ -298,12 +320,16 @@ export class Plip extends Component {
     hasSigned: PropTypes.bool,
     height: PropTypes.number.isRequired,
     index: PropTypes.number.isRequired,
+    isAddingFavoritePlip: PropTypes.bool,
+    isFavorite: PropTypes.bool,
     margin: PropTypes.number.isRequired,
     plip: PropTypes.object.isRequired,
+    plipsFavoriteInfo: PropTypes.object,
     signaturesCount: PropTypes.number,
     user: PropTypes.object,
     onGoToPlip: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
   }
 
   shouldComponentUpdate(nextProps) {
@@ -315,7 +341,10 @@ export class Plip extends Component {
       || props.margin !== nextProps.margin
       || props.user !== nextProps.user
       || props.signaturesCount !== nextProps.signaturesCount
+      || props.isFavorite !== nextProps.isFavorite
       || props.hasSigned !== nextProps.hasSigned
+      || props.isAddingFavoritePlip !== nextProps.isAddingFavoritePlip
+      || props.plipsFavoriteInfo !== nextProps.plipsFavoriteInfo
 
       return shouldUpdate;
   }
@@ -324,6 +353,12 @@ export class Plip extends Component {
     const { plip, onGoToPlip } = this.props;
 
     onGoToPlip(plip);
+  }
+
+  onToggleFavorite = () => {
+    const { plip, onToggleFavorite, isAddingFavoritePlip } = this.props;
+
+    !isAddingFavoritePlip && onToggleFavorite(plip.detailId);
   }
 
   onShare = () => {
@@ -426,13 +461,19 @@ export class Plip extends Component {
     );
   }
 
-  // TODO Add Favorite link
   renderFavoriteButton() {
+    const {
+      isFavorite,
+    } = this.props;
+
+    const iconShape = isFavorite ? "favorite-border" : "favorite"
+
     return (
       <TouchableOpacity
+        onPress={this.onToggleFavorite}
       >
         <Icon
-          name="favorite"
+          name={iconShape}
           style={styles.favoriteIcon}
           size={30}
           color="rgba(0, 0, 0, .5)"

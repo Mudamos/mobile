@@ -60,10 +60,12 @@ import {
   fetchPlipSignersError,
   fetchingShortPlipSigners,
   invalidatePhone,
+  isAddingFavoritePlip,
   isSigningPlip,
   logEvent,
   navigate,
   plipsSignInfoFetched,
+  plipsFavoriteInfoFetched,
   plipJustSigned,
   plipsRefreshError,
   plipSigners,
@@ -253,10 +255,13 @@ function* fetchPlipsSaga({ mobileApi }) {
       ]);
 
       const id = prop("id");
-      const plips = response.plips;
-      const plipIds = plips.map(id);
+      const detailId = prop("detailId");
 
-      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+      const plips = response.plips || [];
+      const plipIds = plips.map(id);
+      const plipDetailIds = plips.map(detailId);
+
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds, plipDetailIds });
     } catch (e) {
       logError(e);
 
@@ -312,11 +317,14 @@ function* fetchPlipsNextPageSaga({ mobileApi }) {
 
       const response = yield call(fetchNextPage, { mobileApi, key: typeList, nextPage });
 
-      yield call(fetchingNextPage, { key: typeList, status: false });
+      const id = prop("id");
+      const detailId = prop("detailId");
 
-      const plipIds = (response.plips || []).map(prop("id"));
+      const plips = response.plips || [];
+      const plipIds = plips.map(id);
+      const plipDetailIds = plips.map(detailId);
 
-      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds, plipDetailIds });
     } catch (e) {
       logError(e, { tag: `${typeList} nextPage(${nextPage})` });
 
@@ -367,10 +375,15 @@ function* refreshPlipsSaga({ mobileApi }) {
 
       const response = yield call(refreshPlips, { mobileApi, key: typeList});
 
-      const plipIds = (response.plips || []).map(prop("id"));
+      const id = prop("id");
+      const detailId = prop("detailId");
+
+      const plips = response.plips || [];
+      const plipIds = plips.map(id);
+      const plipDetailIds = plips.map(detailId);
 
       yield all([
-        call(fetchPlipsRelatedInfo, { mobileApi, plipIds }),
+        call(fetchPlipsRelatedInfo, { mobileApi, plipIds, plipDetailIds }),
         call(refreshingPlips, { key: typeList, status: false }),
       ]);
     } catch (e) {
@@ -669,7 +682,7 @@ function* invalidateWalletAndNavigate(params = {}) {
   yield put(profileStateMachine(params));
 }
 
-function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
+function* fetchPlipsRelatedInfo({ mobileApi, plipIds, plipDetailIds }) {
   try {
     if (!plipIds || !plipIds.length) return;
 
@@ -685,7 +698,17 @@ function* fetchPlipsRelatedInfo({ mobileApi, plipIds }) {
       return memo;
     }, {});
 
-    yield put(plipsSignInfoFetched({ signInfo }));
+    const plipFavoriteResults = loggedIn && plipDetailIds ? yield call(fetchUserFavoriteInfo, { mobileApi, plipDetailIds }) : [];
+
+    const favoriteInfo = zip(plipDetailIds || [], plipFavoriteResults).reduce((memo, [id, result]) => {
+      memo[id] = result.favorite;
+      return memo;
+    }, {});
+
+    yield all([
+      put(plipsSignInfoFetched({ signInfo })),
+      plipDetailIds ? put(plipsFavoriteInfoFetched({ favoriteInfo })) : Promise.resolve(),
+    ]);
   } catch(e) {
     logError(e, { tag: "fetchPlipsRelatedInfo" });
   }
@@ -702,6 +725,45 @@ function* fetchPlipsSignInfo({ mobileApi, plipIds }) {
 
 function* fetchPlipsUserSignInfo({ mobileApi, plipIds }) {
   return yield all(plipIds.map(plipId => call(fetchUserSignInfo, { mobileApi, plipId })));
+}
+
+function* fetchUserFavoriteInfo({ mobileApi, plipDetailIds }) {
+  const authToken = yield select(currentAuthToken);
+
+  const calls = plipDetailIds
+    .map(detailId =>
+      call(mobileApi.userFavoriteInfo, authToken, { detailId }));
+
+  return yield all(calls);
+}
+
+function* toggleFavoritePlipSaga({ mobileApi }) {
+  yield takeEvery("TOGGLE_FAVORITE", function* (action) {
+    try {
+      const { detailId } = action.payload;
+      const authToken = yield select(currentAuthToken);
+      const loggedIn = yield select(isUserLoggedIn);
+
+      if (!loggedIn) {
+        yield put(isAddingFavoritePlip(false));
+        return;
+      }
+
+      const response = yield call(mobileApi.toggleFavoritePlip, authToken, { detailId });
+
+      const favoriteInfo = { [detailId]: response.favorite };
+
+      yield all([
+        put(plipsFavoriteInfoFetched({ favoriteInfo })),
+        call(refreshPlips, { mobileApi, key: "favoritePlips" }),
+      ]);
+
+    } catch(e) {
+      logError(e, { tag: "toggleFavoritePlipSaga" });
+    }
+
+    yield put(isAddingFavoritePlip(false));
+  });
 }
 
 function* loadStorePlipsInfo() {
@@ -758,6 +820,7 @@ export default function* plipSaga({ mobileApi, walletStore, apiError }) {
   yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
   yield spawn(fetchPlipRelatedInfo, { mobileApi });
-  yield fork(fetchAllPlips, { mobileApi })
+  yield fork(fetchAllPlips, { mobileApi });
+  yield fork(toggleFavoritePlipSaga, { mobileApi });
   yield fork(loadStorePlipsInfo);
 }

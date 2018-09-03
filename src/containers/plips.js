@@ -32,6 +32,7 @@ import {
   userFirstTimeDone,
   validateProfile,
   setCurrentPlip,
+  toggleFavorite,
 } from "../actions";
 
 import {
@@ -54,6 +55,7 @@ import {
   currentUser as getCurrentUser,
   getMainTabView,
   getUserSignInfo,
+  isAddingFavoritePlip,
   isFetchingProfile,
   isFetchingAllPlips,
   isFetchingNationwidePlips,
@@ -73,6 +75,7 @@ import {
   findUserFavoritePlipsNextPage,
   findSignedPlipsNextPage,
   findRemoteLinks,
+  findPlipsFavoriteInfo,
   findPlipsSignInfo,
   getCurrentSigningPlip,
   hasLoadedAllPlips,
@@ -120,6 +123,7 @@ class Container extends Component {
     errorFetchingSignedPlips: PropTypes.bool,
     errorFetchingUserFavoritePlips: PropTypes.bool,
     errorFetchingUserLocationPlips: PropTypes.bool,
+    isAddingFavoritePlip: PropTypes.bool,
     isAppReady: PropTypes.bool,
     isFetchingAllPlips: PropTypes.bool.isRequired,
     isFetchingFavoritePlips: PropTypes.bool.isRequired,
@@ -158,6 +162,7 @@ class Container extends Component {
     onShare: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
     onTellAFriend: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
     onValidateProfile: PropTypes.func.isRequired,
   };
 
@@ -364,6 +369,7 @@ const mapStateToProps = state => ({
   isFetchingFavoritePlips: isFetchingFavoritePlips(state),
   isFetchingNationwidePlips: isFetchingNationwidePlips(state),
   isFetchingPlipsByLocation: isFetchingPlipsByLocation(state),
+  isAddingFavoritePlip: isAddingFavoritePlip(state),
   isFetchingProfile: isFetchingProfile(state),
   isFetchingSignedPlips: isFetchingSignedPlips(state),
   isRefreshingAllPlips: isRefreshingAllPlips(state),
@@ -393,6 +399,7 @@ const mapStateToProps = state => ({
   plipsSignInfo: findPlipsSignInfo(state),
   tabViewState: getMainTabView(state),
   userSignInfo: getUserSignInfo(state),
+  plipsFavoriteInfo: findPlipsFavoriteInfo(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -416,6 +423,7 @@ const mapDispatchToProps = dispatch => ({
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),
   onShare: plip => dispatch(sharePlip(plip)),
+  onToggleFavorite: detailId => dispatch(toggleFavorite({ detailId })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

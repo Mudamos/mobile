@@ -30,7 +30,6 @@ export default class PlipsLayout extends Component {
     currentUser: PropTypes.object,
     favoritePlips: PropTypes.array,
     favoritePlipsNextPage: PropTypes.number,
-    isRefreshingPlips: PropTypes.bool,
     loadedAllPlips: PropTypes.bool,
     loadedNationwidePlips: PropTypes.bool,
     loadedSignedPlips: PropTypes.bool,
@@ -54,6 +53,7 @@ export default class PlipsLayout extends Component {
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
   }
 
   render() {

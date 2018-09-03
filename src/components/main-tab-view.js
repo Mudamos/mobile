@@ -68,6 +68,7 @@ export default class MainTabView extends Component {
     userLocationPlips: PropTypes.array,
     userLocationPlipsNextPage: PropTypes.number,
     onMainTabChange: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
   };
 
   handleIndexChange = index => {
