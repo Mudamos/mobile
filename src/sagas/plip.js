@@ -16,6 +16,7 @@ import {
   different,
   eligibleToSignPlip,
   homeSceneKey,
+  isBlank,
   isPresent,
   isDev,
   isUnauthorized,
@@ -62,6 +63,8 @@ import {
   invalidatePhone,
   isAddingFavoritePlip,
   isSigningPlip,
+  isSearchingPlip,
+  clearSearchPlip,
   logEvent,
   navigate,
   plipsSignInfoFetched,
@@ -97,6 +100,7 @@ import {
   isAppReady,
   isUserLoggedIn,
   getIneligiblePlipReasonForScope,
+  searchPlipTitle,
 } from "../selectors";
 
 import {
@@ -278,7 +282,8 @@ function* fetchPlipsSaga({ mobileApi }) {
 function* fetchNextPage({ mobileApi, key, nextPage }) {
   switch(key) {
     case "allPlips": {
-      const response = yield call(fetchAllPlips, { mobileApi, page: nextPage });
+      const title = yield select(searchPlipTitle);
+      const response = yield call(fetchAllPlips, { mobileApi, page: nextPage, title });
       yield put(allPlipsFetched(response));
       return response;
     }
@@ -383,6 +388,7 @@ function* refreshPlipsSaga({ mobileApi }) {
       const plipDetailIds = plips.map(detailId);
 
       yield all([
+        put(clearSearchPlip()),
         call(fetchPlipsRelatedInfo, { mobileApi, plipIds, plipDetailIds }),
         call(refreshingPlips, { key: typeList, status: false }),
       ]);
@@ -431,16 +437,18 @@ function* fetchByUserLocationPlips({ mobileApi, page = 0 }) {
   return response;
 }
 
-function* fetchAllPlips({ mobileApi, page = 0 }) {
+function* fetchAllPlips({ mobileApi, page = 0, title = "" }) {
   const limit = PLIPS_PER_PAGE;
   const scope = ALL_SCOPE;
   const includeCauses = true;
+  const search = isBlank(title) ? null : title;
 
   const response = yield call(mobileApi.listPlips, {
     includeCauses,
     limit,
     page,
     scope,
+    search,
   });
 
   return response;
@@ -766,6 +774,33 @@ function* toggleFavoritePlipSaga({ mobileApi }) {
   });
 }
 
+function * searchPlips({ mobileApi }) {
+  yield takeLatest("SEARCH_PLIP", function* (action) {
+    try {
+      yield call(delay, 1000);
+
+      const { title } = action.payload;
+
+      const response = yield call(fetchAllPlips, { mobileApi, page: 0, title });
+
+      yield all([
+        put(refreshAllPlips(response)),
+        put(isSearchingPlip(false)),
+      ]);
+
+      const id = prop("id");
+      const plips = response.plips;
+      const plipIds = plips.map(id);
+
+      yield call(fetchPlipsRelatedInfo, { mobileApi, plipIds });
+    } catch(e) {
+      logError(e, { tag: "searchPlip" });
+
+      yield put(isSearchingPlip(false));
+    }
+  });
+}
+
 function* loadStorePlipsInfo() {
   let oldUserLocation;
 
@@ -812,6 +847,7 @@ function* loadStorePlipsInfo() {
 }
 
 export default function* plipSaga({ mobileApi, walletStore, apiError }) {
+  yield fork(searchPlips, { mobileApi });
   yield fork(fetchPlipsMainTab);
   yield fork(fetchPlipsSaga, { mobileApi });
   yield fork(refreshPlipsSaga, { mobileApi });

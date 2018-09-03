@@ -89,6 +89,7 @@ const translations = {
   noSignedProjects: "Você não possui projetos assinados.",
   youShouldBeLoggedToSeeYourSignedProjects: "Você precisa está logado para ver seus projetos assinados.",
   noFavoriteProjects: "Você não possui projetos favoritos.",
+  noProjectsMatch: "No momento, nenhum projeto foi encontrado.",
   youShouldBeLoggedToSeeYourFavoriteProjects: "Você precisa está logado para ver seus projetos favoritos.",
   noThanks: "Não, obrigado",
   ok: "Ok",

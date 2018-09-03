@@ -8,6 +8,8 @@ const initialState = {
   isFetchingPlipsNextPage: false,
   isRefreshingPlips: false,
   plips: [],
+  searchPlip: "",
+  isSearching: false,
   allPlips: {
     plips: [],
     page: null,
@@ -571,6 +573,22 @@ export default (state = initialState, action) => {
         fetchPlipRelatedInfoError: null,
         userSignInfo: {},
         justSignedPlips: {},
+      };
+    case "SEARCH_PLIP":
+      return {
+        ...state,
+        searchPlip: payload.title,
+        isSearching: true,
+      };
+    case "CLEAR_SEARCH_PLIP":
+      return {
+        ...state,
+        searchPlip: "",
+      };
+    case "PLIP_SEARCHING":
+      return {
+        ...state,
+        isSearching: payload.isSearching,
       };
     default:
       return state;

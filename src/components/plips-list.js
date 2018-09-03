@@ -43,6 +43,7 @@ export default class PlipsList extends Component {
     isAddingFavoritePlip: PropTypes.bool,
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
+    isSearchingPlips: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
     nextPage: PropTypes.number,
     openMenu: PropTypes.func.isRequired,
@@ -151,6 +152,7 @@ export default class PlipsList extends Component {
       isFetchingPlipsNextPage,
       plipsSignInfo,
       userSignInfo,
+      isSearchingPlips,
     } = this.props;
 
     const extraData = {
@@ -170,10 +172,10 @@ export default class PlipsList extends Component {
         extraData={extraData}
         onEndReached={(this.hasNextPage && !isFetchingPlipsNextPage) ? this.onFetchPlipsNextPage : null}
         onEndReachedThreshold={0.9}
-        refreshing={isRefreshingPlips}
+        refreshing={isRefreshingPlips || isSearchingPlips}
         refreshControl={
           <RefreshControl
-            refreshing={isRefreshingPlips}
+            refreshing={isRefreshingPlips || isSearchingPlips}
             onRefresh={!isRefreshingPlips ? this.onRefresh : null}
             tintColor="black"
           />
@@ -228,6 +230,20 @@ export default class PlipsList extends Component {
     const isLogged = !!currentUser;
 
     switch(typeList) {
+      case "allPlips":
+        return (
+          <View style={styles.noProjectsContainer}>
+            <View style={styles.noProjectsInnerContainer}>
+              <Image
+                source={require("../images/plip-page.png")}
+                style={styles.noProjectsIcon}
+              />
+
+              <Text style={styles.noProjectsText}>{locale.noProjectsMatch}</Text>
+            </View>
+          </View>
+        );
+
       case "signedPlips":
         return (
           <View style={styles.noProjectsContainer}>

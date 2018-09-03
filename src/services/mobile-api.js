@@ -303,6 +303,7 @@ const listPlips = ({ client }) => ({
   limit,
   page,
   scope,
+  search,
   path,
 }) => {
   const qs = buildQueryString({
@@ -312,6 +313,7 @@ const listPlips = ({ client }) => ({
     limit,
     page,
     scope,
+    search,
     path,
   });
 
