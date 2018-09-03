@@ -93,7 +93,7 @@ export const hasPlipsNextPage = state => !!getNextPlipsPage(state);
 
 export const isSigningPlip = state => state.plip.isSigning;
 
-export const isFavoringPlips = state => state.plip.isFavoring;
+export const isAddingFavoritePlip = state => state.plip.isAddingFavorite;
 
 export const getUserSignInfo = state => state.plip.userSignInfo;
 

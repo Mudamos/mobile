@@ -150,9 +150,9 @@ export const fetchingFavoritePlipsNextPage = isFetchingNextPage => ({
   payload: { isFetchingNextPage },
 });
 
-export const isFavoringPlips = isFavoring => ({
-  type: "FAVORING_PLIPS",
-  payload: { isFavoring },
+export const isAddingFavoritePlip = isAddingFavorite => ({
+  type: "ADDING_FAVORITE_PLIP",
+  payload: { isAddingFavorite },
 });
 
 export const allPlipsError = error => ({

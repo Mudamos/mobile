@@ -4,7 +4,7 @@ const initialState = {
   plipsSignInfo: {},
   plipsFavoriteInfo: {},
   isFetchingPlips: false,
-  isFavoring: false,
+  isAddingFavorite: false,
   isFetchingPlipsNextPage: false,
   isRefreshingPlips: false,
   plips: [],
@@ -457,15 +457,15 @@ export default (state = initialState, action) => {
         ...state,
         isSigning: payload.isSigning,
       };
-    case "FAVORING_PLIPS":
+    case "ADDING_FAVORITE_PLIP":
       return {
         ...state,
-        isFavoring: payload.isFavoring,
+        isAddingFavorite: payload.isAddingFavorite,
       };
     case "TOGGLE_FAVORITE":
       return {
         ...state,
-        isFavoring: true,
+        isAddingFavorite: true,
       };
     case "PLIP_JUST_SIGNED":
       return {

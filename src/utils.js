@@ -88,7 +88,7 @@ export const compact = list => reject(isNil, list);
 
 export const notEmpty = complement(isEmpty);
 
-export const notNil = complement(isNil)
+export const notNil = complement(isNil);
 
 export const log = (message, { level = "DEBUG", tag } = {}, ...args) => isDev && console.log(toLogTag(level, tag), message, ...args);
 
