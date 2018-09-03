@@ -45,17 +45,26 @@ export default class ProfileUpdateLayout extends Component {
   };
 
   static propTypes = {
-    errors: PropTypes.array,
-    isSaving: PropTypes.bool,
+    errorsUpdatePassword: PropTypes.array,
+    errorsUpdateProfile: PropTypes.array,
+    isSavingAvatar: PropTypes.bool,
+    isSavingPassword: PropTypes.bool,
+    isSavingProfile: PropTypes.bool,
     previousAvatar: PropTypes.instanceOf(AvatarModel),
     previousBirthdate: PropTypes.string,
     previousName: PropTypes.string,
     previousZipCode: PropTypes.string,
     onBack: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
+    onRequestAvatarPermission: PropTypes.func.isRequired,
+    onSaveAvatar: PropTypes.func.isRequired,
+    onSaveProfile: PropTypes.func.isRequired,
   }
 
   selectAvatar = () => {
+    const { onRequestAvatarPermission } = this.props;
+
+    onRequestAvatarPermission();
+
     ImagePicker.showImagePicker({
       title: locale.chooseAvatar,
       cancelButtonTitle: locale.cancel,
@@ -83,16 +92,38 @@ export default class ProfileUpdateLayout extends Component {
     });
   }
 
+  get validProfileFields() {
+    const { birthdate, name, zipCode } = this.state
+
+    const validBirth = String(birthdate).length === 10;
+    const validName = String(name).length > 0;
+    const validZip = String(zipCode).length === 9;
+
+    return [
+      validBirth,
+      validName,
+      validZip,
+    ].every(v => v);
+  }
+
+  get validAvatar() {
+    return this.state.avatar.uri !== this.props.previousAvatar.url;
+  }
+
+  get validPassword() {
+    const { currentPassword, newPassword } = this.state;
+
+    const validCurrentPassword = String(currentPassword).length > 0;
+    const validNewPassword = String(newPassword).length > 0;
+
+    return [
+      validCurrentPassword,
+      validNewPassword,
+    ].every(v => v);
+  }
+
   get validForm() {
-    const validBirth = String(this.state.birthdate).length === 10;
-    const validName = String(this.state.name).length > 0;
-    const validZip = String(this.state.zipCode).length === 9;
-
-    const validAvatar = this.state.avatar.uri !== this.props.previousAvatar.url;
-    const validCommonFields = [ validBirth, validName, validZip ].every(v => v);
-    const validPassword = this.state.newPassword.length > 0;
-
-    return validAvatar || validCommonFields || validPassword
+    return this.validProfileFields || this.validAvatar || this.validPassword
   }
 
   get formEnabled() {
@@ -101,8 +132,11 @@ export default class ProfileUpdateLayout extends Component {
 
   render() {
     const {
-      errors,
-      isSaving,
+      errorsUpdatePassword,
+      errorsUpdateProfile,
+      isSavingProfile,
+      isSavingAvatar,
+      isSavingPassword,
     } = this.props;
 
     const { avatar } = this.state;
@@ -130,8 +164,8 @@ export default class ProfileUpdateLayout extends Component {
                 placeholder={locale.name}
                 value={this.state.name}
                 onChangeText={name => this.setState({ name })}
-                hasError={!!errorForField("name", errors)}
-                error={errorForField("name", errors)}
+                hasError={!!errorForField("name", errorsUpdateProfile)}
+                error={errorForField("name", errorsUpdateProfile)}
                 onSubmitEditing={() => this.nameInput.blur()}
                 ref={ref => this.nameInput = ref}
               />
@@ -140,8 +174,8 @@ export default class ProfileUpdateLayout extends Component {
                 placeholder={locale.birthdate}
                 value={this.state.birthdate}
                 onChangeDateText={birthdate => this.setState({ birthdate })}
-                hasError={!!errorForField("birthday", errors)}
-                error={errorForField("birthday", errors)}
+                hasError={!!errorForField("birthday", errorsUpdateProfile)}
+                error={errorForField("birthday", errorsUpdateProfile)}
                 hint="Ex: 31/12/1980"
                 onSubmitEditing={() => this.birthInput.blur()}
                 ref={ref => this.birthInput = ref}
@@ -151,8 +185,8 @@ export default class ProfileUpdateLayout extends Component {
                 value={this.state.zipCode}
                 onChangeZipCodeText={zipCode => this.setState({zipCode})}
                 placeholder={locale.zipCode}
-                hasError={!!errorForField("zipcode", errors)}
-                error={errorForField("zipcode", errors)}
+                hasError={!!errorForField("zipcode", errorsUpdateProfile)}
+                error={errorForField("zipcode", errorsUpdateProfile)}
                 hint="Ex: 00000-000"
                 onSubmitEditing={() => this.zipInput.blur()}
                 ref={ref => this.zipInput = ref}
@@ -164,6 +198,8 @@ export default class ProfileUpdateLayout extends Component {
                 password={true}
                 autoCapitalize="none"
                 onChangeText={password => this.setState({ currentPassword: password })}
+                hasError={!!errorForField("currentPassword", errorsUpdatePassword)}
+                error={errorForField("currentPassword", errorsUpdatePassword)}
                 onSubmitEditing={() => this.currentPasswordInput.blur()}
                 ref={ref => this.currentPasswordInput = ref}
               />
@@ -174,6 +210,8 @@ export default class ProfileUpdateLayout extends Component {
                 password={true}
                 autoCapitalize="none"
                 onChangeText={password => this.setState({ newPassword: password })}
+                hasError={!!errorForField("newPassword", errorsUpdatePassword)}
+                error={errorForField("newPassword", errorsUpdatePassword)}
                 onSubmitEditing={() => this.newPasswordInput.blur()}
                 ref={ref => this.newPasswordInput = ref}
               />
@@ -189,7 +227,7 @@ export default class ProfileUpdateLayout extends Component {
           </ScrollView>
         </Layout>
 
-        <PageLoader isVisible={isSaving} />
+        <PageLoader isVisible={isSavingProfile || isSavingAvatar || isSavingPassword} />
       </View>
     );
   }
@@ -205,9 +243,11 @@ export default class ProfileUpdateLayout extends Component {
   }
 
   onSubmit = () => {
-    const { birthdate, name, zipCode } = this.state;
-    const { onSave } = this.props;
+    const { avatar, birthdate, name, zipCode, currentPassword, newPassword } = this.state;
+    const { onSaveProfile, onSaveAvatar, onSavePassword } = this.props;
 
-    onSave({ birthdate, name, zipCode });
+    if (this.validAvatar) onSaveAvatar({ avatar });
+    if (this.validProfileFields) onSaveProfile({ birthdate, name, zipCode });
+    if (this.validPassword) onSavePassword({ currentPassword, newPassword });
   }
 }
