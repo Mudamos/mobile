@@ -1,5 +1,7 @@
 # Next
 
+* [PR #432] Add search functionality
+
 * [PR #437] Update edit profile layout
 * [PR #438] Update app icons
 * [PR #430] Add favorite functionality
