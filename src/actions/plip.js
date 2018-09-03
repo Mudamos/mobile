@@ -333,4 +333,4 @@ export const isSearchingPlip = isSearching => ({
 
 export const clearSearchPlip = () => ({
   type: "CLEAR_SEARCH_PLIP",
-)};
+});
