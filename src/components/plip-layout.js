@@ -472,14 +472,19 @@ export default class PlipLayout extends Component {
 
   renderFavoriteButton() {
     const {
+      user,
       plip,
       plipsFavoriteInfo,
     } = this.props;
+
+    const isLogged = !!user;
 
     const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
     const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);
 
     const iconColor = isFavorite ? "rgb(255, 255, 255)" : "rgba(0, 0, 0, .5)"
+
+    if (!isLogged) return;
 
     return (
       <TouchableOpacity

@@ -500,10 +500,14 @@ export class Plip extends Component {
 
   renderFavoriteButton() {
     const {
+      user,
       isFavorite,
     } = this.props;
 
+    const isLogged = !!user;
     const iconShape = isFavorite ? "favorite-border" : "favorite"
+
+    if (!isLogged) return;
 
     return (
       <TouchableOpacity
