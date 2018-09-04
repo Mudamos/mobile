@@ -57,7 +57,7 @@ export default class Avatar extends Component {
           }, avatarStyle]}
           imageStyle={styles.imageBubble}
         />
-        { editText && <Text style={styles.floatingText}>Editar</Text> }
+        { editText && <Text style={styles.floatingText}>alterar</Text> }
       </TouchableOpacity>
     );
   }

@@ -17,9 +17,6 @@ export default StyleSheet.create({
     justifyContent: "center",
     marginTop: 15,
   },
-  avatarText: {
-    position: 'absolute',
-  },
   inputContainer: {
     marginHorizontal: 33,
   },

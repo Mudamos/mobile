@@ -98,8 +98,6 @@ const translations = {
   openSettings: "Abrir configurações",
   openSite: "Acesse o site",
   password: "Senha",
-  currentPassword: "Senha atual",
-  newPassword: "Senha nova",
   passwordAtMudamos: "Senha no Mudamos",
   passwordChangedSuccessfully: "Senha alterada com sucesso!",
   performLogin: "Faça o login",

@@ -12,12 +12,10 @@ import {
 } from "../selectors";
 
 import {
-  changePassword,
   clearProfileSaveErrors,
+  updateUser,
   navigateBack,
-  profileUpdate,
   requestAvatarAccess,
-  profileSaveAvatar,
 } from "../actions";
 
 import {
@@ -49,15 +47,16 @@ const mapDispatchToProps = dispatch => ({
     dispatch(clearProfileSaveErrors());
     dispatch(navigateBack());
   },
-  onRequestAvatarPermission: () => dispatch(requestAvatarAccess()),
-  onSaveProfile: ({ birthdate, name, zipCode }) =>
-    dispatch(profileUpdate({
-      birthdate: toISODate(birthdate),
-      name,
-      zipCode: extractNumbers(zipCode),
+  onSave: ({ profile, validations }) => dispatch(
+    updateUser({
+      profile: {
+        ...profile,
+        birthdate: toISODate(profile.birthdate),
+        zipCode: extractNumbers(profile.zipCode),
+      },
+      validations,
     })),
-  onSaveAvatar: ({ avatar }) => dispatch(profileSaveAvatar({ avatar })),
-  onSavePassword: ({ currentPassword, newPassword }) => dispatch(changePassword({ currentPassword, newPassword })),
+  onRequestAvatarPermission: () => dispatch(requestAvatarAccess()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdateLayout);

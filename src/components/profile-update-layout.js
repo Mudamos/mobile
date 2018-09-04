@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  TouchableOpacity,
 } from "react-native";
 
 import Layout from "./purple-layout";
@@ -13,7 +12,6 @@ import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
 import BackButton from "./chevron-button";
 import MDTextInput from "./md-text-input";
-import FlatButton from "./flat-button";
 import DateInput from "./date-input";
 import ZipCodeInput from "./zip-code-input";
 import NavigationBar from "./navigation-bar";
@@ -28,7 +26,7 @@ import locale from "../locales/pt-BR";
 import {
   baseName,
   log,
-  errorForField
+  errorForField,
 } from "../utils";
 
 import styles from "../styles/profile-update-layout";
@@ -56,8 +54,7 @@ export default class ProfileUpdateLayout extends Component {
     previousZipCode: PropTypes.string,
     onBack: PropTypes.func.isRequired,
     onRequestAvatarPermission: PropTypes.func.isRequired,
-    onSaveAvatar: PropTypes.func.isRequired,
-    onSaveProfile: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
   }
 
   selectAvatar = () => {
@@ -71,6 +68,7 @@ export default class ProfileUpdateLayout extends Component {
       takePhotoButtonTitle: locale.takePhoto,
       chooseFromLibraryButtonTitle: locale.openGallery,
       mediaType: "photo",
+      previousUri: null,
       storageOptions: {
         skipBackup: true,
       },
@@ -94,20 +92,23 @@ export default class ProfileUpdateLayout extends Component {
 
   get validProfileFields() {
     const { birthdate, name, zipCode } = this.state
+    const { previousBirthdate, previousName, previousZipCode } = this.props;
 
     const validBirth = String(birthdate).length === 10;
     const validName = String(name).length > 0;
     const validZip = String(zipCode).length === 9;
+    const diffValues = String(previousBirthdate) !== String(birthdate) || String(previousName) !== String(name) || String(previousZipCode) !== String(zipCode);
 
     return [
       validBirth,
       validName,
       validZip,
+      diffValues,
     ].every(v => v);
   }
 
   get validAvatar() {
-    return this.state.avatar.uri !== this.props.previousAvatar.url;
+    return this.state.avatar.uri !== this.props.previousAvatar.url && this.state.avatar.uri !== this.state.previousUri;
   }
 
   get validPassword() {
@@ -244,10 +245,25 @@ export default class ProfileUpdateLayout extends Component {
 
   onSubmit = () => {
     const { avatar, birthdate, name, zipCode, currentPassword, newPassword } = this.state;
-    const { onSaveProfile, onSaveAvatar, onSavePassword } = this.props;
+    const { onSave } = this.props;
 
-    if (this.validAvatar) onSaveAvatar({ avatar });
-    if (this.validProfileFields) onSaveProfile({ birthdate, name, zipCode });
-    if (this.validPassword) onSavePassword({ currentPassword, newPassword });
+    this.setState({ previousUri: avatar.uri });
+
+    const profile = {
+      avatar,
+      birthdate,
+      name,
+      zipCode,
+      currentPassword,
+      newPassword,
+    };
+
+    const validations = {
+      validAvatar: this.validAvatar,
+      validProfileFields: this.validProfileFields,
+      validPassword: this.validPassword,
+    }
+
+    onSave({ profile, validations });
   }
 }
