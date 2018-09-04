@@ -13,6 +13,8 @@ import {
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+import locale from "../locales/pt-BR";
+
 const INITIAL_TOP = Platform.OS === "ios" ? -80 : -60;
 
 export default class Search extends Component {
@@ -59,9 +61,9 @@ export default class Search extends Component {
 
   static defaultProps = {
     data: [],
-    placeholder: "Search",
-    backButtonAccessibilityLabel: "Navigate up",
-    closeButtonAccessibilityLabel: "Clear search text",
+    placeholder: locale.defaultSearchBarPlaceholder,
+    backButtonAccessibilityLabel: locale.defaultSearchBarBackButtonAccessibilityLabel,
+    closeButtonAccessibilityLabel: locale.defaultSearchBarCloseButtonAccessibilityLabel,
     heightAdjust: 0,
     backgroundColor: "white",
     iconColor: "gray",

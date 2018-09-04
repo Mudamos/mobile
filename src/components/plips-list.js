@@ -25,6 +25,8 @@ import StaticFooter from "./static-footer";
 
 import styles from "../styles/plips-list";
 
+import noPlipsImage from "../images/plip-page.png";
+
 import locale from "../locales/pt-BR";
 import {
   RemoteLinksType,
@@ -173,7 +175,7 @@ export default class PlipsList extends Component {
       userSignInfo,
     };
 
-    if(isFetchingPlips) return null;
+    if (isFetchingPlips) return null;
 
     return (
       <FlatList
@@ -186,7 +188,7 @@ export default class PlipsList extends Component {
         extraData={extraData}
         onEndReached={(this.hasNextPage && !isFetchingPlipsNextPage) ? this.onFetchPlipsNextPage : null}
         onEndReachedThreshold={0.9}
-        ref={(ref) => { this.flatList = ref; }}
+        ref={ref => { this.flatList = ref; }}
         refreshing={isRefreshingPlips || isSearchingPlips}
         refreshControl={
           <RefreshControl
@@ -256,7 +258,7 @@ export default class PlipsList extends Component {
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
               <Image
-                source={require("../images/plip-page.png")}
+                source={noPlipsImage}
                 style={styles.noProjectsIcon}
               />
 
@@ -270,7 +272,7 @@ export default class PlipsList extends Component {
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
               <Image
-                source={require("../images/plip-page.png")}
+                source={noPlipsImage}
                 style={styles.noProjectsIcon}
               />
 
@@ -284,7 +286,7 @@ export default class PlipsList extends Component {
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
               <Image
-                source={require("../images/plip-page.png")}
+                source={noPlipsImage}
                 style={styles.noProjectsIcon}
               />
 
@@ -298,7 +300,7 @@ export default class PlipsList extends Component {
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
               <Image
-                source={require("../images/plip-page.png")}
+                source={noPlipsImage}
                 style={styles.noProjectsIcon}
               />
 
