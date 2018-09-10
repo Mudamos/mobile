@@ -1,5 +1,7 @@
 # Next
 
+## [1.11.0] 10/09/2018
+
 * [PR #436] Update integration to the TSE system
 * [PR #417] Update to RN 0.55.4
 
