@@ -46,7 +46,7 @@ import {
   logError,
 } from "../utils";
 
-const getUserTags = pipe(pick(["city", "uf"]), map(v => v || ""));
+const getUserTags = pipe(pick(["city", "uf"]), map(v => v || "-"));
 
 const signedPlipTag = pipe(String, concat("signed-plip-"));
 
