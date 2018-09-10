@@ -17,8 +17,7 @@ import {
 
 import TSELayout from "../components/tse-layout";
 
-
-const TSE_URL = "http://apps.tse.jus.br/saae/consultaNomeDataNascimento.do";
+const TSE_URL = "http://www.tse.jus.br/eleitor/servicos/titulo-de-eleitor/titulo-e-local-de-votacao/consulta-por-nome#form-consultar-local-votacao";
 
 const reactNativePostMessageBugHack = `
   var patchPostMessageFunction = function() {
@@ -44,10 +43,12 @@ const jsCode = user => {
 
     (function() {
       function fillOutForm() {
-        var nameField = document.getElementsByName("nomeEleitor")[0];
+        var nameField = document.getElementsByName("nomeTituloEleitor")[0];
         var birthField = document.getElementsByName("dataNascimento")[0];
-        if (nameField && !nameField.value) nameField.value = "${user.name}";
-        if (birthField && !birthField.value) birthField.value = "${fromISODate(user.birthdate)}";
+        const userName = "${user.name}";
+        const userBirthdate = "${fromISODate(user.birthdate)}";
+        if (userName && nameField && !nameField.value) nameField.value = userName;
+        if (userBirthdate && birthField && !birthField.value) birthField.value = userBirthdate;
       }
       fillOutForm();
 
@@ -57,40 +58,53 @@ const jsCode = user => {
       }
       removePrint();
 
-      function getVoteCardId() {
-        var labels = document.getElementsByClassName("label_1");
+      document.getElementById("nav-principal").outerHTML = "";
+      document.getElementById("search").outerHTML = "";
+      Array.from(document.getElementsByClassName("help-block")).forEach(
+        (element, index, array) => {
+          element.remove();
+        }
+      );
 
-        var isVoteCardLabel = function(text) {
-          return /título de eleitor/gi.test(text);
+      const getVoteCardId = () => {
+        const labels = document.getElementById("resposta-local-votacao");
+        const nodes = labels.childNodes;
+        const isVoteCard = text => {
+          return /Inscrição: [0-9]{12}/gi.test(text);
         };
-
-        var getVoteCardIdFromLabel = function(label) {
-          var textNode = label.nextSibling;
-          if (!textNode) return;
-
-          var content = textNode.textContent;
-          return (content || "").trim();
+        const getVoteCard = text => {
+          return text.match(/[0-9]{12}/g)[0];
         };
-
-        for (var i = 0; i < labels.length; i++) {
-          var label = labels[i];
-          if (isVoteCardLabel(label.textContent)) {
-            var voteCardId = getVoteCardIdFromLabel(label);
-            if (voteCardId) return voteCardId;
+        for (let i = 0; i < nodes.length; i++) {
+          const content = nodes[i].innerHTML;
+          if (isVoteCard(content)) {
+            const voteCardId = getVoteCard(content);
+            if (voteCardId) {
+              return voteCardId;
+            }
           }
         }
-      }
+      };
 
-      function postVoteCardId() {
-        var voteCardId = getVoteCardId();
-
+      const postVoteCardId = () => {
+        const voteCardId = getVoteCardId();
         if (voteCardId) {
-          var message = JSON.stringify({voteCardId: voteCardId});
+          const message = JSON.stringify({voteCardId: voteCardId});
+          clearInterval(updateInterval);
           window.postMessage(message, "*");
         }
-      }
+      };
 
-      setTimeout(postVoteCardId, 500);
+      const hasFound = () => {
+        const labels = document.getElementById("resposta-local-votacao");
+        if (labels.hasChildNodes()) {
+          return postVoteCardId();
+        } else {
+          return null;
+        }
+      };
+
+      const updateInterval = setInterval(() => hasFound(), 500);
     })();
   `;
 };
