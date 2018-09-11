@@ -27,7 +27,10 @@ import StaticFooter from "./static-footer";
 import Checkbox from "./multicolor-flat-checkbox";
 
 import locale from "../locales/pt-BR";
-import { errorForField } from "../utils";
+import {
+  errorForField,
+  validateEmail,
+} from "../utils";
 
 import styles from "../styles/sign-up-layout";
 
@@ -50,10 +53,9 @@ const enhance = compose(
     }
   ),
   withHandlers({
-    onSubmit: ({ userEmail, email, cpf, password, termsAccepted, isFacebookUser, onCreate, onUpdate }) => () => {
+    onSubmit: ({ email, cpf, password, termsAccepted, isFacebookUser, onCreate, onUpdate }) => () => {
       if (isFacebookUser) {
-        const currentEmail = email || userEmail;
-        return onUpdate({ cpf, email: currentEmail, termsAccepted })
+        return onUpdate({ cpf, email, termsAccepted })
       } else {
         return onCreate({ cpf, email, password, termsAccepted });
       }
@@ -98,6 +100,10 @@ class SignUpLayout extends Component {
     onUpdate: PropTypes.func.isRequired,
   }
 
+  state = {
+    errors: {},
+  };
+
   componentDidMount() {
     const { userCpf, userEmail, userTermsAccepted, onSetCpf, onSetEmail, onSetTermsAccepted, onSigningUp } = this.props;
 
@@ -116,22 +122,46 @@ class SignUpLayout extends Component {
     onSigningUp();
   }
 
-  get validForm() {
-    const { email, cpf, userEmail, isFacebookUser, password, termsAccepted } = this.props;
+  componentDidUpdate(prevProps) {
+    const { cpf, email, password, termsAccepted } = this.props;
 
-    const validCpf = String(cpf).length === 14;
+    if (prevProps.cpf !== cpf) {
+      this.checkCpf();
+    }
+
+    if (prevProps.email !== email) {
+      this.checkEmail();
+    }
+
+    if (prevProps.password !== password) {
+      this.checkPassword();
+    }
+
+    if (prevProps.termsAccepted !== termsAccepted) {
+      this.checkTermsAccepted();
+    }
+  }
+
+  validCpf = cpf => String(cpf).length === 14;
+
+  validPassword = password => String(password).length > 0;
+
+  validEmail = email => validateEmail(email);
+
+  get validForm() {
+    const { cpf, email, password, isFacebookUser, termsAccepted } = this.props;
 
     if (isFacebookUser) {
       return [
-        validCpf,
-        userEmail || email,
+        this.validCpf(cpf),
+        this.validEmail(email),
         termsAccepted,
       ].every(v => v);
     } else {
       return [
-        validCpf,
-        email,
-        password,
+        this.validCpf(cpf),
+        this.validEmail(email),
+        this.validPassword(password),
         termsAccepted,
       ].every(v => v);
     }
@@ -140,6 +170,75 @@ class SignUpLayout extends Component {
   get createEnabled() {
     return this.validForm;
   }
+
+  allTextFieldsValid = () => {
+    const { cpf, email, password, isFacebookUser } = this.props;
+
+    if (isFacebookUser) {
+      return [
+        this.validCpf(cpf),
+        this.validEmail(email),
+      ].every(v => v);
+    } else {
+      return [
+        this.validCpf(cpf),
+        this.validEmail(email),
+        this.validPassword(password),
+      ].every(v => v);
+    }
+  }
+
+  checkCpf = () => {
+    const { cpf, termsAccepted } = this.props;
+    const shouldShowMessage = this.allTextFieldsValid() && !termsAccepted;
+
+    this.setState({
+      errors: {
+        ...this.state.errors,
+        cpf: this.validCpf(cpf) ? null : locale.invalidCpf,
+        termsAccepted: shouldShowMessage ? locale.acceptTermsToContinue : null,
+      },
+    });
+  };
+
+  checkEmail = () => {
+    const { email, termsAccepted } = this.props;
+    const shouldShowMessage = this.allTextFieldsValid() && !termsAccepted;
+
+    this.setState({
+      errors: {
+        ...this.state.errors,
+        email: this.validEmail(email) ? null : locale.invalidEmail,
+        termsAccepted: shouldShowMessage ? locale.acceptTermsToContinue : null,
+      },
+    });
+  };
+
+  checkPassword = () => {
+    const { password, termsAccepted } = this.props;
+    const shouldShowMessage = this.allTextFieldsValid() && !termsAccepted;
+
+    this.setState({
+      errors: {
+        ...this.state.errors,
+        password: this.validPassword(password) ? null : locale.invalidPassword,
+        termsAccepted: shouldShowMessage ? locale.acceptTermsToContinue : null,
+      },
+    });
+  };
+
+  checkTermsAccepted = () => {
+    const { termsAccepted } = this.props;
+
+    const shouldShowMessage = this.allTextFieldsValid() && !termsAccepted;
+
+    this.setState({
+      errors: {
+        ...this.state.errors,
+        termsAccepted: shouldShowMessage ? locale.acceptTermsToContinue : null,
+      },
+    });
+  };
 
   onBack = () => {
     const { isLogged, onNavigate, onLogout } = this.props;
@@ -174,6 +273,10 @@ class SignUpLayout extends Component {
       onTermsRequested,
     } = this.props;
 
+    const {
+      errors,
+    } = this.state;
+
     return (
       <View style={styles.container}>
         <Layout>
@@ -189,8 +292,8 @@ class SignUpLayout extends Component {
                 value={cpf}
                 onChangeCpfText={onSetCpf}
                 placeholder={locale.cpf.toUpperCase()}
-                hasError={!!errorForField("cpf", createErrors)}
-                error={errorForField("cpf", createErrors)}
+                hasError={!!errorForField("cpf", createErrors) || !!errors.cpf}
+                error={errorForField("cpf", createErrors) || errors.cpf}
                 errorLink={this.onBack}
                 hint="Ex: 000.000.000-00"
                 onSubmitEditing={() => this.cpfInput.blur()}
@@ -202,8 +305,8 @@ class SignUpLayout extends Component {
                   placeholder={locale.emailForAccess}
                   value={email}
                   onChangeText={onSetEmail}
-                  hasError={!!errorForField("email", createErrors)}
-                  error={errorForField("email", createErrors)}
+                  hasError={!!errorForField("email", createErrors) || !!errors.email}
+                  error={errorForField("email", createErrors) || errors.email}
                   errorLink={this.onBack}
                   keyboardType="email-address"
                   onSubmitEditing={() => this.emailInput.blur()}
@@ -218,8 +321,8 @@ class SignUpLayout extends Component {
                   value={password}
                   onChangeText={onSetPassword}
                   password={true}
-                  hasError={!!errorForField("password", createErrors)}
-                  error={errorForField("password", createErrors)}
+                  hasError={!!errorForField("password", createErrors) || !!errors.password}
+                  error={errorForField("password", createErrors) || errors.password}
                   onSubmitEditing={() => this.passwordInput.blur()}
                   ref={ref => this.passwordInput = ref}
                 />
@@ -241,6 +344,11 @@ class SignUpLayout extends Component {
                   <Text style={[styles.termsAcceptedText, styles.text, styles.termsAcceptedLink]}>{locale.termsOfUse.toUpperCase()}</Text>
                 </TouchableOpacity>
               </View>
+              { !!errors.termsAccepted &&
+                <Text style={styles.termsAcceptedTextAlert}>
+                  {errors.termsAccepted}
+                </Text>
+              }
             </View>
 
             <RoundedButton title={locale.continue} enabled={this.createEnabled} action={onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
