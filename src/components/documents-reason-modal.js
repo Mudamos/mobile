@@ -7,10 +7,12 @@ import locale from "../locales/pt-BR";
 
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 
+import EStyleSheet from "react-native-extended-stylesheet";
+
 import HeaderLogo from "./header-logo";
 import NavigationBar from "./navigation-bar";
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   background: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0, 0, 0, .4)",
@@ -35,6 +37,7 @@ const styles = StyleSheet.create({
   },
   descriptionContainer: {
     marginBottom: 20,
+    flexDirection:"row",
   },
   modal: {
     position: "absolute",
@@ -45,11 +48,15 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
   },
   text: {
+    fontSize: "0.8rem",
     color: "#FFF",
+    flex: 1,
+    flexWrap: "wrap",
   },
   title: {
-    fontSize: 18,
+    fontSize: "1rem",
     fontWeight: "bold",
+    textAlign: "center",
     marginVertical: 20,
   },
 });
@@ -131,7 +138,7 @@ class DocumentsReasonModal extends Component {
           />
           <Text style={[styles.text, styles.title]}>{modalTitle}</Text>
           <View style={styles.descriptionContainer}>
-            <Text style={styles.text}>{modalDescription}</Text>
+            <Text style={[styles.text, {height: 200}]}>{modalDescription}</Text>
           </View>
           <View style={styles.buttonPanel}>
             <TouchableOpacity onPress={onToggleReasonEnabled} >

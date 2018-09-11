@@ -1,21 +1,22 @@
 import React, { Component } from "react";
-import { StyleSheet, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
 import PropTypes from "prop-types";
 import PlipsList from "../components/plips-list";
 import { TabViewType } from "../prop-types";
+import EStyleSheet from "react-native-extended-stylesheet";
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   label: {
     color: "#7705B9",
-    fontSize: 18,
+    fontSize: "1rem",
     fontFamily: "roboto",
   },
   tabBar: {
     backgroundColor: "#FFF",
   },
   tab: {
-    width: 180,
+    width: 200,
   },
   indicator: {
     borderBottomColor: "#00BFD8",

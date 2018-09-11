@@ -76,7 +76,7 @@ export default class Menu extends Component {
     const { currentUser, isFetchingProfile } = this.props;
 
     return (
-      <View>
+      <View style={styles.menuHeaderContainer}>
         {
           currentUser &&
             <View style={styles.profileInfoContainer}>

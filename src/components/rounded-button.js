@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    maxWidth: 170,
+    maxWidth: 200,
   },
   withIcon: {
     flexDirection: "row",

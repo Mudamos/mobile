@@ -1,17 +1,17 @@
 import { StyleSheet } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 import textStyles from "./text";
 
-export default StyleSheet.create({
+export default EStyleSheet.create({
   blueRoundedButton: {
     backgroundColor: "#00BFD8",
     borderWidth: 0,
     marginTop: 20,
-    marginHorizontal: 20,
   },
   blueRoundedButtonTitle: {
     color: "#FFF",
-    fontSize: 12,
+    fontSize: "0.7rem",
   },
   breadcrumb: {
     marginVertical: 15,
@@ -25,7 +25,7 @@ export default StyleSheet.create({
   },
   headerSubTitle: {
     color: "#FFF",
-    fontSize: 12,
+    fontSize: "0.8rem",
     marginTop: 20,
     marginHorizontal: 10,
   },

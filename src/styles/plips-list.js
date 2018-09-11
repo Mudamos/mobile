@@ -1,5 +1,6 @@
 import {
   Dimensions,
+  Platform,
   StyleSheet,
 } from "react-native";
 
@@ -8,7 +9,6 @@ const { width: windowWidth } = Dimensions.get("window");
 export default StyleSheet.create({
   footerContainer: {
     flex: 1,
-    marginTop: 18,
   },
   full: {
     flex: 1,
@@ -27,7 +27,6 @@ export default StyleSheet.create({
   },
   listView: {
     flex: 1,
-    paddingTop: 5,
   },
   noProjectsContainer: {
     flex: 1,
@@ -54,14 +53,14 @@ export default StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   rowContainer: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#DDD",
   },
   plipView: {
     backgroundColor: "#FFF",
     marginVertical: 10,
-    marginHorizontal: 16,
+    marginHorizontal: 6,
     borderWidth: 1,
-    borderColor: "rgb(220,220,220)",
+    borderColor: Platform.OS === "ios" ? "#999" : "transparent",
     borderRadius: 10,
     elevation: 5,
     shadowColor: "rgb(200,200,200)",

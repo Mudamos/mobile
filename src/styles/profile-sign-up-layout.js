@@ -1,17 +1,19 @@
 import { Platform, StyleSheet } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
-export default StyleSheet.create({
+export default EStyleSheet.create({
   breadcrumb: {
     marginVertical: 15,
   },
   cantRememberVoteCardText: {
     color: "#FFF",
-    fontSize: 10,
+    fontSize: "0.8rem",
+    fontWeight: "bold",
   },
   cantRememberVoteCardContainer: {
     flex: 1,
-    alignItems: "flex-end",
-    marginTop: -15,
+    alignItems: "center",
+    marginTop: 20,
   },
   container: {
     backgroundColor: "#6000AA",
@@ -25,6 +27,7 @@ export default StyleSheet.create({
   },
   continueButtonTitle: {
     color: "#FFF",
+    fontSize: "0.8rem",
   },
   cpfExampleText: {
     marginTop: 5,
@@ -33,7 +36,7 @@ export default StyleSheet.create({
   headerTitle: {
     alignSelf: "center",
     color: "#fff",
-    fontSize: 20,
+    fontSize: "1.2rem",
     fontWeight: "500",
     marginHorizontal: 30,
     marginTop: 12,
@@ -114,6 +117,8 @@ export default StyleSheet.create({
   },
   whyDocumentsText: {
     marginHorizontal: 10,
+    fontSize: "0.8rem",
+    fontWeight: "bold",
     color: "#FFF",
   },
 });

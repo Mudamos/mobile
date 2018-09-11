@@ -20,9 +20,11 @@ export default StyleSheet.create({
   full: {
     flex: 1,
   },
+  menuHeaderContainer: {
+    flex: 1,
+  },
   menuListContainer: {
-    flex: 3,
-    marginTop: 50,
+    flex: 4,
   },
   profileInfoContainer: {
     flexDirection: "row",

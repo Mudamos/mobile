@@ -2,11 +2,13 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  StyleSheet,
+  Keyboard,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+
+import EStyleSheet from "react-native-extended-stylesheet";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -18,24 +20,25 @@ const selectionColor = "rgba(255, 255, 255, 0.5)";
 const errorColor = "#DB4437";
 const whiteTransparent = "rgba(255,255,255,0.7)";
 
-const style = StyleSheet.create({
+const style = EStyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "transparent",
   },
   hint: {
     fontFamily: "roboto",
-    fontSize: 10,
+    fontSize: "0.8rem",
     color: "#fff",
     marginTop: 3,
+    marginBottom: 8,
   },
   errorText: {
     color: errorColor,
-    fontSize: 11,
+    fontSize: "0.8rem",
   },
   eyeIcon: {
     position: "absolute",
-    top: 30,
+    bottom: "1.8rem",
     right: 0,
   },
   textFieldStyle: {
@@ -45,7 +48,7 @@ const style = StyleSheet.create({
   textInputStyle: {
     color: "#fff",
     fontFamily: "roboto",
-    fontSize: 14,
+    fontSize: "1.1rem",
     flex: 1,
   },
 });
@@ -70,7 +73,7 @@ export default class MDTextInput extends Component {
     tintColor: "rgba(255,255,255,0.7)",
     floatingLabelFont: {
       fontFamily: "roboto",
-      fontSize: 14,
+      fontSize: 16,
     },
     selectionColor: selectionColor,
     style: style.textFieldStyle,
@@ -100,6 +103,7 @@ export default class MDTextInput extends Component {
   }
 
   changePasswordType = () => {
+    Keyboard.dismiss();
     this.setState(({ togglePassword }) => ({
       togglePassword: !togglePassword,
       icEye: togglePassword ? "visibility" : "visibility-off",
@@ -134,10 +138,12 @@ export default class MDTextInput extends Component {
           tintColor={this.tintColor}
           selectionColor={selectionColor}
           highlightColor={this.highlightColor}
+          style={{}}
           textInputStyle={[style.textInputStyle, textInputStyle]}
           floatingLabelFont={floatingLabelFont}
           underlineSize={underlineEnabled ? 1 : 0}
           underlineEnabled={underlineEnabled}
+          placeholderTextColor={hasError ? errorColor : this.tintColor}
         />
         { password &&
           <Icon

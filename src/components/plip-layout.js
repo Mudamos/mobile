@@ -261,7 +261,7 @@ export default class PlipLayout extends Component {
           title={title}
           onPress={onPress}
           style={signButtonStyle}
-          textStyle={{fontSize: 16, fontFamily: "lato"}}
+          textStyle={{fontFamily: "lato"}}
           iconName={iconName}
         />
       </View>
@@ -612,7 +612,7 @@ export default class PlipLayout extends Component {
 
 const signButtonStyle = {
   backgroundColor: "#00BFD8",
-  marginHorizontal: 20,
+  marginHorizontal: 10,
   marginVertical: 15,
   paddingHorizontal: 15,
   paddingVertical: 10,

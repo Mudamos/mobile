@@ -1,7 +1,5 @@
 import React from "react";
 
-import { StyleSheet } from "react-native";
-
 import { compose, withHandlers } from "recompose";
 
 import {
@@ -15,10 +13,12 @@ import PropTypes from "prop-types";
 
 import locale from "../locales/pt-BR";
 
+import EStyleSheet from "react-native-extended-stylesheet";
+
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   aboutMudamosContainer: {
     flexDirection: "row",
     marginBottom: 40,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#FFF",
-    fontSize: 10,
+    fontSize: "0.65rem",
     fontFamily: "roboto",
   },
   textContainer: {

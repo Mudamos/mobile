@@ -1,7 +1,6 @@
 import React from "react";
 
 import {
-  StyleSheet,
   Text,
   View,
   ViewPropTypes,
@@ -9,15 +8,18 @@ import {
 
 import PropTypes from "prop-types";
 
+import EStyleSheet from "react-native-extended-stylesheet";
+
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import IonIcons from "react-native-vector-icons/Ionicons";
 
 import locale from "../locales/pt-BR";
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   arrowIcon: {
     marginTop: 6,
+    marginHorizontal: -10,
   },
   container: {
     flex: 1,
@@ -37,18 +39,18 @@ const styles = StyleSheet.create({
   iconsContainer: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 40,
   },
   iconContainer: {
-    width: 90,
+    width: "25%",
     alignItems: "center",
-    marginHorizontal: -10,
+    marginHorizontal: 4,
   },
   text: {
-    fontSize: 10,
+    fontSize: "0.6rem",
     marginTop: 10,
+    alignSelf: "center",
     color: "#FFF",
   },
   textContainer: {

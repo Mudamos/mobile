@@ -22,7 +22,7 @@ export default StyleSheet.create({
     alignSelf: "flex-end",
     color: "#fff",
     fontFamily: "roboto",
-    fontSize: 10,
+    fontSize: 13,
     fontWeight: "bold",
     marginTop: 4,
     marginBottom: 10,
