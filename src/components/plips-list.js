@@ -162,7 +162,6 @@ export default class PlipsList extends Component {
   renderListView({ plips, isRefreshingPlips }) {
     const {
       currentUser,
-      isFetchingPlips,
       isFetchingPlipsNextPage,
       plipsSignInfo,
       userSignInfo,
@@ -211,10 +210,7 @@ export default class PlipsList extends Component {
       userSignInfo,
       onToggleFavorite,
       isAddingFavoritePlip,
-      isFetchingPlips,
     } = this.props;
-
-    if (isFetchingPlips) return;
 
     const plipSignInfo = plipsSignInfo && plipsSignInfo[plip.id];
     const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];

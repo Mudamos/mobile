@@ -206,7 +206,7 @@ export default StyleSheet.create({
       },
       ios: {
         height: 120,
-      }
+      },
     }),
   },
   presentation: {

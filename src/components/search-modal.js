@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  Animated,
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
@@ -81,9 +80,8 @@ class SearchModal extends Component {
           onBack={onClearSearch}
           handleChangeText={onSearch}
           placeholder={locale.typeCityOrProjectLaw}
-          phoneValidationCodeSent={"#828282"}
-          backgroundColor={"#6000AA"}
-          iconColor={"#6000AA"}
+          backgroundColor="#6000AA"
+          iconColor="#6000AA"
           fontSize={15}
           onSubmitEditing={this.onSearch} />
       </SafeAreaView>

@@ -14,7 +14,7 @@ export default StyleSheet.create({
       },
       ios: {
         height: 68,
-      }
+      },
     }),
   },
   bar: {

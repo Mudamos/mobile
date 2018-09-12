@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import {
   SafeAreaView,
   TouchableOpacity,
-  View,
 } from "react-native";
 
 import {

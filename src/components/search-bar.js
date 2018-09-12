@@ -3,7 +3,6 @@
 import React, { Component } from "react";
 import {
   StyleSheet,
-  Dimensions,
   Platform,
   View,
   TextInput,
@@ -201,7 +200,6 @@ export default class Search extends Component {
       hideX,
       iosPadding,
       iosPaddingBackgroundColor,
-      iosHideShadow,
       onSubmitEditing,
       onFocus,
       autoCorrect,
@@ -322,12 +320,19 @@ export default class Search extends Component {
         )}
       </Animated.View>
     );
-  };
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
+    ...Platform.select({
+      android: {
+        height: 90,
+      },
+      ios: {
+        height: 80,
+      },
+    }),
     padding: 10,
   },
   navWrapper: {
