@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 import {
   ListView,
+  SafeAreaView,
   Text,
   View,
 } from "react-native";
@@ -34,15 +35,15 @@ export default class SignersLayout extends Component {
     const { hasError, isFetching } = this.props;
 
     return (
-      <View style={styles.full}>
-        <Layout>
+      <SafeAreaView style={[styles.full, styles.container]}>
+        <Layout style={styles.layout}>
           {this.renderNavBar()}
           {!hasError && this.renderListView()}
           {hasError && this.renderRetry()}
         </Layout>
 
         <PageLoader isVisible={isFetching} />
-      </View>
+      </SafeAreaView>
     );
   }
 
