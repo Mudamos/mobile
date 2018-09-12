@@ -17,7 +17,7 @@ export default EStyleSheet.create({
     marginVertical: 15,
   },
   container: {
-    backgroundColor: "#6000AA",
+    backgroundColor: "transparent",
     flex: 1,
   },
   headerContainer: {

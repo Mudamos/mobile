@@ -38,7 +38,7 @@ const infoContainerRow = {
 
 export default StyleSheet.create({
   actionTitle: {
-    color: "#7705B9",
+    color: "#6000AA",
     flex: 3,
     fontFamily: "lato",
     fontSize: 14,
@@ -173,7 +173,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#7705B9",
+    backgroundColor: "#6000AA",
     paddingHorizontal: 20,
     paddingVertical: 24,
   },

@@ -12,7 +12,7 @@ export default StyleSheet.create({
     alignSelf: "center",
   },
   container: {
-    backgroundColor: "#6000AA",
+    backgroundColor: "transparent",
     flex: 1,
   },
   full: {

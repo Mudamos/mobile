@@ -82,7 +82,7 @@ export default class Menu extends Component {
             <View style={styles.profileInfoContainer}>
               <Avatar
                 source={this.avatar}
-                onPress={this.selectAvatar.bind(this)}
+                onPress={this.selectAvatar}
                 size={56}
                 avatarStyle={styles.avatar}
               />
@@ -112,14 +112,14 @@ export default class Menu extends Component {
         <ListView
           bounces={false}
           dataSource={this.state.entries}
-          renderRow={this.renderMenuEntry.bind(this)}
+          renderRow={this.renderMenuEntry}
           style={styles.full}
         />
       </View>
     );
   }
 
-  renderMenuEntry(entry, section, row, highlightRow) {
+  renderMenuEntry = (entry, section, row, highlightRow) => {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -190,7 +190,7 @@ export default class Menu extends Component {
     );
   }
 
-  selectAvatar() {
+  selectAvatar = () => {
     const { onAvatarChanged } = this.props;
 
     ImagePicker.showImagePicker({

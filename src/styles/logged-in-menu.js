@@ -5,7 +5,6 @@ export default StyleSheet.create({
     borderColor: "transparent",
   },
   container: {
-    backgroundColor: "transparent",
     flex: 1,
     paddingTop: 60,
   },

@@ -4,7 +4,7 @@ import textStyles from "./text";
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: "#6000AA",
+    backgroundColor: "transparent",
     flex: 1,
   },
   full: {

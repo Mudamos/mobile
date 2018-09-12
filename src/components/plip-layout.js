@@ -441,7 +441,7 @@ export default class PlipLayout extends Component {
       onBack,
     } = this.props;
 
-    const finalNavColor = "#7705B9";
+    const finalNavColor = "#6000AA";
     let navColorOpacity = this.state.scrollY.interpolate({
       inputRange: [0, (HEADER_SCROLL_DISTANCE - SMALL_ANIM_OFFSET) / 2, HEADER_SCROLL_DISTANCE - SMALL_ANIM_OFFSET],
       outputRange: ["rgba(0,0,0,0.4)", "rgb(119, 5, 185)", finalNavColor],

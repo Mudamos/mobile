@@ -14,7 +14,7 @@ export default StyleSheet.create({
   },
   projectSigned: {
     backgroundColor: "transparent",
-    color: "#7705B9",
+    color: "#6000AA",
     fontFamily: "roboto",
     fontSize: 14,
     fontWeight: "bold",

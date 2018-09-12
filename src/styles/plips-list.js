@@ -92,7 +92,7 @@ export default StyleSheet.create({
     backgroundColor: "#00BFD8",
   },
   plipHeaderContainerNotSigned: {
-    backgroundColor: "#7705B9",
+    backgroundColor: "#6000AA",
   },
   plipTitleContainer: {
     flex: 10,
@@ -149,7 +149,7 @@ export default StyleSheet.create({
     backgroundColor: "#FFF",
   },
   plipDetailsLink: {
-    color: "#7705B9",
+    color: "#6000AA",
     fontWeight: "bold",
   },
   signedIcon: {

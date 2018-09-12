@@ -8,7 +8,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 const styles = EStyleSheet.create({
   label: {
-    color: "#7705B9",
+    color: "#6000AA",
     fontSize: "1rem",
     fontFamily: "roboto",
   },

@@ -48,7 +48,7 @@ export default class ForgotPasswordLayout extends Component {
     return (
       <View style={styles.container}>
         <Layout>
-          <ScrollView style={styles.container}>
+          <ScrollView>
             {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>

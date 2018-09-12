@@ -16,7 +16,7 @@ export default EStyleSheet.create({
     marginTop: 20,
   },
   container: {
-    backgroundColor: "#6000AA",
+    backgroundColor: "transparent",
     flex: 1,
   },
   continueButton: {
@@ -52,6 +52,7 @@ export default EStyleSheet.create({
     }),
   },
   inputContainer: {
+    marginTop: 14,
     marginHorizontal: 33,
   },
   lightText: {

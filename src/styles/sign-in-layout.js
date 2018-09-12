@@ -4,7 +4,7 @@ import textStyles from "./text";
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: "#6000AA",
+    backgroundColor: "transparent",
     flex: 1,
   },
   continueButton: {
@@ -33,6 +33,7 @@ export default StyleSheet.create({
     { fontSize: 18 },
   ]),
   inputContainer: {
+    marginTop: 12,
     marginHorizontal: 33,
   },
   logo: {

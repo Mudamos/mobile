@@ -159,9 +159,6 @@ class ProfileSignUpLayout extends Component {
   checkName = () => {
     const { name } = this.props;
 
-    console.log(name);
-    console.log(this.validName(name))
-
     this.setState({
       errors: {
         ...this.state.errors,
@@ -219,7 +216,7 @@ class ProfileSignUpLayout extends Component {
     return (
       <View style={styles.container}>
         <Layout>
-          <ScrollView style={styles.container}>
+          <ScrollView>
             {this.renderNavBar()}
 
             <SignUpBreadCrumb highlightId={2} containerStyle={styles.breadcrumb} />

@@ -475,7 +475,7 @@ export class Plip extends Component {
               {this.renderShareButton()}
             </View>
           </View>
-          <View style={{backgroundColor: "#7705B9"}}>
+          <View style={{backgroundColor: "#6000AA"}}>
             {this.renderDetailLinkButton()}
           </View>
         </View>
