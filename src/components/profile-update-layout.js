@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
+  SafeAreaView,
   Text,
   View,
 } from "react-native";
@@ -34,7 +35,7 @@ import styles from "../styles/profile-update-layout";
 
 export default class ProfileUpdateLayout extends Component {
   state = {
-    avatar: this.props.previousAvatar.url ? { uri: this.props.previousAvatar.url } : null,
+    avatar: (this.props.previousAvatar && this.props.previousAvatar.url) ? { uri: this.props.previousAvatar.url } : null,
     birthdate: this.props.previousBirthdate,
     currentPassword: "",
     name: this.props.previousName,
@@ -108,7 +109,7 @@ export default class ProfileUpdateLayout extends Component {
   }
 
   get validAvatar() {
-    return this.state.avatar.uri !== this.props.previousAvatar.url && this.state.avatar.uri !== this.state.previousUri;
+    return this.state.avatar && this.props.previousAvatar && this.state.avatar.uri !== this.props.previousAvatar.url && this.state.avatar.uri !== this.state.previousUri;
   }
 
   get validPassword() {
@@ -143,7 +144,7 @@ export default class ProfileUpdateLayout extends Component {
     const { avatar } = this.state;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           <ScrollView style={styles.container}>
             {this.renderNavBar()}
@@ -229,7 +230,7 @@ export default class ProfileUpdateLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={isSavingProfile || isSavingAvatar || isSavingPassword} />
-      </View>
+      </SafeAreaView>
     );
   }
 
