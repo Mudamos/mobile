@@ -46,6 +46,7 @@ export default class ProfileUpdateLayout extends Component {
   static propTypes = {
     errorsUpdatePassword: PropTypes.array,
     errorsUpdateProfile: PropTypes.array,
+    isAppUser: PropTypes.bool,
     isSavingAvatar: PropTypes.bool,
     isSavingPassword: PropTypes.bool,
     isSavingProfile: PropTypes.bool,
@@ -136,6 +137,7 @@ export default class ProfileUpdateLayout extends Component {
     const {
       errorsUpdatePassword,
       errorsUpdateProfile,
+      isAppUser,
       isSavingProfile,
       isSavingAvatar,
       isSavingPassword,
@@ -194,29 +196,33 @@ export default class ProfileUpdateLayout extends Component {
                 ref={ref => this.zipInput = ref}
               />
 
-              <MDTextInput
-                placeholder={locale.currentPassword}
-                value={this.state.currentPassword}
-                password={true}
-                autoCapitalize="none"
-                onChangeText={password => this.setState({ currentPassword: password })}
-                hasError={!!errorForField("currentPassword", errorsUpdatePassword)}
-                error={errorForField("currentPassword", errorsUpdatePassword)}
-                onSubmitEditing={() => this.currentPasswordInput.blur()}
-                ref={ref => this.currentPasswordInput = ref}
-              />
+              { isAppUser &&
+                <View>
+                  <MDTextInput
+                    placeholder={locale.currentPassword}
+                    value={this.state.currentPassword}
+                    password={true}
+                    autoCapitalize="none"
+                    onChangeText={password => this.setState({ currentPassword: password })}
+                    hasError={!!errorForField("currentPassword", errorsUpdatePassword)}
+                    error={errorForField("currentPassword", errorsUpdatePassword)}
+                    onSubmitEditing={() => this.currentPasswordInput.blur()}
+                    ref={ref => this.currentPasswordInput = ref}
+                  />
 
-              <MDTextInput
-                placeholder={locale.newPassword}
-                value={this.state.newPassword}
-                password={true}
-                autoCapitalize="none"
-                onChangeText={password => this.setState({ newPassword: password })}
-                hasError={!!errorForField("newPassword", errorsUpdatePassword)}
-                error={errorForField("newPassword", errorsUpdatePassword)}
-                onSubmitEditing={() => this.newPasswordInput.blur()}
-                ref={ref => this.newPasswordInput = ref}
-              />
+                  <MDTextInput
+                    placeholder={locale.newPassword}
+                    value={this.state.newPassword}
+                    password={true}
+                    autoCapitalize="none"
+                    onChangeText={password => this.setState({ newPassword: password })}
+                    hasError={!!errorForField("newPassword", errorsUpdatePassword)}
+                    error={errorForField("newPassword", errorsUpdatePassword)}
+                    onSubmitEditing={() => this.newPasswordInput.blur()}
+                    ref={ref => this.newPasswordInput = ref}
+                  />
+                </View>
+              }
             </View>
 
             <RoundedButton

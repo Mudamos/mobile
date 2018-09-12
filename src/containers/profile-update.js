@@ -32,6 +32,7 @@ const mapStateToProps = state => {
   return {
     errorsUpdatePassword: getChangePasswordErrors(state),
     errorsUpdateProfile: profileSaveErrors(state),
+    isAppUser: user ? user.isAppUser : null,
     isSavingAvatar: isSavingAvatar(state),
     isSavingPassword: isChangingPassword(state),
     isSavingProfile: isSavingProfile(state),
