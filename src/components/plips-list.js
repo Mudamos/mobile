@@ -100,7 +100,7 @@ export default class PlipsList extends Component {
       typeList,
     } = this.props
 
-    if (typeList == "allPlips" && isSearchingPlips && isSearchingPlips !== prevProps.isSearchingPlips) {
+    if (typeList === "allPlips" && isSearchingPlips && isSearchingPlips !== prevProps.isSearchingPlips) {
       this.flatList && this.flatList.scrollToOffset({ offset: 1, animated: true });
     }
   }
@@ -123,7 +123,7 @@ export default class PlipsList extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: "#FFF" }}>
         {
-          !error && hasRows &&
+          !error && hasRows && !isFetchingPlips &&
             this.renderListView({
               plips,
               isRefreshingPlips,
@@ -174,8 +174,6 @@ export default class PlipsList extends Component {
       plipsSignInfo,
       userSignInfo,
     };
-
-    if (isFetchingPlips) return null;
 
     return (
       <FlatList

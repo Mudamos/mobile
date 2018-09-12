@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { identity } from "ramda";
 
 import locale from "../locales/pt-BR";
 
@@ -85,7 +86,7 @@ export default class Search extends Component {
     autoCorrect: true,
     autoCapitalize: "sentences",
     keyboardAppearance: "default",
-    fontFamily: "System",
+    fontFamily: "roboto",
     backCloseSize: 28,
     fontSize: 20,
     editable: true,
@@ -134,11 +135,7 @@ export default class Search extends Component {
         toValue: INITIAL_TOP,
         duration: animationDuration,
         useNativeDriver: true,
-      }).start();
-      const timerId = setTimeout(() => {
-        this.doHide();
-        clearTimeout(timerId);
-      }, animationDuration);
+      }).start(this.doHide);
     } else {
       this.setState({ top: new Animated.Value(INITIAL_TOP) });
       this.doHide();
@@ -182,7 +179,15 @@ export default class Search extends Component {
     }
   };
 
-  render = () => {
+  setTextInput = input => this.textInput = input;
+
+  onTextInputLayout = () => {
+    const { focusOnLayout } = this.props;
+
+    focusOnLayout && this.textInput && this.textInput.focus();
+  }
+
+  render() {
     const {
       placeholder,
       heightAdjust,
@@ -199,7 +204,6 @@ export default class Search extends Component {
       iosHideShadow,
       onSubmitEditing,
       onFocus,
-      focusOnLayout,
       autoCorrect,
       autoCapitalize,
       keyboardAppearance,
@@ -222,10 +226,9 @@ export default class Search extends Component {
                 translateY: this.state.top,
               },
             ],
-            shadowOpacity: iosHideShadow ? 0 : 0.7,
           },
           { backgroundColor },
-          { paddingTop: (Platform.OS === "android" ? 26 : 10)},
+          { paddingTop: (Platform.OS === "android" ? 26 : 0)},
         ]}>
         {this.state.show && (
           <View style={styles.navWrapper}>
@@ -260,8 +263,8 @@ export default class Search extends Component {
                 </TouchableOpacity>
               )}
               <TextInput
-                ref={ref => (this.textInput = ref)}
-                onLayout={() => focusOnLayout && this.textInput.focus()}
+                ref={this.setTextInput}
+                onLayout={this.onTextInputLayout}
                 style={[
                   styles.input,
                   {
@@ -273,10 +276,9 @@ export default class Search extends Component {
                   },
                 ]}
                 selectionColor={selectionColor}
-                onChangeText={input => this.onChangeText(input)}
-                onSubmitEditing={() =>
-                  onSubmitEditing ? onSubmitEditing() : null}
-                onFocus={() => (onFocus ? onFocus() : null)}
+                onChangeText={this.onChangeText}
+                onSubmitEditing={onSubmitEditing || identity}
+                onFocus={onFocus || identity}
                 onBlur={this.handleBlur}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
@@ -286,6 +288,7 @@ export default class Search extends Component {
                 returnKeyType="search"
                 autoCorrect={autoCorrect}
                 autoCapitalize={autoCapitalize}
+                autoFocus={true}
                 keyboardAppearance={keyboardAppearance}
                 editable={editable}
               />
@@ -324,15 +327,11 @@ export default class Search extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    zIndex: 10,
-    position: "absolute",
-    elevation: 2,
-    shadowRadius: 5,
+    height: 80,
     padding: 10,
   },
   navWrapper: {
-    width: Dimensions.get("window").width - 20,
+    flex: 1,
   },
   nav: {
     ...Platform.select({
@@ -343,16 +342,15 @@ const styles = StyleSheet.create({
     }),
     backgroundColor: "#FFF",
     flex: 1,
-    flexBasis: 1,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
   },
   input: {
+    flex: 1,
     ...Platform.select({
       ios: { height: 30, marginBottom: 8 },
       android: { height: 50 },
     }),
-    width: Dimensions.get("window").width - 120,
   },
 });

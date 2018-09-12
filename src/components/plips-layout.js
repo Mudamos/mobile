@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
+  SafeAreaView,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -86,14 +87,6 @@ export default class PlipsLayout extends Component {
     this.setState(({ isSearchModalVisible }) => ({ isSearchModalVisible: !isSearchModalVisible }));
   };
 
-  onSearchPlip = title => {
-    const {
-      onSearchPlip,
-    } = this.props;
-
-    onSearchPlip(title);
-  };
-
   onClearSearch = () => {
     const { onClearSearch } = this.props;
 
@@ -103,13 +96,13 @@ export default class PlipsLayout extends Component {
 
   render() {
     return (
-      <View style={styles.full}>
+      <SafeAreaView style={styles.full}>
         <Layout>
           { this.renderNavBar() }
           <MainTabView {...this.props}/>
           { this.renderSearchModal() }
         </Layout>
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -144,13 +137,13 @@ export default class PlipsLayout extends Component {
 
   renderSearchModal() {
     const { isSearchModalVisible } = this.state;
-    const { searchTitle } = this.props;
+    const { searchTitle, onSearchPlip } = this.props;
 
     return (
       <SearchModal
         isVisible={isSearchModalVisible}
         onToggleModal={this.onToggleSearchModal}
-        onSearch={this.onSearchPlip}
+        onSearch={onSearchPlip}
         onClearSearch={this.onClearSearch}
         searchTitle={searchTitle} />
     );

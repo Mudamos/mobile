@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 import {
   Animated,
+  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
@@ -40,8 +41,8 @@ class SearchModal extends Component {
     const { input: searchBarInput } = this.searchBar && this.searchBar.state || {};
 
     if (this.props.isVisible !== prevProps.isVisible && this.searchBar) {
-      if (this.props.isVisible === true) {
-        setTimeout(() => this.searchBar.show(), 500);
+      if (this.props.isVisible) {
+        this.searchBar.show();
 
         if (searchBarInput !== searchTitle) {
           this.searchBar.setValue(searchTitle);
@@ -60,6 +61,8 @@ class SearchModal extends Component {
     onToggleModal();
   }
 
+  setSearchBar = ref => this.searchBar = ref;
+
   render() {
     const {
       isVisible,
@@ -71,10 +74,10 @@ class SearchModal extends Component {
     if (!isVisible) return null;
 
     return (
-      <Animated.View style={[styles.container]}>
+      <SafeAreaView style={styles.container}>
         <TouchableOpacity style={styles.background} onPress={onToggleModal} />
         <SearchBar
-          ref={ref => this.searchBar = ref}
+          ref={this.setSearchBar}
           onBack={onClearSearch}
           handleChangeText={onSearch}
           placeholder={locale.typeCityOrProjectLaw}
@@ -83,7 +86,7 @@ class SearchModal extends Component {
           iconColor={"#6000AA"}
           fontSize={15}
           onSubmitEditing={this.onSearch} />
-      </Animated.View>
+      </SafeAreaView>
     );
   }
 }
