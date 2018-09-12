@@ -180,18 +180,12 @@ class Container extends Component {
     const entries = [
       { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout, position: 2 },
       { icon: "account-balance", title: locale.links.sendYourPL, action: () => this.onOpenURL({ eventName: "tapped_menu_send_your_pl", link: remoteLinks.sendYourIdea }), position: 3 },
-      { icon: "extension", title: locale.links.getToKnowMudamos, action: () => this.onOpenURL({ eventName: "tapped_menu_get_to_know_mudamos", link: remoteLinks.getToKnowMudamos }), position: 4 },
-      { icon: "help", title: locale.links.help, action: () => this.onOpenURL({ eventName: "tapped_menu_help", link: remoteLinks.help }), position: 5 },
-      { icon: "favorite", title: locale.menu.tellAFriend, action: this.onTellAFriend, position: 6 },
+      { icon: "help", title: locale.menu.help, action: () => this.onOpenURL({ eventName: "tapped_menu_help", link: remoteLinks.help }), position: 5 },
+      { icon: "share", title: locale.menu.tellAFriend, action: this.onTellAFriend, position: 6 },
     ];
 
     if (!isFetchingProfile && currentUser) {
-      entries.push({ icon: "verified-user", title: locale.menu.validateProfile, action: onValidateProfile, position: -1 });
-      entries.push({ icon: "account-circle", title: locale.menu.editProfile, action: onProfileEdit, position: 0 });
-
-      if (currentUser.isAppUser) {
-        entries.push({ icon: "lock", title: locale.menu.changePassword, action: onChangePassword, position: 1 });
-      }
+      entries.push({ icon: "account-circle", title: locale.menu.myProfile, action: onProfileEdit, position: 0 });
     }
 
     if (!isFetchingProfile && !currentUser && !isUserLoggedIn) {
