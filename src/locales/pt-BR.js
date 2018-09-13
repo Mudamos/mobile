@@ -72,12 +72,8 @@ const translations = {
   iWannaMakeTheDifference: "Eu quero fazer a diferença",
   lastDay: "Último dia",
   links: {
-<<<<<<< HEAD
-    getToKnowMudamos: "Conheça a Mudamos",
-=======
     getToKnowMudamos: "Conheça o Mudamos",
     help: "Ajuda",
->>>>>>> Update texts
     sendYourIdea: "Envie sua ideia!",
     sendYourPL: "Proponha um PL",
   },
