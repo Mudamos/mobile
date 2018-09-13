@@ -17,6 +17,14 @@ export default StyleSheet.create({
     justifyContent: "center",
     marginTop: 15,
   },
+  avatarText: {
+    position: "absolute",
+    color: "black",
+    fontWeight: "bold",
+    textShadowColor: "white",
+    textShadowOffset: {width: 0.5, height: 0.5},
+    textShadowRadius: 2,
+  },
   inputContainer: {
     marginHorizontal: 33,
   },

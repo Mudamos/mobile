@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  Text,
   Image,
   ViewPropTypes,
   TouchableOpacity,
@@ -12,13 +11,11 @@ import NetworkImage from "./network-image";
 
 import styles from "../styles/avatar";
 
-import { isBlank } from "../utils";
-
 export default class Avatar extends Component {
   static propTypes = {
     avatarStyle: ViewPropTypes.style,
+    children: PropTypes.node,
     defaultPicture: PropTypes.any,
-    floatingText: PropTypes.string,
     imageStyle: Image.propTypes.style,
     size: PropTypes.number,
     source: PropTypes.object,
@@ -27,7 +24,6 @@ export default class Avatar extends Component {
 
   static defaultProps = {
     defaultPicture: require("../images/default-avatar.jpg"),
-    floatingText: null,
     size: 100,
   }
 
@@ -41,7 +37,6 @@ export default class Avatar extends Component {
       avatarStyle,
       size,
       onPress,
-      floatingText,
     } = this.props;
 
     return (
@@ -58,7 +53,7 @@ export default class Avatar extends Component {
           }, avatarStyle]}
           imageStyle={styles.imageBubble}
         />
-        { !isBlank(floatingText) && <Text style={styles.floatingText}>{floatingText}</Text> }
+        {this.props.children}
       </TouchableOpacity>
     );
   }

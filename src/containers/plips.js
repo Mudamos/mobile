@@ -172,9 +172,7 @@ class Container extends Component {
       isFetchingProfile,
       isUserLoggedIn,
       remoteLinks,
-      onChangePassword,
       onProfileEdit,
-      onValidateProfile,
     } = this.props;
 
     const entries = [

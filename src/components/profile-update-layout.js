@@ -160,8 +160,9 @@ export default class ProfileUpdateLayout extends Component {
                 <Avatar
                   onPress={this.selectAvatar}
                   source={avatar}
-                  floatingText="alterar"
-                />
+                >
+                  <Text style={styles.avatarText}>alterar</Text>
+                </Avatar>
               </View>
 
               <MDTextInput
