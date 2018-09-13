@@ -155,7 +155,6 @@ class Container extends Component {
     signedPlips: PropTypes.array,
     userLocationPlips: PropTypes.array,
     onAvatarChanged: PropTypes.func.isRequired,
-    onChangePassword: PropTypes.func.isRequired,
     onFetchProfile: PropTypes.func.isRequired,
     onFirstTimeModalClose: PropTypes.func.isRequired,
     onGoToPlip: PropTypes.func.isRequired,
@@ -406,7 +405,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onAvatarChanged: avatar => dispatch(profileSaveAvatar({ avatar, shouldNavigate: false })),
   onRetryPlips: () => dispatch(fetchPlips()),
-  onChangePassword: () => dispatch(navigate("changePassword")),
   onFetchPlipsNextPage: ({ typeList, nextPage }) => dispatch(fetchPlipsNextPage({ typeList, nextPage })),
   onFetchProfile: () => dispatch(fetchProfile()),
   onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),

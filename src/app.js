@@ -12,7 +12,6 @@ import { Dimensions } from "react-native";
 
 import {
   ChangeForgotPasswordContainer,
-  ChangePasswordContainer,
   ForgotPasswordContainer,
   PlipContainer,
   PlipsContainer,
@@ -65,7 +64,6 @@ const scenes = Actions.create(
     <Scene key="forgotPassword" component={ForgotPasswordContainer} hideNavBar={true} />
     <Scene key="changeForgotPassword" component={ChangeForgotPasswordContainer} hideNavBar={true} />
 
-    <Scene key="changePassword" component={ChangePasswordContainer} hideNavBar={true} />
     <Scene key="profileUpdate" component={ProfileUpdateContainer} hideNavBar={true} />
 
     <Scene key="tse" component={TSEContainer} hideNavBar={true} />
