@@ -1,10 +1,21 @@
-import { StyleSheet } from "react-native";
+import {
+  StyleSheet,
+  Platform,
+} from "react-native";
 
 export default StyleSheet.create({
   container: {
     flexDirection: "row",
-    height: 88,
-    paddingTop: 20,
+
+    ...Platform.select({
+      android: {
+        height: 88,
+        paddingTop: 20,
+      },
+      ios: {
+        height: 68,
+      },
+    }),
   },
   bar: {
     flex: 1,

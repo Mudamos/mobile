@@ -128,6 +128,10 @@ export const findPlipsSignInfo = state => state.plip.plipsSignInfo;
 
 export const findPlipsFavoriteInfo = state => state.plip.plipsFavoriteInfo;
 
+export const searchPlipTitle = state => state.plip.searchPlip;
+
+export const isSearchingPlips = state => state.plip.isSearching;
+
 export const findPlipByPath = path => state => {
   const plips = findPlips(state);
 

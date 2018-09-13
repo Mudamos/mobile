@@ -53,6 +53,7 @@ export default StyleSheet.create({
   },
   full: {
     flex: 1,
+    backgroundColor: "#6000AA",
   },
   hairline: {
     borderBottomColor: "rgba(255,255,255,0.23)",

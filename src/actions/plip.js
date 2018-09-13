@@ -320,3 +320,17 @@ export const toggleFavorite = ({ detailId }) => ({
   type: "TOGGLE_FAVORITE",
   payload: { detailId },
 });
+
+export const searchPlip = title => ({
+  type: "SEARCH_PLIP",
+  payload: { title },
+});
+
+export const isSearchingPlip = isSearching => ({
+  type: "PLIP_SEARCHING",
+  payload: { isSearching },
+});
+
+export const clearSearchPlip = () => ({
+  type: "CLEAR_SEARCH_PLIP",
+});

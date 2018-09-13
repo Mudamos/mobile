@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import {
   Animated,
   Dimensions,
+  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -166,7 +167,7 @@ export default class PlipLayout extends Component {
     const { isSignModalVisible } = this.state;
 
     return (
-      <View style={[styles.container]}>
+      <SafeAreaView style={[styles.container, {backgroundColor: "#6000AA"}]}>
         <Layout>
           { errorHandlingAppLink && this.renderRetryAppLink() }
           { errorFetching && plip && this.renderRetry() }
@@ -177,7 +178,7 @@ export default class PlipLayout extends Component {
 
         <PageLoader isVisible={isFetchingPlipRelatedInfo || isSigning || (!plip && !errorHandlingAppLink)} />
         <ConfirmSignModal isVisible={isSignModalVisible} plipName={this.plipName} onToggleSignModal={this.onToggleSignModal} onPlipSign={this.onPlipSign}/>
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -472,9 +473,14 @@ export default class PlipLayout extends Component {
 
   renderFavoriteButton() {
     const {
+      user,
       plip,
       plipsFavoriteInfo,
     } = this.props;
+
+    const isLogged = !!user;
+
+    if (!isLogged) return;
 
     const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
     const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);

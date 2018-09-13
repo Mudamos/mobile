@@ -196,9 +196,18 @@ export default StyleSheet.create({
   },
   navigationBar: {
     position: "absolute",
-    top: 0,
+    top: -50,
+    paddingTop: 50,
     right: 0,
     left: 0,
+    ...Platform.select({
+      android: {
+        height: 156,
+      },
+      ios: {
+        height: 120,
+      },
+    }),
   },
   presentation: {
     color: "#313131",

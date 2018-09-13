@@ -31,6 +31,8 @@ import {
   updateMainTabViewIndex,
   userFirstTimeDone,
   validateProfile,
+  clearSearchPlip,
+  searchPlip,
   setCurrentPlip,
   toggleFavorite,
 } from "../actions";
@@ -53,6 +55,7 @@ import {
   errorFetchingUserFavoritePlips,
   errorFetchingUserLocationPlips,
   currentUser as getCurrentUser,
+  getCurrentMainTabView,
   getMainTabView,
   getUserSignInfo,
   isAddingFavoritePlip,
@@ -62,6 +65,7 @@ import {
   isFetchingPlipsByLocation,
   isFetchingSignedPlips,
   isFetchingFavoritePlips,
+  isSearchingPlips,
   isUserFirstTime,
   isUserLoggedIn,
   findNationwidePlips,
@@ -84,6 +88,7 @@ import {
   hasLoadedUserFavoritePlips,
   hasLoadedUserLocationPlips,
   isValidatingProfile,
+  searchPlipTitle,
 } from "../selectors";
 
 import PageLoader from "../components/page-loader";
@@ -141,6 +146,7 @@ class Container extends Component {
     isRefreshingNationwidePlips: PropTypes.bool.isRequired,
     isRefreshingPlipsByLocation: PropTypes.bool.isRequired,
     isRefreshingSignedPlips: PropTypes.bool.isRequired,
+    isSearchingPlips: PropTypes.bool,
     isUserFirstTime: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     isValidatingProfile: PropTypes.bool,
@@ -351,6 +357,7 @@ const mapStateToProps = state => ({
   errorFetchingSignedPlips: errorFetchingSignedPlips(state),
   errorFetchingUserFavoritePlips: errorFetchingUserFavoritePlips(state),
   errorFetchingUserLocationPlips: errorFetchingUserLocationPlips(state),
+  currentMainTabViewTab: getCurrentMainTabView(state),
   isAppReady: isAppReady(state),
   isFetchingPlipsNextPageAllPlips: isFetchingPlipsNextPageAllPlips(state),
   isFetchingPlipsNextPageFavoritePlips: isFetchingPlipsNextPageFavoritePlips(state),
@@ -364,6 +371,7 @@ const mapStateToProps = state => ({
   isAddingFavoritePlip: isAddingFavoritePlip(state),
   isFetchingProfile: isFetchingProfile(state),
   isFetchingSignedPlips: isFetchingSignedPlips(state),
+  isSearchingPlips: isSearchingPlips(state),
   isRefreshingAllPlips: isRefreshingAllPlips(state),
   isRefreshingFavoritePlips: isRefreshingFavoritePlips(state),
   isRefreshingNationwidePlips: isRefreshingNationwidePlips (state),
@@ -389,6 +397,7 @@ const mapStateToProps = state => ({
   signedPlipsNextPage: findSignedPlipsNextPage(state),
   remoteLinks: findRemoteLinks(state),
   plipsSignInfo: findPlipsSignInfo(state),
+  searchTitle: searchPlipTitle(state),
   tabViewState: getMainTabView(state),
   userSignInfo: getUserSignInfo(state),
   plipsFavoriteInfo: findPlipsFavoriteInfo(state),
@@ -414,6 +423,8 @@ const mapDispatchToProps = dispatch => ({
   onMainTabChange: ({ index }) => dispatch(updateMainTabViewIndex(index)),
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),
+  onClearSearch: () => dispatch(clearSearchPlip()),
+  onSearchPlip: title => dispatch(searchPlip(title)),
   onShare: plip => dispatch(sharePlip(plip)),
   onToggleFavorite: detailId => dispatch(toggleFavorite({ detailId })),
 });

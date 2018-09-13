@@ -25,6 +25,8 @@ import StaticFooter from "./static-footer";
 
 import styles from "../styles/plips-list";
 
+import noPlipsImage from "../images/plip-page.png";
+
 import locale from "../locales/pt-BR";
 import {
   RemoteLinksType,
@@ -44,6 +46,7 @@ export default class PlipsList extends Component {
     isFetchingPlips: PropTypes.bool,
     isFetchingPlipsNextPage: PropTypes.bool,
     isRefreshingPlips: PropTypes.bool,
+    isSearchingPlips: PropTypes.bool,
     nextPage: PropTypes.number,
     openMenu: PropTypes.func.isRequired,
     plips: PropTypes.array,
@@ -91,6 +94,17 @@ export default class PlipsList extends Component {
     return typeList === "favoritePlips";
   }
 
+  componentDidUpdate(prevProps) {
+    const {
+      isSearchingPlips,
+      typeList,
+    } = this.props
+
+    if (typeList === "allPlips" && isSearchingPlips && isSearchingPlips !== prevProps.isSearchingPlips) {
+      this.flatList && this.flatList.scrollToOffset({ offset: 1, animated: true });
+    }
+  }
+
   render() {
     const {
       fetchingError: error,
@@ -109,7 +123,7 @@ export default class PlipsList extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: "#FFF" }}>
         {
-          !error && hasRows &&
+          !error && hasRows && !isFetchingPlips &&
             this.renderListView({
               plips,
               isRefreshingPlips,
@@ -151,6 +165,7 @@ export default class PlipsList extends Component {
       isFetchingPlipsNextPage,
       plipsSignInfo,
       userSignInfo,
+      isSearchingPlips,
     } = this.props;
 
     const extraData = {
@@ -170,15 +185,19 @@ export default class PlipsList extends Component {
         extraData={extraData}
         onEndReached={(this.hasNextPage && !isFetchingPlipsNextPage) ? this.onFetchPlipsNextPage : null}
         onEndReachedThreshold={0.9}
-        refreshing={isRefreshingPlips}
+        ref={ref => { this.flatList = ref; }}
+        refreshing={isRefreshingPlips || isSearchingPlips}
         refreshControl={
           <RefreshControl
-            refreshing={isRefreshingPlips}
+            refreshing={isRefreshingPlips || isSearchingPlips}
             onRefresh={!isRefreshingPlips ? this.onRefresh : null}
             tintColor="black"
           />
         }
-        ListFooterComponent={isFetchingPlipsNextPage && this.renderInnerLoader({ animating: true }) || !this.hasNextPage && !isRefreshingPlips && this.renderStaticFooter()}
+        ListFooterComponent={
+          isFetchingPlipsNextPage ?
+            this.renderInnerLoader({ animating: true }) :
+            !this.hasNextPage && !isRefreshingPlips && this.renderStaticFooter()}
       />
     );
   }
@@ -228,12 +247,26 @@ export default class PlipsList extends Component {
     const isLogged = !!currentUser;
 
     switch(typeList) {
+      case "allPlips":
+        return (
+          <View style={styles.noProjectsContainer}>
+            <View style={styles.noProjectsInnerContainer}>
+              <Image
+                source={noPlipsImage}
+                style={styles.noProjectsIcon}
+              />
+
+              <Text style={styles.noProjectsText}>{locale.noProjectsMatch}</Text>
+            </View>
+          </View>
+        );
+
       case "signedPlips":
         return (
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
               <Image
-                source={require("../images/plip-page.png")}
+                source={noPlipsImage}
                 style={styles.noProjectsIcon}
               />
 
@@ -247,7 +280,7 @@ export default class PlipsList extends Component {
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
               <Image
-                source={require("../images/plip-page.png")}
+                source={noPlipsImage}
                 style={styles.noProjectsIcon}
               />
 
@@ -261,7 +294,7 @@ export default class PlipsList extends Component {
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
               <Image
-                source={require("../images/plip-page.png")}
+                source={noPlipsImage}
                 style={styles.noProjectsIcon}
               />
 
@@ -463,10 +496,14 @@ export class Plip extends Component {
 
   renderFavoriteButton() {
     const {
+      user,
       isFavorite,
     } = this.props;
 
+    const isLogged = !!user;
     const iconShape = isFavorite ? "favorite-border" : "favorite"
+
+    if (!isLogged) return;
 
     return (
       <TouchableOpacity
