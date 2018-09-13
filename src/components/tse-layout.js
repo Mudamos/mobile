@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import {
   Dimensions,
   Image,
+  SafeAreaView,
   Text,
   View,
   WebView,
@@ -60,7 +61,7 @@ export default class TSELayout extends Component {
 
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           {this.renderNavBar()}
 
@@ -69,7 +70,7 @@ export default class TSELayout extends Component {
 
         <PageLoader isVisible={this.loadingWebView} />
 
-      </View>
+      </SafeAreaView>
     );
   }
 
