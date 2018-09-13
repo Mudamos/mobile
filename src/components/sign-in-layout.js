@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 import {
   Image,
+  SafeAreaView,
   TouchableOpacity,
   Text,
   View,
@@ -59,7 +60,7 @@ class SignInLayout extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           <ScrollView>
             {this.renderNavBar()}
@@ -83,7 +84,7 @@ class SignInLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={isLoggingIn || isLogged || isFacebookLogged} />
-      </View>
+      </SafeAreaView>
     );
   }
 

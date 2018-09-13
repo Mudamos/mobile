@@ -8,6 +8,7 @@ import {
 } from "recompose";
 
 import {
+  SafeAreaView,
   Text,
   View,
   TouchableOpacity,
@@ -278,7 +279,7 @@ class SignUpLayout extends Component {
     } = this.state;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           <ScrollView>
             {this.renderNavBar()}
@@ -357,7 +358,7 @@ class SignUpLayout extends Component {
           </ScrollView>
         </Layout>
         <PageLoader isVisible={isCreating || isLoggingIn} />
-      </View>
+      </SafeAreaView>
     );
   }
 

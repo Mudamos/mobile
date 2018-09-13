@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
+  SafeAreaView,
   Text,
   View,
 } from "react-native";
@@ -57,7 +58,7 @@ export default class ProfileConcludeLayout extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           <ScrollView>
             {this.renderNavBar()}
@@ -73,7 +74,7 @@ export default class ProfileConcludeLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={isSaving} />
-      </View>
+      </SafeAreaView>
     );
   }
 

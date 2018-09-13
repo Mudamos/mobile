@@ -9,6 +9,7 @@ import {
 
 import {
   Keyboard,
+  SafeAreaView,
   Text,
   TouchableOpacity,
   View,
@@ -211,10 +212,8 @@ class ProfileSignUpLayout extends Component {
       reasonEnabled,
      } = this.state;
 
-     console.log(errors);
-
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           <ScrollView>
             {this.renderNavBar()}
@@ -283,7 +282,7 @@ class ProfileSignUpLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={isSaving} />
-      </View>
+      </SafeAreaView>
     );
   }
 

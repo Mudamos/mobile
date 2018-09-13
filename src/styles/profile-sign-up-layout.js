@@ -16,7 +16,7 @@ export default EStyleSheet.create({
     marginTop: 20,
   },
   container: {
-    backgroundColor: "transparent",
+    backgroundColor: "#6000AA",
     flex: 1,
   },
   continueButton: {
