@@ -26,7 +26,7 @@ export default StyleSheet.create({
     color: "black",
     fontWeight: "bold",
     textShadowColor: "white",
-    textShadowOffset: {width: 0.5, height: 0.5},
+    textShadowOffset: { width: 0.5, height: 0.5 },
     textShadowRadius: 2,
   },
   inputContainer: {

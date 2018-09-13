@@ -35,6 +35,7 @@ export default class Avatar extends Component {
   render() {
     const {
       avatarStyle,
+      children,
       size,
       onPress,
     } = this.props;
@@ -53,7 +54,7 @@ export default class Avatar extends Component {
           }, avatarStyle]}
           imageStyle={styles.imageBubble}
         >
-          {this.props.children}
+          {children}
         </NetworkImage>
 
       </TouchableOpacity>
