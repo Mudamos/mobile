@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 import {
   ListView,
+  SafeAreaView,
   Text,
   TouchableOpacity,
   View,
@@ -64,11 +65,11 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         {this.renderHeader()}
         {this.renderTable()}
         {this.renderFooter()}
-      </View>
+      </SafeAreaView>
     );
   }
 
