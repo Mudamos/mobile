@@ -4,14 +4,18 @@ import ProfileUpdateLayout from "../components/profile-update-layout";
 
 import {
   currentUser,
+  getChangePasswordErrors,
+  isChangingPassword,
+  isSavingAvatar,
   isSavingProfile,
   profileSaveErrors,
 } from "../selectors";
 
 import {
   clearProfileSaveErrors,
+  updateUser,
   navigateBack,
-  profileUpdate,
+  requestAvatarAccess,
 } from "../actions";
 
 import {
@@ -26,8 +30,13 @@ const mapStateToProps = state => {
   const user = currentUser(state);
 
   return {
-    errors: profileSaveErrors(state),
-    isSaving: isSavingProfile(state),
+    errorsUpdatePassword: getChangePasswordErrors(state),
+    errorsUpdateProfile: profileSaveErrors(state),
+    isAppUser: user ? user.isAppUser : null,
+    isSavingAvatar: isSavingAvatar(state),
+    isSavingPassword: isChangingPassword(state),
+    isSavingProfile: isSavingProfile(state),
+    previousAvatar: user ? user.avatar : null,
     previousName: user ? user.name : null,
     previousBirthdate: user && user.birthdate ? fromISODate(user.birthdate) : null,
     previousZipCode: user && user.zipCode ? zipCodeMask(user.zipCode) : null,
@@ -39,12 +48,16 @@ const mapDispatchToProps = dispatch => ({
     dispatch(clearProfileSaveErrors());
     dispatch(navigateBack());
   },
-  onSave: ({ birthdate, name, zipCode }) =>
-    dispatch(profileUpdate({
-      birthdate: toISODate(birthdate),
-      name,
-      zipCode: extractNumbers(zipCode),
+  onSave: ({ profile, validations }) => dispatch(
+    updateUser({
+      profile: {
+        ...profile,
+        birthdate: toISODate(profile.birthdate),
+        zipCode: extractNumbers(profile.zipCode),
+      },
+      validations,
     })),
+  onRequestAvatarPermission: () => dispatch(requestAvatarAccess()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdateLayout);

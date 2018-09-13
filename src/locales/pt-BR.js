@@ -63,10 +63,8 @@ const translations = {
   lastDay: "Último dia",
   links: {
     getToKnowMudamos: "Conheça a Mudamos",
-    help: "Ajuda",
     sendYourIdea: "Envie sua ideia!",
     sendYourPL: "Proponha um PL",
-    whyProjectsLink: "Por que estes projetos de lei?",
   },
   loading: "Carregando...",
   locality: "Localidade",
@@ -78,7 +76,8 @@ const translations = {
   menu: {
     about: "Sobre o aplicativo",
     changePassword: "Alterar senha",
-    editProfile: "Editar perfil",
+    myProfile: "Meu perfil",
+    help: "Dúvidas",
     tellAFriend: "Contar para um amigo",
     validateProfile: "Validar perfil",
   },

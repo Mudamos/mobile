@@ -73,6 +73,8 @@ export const getCurrentUserAvatar = state => {
   return user.avatar;
 }
 
+export const avatarSaveErrors = state => state.profile.avatarError;
+
 export const currentUserCity = state => {
   const user = currentUser(state) || new User();
   return user.address.city;

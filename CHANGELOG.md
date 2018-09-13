@@ -1,5 +1,6 @@
 # Next
 
+* [PR #437] Update edit profile layout
 * [PR #438] Update app icons
 * [PR #430] Add favorite functionality
 * [PR #429] Update app to paginate plips from mobile api
