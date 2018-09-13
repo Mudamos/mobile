@@ -160,6 +160,7 @@ export default class ProfileUpdateLayout extends Component {
                 <Avatar
                   onPress={this.selectAvatar}
                   source={avatar}
+                  avatarStyle={styles.avatar}
                 >
                   <Text style={styles.avatarText}>alterar</Text>
                 </Avatar>

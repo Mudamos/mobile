@@ -52,8 +52,10 @@ export default class Avatar extends Component {
             height: size,
           }, avatarStyle]}
           imageStyle={styles.imageBubble}
-        />
-        {this.props.children}
+        >
+          {this.props.children}
+        </NetworkImage>
+
       </TouchableOpacity>
     );
   }

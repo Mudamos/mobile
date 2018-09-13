@@ -11,6 +11,11 @@ export default StyleSheet.create({
     textStyles.header,
     { marginBottom: 8, marginTop: 12 },
   ]),
+  avatar: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   avatarContainer: {
     flex: 1,
     alignItems: "center",
@@ -18,7 +23,6 @@ export default StyleSheet.create({
     marginTop: 15,
   },
   avatarText: {
-    position: "absolute",
     color: "black",
     fontWeight: "bold",
     textShadowColor: "white",
