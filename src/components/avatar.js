@@ -12,12 +12,13 @@ import NetworkImage from "./network-image";
 
 import styles from "../styles/avatar";
 
+import { isBlank } from "../utils";
 
 export default class Avatar extends Component {
   static propTypes = {
     avatarStyle: ViewPropTypes.style,
     defaultPicture: PropTypes.any,
-    editText: PropTypes.bool,
+    floatingText: PropTypes.string,
     imageStyle: Image.propTypes.style,
     size: PropTypes.number,
     source: PropTypes.object,
@@ -26,7 +27,7 @@ export default class Avatar extends Component {
 
   static defaultProps = {
     defaultPicture: require("../images/default-avatar.jpg"),
-    editText: false,
+    floatingText: null,
     size: 100,
   }
 
@@ -40,7 +41,7 @@ export default class Avatar extends Component {
       avatarStyle,
       size,
       onPress,
-      editText,
+      floatingText,
     } = this.props;
 
     return (
@@ -57,7 +58,7 @@ export default class Avatar extends Component {
           }, avatarStyle]}
           imageStyle={styles.imageBubble}
         />
-        { editText && <Text style={styles.floatingText}>alterar</Text> }
+        { !isBlank(floatingText) && <Text style={styles.floatingText}>{floatingText}</Text> }
       </TouchableOpacity>
     );
   }

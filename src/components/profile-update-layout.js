@@ -11,7 +11,7 @@ import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
 import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
-import BackButton from "./chevron-button";
+import ChevronButton from "./chevron-button";
 import MDTextInput from "./md-text-input";
 import DateInput from "./date-input";
 import ZipCodeInput from "./zip-code-input";
@@ -160,7 +160,7 @@ export default class ProfileUpdateLayout extends Component {
                 <Avatar
                   onPress={this.selectAvatar}
                   source={avatar}
-                  editText={true}
+                  floatingText="alterar"
                 />
               </View>
 
@@ -244,7 +244,7 @@ export default class ProfileUpdateLayout extends Component {
     const { onBack } = this.props;
     return (
       <NavigationBar
-        leftView={<BackButton onPress={onBack} />}
+        leftView={<ChevronButton onPress={onBack} direction="left"/>}
         middleView={<HeaderLogo />}
       />
     );

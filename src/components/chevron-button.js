@@ -9,10 +9,11 @@ import {
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-export default class BackButton extends Component {
+export default class ChevronButton extends Component {
   static propTypes = {
     color: PropTypes.string,
     containerStyle: ViewPropTypes.style,
+    direction: PropTypes.string.isRequired,
     size: PropTypes.number,
 
     ...Text.propTypes,
@@ -26,6 +27,7 @@ export default class BackButton extends Component {
   render() {
     const {
       color,
+      direction,
       size,
       onPress,
       containerStyle,
@@ -33,10 +35,12 @@ export default class BackButton extends Component {
       ...textProps
     } = this.props;
 
+    const iconName = (direction === "right") ? "chevron-right" : "chevron-left";
+
     return (
       <TouchableOpacity onPress={onPress} style={containerStyle}>
         <Icon
-          name="chevron-left"
+          name={iconName}
           size={size}
           color={color}
 
