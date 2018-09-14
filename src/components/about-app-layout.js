@@ -24,12 +24,16 @@ import locale from "../locales/pt-BR";
 
 import { RemoteLinksType } from "../prop-types/remote-config";
 
+import { isNotNil } from "../utils";
+
 export default class AboutAppLayout extends Component {
   static propTypes = {
+    localFeedback: PropTypes.object,
     remoteLinks: RemoteLinksType,
     onBack: PropTypes.func.isRequired,
     onLogEvent: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
+    onSetFeedback: PropTypes.func.isRequired,
   }
 
   onGoToMudamosSite = () => {
@@ -39,7 +43,10 @@ export default class AboutAppLayout extends Component {
     onOpenURL(remoteLinks.getToKnowMudamos);
   }
 
-  componentDidMount() {
+  onLogFeedback = ({ index, answer }) => {
+    const { onLogEvent, onSetFeedback } = this.props;
+    onLogEvent({ name: `about_app_${index}_${answer}` });
+    onSetFeedback({ questionAnswered: index, answer });
   }
 
   render() {
@@ -79,7 +86,7 @@ export default class AboutAppLayout extends Component {
     );
   }
 
-  renderAccordionHeader(section, index, isActive) {
+  renderAccordionHeader = (section, index, isActive) => {
     const direction = isActive ? "up" : "down";
     return (
       <View style={styles.accordionHeaderContainer}>
@@ -89,25 +96,31 @@ export default class AboutAppLayout extends Component {
     );
   }
 
-  renderAccordionContent(section) {
+  renderAccordionContent = (section, index) => {
+    const { localFeedback } = this.props;
+    const gaveFeedback = localFeedback && isNotNil(localFeedback[index]);
+
     return (
       <View style={styles.accordionContentContainer}>
         <Text style={styles.accordionContentText}>{section.content}</Text>
-        <View style={styles.classifyQuestionView}>
-          <Text style={[styles.accordionContentText, { textAlign: "center" }]}>Esta informação foi útil?</Text>
-          <View style={styles.buttonPanel}>
-            <RoundedButton title={locale.yes} action={() => console.log("yes")} buttonStyle={styles.classifyQuestionButton} titleStyle={styles.classifyQuestionButtonTitle}/>
-            <RoundedButton title={locale.no} action={() => console.log("no")} buttonStyle={styles.classifyQuestionButton} titleStyle={styles.classifyQuestionButtonTitle}/>
-          </View>
-        </View>
+        { gaveFeedback ?
+            <View style={styles.classifyQuestionView}>
+              <Text style={styles.thanksForFeedback}>{locale.thanksForFeedback}</Text>
+            </View>
+          :
+            <View style={styles.classifyQuestionView}>
+              <Text style={[styles.accordionContentText, styles.accordionContentTextFooter]}>{locale.thisInfoWasUseful}</Text>
+              <View style={styles.buttonPanel}>
+                <RoundedButton title={locale.yes} action={() => this.onLogFeedback({ index, answer: "yes" })} buttonStyle={styles.classifyQuestionButton} titleStyle={styles.classifyQuestionButtonTitle}/>
+                <RoundedButton title={locale.no} action={() => this.onLogFeedback({ index, answer: "no" })} buttonStyle={styles.classifyQuestionButton} titleStyle={styles.classifyQuestionButtonTitle}/>
+              </View>
+            </View>
+        }
       </View>
     );
   }
 
   renderContent() {
-    const {
-    } = this.props;
-
     return (
       <View>
         <View style={styles.titleContainer}>
@@ -124,8 +137,6 @@ export default class AboutAppLayout extends Component {
   }
 
   renderFooter() {
-    const { onGoToMudamosSite } = this.props;
-
     return (
       <View style={styles.footerContainer}>
         <View style={styles.moreAboutMudamos}>

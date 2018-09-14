@@ -3,6 +3,7 @@ import { all, call, fork, put, select, takeLatest } from "redux-saga/effects";
 import {
   appSetup,
   fetchIsUserFirstTime,
+  fetchAboutAppFeedback,
   fetchFeatureToggles,
   fetchRemoteLinks,
   fetchRemoteConfig,
@@ -26,6 +27,7 @@ function* setup({ mobileApi, mudamosSigner, sessionStore }) {
 
     yield all([
       put(fetchIsUserFirstTime()),
+      put(fetchAboutAppFeedback()),
       put(fetchFeatureToggles()),
       put(fetchRemoteLinks()),
       put(fetchRemoteConfig()),

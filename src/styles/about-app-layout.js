@@ -12,6 +12,11 @@ export default EStyleSheet.create({
     color: "#757575",
     flex: 1,
   },
+  accordionContentTextFooter: {
+    color: "#000",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   accordionHeaderChevron: {
     flex: 1,
     padding: 4,
@@ -27,9 +32,8 @@ export default EStyleSheet.create({
   },
   accordionHeaderText: {
     flex: 9,
-    fontWeight: "bold",
     fontSize: "0.8rem",
-    color: "#757575",
+    color: "#000",
   },
   body: {
     backgroundColor: "#FFF",
@@ -43,7 +47,6 @@ export default EStyleSheet.create({
   },
   classifyQuestionView: {
     marginTop: 30,
-    flex: 1,
   },
   classifyQuestionButton: {
     paddingHorizontal: 40,
@@ -102,8 +105,14 @@ export default EStyleSheet.create({
       },
     }),
   },
+  thanksForFeedback: {
+    fontSize: "0.8rem",
+    color: "#000",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   title: {
-    color: "#757575",
+    color: "#000",
     fontWeight: "bold",
     fontSize: "1rem",
     textAlign: "center",

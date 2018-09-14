@@ -10,7 +10,7 @@ function* logEvent({ analytics }) {
     try {
       const { name, extraData } = payload;
       const result = yield call(analytics.logEvent, { name, extraData });
-      log(`Event log result: ${result}`);
+      log(`Event log ${name} result: ${result}`);
     } catch (e) {
       logError(e, { tag: "logEvent" });
     }
