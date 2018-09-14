@@ -85,13 +85,18 @@ export default class RoundedButton extends Component {
     if (enabled) {
       return (
         <TouchableOpacity
+          style={styles.full}
           onPress={action}
         >
           {this.renderButton()}
         </TouchableOpacity>
       );
     } else {
-      return this.renderButton();
+      return (
+        <View style={styles.full}>
+          {this.renderButton()}
+        </View>
+      );
     }
   }
 
@@ -109,7 +114,7 @@ export default class RoundedButton extends Component {
     } = this.props;
 
     return(
-      <View style={styles.full}>
+      <View>
         <View style={[styles.defaultButtonContainer, buttonStyle, !enabled && styles.buttonDisable]}>
           { icon &&
             <Icon

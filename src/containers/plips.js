@@ -314,9 +314,13 @@ class Container extends Component {
   }
 
   onAbout = () => {
-    const { onLogEvent } = this.props;
+    const {
+      onTapAboutApp,
+      onLogEvent,
+    } = this.props;
+
     this.closeMenu();
-    this.setState({ showAboutModal: true });
+    onTapAboutApp();
     onLogEvent({ name: "tapped_menu_about_app" });
   }
 
@@ -418,6 +422,7 @@ const mapDispatchToProps = dispatch => ({
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
   onRefresh: ({ typeList }) => dispatch(refreshPlips({ typeList })),
   onSignIn: () => dispatch(navigate("signIn")),
+  onTapAboutApp: () => dispatch(navigate("aboutApp")),
   onMainTabChange: ({ index }) => dispatch(updateMainTabViewIndex(index)),
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),

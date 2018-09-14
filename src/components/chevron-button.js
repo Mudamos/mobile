@@ -7,10 +7,11 @@ import {
   ViewPropTypes,
 } from "react-native";
 
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from "react-native-vector-icons/Feather";
 
 export default class ChevronButton extends Component {
   static propTypes = {
+    clickable: PropTypes.bool,
     color: PropTypes.string,
     containerStyle: ViewPropTypes.style,
     direction: PropTypes.string.isRequired,
@@ -20,6 +21,7 @@ export default class ChevronButton extends Component {
   }
 
   static defaultProps = {
+    clickable: true,
     color: "#fff",
     size: 30,
   }
@@ -31,22 +33,29 @@ export default class ChevronButton extends Component {
       size,
       onPress,
       containerStyle,
+      clickable,
 
       ...textProps
     } = this.props;
 
-    const iconName = (direction === "right") ? "chevron-right" : "chevron-left";
+    const iconName = `chevron-${direction}`;
 
-    return (
+    const icon = (
+      <Icon
+        name={iconName}
+        size={size}
+        color={color}
+
+        {...textProps}
+      />
+    );
+
+    const iconWithTouch = (
       <TouchableOpacity onPress={onPress} style={containerStyle}>
-        <Icon
-          name={iconName}
-          size={size}
-          color={color}
-
-          {...textProps}
-        />
+        {icon}
       </TouchableOpacity>
     );
+
+    return clickable ? iconWithTouch : icon;
   }
 }
