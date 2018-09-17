@@ -1,5 +1,6 @@
 # Next
 
+* [PR #440] Update app following the ITS suggestions
 * [PR #432] Add search functionality
 * [PR #437] Update edit profile layout
 * [PR #438] Update app icons
