@@ -56,8 +56,8 @@ export default class AboutAppLayout extends Component {
 
     return (
       <SafeAreaView style={styles.container}>
+        {this.renderNavBar()}
         <ScrollView style={styles.body}>
-          {this.renderNavBar()}
 
           {this.renderContent()}
 
@@ -71,7 +71,7 @@ export default class AboutAppLayout extends Component {
     const { onBack } = this.props;
 
     return (
-      <View>
+      <View style={styles.navBarContainer}>
         <ImageBackground
           source={require("../images/header-people.png")}
           style={styles.peopleImage}

@@ -1,6 +1,8 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 
 import EStyleSheet from "react-native-extended-stylesheet";
+
+export const IMAGE_HEIGHT = 110;
 
 export default EStyleSheet.create({
   accordionContentContainer: {
@@ -91,19 +93,13 @@ export default EStyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  navBarContainer: {
+    height: IMAGE_HEIGHT,
+  },
   peopleImage: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-
-    ...Platform.select({
-      android: {
-        height: 150,
-      },
-      ios: {
-        height: 110,
-      },
-    }),
   },
   thanksForFeedback: {
     fontSize: "0.8rem",
