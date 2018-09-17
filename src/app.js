@@ -14,6 +14,7 @@ import {
   AboutAppContainer,
   ChangeForgotPasswordContainer,
   ForgotPasswordContainer,
+  HelpContainer,
   PlipContainer,
   PlipsContainer,
   PlipViewerContainer,
@@ -68,6 +69,7 @@ const scenes = Actions.create(
     <Scene key="profileUpdate" component={ProfileUpdateContainer} hideNavBar={true} />
 
     <Scene key="aboutApp" component={AboutAppContainer} hideNavBar={true} />
+    <Scene key="help" component={HelpContainer} hideNavBar={true} />
 
     <Scene key="tse" component={TSEContainer} hideNavBar={true} />
     <Scene key="showVideo" component={ShowVideoContainer} hideNavBar={true} direction="vertical" />

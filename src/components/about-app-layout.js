@@ -13,7 +13,6 @@ import Accordion from 'react-native-collapsible/Accordion';
 
 import styles from "../styles/about-app-layout";
 
-import BackButton from "./back-button";
 import NavigationBar from "./navigation-bar";
 import RoundedButton from "./rounded-button";
 import ScrollView from "./scroll-view";

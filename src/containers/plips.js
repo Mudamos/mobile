@@ -183,7 +183,7 @@ class Container extends Component {
     const entries = [
       { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout, position: 2 },
       { icon: "account-balance", title: locale.links.sendYourPL, action: () => this.onOpenURL({ eventName: "tapped_menu_send_your_pl", link: remoteLinks.sendYourIdea }), position: 3 },
-      { icon: "help", title: locale.menu.help, action: () => this.onOpenURL({ eventName: "tapped_menu_help", link: remoteLinks.help }), position: 5 },
+      { icon: "help", title: locale.menu.help, action: this.onHelp, position: 5 },
       { icon: "share", title: locale.menu.tellAFriend, action: this.onTellAFriend, position: 6 },
     ];
 
@@ -330,6 +330,14 @@ class Container extends Component {
     onTellAFriend();
   }
 
+  onHelp = () => {
+    const { onTapHelp, onLogEvent } = this.props;
+
+    this.closeMenu();
+    onTapHelp();
+    onLogEvent({ name: "tapped_menu_help" });
+  }
+
   onOpenURL({ eventName, link }) {
     const { onLogEvent, onOpenURL } = this.props;
     onLogEvent({ name: eventName });
@@ -423,6 +431,7 @@ const mapDispatchToProps = dispatch => ({
   onRefresh: ({ typeList }) => dispatch(refreshPlips({ typeList })),
   onSignIn: () => dispatch(navigate("signIn")),
   onTapAboutApp: () => dispatch(navigate("aboutApp")),
+  onTapHelp: () => dispatch(navigate("help")),
   onMainTabChange: ({ index }) => dispatch(updateMainTabViewIndex(index)),
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),

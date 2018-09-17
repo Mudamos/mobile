@@ -1,6 +1,7 @@
 export { default as AboutAppContainer } from "./about-app"
 export { default as ChangeForgotPasswordContainer } from "./change-forgot-password";
 export { default as ForgotPasswordContainer } from "./forgot-password";
+export { default as HelpContainer } from "./help";
 export { default as PlipContainer } from "./show-plip";
 export { default as PlipsContainer } from "./plips";
 export { default as PlipViewerContainer } from "./plip-viewer";
