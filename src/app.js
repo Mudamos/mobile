@@ -46,8 +46,8 @@ OneSignal.inFocusDisplaying(2); // Show notification on drawer
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="plipsNav" type="reset" hideNavBar={true}>
-      <Scene key="plipsList" component={PlipsContainer} hideNavBar={true} />
+    <Scene key="plipsNav" initial={true} type="reset" hideNavBar={true}>
+      <Scene key="plipsList" initial={true} component={PlipsContainer} hideNavBar={true} />
     </Scene>
 
     <Scene key="showPlip" component={PlipContainer} hideNavBar={true} />
@@ -67,7 +67,8 @@ const scenes = Actions.create(
 
     <Scene key="profileUpdate" component={ProfileUpdateContainer} hideNavBar={true} />
 
-    <Scene key="aboutApp" initial={true} component={AboutAppContainer} hideNavBar={true} />
+    <Scene key="aboutApp" component={AboutAppContainer} hideNavBar={true} />
+
     <Scene key="tse" component={TSEContainer} hideNavBar={true} />
     <Scene key="showVideo" component={ShowVideoContainer} hideNavBar={true} direction="vertical" />
   </Scene>
