@@ -63,6 +63,7 @@ export default class MainTabView extends Component {
     loadedUserLocationPlips: PropTypes.bool,
     nationwidePlips: PropTypes.array,
     nationwidePlipsNextPage: PropTypes.number,
+    searchTitle: PropTypes.string,
     signedPlips: PropTypes.array,
     signedPlipsNextPage: PropTypes.number,
     tabViewState: TabViewType,

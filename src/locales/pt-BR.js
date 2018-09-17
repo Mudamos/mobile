@@ -26,6 +26,7 @@ const translations = {
   choosePassword: "Escolha uma senha",
   cityFilterTitle: "Selecione a cidade",
   cityName: "Nome da cidade",
+  clearSearch: "Limpar busca",
   close: "Fechar",
   codeHasBeenSentToPhone: "Seu código de confirmação foi enviado por SMS para o número",
   codeSent: "Código enviado",
@@ -138,6 +139,7 @@ const translations = {
   revalidationExplanation: "Desculpe, mas parece que alguma coisa no ato da sua assinatura não funcionou como o esperado. Por isso, precisamos revalidar o seu cadastro.",
   save: "Salvar",
   search: "buscar",
+  searchPlipNotFound: ({ searchTitle }) =>  `No momento, nenhum projeto foi encontrado com o termo "${searchTitle}".`,
   securityMessage: "Este é um ambiente seguro e todas as suas informações estão protegidas.",
   seeAllProjects: "Ver todos os projetos",
   sendCode: "Enviar código",
@@ -214,7 +216,7 @@ const translations = {
   errorsCode: {
     1001: "Usuário ou senha inválidos",
     defaultLoginError: "Não foi possível realizar o login.",
-  }
+  },
 };
 
 const markdown = {

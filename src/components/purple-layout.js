@@ -8,13 +8,11 @@ import Layout from "./layout";
 export default class PurpleLayout extends Component {
   static propTypes = {
     children: PropTypes.node,
-    contentStyle: ViewPropTypes.style,
     style: ViewPropTypes.style,
   };
 
   render() {
     const {
-      contentStyle,
       style,
     } = this.props;
 
