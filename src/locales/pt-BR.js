@@ -211,6 +211,10 @@ const translations = {
     signPlipError: "Por algum motivo não conseguimos completar sua assinatura.",
     walletCreationError: "Houve um erro ao preparar algumas informações para suas assinaturas.",
   },
+  errorsCode: {
+    1001: "Usuário ou senha inválidos",
+    defaultLoginError: "Não foi possível realizar o login.",
+  }
 };
 
 const markdown = {

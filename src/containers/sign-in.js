@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import SignInLayout from "../components/sign-in-layout";
 
 import {
+  authErrorCode,
   isFacebookLoggedIn,
   isLoggingIn,
   currentUser,
@@ -21,6 +22,7 @@ const mapStateToProps = state => {
     isLoggingIn: isLoggingIn(state),
     isLogged: !!currentUser(state),
     isFacebookLogged: isFacebookLoggedIn(state),
+    authErrorCode: authErrorCode(state),
   };
 }
 

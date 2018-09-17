@@ -25,10 +25,16 @@ import styles from "../styles/sign-in-layout";
 
 import Logo from "../images/Logo-alt.png"
 
+import { errorMessageFromCode } from "../utils"
+
 class SignInLayout extends Component {
   state = {};
 
   static propTypes = {
+    authErrorCode: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     isFacebookLogged: PropTypes.bool,
     isLogged: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
@@ -49,6 +55,11 @@ class SignInLayout extends Component {
 
   get signInEnabled() {
     return this.validForm;
+  }
+
+  get errorMessage() {
+    const { authErrorCode } = this.props;
+    return errorMessageFromCode({ errorCode: authErrorCode, locale });
   }
 
   render() {
@@ -132,9 +143,13 @@ class SignInLayout extends Component {
   }
 
   renderContinueButton() {
+    const { authErrorCode } = this.props;
     return (
-      <View style={styles.continueButtonContainer}>
-        <RoundedButton title={locale.continue} action={this.onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+      <View style={styles.continueContainer}>
+      { authErrorCode && <Text style={styles.authErrorText}>{this.errorMessage}</Text>}
+        <View style={styles.continueButtonContainer}>
+          <RoundedButton title={locale.continue} action={this.onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+        </View>
       </View>
     );
   }

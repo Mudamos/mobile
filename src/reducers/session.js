@@ -6,10 +6,16 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case "AUTHENTICATION_LOGIN_ERROR":
+      return {
+        ...state,
+        authLoginError: payload.error.errorCode || "defaultLoginError",
+      };
     case "SESSION_LOGGING_IN":
       return {
         ...state,
         isLoggingIn: true,
+        authLoginError: null,
       };
     case "SESSION_LOGGIN_SUCCEEDED":
       return {
