@@ -152,8 +152,8 @@ class ProfileSignUpLayout extends Component {
     this.setState(({ errors }) => ({
       errors: {
         ...errors,
-        birthdate: this.validBirthdate(birthdate) ? null : locale.invalidBirthdate
-      }
+        birthdate: this.validBirthdate(birthdate) ? null : locale.invalidBirthdate,
+      },
     }));
   };
 
