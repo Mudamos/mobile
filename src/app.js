@@ -23,6 +23,7 @@ import {
   ProfileUpdateContainer,
   ProfileSignUpContainer,
   ProfileWalletContainer,
+  SendYourPLContainer,
   ShowVideoContainer,
   SignersContainer,
   SignInContainer,
@@ -70,6 +71,7 @@ const scenes = Actions.create(
 
     <Scene key="aboutApp" component={AboutAppContainer} hideNavBar={true} />
     <Scene key="help" component={HelpContainer} hideNavBar={true} />
+    <Scene key="sendYourPl" component={SendYourPLContainer} hideNavBar={true} />
 
     <Scene key="tse" component={TSEContainer} hideNavBar={true} />
     <Scene key="showVideo" component={ShowVideoContainer} hideNavBar={true} direction="vertical" />

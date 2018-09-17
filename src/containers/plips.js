@@ -182,7 +182,7 @@ class Container extends Component {
 
     const entries = [
       { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout, position: 2 },
-      { icon: "account-balance", title: locale.links.sendYourPL, action: () => this.onOpenURL({ eventName: "tapped_menu_send_your_pl", link: remoteLinks.sendYourIdea }), position: 3 },
+      { icon: "account-balance", title: locale.links.sendYourPL, action: this.onSendYourPl, position: 3 },
       { icon: "help", title: locale.menu.help, action: this.onHelp, position: 5 },
       { icon: "share", title: locale.menu.tellAFriend, action: this.onTellAFriend, position: 6 },
     ];
@@ -319,7 +319,6 @@ class Container extends Component {
       onLogEvent,
     } = this.props;
 
-    this.closeMenu();
     onTapAboutApp();
     onLogEvent({ name: "tapped_menu_about_app" });
   }
@@ -333,9 +332,15 @@ class Container extends Component {
   onHelp = () => {
     const { onTapHelp, onLogEvent } = this.props;
 
-    this.closeMenu();
     onTapHelp();
     onLogEvent({ name: "tapped_menu_help" });
+  }
+
+  onSendYourPl = () => {
+    const { onTapSendYourPl, onLogEvent } = this.props;
+
+    onTapSendYourPl();
+    onLogEvent({ name: "tapped_menu_send_your_pl" });
   }
 
   onOpenURL({ eventName, link }) {
@@ -355,7 +360,6 @@ class Container extends Component {
     const { onSignIn, onLogEvent } = this.props;
 
     onSignIn();
-    this.closeMenu();
     onLogEvent({ name: "tapped_menu_signup" });
   }
 }
@@ -432,6 +436,7 @@ const mapDispatchToProps = dispatch => ({
   onSignIn: () => dispatch(navigate("signIn")),
   onTapAboutApp: () => dispatch(navigate("aboutApp")),
   onTapHelp: () => dispatch(navigate("help")),
+  onTapSendYourPl: () => dispatch(navigate("sendYourPl")),
   onMainTabChange: ({ index }) => dispatch(updateMainTabViewIndex(index)),
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),
