@@ -10,6 +10,7 @@ import {
 } from "../selectors";
 
 import {
+  clearAuthLoginError,
   facebookUserLogIn,
   loginUser,
   navigate,
@@ -28,6 +29,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onBack: () => dispatch(navigateBack()),
+  onClearAuthLoginError: () => dispatch(clearAuthLoginError()),
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
   onForgotPassword: () => dispatch(navigate("forgotPassword")),
   onOpenURL: url => dispatch(openURL(url)),

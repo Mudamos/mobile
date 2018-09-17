@@ -193,39 +193,39 @@ class SignUpLayout extends Component {
     const { cpf, termsAccepted } = this.props;
     const shouldShowMessage = this.allTextFieldsValid() && !termsAccepted;
 
-    this.setState({
+    this.setState(({ errors }) => ({
       errors: {
-        ...this.state.errors,
+        ...errors,
         cpf: this.validCpf(cpf) ? null : locale.invalidCpf,
         termsAccepted: shouldShowMessage ? locale.acceptTermsToContinue : null,
       },
-    });
+    }));
   };
 
   checkEmail = () => {
     const { email, termsAccepted } = this.props;
     const shouldShowMessage = this.allTextFieldsValid() && !termsAccepted;
 
-    this.setState({
+    this.setState(({ errors }) => ({
       errors: {
-        ...this.state.errors,
+        ...errors,
         email: this.validEmail(email) ? null : locale.invalidEmail,
         termsAccepted: shouldShowMessage ? locale.acceptTermsToContinue : null,
       },
-    });
+    }));
   };
 
   checkPassword = () => {
     const { password, termsAccepted } = this.props;
     const shouldShowMessage = this.allTextFieldsValid() && !termsAccepted;
 
-    this.setState({
+    this.setState(({ errors }) => ({
       errors: {
-        ...this.state.errors,
+        ...errors,
         password: this.validPassword(password) ? null : locale.invalidPassword,
         termsAccepted: shouldShowMessage ? locale.acceptTermsToContinue : null,
       },
-    });
+    }));
   };
 
   checkTermsAccepted = () => {
@@ -233,12 +233,12 @@ class SignUpLayout extends Component {
 
     const shouldShowMessage = this.allTextFieldsValid() && !termsAccepted;
 
-    this.setState({
+    this.setState(({ errors }) => ({
       errors: {
-        ...this.state.errors,
+        ...errors,
         termsAccepted: shouldShowMessage ? locale.acceptTermsToContinue : null,
       },
-    });
+    }));
   };
 
   onBack = () => {

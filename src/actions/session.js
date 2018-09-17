@@ -24,6 +24,10 @@ export const logout = () => ({
   type: "SESSION_LOGOUT",
 });
 
+export const clearAuthLoginError = () => ({
+  type: "CLEAR_AUTHENTICATION_LOGIN_ERROR",
+});
+
 export const clearSession = () => ({
   type: "SESSION_CLEAR_SESSION",
 });

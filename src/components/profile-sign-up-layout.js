@@ -149,34 +149,34 @@ class ProfileSignUpLayout extends Component {
   checkBirthdate = () => {
     const { birthdate } = this.props;
 
-    this.setState({
+    this.setState(({ errors }) => ({
       errors: {
-        ...this.state.errors,
-        birthdate: this.validBirthdate(birthdate) ? null : locale.invalidBirthdate,
-      },
-    });
+        ...errors,
+        birthdate: this.validBirthdate(birthdate) ? null : locale.invalidBirthdate
+      }
+    }));
   };
 
   checkName = () => {
     const { name } = this.props;
 
-    this.setState({
+    this.setState(({ errors }) => ({
       errors: {
-        ...this.state.errors,
+        ...errors,
         name: this.validName(name) ? null : locale.invalidName,
       },
-    });
+    }));
   };
 
   checkVoteCard = () => {
     const { voteCard } = this.props;
 
-    this.setState({
+    this.setState(({ errors }) => ({
       errors: {
-        ...this.state.errors,
+        ...errors,
         voteCard: this.validVoteCard(voteCard) ? null : locale.invalidVoteCard,
       },
-    });
+    }));
   };
 
   enableReason = () => {

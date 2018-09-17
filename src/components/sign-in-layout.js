@@ -39,6 +39,7 @@ class SignInLayout extends Component {
     isLogged: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
+    onClearAuthLoginError: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
     onForgotPassword: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
@@ -60,6 +61,12 @@ class SignInLayout extends Component {
   get errorMessage() {
     const { authErrorCode } = this.props;
     return errorMessageFromCode({ errorCode: authErrorCode, locale });
+  }
+
+  componentWillUnmount() {
+    const { onClearAuthLoginError } = this.props;
+
+    onClearAuthLoginError();
   }
 
   render() {

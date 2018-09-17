@@ -11,6 +11,11 @@ export default (state = initialState, action) => {
         ...state,
         authLoginError: payload.error.errorCode || "defaultLoginError",
       };
+    case "CLEAR_AUTHENTICATION_LOGIN_ERROR":
+      return {
+        ...state,
+        authLoginError: null,
+      };
     case "SESSION_LOGGING_IN":
       return {
         ...state,
