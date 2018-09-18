@@ -9,6 +9,7 @@ import {
 
 import {
   Keyboard,
+  SafeAreaView,
   TouchableOpacity,
   Text,
   View,
@@ -132,9 +133,9 @@ class ProfileAddressLayout extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
-          <ScrollView style={styles.container}>
+          <ScrollView>
             {this.renderNavBar()}
 
             <SignUpBreadCrumb highlightId={3} containerStyle={styles.breadcrumb} />
@@ -146,7 +147,7 @@ class ProfileAddressLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={isFetchingLocation || isSearching || isSaving} />
-      </View>
+      </SafeAreaView>
     );
   }
 

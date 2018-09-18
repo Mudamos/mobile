@@ -3,6 +3,9 @@ import { StyleSheet } from "react-native";
 import textStyles from "./text";
 
 export default StyleSheet.create({
+  authErrorText: {
+    color: "#F00",
+  },
   container: {
     backgroundColor: "#6000AA",
     flex: 1,
@@ -12,8 +15,15 @@ export default StyleSheet.create({
     borderWidth: 0,
     marginHorizontal: 20,
   },
+  continueContainer: {
+    flex: 1,
+    marginTop: 10,
+    flexDirection: "column",
+    alignItems: "center",
+  },
   continueButtonContainer: {
-    marginTop: 18,
+    flex: 1,
+    marginTop: 8,
   },
   continueButtonTitle: {
     color: "#FFF",
@@ -22,7 +32,7 @@ export default StyleSheet.create({
     alignSelf: "flex-end",
     color: "#fff",
     fontFamily: "roboto",
-    fontSize: 10,
+    fontSize: 13,
     fontWeight: "bold",
     marginTop: 4,
     marginBottom: 10,
@@ -33,6 +43,7 @@ export default StyleSheet.create({
     { fontSize: 18 },
   ]),
   inputContainer: {
+    marginTop: 12,
     marginHorizontal: 33,
   },
   logo: {

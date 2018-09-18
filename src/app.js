@@ -6,9 +6,12 @@ import sceneStyle from "./styles/scene-default";
 
 import OneSignal from "react-native-onesignal";
 
+import EStyleSheet from "react-native-extended-stylesheet";
+
+import { Dimensions } from "react-native";
+
 import {
   ChangeForgotPasswordContainer,
-  ChangePasswordContainer,
   ForgotPasswordContainer,
   PlipContainer,
   PlipsContainer,
@@ -61,13 +64,18 @@ const scenes = Actions.create(
     <Scene key="forgotPassword" component={ForgotPasswordContainer} hideNavBar={true} />
     <Scene key="changeForgotPassword" component={ChangeForgotPasswordContainer} hideNavBar={true} />
 
-    <Scene key="changePassword" component={ChangePasswordContainer} hideNavBar={true} />
     <Scene key="profileUpdate" component={ProfileUpdateContainer} hideNavBar={true} />
 
     <Scene key="tse" component={TSEContainer} hideNavBar={true} />
     <Scene key="showVideo" component={ShowVideoContainer} hideNavBar={true} direction="vertical" />
   </Scene>
 );
+
+const entireScreenWidth = Dimensions.get("window").width;
+
+EStyleSheet.build({
+  $rem: entireScreenWidth > 360 ? 20 : 16,
+});
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 

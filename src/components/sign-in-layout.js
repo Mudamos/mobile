@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 import {
   Image,
+  SafeAreaView,
   TouchableOpacity,
   Text,
   View,
@@ -24,14 +25,21 @@ import styles from "../styles/sign-in-layout";
 
 import Logo from "../images/Logo-alt.png"
 
+import { errorMessageFromCode } from "../utils"
+
 class SignInLayout extends Component {
   state = {};
 
   static propTypes = {
+    authErrorCode: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     isFacebookLogged: PropTypes.bool,
     isLogged: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
+    onClearAuthLoginError: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
     onForgotPassword: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
@@ -50,6 +58,17 @@ class SignInLayout extends Component {
     return this.validForm;
   }
 
+  get errorMessage() {
+    const { authErrorCode } = this.props;
+    return errorMessageFromCode({ errorCode: authErrorCode, locale });
+  }
+
+  componentWillUnmount() {
+    const { onClearAuthLoginError } = this.props;
+
+    onClearAuthLoginError();
+  }
+
   render() {
     const {
       isFacebookLogged,
@@ -59,9 +78,9 @@ class SignInLayout extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
-          <ScrollView style={styles.container}>
+          <ScrollView>
             {this.renderNavBar()}
             {this.renderHeader()}
 
@@ -83,7 +102,7 @@ class SignInLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={isLoggingIn || isLogged || isFacebookLogged} />
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -131,9 +150,13 @@ class SignInLayout extends Component {
   }
 
   renderContinueButton() {
+    const { authErrorCode } = this.props;
     return (
-      <View style={styles.continueButtonContainer}>
-        <RoundedButton title={locale.continue} action={this.onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+      <View style={styles.continueContainer}>
+      { authErrorCode && <Text style={styles.authErrorText}>{this.errorMessage}</Text>}
+        <View style={styles.continueButtonContainer}>
+          <RoundedButton title={locale.continue} action={this.onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+        </View>
       </View>
     );
   }

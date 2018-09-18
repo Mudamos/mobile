@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   actionTitle: {
-    color: "#7705B9",
+    color: "#6000AA",
     flex: 3,
     fontFamily: "lato",
     fontSize: 14,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   defaultButtonContainer: {
     borderWidth: 1,
-    borderColor: "#7705B9",
+    borderColor: "#6000AA",
     borderRadius: 4,
     justifyContent: "center",
     alignItems: "center",
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    maxWidth: 170,
+    maxWidth: 200,
   },
   withIcon: {
     flexDirection: "row",

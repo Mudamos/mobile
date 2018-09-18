@@ -19,6 +19,13 @@ export default class HeaderLogo extends Component {
 
   render() {
     const { imgStyle } = this.props;
-    return <Animated.Image ref={ref => this.image = ref} source={require("../images/Logo.png")} style={[style.image, imgStyle]}/>
+
+    return (
+      <Animated.Image
+        ref={ref => this.image = ref}
+        source={require("../images/Logo.png")}
+        style={[style.image, imgStyle]}
+      />
+    );
   }
 }

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 import {
   ListView,
+  SafeAreaView,
   Text,
   TouchableOpacity,
   View,
@@ -64,11 +65,11 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         {this.renderHeader()}
         {this.renderTable()}
         {this.renderFooter()}
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -76,13 +77,13 @@ export default class Menu extends Component {
     const { currentUser, isFetchingProfile } = this.props;
 
     return (
-      <View>
+      <View style={styles.menuHeaderContainer}>
         {
           currentUser &&
             <View style={styles.profileInfoContainer}>
               <Avatar
                 source={this.avatar}
-                onPress={this.selectAvatar.bind(this)}
+                onPress={this.selectAvatar}
                 size={56}
                 avatarStyle={styles.avatar}
               />
@@ -112,14 +113,14 @@ export default class Menu extends Component {
         <ListView
           bounces={false}
           dataSource={this.state.entries}
-          renderRow={this.renderMenuEntry.bind(this)}
+          renderRow={this.renderMenuEntry}
           style={styles.full}
         />
       </View>
     );
   }
 
-  renderMenuEntry(entry, section, row, highlightRow) {
+  renderMenuEntry = (entry, section, row, highlightRow) => {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -190,7 +191,7 @@ export default class Menu extends Component {
     );
   }
 
-  selectAvatar() {
+  selectAvatar = () => {
     const { onAvatarChanged } = this.props;
 
     ImagePicker.showImagePicker({

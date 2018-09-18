@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
+  SafeAreaView,
   View,
 } from "react-native";
 
@@ -28,7 +29,7 @@ export default class ProfileWalletLayout extends Component {
     } = this.props;
 
     return (
-      <View style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: "#6000AA"}}>
         <Layout>
           {this.renderNavBar()}
 
@@ -46,7 +47,7 @@ export default class ProfileWalletLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={isCreatingWallet} />
-      </View>
+      </SafeAreaView>
     );
   }
 

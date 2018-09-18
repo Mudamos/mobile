@@ -10,11 +10,17 @@ export default StyleSheet.create({
     marginRight: 12,
     overflow: "hidden",
   },
+  container: {
+    backgroundColor: "#6000AA",
+  },
   full: {
     flex: 1,
   },
+  layout: {
+    backgroundColor: "#FFF",
+  },
   navigationBar: {
-    backgroundColor: "#883DE1",
+    backgroundColor: "#6000AA",
     height: 64,
   },
   retryContainer: {
@@ -48,7 +54,7 @@ export default StyleSheet.create({
     padding: 12,
   },
   userName: {
-    color: "#883DE1",
+    color: "#6000AA",
     fontFamily: "roboto",
     fontSize: 18,
   },

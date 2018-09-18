@@ -1,10 +1,11 @@
 import { Dimensions, StyleSheet } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 import textStyles from "./text";
 
 const { width } = Dimensions.get("window");
 
-export default StyleSheet.create({
+export default EStyleSheet.create({
   breadcrumb: {
     marginVertical: 15,
   },
@@ -27,7 +28,7 @@ export default StyleSheet.create({
   dontRememberZipCode: {
     color: "#fff",
     fontFamily: "roboto",
-    fontSize: 10,
+    fontSize: "0.7rem",
     fontWeight: "500",
   },
   dontRememberZipCodeContainer: {
@@ -41,8 +42,9 @@ export default StyleSheet.create({
   },
   headerSubTitle: {
     color: "#FFF",
-    fontSize: 12,
+    fontSize: "0.8rem",
     marginHorizontal: 10,
+    textAlign: "justify",
   },
   headerTitle: StyleSheet.flatten([
     textStyles.header,

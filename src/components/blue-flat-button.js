@@ -3,12 +3,14 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import FlatButton from "./flat-button";
 
+import EStyleSheet from "react-native-extended-stylesheet";
+
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   gradientContainer: {
     borderRadius: 100,
-    flex:1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 10,
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "roboto",
-    fontSize: 14,
+    fontSize: "1rem",
     color: "#fff",
     fontWeight: "bold",
     textAlign: "center",
@@ -29,6 +31,7 @@ export default class BlueFlatButton extends FlatButton {
     const {
       enabled,
       textStyle,
+      style,
       title,
       iconName,
     } = this.props;
@@ -36,7 +39,7 @@ export default class BlueFlatButton extends FlatButton {
     const Button = this.buttonClass().withText("").build();
 
     return (
-      <Button>
+      <Button style={[style, { borderRadius: 100 }]}>
         <View style={{flex: 1, flexDirection: "row"}}>
           <Text
             numberOfLines={1}
@@ -47,7 +50,7 @@ export default class BlueFlatButton extends FlatButton {
           { iconName &&
             <Icon
               name={iconName}
-              size={20}
+              size={24}
               color="#FFF"
               style={{marginLeft: 10}}
             />

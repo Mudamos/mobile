@@ -9,6 +9,7 @@ import {
 
 import {
   Keyboard,
+  SafeAreaView,
   Text,
   TouchableOpacity,
   View,
@@ -53,14 +54,14 @@ const enhance = compose(
 class ProfileSignUpLayout extends Component {
   static propTypes = {
     birthdate: PropTypes.string,
-    errors: PropTypes.array,
     isSaving: PropTypes.bool,
     name: PropTypes.string,
     previousBirthdate: PropTypes.string,
     previousName: PropTypes.string,
     previousVoteCard: PropTypes.string,
-    searchedVoteCardId: PropTypes.string,
+    saveErrors: PropTypes.array,
     voteCard: PropTypes.string,
+    voteCardIdFromTSE: PropTypes.string,
     onBack: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
@@ -74,6 +75,7 @@ class ProfileSignUpLayout extends Component {
 
   state = {
     reasonEnabled: false,
+    errors: {},
   };
 
   componentDidMount() {
@@ -95,12 +97,36 @@ class ProfileSignUpLayout extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { searchedVoteCardId, onSetVoteCard } = this.props;
+    const {
+      birthdate,
+      name,
+      voteCard,
+      voteCardIdFromTSE,
+      onSetVoteCard,
+    } = this.props;
 
-    if (prevProps.searchedVoteCardId !== searchedVoteCardId) {
-      onSetVoteCard(searchedVoteCardId);
+    if (prevProps.voteCardIdFromTSE !== voteCardIdFromTSE) {
+      onSetVoteCard(voteCardIdFromTSE);
+    }
+
+    if (prevProps.birthdate !== birthdate) {
+      this.checkBirthdate();
+    }
+
+    if (prevProps.name !== name) {
+      this.checkName();
+    }
+
+    if (prevProps.voteCard !== voteCard) {
+      this.checkVoteCard();
     }
   }
+
+  validBirthdate = birthdate => String(birthdate).length === 10;
+
+  validName = name => String(name).length > 0;
+
+  validVoteCard = voteCard => String(voteCard).length === 14;
 
   get validForm() {
     const {
@@ -109,20 +135,49 @@ class ProfileSignUpLayout extends Component {
       voteCard,
     } = this.props;
 
-    const validBirth = String(birthdate).length === 10;
-    const validName = String(name).length > 0;
-    const validVoteCard = String(voteCard).length === 14;
-
     return [
-      validBirth,
-      validName,
-      validVoteCard,
+      this.validBirthdate(birthdate),
+      this.validName(name),
+      this.validVoteCard(voteCard),
     ].every(v => v);
   }
 
   get formEnabled() {
     return this.validForm;
   }
+
+  checkBirthdate = () => {
+    const { birthdate } = this.props;
+
+    this.setState(({ errors }) => ({
+      errors: {
+        ...errors,
+        birthdate: this.validBirthdate(birthdate) ? null : locale.invalidBirthdate,
+      },
+    }));
+  };
+
+  checkName = () => {
+    const { name } = this.props;
+
+    this.setState(({ errors }) => ({
+      errors: {
+        ...errors,
+        name: this.validName(name) ? null : locale.invalidName,
+      },
+    }));
+  };
+
+  checkVoteCard = () => {
+    const { voteCard } = this.props;
+
+    this.setState(({ errors }) => ({
+      errors: {
+        ...errors,
+        voteCard: this.validVoteCard(voteCard) ? null : locale.invalidVoteCard,
+      },
+    }));
+  };
 
   enableReason = () => {
     Keyboard.dismiss();
@@ -143,7 +198,7 @@ class ProfileSignUpLayout extends Component {
       birthdate,
       name,
       voteCard,
-      errors,
+      saveErrors,
       isSaving,
       onOpenURL,
       onSubmit,
@@ -152,12 +207,15 @@ class ProfileSignUpLayout extends Component {
       onSetVoteCard,
     } = this.props;
 
-    const { reasonEnabled } = this.state;
+    const {
+      errors,
+      reasonEnabled,
+     } = this.state;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
-          <ScrollView style={styles.container}>
+          <ScrollView>
             {this.renderNavBar()}
 
             <SignUpBreadCrumb highlightId={2} containerStyle={styles.breadcrumb} />
@@ -181,8 +239,8 @@ class ProfileSignUpLayout extends Component {
                 placeholder={locale.name}
                 value={name}
                 onChangeText={onSetName}
-                hasError={!!errorForField("name", errors)}
-                error={errorForField("name", errors)}
+                hasError={!!errorForField("name", saveErrors) || !!errors.name}
+                error={errorForField("name", saveErrors) || errors.name}
                 onSubmitEditing={() => this.nameInput.blur()}
                 ref={ref => this.nameInput = ref}
               />
@@ -191,8 +249,8 @@ class ProfileSignUpLayout extends Component {
                 placeholder={locale.birthdate}
                 value={birthdate}
                 onChangeDateText={onSetBirthdate}
-                hasError={!!errorForField("birthday", errors)}
-                error={errorForField("birthday", errors)}
+                hasError={!!errorForField("birthday", saveErrors) || !!errors.birthdate}
+                error={errorForField("birthday", saveErrors) || errors.birthdate}
                 hint="Ex: 31/12/1980"
                 onSubmitEditing={() => this.birthInput.blur()}
                 ref={ref => this.birthInput = ref}
@@ -202,8 +260,8 @@ class ProfileSignUpLayout extends Component {
                 value={voteCard}
                 onChangeVoteCardText={onSetVoteCard}
                 placeholder={locale.voteCard}
-                hasError={!!errorForField("voteidcard", errors)}
-                error={errorForField("voteidcard", errors)}
+                hasError={!!errorForField("voteidcard", saveErrors) || !!errors.voteCard}
+                error={errorForField("voteidcard", saveErrors) || errors.voteCard}
                 hint="Ex: 0000.0000.0000"
                 onSubmitEditing={() => this.cardInput.blur()}
                 ref={ref => this.cardInput = ref}
@@ -217,14 +275,14 @@ class ProfileSignUpLayout extends Component {
 
             <RoundedButton title={locale.continue} enabled={this.formEnabled} action={onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
 
-            <DocumentsReasonModal isVisible={reasonEnabled} onToggleReasonEnabled={this.onToggleReasonEnabled}/>
-
             <StaticFooter onOpenURL={onOpenURL} />
+
+            <DocumentsReasonModal isVisible={reasonEnabled} onToggleReasonEnabled={this.onToggleReasonEnabled}/>
           </ScrollView>
         </Layout>
 
         <PageLoader isVisible={isSaving} />
-      </View>
+      </SafeAreaView>
     );
   }
 

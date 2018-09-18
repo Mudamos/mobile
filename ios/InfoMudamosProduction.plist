@@ -58,6 +58,11 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>www.tre-mt.jus.br</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>www.tse.jus.br</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>

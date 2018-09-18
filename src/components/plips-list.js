@@ -33,6 +33,7 @@ import {
 } from "../prop-types";
 
 import {
+  isBlank,
   notEmpty,
   notNil,
 } from "../utils";
@@ -53,6 +54,7 @@ export default class PlipsList extends Component {
     plipsFavoriteInfo: PropTypes.object,
     plipsSignInfo: PropTypes.object.isRequired,
     remoteLinks: RemoteLinksType,
+    searchTitle: PropTypes.string,
     typeList: PropTypes.string.isRequired,
     userSignInfo: PropTypes.object.isRequired,
     onFetchPlipsNextPage: PropTypes.func.isRequired,
@@ -242,7 +244,11 @@ export default class PlipsList extends Component {
   renderCommonRow = this.renderRow({ height: 360, margin: 0 });
 
   renderNoPlips() {
-    const { typeList, currentUser } = this.props;
+    const {
+      currentUser,
+      searchTitle,
+      typeList,
+    } = this.props;
 
     const isLogged = !!currentUser;
 
@@ -256,7 +262,20 @@ export default class PlipsList extends Component {
                 style={styles.noProjectsIcon}
               />
 
-              <Text style={styles.noProjectsText}>{locale.noProjectsMatch}</Text>
+              { isBlank(searchTitle) ?
+                  <Text style={styles.noProjectsText}>{locale.noProjectsMatch}</Text>
+                :
+                  <View>
+                    <Text style={styles.noProjectsText}>{locale.searchPlipNotFound({ searchTitle })}</Text>
+
+                    <FlatButton
+                      title={locale.clearSearch.toUpperCase()}
+                      onPress={this.onRefresh}
+                      style={{backgroundColor: "#00c084", marginTop: 10 }}
+                      textStyle={{color: "#fff"}}
+                    />
+                  </View>
+              }
             </View>
           </View>
         );
@@ -475,7 +494,7 @@ export class Plip extends Component {
               {this.renderShareButton()}
             </View>
           </View>
-          <View style={{backgroundColor: "#7705B9"}}>
+          <View style={{backgroundColor: "#6000AA"}}>
             {this.renderDetailLinkButton()}
           </View>
         </View>

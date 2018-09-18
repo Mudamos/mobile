@@ -5,7 +5,7 @@ import textStyles from "./text";
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: "transparent",
+    backgroundColor: "#6000AA",
     flex: 1,
   },
   controlsContainer: {

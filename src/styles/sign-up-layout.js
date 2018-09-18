@@ -1,6 +1,8 @@
 import { Platform, StyleSheet } from "react-native";
 
-export default StyleSheet.create({
+import EStyleSheet from "react-native-extended-stylesheet";
+
+export default EStyleSheet.create({
   breadcrumb: {
     marginVertical: 15,
   },
@@ -91,7 +93,12 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   termsAcceptedText: {
-    fontSize: 12,
+    fontSize: "0.8rem",
+  },
+  termsAcceptedTextAlert: {
+    color: "#FF0000",
+    fontSize: "0.8rem",
+    textAlign: "center",
   },
   termsAcceptedLink: {
     fontWeight: "500",

@@ -257,3 +257,9 @@ export const eligibleToSignPlip = ({ plip, user }) => {
     case CITYWIDE_SCOPE: return isBlank(userCityName) || isNationalCause(plip) || matchCity();
   }
 }
+
+// Read more about this email validation at http://emailregex.com/
+/* eslint-disable no-useless-escape */
+export const validateEmail = email => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
+
+export const errorMessageFromCode = ({ errorCode, locale }) => locale.errorsCode[errorCode]

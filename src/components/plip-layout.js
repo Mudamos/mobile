@@ -261,7 +261,7 @@ export default class PlipLayout extends Component {
           title={title}
           onPress={onPress}
           style={signButtonStyle}
-          textStyle={{fontSize: 16, fontFamily: "lato"}}
+          textStyle={{fontFamily: "lato"}}
           iconName={iconName}
         />
       </View>
@@ -441,7 +441,7 @@ export default class PlipLayout extends Component {
       onBack,
     } = this.props;
 
-    const finalNavColor = "#7705B9";
+    const finalNavColor = "#6000AA";
     let navColorOpacity = this.state.scrollY.interpolate({
       inputRange: [0, (HEADER_SCROLL_DISTANCE - SMALL_ANIM_OFFSET) / 2, HEADER_SCROLL_DISTANCE - SMALL_ANIM_OFFSET],
       outputRange: ["rgba(0,0,0,0.4)", "rgb(119, 5, 185)", finalNavColor],
@@ -612,7 +612,7 @@ export default class PlipLayout extends Component {
 
 const signButtonStyle = {
   backgroundColor: "#00BFD8",
-  marginHorizontal: 20,
+  marginHorizontal: 10,
   marginVertical: 15,
   paddingHorizontal: 15,
   paddingVertical: 10,

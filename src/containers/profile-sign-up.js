@@ -29,12 +29,12 @@ const mapStateToProps = state => {
   const user = currentUser(state);
 
   return {
-    errors: profileSaveErrors(state),
+    saveErrors: profileSaveErrors(state),
     isSaving: isSavingProfile(state),
     previousName: user ? user.name : null,
     previousBirthdate: user && user.birthdate ? fromISODate(user.birthdate) : null,
     previousVoteCard: user && user.voteCard ? voteCardMask(user.voteCard) : null,
-    searchedVoteCardId: voteCardMask(getSearchedVoteCardId(state)),
+    voteCardIdFromTSE: voteCardMask(getSearchedVoteCardId(state)),
   };
 };
 

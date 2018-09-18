@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
+  SafeAreaView,
   TouchableOpacity,
   Text,
   View,
@@ -53,9 +54,9 @@ export default class ChangeForgotPasswordLayout extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
-          <ScrollView style={styles.container}>
+          <ScrollView>
             {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
@@ -109,7 +110,7 @@ export default class ChangeForgotPasswordLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={isSaving} />
-      </View>
+      </SafeAreaView>
     );
   }
 
