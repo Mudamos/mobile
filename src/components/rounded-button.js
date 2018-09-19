@@ -16,12 +16,6 @@ const styles = StyleSheet.create({
   actionIcon: {
     marginRight: 18,
   },
-  actionSubtitle: {
-    color: "rgba(0, 0, 0, .7)",
-    fontFamily: "lato",
-    fontSize: 10,
-    marginTop: 5,
-  },
   actionTitle: {
     color: "#6000AA",
     fontFamily: "lato",
@@ -42,9 +36,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   titleContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     maxWidth: 200,
   },
   withIcon: {
@@ -54,14 +45,13 @@ const styles = StyleSheet.create({
 
 export default class RoundedButton extends Component {
   static propTypes = {
+    append: PropTypes.node,
     action: PropTypes.func.isRequired,
     buttonStyle: ViewPropTypes.style,
     enabled: PropTypes.bool,
     icon: PropTypes.string,
     iconColor: PropTypes.string,
     iconStyle: ViewPropTypes.style,
-    subtitle: PropTypes.string,
-    subtitleStyle: Text.propTypes.style,
     title: PropTypes.string.isRequired,
     titleStyle: Text.propTypes.style,
   };
@@ -75,7 +65,6 @@ export default class RoundedButton extends Component {
       action,
       enabled,
     } = this.props;
-
 
     if (enabled) {
       return (
@@ -96,37 +85,29 @@ export default class RoundedButton extends Component {
 
   renderButton() {
     const {
+      append,
       buttonStyle,
       enabled,
       icon,
       iconColor,
       iconStyle,
-      subtitle,
-      subtitleStyle,
       title,
       titleStyle,
     } = this.props;
 
     return(
-      <View>
-        <View style={[styles.defaultButtonContainer, buttonStyle, !enabled && styles.buttonDisable]}>
-          { icon &&
-            <Icon
-              name={icon}
-              size={24}
-              color= { iconColor ? iconColor : "#000" }
-              style={[styles.actionIcon, iconStyle]}
-            />
-          }
-          <View style={styles.titleContainer}>
-            <Text style={[styles.actionTitle, titleStyle]}>{title.toUpperCase()}</Text>
-          </View>
-        </View>
-        { subtitle &&
-          <Text style={[styles.actionSubtitle, subtitleStyle]}>
-            {subtitle}
-          </Text>
+      <View style={[styles.defaultButtonContainer, icon && styles.withIcon, buttonStyle, !enabled && styles.buttonDisable]}>
+        { icon &&
+          <Icon
+            name={icon}
+            size={24}
+            color= { iconColor ? iconColor : "#000" }
+            style={[styles.actionIcon, iconStyle]}
+          />
         }
+        <View style={styles.titleContainer}>
+          <Text style={[styles.actionTitle, titleStyle]}>{title.toUpperCase()}</Text>
+        </View>
       </View>
     );
   }

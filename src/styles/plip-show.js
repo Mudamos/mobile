@@ -69,6 +69,12 @@ export default StyleSheet.create({
     height: IMAGE_HEIGHT_WITH_LEAK,
     backgroundColor: "rgb(71, 57, 121)",
   },
+  buttonInfo: {
+    color: "rgba(0, 0, 0, .7)",
+    fontFamily: "lato",
+    fontSize: 10,
+    marginTop: 5,
+  },
   column: {
     flex: 1,
     flexDirection: "column",
