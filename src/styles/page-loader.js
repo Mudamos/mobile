@@ -22,7 +22,7 @@ export default StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100,
-    borderBottomColor: '#00BFD8',
+    borderBottomColor: "#00BFD8",
     position: "absolute",
   },
   progressText: {

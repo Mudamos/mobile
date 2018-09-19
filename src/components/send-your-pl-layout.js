@@ -2,8 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  Button,
-  ImageBackground,
   Text,
   SafeAreaView,
   View,
@@ -31,7 +29,7 @@ export default class HelpLayout extends Component {
   }
 
   onGoToSendPlForm = () => {
-    const { remoteLinks, onLogEvent, onOpenURL } = this.props;
+    const { remoteLinks, onOpenURL } = this.props;
 
     onOpenURL(remoteLinks.sendYourIdea);
   }
@@ -48,10 +46,6 @@ export default class HelpLayout extends Component {
   }
 
   render() {
-    const { currentUser } = this.props;
-
-    const complement = currentUser ? `, ${currentUser.name}` : "";
-
     return (
       <SafeAreaView style={styles.container}>
         <Layout>

@@ -3,7 +3,7 @@ export const fetchIsUserFirstTime = () => ({
 });
 
 export const fetchAboutAppFeedback = () => ({
-  type: "LOCAL_FETCH_ABOUT_APP_FEEDBACK"
+  type: "LOCAL_FETCH_ABOUT_APP_FEEDBACK",
 });
 
 export const userFirstTimeFetched = ({ isUserFirstTime }) => ({

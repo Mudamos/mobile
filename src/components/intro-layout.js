@@ -27,6 +27,7 @@ export default class IntroLayout extends Component {
   }
 
   static propTypes = {
+    appLoadingCompleted: PropTypes.number,
     isAppReady: PropTypes.bool,
     isUserFirstTime: PropTypes.bool,
     onHome: PropTypes.func.isRequired,

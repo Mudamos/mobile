@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
 
 export default class RoundedButton extends Component {
   static propTypes = {
-    append: PropTypes.node,
     action: PropTypes.func.isRequired,
     buttonStyle: ViewPropTypes.style,
     enabled: PropTypes.bool,
@@ -85,7 +84,6 @@ export default class RoundedButton extends Component {
 
   renderButton() {
     const {
-      append,
       buttonStyle,
       enabled,
       icon,

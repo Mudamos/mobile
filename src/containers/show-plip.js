@@ -9,7 +9,6 @@ import {
   fetchPlipRelatedInfo,
   handleAppLink,
   navigate,
-  navigateBack,
   openURL,
   removeJustSignedPlip,
   sharePlip,

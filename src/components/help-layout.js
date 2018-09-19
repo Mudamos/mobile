@@ -2,8 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  Button,
-  ImageBackground,
   Text,
   SafeAreaView,
   View,
@@ -32,7 +30,7 @@ export default class HelpLayout extends Component {
   }
 
   onGoToHelpForm = () => {
-    const { remoteLinks, onLogEvent, onOpenURL } = this.props;
+    const { remoteLinks, onOpenURL } = this.props;
 
     onOpenURL(remoteLinks.help);
   }

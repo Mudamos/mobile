@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 
 const { height: windowHeight } = Dimensions.get("window");
 
@@ -10,7 +10,7 @@ export default EStyleSheet.create({
     top: windowHeight / 2,
   },
   bold: {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   button: {
     height: 40,
@@ -59,5 +59,5 @@ export default EStyleSheet.create({
   title: {
     fontSize: "1.8rem",
     fontWeight: "bold",
-  }
+  },
 });

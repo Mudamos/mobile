@@ -122,6 +122,7 @@ class Container extends Component {
 
   static propTypes = {
     allPlips: PropTypes.array,
+    appLoadingCompleted: PropTypes.number,
     currentSigningPlip: PropTypes.object,
     currentUser: PropTypes.object,
     errorFetchingAllPlips: PropTypes.bool,
@@ -167,6 +168,9 @@ class Container extends Component {
     onRetryPlips: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
+    onTapAboutApp: PropTypes.func.isRequired,
+    onTapHelp: PropTypes.func.isRequired,
+    onTapSendYourPl: PropTypes.func.isRequired,
     onTellAFriend: PropTypes.func.isRequired,
     onToggleFavorite: PropTypes.func.isRequired,
     onValidateProfile: PropTypes.func.isRequired,
@@ -177,7 +181,6 @@ class Container extends Component {
       currentUser,
       isFetchingProfile,
       isUserLoggedIn,
-      remoteLinks,
       onProfileEdit,
     } = this.props;
 

@@ -1,6 +1,6 @@
 export const fetchPlips = ({ shouldIncreaseAppLoading } = {}) => ({
   type: "FETCH_PLIPS",
-  payload: { shouldIncreaseAppLoading }
+  payload: { shouldIncreaseAppLoading },
 });
 
 export const fetchPlipsNextPage = ({ typeList, nextPage }) => ({

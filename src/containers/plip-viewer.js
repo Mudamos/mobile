@@ -1,9 +1,6 @@
-import { Alert } from "react-native";
 import { connect } from "react-redux";
 
 import { moment } from "../utils";
-
-import locale from "../locales/pt-BR";
 
 import {
   navigate,

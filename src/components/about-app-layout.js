@@ -2,14 +2,13 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  Button,
   ImageBackground,
   Text,
   SafeAreaView,
   View,
 } from "react-native";
 
-import Accordion from 'react-native-collapsible/Accordion';
+import Accordion from "react-native-collapsible/Accordion";
 
 import styles from "../styles/about-app-layout";
 
@@ -49,10 +48,6 @@ export default class AboutAppLayout extends Component {
   }
 
   render() {
-    const {
-      onBack,
-    } = this.props;
-
     return (
       <SafeAreaView style={styles.container}>
         {this.renderNavBar()}

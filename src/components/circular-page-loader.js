@@ -4,10 +4,8 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  ViewPropTypes
+  ViewPropTypes,
 } from "react-native";
-
-import Spinner from "react-native-spinkit";
 
 import styles from "../styles/page-loader";
 
