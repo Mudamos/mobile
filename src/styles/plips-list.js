@@ -53,7 +53,6 @@ export default StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   rowContainer: {
-    backgroundColor: "#DDD",
   },
   plipView: {
     backgroundColor: "#FFF",

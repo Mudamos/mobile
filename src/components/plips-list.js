@@ -123,7 +123,7 @@ export default class PlipsList extends Component {
       !hasRows;
 
     return (
-      <View style={{ flex: 1, backgroundColor: "#FFF" }}>
+      <View style={{ flex: 1, backgroundColor: "#DDD" }}>
         {
           !error && hasRows && !isFetchingPlips &&
             this.renderListView({
