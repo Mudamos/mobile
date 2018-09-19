@@ -38,6 +38,7 @@ import {
 } from "../actions";
 
 import {
+  appLoadingCompleted,
   isAppReady,
   isFetchingPlipsNextPageAllPlips,
   isFetchingPlipsNextPageFavoritePlips,
@@ -276,8 +277,8 @@ class Container extends Component {
   }
 
   renderFirstTimeLoader() {
-    const { isAppReady } = this.props;
-    return <SplashLoader isVisible={!isAppReady} />
+    const { isAppReady, appLoadingCompleted } = this.props;
+    return <SplashLoader isVisible={!isAppReady} percentage={appLoadingCompleted}/>
   }
 
   renderMenuContent() {
@@ -365,6 +366,7 @@ class Container extends Component {
 }
 
 const mapStateToProps = state => ({
+  appLoadingCompleted: appLoadingCompleted(state),
   currentSigningPlip: getCurrentSigningPlip(state),
   currentUser: getCurrentUser(state),
   errorFetchingAllPlips: errorFetchingAllPlips(state),

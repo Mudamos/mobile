@@ -8,6 +8,7 @@ import {
   fetchRemoteLinks,
   fetchRemoteConfig,
   fetchPlips,
+  increaseAppLoading,
   mainAppInitiated as mainAppInitiatedAction,
   signMessage,
 } from "../actions";
@@ -23,9 +24,12 @@ function* setup({ mobileApi, mudamosSigner, sessionStore }) {
     const isMainApp = yield call(mudamosSigner.isMainApp);
     if (!isMainApp) return;
 
+    yield put(increaseAppLoading()),
+
     yield call(fetchSession, { sessionStore });
 
     yield all([
+      put(increaseAppLoading()),
       put(fetchIsUserFirstTime()),
       put(fetchAboutAppFeedback()),
       put(fetchFeatureToggles()),
@@ -34,13 +38,16 @@ function* setup({ mobileApi, mudamosSigner, sessionStore }) {
       put(mainAppInitiatedAction()),
     ]);
 
+    yield put(increaseAppLoading());
+
     try {
       yield call(fetchProfile, { mobileApi });
+      yield put(increaseAppLoading());
     } catch(e) {
       logError(e);
     }
 
-    yield put(fetchPlips());
+    yield put(fetchPlips({ shouldIncreaseAppLoading: true }));
   });
 
   yield takeLatest("ACTION_SIGN_APP_SETUP", function* () {

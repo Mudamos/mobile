@@ -17,6 +17,8 @@ import locale from "../locales/pt-BR";
 
 import styles from "../styles/intro-layout";
 
+import { isNotNil } from "../utils";
+
 export default class IntroLayout extends Component {
   state = {
     loading: true,
@@ -33,7 +35,7 @@ export default class IntroLayout extends Component {
   componentDidUpdate() {
     const { isUserFirstTime, onHome } = this.props;
 
-    if (!isUserFirstTime) onHome();
+    if (isNotNil(isUserFirstTime) && !isUserFirstTime) onHome();
   }
 
   get totalPages() {
@@ -160,7 +162,7 @@ export default class IntroLayout extends Component {
   }
 
   renderFirstTimeLoader() {
-    const { isAppReady } = this.props;
-    return <SplashLoader isVisible={!isAppReady}/>
+    const { isAppReady, appLoadingCompleted } = this.props;
+    return <SplashLoader isVisible={!isAppReady} percentage={appLoadingCompleted}/>
   }
 }

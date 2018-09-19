@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import IntroLayout from "../components/intro-layout";
 
 import {
+  appLoadingCompleted,
   isUserFirstTime,
   isAppReady,
 } from "../selectors";
@@ -13,6 +14,7 @@ import {
 } from "../actions";
 
 const mapStateToProps = state => ({
+  appLoadingCompleted: appLoadingCompleted(state),
   isUserFirstTime: isUserFirstTime(state),
   isAppReady: isAppReady(state),
 });

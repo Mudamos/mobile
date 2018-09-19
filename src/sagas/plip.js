@@ -60,6 +60,7 @@ import {
   fetchingPlipSigners,
   fetchPlipSignersError,
   fetchingShortPlipSigners,
+  increaseAppLoading,
   invalidatePhone,
   isAddingFavoritePlip,
   isSigningPlip,
@@ -241,7 +242,8 @@ function* fetchingNextPage({ key, status }) {
 }
 
 function* fetchPlipsSaga({ mobileApi }) {
-  yield takeEvery("FETCH_PLIPS", function* () {
+  yield takeEvery("FETCH_PLIPS", function* (action) {
+    const { shouldIncreaseAppLoading } = action && action.payload || {};
     const isReady = yield select(isAppReady);
     const mainTabViewKey = yield select(getCurrentMainTabView);
 
@@ -270,6 +272,10 @@ function* fetchPlipsSaga({ mobileApi }) {
       logError(e);
 
       yield call(setPlipError, { key: mainTabViewKey, error: e });
+    }
+
+    if (shouldIncreaseAppLoading) {
+      yield put(increaseAppLoading());
     }
 
     yield all([
