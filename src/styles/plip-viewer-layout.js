@@ -3,13 +3,13 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#6000AA",
   },
   full: {
     flex: 1,
   },
   navigationBar: {
-    backgroundColor: "rgb(71, 57, 121)",
+    backgroundColor: "#6000AA",
   },
   scrollView: {
     flex: 1,
