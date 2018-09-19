@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   },
   actionTitle: {
     color: "#6000AA",
-    flex: 3,
     fontFamily: "lato",
     fontSize: 14,
     fontWeight: "bold",
@@ -32,10 +31,6 @@ const styles = StyleSheet.create({
   },
   buttonDisable: {
     backgroundColor: "#AAA",
-  },
-  full: {
-    flex: 1,
-    alignItems: "center",
   },
   defaultButtonContainer: {
     borderWidth: 1,
@@ -85,7 +80,6 @@ export default class RoundedButton extends Component {
     if (enabled) {
       return (
         <TouchableOpacity
-          style={styles.full}
           onPress={action}
         >
           {this.renderButton()}
@@ -93,7 +87,7 @@ export default class RoundedButton extends Component {
       );
     } else {
       return (
-        <View style={styles.full}>
+        <View>
           {this.renderButton()}
         </View>
       );

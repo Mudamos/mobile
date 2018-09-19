@@ -16,6 +16,10 @@ export default EStyleSheet.create({
   breadcrumb: {
     marginVertical: 15,
   },
+  buttonContainer: {
+    flex: 1,
+    alignItems: "center",
+  },
   container: {
     backgroundColor: "#6000AA",
     flex: 1,

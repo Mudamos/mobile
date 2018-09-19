@@ -77,6 +77,7 @@ const translations = {
   invalidVoteCard: "Título de eleitor inválido",
   iWannaMakeTheDifference: "Eu quero fazer a diferença",
   lastDay: "Último dia",
+  letsGo: "Vamos lá!",
   links: {
     getToKnowMudamos: "Conheça o Mudamos",
     help: "Ajuda",
@@ -259,6 +260,20 @@ const translations = {
         content: "Todos os dados fornecidos são protegidos. Os dados só serão usados para uma única finalidade: verificar a transparência do processo e validade da sua assinatura. Não serão fornecidos a ninguém mais nem usados para qualquer outra finalidade que não essa. Dados como nome, data de nascimento, cidade, CPF/Título passarão por um processo de pseudonimização para garantir seu sigilo. Isso permitirá proteger sua privacidade, ao mesmo tempo em que permite que governo e sociedade civil possam verificar a validade das assinaturas. "
       },
     ]
+  },
+  firstTimeOpen: {
+    screen0: {
+      wow: "Uau!",
+      youAreAnMudamosAgent: "Agora você é um agente da mudança no Mudamos+!",
+      aNewWayToMakeTheDifference: "Uma nova forma de participação e de fazer a diferença!",
+    },
+    screen1: {
+      signIntro: "Assine Projetos de Lei de iniciativa popular de forma rápida e segura!",
+      voteCardInfoSecure: "É a extensão do seu Titulo de Eleitor. Suas informações são protegidas e sua assinatura garantida.",
+    },
+    screen2: {
+      youCanSharePls: "É possível compartilhar os Projetos de lei com seus amigos pelas redes sociais.",
+    },
   },
 };
 

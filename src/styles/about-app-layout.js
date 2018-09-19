@@ -40,12 +40,16 @@ export default EStyleSheet.create({
   body: {
     backgroundColor: "#FFF",
   },
+  buttonContainer: {
+    alignItems: "center",
+    flex: 1,
+  },
   buttonPanel: {
     flex: 1,
     flexDirection: "row",
     marginTop: 12,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
   },
   classifyQuestionView: {
     marginTop: 30,

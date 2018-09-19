@@ -6,6 +6,10 @@ import textStyles from "./text";
 const { width } = Dimensions.get("window");
 
 export default EStyleSheet.create({
+  buttonContainer: {
+    alignItems: "center",
+    flex: 1,
+  },
   breadcrumb: {
     marginVertical: 15,
   },

@@ -12,6 +12,8 @@ export default EStyleSheet.create({
     fontSize: "0.6rem",
   },
   buttonContainer: {
+    alignItems: "center",
+    flex: 1,
     paddingHorizontal: 33,
   },
   container: {

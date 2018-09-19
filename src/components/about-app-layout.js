@@ -140,7 +140,9 @@ export default class AboutAppLayout extends Component {
       <View style={styles.footerContainer}>
         <View style={styles.moreAboutMudamos}>
           <Text style={styles.moreAboutMudamosTitle}>{locale.wannaKnowMoreAboutMudamos}</Text>
-          <RoundedButton title={locale.goToSite} action={this.onGoToMudamosSite} buttonStyle={styles.goToMudamosSiteButton} titleStyle={styles.goToMudamosSiteTitle} />
+          <View style={styles.buttonContainer}>
+            <RoundedButton title={locale.goToSite} action={this.onGoToMudamosSite} buttonStyle={styles.goToMudamosSiteButton} titleStyle={styles.goToMudamosSiteTitle} />
+            </View>
           <Text style={styles.moreAboutMudamosInfo}>{locale.youWillBeRedirectToMudamos}</Text>
         </View>
       </View>

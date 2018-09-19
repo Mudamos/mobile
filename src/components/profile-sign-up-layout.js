@@ -273,7 +273,9 @@ class ProfileSignUpLayout extends Component {
               </TouchableOpacity>
             </View>
 
-            <RoundedButton title={locale.continue} enabled={this.formEnabled} action={onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+            <View style={styles.buttonContainer}>
+              <RoundedButton title={locale.continue} enabled={this.formEnabled} action={onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+            </View>
 
             <StaticFooter onOpenURL={onOpenURL} />
 

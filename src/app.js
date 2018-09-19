@@ -15,6 +15,7 @@ import {
   ChangeForgotPasswordContainer,
   ForgotPasswordContainer,
   HelpContainer,
+  IntroContainer,
   PlipContainer,
   PlipsContainer,
   PlipViewerContainer,
@@ -48,9 +49,11 @@ OneSignal.inFocusDisplaying(2); // Show notification on drawer
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="plipsNav" initial={true} type="reset" hideNavBar={true}>
-      <Scene key="plipsList" initial={true} component={PlipsContainer} hideNavBar={true} />
+    <Scene key="plipsNav" type="reset" hideNavBar={true}>
+      <Scene key="plipsList" component={PlipsContainer} hideNavBar={true} />
     </Scene>
+
+    <Scene key="intro" initial={true} component={IntroContainer} hideNavBar={true} />
 
     <Scene key="showPlip" component={PlipContainer} hideNavBar={true} />
     <Scene key="plipViewer" component={PlipViewerContainer} hideNavBar={true} title="Texto do projeto"/>

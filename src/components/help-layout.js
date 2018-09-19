@@ -68,8 +68,8 @@ export default class HelpLayout extends Component {
             </View>
             <View style={styles.buttonContainer}>
               <RoundedButton title={locale.continue} action={this.onGoToHelpForm} buttonStyle={styles.continueButton} titleStyle={[styles.text, styles.continueButtonTitle]}/>
-              <Text style={[styles.text, styles.buttonInfo]}>{locale.youWillBeRedirectToWebForm}</Text>
             </View>
+            <Text style={[styles.text, styles.buttonInfo]}>{locale.youWillBeRedirectToWebForm}</Text>
           </ScrollView>
         </Layout>
       </SafeAreaView>
