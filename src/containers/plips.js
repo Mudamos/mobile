@@ -281,7 +281,7 @@ class Container extends Component {
 
   renderFirstTimeLoader() {
     const { isAppReady, appLoadingCompleted } = this.props;
-    return <SplashLoader isVisible={!isAppReady} percentage={appLoadingCompleted}/>
+    return <SplashLoader isVisible={!isAppReady} progress={appLoadingCompleted}/>
   }
 
   renderMenuContent() {

@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
   onBack: () =>  dispatch(navigate("plipsNav")),
   onLogEvent: ({ name, extraData }) => dispatch(logEvent({ name, extraData })),
   onOpenURL: url => dispatch(openURL(url)),
-  onSetFeedback: ({ questionAnswered, answer }) => dispatch(userAboutAppFeedback({ questionAnswered, answer })),
+  onSetFeedback: ({ questionAnsweredKey, answer }) => dispatch(userAboutAppFeedback({ questionAnsweredKey, answer })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AboutAppLayout);

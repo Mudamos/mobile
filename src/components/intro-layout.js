@@ -61,7 +61,7 @@ export default class IntroLayout extends Component {
 
     if (this.isLastPage) return;
 
-    this.setState({ page: nextPage });
+    this.setState(({ page }) => ({ page: page + 1 }));
     this.pager.setPage(nextPage);
   }
 
@@ -71,7 +71,7 @@ export default class IntroLayout extends Component {
 
     if (this.isFirstPage) return;
 
-    this.setState({ page: previousPage });
+    this.setState(({ page }) => ({ page: page - 1 }));
     this.pager.setPage(previousPage);
   }
 
@@ -164,6 +164,6 @@ export default class IntroLayout extends Component {
 
   renderFirstTimeLoader() {
     const { isAppReady, appLoadingCompleted } = this.props;
-    return <SplashLoader isVisible={!isAppReady} percentage={appLoadingCompleted}/>
+    return <SplashLoader isVisible={!isAppReady} progress={appLoadingCompleted}/>
   }
 }

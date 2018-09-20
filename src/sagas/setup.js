@@ -24,7 +24,7 @@ function* setup({ mobileApi, mudamosSigner, sessionStore }) {
     const isMainApp = yield call(mudamosSigner.isMainApp);
     if (!isMainApp) return;
 
-    yield put(increaseAppLoading()),
+    yield put(increaseAppLoading());
 
     yield call(fetchSession, { sessionStore });
 

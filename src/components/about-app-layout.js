@@ -41,10 +41,10 @@ export default class AboutAppLayout extends Component {
     onOpenURL(remoteLinks.getToKnowMudamos);
   }
 
-  onLogFeedback = ({ index, answer }) => {
+  onLogFeedback = ({ section, answer }) => {
     const { onLogEvent, onSetFeedback } = this.props;
-    onLogEvent({ name: `about_app_${index}_${answer}` });
-    onSetFeedback({ questionAnswered: index, answer });
+    onLogEvent({ name: `about_app_${section.key}_${answer}` });
+    onSetFeedback({ questionAnsweredKey: section.key, answer });
   }
 
   render() {
@@ -90,9 +90,9 @@ export default class AboutAppLayout extends Component {
     );
   }
 
-  renderAccordionContent = (section, index) => {
+  renderAccordionContent = section => {
     const { localFeedback } = this.props;
-    const gaveFeedback = localFeedback && isNotNil(localFeedback[index]);
+    const gaveFeedback = localFeedback && isNotNil(localFeedback[section.key]);
 
     return (
       <View style={styles.accordionContentContainer}>
@@ -105,8 +105,8 @@ export default class AboutAppLayout extends Component {
             <View style={styles.classifyQuestionView}>
               <Text style={[styles.accordionContentText, styles.accordionContentTextFooter]}>{locale.thisInfoWasUseful}</Text>
               <View style={styles.buttonPanel}>
-                <RoundedButton title={locale.yes} action={() => this.onLogFeedback({ index, answer: "yes" })} buttonStyle={styles.classifyQuestionButton} titleStyle={styles.classifyQuestionButtonTitle}/>
-                <RoundedButton title={locale.no} action={() => this.onLogFeedback({ index, answer: "no" })} buttonStyle={styles.classifyQuestionButton} titleStyle={styles.classifyQuestionButtonTitle}/>
+                <RoundedButton title={locale.yes} action={() => this.onLogFeedback({ section, answer: "yes" })} buttonStyle={styles.classifyQuestionButton} titleStyle={styles.classifyQuestionButtonTitle}/>
+                <RoundedButton title={locale.no} action={() => this.onLogFeedback({ section, answer: "no" })} buttonStyle={styles.classifyQuestionButton} titleStyle={styles.classifyQuestionButtonTitle}/>
               </View>
             </View>
         }

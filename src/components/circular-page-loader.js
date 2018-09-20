@@ -7,19 +7,19 @@ import {
   ViewPropTypes,
 } from "react-native";
 
-import styles from "../styles/page-loader";
+import styles from "../styles/circular-page-loader";
 
 class PageLoader extends Component {
   static propTypes = {
     append: PropTypes.node,
     isVisible: PropTypes.bool,
-    percentage: PropTypes.number,
     prepend: PropTypes.node,
+    progress: PropTypes.number,
     style: ViewPropTypes.style,
   }
 
   static defaultProps = {
-    percentage: 0,
+    progress: 0,
     isVisible: false,
   }
 
@@ -27,23 +27,33 @@ class PageLoader extends Component {
     const {
       append,
       isVisible,
-      percentage,
+      progress,
       prepend,
       style,
     } = this.props;
 
     if (!isVisible) return (<View/>);
 
-    const progressLayerY = percentage * 2;
-    const formatPercentage = parseInt(percentage);
+    const circleDiameter = 200;
+    const circleDimensions = ({ height: circleDiameter, width: circleDiameter});
+    const progressToPercentage = parseInt((100 * progress), 10);
+
+    /*
+          1    - circleDiameter
+      progress - progressLayerFill
+
+      progressLayerFill = circleDiameter * progress / 1
+    */
+
+    const progressLayerFill = circleDiameter * progress;
 
     return (
       <View style={[styles.container, style]}>
         {prepend}
 
-        <View style={styles.loader}>
-          <View style={[styles.progressLayer, { borderBottomWidth: progressLayerY }]}/>
-          <Text style={styles.progressText}>{formatPercentage} %</Text>
+        <View style={[styles.loader, circleDimensions]}>
+          <View style={[styles.progressLayer, circleDimensions, { borderBottomWidth: progressLayerFill }]}/>
+          <Text style={styles.progressText}>{progressToPercentage} %</Text>
         </View>
 
         {append}

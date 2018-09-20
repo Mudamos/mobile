@@ -74,11 +74,7 @@ export default class RoundedButton extends Component {
         </TouchableOpacity>
       );
     } else {
-      return (
-        <View>
-          {this.renderButton()}
-        </View>
-      );
+      return this.renderButton();
     }
   }
 

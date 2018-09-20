@@ -32,7 +32,7 @@ function* fetchAboutAppFeedbackSaga({ localStorage }) {
       const localUserFeedBack = JSON.parse(userFeedback) || {};
       yield put(aboutAppFeedbackFetched({ userFeedback: localUserFeedBack }));
     } catch (e) {
-      logError(e, { tag: "fetchUserFirstTimeSaga"});
+      logError(e, { tag: "fetchAboutAppFeedbackSaga"});
     }
   })
 }
@@ -50,10 +50,10 @@ function* userFirstTimeDoneSaga({ localStorage }) {
 function* userAboutAppFeedbackSaga({ localStorage }) {
   yield takeEvery("LOCAL_USER_ABOUT_APP_FEEDBACK", function* (action) {
     try {
-      const { questionAnswered, answer } = action.payload;
+      const { questionAnsweredKey, answer } = action.payload;
 
       const aboutAppFeedback = yield select(aboutAppUserFeedback);
-      const updatedAboutAppFeedBack = {...aboutAppFeedback, [questionAnswered]: answer };
+      const updatedAboutAppFeedBack = { ...aboutAppFeedback, [questionAnsweredKey]: answer };
 
       yield put(aboutAppFeedbackFetched({ userFeedback: updatedAboutAppFeedBack }));
       yield call(localStorage.store, ABOUT_APP_FEEDBACK_KEY, JSON.stringify(updatedAboutAppFeedBack));

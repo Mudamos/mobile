@@ -20,7 +20,7 @@ export const userFirstTimeDone = () => ({
   type: "LOCAL_USER_FIRST_TIME_DONE",
 });
 
-export const userAboutAppFeedback = ({ questionAnswered, answer }) => ({
+export const userAboutAppFeedback = ({ questionAnsweredKey, answer }) => ({
   type: "LOCAL_USER_ABOUT_APP_FEEDBACK",
-  payload: { questionAnswered, answer },
+  payload: { questionAnsweredKey, answer },
 });
