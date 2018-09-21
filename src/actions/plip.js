@@ -250,11 +250,6 @@ export const removeJustSignedPlip = ({ plipId }) => ({
   payload: { plipId },
 });
 
-export const isSigningPlip = isSigning => ({
-  type: "PLIP_SIGNING",
-  payload: { isSigning },
-});
-
 export const plipSignError = error => ({
   type: "PLIP_SIGN_ERROR",
   payload: { error },

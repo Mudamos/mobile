@@ -25,7 +25,7 @@ import { User } from "../models";
 
 
 function* createWallet({ mobileApi, walletStore }) {
-  yield takeLatest("WALLET_CREATE", function* () {
+  yield takeLatest("WALLET_CREATE", function* ({ payload }) {
     try {
       yield put(creatingWallet(true));
 
@@ -48,7 +48,7 @@ function* createWallet({ mobileApi, walletStore }) {
 
       yield put(creatingWallet(false));
       yield put(walletAvailable(true));
-      yield put(profileStateMachine());
+      yield put(profileStateMachine(payload));
     } catch (e) {
       logError(e, { tag: "createWallet"});
 

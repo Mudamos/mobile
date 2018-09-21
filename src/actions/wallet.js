@@ -1,5 +1,6 @@
-export const createWallet = () => ({
+export const createWallet = payload => ({
   type: "WALLET_CREATE",
+  payload,
 });
 
 export const creatingWallet = isCreating => ({
