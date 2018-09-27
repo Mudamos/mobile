@@ -15,11 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="Logo-alt" translatesAutoresizingMaskIntoConstraints="NO" id="KwI-fZ-viW">
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="Logo-alt-1" translatesAutoresizingMaskIntoConstraints="NO" id="KwI-fZ-viW">
                     <rect key="frame" x="130" y="190" width="220" height="100"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.37647058823529" green="0" blue="0.66666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.37647058823529411" green="0.0" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="KwI-fZ-viW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="9IR-7h-8ag"/>
                 <constraint firstItem="KwI-fZ-viW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="FAt-x2-11N"/>
@@ -32,6 +32,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Logo-alt" width="220" height="100"/>
+        <image name="Logo-alt-1" width="220" height="100"/>
     </resources>
 </document>
