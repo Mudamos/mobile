@@ -27,7 +27,7 @@ export default class IntroLayout extends Component {
   }
 
   static propTypes = {
-    appLoadingCompleted: PropTypes.number,
+    appLoadingProgress: PropTypes.number,
     isAppReady: PropTypes.bool,
     isUserFirstTime: PropTypes.bool,
     onHome: PropTypes.func.isRequired,
@@ -56,23 +56,21 @@ export default class IntroLayout extends Component {
   }
 
   goToNextPage = () => {
-    const { page } = this.state;
-    const nextPage = page + 1;
-
     if (this.isLastPage) return;
 
-    this.setState(({ page }) => ({ page: page + 1 }));
-    this.pager.setPage(nextPage);
+    this.setState(
+      ({ page }) => ({ page: page + 1 }),
+      () => this.pager.setPage(this.state.page),
+    );
   }
 
   goToPreviousPage = () => {
-    const { page } = this.state;
-    const previousPage = page - 1;
-
     if (this.isFirstPage) return;
 
-    this.setState(({ page }) => ({ page: page - 1 }));
-    this.pager.setPage(previousPage);
+    this.setState(
+      ({ page }) => ({ page: page - 1 }),
+      () => this.pager.setPage(this.state.page),
+    );
   }
 
   render() {
@@ -163,7 +161,7 @@ export default class IntroLayout extends Component {
   }
 
   renderFirstTimeLoader() {
-    const { isAppReady, appLoadingCompleted } = this.props;
-    return <SplashLoader isVisible={!isAppReady} progress={appLoadingCompleted}/>
+    const { isAppReady, appLoadingProgress } = this.props;
+    return <SplashLoader isVisible={!isAppReady} progress={appLoadingProgress}/>
   }
 }

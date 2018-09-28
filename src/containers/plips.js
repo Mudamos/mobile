@@ -38,7 +38,7 @@ import {
 } from "../actions";
 
 import {
-  appLoadingCompleted,
+  appLoadingProgress,
   isAppReady,
   isFetchingPlipsNextPageAllPlips,
   isFetchingPlipsNextPageFavoritePlips,
@@ -122,7 +122,7 @@ class Container extends Component {
 
   static propTypes = {
     allPlips: PropTypes.array,
-    appLoadingCompleted: PropTypes.number,
+    appLoadingProgress: PropTypes.number,
     currentSigningPlip: PropTypes.object,
     currentUser: PropTypes.object,
     errorFetchingAllPlips: PropTypes.bool,
@@ -280,8 +280,8 @@ class Container extends Component {
   }
 
   renderFirstTimeLoader() {
-    const { isAppReady, appLoadingCompleted } = this.props;
-    return <SplashLoader isVisible={!isAppReady} progress={appLoadingCompleted}/>
+    const { isAppReady, appLoadingProgress } = this.props;
+    return <SplashLoader isVisible={!isAppReady} progress={appLoadingProgress}/>
   }
 
   renderMenuContent() {
@@ -369,7 +369,7 @@ class Container extends Component {
 }
 
 const mapStateToProps = state => ({
-  appLoadingCompleted: appLoadingCompleted(state),
+  appLoadingProgress: appLoadingProgress(state),
   currentSigningPlip: getCurrentSigningPlip(state),
   currentUser: getCurrentUser(state),
   errorFetchingAllPlips: errorFetchingAllPlips(state),

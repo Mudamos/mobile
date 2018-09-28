@@ -1,4 +1,4 @@
-import { call, put, select, spawn, takeEvery } from "redux-saga/effects";
+import { call, fork, put, select, spawn, takeEvery } from "redux-saga/effects";
 
 import {
   userFirstTimeFetched,
@@ -67,6 +67,6 @@ function* userAboutAppFeedbackSaga({ localStorage }) {
 export default function* localStorageSaga({ localStorage }) {
   yield spawn(fetchUserFirstTimeSaga, { localStorage });
   yield spawn(userFirstTimeDoneSaga, { localStorage });
-  yield spawn(fetchAboutAppFeedbackSaga, { localStorage });
+  yield fork(fetchAboutAppFeedbackSaga, { localStorage });
   yield spawn(userAboutAppFeedbackSaga, { localStorage });
 }
