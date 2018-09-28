@@ -97,11 +97,8 @@ import PlipsLayout from "../components/plips-layout";
 import SplashLoader from "../components/splash-loader";
 import Menu from "../components/side-menu";
 import LoggedInMenu from "../components/logged-in-menu-content";
-import SimpleModal from "../components/simple-modal";
-import MarkdownView from "../containers/markdown-view";
 
 import Toast from "react-native-simple-toast";
-import aboutHtmlStyles from "../styles/about-html-styles";
 
 import { RemoteLinksType } from "../prop-types/remote-config";
 
@@ -117,7 +114,6 @@ const styles = StyleSheet.create({
 class Container extends Component {
   state = {
     menuOpen: false,
-    showAboutModal: false,
   };
 
   static propTypes = {
@@ -223,12 +219,6 @@ class Container extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isUserFirstTime === true && !this.state.showAboutModal) {
-      this.setState({ showAboutModal: true });
-    }
-  }
-
   render() {
     const { isValidatingProfile, onFetchProfile } = this.props;
     const { menuOpen: open } = this.state;
@@ -252,10 +242,6 @@ class Container extends Component {
   }
 
   renderPage() {
-    const {
-      showAboutModal,
-    } = this.state;
-
     return (
       <View style={{flex: 1}}>
         <PlipsLayout
@@ -263,18 +249,6 @@ class Container extends Component {
 
           openMenu={this.openMenu}
         />
-
-        {
-          showAboutModal &&
-            <SimpleModal
-              onClose={this.onFirstTimeModalClose}
-            >
-              <MarkdownView
-                content={locale.markdown.aboutBody}
-                contentContainerStyle={aboutHtmlStyles}
-              />
-            </SimpleModal>
-        }
       </View>
     );
   }
@@ -351,13 +325,6 @@ class Container extends Component {
     const { onLogEvent, onOpenURL } = this.props;
     onLogEvent({ name: eventName });
     onOpenURL(link);
-  }
-
-  onFirstTimeModalClose = () => {
-    const { onFirstTimeModalClose } = this.props;
-
-    onFirstTimeModalClose();
-    this.setState({ showAboutModal: false });
   }
 
   onSignIn = () => {
