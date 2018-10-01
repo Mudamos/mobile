@@ -58,7 +58,7 @@ function* userProfileNavigator() {
     try {
       const { params } = payload;
 
-      const { key, ...args } = yield call(profileScreenForCurrentUser);
+      const { key, ...args } = yield call(profileScreenForCurrentUser, params);
       const options = { ...args, ...params };
 
       if (isDev) console.log("Go to profile screen: ", key, options);
@@ -70,7 +70,9 @@ function* userProfileNavigator() {
   });
 }
 
-export function* profileScreenForCurrentUser() {
+export function* profileScreenForCurrentUser(params = {}) {
+  const { revalidateProfileSignPlip } = params;
+
   const screenKeys = [
     "signUp",
     "signIn",
@@ -93,6 +95,8 @@ export function* profileScreenForCurrentUser() {
   const goToScreen = firstScreenNotDone(screensDone);
 
   if (goToScreen) return { key: goToScreen };
+
+  if (revalidateProfileSignPlip) return { key: "showPlip" };
 
   return { key: homeSceneKey, type: "reset" };
 }

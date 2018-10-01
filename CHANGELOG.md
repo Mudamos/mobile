@@ -1,5 +1,6 @@
 # Next
 
+* [PR #443] Add signing validation pages
 * [PR #441] Add static pages
 * [PR #445] Update splash screen
 * [PR #440] Update app following the ITS suggestions

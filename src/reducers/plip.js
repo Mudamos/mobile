@@ -454,11 +454,6 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case "PLIP_SIGNING":
-      return {
-        ...state,
-        isSigning: payload.isSigning,
-      };
     case "ADDING_FAVORITE_PLIP":
       return {
         ...state,

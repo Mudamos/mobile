@@ -39,6 +39,7 @@ import ProgressBarClassic from "./progress-bar-classic";
 import RoundedButton from "./rounded-button";
 import StaticFooter from "./static-footer";
 import ConfirmSignModal from "./confirm-sign-modal";
+import ValidProfileModal from "./valid-profile-modal";
 
 import styles, {
   HEADER_SCROLL_DISTANCE,
@@ -50,6 +51,7 @@ import locale from "../locales/pt-BR";
 export default class PlipLayout extends Component {
   state = {
     isSignModalVisible: false,
+    isValidProfileModalVisible: false,
   };
 
   static propTypes = {
@@ -66,6 +68,7 @@ export default class PlipLayout extends Component {
     remoteConfig: PropTypes.shape({
       authenticatedSignersButtonTitle: PropTypes.string,
     }),
+    revalidateProfileSignPlip: PropTypes.bool,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     user: PropTypes.object,
@@ -149,10 +152,24 @@ export default class PlipLayout extends Component {
     this.setState(({ isSignModalVisible }) => ({ isSignModalVisible: !isSignModalVisible }));
   }
 
+  onShowSignModal = () => {
+    this.setState({ isSignModalVisible: true, isValidProfileModalVisible: false });
+  }
+
+  onToggleValidProfileModal = () => {
+    this.setState(({ isValidProfileModalVisible }) => ({ isValidProfileModalVisible: !isValidProfileModalVisible }));
+  }
+
   componentWillMount() {
     this.setState({
       scrollY: new Animated.Value(0),
     });
+  }
+
+  componentDidMount() {
+    const { revalidateProfileSignPlip } = this.props;
+
+    this.setState({ isValidProfileModalVisible: !!revalidateProfileSignPlip });
   }
 
   render() {
@@ -164,7 +181,7 @@ export default class PlipLayout extends Component {
       plip,
     } = this.props;
 
-    const { isSignModalVisible } = this.state;
+    const { isSignModalVisible, isValidProfileModalVisible } = this.state;
 
     return (
       <SafeAreaView style={[styles.container, {backgroundColor: "#6000AA"}]}>
@@ -178,6 +195,7 @@ export default class PlipLayout extends Component {
 
         <PageLoader isVisible={isFetchingPlipRelatedInfo || isSigning || (!plip && !errorHandlingAppLink)} />
         <ConfirmSignModal isVisible={isSignModalVisible} plipName={this.plipName} onToggleSignModal={this.onToggleSignModal} onPlipSign={this.onPlipSign}/>
+        <ValidProfileModal isVisible={isValidProfileModalVisible} onToggleModal={this.onToggleValidProfileModal} onOk={this.onShowSignModal}/>
       </SafeAreaView>
     );
   }

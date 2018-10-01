@@ -63,7 +63,6 @@ import {
   increaseAppLoading,
   invalidatePhone,
   isAddingFavoritePlip,
-  isSigningPlip,
   isSearchingPlip,
   clearSearchPlip,
   logEvent,
@@ -603,8 +602,6 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       const { plip } = payload;
       yield put(signingPlip(plip));
 
-      yield put(isSigningPlip(true));
-
       const user = yield call(fetchProfile, { mobileApi });
 
       if (!user) {
@@ -615,7 +612,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       const validWallet = yield call(validateLocalWallet, { walletStore });
       if (!validWallet) {
         if (isDev) console.log("Local wallet is invalid");
-        return yield call(invalidateWalletAndNavigate, { alertRevalidate: true });
+        return yield call(invalidateWalletAndNavigate, { revalidateProfileSignPlip: true });
       }
 
       // Check profile completion
@@ -627,7 +624,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
 
       const seed = yield call(walletStore.retrieve, user.voteCard);
       if (isDev) console.log("Acquired seed", seed);
-      if (!seed) return yield call(invalidateWalletAndNavigate, { alertRevalidate: true });
+      if (!seed) return yield call(invalidateWalletAndNavigate, { revalidateProfileSignPlip: true });
 
       const isElegible = yield call(eligibleToSignPlip, { user, plip });
 
@@ -670,7 +667,7 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
         logError(e);
         if (isDev) console.log("is wallet invalid?", apiError.isInvalidWallet(e), e.errorCode, e);
 
-        if (apiError.isInvalidWallet(e)) return yield call(invalidateWalletAndNavigate, { alertRevalidate: true });
+        if (apiError.isInvalidWallet(e)) return yield call(invalidateWalletAndNavigate, { revalidateProfileSignPlip: true });
 
         if (apiError.isErrorAlreadySigned(e)) {
           if (isDev) console.log("User already signed the plip. No op.");
@@ -684,9 +681,8 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
       if (isUnauthorized(e)) return yield put(unauthorized());
 
       yield put(plipSignError(e));
-      yield put(signingPlip(null));
     } finally {
-      yield put(isSigningPlip(false));
+      yield put(signingPlip(null));
     }
   });
 }
