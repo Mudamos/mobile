@@ -1,11 +1,9 @@
-import { Alert } from "react-native";
 import { connect } from "react-redux";
 
 import { moment } from "../utils";
 
-import locale from "../locales/pt-BR";
-
 import {
+  navigate,
   navigateBack,
   removeJustSignedPlip,
   sharePlip,
@@ -13,6 +11,7 @@ import {
 } from "../actions";
 
 import {
+  currentUser,
   isSigningPlip,
   getUserCurrentPlipSignInfo,
   hasUserJustSignedPlip,
@@ -20,21 +19,11 @@ import {
 
 import PlipViewerLayout from "../components/plip-viewer-layout";
 
-const onPlipSign = ({ dispatch, plip }) => {
-  Alert.alert(
-    null,
-    `${locale.doYouWantToSign} "${plip.title}"?`,
-    [
-      {text: locale.cancel, onPress: () => {}, style: "cancel"},
-      {text: locale.yes, onPress: () => dispatch(signPlip({ plip }))},
-    ]
-  )
-};
-
 const mapStateToProps = (state, ownProps) => {
   const userSignInfo = getUserCurrentPlipSignInfo(state, ownProps.plip.id);
 
   return {
+    user: currentUser(state),
     isSigning: isSigningPlip(state),
     justSignedPlip: hasUserJustSignedPlip(state, ownProps.plip.id),
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
@@ -43,7 +32,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   onBack: () => dispatch(navigateBack()),
-  onPlipSign: plip => onPlipSign({ dispatch, plip }),
+  onPlipSign: plip => dispatch(signPlip({ plip })),
+  onLogin: () => dispatch(navigate("signIn")),
   onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
 });

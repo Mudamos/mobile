@@ -352,7 +352,9 @@ class SignUpLayout extends Component {
               }
             </View>
 
-            <RoundedButton title={locale.continue} enabled={this.createEnabled} action={onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+            <View style={styles.buttonContainer}>
+              <RoundedButton title={locale.continue} enabled={this.createEnabled} action={onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+            </View>
 
             <StaticFooter onOpenURL={onOpenURL} />
           </ScrollView>

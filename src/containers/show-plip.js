@@ -9,7 +9,6 @@ import {
   fetchPlipRelatedInfo,
   handleAppLink,
   navigate,
-  navigateBack,
   openURL,
   removeJustSignedPlip,
   sharePlip,
@@ -116,7 +115,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onBack: () => {
     dispatch(clearPlipInfo());
-    dispatch(navigateBack());
+    dispatch(navigate("plipsNav"));
   },
   onFetchPlipRelatedInfo: plipId => dispatch(fetchPlipRelatedInfo(plipId)),
   onOpenSigners: plipId => dispatch(navigate("signers", { plipId })),

@@ -132,7 +132,7 @@ class DocumentsReasonModal extends Component {
     return (
       <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
         <TouchableOpacity style={styles.background} onPress={onToggleReasonEnabled} />
-        <Animated.View style={[styles.modal, {top: top}]}>
+        <Animated.View style={[styles.modal, { top: top }]}>
           <NavigationBar
             middleView={<HeaderLogo />}
           />

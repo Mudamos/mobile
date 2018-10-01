@@ -2,6 +2,10 @@ import { Platform, StyleSheet } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 export default EStyleSheet.create({
+  buttonContainer: {
+    alignItems: "center",
+    flex: 1,
+  },
   breadcrumb: {
     marginVertical: 15,
   },

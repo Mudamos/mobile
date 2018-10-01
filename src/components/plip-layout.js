@@ -406,11 +406,11 @@ export default class PlipLayout extends Component {
     const subtitle = plipSignInfo && plipSignInfo.updatedAt && locale.registeredAt + plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss");
     const action = this.onOpenDocument;
     const icon = "file-download";
-    const buttonStyle = { flexDirection: "row" };
 
     return (
-      <View style={{marginBottom: 20}}>
-        <RoundedButton title={title} subtitle={subtitle} action={action} icon={icon} buttonStyle={buttonStyle}/>
+      <View style={{marginBottom: 20, alignItems: "center"}}>
+        <RoundedButton title={title} action={action} icon={icon}/>
+        <Text style={styles.buttonInfo}>{subtitle}</Text>
       </View>
     );
   }
@@ -424,11 +424,11 @@ export default class PlipLayout extends Component {
     const subtitle = locale.youWillBeRedirectToMudamos;
     const action = this.onOpenURL;
     const icon = "exit-to-app";
-    const buttonStyle = { flexDirection: "row" };
 
     return (
-      <View style={{marginBottom: 20}}>
-        <RoundedButton title={title} subtitle={subtitle} action={action} icon={icon} buttonStyle={buttonStyle}/>
+      <View style={{marginBottom: 20, alignItems: "center"}}>
+        <RoundedButton title={title} action={action} icon={icon}/>
+        <Text style={styles.buttonInfo}>{subtitle}</Text>
       </View>
     );
   }

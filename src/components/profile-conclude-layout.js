@@ -67,7 +67,9 @@ export default class ProfileConcludeLayout extends Component {
 
             {this.renderContent()}
 
-            <RoundedButton title={locale.seeAllProjects} action={onBack} buttonStyle={styles.blueRoundedButton} titleStyle={styles.blueRoundedButtonTitle}/>
+            <View style={styles.buttonContainer}>
+              <RoundedButton title={locale.seeAllProjects} action={onBack} buttonStyle={styles.blueRoundedButton} titleStyle={styles.blueRoundedButtonTitle}/>
+            </View>
 
             <StaticFooter onOpenURL={onOpenURL} />
           </ScrollView>

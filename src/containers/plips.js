@@ -38,6 +38,7 @@ import {
 } from "../actions";
 
 import {
+  appLoadingProgress,
   isAppReady,
   isFetchingPlipsNextPageAllPlips,
   isFetchingPlipsNextPageFavoritePlips,
@@ -96,11 +97,8 @@ import PlipsLayout from "../components/plips-layout";
 import SplashLoader from "../components/splash-loader";
 import Menu from "../components/side-menu";
 import LoggedInMenu from "../components/logged-in-menu-content";
-import SimpleModal from "../components/simple-modal";
-import MarkdownView from "../containers/markdown-view";
 
 import Toast from "react-native-simple-toast";
-import aboutHtmlStyles from "../styles/about-html-styles";
 
 import { RemoteLinksType } from "../prop-types/remote-config";
 
@@ -116,11 +114,11 @@ const styles = StyleSheet.create({
 class Container extends Component {
   state = {
     menuOpen: false,
-    showAboutModal: false,
   };
 
   static propTypes = {
     allPlips: PropTypes.array,
+    appLoadingProgress: PropTypes.number,
     currentSigningPlip: PropTypes.object,
     currentUser: PropTypes.object,
     errorFetchingAllPlips: PropTypes.bool,
@@ -166,6 +164,9 @@ class Container extends Component {
     onRetryPlips: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
+    onTapAboutApp: PropTypes.func.isRequired,
+    onTapHelp: PropTypes.func.isRequired,
+    onTapSendYourPl: PropTypes.func.isRequired,
     onTellAFriend: PropTypes.func.isRequired,
     onToggleFavorite: PropTypes.func.isRequired,
     onValidateProfile: PropTypes.func.isRequired,
@@ -176,14 +177,13 @@ class Container extends Component {
       currentUser,
       isFetchingProfile,
       isUserLoggedIn,
-      remoteLinks,
       onProfileEdit,
     } = this.props;
 
     const entries = [
       { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout, position: 2 },
-      { icon: "account-balance", title: locale.links.sendYourPL, action: () => this.onOpenURL({ eventName: "tapped_menu_send_your_pl", link: remoteLinks.sendYourIdea }), position: 3 },
-      { icon: "help", title: locale.menu.help, action: () => this.onOpenURL({ eventName: "tapped_menu_help", link: remoteLinks.help }), position: 5 },
+      { icon: "account-balance", title: locale.links.sendYourPL, action: this.onSendYourPl, position: 3 },
+      { icon: "help", title: locale.menu.help, action: this.onHelp, position: 5 },
       { icon: "share", title: locale.menu.tellAFriend, action: this.onTellAFriend, position: 6 },
     ];
 
@@ -219,12 +219,6 @@ class Container extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isUserFirstTime === true && !this.state.showAboutModal) {
-      this.setState({ showAboutModal: true });
-    }
-  }
-
   render() {
     const { isValidatingProfile, onFetchProfile } = this.props;
     const { menuOpen: open } = this.state;
@@ -248,10 +242,6 @@ class Container extends Component {
   }
 
   renderPage() {
-    const {
-      showAboutModal,
-    } = this.state;
-
     return (
       <View style={{flex: 1}}>
         <PlipsLayout
@@ -259,25 +249,13 @@ class Container extends Component {
 
           openMenu={this.openMenu}
         />
-
-        {
-          showAboutModal &&
-            <SimpleModal
-              onClose={this.onFirstTimeModalClose}
-            >
-              <MarkdownView
-                content={locale.markdown.aboutBody}
-                contentContainerStyle={aboutHtmlStyles}
-              />
-            </SimpleModal>
-        }
       </View>
     );
   }
 
   renderFirstTimeLoader() {
-    const { isAppReady } = this.props;
-    return <SplashLoader isVisible={!isAppReady} />
+    const { isAppReady, appLoadingProgress } = this.props;
+    return <SplashLoader isVisible={!isAppReady} progress={appLoadingProgress}/>
   }
 
   renderMenuContent() {
@@ -314,9 +292,12 @@ class Container extends Component {
   }
 
   onAbout = () => {
-    const { onLogEvent } = this.props;
-    this.closeMenu();
-    this.setState({ showAboutModal: true });
+    const {
+      onTapAboutApp,
+      onLogEvent,
+    } = this.props;
+
+    onTapAboutApp();
     onLogEvent({ name: "tapped_menu_about_app" });
   }
 
@@ -326,29 +307,36 @@ class Container extends Component {
     onTellAFriend();
   }
 
+  onHelp = () => {
+    const { onTapHelp, onLogEvent } = this.props;
+
+    onTapHelp();
+    onLogEvent({ name: "tapped_menu_help" });
+  }
+
+  onSendYourPl = () => {
+    const { onTapSendYourPl, onLogEvent } = this.props;
+
+    onTapSendYourPl();
+    onLogEvent({ name: "tapped_menu_send_your_pl" });
+  }
+
   onOpenURL({ eventName, link }) {
     const { onLogEvent, onOpenURL } = this.props;
     onLogEvent({ name: eventName });
     onOpenURL(link);
   }
 
-  onFirstTimeModalClose = () => {
-    const { onFirstTimeModalClose } = this.props;
-
-    onFirstTimeModalClose();
-    this.setState({ showAboutModal: false });
-  }
-
   onSignIn = () => {
     const { onSignIn, onLogEvent } = this.props;
 
     onSignIn();
-    this.closeMenu();
     onLogEvent({ name: "tapped_menu_signup" });
   }
 }
 
 const mapStateToProps = state => ({
+  appLoadingProgress: appLoadingProgress(state),
   currentSigningPlip: getCurrentSigningPlip(state),
   currentUser: getCurrentUser(state),
   errorFetchingAllPlips: errorFetchingAllPlips(state),
@@ -418,6 +406,9 @@ const mapDispatchToProps = dispatch => ({
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
   onRefresh: ({ typeList }) => dispatch(refreshPlips({ typeList })),
   onSignIn: () => dispatch(navigate("signIn")),
+  onTapAboutApp: () => dispatch(navigate("aboutApp")),
+  onTapHelp: () => dispatch(navigate("help")),
+  onTapSendYourPl: () => dispatch(navigate("sendYourPl")),
   onMainTabChange: ({ index }) => dispatch(updateMainTabViewIndex(index)),
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),

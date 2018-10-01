@@ -30,6 +30,9 @@ export default StyleSheet.create({
   },
   noProjectsContainer: {
     flex: 1,
+    backgroundColor: "#FFF",
+    margin: 10,
+    borderRadius: 10,
     justifyContent: "space-around",
     paddingHorizontal: 33,
   },
@@ -53,7 +56,6 @@ export default StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   rowContainer: {
-    backgroundColor: "#DDD",
   },
   plipView: {
     backgroundColor: "#FFF",

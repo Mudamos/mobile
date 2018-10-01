@@ -169,8 +169,9 @@ class ProfileAddressLayout extends Component {
 
         {this.renderZipCodeInput()}
 
-        <RoundedButton title={locale.continue} enabled={this.searchEnabled} action={onSave} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
-
+        <View style={styles.buttonContainer}>
+          <RoundedButton title={locale.continue} enabled={this.searchEnabled} action={onSave} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+        </View>
         { this.renderMap() }
       </View>
     );

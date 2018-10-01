@@ -148,7 +148,7 @@ export default class ProfileUpdateLayout extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <Layout>
-          <ScrollView style={styles.container}>
+          <ScrollView>
             {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
@@ -227,13 +227,15 @@ export default class ProfileUpdateLayout extends Component {
               }
             </View>
 
-            <RoundedButton
-              title={locale.save.toUpperCase()}
-              enabled={this.formEnabled}
-              action={this.onSubmit}
-              buttonStyle={styles.submitButton}
-              titleStyle={styles.submitButtonTitle}
-            />
+            <View style={styles.buttonContainer}>
+              <RoundedButton
+                title={locale.save.toUpperCase()}
+                enabled={this.formEnabled}
+                action={this.onSubmit}
+                buttonStyle={styles.submitButton}
+                titleStyle={styles.submitButtonTitle}
+              />
+            </View>
           </ScrollView>
         </Layout>
 

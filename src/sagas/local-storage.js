@@ -1,12 +1,18 @@
-import { call, put, spawn, takeEvery } from "redux-saga/effects";
+import { call, fork, put, select, spawn, takeEvery } from "redux-saga/effects";
 
 import {
   userFirstTimeFetched,
+  aboutAppFeedbackFetched,
 } from "../actions";
+
+import {
+  aboutAppUserFeedback,
+} from "../selectors";
 
 import { logError } from "../utils";
 
 const FIRST_OPEN_KEY = "first_time_user";
+const ABOUT_APP_FEEDBACK_KEY = "about_app_feedback";
 
 function* fetchUserFirstTimeSaga({ localStorage }) {
   yield takeEvery("LOCAL_FETCH_IS_USER_FIRST_TIME", function* () {
@@ -15,6 +21,18 @@ function* fetchUserFirstTimeSaga({ localStorage }) {
       yield put(userFirstTimeFetched({ isUserFirstTime: isUserFirstTime !== false }));
     } catch (e) {
       logError(e, { tag: "fetchUserFirstTimeSaga"});
+    }
+  })
+}
+
+function* fetchAboutAppFeedbackSaga({ localStorage }) {
+  yield takeEvery("LOCAL_FETCH_ABOUT_APP_FEEDBACK", function* () {
+    try {
+      const userFeedback = yield call(localStorage.fetch, ABOUT_APP_FEEDBACK_KEY);
+      const localUserFeedBack = JSON.parse(userFeedback) || {};
+      yield put(aboutAppFeedbackFetched({ userFeedback: localUserFeedBack }));
+    } catch (e) {
+      logError(e, { tag: "fetchAboutAppFeedbackSaga"});
     }
   })
 }
@@ -29,8 +47,26 @@ function* userFirstTimeDoneSaga({ localStorage }) {
   })
 }
 
+function* userAboutAppFeedbackSaga({ localStorage }) {
+  yield takeEvery("LOCAL_USER_ABOUT_APP_FEEDBACK", function* (action) {
+    try {
+      const { questionAnsweredKey, answer } = action.payload;
+
+      const aboutAppFeedback = yield select(aboutAppUserFeedback);
+      const updatedAboutAppFeedBack = { ...aboutAppFeedback, [questionAnsweredKey]: answer };
+
+      yield put(aboutAppFeedbackFetched({ userFeedback: updatedAboutAppFeedBack }));
+      yield call(localStorage.store, ABOUT_APP_FEEDBACK_KEY, JSON.stringify(updatedAboutAppFeedBack));
+    } catch (e) {
+      logError(e, { tag: "userAboutAppFeedbackSaga"});
+    }
+  })
+}
+
 
 export default function* localStorageSaga({ localStorage }) {
   yield spawn(fetchUserFirstTimeSaga, { localStorage });
   yield spawn(userFirstTimeDoneSaga, { localStorage });
+  yield fork(fetchAboutAppFeedbackSaga, { localStorage });
+  yield spawn(userAboutAppFeedbackSaga, { localStorage });
 }
