@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  SafeAreaView,
   TouchableOpacity,
 } from "react-native";
 
@@ -16,6 +15,7 @@ import Layout from "./layout";
 import NavigationBar from "./navigation-bar";
 import HeaderLogo from "./header-logo";
 import MainTabView from "../components/main-tab-view";
+import SafeAreaView from "./safe-area-view";
 
 import styles from "../styles/plips-layout";
 

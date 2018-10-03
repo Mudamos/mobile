@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  SafeAreaView,
   Text,
   View,
 } from "react-native";
@@ -19,6 +18,7 @@ import NavigationBar from "./navigation-bar";
 import Avatar from "./avatar";
 import AvatarModel from "../models/image";
 import RoundedButton from "./rounded-button";
+import SafeAreaView from "./safe-area-view";
 
 import ImagePicker from "react-native-image-picker";
 

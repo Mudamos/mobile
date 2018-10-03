@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  SafeAreaView,
   Text,
   View,
 } from "react-native";
@@ -13,6 +12,7 @@ import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
 import NavigationBar from "./navigation-bar";
 import RoundedButton from "./rounded-button";
+import SafeAreaView from "./safe-area-view";
 
 import styles from "../styles/profile-wallet-layout";
 

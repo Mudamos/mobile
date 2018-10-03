@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  SafeAreaView,
   Text,
   View,
 } from "react-native";
@@ -12,6 +11,7 @@ import ChevronButton from "./chevron-button";
 import Layout from "./purple-layout";
 import RoundedButton from "./rounded-button";
 import SplashLoader from "./splash-loader";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 

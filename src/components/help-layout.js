@@ -3,7 +3,6 @@ import React, { Component } from "react";
 
 import {
   Text,
-  SafeAreaView,
   View,
 } from "react-native";
 
@@ -15,6 +14,7 @@ import RoundedButton from "./rounded-button";
 import ScrollView from "./scroll-view";
 import ChevronButton from "./chevron-button";
 import HeaderLogo from "./header-logo";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 

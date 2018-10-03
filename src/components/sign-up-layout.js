@@ -8,7 +8,6 @@ import {
 } from "recompose";
 
 import {
-  SafeAreaView,
   Text,
   View,
   TouchableOpacity,
@@ -26,6 +25,7 @@ import RoundedButton from "./rounded-button";
 import SignUpBreadCrumb from "./sign-up-breadcrumb";
 import StaticFooter from "./static-footer";
 import Checkbox from "./multicolor-flat-checkbox";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 import {

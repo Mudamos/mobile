@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  SafeAreaView,
   ScrollView,
   TouchableOpacity,
   View,
@@ -24,6 +23,7 @@ import MarkdownView from "../containers/markdown-view";
 import BackButton from "./back-button";
 import SignedMessageView from "./signed-message-view";
 import ConfirmSignModal from "./confirm-sign-modal";
+import SafeAreaView from "./safe-area-view";
 
 import styles from "../styles/plip-viewer-layout";
 import plipHtmlStyles from "../styles/plip-html-styles";

@@ -9,7 +9,6 @@ import {
 
 import {
   Keyboard,
-  SafeAreaView,
   TouchableOpacity,
   Text,
   View,
@@ -31,6 +30,7 @@ import SignUpBreadCrumb from "./sign-up-breadcrumb";
 import StaticFooter from "./static-footer";
 import BackButton from "./back-button";
 import RoundedButton from "./rounded-button";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 
