@@ -8,15 +8,15 @@
 
 "could-not-convert-message" = "Não foi possível converter a mensagem.";
 "error-title" = "Ocorreu um erro.";
-"incomplete-profile" = "Perfil incompleto. Use a app da Mudamos+ para completar seu perfil. Acesse no menu a opção 'Validar perfil'.";
+"incomplete-profile" = "Perfil incompleto. Use a app da Mudamos para completar seu perfil. Acesse no menu a opção 'Validar perfil'.";
 "identifier-not-found" = "Identificador da mensagem não encontrado.";
 "invalid-payload" = "Mensagem inválida.";
 "invalid-payload-size" = "Tamanho da mensagem é inválido.";
-"invalid-wallet" = "Sua assinatura é inválida. Use a app da Mudamos+ para atualizá-la. Acesse no menu a opção 'Validar perfil'.";
+"invalid-wallet" = "Sua assinatura é inválida. Use a app da Mudamos para atualizá-la. Acesse no menu a opção 'Validar perfil'.";
 "sign-error" = "Erro ao efetuar a assinatura.";
 "success!" = "Sucesso!";
 "unknown-error" = "Erro ao efetuar ação.";
-"user-not-logged-in" = "Usuário não logado. Use a app da Mudamos+ para se logar.";
+"user-not-logged-in" = "Usuário não logado. Use a app da Mudamos para se logar.";
 
 /* ActionViewController */
 "executing-action-wait" = "Executando assinatura. Aguarde...";
