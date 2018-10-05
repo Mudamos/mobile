@@ -27,9 +27,10 @@ export default EStyleSheet.create({
   continueButtonTitle: {
     fontSize: "0.8rem",
   },
-  incredible: {
-    fontSize: "1.8rem",
-    fontWeight: "bold",
+  imageContainer: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
   },
   instructions: {
     fontSize: "0.8rem",
@@ -37,7 +38,7 @@ export default EStyleSheet.create({
   },
   instructionsContainer: {
     flex: 1,
-    marginVertical: 16,
+    marginBottom: 8,
     paddingHorizontal: 16,
   },
   title: {
@@ -46,7 +47,7 @@ export default EStyleSheet.create({
   },
   titleContainer: {
     flex: 1,
-    marginVertical: 16,
+    marginTop: 14,
     paddingHorizontal: 33,
   },
   text: {

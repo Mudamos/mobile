@@ -67,7 +67,6 @@ const translations = {
   hello: ({ complement }) => `Olá${complement}`,
   identification: "Identificação",
   imAlreadyRegistered: "Já tenho cadastro",
-  incredible: "Incrível!",
   invalidBirthdate: "Data de nascimento inválida",
   invalidCpf: "CPF inválido",
   invalidEmail: "E-mail inválido",
