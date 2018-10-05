@@ -277,15 +277,17 @@ const translations = {
   },
   firstTimeOpen: {
     screen0: {
-      wow: "Uau!",
+      welcome: "Bem-vindo!",
       youAreAnMudamosAgent: "Agora você é um agente da mudança no Mudamos!",
-      aNewWayToMakeTheDifference: "Uma nova forma de participar e de fazer a diferença.",
+      aNewWayToMakeTheDifference: "Uma nova forma de participação e de fazer a diferença!",
     },
     screen1: {
+      sign: "Assine!",
       signIntro: "Assine projetos de lei de iniciativa popular de forma rápida e segura!",
       voteCardInfoSecure: "É a extensão do seu título de eleitor. Suas informações são protegidas e sua assinatura garantida.",
     },
     screen2: {
+      share: "Compartilhe!",
       youCanSharePls: "É possível compartilhar os projetos de lei com seus amigos pelas redes sociais.",
     },
   },

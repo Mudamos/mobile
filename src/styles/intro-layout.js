@@ -33,7 +33,8 @@ export default EStyleSheet.create({
   },
   page: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: "column",
+    alignItems: "center",
     justifyContent: "center",
     padding: 50,
   },
@@ -50,11 +51,6 @@ export default EStyleSheet.create({
     color: "#FFF",
     marginVertical: 8,
     textAlign: "center",
-  },
-  textContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
   title: {
     fontSize: "1.8rem",
