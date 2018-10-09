@@ -24,6 +24,7 @@ export default EStyleSheet.create({
   revalidateContainer: {
     alignItems: "center",
     flex: 1,
+    justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 10,
   },

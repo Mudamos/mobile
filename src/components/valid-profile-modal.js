@@ -1,7 +1,14 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import { Animated, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Animated,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import EStyleSheet from "react-native-extended-stylesheet";
 
@@ -36,6 +43,7 @@ const styles = EStyleSheet.create({
     right: 0,
     bottom: 0,
     justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#7705B9",
     paddingHorizontal: 20,
     paddingVertical: 36,
@@ -126,7 +134,10 @@ class ValidProfileModal extends Component {
       <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
         <TouchableOpacity style={styles.background} onPress={onToggleModal} />
         <Animated.View style={styles.modal}>
-          <Text style={[styles.text, styles.title, { marginBottom: 20 }]}>{locale.validProfile}</Text>
+          <Text style={[styles.text, styles.title]}>{locale.validProfile}</Text>
+          <Image
+            source={require("../images/valid.png")}
+          />
           <Text style={[styles.text, styles.bold, { marginBottom: 20 }]}>{locale.profileActive}</Text>
           <Text style={[styles.text, { marginBottom: 20 }]}>{locale.youCanSignAndShare}</Text>
           {this.renderButtonSign()}
