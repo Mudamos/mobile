@@ -3,7 +3,6 @@ import React, { Component } from "react";
 
 import {
   Image,
-  SafeAreaView,
   TouchableOpacity,
   Text,
   View,
@@ -18,6 +17,7 @@ import FBLoginButton from "./fb-login-button";
 import NavigationBar from "./navigation-bar";
 import RoundedButton from "./rounded-button";
 import StaticFooter from "./static-footer";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 

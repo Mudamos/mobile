@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  SafeAreaView,
+  Image,
   Text,
   View,
 } from "react-native";
@@ -13,6 +13,8 @@ import FlatButton from "./flat-button";
 import PageLoader from "./page-loader";
 import NavigationBar from "./navigation-bar";
 import RoundedButton from "./rounded-button";
+import SafeAreaView from "./safe-area-view";
+import ScrollView from "./scroll-view";
 
 import styles from "../styles/profile-wallet-layout";
 
@@ -44,33 +46,37 @@ export default class ProfileWalletLayout extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <Layout>
-          {this.renderNavBar()}
+          <ScrollView style={{flex: 1}}>
+            {this.renderNavBar()}
 
-          {
-            hasError &&
-              <View style={styles.retryContainer}>
-                <FlatButton
-                  title={locale.retry}
-                  onPress={onRetry}
-                  style={styles.retryButton}
-                />
-              </View>
-          }
+            {
+              hasError &&
+                <View style={styles.retryContainer}>
+                  <FlatButton
+                    title={locale.retry}
+                    onPress={onRetry}
+                    style={styles.retryButton}
+                  />
+                </View>
+            }
 
-          {
-            revalidateProfileSignPlip && !hasError &&
-              <View style={styles.revalidateContainer}>
-                <Text style={[styles.text, styles.bold, styles.title, { marginVertical: 20 }]}>{locale.wow}</Text>
-                <Text style={[styles.text, { marginVertical: 20 }]}>{locale.weNeedAnalyseYourProfileToSign}</Text>
-                <Text style={[styles.text, styles.bold, { marginVertical: 20 }]}>{locale.pressTheButtonToValidateYourWallet}</Text>
-                <RoundedButton
-                  title={locale.validate.toUpperCase()}
-                  action={this.onCreateWallet}
-                  buttonStyle={styles.revalidateButton}
-                  titleStyle={styles.text}/>
-              </View>
-          }
-
+            {
+              revalidateProfileSignPlip && !hasError &&
+                <View style={styles.revalidateContainer}>
+                  <Text style={[styles.text, styles.bold, styles.title]}>{locale.wow}</Text>
+                  <Image
+                    source={require("../images/search.png")}
+                  />
+                  <Text style={[styles.text, { marginTop: 10 }]}>{locale.weNeedAnalyseYourProfileToSign}</Text>
+                  <Text style={[styles.text, styles.bold, { marginVertical: 10 }]}>{locale.pressTheButtonToValidateYourWallet}</Text>
+                  <RoundedButton
+                    title={locale.validate.toUpperCase()}
+                    action={this.onCreateWallet}
+                    buttonStyle={styles.revalidateButton}
+                    titleStyle={styles.text}/>
+                </View>
+            }
+          </ScrollView>
         </Layout>
 
         <PageLoader isVisible={isCreatingWallet} />

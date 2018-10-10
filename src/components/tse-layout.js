@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import {
   Dimensions,
   Image,
-  SafeAreaView,
   Text,
   View,
   WebView,
@@ -16,6 +15,7 @@ import BackButton from "./back-button";
 import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
 import FlatButton from "./flat-button";
+import SafeAreaView from "./safe-area-view";
 
 import { IndicatorViewPager, PagerDotIndicator } from "rn-viewpager";
 

@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
+  Image,
   Text,
-  SafeAreaView,
   View,
 } from "react-native";
 
@@ -15,6 +15,7 @@ import RoundedButton from "./rounded-button";
 import ScrollView from "./scroll-view";
 import ChevronButton from "./chevron-button";
 import HeaderLogo from "./header-logo";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 
@@ -59,6 +60,11 @@ export default class HelpLayout extends Component {
             <View style={styles.titleContainer}>
               <Text style={[styles.text, styles.title]}>{locale.hello({ complement })}</Text>
               <Text style={[styles.text, styles.title]}>{locale.mayIHelpYou}</Text>
+            </View>
+            <View style={styles.imageContainer}>
+              <Image
+                source={require("../images/sos.png")}
+              />
             </View>
             <View style={styles.instructionsContainer}>
               <Text style={[styles.text, styles.bold, styles.instructions]}>{locale.wePrepareAFormForYourHelp}</Text>

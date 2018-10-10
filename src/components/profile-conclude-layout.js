@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  SafeAreaView,
   Text,
   View,
 } from "react-native";
@@ -19,6 +18,7 @@ import ScrollView from "./scroll-view";
 import SignUpBreadCrumb from "./sign-up-breadcrumb";
 import StaticFooter from "./static-footer";
 import { Plip } from "./plips-list";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 

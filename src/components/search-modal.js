@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
 
 import SearchBar from "./search-bar";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 

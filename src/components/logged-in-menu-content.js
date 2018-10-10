@@ -3,7 +3,6 @@ import React, { Component } from "react";
 
 import {
   ListView,
-  SafeAreaView,
   Text,
   TouchableOpacity,
   View,
@@ -13,6 +12,7 @@ import Spinner from "react-native-spinkit";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import HeaderLogo from "./header-logo";
 import Avatar from "./avatar";
+import SafeAreaView from "./safe-area-view";
 
 import ImagePicker from "react-native-image-picker";
 

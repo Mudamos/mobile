@@ -81,7 +81,6 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
   divider: {
     height: 1,

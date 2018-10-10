@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import {
   Animated,
   Dimensions,
-  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -24,7 +23,7 @@ import { clamp } from "ramda";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-import Layout from "./layout";
+import Layout from "./purple-layout";
 import HeaderLogo from "./header-logo";
 import NavigationBar from "./navigation-bar";
 import NetworkImage from "./network-image";
@@ -40,6 +39,7 @@ import RoundedButton from "./rounded-button";
 import StaticFooter from "./static-footer";
 import ConfirmSignModal from "./confirm-sign-modal";
 import ValidProfileModal from "./valid-profile-modal";
+import SafeAreaView from "./safe-area-view";
 
 import styles, {
   HEADER_SCROLL_DISTANCE,
@@ -184,7 +184,7 @@ export default class PlipLayout extends Component {
     const { isSignModalVisible, isValidProfileModalVisible } = this.state;
 
     return (
-      <SafeAreaView style={[styles.container, {backgroundColor: "#6000AA"}]}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           { errorHandlingAppLink && this.renderRetryAppLink() }
           { errorFetching && plip && this.renderRetry() }

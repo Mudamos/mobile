@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  SafeAreaView,
   TouchableOpacity,
   Text,
   View,
@@ -16,6 +15,7 @@ import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
 import FlatButton from "./flat-button";
 import NavigationBar from "./navigation-bar";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 

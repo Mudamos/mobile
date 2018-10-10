@@ -30,7 +30,7 @@ export default EStyleSheet.create({
   headerTitleText: {
     alignSelf: "center",
     color: "#fff",
-    fontSize: 20,
+    fontSize: "0.8rem",
     fontWeight: "700",
     marginHorizontal: 30,
     marginTop: 12,

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
-  SafeAreaView,
+  Image,
   Text,
   View,
 } from "react-native";
@@ -12,6 +12,7 @@ import ChevronButton from "./chevron-button";
 import Layout from "./purple-layout";
 import RoundedButton from "./rounded-button";
 import SplashLoader from "./splash-loader";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 
@@ -118,11 +119,12 @@ export default class IntroLayout extends Component {
   renderStep0() {
     return (
       <View style={styles.page}>
-        <View style={styles.textContainer}>
-          <Text style={[styles.text, styles.title]}>{locale.firstTimeOpen.screen0.wow}</Text>
-          <Text style={[styles.text, styles.bold]}>{locale.firstTimeOpen.screen0.youAreAnMudamosAgent}</Text>
-          <Text style={styles.text}>{locale.firstTimeOpen.screen0.aNewWayToMakeTheDifference}</Text>
-        </View>
+        <Text style={[styles.text, styles.title]}>{locale.firstTimeOpen.screen0.welcome}</Text>
+        <Image
+          source={require("../images/welcome.png")}
+        />
+        <Text style={[styles.text, styles.bold]}>{locale.firstTimeOpen.screen0.youAreAnMudamosAgent}</Text>
+        <Text style={styles.text}>{locale.firstTimeOpen.screen0.aNewWayToMakeTheDifference}</Text>
       </View>
     );
   }
@@ -130,10 +132,12 @@ export default class IntroLayout extends Component {
   renderStep1() {
     return (
       <View style={styles.page}>
-        <View style={styles.textContainer}>
-          <Text style={[styles.text, styles.bold]}>{locale.firstTimeOpen.screen1.signIntro}</Text>
-          <Text style={styles.text}>{locale.firstTimeOpen.screen1.voteCardInfoSecure}</Text>
-        </View>
+        <Text style={[styles.text, styles.title]}>{locale.firstTimeOpen.screen1.sign}</Text>
+        <Image
+          source={require("../images/pencil.png")}
+        />
+        <Text style={[styles.text, styles.bold]}>{locale.firstTimeOpen.screen1.signIntro}</Text>
+        <Text style={styles.text}>{locale.firstTimeOpen.screen1.voteCardInfoSecure}</Text>
       </View>
     );
   }
@@ -141,9 +145,11 @@ export default class IntroLayout extends Component {
   renderStep2() {
     return (
       <View style={styles.page}>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>{locale.firstTimeOpen.screen2.youCanSharePls}</Text>
-        </View>
+        <Text style={[styles.text, styles.title]}>{locale.firstTimeOpen.screen2.share}</Text>
+        <Image
+          source={require("../images/share.png")}
+        />
+        <Text style={styles.text}>{locale.firstTimeOpen.screen2.youCanSharePls}</Text>
       </View>
     );
   }
