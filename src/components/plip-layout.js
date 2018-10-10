@@ -160,6 +160,10 @@ export default class PlipLayout extends Component {
     this.setState(({ isValidProfileModalVisible }) => ({ isValidProfileModalVisible: !isValidProfileModalVisible }));
   }
 
+  onRedirectToCantSign = () => {
+
+  }
+
   componentWillMount() {
     this.setState({
       scrollY: new Animated.Value(0),
@@ -265,20 +269,24 @@ export default class PlipLayout extends Component {
       plip,
     } = this.props;
 
-    const canSign = eligibleToSignPlip({ plip, user });
-    const willSign = canSign && !userSignDate && this.signatureEnabled;
-    const shouldLogin = !user && this.signatureEnabled
+    const hasSigned = !!userSignDate;
+    const logged = !!user;
+    const sameRegion = logged && !!eligibleToSignPlip({ plip, user }) || !logged;
+    const availableToSign = !!this.signatureEnabled;
 
-    const title = (shouldLogin || willSign) && locale.iWannaMakeTheDifference || locale.makeTheDifferenceAndShare;
-    const onPress = shouldLogin && onLogin || willSign && this.onToggleSignModal || this.onShare;
-    const iconName = (shouldLogin || willSign) && "check-circle" || "share";
+    const shouldLogin = !logged;
+    const canSign = logged && !hasSigned && sameRegion;
+
+    const title = (canSign || shouldLogin) && locale.iWannaMakeTheDifference || !sameRegion && locale.thisPlIsFromAnotherRegion || locale.makeTheDifferenceAndShare;
+    const onPress = shouldLogin && onLogin || canSign && this.onToggleSignModal || !sameRegion && this.onRedirectToCantSign || this.onShare;
+    const iconName = (canSign || shouldLogin) && "check-circle" || !sameRegion && "information" || "share-variant";
 
     return (
       <View style={styles.signButton}>
         <BlueFlatButton
           title={title}
           onPress={onPress}
-          style={signButtonStyle}
+          style={signButtonStyle(!user || user && sameRegion)}
           textStyle={{fontFamily: "lato"}}
           iconName={iconName}
         />
@@ -628,8 +636,8 @@ export default class PlipLayout extends Component {
   }
 }
 
-const signButtonStyle = {
-  backgroundColor: "#00BFD8",
+const signButtonStyle = active => ({
+  backgroundColor: active ? "#00BFD8" : "#ACACAC",
   marginHorizontal: 10,
   marginVertical: 15,
   paddingHorizontal: 15,
@@ -639,4 +647,4 @@ const signButtonStyle = {
   shadowOffset: { width: 0, height: 2 },
   shadowOpacity: 0.2,
   shadowRadius: 4,
-};
+});
