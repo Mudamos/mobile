@@ -79,6 +79,7 @@ export default class PlipLayout extends Component {
     onOpenSigners: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
+    onRedirectToCantSign: PropTypes.func.isRequired,
     onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onToggleFavorite: PropTypes.func.isRequired,
@@ -158,10 +159,6 @@ export default class PlipLayout extends Component {
 
   onToggleValidProfileModal = () => {
     this.setState(({ isValidProfileModalVisible }) => ({ isValidProfileModalVisible: !isValidProfileModalVisible }));
-  }
-
-  onRedirectToCantSign = () => {
-
   }
 
   componentWillMount() {
@@ -267,18 +264,18 @@ export default class PlipLayout extends Component {
       user,
       onLogin,
       plip,
+      onRedirectToCantSign,
     } = this.props;
 
     const hasSigned = !!userSignDate;
     const logged = !!user;
     const sameRegion = logged && !!eligibleToSignPlip({ plip, user }) || !logged;
-    const availableToSign = !!this.signatureEnabled;
 
     const shouldLogin = !logged;
     const canSign = logged && !hasSigned && sameRegion;
 
     const title = (canSign || shouldLogin) && locale.iWannaMakeTheDifference || !sameRegion && locale.thisPlIsFromAnotherRegion || locale.makeTheDifferenceAndShare;
-    const onPress = shouldLogin && onLogin || canSign && this.onToggleSignModal || !sameRegion && this.onRedirectToCantSign || this.onShare;
+    const onPress = shouldLogin && onLogin || canSign && this.onToggleSignModal || !sameRegion && onRedirectToCantSign || this.onShare;
     const iconName = (canSign || shouldLogin) && "check-circle" || !sameRegion && "information" || "share-variant";
 
     return (

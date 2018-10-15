@@ -117,6 +117,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(clearPlipInfo());
     dispatch(navigate("plipsNav"));
   },
+  onRedirectToCantSign: () => dispatch(navigate("cantSignPlip")),
   onFetchPlipRelatedInfo: plipId => dispatch(fetchPlipRelatedInfo(plipId)),
   onOpenSigners: plipId => dispatch(navigate("signers", { plipId })),
   onOpenURL: url => dispatch(openURL(url)),

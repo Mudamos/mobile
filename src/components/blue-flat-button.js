@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import FlatButton from "./flat-button";
 
 import EStyleSheet from "react-native-extended-stylesheet";

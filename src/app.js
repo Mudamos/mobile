@@ -12,6 +12,7 @@ import { Dimensions } from "react-native";
 
 import {
   AboutAppContainer,
+  CantSignPlipContainer,
   ChangeForgotPasswordContainer,
   ForgotPasswordContainer,
   HelpContainer,
@@ -58,6 +59,8 @@ const scenes = Actions.create(
     <Scene key="showPlip" component={PlipContainer} hideNavBar={true} />
     <Scene key="plipViewer" component={PlipViewerContainer} hideNavBar={true} title="Texto do projeto"/>
     <Scene key="signers" component={SignersContainer} hideNavBar={true} />
+
+    <Scene key="cantSignPlip" component={CantSignPlipContainer} hideNavBar={true} />
 
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
 
