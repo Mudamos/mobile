@@ -31,7 +31,7 @@ export default EStyleSheet.create({
   text: {
     color: "#FFF",
     fontSize: "1rem",
-    marginTop: 10,
+    marginTop: 16,
     paddingHorizontal: 20,
     textAlign: "center",
   },

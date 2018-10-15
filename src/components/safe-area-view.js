@@ -16,10 +16,10 @@ import {
 const styles = EStyleSheet.create({
   defaultStyle: {
     flex: 1,
+    backgroundColor: "#6000AA",
   },
   extraPadding: {
     paddingTop: 20,
-    backgroundColor: "#6000AA",
   },
 });
 
