@@ -1,4 +1,6 @@
 # Next
+
+* [PR #449] Add "This PR is from another region" page
 * [PR #451] Update texts
 * [PR #447] Update app following the ITS suggestions
 * [PR #443] Add signing validation pages
