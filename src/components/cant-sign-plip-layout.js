@@ -9,6 +9,12 @@ import {
   View,
 } from "react-native";
 
+import {
+  compose,
+  withHandlers,
+  withProps,
+} from "recompose";
+
 import SafeAreaView from "./safe-area-view";
 import NavigationBar from "./navigation-bar";
 import Layout from "./purple-layout";
@@ -25,38 +31,36 @@ import {
   plipRegion,
 } from "../utils";
 
-const CantSignPlipLayout = props => {
-  const {
-    plip,
-    onMyLocation,
-  } = props;
+const NavBar = ({ onBack }) => (
+  <NavigationBar
+    leftView={<ChevronButton onPress={onBack} direction="left" />}
+    middleView={<HeaderLogo />}
+  />
+);
 
+const LineSeparator = () => (
+  <View style={styles.separatorContainer}>
+    <View style={styles.separatorLine} />
+  </View>
+);
+
+const enhance = compose(
+  withProps(({ plip }) => ({
+    region: plipRegion(plip),
+  })),
+  withHandlers({
+    onShare: ({ onShare, plip }) => () => onShare(plip),
+  }),
+);
+
+const CantSignPlipLayout = ({ region, plip, onMyLocation, onBack, onShare }) => {
   if (!plip) return null;
-
-  const region = plipRegion(plip);
-
-  const onShare = ({ plip, onShare }) => {
-    onShare(plip);
-  };
-
-  const renderNavBar = ({ onBack }) => (
-    <NavigationBar
-      leftView={<ChevronButton onPress={onBack} direction="left" />}
-      middleView={<HeaderLogo />}
-    />
-  );
-
-  const renderLineSeparator = () => (
-    <View style={styles.separatorContainer}>
-      <View style={styles.separatorLine} />
-    </View>
-  );
 
   return (
     <SafeAreaView>
       <Layout>
         <ScrollView>
-          {renderNavBar(props)}
+          <NavBar onBack={onBack}/>
 
           <View style={styles.container}>
             <Text style={[styles.text, styles.title]}>{locale.itsNotPossibleToSignThatPl}</Text>
@@ -66,8 +70,9 @@ const CantSignPlipLayout = props => {
             <Text style={[styles.text, styles.small]}>{locale.wrongRegionThanks}</Text>
             <Text style={[styles.text, styles.bold]}>{locale.helpPl({ plName: plip.title, region })}</Text>
             <Text style={[styles.text, styles.small]}>{locale.knowSomeoneToShare}
-            <Text style={[styles.text, styles.bold, styles.small]}>{locale.clickOnIconAndShare}</Text></Text>
-            <TouchableOpacity onPress={() => onShare(props)}>
+              <Text style={[styles.text, styles.bold, styles.small]}>{locale.clickOnIconAndShare}</Text>
+            </Text>
+            <TouchableOpacity onPress={onShare}>
               <Icon
                 color="#FFF"
                 name="share-variant"
@@ -76,7 +81,7 @@ const CantSignPlipLayout = props => {
               />
             </TouchableOpacity>
 
-            {renderLineSeparator(props)}
+            <LineSeparator />
 
             <Image
               source={require("../images/gradient-clipboard.png")}
@@ -93,11 +98,16 @@ const CantSignPlipLayout = props => {
   );
 }
 
+NavBar.propTypes = {
+  onBack: PropTypes.func.isRequired,
+};
+
 CantSignPlipLayout.propTypes = {
   plip: PropTypes.object,
+  region: PropTypes.string,
   onBack: PropTypes.func.isRequired,
   onMyLocation: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
 }
 
-export default CantSignPlipLayout;
+export default enhance(CantSignPlipLayout);
