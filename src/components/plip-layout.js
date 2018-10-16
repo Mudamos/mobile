@@ -277,13 +277,14 @@ export default class PlipLayout extends Component {
     const title = (canSign || shouldLogin) && locale.iWannaMakeTheDifference || !sameRegion && locale.thisPlIsFromAnotherRegion || locale.makeTheDifferenceAndShare;
     const onPress = shouldLogin && onLogin || canSign && this.onToggleSignModal || !sameRegion && onRedirectToCantSign || this.onShare;
     const iconName = (canSign || shouldLogin) && "check-circle" || !sameRegion && "information" || "share-variant";
+    const buttonStyle = signButtonStyle(!user || user && sameRegion);
 
     return (
       <View style={styles.signButton}>
         <BlueFlatButton
           title={title}
           onPress={onPress}
-          style={signButtonStyle(!user || user && sameRegion)}
+          style={buttonStyle}
           textStyle={{fontFamily: "lato"}}
           iconName={iconName}
         />

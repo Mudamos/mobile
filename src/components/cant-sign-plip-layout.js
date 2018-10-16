@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React from "react";
 
 import {
   Image,
@@ -25,79 +25,79 @@ import {
   plipRegion,
 } from "../utils";
 
-export default class CantSignPlipLayout extends Component {
-  static propTypes = {
-    plip: PropTypes.object,
-    onBack: PropTypes.func.isRequired,
-    onMyLocation: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
-  }
+const CantSignPlipLayout = props => {
+  const {
+    plip,
+    onMyLocation,
+  } = props;
 
-  onShare = () => {
-    const { plip, onShare } = this.props;
+  if (!plip) return null;
+
+  const region = plipRegion(plip);
+
+  const onShare = ({ plip, onShare }) => {
     onShare(plip);
-  }
+  };
 
-  render() {
-    const { plip, onMyLocation } = this.props;
-    const region = plip && plipRegion(plip);
+  const renderNavBar = ({ onBack }) => (
+    <NavigationBar
+      leftView={<ChevronButton onPress={onBack} direction="left" />}
+      middleView={<HeaderLogo />}
+    />
+  );
 
-    if (!plip) return null;
+  const renderLineSeparator = () => (
+    <View style={styles.separatorContainer}>
+      <View style={styles.separatorLine} />
+    </View>
+  );
 
-    return (
-      <SafeAreaView>
-        <Layout>
-          <ScrollView>
-            {this.renderNavBar()}
+  return (
+    <SafeAreaView>
+      <Layout>
+        <ScrollView>
+          {renderNavBar(props)}
 
-            <View style={styles.container}>
-              <Text style={[styles.text, styles.title]}>{locale.itsNotPossibleToSignThatPl}</Text>
-              <Image
-                source={require("../images/erro.png")}
-              />
-              <Text style={[styles.text, styles.small]}>{locale.wrongRegionThanks}</Text>
-              <Text style={[styles.text, styles.bold]}>{locale.helpPl({ plName: plip.title, region })}</Text>
-              <Text style={[styles.text, styles.small]}>{locale.knowSomeoneToShare}
-              <Text style={[styles.text, styles.bold, styles.small]}>{locale.clickOnIconAndShare}</Text></Text>
-              <TouchableOpacity onPress={this.onShare}>
-                <Icon
-                  color="#FFF"
-                  name="share-variant"
-                  size={68}
-                  style={{marginVertical: 17}}
-                />
-              </TouchableOpacity>
-              {this.renderLineSeparator()}
-              <Image
-                source={require("../images/gradient-clipboard.png")}
+          <View style={styles.container}>
+            <Text style={[styles.text, styles.title]}>{locale.itsNotPossibleToSignThatPl}</Text>
+            <Image
+              source={require("../images/erro.png")}
+            />
+            <Text style={[styles.text, styles.small]}>{locale.wrongRegionThanks}</Text>
+            <Text style={[styles.text, styles.bold]}>{locale.helpPl({ plName: plip.title, region })}</Text>
+            <Text style={[styles.text, styles.small]}>{locale.knowSomeoneToShare}
+            <Text style={[styles.text, styles.bold, styles.small]}>{locale.clickOnIconAndShare}</Text></Text>
+            <TouchableOpacity onPress={() => onShare(props)}>
+              <Icon
+                color="#FFF"
+                name="share-variant"
+                size={68}
                 style={{marginVertical: 17}}
               />
-              <Text style={[styles.text, styles.bold]}>{locale.signPlipAtYourRegion}</Text>
-              <Text style={[styles.text, { margin: 20 }]}>{locale.backToMainPageToSignAndShareNationalPlipOrFromYourRegion}</Text>
-              <RoundedButton title={locale.showMe} action={onMyLocation} buttonStyle={styles.buttonStyle} titleStyle={{color: "#FFF"}}/>
-            </View>
-          </ScrollView>
-        </Layout>
-      </SafeAreaView>
-    );
-  }
+            </TouchableOpacity>
 
-  renderNavBar() {
-    const { onBack } = this.props;
+            {renderLineSeparator(props)}
 
-    return (
-      <NavigationBar
-        leftView={<ChevronButton onPress={onBack} direction="left" />}
-        middleView={<HeaderLogo />}
-      />
-    );
-  }
+            <Image
+              source={require("../images/gradient-clipboard.png")}
+              style={{marginVertical: 17}}
+            />
+            <Text style={[styles.text, styles.bold]}>{locale.signPlipAtYourRegion}</Text>
+            <Text style={[styles.text, { margin: 20 }]}>{locale.backToMainPageToSignAndShareNationalPlipOrFromYourRegion}</Text>
 
-  renderLineSeparator() {
-    return (
-      <View style={styles.separatorContainer}>
-        <View style={styles.separatorLine} />
-      </View>
-    );
-  }
+            <RoundedButton title={locale.showMe} action={onMyLocation} buttonStyle={styles.buttonStyle} titleStyle={{color: "#FFF"}}/>
+          </View>
+        </ScrollView>
+      </Layout>
+    </SafeAreaView>
+  );
 }
+
+CantSignPlipLayout.propTypes = {
+  plip: PropTypes.object,
+  onBack: PropTypes.func.isRequired,
+  onMyLocation: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
+}
+
+export default CantSignPlipLayout;
