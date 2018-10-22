@@ -38,6 +38,10 @@ const NavBar = ({ onBack }) => (
   />
 );
 
+NavBar.propTypes = {
+  onBack: PropTypes.func.isRequired,
+};
+
 const LineSeparator = () => (
   <View style={styles.separatorContainer}>
     <View style={styles.separatorLine} />
@@ -97,10 +101,6 @@ const CantSignPlipLayout = ({ region, plip, onMyLocation, onBack, onShare }) => 
     </SafeAreaView>
   );
 }
-
-NavBar.propTypes = {
-  onBack: PropTypes.func.isRequired,
-};
 
 CantSignPlipLayout.propTypes = {
   plip: PropTypes.object,

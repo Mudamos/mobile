@@ -276,6 +276,6 @@ export const plipRegion = plip => {
   switch (plip.scopeCoverage) {
     case STATEWIDE_SCOPE: return plip.uf;
     case CITYWIDE_SCOPE: return plip.cityName;
-    default: return null;
+    default: return;
   }
 }

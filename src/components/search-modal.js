@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
   },
   container: {
     ...StyleSheet.absoluteFillObject,
+    backgroundColor: "transparent",
     elevation: 8,
   },
 });

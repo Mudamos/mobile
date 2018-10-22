@@ -258,13 +258,48 @@ export default class PlipLayout extends Component {
     );
   }
 
+  signButtonTitle = ({ canSign, sameRegion, shouldLogin }) => {
+    if (canSign || shouldLogin) {
+      return locale.iWannaMakeTheDifference;
+    } else if (!sameRegion) {
+      return locale.thisPlipFromAnotherRegion;
+    } else {
+      return locale.makeTheDifferenceAndShare;
+    }
+  }
+
+  signButtonOnPress = ({ canSign, sameRegion, shouldLogin }) => {
+    const {
+      onLogin,
+      onRedirectToCantSign,
+    } = this.props;
+
+    if (shouldLogin) {
+      return onLogin;
+    } else if (canSign) {
+      return this.onToggleSignModal;
+    } if (!sameRegion) {
+      return onRedirectToCantSign;
+    } else {
+      return this.onShare;
+    }
+  }
+
+  signButtonIcon = ({ canSign, shouldLogin, sameRegion }) => {
+    if (canSign || shouldLogin) {
+      return "check-circle";
+    } else if (!sameRegion) {
+      return "information";
+    } else {
+      return "share-variant";
+    }
+  }
+
   renderSignButton() {
     const {
       userSignDate,
       user,
-      onLogin,
       plip,
-      onRedirectToCantSign,
     } = this.props;
 
     const hasSigned = !!userSignDate;
@@ -274,9 +309,9 @@ export default class PlipLayout extends Component {
     const shouldLogin = !logged;
     const canSign = logged && !hasSigned && sameRegion;
 
-    const title = (canSign || shouldLogin) && locale.iWannaMakeTheDifference || !sameRegion && locale.thisPlIsFromAnotherRegion || locale.makeTheDifferenceAndShare;
-    const onPress = shouldLogin && onLogin || canSign && this.onToggleSignModal || !sameRegion && onRedirectToCantSign || this.onShare;
-    const iconName = (canSign || shouldLogin) && "check-circle" || !sameRegion && "information" || "share-variant";
+    const title = this.signButtonTitle({ canSign, sameRegion, shouldLogin });
+    const onPress = this.signButtonOnPress({ canSign, sameRegion, shouldLogin });
+    const iconName = this.signButtonIcon({ canSign, shouldLogin, sameRegion });
     const buttonStyle = signButtonStyle(!user || user && sameRegion);
 
     return (

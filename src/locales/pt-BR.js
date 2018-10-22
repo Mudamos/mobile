@@ -189,7 +189,7 @@ const translations = {
   },
   termsOfUse: "Termos de uso",
   thisInfoWasUseful: "Esta informação foi útil?",
-  thisPlIsFromAnotherRegion: "Este PL é de outra região",
+  thisPlipFromAnotherRegion: "Este PL é de outra região",
   tseNotRobot: "Não sou um robô",
   tseSubmit: "Consultar",
   tseTutorial1: "Você será redirecionado para o site do Tribunal Superior Eleitoral (TSE).",
