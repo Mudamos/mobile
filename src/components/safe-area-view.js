@@ -14,18 +14,21 @@ import {
 } from "../utils";
 
 const styles = EStyleSheet.create({
+  defaultStyle: {
+    flex: 1,
+    backgroundColor: "#6000AA",
+  },
   extraPadding: {
     paddingTop: 20,
-    backgroundColor: "#6000AA",
   },
 });
 
 const SafeArea = ({ children, style }) => isIOSVersionBellow11 ? (
-    <View style={[styles.extraPadding, style]}>
+    <View style={[styles.defaultStyle, styles.extraPadding, style]}>
       {children}
     </View>
   ) : (
-    <SafeAreaView style={style}>
+    <SafeAreaView style={[styles.defaultStyle, style]}>
       {children}
     </SafeAreaView>
   );

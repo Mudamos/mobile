@@ -269,3 +269,13 @@ export const validateEmail = email => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.
 export const errorMessageFromCode = ({ errorCode, locale }) => locale.errorsCode[errorCode];
 
 export const isIOSVersionBellow11 = (Platform.OS === "ios") && (parseInt(Platform.Version, 10) <= 11);
+
+export const plipRegion = plip => {
+  if (!plip) return;
+
+  switch (plip.scopeCoverage) {
+    case STATEWIDE_SCOPE: return plip.uf;
+    case CITYWIDE_SCOPE: return plip.cityName;
+    default: return;
+  }
+}

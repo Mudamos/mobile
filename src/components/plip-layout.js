@@ -79,6 +79,7 @@ export default class PlipLayout extends Component {
     onOpenSigners: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
+    onRedirectToCantSign: PropTypes.func.isRequired,
     onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onToggleFavorite: PropTypes.func.isRequired,
@@ -257,28 +258,68 @@ export default class PlipLayout extends Component {
     );
   }
 
+  signButtonTitle = ({ canSign, sameRegion, shouldLogin }) => {
+    if (canSign || shouldLogin) {
+      return locale.iWannaMakeTheDifference;
+    } else if (!sameRegion) {
+      return locale.thisPlipFromAnotherRegion;
+    } else {
+      return locale.makeTheDifferenceAndShare;
+    }
+  }
+
+  signButtonOnPress = ({ canSign, sameRegion, shouldLogin }) => {
+    const {
+      onLogin,
+      onRedirectToCantSign,
+    } = this.props;
+
+    if (shouldLogin) {
+      return onLogin;
+    } else if (canSign) {
+      return this.onToggleSignModal;
+    } if (!sameRegion) {
+      return onRedirectToCantSign;
+    } else {
+      return this.onShare;
+    }
+  }
+
+  signButtonIcon = ({ canSign, shouldLogin, sameRegion }) => {
+    if (canSign || shouldLogin) {
+      return "check-circle";
+    } else if (!sameRegion) {
+      return "information";
+    } else {
+      return "share-variant";
+    }
+  }
+
   renderSignButton() {
     const {
       userSignDate,
       user,
-      onLogin,
       plip,
     } = this.props;
 
-    const canSign = eligibleToSignPlip({ plip, user });
-    const willSign = canSign && !userSignDate && this.signatureEnabled;
-    const shouldLogin = !user && this.signatureEnabled
+    const hasSigned = !!userSignDate;
+    const logged = !!user;
+    const sameRegion = logged && !!eligibleToSignPlip({ plip, user }) || !logged;
 
-    const title = (shouldLogin || willSign) && locale.iWannaMakeTheDifference || locale.makeTheDifferenceAndShare;
-    const onPress = shouldLogin && onLogin || willSign && this.onToggleSignModal || this.onShare;
-    const iconName = (shouldLogin || willSign) && "check-circle" || "share";
+    const shouldLogin = !logged;
+    const canSign = logged && !hasSigned && sameRegion;
+
+    const title = this.signButtonTitle({ canSign, sameRegion, shouldLogin });
+    const onPress = this.signButtonOnPress({ canSign, sameRegion, shouldLogin });
+    const iconName = this.signButtonIcon({ canSign, shouldLogin, sameRegion });
+    const buttonStyle = signButtonStyle(!user || user && sameRegion);
 
     return (
       <View style={styles.signButton}>
         <BlueFlatButton
           title={title}
           onPress={onPress}
-          style={signButtonStyle}
+          style={buttonStyle}
           textStyle={{fontFamily: "lato"}}
           iconName={iconName}
         />
@@ -628,8 +669,8 @@ export default class PlipLayout extends Component {
   }
 }
 
-const signButtonStyle = {
-  backgroundColor: "#00BFD8",
+const signButtonStyle = active => ({
+  backgroundColor: active ? "#00BFD8" : "#ACACAC",
   marginHorizontal: 10,
   marginVertical: 15,
   paddingHorizontal: 15,
@@ -639,4 +680,4 @@ const signButtonStyle = {
   shadowOffset: { width: 0, height: 2 },
   shadowOpacity: 0.2,
   shadowRadius: 4,
-};
+});

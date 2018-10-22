@@ -1,13 +1,20 @@
 import React from "react";
 
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import FlatButton from "./flat-button";
 
 import EStyleSheet from "react-native-extended-stylesheet";
 
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const styles = EStyleSheet.create({
+  container: {
+    borderRadius: 100,
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   gradientContainer: {
     borderRadius: 100,
     flex: 1,
@@ -39,23 +46,22 @@ export default class BlueFlatButton extends FlatButton {
     const Button = this.buttonClass().withText("").build();
 
     return (
-      <Button style={[style, { borderRadius: 100 }]}>
-        <View style={{flex: 1, flexDirection: "row"}}>
-          <Text
-            numberOfLines={1}
-            style={[styles.text, textStyle, { opacity: enabled ? 1 : 0.5 }]}
-          >
-            {title}
-          </Text>
-          { iconName &&
-            <Icon
-              name={iconName}
-              size={24}
-              color="#FFF"
-              style={{marginLeft: 10}}
-            />
-          }
-        </View>
+      <Button style={[styles.container, style]}>
+        <Text
+          numberOfLines={1}
+          textAnchor="middle"
+          style={[styles.text, textStyle, { opacity: enabled ? 1 : 0.5 }]}
+        >
+          {title}
+        </Text>
+        { iconName &&
+          <Icon
+            name={iconName}
+            size={24}
+            color="#FFF"
+            style={{marginLeft: 10}}
+          />
+        }
       </Button>
     );
   }
