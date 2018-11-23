@@ -1,5 +1,6 @@
 # Next
 
+* [PR #453] Update profile endpoint from v1 to v3
 * [PR #449] Add "This PR is from another region" page
 * [PR #451] Update texts
 * [PR #447] Update app following the ITS suggestions
