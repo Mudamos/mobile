@@ -31,7 +31,7 @@ class MobileApi {
   func profile(completionHandler: @escaping (User?, MUDError?) -> ()) {
     let headers = buildAuthHeaders([:])
 
-    Alamofire.request(buildURL("/api/v1/profile"), headers: headers).validate().responseJSON { response in
+    Alamofire.request(buildURL("/api/v3/profile"), headers: headers).validate().responseJSON { response in
       self.handleResponse(response: response) { data, error in
         if error != nil {
           completionHandler(nil, error)
