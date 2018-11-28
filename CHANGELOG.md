@@ -1,5 +1,7 @@
 # Next
 
+* [PR #455] Update how display errors
+
 ## [1.11.0] 10/09/2018
 
 * [PR #436] Update integration to the TSE system
