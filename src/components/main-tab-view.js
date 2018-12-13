@@ -9,14 +9,15 @@ import EStyleSheet from "react-native-extended-stylesheet";
 const styles = EStyleSheet.create({
   label: {
     color: "#6000AA",
-    fontSize: "1rem",
+    fontSize: "0.8rem",
     fontFamily: "roboto",
   },
   tabBar: {
     backgroundColor: "#FFF",
   },
   tab: {
-    width: 200,
+    width: 170,
+    paddingVertical: 6,
   },
   indicator: {
     borderBottomColor: "#00BFD8",
