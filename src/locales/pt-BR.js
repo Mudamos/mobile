@@ -30,7 +30,6 @@ const translations = {
   cityName: "Nome da cidade",
   clearSearch: "Limpar busca",
   clickOnIconAndShare: "Clique no ícone abaixo e compartilhe agora!",
-  clickToRedirect: "Se deseja ser direcionado, clique no botão abaixo.",
   close: "Fechar",
   codeHasBeenSentToPhone: "Seu código de confirmação foi enviado por SMS para o número",
   codeSent: "Código enviado",
@@ -69,6 +68,7 @@ const translations = {
   hello: ({ complement }) => `Olá${complement},`,
   helpPl: ({ plName, region }) => `Você pode ajudar o projeto ${plName} divulgando para quem for de ${region}.`,
   identification: "Identificação",
+  ifYouWannaProceedClickTheButtonBelow: "Se quiser prosseguir, clique no botão abaixo.",
   imAlreadyRegistered: "Já tenho cadastro",
   invalidBirthdate: "Data de nascimento inválida",
   invalidCpf: "CPF inválido",
@@ -211,7 +211,7 @@ const translations = {
   voterName: "Nome do eleitor",
   voterMotherName: "Nome da mãe",
   wannaKnowMoreAboutMudamos: "Quer conhecer mais sobre o Mudamos?",
-  wePrepareAFormForYourHelp: "Preparamos um formulário especial para você tirar todas as suas duvidas.",
+  wePrepareAFormForYourHelp: "Preparamos um formulário especial para você tirar todas as suas dúvidas.",
   weNeedAnalyseYourProfileToSign: "Por segurança, precisamos analisar seus dados para ativar a assinatura.",
   willCreateNewWallet: "Vamos agora criar uma nova assinatura para você.",
   whatIsMudamos: "Mudamos é uma iniciativa do Instituto de Tecnologia e Sociedade do Rio (ITS Rio), premiada e financiada exclusivamente pelo prêmio Desafio Google de Impacto Social, conquistado em 2016.",
@@ -259,12 +259,12 @@ const translations = {
       {
         key: "pergunta2",
         title: "Por que criar um aplicativo para propor leis de iniciativa popular?",
-        content: "Desde quando a iniciativa popular foi prevista na Constituição Federal de 1988, apenas quatro projetos foram propostos usando este instrumento. Concorda que coletar centenas ou milhares de assinaturas em papel é muito difícil? Além disso, como as casas legislativas não conseguem verificar as assinaturas em papel, sempre um vereador ou deputado precisava “adotar” o projeto, descaracterizando a iniciativa popular. Por isso, criamos o aplicativo para tornar a coleta de assinaturas mais fácil e aproximá-las das pessoas. Com o aplicativo, qualquer cidadão que tenha um smartphone, em qualquer lugar, pode apoiar um projeto de lei de iniciativa popular ou criar o seu próprio. E ainda garantimos mais transparência e segurança a este processo.",
+        content: "Desde quando a iniciativa popular foi prevista na Constituição Federal de 1988, apenas quatro projetos nacionais foram propostos usando este instrumento. Concorda que coletar centenas ou milhares de assinaturas em papel é muito difícil? Além disso, como as casas legislativas não conseguem verificar as assinaturas em papel, sempre um vereador ou deputado precisava “adotar” o projeto, descaracterizando a iniciativa popular. Por isso, criamos o aplicativo para tornar a coleta de assinaturas mais fácil e aproximá-la das pessoas. Com o aplicativo, qualquer cidadão que tenha um smartphone, em qualquer lugar, pode apoiar um projeto de lei de iniciativa popular ou criar o seu próprio. E ainda garantimos mais transparência e segurança a este processo.",
       },
       {
         key: "pergunta3",
         title: "As assinaturas feitas por meio do aplicativo são válidas?",
-        content: "Sim! As assinaturas feitas pelo aplicativo Mudamos são totalmente válidas. A Constituição não exige que as assinaturas sejam obtidas papel. Qualquer forma de registrar a subscrição do eleitor (termo usado pela Constituição) é válida. Além disso, o sistema de segurança, identificação e auditoria usado pelo aplicativo faz dele infinitamente mais confiável que assinaturas em papel: a chances de fraudes é praticamente zero.",
+        content: "Sim! As assinaturas feitas pelo aplicativo Mudamos são totalmente válidas. A Constituição não exige que as assinaturas sejam obtidas em papel. Qualquer forma de registrar a subscrição do eleitor (termo usado pela Constituição) é válida. Além disso, o sistema de segurança, identificação e auditoria usado pelo aplicativo faz dele infinitamente mais confiável que assinaturas em papel: a chance de fraudes é praticamente zero.",
       },
       {
         key: "pergunta4",
@@ -274,7 +274,7 @@ const translations = {
       {
         key: "pergunta5",
         title: "Por que pedimos seu CPF e Título de Eleitor?",
-        content: "Para garantir que sua assinatura tenha validade legal. A exigência desse documentos vem das normas definidas pela Câmara e outras Assembleias Legislativas. Usamos nome, data de nascimento, cidade e um identificador único (título eleitoral e CPF) para validar sua assinatura. Lembre-se que assinar um projeto de lei de iniciativa popular, que pode vir a ser apresentado no Congresso, por exemplo, é diferente de assinar petições online, onde apenas seu nome e e-mail já são suficientes porque não possuem validade legal.",
+        content: "Para garantir que sua assinatura tenha validade legal. A exigência desses documentos vem das normas definidas pela Câmara e outras Assembleias Legislativas. Usamos nome, data de nascimento, cidade e um identificador único (título eleitoral e CPF) para validar sua assinatura. Lembre-se que assinar um projeto de lei de iniciativa popular, que pode vir a ser apresentado no Congresso, por exemplo, é diferente de assinar petições online, onde apenas seu nome e e-mail já são suficientes porque não possuem validade legal.",
       },
       {
         key: "pergunta6",
