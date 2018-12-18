@@ -1,23 +1,29 @@
+import {
+  Dimensions,
+  Platform,
+  Text,
+  View,
+} from "react-native";
 import React, { Component } from "react";
-import { Dimensions } from "react-native";
-import { TabView, TabBar } from "react-native-tab-view";
-import PropTypes from "prop-types";
-import PlipsList from "../components/plips-list";
-import { TabViewType } from "../prop-types";
+import { TabBar, TabView } from "react-native-tab-view";
+
 import EStyleSheet from "react-native-extended-stylesheet";
+import PlipsList from "../components/plips-list";
+import PropTypes from "prop-types";
+import { TabViewType } from "../prop-types";
 
 const styles = EStyleSheet.create({
   label: {
     color: "#6000AA",
-    fontSize: "0.8rem",
+    fontSize: "0.9rem",
     fontFamily: "roboto",
   },
   tabBar: {
     backgroundColor: "#FFF",
   },
   tab: {
-    width: 170,
     paddingVertical: 6,
+    paddingHorizontal: 0,
   },
   indicator: {
     borderBottomColor: "#00BFD8",
@@ -182,15 +188,29 @@ export default class MainTabView extends Component {
 
   routeTitle = ({ route }) => route.title;
 
+  tabBarLabel = props => {
+    const { title } = props.route;
+
+    return (
+      <View style={styles.tab}>
+        <Text
+          style={styles.label}
+          numberOfLines={1}
+          ellipsizeMode={Platform.OS === "ios" ? "clip" : "tail"}>
+            {title}
+        </Text>
+      </View>
+    )
+  };
+
   renderTabBar = props => (
     <TabBar
       {...props}
       scrollEnabled
       indicatorStyle={styles.indicator}
       style={styles.tabBar}
-      tabStyle={styles.tab}
-      labelStyle={styles.label}
       getLabelText={this.routeTitle}
+      renderLabel={this.tabBarLabel}
     />
   );
 
