@@ -68,7 +68,7 @@ export default class HelpLayout extends Component {
             </View>
             <View style={styles.instructionsContainer}>
               <Text style={[styles.text, styles.bold, styles.instructions]}>{locale.wePrepareAFormForYourHelp}</Text>
-              <Text style={[styles.text, styles.instructions]}>{locale.clickToRedirect}</Text>
+              <Text style={[styles.text, styles.instructions]}>{locale.ifYouWannaProceedClickTheButtonBelow}</Text>
             </View>
             <View style={styles.buttonContainer}>
               <RoundedButton title={locale.continue} action={this.onGoToHelpForm} buttonStyle={styles.continueButton} titleStyle={[styles.text, styles.continueButtonTitle]}/>
