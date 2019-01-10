@@ -53,26 +53,28 @@ function* retrievePassword({ mobileApi, Crypto }) {
   });
 }
 
+export function* changePasswordSaga({ mobileApi, currentPassword, newPassword }) {
+  try {
+    yield put(changingPassword(true));
+
+    const authToken = yield select(currentAuthToken);
+    yield call(mobileApi.changePassword, authToken, { currentPassword, newPassword });
+
+    yield put(changingPassword(false));
+  } catch(e) {
+    logError(e);
+    if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
+    yield put(changingPassword(false));
+    yield put(changePasswordError(e));
+  }
+}
+
 function* changePassword({ mobileApi }) {
   yield takeLatest("PASSWORD_CHANGE", function* ({ payload }) {
-    try {
-      const { currentPassword, newPassword } = payload;
+    const { currentPassword, newPassword } = payload;
 
-      yield put(changingPassword(true));
-
-      const authToken = yield select(currentAuthToken);
-      yield call(mobileApi.changePassword, authToken, { currentPassword, newPassword });
-
-      yield put(changingPassword(false));
-
-      yield call([Toast, Toast.show], locale.passwordChangedSuccessfully);
-    } catch(e) {
-      logError(e);
-      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
-
-      yield put(changingPassword(false));
-      yield put(changePasswordError(e));
-    }
+    yield call(changePasswordSaga, { mobileApi, currentPassword, newPassword });
   });
 }
 

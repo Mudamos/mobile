@@ -7,7 +7,10 @@ import {
   View,
 } from "react-native";
 
-import { moment } from "../utils";
+import {
+  eligibleToSignPlip,
+  moment,
+} from "../utils";
 
 import Ionicon from "react-native-vector-icons/Ionicons";
 
@@ -19,6 +22,8 @@ import SignModal from "./plip-signed-modal";
 import MarkdownView from "../containers/markdown-view";
 import BackButton from "./back-button";
 import SignedMessageView from "./signed-message-view";
+import ConfirmSignModal from "./confirm-sign-modal";
+import SafeAreaView from "./safe-area-view";
 
 import styles from "../styles/plip-viewer-layout";
 import plipHtmlStyles from "../styles/plip-html-styles";
@@ -27,14 +32,17 @@ import plipHtmlStyles from "../styles/plip-html-styles";
 export default class PlipViewerLayout extends Component {
   state = {
     showSignSuccess: false,
+    isSignModalVisible: false,
   };
 
   static propTypes = {
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
     plip: PropTypes.object,
+    user: PropTypes.object,
     userSignDate: PropTypes.object,
     onBack: PropTypes.func.isRequired,
+    onLogin: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
@@ -42,7 +50,7 @@ export default class PlipViewerLayout extends Component {
 
   get plipName() {
     const { plip } = this.props;
-    return plip.phase.name;
+    return plip && plip.title;
   }
 
   get callToAction() {
@@ -57,7 +65,7 @@ export default class PlipViewerLayout extends Component {
     if (!plip) return;
 
     const start = moment();
-    const end = moment(plip.phase.finalDate);
+    const end = moment(plip.finalDate);
 
     // No days left because there are no more seconds left
     if (end.diff(start, "seconds") < 0) return;
@@ -68,6 +76,16 @@ export default class PlipViewerLayout extends Component {
   get signatureEnabled() {
     const daysLeft = this.daysLeft;
     return daysLeft != null && daysLeft >= 0;
+  }
+
+  onPlipSign = () => {
+    const { plip, onPlipSign } = this.props;
+    this.onToggleSignModal();
+    onPlipSign(plip);
+  }
+
+  onToggleSignModal = () => {
+    this.setState(({ isSignModalVisible }) => ({ isSignModalVisible: !isSignModalVisible }));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -85,11 +103,11 @@ export default class PlipViewerLayout extends Component {
       isSigning,
     } = this.props;
 
-    const { showSignSuccess } = this.state;
+    const { showSignSuccess, isSignModalVisible } = this.state;
 
     return (
-      <View style={[styles.container]}>
-        <Layout>
+      <SafeAreaView style={styles.container}>
+        <Layout style={{backgroundColor: "#FFF"}}>
           {this.renderNavBar()}
           {this.renderMainContent()}
         </Layout>
@@ -97,7 +115,8 @@ export default class PlipViewerLayout extends Component {
         {showSignSuccess && this.renderSignSuccess()}
 
         <PageLoader isVisible={isSigning} />
-      </View>
+        <ConfirmSignModal isVisible={isSignModalVisible} plipName={this.plipName} onToggleSignModal={this.onToggleSignModal} onPlipSign={this.onPlipSign}/>
+      </SafeAreaView>
     );
   }
 
@@ -105,7 +124,15 @@ export default class PlipViewerLayout extends Component {
     const {
       plip,
       userSignDate,
+      user,
+      onLogin,
     } = this.props;
+
+    const canSign = eligibleToSignPlip({ plip, user });
+    const willSign = canSign && !userSignDate && this.signatureEnabled;
+    const shouldLogin = !user && this.signatureEnabled
+
+    const onPress = shouldLogin && onLogin || willSign && this.onToggleSignModal;
 
     return (
       <View style={styles.full}>
@@ -127,7 +154,7 @@ export default class PlipViewerLayout extends Component {
           !userSignDate && plip && this.signatureEnabled &&
             <PurpleFlatButton
               title={this.callToAction}
-              onPress={this.onPlipSign.bind(this)}
+              onPress={onPress}
               style={signButtonStyle}
               textStyle={{fontSize: 19, fontFamily: "lato"}}
             />
@@ -173,11 +200,6 @@ export default class PlipViewerLayout extends Component {
         onClose={this.onModalSuccessClose.bind(this)}
       />
     );
-  }
-
-  onPlipSign() {
-    const { plip, onPlipSign } = this.props;
-    onPlipSign(plip);
   }
 
   onModalSuccessClose() {

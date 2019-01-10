@@ -6,11 +6,6 @@ import {
 } from "../actions";
 
 import {
-  currentUser,
-} from "../selectors";
-
-import {
-  fromISODate,
   log,
   logError,
 } from "../utils";
@@ -37,7 +32,7 @@ const reactNativePostMessageBugHack = `
   patchPostMessageFunction();
 `;
 
-const jsCode = user => {
+const jsCode = ({ birthdate, name }) => {
   return `
     ${reactNativePostMessageBugHack}
 
@@ -45,8 +40,8 @@ const jsCode = user => {
       function fillOutForm() {
         var nameField = document.getElementsByName("nomeTituloEleitor")[0];
         var birthField = document.getElementsByName("dataNascimento")[0];
-        const userName = "${user.name}";
-        const userBirthdate = "${fromISODate(user.birthdate)}";
+        const userName = "${name}";
+        const userBirthdate = "${birthdate}";
         if (userName && nameField && !nameField.value) nameField.value = userName;
         if (userBirthdate && birthField && !birthField.value) birthField.value = userBirthdate;
       }
@@ -68,17 +63,22 @@ const jsCode = user => {
 
       const getVoteCardId = () => {
         const labels = document.getElementById("resposta-local-votacao");
+
         const nodes = labels.childNodes;
+
         const isVoteCard = text => {
           return /Inscrição: [0-9]{12}/gi.test(text);
         };
+
         const getVoteCard = text => {
           return text.match(/[0-9]{12}/g)[0];
         };
+
         for (let i = 0; i < nodes.length; i++) {
           const content = nodes[i].innerHTML;
           if (isVoteCard(content)) {
             const voteCardId = getVoteCard(content);
+
             if (voteCardId) {
               return voteCardId;
             }
@@ -109,8 +109,11 @@ const jsCode = user => {
   `;
 };
 
-const mapStateToProps = state => ({
-  injectedJavaScript: jsCode(currentUser(state)),
+const mapStateToProps = (state, ownProps) => ({
+  injectedJavaScript: jsCode({
+    birthdate: ownProps.birthdate,
+    name: ownProps.name,
+  }),
 });
 
 const mapDispatchToProps = dispatch => ({

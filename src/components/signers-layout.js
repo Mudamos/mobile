@@ -15,6 +15,7 @@ import BackButton from "./back-button";
 import NavigationBar from "./navigation-bar";
 import NetworkImage from "./network-image";
 import RetryButton from "./retry-button";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 
@@ -34,15 +35,15 @@ export default class SignersLayout extends Component {
     const { hasError, isFetching } = this.props;
 
     return (
-      <View style={styles.full}>
-        <Layout>
+      <SafeAreaView style={[styles.full, styles.container]}>
+        <Layout style={styles.layout}>
           {this.renderNavBar()}
           {!hasError && this.renderListView()}
           {hasError && this.renderRetry()}
         </Layout>
 
         <PageLoader isVisible={isFetching} />
-      </View>
+      </SafeAreaView>
     );
   }
 

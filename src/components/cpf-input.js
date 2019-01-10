@@ -5,7 +5,6 @@ import MDTextInput from "./md-text-input";
 
 import { cpfMask } from "../utils";
 
-
 export default class CpfInput extends Component {
   static propTypes = {
     value: PropTypes.string,

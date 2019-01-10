@@ -11,10 +11,10 @@ import NetworkImage from "./network-image";
 
 import styles from "../styles/avatar";
 
-
 export default class Avatar extends Component {
   static propTypes = {
     avatarStyle: ViewPropTypes.style,
+    children: PropTypes.node,
     defaultPicture: PropTypes.any,
     imageStyle: Image.propTypes.style,
     size: PropTypes.number,
@@ -35,6 +35,7 @@ export default class Avatar extends Component {
   render() {
     const {
       avatarStyle,
+      children,
       size,
       onPress,
     } = this.props;
@@ -52,7 +53,10 @@ export default class Avatar extends Component {
             height: size,
           }, avatarStyle]}
           imageStyle={styles.imageBubble}
-        />
+        >
+          {children}
+        </NetworkImage>
+
       </TouchableOpacity>
     );
   }

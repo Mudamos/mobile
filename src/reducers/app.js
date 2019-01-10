@@ -1,5 +1,7 @@
 const initialState = {
   mainInitiated: false,
+  appLoadingTotal: 5,
+  appLoading: 0,
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +20,12 @@ export default (state = initialState, action) => {
         ...state,
         mainInitiated: true,
       };
+    }
+    case "INCREASE_APP_LOADING": {
+      return {
+        ...state,
+        appLoading: state.appLoading + 1,
+      }
     }
     default:
       return state;

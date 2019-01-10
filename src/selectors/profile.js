@@ -15,9 +15,24 @@ export const hasProfileSaveErrors = state => state.profile.hasError;
 
 export const profileSendPhoneValidationErrors = state => state.profile.sendValidationErrors;
 
+export const isFacebookMainProfileComplete = state => {
+  const currentUser = state.profile.currentUser || new User();
+
+  if (currentUser.profileType === "facebook") {
+    return currentUser.cpf && currentUser.email && currentUser.termsAccepted;
+  } else {
+    return true;
+  }
+}
+
 export const isMainProfileComplete = state => {
   const currentUser = state.profile.currentUser || new User();
-  return currentUser.name && currentUser.email;
+  return currentUser.cpf && currentUser.email;
+};
+
+export const isDetailProfileComplete = state => {
+  const currentUser = state.profile.currentUser || new User();
+  return currentUser.name && currentUser.birthdate && currentUser.voteCard;
 };
 
 export const isBirthProfileComplete = state => {
@@ -58,6 +73,18 @@ export const getCurrentUserAvatar = state => {
   return user.avatar;
 }
 
+export const avatarSaveErrors = state => state.profile.avatarError;
+
+export const currentUserCity = state => {
+  const user = currentUser(state) || new User();
+  return user.address.city;
+}
+
+export const currentUserUf = state => {
+  const user = currentUser(state) || new User();
+  return user.address.uf;
+}
+
 export const isProfileComplete =
   allPass([
     isMainProfileComplete,
@@ -68,5 +95,9 @@ export const isProfileComplete =
     isWalletProfileComplete,
     isPhoneProfileComplete,
   ]);
+
+export const isSigningUpComplete = state => {
+  return isProfileComplete && !state.profile.isSigningUp;
+}
 
 export const isValidatingProfile = state => state.profile.validatingProfile;

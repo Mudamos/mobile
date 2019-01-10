@@ -15,6 +15,7 @@ import BackButton from "./back-button";
 import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
 import FlatButton from "./flat-button";
+import SafeAreaView from "./safe-area-view";
 
 import { IndicatorViewPager, PagerDotIndicator } from "rn-viewpager";
 
@@ -60,7 +61,7 @@ export default class TSELayout extends Component {
 
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           {this.renderNavBar()}
 
@@ -69,7 +70,7 @@ export default class TSELayout extends Component {
 
         <PageLoader isVisible={this.loadingWebView} />
 
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -126,7 +127,7 @@ export default class TSELayout extends Component {
       <View style={styles.page}>
         <View style={[styles.hPadded]}>
           <Text style={styles.tutorialText}>
-            {locale.tseTutorial3} <Text style={[styles.tutorialText, styles.reference]}>{locale.voterName}</Text> e <Text style={[styles.tutorialText, styles.reference]}>{locale.voterBirthDay}</Text>.
+            {locale.tseTutorial3} <Text style={[styles.tutorialText, styles.reference]}>{locale.voterName}</Text>, <Text style={[styles.tutorialText, styles.reference]}>{locale.voterBirthDay}</Text> e <Text style={[styles.tutorialText, styles.reference]}>{locale.voterMotherName}</Text>.
           </Text>
         </View>
 

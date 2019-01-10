@@ -13,6 +13,8 @@ export default (state = initialState, action) => {
       return { ...state, profileFetchError: payload.profileFetchError };
     case "PROFILE_SAVING":
       return { ...state, isSaving: payload.isSaving, errors: null, hasError: false };
+    case "SIGNING_UP":
+      return { ...state, isSigningUp: payload.isSigningUp };
     case "PROFILE_SENDING_PHONE_VALIDATION":
       return {
         ...state,
@@ -41,7 +43,9 @@ export default (state = initialState, action) => {
     case "PROFILE_VOTE_CARD_ID_ACQUIRED":
       return { ...state, voteCardId: payload.voteCardId };
     case "PROFILE_SAVING_AVATAR":
-      return { ...state, isSavingAvatar: payload.isSaving };
+      return { ...state, isSavingAvatar: payload.isSaving, avatarError: null };
+    case "PROFILE_SAVE_AVATAR_ERROR":
+      return { ...state, avatarError: payload.error };
     case "PROFILE_VALIDATE_PROFILE": {
       return { ...state, validatingProfile: true };
     }
@@ -51,12 +55,14 @@ export default (state = initialState, action) => {
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,
+        avatarError: null,
         currentUser: null,
         isFetching: false,
         isSaving: false,
         errors: null,
         hasError: false,
         isSendingPhoneValidation: false,
+        isSigningUp: false,
         phoneJustValidated: false,
         profileFetchError: false,
         sendValidationErrors: null,

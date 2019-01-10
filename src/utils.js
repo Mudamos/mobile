@@ -1,4 +1,8 @@
 import {
+  Platform,
+} from "react-native";
+
+import {
   allPass,
   apply,
   complement,
@@ -38,6 +42,8 @@ import "numeral/locales/pt-br";
 import moment from "moment";
 import "moment/locale/pt-br";
 
+import { isNationalCause } from "./models";
+
 const DEFAULT_LOCALE = "pt-br";
 
 moment.locale(DEFAULT_LOCALE);
@@ -56,6 +62,8 @@ export const NATIONWIDE_SCOPE = "nationwide";
 export const STATEWIDE_SCOPE = "statewide";
 
 export const CITYWIDE_SCOPE = "citywide";
+
+export const ALL_SCOPE = "all";
 
 export const different = complement(equals);
 
@@ -81,6 +89,10 @@ export const findByStrIndex = (index, object) => (object || {})[String(index)];
 export const isDev = __DEV__;
 
 export const compact = list => reject(isNil, list);
+
+export const notEmpty = complement(isEmpty);
+
+export const notNil = complement(isNil);
 
 export const log = (message, { level = "DEBUG", tag } = {}, ...args) => isDev && console.log(toLogTag(level, tag), message, ...args);
 
@@ -233,3 +245,37 @@ export const backoff = (fn, { attempts, delay: duration = 100 } = {}) =>
       delay: duration * 2,
     }))
     : Promise.reject(err));
+
+export const eligibleToSignPlip = ({ plip, user }) => {
+  if (!user || !plip) return;
+
+  const { scopeCoverage: scope, uf, cityName } = plip;
+  const { uf: userUF, city: userCityName } = user.address;
+
+  const matchUF = () => userUF && uf && userUF.toLowerCase() === uf.toLowerCase();
+  const matchCity = () => userUF && uf && userCityName && cityName && userUF.toLowerCase() === uf.toLowerCase() && userCityName.toLowerCase() === cityName.toLowerCase();
+
+  switch (scope) {
+    case NATIONWIDE_SCOPE: return true;
+    case STATEWIDE_SCOPE: return isBlank(userUF) || isNationalCause(plip) || matchUF();
+    case CITYWIDE_SCOPE: return isBlank(userCityName) || isNationalCause(plip) || matchCity();
+  }
+}
+
+// Read more about this email validation at http://emailregex.com/
+/* eslint-disable no-useless-escape */
+export const validateEmail = email => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
+
+export const errorMessageFromCode = ({ errorCode, locale }) => locale.errorsCode[errorCode];
+
+export const isIOSVersionBellow11 = (Platform.OS === "ios") && (parseInt(Platform.Version, 10) <= 11);
+
+export const plipRegion = plip => {
+  if (!plip) return;
+
+  switch (plip.scopeCoverage) {
+    case STATEWIDE_SCOPE: return plip.uf;
+    case CITYWIDE_SCOPE: return plip.cityName;
+    default: return;
+  }
+}

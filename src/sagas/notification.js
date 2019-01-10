@@ -1,32 +1,25 @@
 import OneSignal from "react-native-onesignal";
 
 import {
-  buffers,
   delay,
 } from "redux-saga";
 
 import {
-  actionChannel,
   all,
   call,
-  flush,
   fork,
   put,
   select,
-  take,
   takeLatest,
 } from "redux-saga/effects";
 
 import {
   concat,
-  flip,
   fromPairs,
-  lensPath,
   map,
   pick,
   pipe,
   prop,
-  view,
   zipObj,
 } from "ramda";
 
@@ -35,9 +28,8 @@ import {
 } from "../actions";
 
 import {
-  findPlip,
+  currentAuthToken,
   listAllPlips,
-  hasUserSignedPlip,
   oneSignalUserInfo,
 } from "../selectors";
 
@@ -76,37 +68,28 @@ function* updateOneSignalProfile() {
   });
 }
 
-function* signedPlips() {
-  const channel = yield actionChannel("PLIP_USER_SIGN_INFO", buffers.expanding(50));
-
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
+function* signedPlips({ mobileApi }) {
+  yield takeLatest("PLIP_USER_SIGN_INFO", function* () {
     try {
-      const currentAction = yield take(channel);
-
       yield call(delay, 3000);
 
-      const pendingActions = yield flush(channel);
-      const actions = [currentAction, ...pendingActions];
+      const authToken = yield select(currentAuthToken);
 
-      const ids = actions.map(view(lensPath(["payload", "plipId"])));
+      if (!authToken) return;
 
-      const signedResult = yield all(ids.map(id => select(hasUserSignedPlip(id))));
-      const plips = yield all(ids.map(id => select(findPlip(id))));
-      const detailIds = plips.map(prop("detailId"));
+      const response = yield call(mobileApi.listSignedPlipsByUser, authToken);
+      const plips = response.petitions;
 
-      const buildTags = pipe(
-        map(signedPlipTag),
-        flip(zipObj)(signedResult.map(String))
+      const tags = zipObj(
+        plips.map(plip => signedPlipTag(plip.idPetition)),
+        plips.map(prop("hasVoted")).map(String),
       );
-
-      const tags = buildTags(detailIds);
 
       yield call([OneSignal, OneSignal.sendTags], tags);
     } catch(e) {
       logError(e, { tag: "signedPlips" });
     }
-  }
+  })
 }
 
 function* clearOneSinalProfileInfo() {
@@ -146,9 +129,9 @@ function* clearSignedPlips() {
   });
 }
 
-export default function* notificationSaga() {
+export default function* notificationSaga({ mobileApi }) {
   yield fork(updateOneSignalProfile);
   yield fork(clearOneSinalProfileInfo);
-  yield fork(signedPlips);
+  yield fork(signedPlips, { mobileApi });
   yield fork(clearSignedPlips);
 }

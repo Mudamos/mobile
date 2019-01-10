@@ -5,8 +5,8 @@ export default StyleSheet.create({
     borderColor: "transparent",
   },
   container: {
-    backgroundColor: "transparent",
     flex: 1,
+    backgroundColor: "transparent",
     paddingTop: 60,
   },
   contentContainer: {
@@ -20,9 +20,11 @@ export default StyleSheet.create({
   full: {
     flex: 1,
   },
+  menuHeaderContainer: {
+    flex: 1,
+  },
   menuListContainer: {
-    flex: 3,
-    marginTop: 50,
+    flex: 4,
   },
   profileInfoContainer: {
     flexDirection: "row",
@@ -51,6 +53,7 @@ export default StyleSheet.create({
     marginRight: 16,
   },
   mediumText: {
+    flex: 1,
     fontFamily: "roboto",
     fontSize: 13,
     lineHeight: 15,

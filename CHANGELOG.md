@@ -1,5 +1,27 @@
 # Next
 
+## [2.0.0] 09/01/2019
+
+* [PR #459] Bump app version
+* [PR #457] Improve interface following ITS recommendations
+* [PR #453] Update profile endpoint from v1 to v3
+* [PR #449] Add "This PR is from another region" page
+* [PR #451] Update texts
+* [PR #447] Update app following the ITS suggestions
+* [PR #443] Add signing validation pages
+* [PR #441] Add static pages
+* [PR #445] Update splash screen
+* [PR #440] Update app following the ITS suggestions
+* [PR #432] Add search functionality
+* [PR #437] Update edit profile layout
+* [PR #438] Update app icons
+* [PR #430] Add favorite functionality
+* [PR #429] Update app to paginate plips from mobile api
+* [PR #426] Fix OneSignal crash
+* [PR #423] Adjust new layout following guidelines passed by ITS
+* [PR #421] New layout at sign in and sign up
+* [PR #419] Add new layout at plip details
+* [PR #418] Add new layout at plips view with tabs
 * [PR #455] Update how display errors
 
 ## [1.11.0] 10/09/2018

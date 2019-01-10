@@ -33,8 +33,6 @@ function appError({ type, payload }) {
     defaultErrorHandler({ payload, defaultMessage });
 
   switch (type) {
-    case "AUTHENTICATION_LOGIN_ERROR":
-      return handleWithPayload({ defaultMessage: locale.errors.loginError });
     case "WALLET_CREATE_ERROR":
       return handleWithPayload({ defaultMessage: locale.errors.walletCreationError });
     case "FACEBOOK_LOGIN_ERROR":
@@ -62,7 +60,6 @@ function appError({ type, payload }) {
       return handleWithPayload({ defaultMessage: locale.errors.shareLinkError });
     case "PASSWORD_CHANGE_FORGOT_ERROR":
     case "PROFILE_SENDING_PHONE_VALIDATION_ERROR":
-    case "PROFILE_USER_SAVE_FAILURE":
     case "ADDRESS_ZIP_CODE_SEARCH_ERROR":
       return handleWithPayload();
   }

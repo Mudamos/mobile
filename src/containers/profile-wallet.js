@@ -2,10 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Alert } from "react-native";
-
 import WalletLayout from "../components/profile-wallet-layout";
-import locale from "../locales/pt-BR";
 
 import {
   createWallet,
@@ -18,23 +15,17 @@ import {
 
 class Container extends Component {
   static propTypes = {
-    alertRevalidate: PropTypes.bool, // Navigation injected
+    revalidateProfileSignPlip: PropTypes.bool, // Navigation injected
     onCreateWallet: PropTypes.func.isRequired,
 
     ...WalletLayout.propTypes,
   }
 
-  static defaultProps = {
-    alertRevalidate: false,
-  }
-
   componentWillMount() {
-    const { alertRevalidate, onCreateWallet } = this.props;
+    const { revalidateProfileSignPlip, onCreateWallet } = this.props;
 
-    if (alertRevalidate) {
-      this.fireAlertRevalidate();
-    } else {
-      onCreateWallet(); // Fire the wallet creation
+    if (!revalidateProfileSignPlip) {
+      onCreateWallet({ revalidateProfileSignPlip }); // Fire the wallet creation
     }
   }
 
@@ -45,18 +36,6 @@ class Container extends Component {
       />
     );
   }
-
-  fireAlertRevalidate() {
-    const { onCreateWallet } = this.props;
-
-    Alert.alert(
-      locale.revalidation,
-      locale.revalidationExplanation,
-      [
-        { text: locale.ok, onPress: onCreateWallet },
-      ],
-    );
-  }
 }
 
 const mapStateToProps = state => ({
@@ -65,7 +44,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCreateWallet: () => dispatch(createWallet()),
+  onCreateWallet: ({ revalidateProfileSignPlip }) => dispatch(createWallet({ revalidateProfileSignPlip })),
   onRetry: () => dispatch(createWallet()),
 });
 

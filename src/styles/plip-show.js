@@ -37,15 +37,20 @@ const infoContainerRow = {
 };
 
 export default StyleSheet.create({
-  actionIcon: {
-    marginRight: 18,
-  },
   actionTitle: {
-    color: "#fff",
+    color: "#6000AA",
     flex: 3,
     fontFamily: "lato",
     fontSize: 14,
     fontWeight: "bold",
+    textAlign: "center",
+  },
+  actionFullText: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
   },
   actionRow: {
     backgroundColor: "transparent",
@@ -55,14 +60,20 @@ export default StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 27,
   },
-  actionSubtitle: {
-    color: "#fff",
-    fontFamily: "lato",
-    fontSize: 11,
+  aditionalInfo: {
+    fontWeight: "bold",
+    color: "#000",
+    marginBottom: 30,
   },
   backgroundImage: {
     height: IMAGE_HEIGHT_WITH_LEAK,
     backgroundColor: "rgb(71, 57, 121)",
+  },
+  buttonInfo: {
+    color: "rgba(0, 0, 0, .7)",
+    fontFamily: "lato",
+    fontSize: 10,
+    marginTop: 5,
   },
   column: {
     flex: 1,
@@ -70,7 +81,12 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "#rgba(0, 0, 0, .1)",
+    marginVertical: 30,
+    marginHorizontal: -15,
   },
   finalGoalText: {
     marginTop: 10,
@@ -145,40 +161,86 @@ export default StyleSheet.create({
     height: SIGN_BUTTON_HEIGHT / 2,
   },
   logoContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
     backgroundColor: "transparent",
+  },
+  mainContainer: {
+    marginTop: 30,
+    marginHorizontal: 15,
   },
   mainContentContainer: {
     backgroundColor: "#7E52D8",
     flex: 1,
   },
+  mainTitleContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "#6000AA",
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+  },
   mainTitle: {
+    flex: 3,
     color: "#fff",
-    fontFamily: "pt sans",
-    fontSize: 48,
-    fontWeight: "bold",
+    fontFamily: "roboto",
+    fontSize: 24,
     textAlign: "left",
     ...textShadow,
   },
+  mainTitleOptions: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  favoriteIcon: {
+    marginHorizontal: 10,
+  },
   navigationBar: {
     position: "absolute",
-    top: 0,
+    top: -50,
+    paddingTop: 50,
     right: 0,
     left: 0,
+    ...Platform.select({
+      android: {
+        height: 156,
+      },
+      ios: {
+        height: 120,
+      },
+    }),
   },
   presentation: {
     color: "#313131",
     fontFamily: "pt sans",
     fontSize: 17,
   },
-  presentationContainer: {
+  description: {
+    color: "#313131",
+    fontFamily: "pt sans",
+    fontSize: 19,
+    fontWeight: "bold",
+  },
+  textContainer: {
     backgroundColor: "#fff",
-    paddingHorizontal: 15,
-    paddingBottom: 30,
   },
   progress: {
-    height: 14,
+    borderColor: "#rgba(0, 0, 0, .1)",
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
+    height: 34,
     flex: 1,
-    backgroundColor: "#484848",
+    backgroundColor: "#FFF",
+  },
+  progressText: {
+    backgroundColor: "#FFF",
+    paddingLeft: 5,
+    paddingVertical: 6.5,
+    position: "absolute",
   },
   retryContainer: {
     flex: 1,
@@ -195,14 +257,27 @@ export default StyleSheet.create({
   scrollViewHeaderContainer: {
     backgroundColor: "transparent",
     flex: 1,
-    height: HEADER_MAX_HEIGHT,
+    paddingTop: HEADER_MAX_HEIGHT,
     justifyContent: "flex-end",
-    marginHorizontal: 20,
-    marginBottom: 20,
+  },
+  signButton: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+  },
+  signaturesAndGoal: {
+    color: "#000",
+    paddingHorizontal: 10,
+    paddingTop: 20,
+  },
+  signaturesAndGoalContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
   signersBubble: {
     alignSelf: "flex-end",
-    marginVertical: 10,
+    marginTop: 20,
     marginRight: 10,
   },
   subtitle: {

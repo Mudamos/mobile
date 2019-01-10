@@ -14,6 +14,12 @@ import { identity } from "ramda";
 
 import { UnauthorizedError } from "../models/net-error";
 
+const getPagination = ({ response, ...args }) => ({
+  page: parseInt(response.headers.get("X-Page") || 0, 10),
+  nextPage: parseInt(response.headers.get("X-Next-Page"), 10) || null,
+
+  ...args,
+});
 
 const requester = ({ host, version }) => {
   let builder = farfetch;
@@ -217,17 +223,18 @@ const userSignInfo = ({ client }) => (authToken, plipId) =>
     .get(`/users/message/${plipId}`)
     .then(getData);
 
-const plipSignInfo = ({ client }) => ({ authToken, plipId, initialGoal, finalGoal }) => {
+const plipSignInfo = ({ client }) => ({ authToken, plipId }) => {
   const api =  authToken ? authorizedClient(client, authToken) : client;
-  const qs = buildQueryString({
-    initial_goal: initialGoal,
-    final_goal: finalGoal,
-  });
 
   return api
-    .get(`/petition/${plipId}/info?${qs}`)
+    .get(`/petition/${plipId}/info`)
     .then(getData);
 };
+
+const userFavoriteInfo = ({ client }) => ( authToken, { detailId }) =>
+  authorizedClient(client, authToken)
+    .get(`/favorites/${detailId}/info`)
+    .then(getData)
 
 const logout = ({ client }) => authToken =>
   authorizedClient(client, authToken)
@@ -257,11 +264,16 @@ const changePassword = ({ client }) => (authToken, { currentPassword, newPasswor
     .send({ user: { currentPassword, newPassword } })
     .then(getData);
 
-const updateProfile = ({ client }) => (authToken, { birthdate, name, zipCode }) =>
+const updateProfile = ({ client }) => (authToken, { birthdate, name, voteIdCard, zipCode }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
     .post("/users/profile/update")
-    .send({ user: { birthday: birthdate, name, zipcode: zipCode }})
+    .send({ user: {
+      birthday: birthdate || "",
+      name: name || "",
+      zipcode: zipCode || "",
+      voteidcard: voteIdCard || "",
+    }})
     .then(getData);
 
 const fetchShortPlipSigners = ({ client }) => (authToken, { plipId }) =>
@@ -283,6 +295,103 @@ const fetchOfflinePlipSigners = ({ client }) => ({ plipId }) =>
   client
     .get(`/petition/${plipId}/true/votes/friends`)
     .then(getData);
+
+const listPlips = ({ client }) => ({
+  city,
+  uf,
+  includeCauses,
+  limit,
+  page,
+  scope,
+  search,
+  path,
+}) => {
+  const qs = buildQueryString({
+    city,
+    uf,
+    includeCauses,
+    limit,
+    page,
+    scope,
+    search,
+    path,
+  });
+
+  return client
+    .get(`/petitions/pagination?${qs}`)
+    .then(getPagination)
+    .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+};
+
+const listSignedPlips = ({ client }) => (authToken, {
+  city,
+  uf,
+  includeCauses,
+  limit,
+  page,
+  scope,
+  path,
+}) => {
+  const qs = buildQueryString({
+    city,
+    uf,
+    includeCauses,
+    limit,
+    page,
+    scope,
+    path,
+  });
+
+  if (authToken) {
+    return authorizedClient(client, authToken)
+      .get(`/petitions/pagination/sign?${qs}`)
+      .then(getPagination)
+      .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+  } else {
+    return Promise.resolve({plips: [], page: 0, nextPage: null});
+  }
+};
+
+const listFavoritePlips = ({ client }) => (authToken, {
+  city,
+  uf,
+  includeCauses,
+  limit,
+  page,
+  scope,
+  path,
+}) => {
+  const qs = buildQueryString({
+    city,
+    uf,
+    includeCauses,
+    limit,
+    page,
+    scope,
+    path,
+  });
+
+  if (authToken) {
+    return authorizedClient(client, authToken)
+      .get(`/petitions/pagination/favorite?${qs}`)
+      .then(getPagination)
+      .then(({ json, page, nextPage }) => ({ plips: json.data.petitions, page, nextPage }));
+  } else {
+    return Promise.resolve({plips: [], page: 0, nextPage: null});
+  }
+};
+
+const listSignedPlipsByUser = ({ client }) => authToken =>
+  authorizedClient(client, authToken)
+    .get("/users/petitions")
+    .then(getData);
+
+const toggleFavoritePlip = ({ client }) => (authToken, { detailId }) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/favorites/update/")
+    .send({ petition: { id: detailId }})
+    .then(getData)
 
 const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatarURL }) => {
   let progressListener = identity;
@@ -347,6 +456,7 @@ const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatar
 export default function MobileApi(host) {
   const v1Client = requester({ host, version: "v1" });
   const v2Client = requester({ host, version: "v2" });
+  const v3Client = requester({ host, version: "v3" });
 
   return {
     changePassword: changePassword({ client: v1Client }),
@@ -357,11 +467,17 @@ export default function MobileApi(host) {
     fetchPlipSigners: fetchPlipSigners({ client: v1Client }),
     fetchOfflineShortPlipSigners: fetchOfflineShortPlipSigners({ client: v1Client }),
     fetchShortPlipSigners: fetchShortPlipSigners({ client: v1Client }),
+    listPlips: listPlips({ client: v3Client }),
+    listFavoritePlips: listFavoritePlips({ client: v3Client }),
+    listSignedPlips: listSignedPlips({ client: v3Client }),
+    listSignedPlipsByUser: listSignedPlipsByUser({ client: v3Client }),
     logout: logout({ client: v1Client }),
     plipSignInfo: plipSignInfo({ client: v1Client }),
-    profile: profile({ client: v1Client }),
+    userFavoriteInfo: userFavoriteInfo({ client: v3Client }),
+    toggleFavoritePlip: toggleFavoritePlip({ client: v3Client }),
+    profile: profile({ client: v3Client }),
     retrievePassword: retrievePassword({ client: v2Client }),
-    reverseSearchZipCode: reverseSearchZipCode({ client: v2Client }),
+    reverseSearchZipCode: reverseSearchZipCode({ client: v3Client }),
     saveAvatar: upload({ endpoint: `${host}/api/v1/profile/photo` }),
     saveBirthdate: saveBirthdate({ client: v1Client }),
     saveDocuments: saveDocuments({ client: v1Client }),
@@ -372,9 +488,9 @@ export default function MobileApi(host) {
     sendPhoneValidation: sendPhoneValidation({ client: v1Client }),
     signIn: signIn({ client: v1Client }),
     signMessage: signMessage({ client: v1Client }),
-    signUp: signUp({ client: v2Client }),
+    signUp: signUp({ client: v3Client }),
     signPlip: signPlip({ client: v1Client }),
-    updateProfile: updateProfile({ client: v1Client }),
+    updateProfile: updateProfile({ client: v3Client }),
     userSignInfo: userSignInfo({ client: v1Client }),
   };
 }

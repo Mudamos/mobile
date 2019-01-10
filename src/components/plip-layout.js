@@ -10,8 +10,11 @@ import {
 } from "react-native";
 
 import {
+  eligibleToSignPlip,
   formatNumber,
   moment,
+  notEmpty,
+  notNil,
 } from "../utils";
 
 import PropTypes from "prop-types";
@@ -19,29 +22,24 @@ import PropTypes from "prop-types";
 import { clamp } from "ramda";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
-import Ionicon from "react-native-vector-icons/Ionicons";
 
-import LinearGradient from "react-native-linear-gradient";
-import { MKProgress } from "react-native-material-kit";
-
-import Layout from "./layout";
+import Layout from "./purple-layout";
 import HeaderLogo from "./header-logo";
 import NavigationBar from "./navigation-bar";
 import NetworkImage from "./network-image";
 import PageLoader from "./page-loader";
 import RetryButton from "./retry-button";
-import PurpleFlatButton from "./purple-flat-button";
-import SignModal from "./plip-signed-modal";
+import BlueFlatButton from "./blue-flat-button";
 import SignedMessageView from "./signed-message-view";
 import SignerBubbleView from "./signer-bubble-view";
 import BackButton from "./back-button";
 import YouTube from "./you-tube";
-
-import {
-  isNationalCause,
-  isStateNationalCause,
-  isUserGoals,
-} from "../models";
+import ProgressBarClassic from "./progress-bar-classic";
+import RoundedButton from "./rounded-button";
+import StaticFooter from "./static-footer";
+import ConfirmSignModal from "./confirm-sign-modal";
+import ValidProfileModal from "./valid-profile-modal";
+import SafeAreaView from "./safe-area-view";
 
 import styles, {
   HEADER_SCROLL_DISTANCE,
@@ -50,64 +48,52 @@ import styles, {
 
 import locale from "../locales/pt-BR";
 
-import {
-  SignatureGoalsType,
-} from "../prop-types";
-
-const footerGradientStart = { x: 0.0, y: 0.1 };
-const footerGradientEnd = { x: 0.5, y: 1.0 };
-const footerGradientLocation = [0, 0.5];
-
 export default class PlipLayout extends Component {
   state = {
-    showSignSuccess: false,
+    isSignModalVisible: false,
+    isValidProfileModalVisible: false,
   };
 
   static propTypes = {
     errorFetching: PropTypes.bool,
     errorHandlingAppLink: PropTypes.bool,
+    isAddingFavoritePlip: PropTypes.bool,
     isFetchingPlipRelatedInfo: PropTypes.bool,
     isRemainingDaysEnabled: PropTypes.bool,
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
+    plipsFavoriteInfo: PropTypes.object,
     remoteConfig: PropTypes.shape({
       authenticatedSignersButtonTitle: PropTypes.string,
     }),
-    signatureGoals: SignatureGoalsType,
+    revalidateProfileSignPlip: PropTypes.bool,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     user: PropTypes.object,
     userSignDate: PropTypes.object,
     onBack: PropTypes.func.isRequired,
     onFetchPlipRelatedInfo: PropTypes.func.isRequired,
+    onLogin: PropTypes.func.isRequired,
     onOpenSigners: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onPlipSign: PropTypes.func.isRequired,
+    onRedirectToCantSign: PropTypes.func.isRequired,
     onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
-    onSignSuccessClose: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
 
   get plipName() {
     const { plip } = this.props;
-    if (!plip) return;
-
-    return plip.phase && plip.phase.name;
-  }
-
-  get plipSubtitle() {
-    const { plip } = this.props;
-    if (!plip) return;
-
-    return plip.phase && plip.phase.description;
+    return plip && plip.title;
   }
 
   get plipImage() {
     const { plip } = this.props;
-    return plip && plip.cycle && plip.cycle.pictures && plip.cycle.pictures.thumb;
+    return plip && plip.pictureThumb;
   }
 
   get plipPresentation() {
@@ -115,12 +101,17 @@ export default class PlipLayout extends Component {
     return plip && plip.presentation;
   }
 
+  get plipDescription() {
+    const { plip } = this.props;
+    return plip && plip.subtitle;
+  }
+
   get daysLeft() {
     const { plip } = this.props;
     if (!plip) return;
 
     const start = moment();
-    const end = moment(plip.phase.finalDate);
+    const end = moment(plip.finalDate);
 
     // No days left because there are no more seconds left
     if (end.diff(start, "seconds") < 0) return;
@@ -133,20 +124,6 @@ export default class PlipLayout extends Component {
     return daysLeft != null && daysLeft >= 0;
   }
 
-  get showCurrentGoal() {
-    const { isRemainingDaysEnabled, plip } = this.props;
-    return this.signatureEnabled && !isRemainingDaysEnabled && !isNationalCause(plip);
-  }
-
-  get messageForDaysLeft() {
-    if (this.daysLeft > 0) {
-      const sufix = this.daysLeft > 1 ? "dias" : "dia";
-      return `${formatNumber(this.daysLeft)} ${sufix}`;
-    } else if (this.daysLeft === 0) {
-      return locale.lastDay;
-    }
-  }
-
   get callToAction() {
     const { plip } = this.props;
     if (!plip) return;
@@ -155,12 +132,12 @@ export default class PlipLayout extends Component {
   }
 
   get plipProgress() {
-    const { plip, plipSignInfo, signatureGoals } = this.props;
+    const { plip, plipSignInfo } = this.props;
 
-    if (!plip || !signatureGoals.currentSignatureGoal) return 0;
+    if (!plip) return 0;
 
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
-    const total = signatureGoals.currentSignatureGoal;
+    const total = plip.totalSignaturesRequired;
     const progress = clamp(0, 1, count / total);
 
     return progress;
@@ -172,20 +149,28 @@ export default class PlipLayout extends Component {
 
   onRetryAppLink = () => this.props.onRetryAppLink();
 
+  onToggleSignModal = () => {
+    this.setState(({ isSignModalVisible }) => ({ isSignModalVisible: !isSignModalVisible }));
+  }
+
+  onShowSignModal = () => {
+    this.setState({ isSignModalVisible: true, isValidProfileModalVisible: false });
+  }
+
+  onToggleValidProfileModal = () => {
+    this.setState(({ isValidProfileModalVisible }) => ({ isValidProfileModalVisible: !isValidProfileModalVisible }));
+  }
+
   componentWillMount() {
     this.setState({
       scrollY: new Animated.Value(0),
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    // Handling the success modal after signing the plip. It should be just displayed once.
-    if (nextProps.justSignedPlip && nextProps.justSignedPlip !== this.props.justSignedPlip) {
-      this.setState({ showSignSuccess: true });
-    } else if (nextProps.justSignedPlip === false && this.state.showSignSuccess) {
-      // Handling the case the modal was displayed on another view and we need to dismiss it here
-      this.setState({ showSignSuccess: false });
-    }
+  componentDidMount() {
+    const { revalidateProfileSignPlip } = this.props;
+
+    this.setState({ isValidProfileModalVisible: !!revalidateProfileSignPlip });
   }
 
   render() {
@@ -197,31 +182,30 @@ export default class PlipLayout extends Component {
       plip,
     } = this.props;
 
-    const { showSignSuccess } = this.state;
+    const { isSignModalVisible, isValidProfileModalVisible } = this.state;
 
     return (
-      <View style={[styles.container]}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           { errorHandlingAppLink && this.renderRetryAppLink() }
           { errorFetching && plip && this.renderRetry() }
           { !errorFetching && !errorHandlingAppLink && !isFetchingPlipRelatedInfo && plip && this.renderMainContent() }
           { this.renderNavBar() }
+          { !errorFetching && !errorHandlingAppLink && !isFetchingPlipRelatedInfo && plip && this.renderSignButton() }
         </Layout>
 
-        {showSignSuccess && plip && this.renderSignSuccess()}
-
         <PageLoader isVisible={isFetchingPlipRelatedInfo || isSigning || (!plip && !errorHandlingAppLink)} />
-      </View>
+        <ConfirmSignModal isVisible={isSignModalVisible} plipName={this.plipName} onToggleSignModal={this.onToggleSignModal} onPlipSign={this.onPlipSign}/>
+        <ValidProfileModal isVisible={isValidProfileModalVisible} onToggleModal={this.onToggleValidProfileModal} onOk={this.onShowSignModal}/>
+      </SafeAreaView>
     );
   }
 
   renderMainContent() {
     const {
-      isRemainingDaysEnabled,
-      plip,
-      signatureGoals,
       signers,
       signersTotal,
+      onOpenURL,
       userSignDate,
     } = this.props;
 
@@ -244,21 +228,8 @@ export default class PlipLayout extends Component {
 
             {this.renderProgress()}
 
-            <View style={styles.infoContainer}>
-              <View style={isNationalCause(plip) ? styles.infoNationalCauseContainerRow : styles.infoContainerRow}>
-                {this.renderTargetPercentage(plip)}
-                {this.renderSignaturesCount()}
-                {this.signatureEnabled && isRemainingDaysEnabled && this.renderDaysLeft()}
-                {!this.signatureEnabled && this.renderPlipFinished()}
-              </View>
-
-              { !!signatureGoals.finalGoal && !isNationalCause(plip) &&
-                <Text style={styles.finalGoalText}>* Nossa meta final é de {formatNumber(signatureGoals.finalGoal)} assinaturas</Text>
-              }
-            </View>
-
             {userSignDate && <SignedMessageView date={userSignDate} />}
-            {!userSignDate && plip && this.signatureEnabled && this.renderSignButton()}
+            {this.renderSignaturesCount()}
 
             {
               signers &&
@@ -266,31 +237,91 @@ export default class PlipLayout extends Component {
                   users={signers}
                   total={signersTotal}
                   style={styles.signersBubble}
-                  onPress={this.onOpenSigners.bind(this)}
+                  onPress={this.onOpenSigners}
                 />
             }
-
-            {this.renderPresentation()}
-            {this.renderVideo()}
+            <View style={styles.mainContainer}>
+              {this.renderDescription()}
+              <View style={styles.divider} />
+              {this.renderPresentation()}
+              {this.renderVideo()}
+              {this.renderButtonReadFullText()}
+              <View style={styles.divider} />
+              <Text style={styles.aditionalInfo}>Informações Adicionais:</Text>
+              {this.renderButtonDownloadPDF()}
+              {this.renderButtonSignerList()}
+            </View>
+            <StaticFooter onOpenURL={onOpenURL} />
           </View>
-
-          {this.renderFooterActions()}
         </ScrollView>
       </View>
     );
   }
 
-  renderSignButton() {
-    return (
-      <View style={styles.full}>
-        <View style={styles.infoFakeTop} />
-        <View style={styles.infoFakeBottom} />
+  signButtonTitle = ({ canSign, sameRegion, shouldLogin }) => {
+    if (canSign || shouldLogin) {
+      return locale.iWannaMakeTheDifference;
+    } else if (!sameRegion) {
+      return locale.thisPlipFromAnotherRegion;
+    } else {
+      return locale.makeTheDifferenceAndShare;
+    }
+  }
 
-        <PurpleFlatButton
-          title={this.callToAction}
-          onPress={this.onPlipSign.bind(this)}
-          style={signButtonStyle}
-          textStyle={{fontSize: 19, fontFamily: "lato"}}
+  signButtonOnPress = ({ canSign, sameRegion, shouldLogin }) => {
+    const {
+      onLogin,
+      onRedirectToCantSign,
+    } = this.props;
+
+    if (shouldLogin) {
+      return onLogin;
+    } else if (canSign) {
+      return this.onToggleSignModal;
+    } if (!sameRegion) {
+      return onRedirectToCantSign;
+    } else {
+      return this.onShare;
+    }
+  }
+
+  signButtonIcon = ({ canSign, shouldLogin, sameRegion }) => {
+    if (canSign || shouldLogin) {
+      return "check-circle";
+    } else if (!sameRegion) {
+      return "information";
+    } else {
+      return "share-variant";
+    }
+  }
+
+  renderSignButton() {
+    const {
+      userSignDate,
+      user,
+      plip,
+    } = this.props;
+
+    const hasSigned = !!userSignDate;
+    const logged = !!user;
+    const sameRegion = logged && !!eligibleToSignPlip({ plip, user }) || !logged;
+
+    const shouldLogin = !logged;
+    const canSign = logged && !hasSigned && sameRegion;
+
+    const title = this.signButtonTitle({ canSign, sameRegion, shouldLogin });
+    const onPress = this.signButtonOnPress({ canSign, sameRegion, shouldLogin });
+    const iconName = this.signButtonIcon({ canSign, shouldLogin, sameRegion });
+    const buttonStyle = signButtonStyle(!user || user && sameRegion);
+
+    return (
+      <View style={styles.signButton}>
+        <BlueFlatButton
+          title={title}
+          onPress={onPress}
+          style={buttonStyle}
+          textStyle={{fontFamily: "lato"}}
+          iconName={iconName}
         />
       </View>
     );
@@ -298,32 +329,8 @@ export default class PlipLayout extends Component {
 
   renderProgress() {
     return (
-      <MKProgress
-        style={styles.progress}
-        progressAniDuration={1000}
-        progressColor="#00db5e"
-        progress={this.plipProgress}
-      />
-    );
-  }
-
-  renderTargetPercentage(plip) {
-    if (isNationalCause(plip)) return null;
-
-    return (
-      <View>
-        <Text style={styles.infoPercentageText}>{this.progressPercentage}%</Text>
-        <Text style={styles.infoPercentageSubtitle}>da meta atual *</Text>
-      </View>
-    );
-  }
-
-  renderPlipFinished() {
-    return (
-      <View>
-        <View style={{flex: 1, justifyContent: "flex-end"}}>
-          <Text style={styles.infoTextSubtitle}>{locale.petitionEnded}</Text>
-        </View>
+      <View style={{flex: 1, justifyContent: "center"}}>
+        <ProgressBarClassic value={this.progressPercentage}/>
       </View>
     );
   }
@@ -356,20 +363,17 @@ export default class PlipLayout extends Component {
           opacity: titlesOpacity,
         }]}
       >
-        <Text
-          numberOfLines={3}
-          ellipsizeMode="tail"
-          style={styles.mainTitle}
-        >
-          {this.plipName}
-        </Text>
-        <Text
-          numberOfLines={3}
-          ellipsizeMode="tail"
-          style={styles.subtitle}
-        >
-          {this.plipSubtitle}
-        </Text>
+        <View style={styles.mainTitleContainer}>
+          <Text
+            style={styles.mainTitle}
+          >
+            {this.plipName}
+          </Text>
+          <View style={styles.mainTitleOptions}>
+            {this.renderFavoriteButton()}
+            {this.renderShareButton()}
+          </View>
+        </View>
       </Animated.View>
     );
   }
@@ -381,12 +385,6 @@ export default class PlipLayout extends Component {
       extrapolate: "clamp",
     });
 
-    const titlesBackgroundColor = this.state.scrollY.interpolate({
-      inputRange: [0, 100, HEADER_SCROLL_DISTANCE],
-      outputRange: ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, .7)", "rgba(0, 0, 0, 1)"],
-      extrapolate: "clamp",
-    });
-
     return (
       <View style={styles.imageBackgroundContainer}>
         <NetworkImage
@@ -395,88 +393,47 @@ export default class PlipLayout extends Component {
             transform: [{translateY: imageTranslate}],
           }]}
           resizeMode="cover"
-        >
-          <Animated.View
-            style={[styles.full, {
-              backgroundColor: titlesBackgroundColor,
-            }]}
-          >
-            <LinearGradient
-              colors={["rgba(0, 0, 0, .4)", "rgba(0, 0, 0, .2)", "rgba(0, 0, 0, 0)"]}
-              locations={[0, 0.3, 0.8]}
-              style={styles.fullGradient}
-            />
-
-            <LinearGradient
-              colors={["rgba(0,0,0,0)", "rgba(0,0,0,0.4)", "rgba(0,0,0,.6)"]}
-              locations={[0.5, 0.7, 1]}
-              style={styles.fullGradient}
-            />
-
-            <LinearGradient
-              colors={["rgba(0, 0, 0, .2)", "rgba(0, 0, 0, .2)"]}
-              locations={[0, 1]}
-              style={styles.fullGradient}
-            />
-
-          </Animated.View>
-        </NetworkImage>
+        />
       </View>
     );
   }
 
   renderSignaturesCount() {
     const {
-      plip,
       plipSignInfo,
-      signatureGoals,
-      user,
+      plip,
     } = this.props;
 
-    const { currentSignatureGoal: goal } = signatureGoals;
     const count = plipSignInfo && plipSignInfo.signaturesCount || 0;
 
-    const CountView = () =>
-      <Text style={styles.infoText}>{formatNumber(count)}</Text>;
-
-    const getMessage = () => {
-      if (isUserGoals({ user, plip })) {
-        const location = isStateNationalCause(plip)
-          ? user.address.state
-          : user.address.city;
-
-          return `pessoas em ${location} assinaram`;
-      }
-
-      if (isNationalCause(plip)) {
-        return "pessoas assinaram no Brasil";
-      }
-
-      return this.signatureEnabled ? "já assinaram" : "assinaram";
+    const signaturesAndGoal = {
+      signatures: formatNumber(count),
+      goal: formatNumber(plip.totalSignaturesRequired),
     }
 
-    const signatureMessage = getMessage();
-
     return (
-      <View style={{ flex: 1, marginLeft: 5 }}>
-        {
-          this.showCurrentGoal &&
-            <View style={{ alignSelf: "flex-end", flexDirection: "row", alignItems: "flex-start"}}>
-              <CountView />
-              <Text style={[styles.infoTextSubtitle, { alignSelf: "center", marginLeft: 5 }]}>de</Text>
-              <Text style={[styles.infoText, { marginLeft: 5 }]}>{formatNumber(goal)}</Text>
-            </View>
-        }
+      <View style={styles.signaturesAndGoalContainer}>
+        <Text style={styles.signaturesAndGoal}>{locale.signaturesAndGoal(signaturesAndGoal)}</Text>
+      </View>
+    );
+  }
 
-        {!this.showCurrentGoal && <CountView />}
-        <Text style={[styles.infoTextSubtitle, this.showCurrentGoal ? { alignSelf: "flex-end" } : null]}>{signatureMessage}</Text>
+  renderDescription() {
+    return (
+      <View style={styles.textContainer}>
+        <Text
+          numberOfLines={0}
+          style={styles.description}
+        >
+          {this.plipDescription}
+        </Text>
       </View>
     );
   }
 
   renderPresentation() {
     return (
-      <View style={styles.presentationContainer}>
+      <View style={styles.textContainer}>
         <Text
           numberOfLines={0}
           style={styles.presentation}
@@ -487,95 +444,50 @@ export default class PlipLayout extends Component {
     );
   }
 
-  renderFooterActions() {
-    const {
-      plipSignInfo,
-      onViewPlip,
-      plip,
-      remoteConfig,
-      onOpenURL,
-    } = this.props;
-
+  renderButtonReadFullText() {
     return (
-      <LinearGradient
-        start={footerGradientStart}
-        end={footerGradientEnd}
-        locations={footerGradientLocation}
-        style={styles.footerContainer}
-        colors={["#9844ce", "#7E52D8"]}
+      <TouchableOpacity
+        onPress={this.onViewPlip}
       >
-        <TouchableOpacity
-          onPress={() => onViewPlip(plip)}
-        >
-          <View style={styles.actionRow}>
-            <Icon
-              name="insert-drive-file"
-              size={40}
-              color="#fff"
-              style={styles.actionIcon}
-            />
-            <Text style={styles.actionTitle}>{locale.readFullText.toUpperCase()}</Text>
-            <Icon
-              name="chevron-right"
-              size={40}
-              color="#fff"
-            />
-          </View>
-        </TouchableOpacity>
-
-        <View style={styles.hairline} />
-
-        <TouchableOpacity
-          onPress={this.onOpenDocument.bind(this)}
-        >
-          <View style={styles.actionRow}>
-            <Icon
-              name="file-download"
-              size={40}
-              color="#fff"
-              style={styles.actionIcon}
-            />
-            <View style={styles.column}>
-              <Text style={styles.actionTitle}>{locale.downloadPDF.toUpperCase()}</Text>
-              {
-                plipSignInfo && plipSignInfo.updatedAt &&
-                  <Text style={styles.actionSubtitle}>
-                    Registrada em: {plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss")}
-                  </Text>
-              }
-            </View>
-          </View>
-        </TouchableOpacity>
-
-        <View style={styles.hairline} />
-
-        <TouchableOpacity
-          onPress={() => onOpenURL(plip.plipUrl)}
-        >
-          <View style={styles.actionRow}>
-            <Icon
-              name="create"
-              size={40}
-              color="#fff"
-              style={styles.actionIcon}
-            />
-            <Text style={styles.actionTitle}>{remoteConfig.authenticatedSignersButtonTitle.toUpperCase()}</Text>
-            <Icon
-              name="chevron-right"
-              size={40}
-              color="#fff"
-            />
-          </View>
-        </TouchableOpacity>
-      </LinearGradient>
+        <View style={styles.actionFullText}>
+          <Text style={styles.actionTitle}>{locale.readFullText.toUpperCase()}</Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 
-  renderDaysLeft() {
+  renderButtonDownloadPDF() {
+    const {
+      plipSignInfo,
+    } = this.props;
+
+    const title = locale.downloadPDF;
+    const subtitle = plipSignInfo && plipSignInfo.updatedAt && locale.registeredAt + plipSignInfo.updatedAt.format("DD/MM/YYYY [às] HH:mm:ss");
+    const action = this.onOpenDocument;
+    const icon = "file-download";
+
     return (
-      <View>
-        <Text style={styles.infoText}>{this.messageForDaysLeft}</Text>
-        <Text style={styles.infoTextSubtitle}>para o encerramento</Text>
+      <View style={{marginBottom: 20, alignItems: "center"}}>
+        <RoundedButton title={title} action={action} icon={icon}/>
+        <Text style={styles.buttonInfo}>{subtitle}</Text>
+      </View>
+    );
+  }
+
+  renderButtonSignerList() {
+    const {
+      remoteConfig,
+    } = this.props;
+
+    const title = remoteConfig && remoteConfig.authenticatedSignersButtonTitle.toUpperCase();
+    const subtitle = locale.youWillBeRedirectToMudamos;
+    const action = this.onOpenURL;
+    const icon = "exit-to-app";
+
+    return (
+      <View style={{marginBottom: 20, alignItems: "center"}}>
+        <RoundedButton title={title} action={action} icon={icon}/>
+        <Text style={styles.buttonInfo}>{subtitle}</Text>
       </View>
     );
   }
@@ -588,10 +500,10 @@ export default class PlipLayout extends Component {
       onBack,
     } = this.props;
 
-    const finalNavColor = "rgba(71, 57, 121, 1)";
+    const finalNavColor = "#6000AA";
     let navColorOpacity = this.state.scrollY.interpolate({
       inputRange: [0, (HEADER_SCROLL_DISTANCE - SMALL_ANIM_OFFSET) / 2, HEADER_SCROLL_DISTANCE - SMALL_ANIM_OFFSET],
-      outputRange: ["rgba(71, 57, 121, 0)", "rgba(71, 57, 121, 0)", finalNavColor],
+      outputRange: ["rgba(0,0,0,0.4)", "rgb(119, 5, 185)", finalNavColor],
       extrapolate: "clamp",
     });
 
@@ -612,15 +524,49 @@ export default class PlipLayout extends Component {
     );
   }
 
-  renderShareButton() {
-    const { plip, onShare } = this.props;
+  onToggleFavorite = () => {
+    const { plip, onToggleFavorite, isAddingFavoritePlip } = this.props;
+
+    !isAddingFavoritePlip && onToggleFavorite(plip.detailId);
+  }
+
+  renderFavoriteButton() {
+    const {
+      user,
+      plip,
+      plipsFavoriteInfo,
+    } = this.props;
+
+    const isLogged = !!user;
+
+    if (!isLogged) return;
+
+    const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
+    const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);
+
+    const iconColor = isFavorite ? "rgb(255, 255, 255)" : "rgba(0, 0, 0, .5)"
 
     return (
-      <TouchableOpacity onPress={() => onShare(plip)}>
-        <Ionicon
-          name="md-share-alt"
+      <TouchableOpacity
+        onPress={this.onToggleFavorite}
+      >
+        <Icon
+          name="favorite"
+          style={styles.favoriteIcon}
+          size={30}
+          color={iconColor}
+        />
+      </TouchableOpacity>
+    );
+  }
+
+  renderShareButton() {
+    return (
+      <TouchableOpacity onPress={this.onShare}>
+        <Icon
+          name="share"
           size={24}
-          color="#fff"
+          color="rgba(0, 0, 0, .5)"
         />
       </TouchableOpacity>
     );
@@ -665,11 +611,10 @@ export default class PlipLayout extends Component {
   }
 
   renderRetry() {
-    const { plip, onFetchPlipRelatedInfo } = this.props;
     return (
       <View style={styles.retryContainer}>
         <RetryButton
-          onPress={() => onFetchPlipRelatedInfo(plip.id)}
+          onPress={this.onFetchPlipRelatedInfo}
           style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
         />
       </View>
@@ -687,50 +632,52 @@ export default class PlipLayout extends Component {
     );
   }
 
-  renderSignSuccess() {
-    const { plip, onShare } = this.props;
-
-    return (
-      <SignModal
-        plipName={this.plipName}
-        onShare={() => onShare(plip)}
-        onClose={this.onModalSuccessClose.bind(this)}
-      />
-    );
+  onFetchPlipRelatedInfo = () => {
+    const { plip, onFetchPlipRelatedInfo} = this.props;
+    onFetchPlipRelatedInfo(plip.id);
   }
 
-  onOpenDocument() {
+  onOpenDocument = () => {
     const { plip, onOpenURL } = this.props;
     onOpenURL(plip.documentUrl);
   }
 
-  onPlipSign() {
+  onPlipSign = () => {
     const { plip, onPlipSign } = this.props;
+    this.onToggleSignModal();
     onPlipSign(plip);
   }
 
-  onModalSuccessClose() {
-    const { onSignSuccessClose, plip } = this.props;
-
-    this.setState({ showSignSuccess: false });
-    onSignSuccessClose(plip);
-  }
-
-  onOpenSigners() {
+  onOpenSigners = () => {
     const { plip, onOpenSigners } = this.props;
     onOpenSigners(plip.id);
   }
+
+  onOpenURL = () => {
+    const { plip, onOpenURL } = this.props;
+    onOpenURL(plip.plipUrl);
+  }
+
+  onShare = () => {
+    const { plip, onShare } = this.props;
+    onShare(plip);
+  }
+
+  onViewPlip = () => {
+    const { plip, onViewPlip } = this.props;
+    onViewPlip(plip);
+  }
 }
 
-const signButtonStyle = {
-  marginHorizontal: 20,
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  elevation: 5,
+const signButtonStyle = active => ({
+  backgroundColor: active ? "#00BFD8" : "#ACACAC",
+  marginHorizontal: 10,
+  marginVertical: 15,
+  paddingHorizontal: 15,
+  paddingVertical: 10,
+  elevation: 3,
   shadowColor: "#000",
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.3,
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.2,
   shadowRadius: 4,
-};
+});

@@ -1,35 +1,33 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Alert } from "react-native";
 import { connect } from "react-redux";
 
 import { moment } from "../utils";
-
-import locale from "../locales/pt-BR";
 
 import {
   clearPlipInfo,
   fetchPlipRelatedInfo,
   handleAppLink,
   navigate,
-  navigateBack,
   openURL,
   removeJustSignedPlip,
   sharePlip,
   signPlip,
+  toggleFavorite,
 } from "../actions";
 
 import {
   currentUser,
   getCurrentPlip,
   fetchPlipRelatedInfoError,
+  findPlipsFavoriteInfo,
+  isAddingFavoritePlip,
   isFetchingPlipRelatedInfo,
   isRemainingDaysEnabled,
   isSigningPlip,
   getCurrentPlipShortSignersInfo,
   getPlipSignInfo,
   getUserCurrentPlipSignInfo,
-  getPlipSignatureGoals,
   handlingAppLinkError,
   hasUserJustSignedPlip,
   listRemoteConfig,
@@ -42,11 +40,13 @@ class Container extends Component {
   static propTypes = {
     errorFetching: PropTypes.bool,
     errorHandlingAppLink: PropTypes.bool,
+    isAddingFavoritePlip: PropTypes.bool,
     isFetchingPlipRelatedInfo: PropTypes.bool,
     isSigning: PropTypes.bool,
     justSignedPlip: PropTypes.bool,
     plip: PropTypes.object,
     plipSignInfo: PropTypes.object,
+    plipsFavoriteInfo: PropTypes.object,
     signers: PropTypes.array,
     signersTotal: PropTypes.number,
     userSignDate: PropTypes.object,
@@ -58,6 +58,7 @@ class Container extends Component {
     onRetryAppLink: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onSignSuccessClose: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
     onViewPlip: PropTypes.func.isRequired,
   };
 
@@ -76,17 +77,6 @@ class Container extends Component {
     );
   }
 }
-
-const onPlipSign = ({ dispatch, plip }) => {
-  Alert.alert(
-    null,
-    `${locale.doYouWantToSign} "${plip.phase.name}"?`,
-    [
-      {text: locale.cancel, onPress: () => {}, style: "cancel"},
-      {text: locale.yes, onPress: () => dispatch(signPlip({ plip }))},
-    ]
-  )
-};
 
 const mapStateToProps = state => {
   const currentPlip = getCurrentPlip(state);
@@ -107,15 +97,16 @@ const mapStateToProps = state => {
     plip: getCurrentPlip(state),
     errorFetching: fetchPlipRelatedInfoError(state),
     errorHandlingAppLink: handlingAppLinkError(state),
+    isAddingFavoritePlip: isAddingFavoritePlip(state),
     isFetchingPlipRelatedInfo: isFetchingPlipRelatedInfo(state),
     isRemainingDaysEnabled: isRemainingDaysEnabled(state),
     isSigning: isSigningPlip(state),
     justSignedPlip: plipId ? hasUserJustSignedPlip(state, plipId) : false,
+    plipsFavoriteInfo: findPlipsFavoriteInfo(state),
     plipSignInfo: plipSignInfo,
     remoteConfig: listRemoteConfig(state),
     signers: currentPlipShortSignersInfo.users,
     signersTotal: currentPlipShortSignersInfo.total,
-    signatureGoals: getPlipSignatureGoals(plipId)(state),
     user: currentUser(state),
     userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
@@ -124,15 +115,18 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onBack: () => {
     dispatch(clearPlipInfo());
-    dispatch(navigateBack());
+    dispatch(navigate("plipsNav"));
   },
+  onRedirectToCantSign: () => dispatch(navigate("cantSignPlip")),
   onFetchPlipRelatedInfo: plipId => dispatch(fetchPlipRelatedInfo(plipId)),
   onOpenSigners: plipId => dispatch(navigate("signers", { plipId })),
   onOpenURL: url => dispatch(openURL(url)),
-  onPlipSign: plip => onPlipSign({ dispatch, plip }),
+  onLogin: () => dispatch(navigate("signIn")),
+  onPlipSign: plip => dispatch(signPlip({ plip })),
   onRetryAppLink: () => dispatch(handleAppLink()),
   onShare: plip => dispatch(sharePlip(plip)),
   onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
+  onToggleFavorite: detailId => dispatch(toggleFavorite({ detailId })),
   onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),
 });
 

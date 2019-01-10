@@ -15,6 +15,7 @@ import BackButton from "./back-button";
 import MDTextInput from "./md-text-input";
 import FlatButton from "./flat-button";
 import NavigationBar from "./navigation-bar";
+import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 
@@ -46,7 +47,7 @@ export default class ForgotPasswordLayout extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           <ScrollView>
             {this.renderNavBar()}
@@ -82,7 +83,7 @@ export default class ForgotPasswordLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={isSaving} />
-      </View>
+      </SafeAreaView>
     );
   }
 

@@ -12,9 +12,9 @@ export const isFetchingProfile = isFetching => ({
   payload: { isFetching },
 });
 
-export const profileSaveMain = ({ name, email, password }) => ({
+export const profileSaveMain = ({ cpf, email, password, termsAccepted }) => ({
   type: "PROFILE_SAVE_MAIN",
-  payload: { name, email, password },
+  payload: { cpf, email, password, termsAccepted },
 });
 
 export const saveProfileBirthdate = birthdate => ({
@@ -30,6 +30,11 @@ export const saveProfileDocuments = ({ cpf, voteCard, termsAccepted }) => ({
 export const savingProfile = isSaving => ({
   type: "PROFILE_SAVING",
   payload: { isSaving },
+});
+
+export const signingUp = isSigningUp => ({
+  type: "SIGNING_UP",
+  payload: { isSigningUp },
 });
 
 export const sendingPhoneValidation = isSendingValidation => ({
@@ -76,9 +81,9 @@ export const invalidatePhone = () => ({
   type: "PROFILE_INVALIDATE_PHONE",
 });
 
-export const profileUpdate = ({ birthdate, name, zipCode }) => ({
+export const profileUpdate = ({ birthdate, name, zipCode, voteIdCard, shouldNavigate = true }) => ({
   type: "PROFILE_UPDATE",
-  payload: { birthdate, name, zipCode },
+  payload: { birthdate, name, zipCode, voteIdCard, shouldNavigate },
 });
 
 export const clearProfileSaveErrors = () => ({
@@ -113,3 +118,8 @@ export const profileValidationCompleted = ({ error }) => ({
   type: "PROFILE_VALIDATE_COMPLETED",
   payload: { error },
 });
+
+export const updateUser = ({ profile, validations }) => ({
+  type: "UPDATE_USER",
+  payload: { profile, validations },
+})

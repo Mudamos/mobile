@@ -1,101 +1,85 @@
 import {
-  CITYWIDE_SCOPE,
-  STATEWIDE_SCOPE,
-  NATIONWIDE_SCOPE,
-
-  excludes,
-  moment,
-} from "../utils";
-
-import {
-  isNationalCause,
-} from "../models";
-
-import { currentUser } from "./profile";
-
-import {
-  groupBy,
-  pipe,
-  prop,
   propEq,
-  sort,
 } from "ramda";
 
-export const errorFetchingPlips = state => state.plip.errorFetchingPlips;
+export const isFetchingAllPlips = state => state.plip.allPlips.isFetching;
+export const isFetchingNationwidePlips = state => state.plip.nationwidePlips.isFetching;
+export const isFetchingPlipsByLocation = state => state.plip.userLocationPlips.isFetching;
+export const isFetchingSignedPlips = state => state.plip.signedPlips.isFetching;
+export const isFetchingFavoritePlips = state => state.plip.favoritePlips.isFetching;
 
-export const isFetchingPlips = state => state.plip.isFetchingPlips;
+export const isFetchingPlipsNextPageAllPlips = state => state.plip.allPlips.isFetchingNextPage;
+export const isFetchingPlipsNextPageNationwidePlips = state => state.plip.nationwidePlips.isFetchingNextPage;
+export const isFetchingPlipsNextPagePlipsByLocation = state => state.plip.userLocationPlips.isFetchingNextPage;
+export const isFetchingPlipsNextPageSignedPlips = state => state.plip.signedPlips.isFetchingNextPage;
+export const isFetchingPlipsNextPageFavoritePlips = state => state.plip.favoritePlips.isFetchingNextPage;
 
-export const isFetchingPlipsNextPage = state => state.plip.isFetchingPlipsNextPage;
-
-export const isRefreshingPlips = state => state.plip.isRefreshingPlips;
+export const isRefreshingAllPlips = state => state.plip.allPlips.isRefreshing;
+export const isRefreshingNationwidePlips = state => state.plip.nationwidePlips.isRefreshing;
+export const isRefreshingPlipsByLocation = state => state.plip.userLocationPlips.isRefreshing;
+export const isRefreshingSignedPlips = state => state.plip.signedPlips.isRefreshing;
+export const isRefreshingFavoritePlips = state => state.plip.favoritePlips.isRefreshing;
 
 export const findPlip = id => state =>
-  (state.plip.plips || []).find(propEq("id", id));
+  (findPlips(state) || []).find(propEq("id", id));
 
-export const findPlips = state => state.plip.plips || [];
-
-export const sortPlips = plips => state => {
-  const user = currentUser(state);
-  const address = (user || {}).address;
-  const normalize = str => (str || "").toLowerCase();
-  const getTime = date => moment(date).toDate().getTime();
-  const orderPlips = plips => sort((a, b) => getTime(b.phase.initialDate) - getTime(a.phase.initialDate), plips || []);
-  // There is no concept for signed unsigned anymore
-  const groupBySignature = groupBy(() => "unsigned");
-
-  const userCityPlips = plips.filter(plip => {
-    const { scopeCoverage } = plip;
-
-    return !isNationalCause(plip) && scopeCoverage.scope === CITYWIDE_SCOPE &&
-           address &&
-           normalize(address.uf) === normalize(scopeCoverage.city.uf) &&
-           normalize(address.city) === normalize(scopeCoverage.city.name);
-  }).filter(({ id }) => !hasUserSignedPlip(id)(state));
-
-  const userStatePlips = plips.filter(plip => {
-    const { scopeCoverage } = plip;
-
-    return !isNationalCause(plip) && scopeCoverage.scope === STATEWIDE_SCOPE &&
-           address &&
-           normalize(address.uf) === normalize(scopeCoverage.uf);
-  }).filter(({ id }) => !hasUserSignedPlip(id)(state));
-
-  const unsignedNationwidePlips = plips
-    .filter(({ scopeCoverage }) => scopeCoverage.scope === NATIONWIDE_SCOPE)
-    .filter(({ id }) => !hasUserSignedPlip(id)(state));
-
-  const filteredIds = [
-    ...userCityPlips,
-    ...userStatePlips,
-    ...unsignedNationwidePlips,
-  ].map(prop("id"));
-
-  const others = plips.filter(pipe(prop("id"), excludes(filteredIds)));
-
-  const signedNationwide = others.filter(({ scopeCoverage }) => scopeCoverage.scope === NATIONWIDE_SCOPE);
-  const otherStatewide = groupBySignature(others.filter(plip => !isNationalCause(plip) && plip.scopeCoverage.scope === STATEWIDE_SCOPE));
-  const otherCitywide = groupBySignature(others.filter(plip => !isNationalCause(plip) && plip.scopeCoverage.scope === CITYWIDE_SCOPE));
-
-  const stateNationalCause = groupBySignature(others.filter(plip => isNationalCause(plip) && plip.scopeCoverage.scope === STATEWIDE_SCOPE));
-  const cityNationalCause = groupBySignature(others.filter(plip => isNationalCause(plip) && plip.scopeCoverage.scope === CITYWIDE_SCOPE));
+export const findPlips = state => {
+  const {
+    nationwidePlips,
+    userLocationPlips,
+    allPlips,
+    favoritePlips,
+    signedPlips,
+  } = state.plip;
 
   return [
-    ...orderPlips(userCityPlips),
-    ...(user ? orderPlips(cityNationalCause["unsigned"]) : []),
-    ...orderPlips(userStatePlips),
-    ...(user ? orderPlips(stateNationalCause["unsigned"]) : []),
-    ...orderPlips(unsignedNationwidePlips),
-    ...(user ? [] : orderPlips(cityNationalCause["unsigned"])),
-    ...(user ? [] : orderPlips(stateNationalCause["unsigned"])),
-    ...orderPlips(otherStatewide["unsigned"]),
-    ...orderPlips(otherCitywide["unsigned"]),
-    ...orderPlips(signedNationwide),
-    ...orderPlips(otherStatewide["signed"]),
-    ...orderPlips(stateNationalCause["signed"]),
-    ...orderPlips(otherCitywide["signed"]),
-    ...orderPlips(cityNationalCause["signed"]),
-  ];
-};
+    ...nationwidePlips.plips,
+    ...userLocationPlips.plips,
+    ...allPlips.plips,
+    ...favoritePlips.plips,
+    ...signedPlips.plips,
+  ] || [];
+}
+
+export const hasLoadedNationwidePlips = state => !!state.plip.nationwidePlips.loaded;
+
+export const hasLoadedUserLocationPlips = state => !!state.plip.userLocationPlips.loaded;
+
+export const hasLoadedAllPlips = state => !!state.plip.allPlips.loaded;
+
+export const hasLoadedUserFavoritePlips = state => !!state.plip.favoritePlips.loaded;
+
+export const hasLoadedSignedPlips = state => !!state.plip.signedPlips.loaded;
+
+export const errorFetchingNationwidePlips = state => !!state.plip.nationwidePlips.error;
+
+export const errorFetchingUserLocationPlips = state => !!state.plip.userLocationPlips.error;
+
+export const errorFetchingAllPlips = state => !!state.plip.allPlips.error;
+
+export const errorFetchingUserFavoritePlips = state => !!state.plip.favoritePlips.error;
+
+export const errorFetchingSignedPlips = state => !!state.plip.signedPlips.error;
+
+export const findNationwidePlips = state => state.plip.nationwidePlips.plips || [];
+
+export const findUserLocationPlips = state => state.plip.userLocationPlips.plips || [];
+
+export const findAllPlips = state => state.plip.allPlips.plips || [];
+
+export const findUserFavoritePlips = state => state.plip.favoritePlips.plips || [];
+
+export const findSignedPlips = state => state.plip.signedPlips.plips || [];
+
+export const findNationwidePlipsNextPage = state => state.plip.nationwidePlips.nextPage;
+
+export const findUserLocationPlipsNextPage = state => state.plip.userLocationPlips.nextPage;
+
+export const findAllPlipsNextPage = state => state.plip.allPlips.nextPage;
+
+export const findUserFavoritePlipsNextPage = state => state.plip.favoritePlips.nextPage;
+
+export const findSignedPlipsNextPage = state => state.plip.signedPlips.nextPage;
 
 export const listAllPlips = state => state.plip.allPlips;
 
@@ -107,7 +91,9 @@ export const getCurrentPlip = state => state.plip.currentPlip;
 
 export const hasPlipsNextPage = state => !!getNextPlipsPage(state);
 
-export const isSigningPlip = state => state.plip.isSigning;
+export const isSigningPlip = state => !!state.plip.currentSigningPlip;
+
+export const isAddingFavoritePlip = state => state.plip.isAddingFavorite;
 
 export const getUserSignInfo = state => state.plip.userSignInfo;
 
@@ -140,33 +126,24 @@ export const fetchPlipRelatedInfoError = state => state.plip.fetchPlipRelatedInf
 
 export const findPlipsSignInfo = state => state.plip.plipsSignInfo;
 
-export const getPlipSignatureGoals = plipId => state => {
-  const currentPlip = getCurrentPlip(state);
-  const plip = findPlip(plipId)(state) || (currentPlip && currentPlip.id === plipId ? currentPlip : {});
-  const { currentSignatureGoal } = getPlipSignInfo(plipId)(state) || {};
+export const findPlipsFavoriteInfo = state => state.plip.plipsFavoriteInfo;
 
-  const {
-    initialSignaturesGoal: initialGoal,
-    totalSignaturesRequired: finalGoal,
-  } = plip;
+export const searchPlipTitle = state => state.plip.searchPlip;
 
-  return { currentSignatureGoal, initialGoal, finalGoal };
-};
+export const isSearchingPlips = state => state.plip.isSearching;
 
-export const getPlipsSignatureGoals = state =>
-  (state.plip.plips || []).reduce((memo, { id }) => ({
-    ...memo,
-    [id]: getPlipSignatureGoals(id)(state),
-  }), {});
+export const findPlipByPath = path => state => {
+  const plips = findPlips(state);
 
-export const findPlipBySlug = slug => state => {
-  if (state.plip.allPlips) {
-    return state.plip.allPlips.find(plip => {
-      const plipSlug = /\S+\/(\S+)\/plugins\/peticao\/?$/.exec(plip.plipUrl);
+  if (plips) {
+    return plips.find(plip => {
+      const plipPath = /\S+(\/temas\/\S+\/plugins\/peticao)\/?$/.exec(plip.plipUrl);
 
-      if (plipSlug && plipSlug[1] === slug) {
+      if (plipPath && plipPath[1] === path) {
         return true;
       }
     });
   }
 }
+
+export const mostRecentNationalPlip = state => findNationwidePlips(state) && findNationwidePlips(state)[0]

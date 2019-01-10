@@ -4,7 +4,7 @@ import { Image } from "react-native";
 
 import * as Animatable from "react-native-animatable";
 
-import PageLoader from "./page-loader";
+import CircularPageLoader from "./circular-page-loader";
 
 import locale from "../locales/pt-BR";
 import styles from "../styles/splash-loader";
@@ -30,7 +30,7 @@ const SplashLoader = ({ loadingTitle = locale.loading, ...props }) => {
   );
 
   return (
-    <PageLoader
+    <CircularPageLoader
       {...props}
 
       prepend={logo}
@@ -40,7 +40,7 @@ const SplashLoader = ({ loadingTitle = locale.loading, ...props }) => {
 }
 
 SplashLoader.propTypes = {
-  ...PageLoader.propTypes,
+  ...CircularPageLoader.propTypes,
   loadingTitle: PropTypes.string,
 };
 

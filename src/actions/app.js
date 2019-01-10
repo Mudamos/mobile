@@ -30,3 +30,7 @@ export const actionSignAppSetup = () => ({
 export const mainAppInitiated = () => ({
   type: "APP_MAIN_INITIATED",
 });
+
+export const increaseAppLoading = () => ({
+  type: "INCREASE_APP_LOADING",
+});
