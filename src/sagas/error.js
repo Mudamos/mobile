@@ -34,30 +34,30 @@ function appError({ type, payload }) {
 
   switch (type) {
     case "WALLET_CREATE_ERROR":
-      return showToast(locale.errors.walletCreationError);
+      return handleWithPayload({ defaultMessage: locale.errors.walletCreationError });
     case "FACEBOOK_LOGIN_ERROR":
-      return showToast(locale.errors.facebookLoginError);
+      return handleWithPayload({ defaultMessage: locale.errors.facebookLoginError });
     case "LINKING_OPEN_URL_ERROR":
-      return showToast(locale.errors.openURLError);
+      return handleWithPayload({ defaultMessage: locale.errors.openURLError });
     case "LOCATION_FETCH_LOCATION_ERROR":
     case "ADDRESS_REVERSE_ZIP_CODE_SEARCH_ERROR":
-      return showToast(locale.errors.locationError);
+      return handleWithPayload({ defaultMessage: locale.errors.locationError });
     case "PASSWORD_RETRIEVE_ERROR":
-      return showToast(locale.errors.passwordRetrieveError);
+      return handleWithPayload({ defaultMessage: locale.errors.passwordRetrieveError });
     case "PLIP_SIGN_ERROR":
-      return showToast(locale.errors.signPlipError);
+      return handleWithPayload({ defaultMessage: locale.errors.signPlipError });
     case "PROFILE_VALIDATE_COMPLETED": {
-      return payload.error ? showToast(locale.errors.genericError) : null;
+      return payload.error ? handleWithPayload({ defaultMessage: locale.errors.genericError }) : null;
     }
     case "PLIP_FETCH_SIGNERS_ERROR":
-      return showToast(locale.errors.genericError);
+      return handleWithPayload({ defaultMessage: locale.errors.genericError });
     case "FETCHING_PLIPS_NEXT_PAGE_ERROR":
     case "PLIPS_REFRESH_ERROR":
-      return showToast(locale.errors.fetchPlips);
+      return handleWithPayload({ defaultMessage: locale.errors.fetchPlips });
     case "PROFILE_SAVE_AVATAR_ERROR":
-      return showToast(locale.errors.saveAvatar);
+      return handleWithPayload({ defaultMessage: locale.errors.saveAvatar });
     case "SHARE_LINK_ERROR":
-      return showToast(locale.errors.shareLinkError);
+      return handleWithPayload({ defaultMessage: locale.errors.shareLinkError });
     case "PASSWORD_CHANGE_FORGOT_ERROR":
     case "PROFILE_SENDING_PHONE_VALIDATION_ERROR":
     case "ADDRESS_ZIP_CODE_SEARCH_ERROR":

@@ -22,6 +22,11 @@
 * [PR #421] New layout at sign in and sign up
 * [PR #419] Add new layout at plip details
 * [PR #418] Add new layout at plips view with tabs
+* [PR #455] Update how display errors
+
+## [1.11.0] 10/09/2018
+
+* [PR #436] Update integration to the TSE system
 * [PR #417] Update to RN 0.55.4
 
 ## [1.10.0] 25/05/2018
