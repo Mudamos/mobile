@@ -1,5 +1,8 @@
 # Next
 
+## [2.0.0] 09/01/2019
+
+* [PR #459] Bump app version
 * [PR #457] Improve interface following ITS recommendations
 * [PR #453] Update profile endpoint from v1 to v3
 * [PR #449] Add "This PR is from another region" page

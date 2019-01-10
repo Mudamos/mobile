@@ -46,7 +46,7 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>www.tse.jus.br</key>
+			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
@@ -56,7 +56,7 @@
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 			</dict>
-			<key>localhost</key>
+			<key>www.tse.jus.br</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
