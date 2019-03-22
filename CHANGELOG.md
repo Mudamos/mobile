@@ -1,5 +1,7 @@
 # Next
 
+* [PR #463] Fix uncommitted lock file
+
 ## [2.0.0] 09/01/2019
 
 * [PR #459] Bump app version
