@@ -11,7 +11,6 @@
 #import <React/RCTRootView.h>
 #import <React/RCTLog.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "IQKeyboardManager.h"
 #import "ReactNativeConfig.h"
 @import Firebase;
