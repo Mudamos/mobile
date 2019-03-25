@@ -196,18 +196,23 @@ android {
         }
     }
 
+    flavorDimensions "version"
+
     productFlavors {
         development {
+            dimension "version"
             applicationId = "br.com.tagview.petition.development"
             versionName "1.0-debug"
         }
         mudamosBeta {
+            dimension "version"
             applicationId = "br.com.tagview.petition.mudamos.beta"
             versionCode 1
             versionName "1.0-beta-mudamos"
             signingConfig signingConfigs.release
         }
         production {
+            dimension "version"
             applicationId = "org.mudamos.petition"
             versionCode 15
             versionName "2.0.0"
