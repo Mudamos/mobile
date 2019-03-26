@@ -21,8 +21,10 @@
     "test": "mocha --compilers js:babel-core/register --require spec/support.js 'spec/**/*.spec.js'",
     "build-ios-beta": " ipa build -w ios/MudamosMobile.xcworkspace -s 'MudamosMobileBeta' -d ios/ipa --ipa MudamosTagviewBeta.ipa",
     "build-android-beta": "ENVFILE=.env.beta android/gradlew -p android assembleMudamosBetaRelease",
+    "bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "build-android-production": "ENVFILE=.env.production android/gradlew -p android assembleProductionRelease",
     "distribute-ios-beta": "ipa distribute:s3 -b mudamos-mobile-beta -f ios/ipa/MudamosTagviewBeta.ipa",
+    "install-android-beta": "ENVFILE=.env.beta android/gradlew -p android installMudamosBetaRelease",
     "postinstall": "./node_modules/.bin/rn-nodeify -y --install vm,buffer,stream,events,crypto,assert,process,react-native-randombytes,react-native-crypto --hack",
     "install-action-sign-deps": "cd action-sign-generator && yarn install && yarn run install-mudamos-libcrypto-deps && cd -",
     "generate-ios-action-sign-html": "cd action-sign-generator && yarn run build && cd -"
