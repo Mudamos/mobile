@@ -1,0 +1,29 @@
+#! /usr/bin/env node
+/* eslint-disable-next-line */
+"use strict";
+
+const fs = require("fs");
+const nodegit = require("nodegit");
+const path = require("path");
+
+/* eslint-disable-next-line */
+const dirName = __dirname;
+const buildFilesPrefixes = [
+  "android/app/src/main/res/drawable-",
+  "android/app/src/main/assets/index.android.bundle",
+];
+
+console.log("Start clean up");
+
+nodegit.Repository.open(path.resolve(dirName, "../.git"))
+  .then(repo =>
+    repo.getStatus().then(statuses => {
+      statuses.forEach(file => {
+        if (file.isNew() && buildFilesPrefixes.some(prefix => file.path().startsWith(prefix))) {
+          console.log("Removing: ", file.path());
+
+          fs.unlinkSync(file.path());
+        }
+      });
+    })
+  ).then(() => console.log("Finished"));
