@@ -3,9 +3,9 @@ platform :ios, "9.0"
 
 def pods
   pod "Bolts"
-  pod "FBSDKCoreKit", "4.22.1"
-  pod "FBSDKShareKit", "4.22.1"
-  pod "FBSDKLoginKit", "4.22.1"
+  pod "FBSDKCoreKit", "4.40.0"
+  pod "FBSDKLoginKit", "4.40.0"
+  pod "FBSDKShareKit", "4.40.0"
   pod "IQKeyboardManager"
   pod "Firebase"
   pod "Firebase/Core"
