@@ -155,7 +155,6 @@ class SignUpLayout extends Component {
     if (isFacebookUser) {
       return [
         this.validCpf(cpf),
-        this.validEmail(email),
         termsAccepted,
       ].every(v => v);
     } else {
