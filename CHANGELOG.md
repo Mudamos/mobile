@@ -1,5 +1,9 @@
 # Next
 
+## [2.0.2] 09/04/2019
+
+* [PR #470] Update NSLocation permissions
+
 ## [2.0.1] 09/04/2019
 
 * [PR #468] Remove email validation for facebook users on sign up
