@@ -143,9 +143,9 @@ class SignUpLayout extends Component {
     }
   }
 
-  validCpf = cpf => cpf && String(cpf).length === 14;
+  validCpf = cpf => String(cpf).length === 14;
 
-  validPassword = password => password && String(password).length > 0;
+  validPassword = password => String(password).length > 0;
 
   validEmail = email => email && validateEmail(email);
 
