@@ -1,5 +1,7 @@
 # Next
 
+## [2.0.1] 09/04/2019
+
 * [PR #468] Remove email validation for facebook users on sign up
 * [PR #465] Upgrade facebook sdk
 * [PR #463] Fix uncommitted lock file
