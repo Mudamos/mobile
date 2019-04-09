@@ -83,8 +83,12 @@
 	<string>Não pedimos essa permissão</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Para você tirar uma foto para seu avatar</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Não pedimos essa permissão</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Compartilhar sua localização permite buscar automaticamente seu CEP</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Não pedimos essa permissão</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Não pedimos essa permissão</string>
 	<key>NSPhotoLibraryUsageDescription</key>
