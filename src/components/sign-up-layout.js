@@ -108,11 +108,11 @@ class SignUpLayout extends Component {
   componentDidMount() {
     const { userCpf, userEmail, userTermsAccepted, onSetCpf, onSetEmail, onSetTermsAccepted, onSigningUp } = this.props;
 
-    if (userCpf) {
+    if (this.validCpf(userCpf)) {
       onSetCpf(userCpf);
     }
 
-    if (userEmail) {
+    if (this.validEmail(userEmail)) {
       onSetEmail(userEmail);
     }
 
@@ -143,11 +143,11 @@ class SignUpLayout extends Component {
     }
   }
 
-  validCpf = cpf => String(cpf).length === 14;
+  validCpf = cpf => cpf && String(cpf).length === 14;
 
-  validPassword = password => String(password).length > 0;
+  validPassword = password => password && String(password).length > 0;
 
-  validEmail = email => validateEmail(email);
+  validEmail = email => email && validateEmail(email);
 
   get validForm() {
     const { cpf, email, password, isFacebookUser, termsAccepted } = this.props;
@@ -155,6 +155,7 @@ class SignUpLayout extends Component {
     if (isFacebookUser) {
       return [
         this.validCpf(cpf),
+        this.validEmail(email),
         termsAccepted,
       ].every(v => v);
     } else {
@@ -300,7 +301,7 @@ class SignUpLayout extends Component {
                 ref={ref => this.cpfInput = ref}
               />
 
-              { !userEmail &&
+              { !this.validEmail(userEmail) &&
                 <MDTextInput
                   placeholder={locale.emailForAccess}
                   value={email}
