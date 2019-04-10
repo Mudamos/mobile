@@ -1,5 +1,9 @@
 # Next
 
+## [2.0.3] 10/04/2019
+
+* [PR #472] Update sdk target version to 26
+
 ## [2.0.2] 09/04/2019
 
 * [PR #470] Update NSLocation permissions
