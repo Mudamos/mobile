@@ -30,6 +30,7 @@ import SafeAreaView from "./safe-area-view";
 import locale from "../locales/pt-BR";
 import {
   errorForField,
+  validateCpf,
   validateEmail,
 } from "../utils";
 
@@ -76,6 +77,7 @@ class SignUpLayout extends Component {
     cpf: PropTypes.string,
     createErrors: PropTypes.array,
     email: PropTypes.string,
+    hasCompletedSignupOnce: PropTypes.bool.isRequired,
     isCreating: PropTypes.bool,
     isFacebookUser: PropTypes.bool,
     isLogged: PropTypes.bool,
@@ -143,16 +145,23 @@ class SignUpLayout extends Component {
     }
   }
 
-  validCpf = cpf => String(cpf).length === 14;
+  validCpf = cpf => cpf && validateCpf(cpf);
 
   validPassword = password => String(password).length > 0;
 
   validEmail = email => email && validateEmail(email);
 
   get validForm() {
-    const { cpf, email, password, isFacebookUser, termsAccepted } = this.props;
+    const {
+      cpf,
+      email,
+      hasCompletedSignupOnce,
+      isFacebookUser,
+      password,
+      termsAccepted,
+    } = this.props;
 
-    if (isFacebookUser) {
+    if (isFacebookUser || hasCompletedSignupOnce) {
       return [
         this.validCpf(cpf),
         this.validEmail(email),
@@ -173,9 +182,15 @@ class SignUpLayout extends Component {
   }
 
   allTextFieldsValid = () => {
-    const { cpf, email, password, isFacebookUser } = this.props;
+    const {
+      cpf,
+      email,
+      hasCompletedSignupOnce
+      isFacebookUser,
+      password, 
+    } = this.props;
 
-    if (isFacebookUser) {
+    if (isFacebookUser || hasCompletedSignupOnce) {
       return [
         this.validCpf(cpf),
         this.validEmail(email),
@@ -261,9 +276,11 @@ class SignUpLayout extends Component {
     const {
       email,
       cpf,
+      hasCompletedSignupOnce,
       isFacebookUser,
       password,
       termsAccepted,
+      userCpf,
       userEmail,
       onOpenURL,
       onSetEmail,
@@ -286,20 +303,24 @@ class SignUpLayout extends Component {
 
             <SignUpBreadCrumb highlightId={1} containerStyle={styles.breadcrumb} />
 
-            <Text style={styles.headerTitleText}>{locale.signUpTitle}</Text>
+            {!hasCompletedSignupOnce &&
+              <Text style={styles.headerTitleText}>{locale.signUpTitle}</Text>
+            }
 
             <View style={styles.inputContainer}>
-              <CpfInput
-                value={cpf}
-                onChangeCpfText={onSetCpf}
-                placeholder={locale.cpf.toUpperCase()}
-                hasError={!!errorForField("cpf", createErrors) || !!errors.cpf}
-                error={errorForField("cpf", createErrors) || errors.cpf}
-                errorLink={this.onBack}
-                hint="Ex: 000.000.000-00"
-                onSubmitEditing={() => this.cpfInput.blur()}
-                ref={ref => this.cpfInput = ref}
-              />
+              { !this.validCpf(userCpf) &&
+                <CpfInput
+                  value={cpf}
+                  onChangeCpfText={onSetCpf}
+                  placeholder={locale.cpf.toUpperCase()}
+                  hasError={!!errorForField("cpf", createErrors) || !!errors.cpf}
+                  error={errorForField("cpf", createErrors) || errors.cpf}
+                  errorLink={this.onBack}
+                  hint="Ex: 000.000.000-00"
+                  onSubmitEditing={() => this.cpfInput.blur()}
+                  ref={ref => this.cpfInput = ref}
+                />
+              }
 
               { !this.validEmail(userEmail) &&
                 <MDTextInput
@@ -316,7 +337,7 @@ class SignUpLayout extends Component {
                 />
               }
 
-              { !isFacebookUser &&
+              { !isFacebookUser && !hasCompletedSignupOnce &&
                 <MDTextInput
                   placeholder={locale.choosePassword}
                   value={password}

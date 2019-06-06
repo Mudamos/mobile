@@ -1,3 +1,5 @@
+import { path } from "ramda";
+
 import Config from "react-native-config";
 
 import { connect } from "react-redux";
@@ -35,6 +37,7 @@ const mapStateToProps = state => {
 
   return {
     createErrors: profileSaveErrors(state),
+    hasCompletedSignupOnce: !!path(["wallet", "key"], user),
     isCreating: isSavingProfile(state),
     isFacebookUser: user ? user.profileType === "facebook" : null,
     isLogged: !!user,
