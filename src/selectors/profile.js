@@ -30,12 +30,7 @@ export const isFacebookMainProfileComplete = state => {
 
 export const isMainProfileComplete = state => {
   const currentUser = state.profile.currentUser || new User();
-  return currentUser.cpf && currentUser.email;
-};
-
-export const hasValidCpfProfile = state => {
-  const currentUser = state.profile.currentUser || new User();
-  return currentUser.cpf && validateCpf(currentUser.cpf);
+  return currentUser.email && currentUser.cpf && validateCpf(currentUser.cpf);
 };
 
 export const isDetailProfileComplete = state => {

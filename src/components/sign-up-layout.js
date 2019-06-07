@@ -296,11 +296,11 @@ class SignUpLayout extends Component {
       <SafeAreaView style={styles.container}>
         <Layout>
           <ScrollView>
-            {this.renderNavBar()}
+            { this.renderNavBar() }
 
             <SignUpBreadCrumb highlightId={1} containerStyle={styles.breadcrumb} />
 
-            {isSigningUp &&
+            { isSigningUp &&
               <Text style={styles.headerTitleText}>{locale.signUpTitle}</Text>
             }
 

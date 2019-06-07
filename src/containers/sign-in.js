@@ -41,7 +41,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(signingUp(true));
     dispatch(navigate("signUp"));
   },
-  onSignIn: (email, password) => dispatch(loginUser(email, password)),
+  onSignIn: (email, password) => {
+    dispatch(signingUp(false));
+    dispatch(loginUser(email, password))
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInLayout);
