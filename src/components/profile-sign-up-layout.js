@@ -68,7 +68,6 @@ class ProfileSignUpLayout extends Component {
     onSetBirthdate: PropTypes.func.isRequired,
     onSetName: PropTypes.func.isRequired,
     onSetVoteCard: PropTypes.func.isRequired,
-    onSigningUp: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onTSERequested: PropTypes.func.isRequired,
   }
@@ -79,7 +78,7 @@ class ProfileSignUpLayout extends Component {
   };
 
   componentDidMount() {
-    const { previousName, previousBirthdate, previousVoteCard, onSetName, onSetBirthdate, onSetVoteCard, onSigningUp } = this.props;
+    const { previousName, previousBirthdate, previousVoteCard, onSetName, onSetBirthdate, onSetVoteCard } = this.props;
 
     if (previousBirthdate) {
       onSetBirthdate(previousBirthdate);
@@ -92,8 +91,6 @@ class ProfileSignUpLayout extends Component {
     if (previousVoteCard) {
       onSetVoteCard(previousVoteCard);
     }
-
-    onSigningUp();
   }
 
   componentDidUpdate(prevProps) {

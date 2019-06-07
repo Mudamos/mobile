@@ -16,6 +16,7 @@ import {
   navigate,
   navigateBack,
   openURL,
+  signingUp,
 } from "../actions";
 
 const mapStateToProps = state => {
@@ -28,12 +29,18 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onBack: () => dispatch(navigateBack()),
+  onBack: () => {
+    dispatch(signingUp(false));
+    dispatch(navigateBack());
+  },
   onClearAuthLoginError: () => dispatch(clearAuthLoginError()),
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
   onForgotPassword: () => dispatch(navigate("forgotPassword")),
   onOpenURL: url => dispatch(openURL(url)),
-  onSignUp: () => dispatch(navigate("signUp")),
+  onSignUp: () => {
+    dispatch(signingUp(true));
+    dispatch(navigate("signUp"));
+  },
   onSignIn: (email, password) => dispatch(loginUser(email, password)),
 });
 

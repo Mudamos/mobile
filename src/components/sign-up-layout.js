@@ -77,7 +77,7 @@ class SignUpLayout extends Component {
     cpf: PropTypes.string,
     createErrors: PropTypes.array,
     email: PropTypes.string,
-    hasCompletedSignupOnce: PropTypes.bool.isRequired,
+    isSigningUp: PropTypes.bool.isRequired,
     isCreating: PropTypes.bool,
     isFacebookUser: PropTypes.bool,
     isLogged: PropTypes.bool,
@@ -97,7 +97,6 @@ class SignUpLayout extends Component {
     onSetEmail: PropTypes.func.isRequired,
     onSetPassword: PropTypes.func.isRequired,
     onSetTermsAccepted: PropTypes.func.isRequired,
-    onSigningUp: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onTermsRequested: PropTypes.func.isRequired,
     onUpdate: PropTypes.func.isRequired,
@@ -108,7 +107,7 @@ class SignUpLayout extends Component {
   };
 
   componentDidMount() {
-    const { userCpf, userEmail, userTermsAccepted, onSetCpf, onSetEmail, onSetTermsAccepted, onSigningUp } = this.props;
+    const { userCpf, userEmail, userTermsAccepted, onSetCpf, onSetEmail, onSetTermsAccepted } = this.props;
 
     if (this.validCpf(userCpf)) {
       onSetCpf(userCpf);
@@ -121,8 +120,6 @@ class SignUpLayout extends Component {
     if (userTermsAccepted) {
       onSetTermsAccepted({checked: userTermsAccepted});
     }
-
-    onSigningUp();
   }
 
   componentDidUpdate(prevProps) {
@@ -155,13 +152,13 @@ class SignUpLayout extends Component {
     const {
       cpf,
       email,
-      hasCompletedSignupOnce,
       isFacebookUser,
+      isSigningUp,
       password,
       termsAccepted,
     } = this.props;
 
-    if (isFacebookUser || hasCompletedSignupOnce) {
+    if (isFacebookUser || !isSigningUp) {
       return [
         this.validCpf(cpf),
         this.validEmail(email),
@@ -185,12 +182,12 @@ class SignUpLayout extends Component {
     const {
       cpf,
       email,
-      hasCompletedSignupOnce
       isFacebookUser,
-      password, 
+      isSigningUp,
+      password,
     } = this.props;
 
-    if (isFacebookUser || hasCompletedSignupOnce) {
+    if (isFacebookUser || !isSigningUp) {
       return [
         this.validCpf(cpf),
         this.validEmail(email),
@@ -276,8 +273,8 @@ class SignUpLayout extends Component {
     const {
       email,
       cpf,
-      hasCompletedSignupOnce,
       isFacebookUser,
+      isSigningUp,
       password,
       termsAccepted,
       userCpf,
@@ -303,7 +300,7 @@ class SignUpLayout extends Component {
 
             <SignUpBreadCrumb highlightId={1} containerStyle={styles.breadcrumb} />
 
-            {!hasCompletedSignupOnce &&
+            {isSigningUp &&
               <Text style={styles.headerTitleText}>{locale.signUpTitle}</Text>
             }
 
@@ -337,7 +334,7 @@ class SignUpLayout extends Component {
                 />
               }
 
-              { !isFacebookUser && !hasCompletedSignupOnce &&
+              { !isFacebookUser && isSigningUp &&
                 <MDTextInput
                   placeholder={locale.choosePassword}
                   value={password}

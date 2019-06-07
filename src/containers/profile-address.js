@@ -13,7 +13,6 @@ import {
   openURL,
   requestUserLocation,
   saveZipCode,
-  signingUp,
 } from "../actions";
 
 import {
@@ -58,17 +57,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onBack: () =>  {
-    dispatch(signingUp(false));
-    dispatch(navigate("plipsNav"));
-  },
+  onBack: () => dispatch(navigate("plipsNav")),
   onDontKnowZipCode: () => dispatch(openURL(CORREIOS_URL)),
   onOpenURL: url => dispatch(openURL(url)),
   onRequestLocation: ({ message }) => dispatch(requestUserLocation({ message })),
   onSave: location => dispatch(saveZipCode(location)),
   onSearch: zipCode => {dispatch(addressZipCodeSearch(extractNumbers(zipCode)))},
   onSearchZipCodeWithCoords: ({ latitude, longitude }) => dispatch(addressZipCodeSearchWithCoords({ latitude, longitude })),
-  onSigningUp: () => dispatch(signingUp(true)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

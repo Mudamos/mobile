@@ -1,5 +1,3 @@
-import { path } from "ramda";
-
 import Config from "react-native-config";
 
 import { connect } from "react-redux";
@@ -20,13 +18,13 @@ import {
   openURL,
   profileSaveMain,
   signingPlip,
-  signingUp,
 } from "../actions";
 
 import {
   currentUser,
   isLoggingIn,
   isSavingProfile,
+  isSigningUp,
   profileSaveErrors,
 } from "../selectors";
 
@@ -37,11 +35,11 @@ const mapStateToProps = state => {
 
   return {
     createErrors: profileSaveErrors(state),
-    hasCompletedSignupOnce: !!path(["wallet", "key"], user),
     isCreating: isSavingProfile(state),
     isFacebookUser: user ? user.profileType === "facebook" : null,
     isLogged: !!user,
     isLoggingIn: isLoggingIn(state),
+    isSigningUp: isSigningUp(state),
     userCpf: user ? cpfMask(user.cpf) : null,
     userEmail: user ? user.email : null,
     userTermsAccepted: user ? user.termsAccepted : null,
@@ -51,7 +49,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onNavigate: scene => {
     dispatch(clearProfileSaveErrors());
-    dispatch(signingUp(false));
     dispatch(signingPlip(null)); // Clear the user plip sign intention if they gave up
 
     if (scene === "back") {
@@ -78,7 +75,6 @@ const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch(logout()),
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
   onOpenURL: url => dispatch(openURL(url)),
-  onSigningUp: () => dispatch(signingUp(true)),
   onTermsRequested: () => dispatch(openURL(TERMS_OF_USE_URL)),
 });
 

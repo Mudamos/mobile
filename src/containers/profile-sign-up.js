@@ -14,7 +14,6 @@ import {
   navigate,
   openURL,
   profileUpdate,
-  signingUp,
 } from "../actions";
 
 import {
@@ -41,7 +40,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onBack: () => {
     dispatch(clearProfileSaveErrors());
-    dispatch(signingUp(false));
     dispatch(navigate("plipsNav"));
   },
   onSave: ({ birthdate, name, voteCard }) => {
@@ -52,7 +50,6 @@ const mapDispatchToProps = dispatch => ({
     }))
   },
   onOpenURL: url => dispatch(openURL(url)),
-  onSigningUp: () => dispatch(signingUp(true)),
   onTSERequested: ({ birthdate, name }) => dispatch(navigate("tse", { birthdate, name })),
 });
 

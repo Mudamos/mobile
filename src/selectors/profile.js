@@ -6,6 +6,8 @@ export const isFetchingProfile = state => state.profile.isFetching;
 
 export const isSavingProfile = state => state.profile.isSaving;
 
+export const isSigningUp = state => state.profile.isSigningUp;
+
 export const isSendingPhoneValidation = state => state.profile.isSendingPhoneValidation;
 
 export const currentUser = state => state.profile.currentUser;
@@ -103,7 +105,7 @@ export const isProfileComplete =
   ]);
 
 export const isSigningUpComplete = state => {
-  return isProfileComplete && !state.profile.isSigningUp;
+  return isProfileComplete && !isSigningUp(state);
 }
 
 export const isValidatingProfile = state => state.profile.validatingProfile;
