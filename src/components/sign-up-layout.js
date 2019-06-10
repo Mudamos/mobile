@@ -30,6 +30,7 @@ import SafeAreaView from "./safe-area-view";
 import locale from "../locales/pt-BR";
 import {
   errorForField,
+  validateCpf,
   validateEmail,
 } from "../utils";
 
@@ -76,6 +77,7 @@ class SignUpLayout extends Component {
     cpf: PropTypes.string,
     createErrors: PropTypes.array,
     email: PropTypes.string,
+    isSigningUp: PropTypes.bool.isRequired,
     isCreating: PropTypes.bool,
     isFacebookUser: PropTypes.bool,
     isLogged: PropTypes.bool,
@@ -95,7 +97,6 @@ class SignUpLayout extends Component {
     onSetEmail: PropTypes.func.isRequired,
     onSetPassword: PropTypes.func.isRequired,
     onSetTermsAccepted: PropTypes.func.isRequired,
-    onSigningUp: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onTermsRequested: PropTypes.func.isRequired,
     onUpdate: PropTypes.func.isRequired,
@@ -106,7 +107,7 @@ class SignUpLayout extends Component {
   };
 
   componentDidMount() {
-    const { userCpf, userEmail, userTermsAccepted, onSetCpf, onSetEmail, onSetTermsAccepted, onSigningUp } = this.props;
+    const { userCpf, userEmail, userTermsAccepted, onSetCpf, onSetEmail, onSetTermsAccepted } = this.props;
 
     if (this.validCpf(userCpf)) {
       onSetCpf(userCpf);
@@ -119,8 +120,6 @@ class SignUpLayout extends Component {
     if (userTermsAccepted) {
       onSetTermsAccepted({checked: userTermsAccepted});
     }
-
-    onSigningUp();
   }
 
   componentDidUpdate(prevProps) {
@@ -143,16 +142,23 @@ class SignUpLayout extends Component {
     }
   }
 
-  validCpf = cpf => String(cpf).length === 14;
+  validCpf = cpf => cpf && validateCpf(cpf);
 
   validPassword = password => String(password).length > 0;
 
   validEmail = email => email && validateEmail(email);
 
   get validForm() {
-    const { cpf, email, password, isFacebookUser, termsAccepted } = this.props;
+    const {
+      cpf,
+      email,
+      isFacebookUser,
+      isSigningUp,
+      password,
+      termsAccepted,
+    } = this.props;
 
-    if (isFacebookUser) {
+    if (isFacebookUser || !isSigningUp) {
       return [
         this.validCpf(cpf),
         this.validEmail(email),
@@ -173,9 +179,15 @@ class SignUpLayout extends Component {
   }
 
   allTextFieldsValid = () => {
-    const { cpf, email, password, isFacebookUser } = this.props;
+    const {
+      cpf,
+      email,
+      isFacebookUser,
+      isSigningUp,
+      password,
+    } = this.props;
 
-    if (isFacebookUser) {
+    if (isFacebookUser || !isSigningUp) {
       return [
         this.validCpf(cpf),
         this.validEmail(email),
@@ -262,8 +274,10 @@ class SignUpLayout extends Component {
       email,
       cpf,
       isFacebookUser,
+      isSigningUp,
       password,
       termsAccepted,
+      userCpf,
       userEmail,
       onOpenURL,
       onSetEmail,
@@ -282,24 +296,28 @@ class SignUpLayout extends Component {
       <SafeAreaView style={styles.container}>
         <Layout>
           <ScrollView>
-            {this.renderNavBar()}
+            { this.renderNavBar() }
 
             <SignUpBreadCrumb highlightId={1} containerStyle={styles.breadcrumb} />
 
-            <Text style={styles.headerTitleText}>{locale.signUpTitle}</Text>
+            { isSigningUp &&
+              <Text style={styles.headerTitleText}>{locale.signUpTitle}</Text>
+            }
 
             <View style={styles.inputContainer}>
-              <CpfInput
-                value={cpf}
-                onChangeCpfText={onSetCpf}
-                placeholder={locale.cpf.toUpperCase()}
-                hasError={!!errorForField("cpf", createErrors) || !!errors.cpf}
-                error={errorForField("cpf", createErrors) || errors.cpf}
-                errorLink={this.onBack}
-                hint="Ex: 000.000.000-00"
-                onSubmitEditing={() => this.cpfInput.blur()}
-                ref={ref => this.cpfInput = ref}
-              />
+              { !this.validCpf(userCpf) &&
+                <CpfInput
+                  value={cpf}
+                  onChangeCpfText={onSetCpf}
+                  placeholder={locale.cpf.toUpperCase()}
+                  hasError={!!errorForField("cpf", createErrors) || !!errors.cpf}
+                  error={errorForField("cpf", createErrors) || errors.cpf}
+                  errorLink={this.onBack}
+                  hint="Ex: 000.000.000-00"
+                  onSubmitEditing={() => this.cpfInput.blur()}
+                  ref={ref => this.cpfInput = ref}
+                />
+              }
 
               { !this.validEmail(userEmail) &&
                 <MDTextInput
@@ -316,7 +334,7 @@ class SignUpLayout extends Component {
                 />
               }
 
-              { !isFacebookUser &&
+              { !isFacebookUser && isSigningUp &&
                 <MDTextInput
                   placeholder={locale.choosePassword}
                   value={password}

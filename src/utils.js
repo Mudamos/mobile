@@ -266,6 +266,11 @@ export const eligibleToSignPlip = ({ plip, user }) => {
 /* eslint-disable no-useless-escape */
 export const validateEmail = email => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 
+export const validateCpf = cpf => {
+  const cpfFormatted = String(cpf).replace(/\D/g, "");
+  return cpfFormatted.length === 11;
+}
+
 export const errorMessageFromCode = ({ errorCode, locale }) => locale.errorsCode[errorCode];
 
 export const isIOSVersionBellow11 = (Platform.OS === "ios") && (parseInt(Platform.Version, 10) <= 11);

@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+  isSigningUp: false,
+};
 
 
 export default (state = initialState, action) => {

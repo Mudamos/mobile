@@ -1,9 +1,12 @@
 import { allPass } from "ramda";
 import { User } from "../models";
+import { validateCpf } from "../utils";
 
 export const isFetchingProfile = state => state.profile.isFetching;
 
 export const isSavingProfile = state => state.profile.isSaving;
+
+export const isSigningUp = state => state.profile.isSigningUp;
 
 export const isSendingPhoneValidation = state => state.profile.isSendingPhoneValidation;
 
@@ -27,7 +30,7 @@ export const isFacebookMainProfileComplete = state => {
 
 export const isMainProfileComplete = state => {
   const currentUser = state.profile.currentUser || new User();
-  return currentUser.cpf && currentUser.email;
+  return currentUser.email && currentUser.cpf && validateCpf(currentUser.cpf);
 };
 
 export const isDetailProfileComplete = state => {
@@ -97,7 +100,7 @@ export const isProfileComplete =
   ]);
 
 export const isSigningUpComplete = state => {
-  return isProfileComplete && !state.profile.isSigningUp;
+  return isProfileComplete && !isSigningUp(state);
 }
 
 export const isValidatingProfile = state => state.profile.validatingProfile;

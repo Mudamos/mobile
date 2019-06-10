@@ -75,7 +75,7 @@ export function* profileScreenForCurrentUser(params = {}) {
 
   const screenKeys = [
     "signUp",
-    "signIn",
+    "signUp",
     "profileSignUp",
     "profileAddress",
     "profileWallet",
