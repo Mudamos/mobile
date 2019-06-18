@@ -1,5 +1,9 @@
 # Next
 
+## [2.0.4] 17/06/2019
+
+* [PR #474] Fix CPF entry bug after signup
+
 ## [2.0.3] 10/04/2019
 
 * [PR #472] Update sdk target version to 26
