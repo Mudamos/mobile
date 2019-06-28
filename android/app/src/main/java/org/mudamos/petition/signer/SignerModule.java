@@ -12,6 +12,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 
+import com.facebook.react.module.annotations.ReactModule;
+
 import org.mudamos.petition.BuildConfig;
 
 import java.util.HashMap;
@@ -21,6 +23,7 @@ import java.util.Map;
  * Created by guimello on 24/01/18.
  */
 
+@ReactModule(name="MUDSigner")
 public class SignerModule extends ReactContextBaseJavaModule {
     private static String PAYLOAD_IDENTIFIER = "org.mudamos.signer.message";
     private static String RESULT_IDENTIFIER = "org.mudamos.signer.message.result";

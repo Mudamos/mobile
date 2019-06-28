@@ -5,10 +5,13 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
+import com.facebook.react.module.annotations.ReactModule;
+
 /**
  * Created by guimello on 5/17/17.
  */
 
+@ReactModule(name="MUDFirebase")
 public class FirebaseModule extends ReactContextBaseJavaModule {
     private Config config;
 

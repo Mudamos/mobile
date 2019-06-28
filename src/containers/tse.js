@@ -53,8 +53,14 @@ const jsCode = ({ birthdate, name }) => {
       }
       removePrint();
 
-      document.getElementById("nav-principal").outerHTML = "";
-      document.getElementById("search").outerHTML = "";
+      function clearOuterHTML() {
+        [
+          document.getElementById("nav-principal"),
+          document.getElementById("search"),
+        ].filter(Boolean).forEach(e => e.outerHTML = "");
+      }
+      clearOuterHTML();
+
       Array.from(document.getElementsByClassName("help-block")).forEach(
         (element, index, array) => {
           element.remove();

@@ -1,10 +1,13 @@
 package org.mudamos.petition;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 import io.fullstack.firestack.FirestackPackage;
 import com.ianlin.RNFirebaseCrashReport.RNFirebaseCrashReportPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
@@ -32,7 +35,7 @@ import org.mudamos.petition.signer.SignerPackage;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends MultiDexApplication implements ReactApplication {
   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
   protected static CallbackManager getCallbackManager() {
@@ -49,6 +52,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AsyncStoragePackage(),
+            new RNCWebViewPackage(),
             new FirestackPackage(),
             new RNFirebaseCrashReportPackage(),
             new ReactNativeOneSignalPackage(),

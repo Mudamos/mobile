@@ -4,8 +4,9 @@ import {
   findNodeHandle,
   requireNativeComponent,
   UIManager,
-  WebView,
 } from "react-native";
+
+import { WebView } from "react-native-webview";
 
 const RCTYouTubeWebView = requireNativeComponent("RCTYouTubeWebView");
 
