@@ -6829,6 +6829,7 @@ qs@~6.5.1:
 ramda@^0.24.1:
   version "0.24.1"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.24.1.tgz#c3b7755197f35b8dc3502228262c4c91ddb6b857"
+  integrity sha1-w7d1UZfzW43DUCIoJixMkd22uFc=
 
 ramda@^0.25.0:
   version "0.25.0"
@@ -7020,9 +7021,9 @@ react-native-maps@0.24.2:
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.24.2.tgz#19974f967cb0c2e24dab74ca879118e0932571b2"
   integrity sha512-1iNIDikp2dkCG+8DguaEviYZiMSYyvwqYT7pO2YTZvuFRDSc/P9jXMhTUnSh4wNDlEeQ47OJ09l0pwWVBZ7wxg==
 
-react-native-material-kit@^0.5.1:
+"react-native-material-kit@https://github.com/itsriodejaneiro/react-native-material-kit.git#mudamos":
   version "0.5.1"
-  resolved "https://registry.yarnpkg.com/react-native-material-kit/-/react-native-material-kit-0.5.1.tgz#fc05605273bfa0d145c6e36cca755cbde5b8db3a"
+  resolved "https://github.com/itsriodejaneiro/react-native-material-kit.git#e12bbc2a584126ab1eae61acd5f087617ade79f3"
   dependencies:
     prop-types "^15.5.10"
     ramda "^0.24.1"
