@@ -9,7 +9,7 @@
 
 @import Firebase;
 #import "MUDFirebaseConfig.h"
-#import "RCTLog.h"
+#import <React/RCTLog.h>
 
 
 @interface MUDFirebaseConfig()
@@ -40,6 +40,10 @@
   }
 
   return self;
+}
+
++ (BOOL)requiresMainQueueSetup {
+  return YES;
 }
 
 - (void)setDefaults {

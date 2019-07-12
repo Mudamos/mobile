@@ -1,5 +1,7 @@
 # Next
 
+* [PR #477] Upgrade RN to 0.59
+
 ## [2.0.4] 17/06/2019
 
 * [PR #474] Fix CPF entry bug after signup

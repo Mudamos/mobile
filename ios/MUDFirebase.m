@@ -29,6 +29,10 @@
   return self;
 }
 
++ (BOOL)requiresMainQueueSetup {
+  return YES;
+}
+
 RCT_EXPORT_METHOD(getStringConfig:(NSString*)name resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   [self.config getString:name resolver:resolve rejecter:reject];
 }

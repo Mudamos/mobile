@@ -12,6 +12,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,6 +25,7 @@ import org.mudamos.petition.BuildConfig;
  * Created by guimello on 24/04/18.
  */
 
+@ReactModule(name="MUDFirebaseDynamicLink")
 public class MUDFirebaseDynamicLink extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
     private static String deepLinkReceivedEvent = "onDeepLinkReceived";
 

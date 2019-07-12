@@ -8,6 +8,7 @@ export default class MyCheckbox extends Checkbox {
     fillColor: "#fff",
     borderOnColor: "#fff",
     borderOffColor: "#000",
+    overflow: "hidden",
     rippleColor: "rgba(255,255,255,0.2)",
   }
 }

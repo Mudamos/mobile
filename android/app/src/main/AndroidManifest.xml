@@ -16,12 +16,12 @@
          Please check https://github.com/facebook/react-native/issues/5886
     -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" tools:remove="${excludeSystemAlertWindowPermission}"/>
 
     <application
       android:name=".MainApplication"
       android:label="@string/ANDROID_APP_NAME"
       android:icon="@mipmap/ic_launcher"
+      android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme"
       tools:replace="android:label">

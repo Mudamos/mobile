@@ -6,8 +6,9 @@ import {
   Image,
   Text,
   View,
-  WebView,
 } from "react-native";
+
+import { WebView } from "react-native-webview";
 
 import Layout from "./purple-layout";
 import NavigationBar from "./navigation-bar";
