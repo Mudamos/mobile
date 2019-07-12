@@ -1,5 +1,6 @@
 # Next
 
+* [PR #479] Fix checkbox layout
 * [PR #477] Upgrade RN to 0.59
 
 ## [2.0.4] 17/06/2019

@@ -353,15 +353,15 @@ class SignUpLayout extends Component {
                   onCheckedChange={onSetTermsAccepted}
                   style={styles.termsAcceptedCheckbox}
                 />
-                <Text style={[styles.termsAcceptedText, styles.text]}>
-                  {locale.readAndAgreedWithTermsPrefix}
-                </Text>
+                <View style={styles.termsAcceptedContextContainer}>
+                  <Text style={[styles.termsAcceptedText, styles.text]}>
+                    {locale.readAndAgreedWithTermsPrefix}
+                  </Text>
 
-                <TouchableOpacity
-                  onPress={onTermsRequested}
-                >
-                  <Text style={[styles.termsAcceptedText, styles.text, styles.termsAcceptedLink]}>{locale.termsOfUse.toUpperCase()}</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity onPress={onTermsRequested}>
+                    <Text style={[styles.termsAcceptedText, styles.text, styles.termsAcceptedLink]}>{locale.termsOfUse.toUpperCase()}</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
               { !!errors.termsAccepted &&
                 <Text style={styles.termsAcceptedTextAlert}>

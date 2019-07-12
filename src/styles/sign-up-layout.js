@@ -91,10 +91,14 @@ export default EStyleSheet.create({
     paddingLeft: 0,
   },
   termsAcceptedContainer: {
+    flexDirection: "row",
+    marginTop: 20,
+  },
+  termsAcceptedContextContainer: {
     alignItems: "center",
     flex: 1,
     flexDirection: "row",
-    marginTop: 20,
+    flexWrap: "wrap",
   },
   termsAcceptedText: {
     fontSize: "0.8rem",
