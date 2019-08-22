@@ -10,9 +10,9 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   hiddenFieldContainer: {
-    ...StyleSheet.absoluteFillObject,
-
     justifyContent: "center",
     flexDirection: "row",
+    top: 0,
+    position: "absolute",
   },
 });

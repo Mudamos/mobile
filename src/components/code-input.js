@@ -1,12 +1,10 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 
+import MDTextInput from "./md-text-input";
+import PropTypes from "prop-types";
 import {
   View,
 } from "react-native";
-
-import MDTextInput from "./md-text-input";
-
 import styles from "../styles/code-input";
 
 export default class CodeInput extends Component {
@@ -60,7 +58,6 @@ export default class CodeInput extends Component {
             mdContainerStyle={{
               width: this.hiddenFieldWidth,
               flex: 0,
-              height: 0,
             }}
             textInputStyle={{ color: "transparent" }}
             selectionColor="transparent"
@@ -85,13 +82,16 @@ export default class CodeInput extends Component {
 
     return (
       <MDTextInput
-
         key={`codeInput${index}`}
         ref={ref}
         value={value}
         maxLength={1}
         onFocus={() => this.hiddenField.focus()}
-        mdContainerStyle={{width: codeSize, flex: 0, marginRight: (last ? 0 : marginFromCode)}}
+        mdContainerStyle={{
+          flex: 0,
+          width: codeSize,
+          marginRight: (last ? 0 : marginFromCode)
+        }}
         textInputStyle={{ textAlign: "center"  }}
       />
     );
