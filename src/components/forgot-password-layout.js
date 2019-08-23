@@ -1,26 +1,22 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
-
 import {
-  TouchableOpacity,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
-import Layout from "./purple-layout";
-import ScrollView from "./scroll-view";
-import HeaderLogo from "./header-logo";
-import PageLoader from "./page-loader";
 import BackButton from "./back-button";
-import MDTextInput from "./md-text-input";
 import FlatButton from "./flat-button";
+import HeaderLogo from "./header-logo";
+import Layout from "./purple-layout";
+import MDTextInput from "./md-text-input";
 import NavigationBar from "./navigation-bar";
+import PageLoader from "./page-loader";
+import PropTypes from "prop-types";
 import SafeAreaView from "./safe-area-view";
-
+import ScrollView from "./scroll-view";
 import locale from "../locales/pt-BR";
-
 import styles from "../styles/forgot-password-layout";
-
 
 export default class ForgotPasswordLayout extends Component {
   state = {};
@@ -58,6 +54,7 @@ export default class ForgotPasswordLayout extends Component {
 
             <View style={styles.inputContainer}>
               <MDTextInput
+                autoCapitalize="none"
                 placeholder={locale.email}
                 value={this.state.email}
                 onChangeText={email => this.setState({ email })}
