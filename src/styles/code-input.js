@@ -10,9 +10,6 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   hiddenFieldContainer: {
-    justifyContent: "center",
-    flexDirection: "row",
-    top: 0,
     position: "absolute",
   },
 });

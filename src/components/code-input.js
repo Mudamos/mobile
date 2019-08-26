@@ -44,8 +44,7 @@ export default class CodeInput extends Component {
           {fields}
         </View>
 
-        <View style={styles.hiddenFieldContainer}>
-
+        <View style={styles.hiddenFieldContainer} pointerEvents="none">
           <MDTextInput
             {...mdInputProps}
 
@@ -57,7 +56,6 @@ export default class CodeInput extends Component {
             underlineEnabled={false}
             mdContainerStyle={{
               width: this.hiddenFieldWidth,
-              flex: 0,
             }}
             textInputStyle={{ color: "transparent" }}
             selectionColor="transparent"
