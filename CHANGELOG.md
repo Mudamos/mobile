@@ -1,5 +1,6 @@
 # Next
 
+* [PR #483] Fix select on code input
 * [PR #481] Fix code input on forgot password
 * [PR #479] Fix checkbox layout
 * [PR #477] Upgrade RN to 0.59
