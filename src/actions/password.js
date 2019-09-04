@@ -8,9 +8,9 @@ export const retrievingPassword = isRetrieving => ({
   payload: { isRetrieving },
 });
 
-export const retrievePasswordError = hasRetrieveError => ({
+export const retrievePasswordError = (hasRetrieveError, error) => ({
   type: "PASSWORD_RETRIEVE_ERROR",
-  payload: { hasRetrieveError },
+  payload: { hasRetrieveError, error },
 });
 
 export const changePassword = ({ currentPassword, newPassword }) => ({

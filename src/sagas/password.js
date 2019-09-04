@@ -46,7 +46,7 @@ function* retrievePassword({ mobileApi, Crypto }) {
       yield put(navigate("changeForgotPassword"));
     } catch(e) {
       logError(e);
-      yield put(retrievePasswordError(true));
+      yield put(retrievePasswordError(true, e));
     } finally {
       yield put(retrievingPassword(false));
     }

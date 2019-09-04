@@ -1,5 +1,6 @@
 # Next
 
+* [PR #485] Handle errors to have a generic one
 * [PR #483] Fix select on code input
 * [PR #481] Fix code input on forgot password
 * [PR #479] Fix checkbox layout
