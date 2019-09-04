@@ -1,6 +1,7 @@
 import { takeEvery } from "redux-saga/effects";
 
 import Toast from "react-native-simple-toast";
+import { test } from "ramda";
 
 import locale from "../locales/pt-BR";
 
@@ -12,6 +13,10 @@ const validationMessageFor = validations => (validations || []).map(v => v.messa
 const errorMessageFor = ({ payload, defaultMessage }) => {
   const { error } = (payload || {});
   let message;
+
+  if (!error) {
+    return null;
+  }
 
   if (error.type === "validation") {
     message = validationMessageFor(error.validations);
@@ -58,10 +63,8 @@ function appError({ type, payload }) {
       return handleWithPayload({ defaultMessage: locale.errors.saveAvatar });
     case "SHARE_LINK_ERROR":
       return handleWithPayload({ defaultMessage: locale.errors.shareLinkError });
-    case "PASSWORD_CHANGE_FORGOT_ERROR":
-    case "PROFILE_SENDING_PHONE_VALIDATION_ERROR":
-    case "ADDRESS_ZIP_CODE_SEARCH_ERROR":
-      return handleWithPayload();
+    default:
+      return test(/.+_(ERROR|FAILURE)$/i, type) ? handleWithPayload() : null;
   }
 }
 
