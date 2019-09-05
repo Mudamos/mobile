@@ -3,6 +3,10 @@ import { takeEvery } from "redux-saga/effects";
 import Toast from "react-native-simple-toast";
 import { test } from "ramda";
 
+import {
+  isBlank,
+} from "../utils";
+
 import locale from "../locales/pt-BR";
 
 
@@ -25,13 +29,11 @@ const errorMessageFor = ({ payload, defaultMessage }) => {
   return message || error.userMessage || defaultMessage || locale.errors.genericError;
 }
 
-const defaultErrorHandler = ({ payload, defaultMessage }) =>
-  Toast.show(
-    errorMessageFor({
-      payload,
-      defaultMessage,
-    })
-  )
+const defaultErrorHandler = ({ payload, defaultMessage }) => {
+  const errorMessage = errorMessageFor({ payload, defaultMessage });
+
+  return !isBlank(errorMessage) ? Toast.show(errorMessage) : null;
+}
 
 function appError({ type, payload }) {
   const handleWithPayload = ({ defaultMessage } = {}) =>
