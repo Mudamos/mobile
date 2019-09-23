@@ -1,5 +1,7 @@
 # Next
 
+* [PR #488] Crash Andorid Pie (9) with the maps lib
+
 ## [2.0.5] 04/09/2019
 
 * [PR #485] Handle errors to have a generic one

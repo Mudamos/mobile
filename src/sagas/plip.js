@@ -459,6 +459,14 @@ function* fetchAllPlips({ mobileApi, page = 0, title = "" }) {
   return response;
 }
 
+function* fetchAllPlipsSafe({ mobileApi }) {
+  try {
+    return yield call(fetchAllPlips, { mobileApi });
+  } catch(e) {
+    logError(e);
+  }
+}
+
 function* fetchSignedPlips({ mobileApi, page = 0 }) {
   const limit = PLIPS_PER_PAGE;
   const scope = ALL_SCOPE;
@@ -858,7 +866,8 @@ export default function* plipSaga({ mobileApi, walletStore, apiError }) {
   yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
   yield spawn(fetchPlipRelatedInfo, { mobileApi });
-  yield fork(fetchAllPlips, { mobileApi });
   yield fork(toggleFavoritePlipSaga, { mobileApi });
   yield fork(loadStorePlipsInfo);
+
+  yield fork(fetchAllPlipsSafe, { mobileApi });
 }
