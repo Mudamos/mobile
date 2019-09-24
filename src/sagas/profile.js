@@ -129,7 +129,11 @@ function* saveZipCodeProfile({ mobileApi }) {
       yield put(savingProfile(true));
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.saveZipCode, authToken, location.toJson());
+      const response = yield call(mobileApi.saveZipCode, authToken, {
+        ...location.toJson(),
+        lat: location.latitude ? location.latitude : "",
+        lng: location.longitude ? location.longitude : "",
+      });
 
       const user = User.fromJson(response.user);
 

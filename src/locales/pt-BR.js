@@ -8,6 +8,7 @@ const translations = {
     "user-not-logged-in": "Usuário não logado. Use a app da Mudamos para se logar.",
   },
   acceptTermsToContinue: "Você deve aceitar os termos de uso para continuar",
+  address: "Endereço",
   addressConfirmHeader: "Confirme sua localização",
   addressSearchHeader: "Informe sua localidade",
   addressSearchSubtitle: "Não precisamos saber seu endereço específico, apenas uma localização aproximada de onde você mora.",

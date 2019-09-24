@@ -484,7 +484,7 @@ export default function MobileApi(host) {
     savePhone: savePhone({ client: v1Client }),
     saveWallet: saveWallet({ client: v1Client }),
     saveZipCode: saveZipCode({ client: v1Client }),
-    searchZipCode: searchZipCode({ client: v1Client }),
+    searchZipCode: searchZipCode({ client: v2Client }),
     sendPhoneValidation: sendPhoneValidation({ client: v1Client }),
     signIn: signIn({ client: v1Client }),
     signMessage: signMessage({ client: v1Client }),

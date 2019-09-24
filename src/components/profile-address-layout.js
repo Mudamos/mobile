@@ -37,6 +37,8 @@ import locale from "../locales/pt-BR";
 const LATITUDE_DELTA = 0.010;
 const LONGITUDE_DELTA = 0.010;
 
+const hasCoordinates = location => location && location.latitude && location.longitude;
+
 const enhance = compose(
   withStateHandlers(
     { zipCode: "" },
@@ -151,6 +153,7 @@ class ProfileAddressLayout extends Component {
 
   renderContent() {
     const {
+      location,
       onSave,
     } = this.props;
 
@@ -167,10 +170,13 @@ class ProfileAddressLayout extends Component {
 
         {this.renderZipCodeInput()}
 
+        {!hasCoordinates(location) && this.renderAddress()}
+
         <View style={styles.buttonContainer}>
           <RoundedButton title={locale.continue} enabled={this.searchEnabled} action={onSave} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
         </View>
-        { this.renderMap() }
+
+        {hasCoordinates(location) && this.renderMap()}
       </View>
     );
   }
@@ -215,11 +221,7 @@ class ProfileAddressLayout extends Component {
   }
 
   renderMap() {
-    const { location } = this.props;
-
-    if (!location) return null;
-
-    const { latitude, longitude } = location;
+    const { location: { latitude, longitude } } = this.props;
 
     return (
       <View style={styles.mapContainer}>
@@ -239,6 +241,19 @@ class ProfileAddressLayout extends Component {
             description={this.locationDescription}
           />
         </MapView>
+      </View>
+    );
+  }
+
+  renderAddress() {
+    const { location } = this.props;
+    if (!location || !location.address) return;
+
+    return (
+      <View style={styles.addressContainer}>
+        <Text style={styles.address}>
+          <Text style={styles.addressItem}>{locale.address}:</Text> {location.address}
+        </Text>
       </View>
     );
   }

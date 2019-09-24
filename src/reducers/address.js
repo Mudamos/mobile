@@ -14,6 +14,7 @@ export default (state = initialState, action) => {
     case "ADDRESS_ZIP_CODE_SEARCHING":
       return {
         ...state,
+        location: payload.isSearchingZipCode ? null : state.location,
         isSearchingZipCode: payload.isSearchingZipCode,
       };
     case "ADDRESS_FOUND":
