@@ -1,4 +1,4 @@
-export const createWallet = ({ revalidateProfileSignPlip }) => ({
+export const createWallet = ({ revalidateProfileSignPlip } = {}) => ({
   type: "WALLET_CREATE",
   payload: { revalidateProfileSignPlip },
 });
