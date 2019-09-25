@@ -88,7 +88,7 @@ export default class CodeInput extends Component {
         mdContainerStyle={{
           flex: 0,
           width: codeSize,
-          marginRight: (last ? 0 : marginFromCode)
+          marginRight: (last ? 0 : marginFromCode),
         }}
         textInputStyle={{ textAlign: "center"  }}
       />

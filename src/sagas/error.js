@@ -9,9 +9,6 @@ import {
 
 import locale from "../locales/pt-BR";
 
-
-const showToast = message => Toast.show(message);
-
 const validationMessageFor = validations => (validations || []).map(v => v.message).join("\n");
 
 const errorMessageFor = ({ payload, defaultMessage }) => {

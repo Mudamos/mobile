@@ -5,7 +5,24 @@ import textStyles from "./text";
 
 const { width } = Dimensions.get("window");
 
+const address =  {
+  color: "#FFF",
+  fontSize: "1rem",
+  marginHorizontal: 10,
+};
+
 export default EStyleSheet.create({
+  address: {
+    ...address,
+  },
+  addressItem: {
+    ...address,
+    fontWeight: "bold",
+  },
+  addressContainer: {
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
   buttonContainer: {
     alignItems: "center",
     flex: 1,

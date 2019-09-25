@@ -188,8 +188,8 @@ export default class MainTabView extends Component {
 
   routeTitle = ({ route }) => route.title;
 
-  tabBarLabel = props => {
-    const { title } = props.route;
+  tabBarLabel = attrs => {
+    const { title } = attrs.route;
 
     return (
       <View style={styles.tab}>
