@@ -1,5 +1,7 @@
 # Next
 
+## [2.1.0] 25/09/2019
+
 * [PR #490] Use new address api
 * [PR #488] Crash Andorid Pie (9) with the maps lib
 
