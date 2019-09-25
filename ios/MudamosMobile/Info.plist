@@ -63,6 +63,8 @@
 			</dict>
 		</dict>
 	</dict>
+  <key>NSBluetoothAlwaysUsageDescription</key>
+  <string>Não pedimos essa permissão</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Não pedimos essa permissão</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>

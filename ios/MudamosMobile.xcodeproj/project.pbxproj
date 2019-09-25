@@ -214,6 +214,8 @@
 		46439D801E709B03008577C0 /* roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B561E269C800002728D /* roboto_medium.ttf */; };
 		46439D811E709B03008577C0 /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B591E269C800002728D /* roboto.ttf */; };
 		4644560C1E1ECFD600AACF91 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 464455F51E1ECFAD00AACF91 /* libRCTFBSDK.a */; };
+		4649D92B233BD49D00674DAF /* MessageSignerActionBeta-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4649D92A233BD49D00674DAF /* MessageSignerActionBeta-Info.plist */; };
+		4649D92D233BD4B500674DAF /* MessageSignerActionProduction-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4649D92C233BD4B500674DAF /* MessageSignerActionProduction-Info.plist */; };
 		4658C25A1DFF25020063E371 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46668FAE1DFB3875002ECF64 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
 		466D24FD2051730B00DF8471 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 466D24DC205172B000DF8471 /* libRCTAnimation.a */; };
@@ -236,6 +238,7 @@
 		467749DC2016232A001717E1 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749D92016232A001717E1 /* Bool.swift */; };
 		468261211EBA7E330044D471 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
 		468261421EBA7E3C0044D471 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
+		4684B111233BCFF600CFBC63 /* InfoMudamosProduction.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4684B110233BCFF500CFBC63 /* InfoMudamosProduction.plist */; };
 		468B52A31E57273200A4E6B6 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */; };
 		46918CE11E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
 		46918CE21E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
@@ -932,12 +935,12 @@
 		460CED6820165CC1008ECD65 /* Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		460CEDE6201671E4008ECD65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4615B18D20125382006CBF41 /* MessageSignerActionProduction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionProduction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		4615B18E20125383006CBF41 /* MessageSignerActionProduction-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MessageSignerActionProduction-Info.plist"; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/MessageSignerAction/MessageSignerActionProduction-Info.plist"; sourceTree = "<absolute>"; };
 		462DE3E01E9C0D630075CAFC /* MudamosProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosProduction.entitlements; sourceTree = "<group>"; };
 		463207391EBA7D0800778DCC /* google */ = {isa = PBXFileReference; lastKnownFileType = folder; path = google; sourceTree = "<group>"; };
 		463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46439D881E709B03008577C0 /* MudamosProduction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosProduction.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		46439D891E709B03008577C0 /* InfoMudamosProduction.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = InfoMudamosProduction.plist; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/InfoMudamosProduction.plist"; sourceTree = "<absolute>"; };
+		4649D92A233BD49D00674DAF /* MessageSignerActionBeta-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MessageSignerActionBeta-Info.plist"; sourceTree = "<group>"; };
+		4649D92C233BD4B500674DAF /* MessageSignerActionProduction-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MessageSignerActionProduction-Info.plist"; sourceTree = "<group>"; };
 		466D24D1205172AF00DF8471 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		466E448A22D3B080002957AD /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCWebView.xcodeproj; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; };
 		4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDFirebaseConfig.m; sourceTree = "<group>"; };
@@ -945,6 +948,7 @@
 		467749AE20160362001717E1 /* MudamosPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MudamosPayload.swift; sourceTree = "<group>"; };
 		467749D5201612DA001717E1 /* Signer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signer.swift; sourceTree = "<group>"; };
 		467749D92016232A001717E1 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
+		4684B110233BCFF500CFBC63 /* InfoMudamosProduction.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InfoMudamosProduction.plist; path = MudamosMobile/InfoMudamosProduction.plist; sourceTree = "<group>"; };
 		46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold_italic.ttf; sourceTree = "<group>"; };
 		46918CDE1E26989000AF78FF /* pt_sans_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_bold.ttf; sourceTree = "<group>"; };
 		46918CDF1E26989000AF78FF /* pt_sans_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans_italic.ttf; sourceTree = "<group>"; };
@@ -953,7 +957,6 @@
 		46AA978D1E9BBCD200B76B3F /* MudamosMobileTagviewBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosMobileTagviewBeta.entitlements; sourceTree = "<group>"; };
 		46AE0B6022D3CD4700D39CFA /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		46B86B6920123271009E643E /* MessageSignerActionBeta.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionBeta.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		46B86B6A20123271009E643E /* MessageSignerActionBeta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MessageSignerActionBeta-Info.plist"; path = "/Users/guimello/projects/itsriodejaneiro/mudamos-mobile/ios/MessageSignerAction/MessageSignerActionBeta-Info.plist"; sourceTree = "<absolute>"; };
 		46BAB489202240CC0068CE6F /* MessageSignerActionProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageSignerActionProduction.entitlements; sourceTree = "<group>"; };
 		46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InfoTagviewBeta.plist; path = MudamosMobile/InfoTagviewBeta.plist; sourceTree = "<group>"; };
 		46BF09C1206025A200C5C095 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
@@ -1295,7 +1298,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */,
-				46439D891E709B03008577C0 /* InfoMudamosProduction.plist */,
+				4684B110233BCFF500CFBC63 /* InfoMudamosProduction.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				460B5A7A201230B30028A617 /* Dummy.swift */,
@@ -1575,8 +1578,8 @@
 				46E9602920122E5D00D5AEB9 /* ActionViewController.swift */,
 				46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */,
 				46E9602E20122E5D00D5AEB9 /* Info.plist */,
-				46B86B6A20123271009E643E /* MessageSignerActionBeta-Info.plist */,
-				4615B18E20125383006CBF41 /* MessageSignerActionProduction-Info.plist */,
+				4649D92A233BD49D00674DAF /* MessageSignerActionBeta-Info.plist */,
+				4649D92C233BD4B500674DAF /* MessageSignerActionProduction-Info.plist */,
 				460373522012565900EC7EBE /* Images.xcassets */,
 				460373C2201263A800EC7EBE /* sign.html */,
 				460CEDE520166E46008ECD65 /* Localizable.strings */,
@@ -2633,6 +2636,7 @@
 			files = (
 				460CEDD42016661F008ECD65 /* lato_black.ttf in Resources */,
 				460CEDD02016661F008ECD65 /* pt_sans_bold.ttf in Resources */,
+				4649D92D233BD4B500674DAF /* MessageSignerActionProduction-Info.plist in Resources */,
 				460CEDC82016661F008ECD65 /* roboto_light_italic.ttf in Resources */,
 				460CEDC62016661F008ECD65 /* roboto_bold.ttf in Resources */,
 				460CEDCA2016661F008ECD65 /* roboto_medium_italic.ttf in Resources */,
@@ -2675,6 +2679,7 @@
 				46439D5F1E709B03008577C0 /* lato_italic.ttf in Resources */,
 				46439D601E709B03008577C0 /* lato_hairline.ttf in Resources */,
 				46439D611E709B03008577C0 /* roboto_bold.ttf in Resources */,
+				4684B111233BCFF600CFBC63 /* InfoMudamosProduction.plist in Resources */,
 				46439D621E709B03008577C0 /* LaunchScreen.xib in Resources */,
 				46439D631E709B03008577C0 /* Entypo.ttf in Resources */,
 				46439D641E709B03008577C0 /* pt_sans.ttf in Resources */,
@@ -2722,6 +2727,7 @@
 				460CEDAE2016661F008ECD65 /* roboto_light_italic.ttf in Resources */,
 				460CEDAC2016661F008ECD65 /* roboto_bold.ttf in Resources */,
 				460CEDB02016661F008ECD65 /* roboto_medium_italic.ttf in Resources */,
+				4649D92B233BD49D00674DAF /* MessageSignerActionBeta-Info.plist in Resources */,
 				460CEDBE2016661F008ECD65 /* lato_hairline.ttf in Resources */,
 				460CEDAA2016661F008ECD65 /* roboto_black.ttf in Resources */,
 				460CEDAF2016661F008ECD65 /* roboto_light.ttf in Resources */,
@@ -3776,7 +3782,7 @@
 					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 				);
-				INFOPLIST_FILE = InfoMudamosProduction.plist;
+				INFOPLIST_FILE = MudamosMobile/InfoMudamosProduction.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3836,7 +3842,7 @@
 					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 				);
-				INFOPLIST_FILE = InfoMudamosProduction.plist;
+				INFOPLIST_FILE = MudamosMobile/InfoMudamosProduction.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
