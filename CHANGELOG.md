@@ -1,5 +1,7 @@
 # Next
 
+## [2.1.1] 27/09/2019
+
 * [PR #492] Allow TSE to work without encryption
 
 ## [2.1.0] 25/09/2019
