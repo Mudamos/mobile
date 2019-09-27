@@ -1,5 +1,7 @@
 # Next
 
+* [PR #492] Allow TSE to work without encryption
+
 ## [2.1.0] 25/09/2019
 
 * [PR #490] Use new address api
