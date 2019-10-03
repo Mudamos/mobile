@@ -243,11 +243,11 @@ const logout = ({ client }) => authToken =>
       if (isDev) console.log("Logout failed, but skipping.");
     });
 
-const retrievePassword = ({ client }) => ({ email, block }) =>
+const retrievePassword = ({ client }) => ({ cpf, email, block }) =>
   client
     .use(serializeJson)
     .post("/users/password/reset")
-    .send({ user: { email }, block })
+    .send({ user: { cpf, email }, block })
     .then(getData);
 
 const changeForgotPassword = ({ client }) => ({ code, password, block }) =>
