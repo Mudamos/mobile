@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onBack: () => dispatch(navigateBack()),
   onHasCode: () => dispatch(navigate("changeForgotPassword")),
-  onSave: email => dispatch(retrievePassword(email)),
+  onSave: ({ cpf, email }) => dispatch(retrievePassword({ cpf, email })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ForgotPasswordLayout);

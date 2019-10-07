@@ -267,9 +267,11 @@ export const eligibleToSignPlip = ({ plip, user }) => {
 export const validateEmail = email => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 
 export const validateCpf = cpf => {
-  const cpfFormatted = String(cpf).replace(/\D/g, "");
+  const cpfFormatted = unMaskCpf(cpf);
   return cpfFormatted.length === 11;
 }
+
+export const unMaskCpf = cpf => String(cpf).replace(/\D/g, "");
 
 export const errorMessageFromCode = ({ errorCode, locale }) => locale.errorsCode[errorCode];
 

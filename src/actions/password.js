@@ -1,6 +1,6 @@
-export const retrievePassword = email => ({
+export const retrievePassword = ({ cpf, email }) => ({
   type: "PASSWORD_RETRIEVE",
-  payload: { email },
+  payload: { cpf, email },
 });
 
 export const retrievingPassword = isRetrieving => ({

@@ -1,11 +1,15 @@
-import React, { Component } from "react";
+import { anyPass, isEmpty, isNil } from "ramda";
+import React, { PureComponent } from "react";
 import {
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
 
+import { compose, withStateHandlers } from "recompose";
+
 import BackButton from "./back-button";
+import CpfInput from "./cpf-input";
 import FlatButton from "./flat-button";
 import HeaderLogo from "./header-logo";
 import Layout from "./purple-layout";
@@ -18,29 +22,84 @@ import ScrollView from "./scroll-view";
 import locale from "../locales/pt-BR";
 import styles from "../styles/forgot-password-layout";
 
-export default class ForgotPasswordLayout extends Component {
-  state = {};
+import { unMaskCpf, validateCpf } from "../utils";
+
+const isNotPresent = anyPass([isNil, isEmpty]);
+
+const enhance = compose(
+  withStateHandlers(
+    { cpf: "", email: "" },
+    {
+      onSetCpf: () => value => ({
+        cpf: value,
+      }),
+      onSetEmail: () => value => ({
+        email: value,
+      }),
+    }
+  )
+);
+
+class ForgotPasswordLayout extends PureComponent {
+  state = {
+    errors: {},
+  };
 
   static propTypes = {
+    cpf: PropTypes.string,
+    email: PropTypes.string,
     isSaving: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
     onHasCode: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
+    onSetCpf: PropTypes.func.isRequired,
+    onSetEmail: PropTypes.func.isRequired,
   }
 
-  get validForm() {
-    return !!this.state.email;
+  get isValidForm() {
+    return this.isValidCpf(this.props.cpf);
   }
 
-  get formEnabled() {
-    return this.validForm;
+  get isFormEnabled() {
+    return this.isValidForm;
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.cpf !== prevProps.cpf) {
+      this.checkCpf();
+    }
+  }
+
+  checkCpf = () => {
+    const { cpf } = this.props;
+
+    this.setState(({ errors }) => ({
+      errors: {
+        ...errors,
+        cpf: this.isValidCpf(cpf) ? null : locale.invalidCpf,
+      },
+    }));
+  };
+
+  isValidCpf = cpf => isNotPresent(cpf) || validateCpf(cpf);
+
+  onSubmit = () => {
+    const { cpf, email, onSave } = this.props;
+
+    onSave({ cpf: unMaskCpf(cpf), email });
+  };
 
   render() {
     const {
+      cpf,
+      email,
       isSaving,
       onHasCode,
+      onSetCpf,
+      onSetEmail,
     } = this.props;
+
+    const { errors } = this.state;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -56,18 +115,33 @@ export default class ForgotPasswordLayout extends Component {
               <MDTextInput
                 autoCapitalize="none"
                 placeholder={locale.email}
-                value={this.state.email}
-                onChangeText={email => this.setState({ email })}
+                value={email}
+                onChangeText={onSetEmail}
                 keyboardType="email-address"
                 onSubmitEditing={() => this.emailInput.blur()}
                 ref={ref => this.emailInput = ref}
+              />
+
+              <Text style={styles.fieldTextSeparator}>
+                {locale.or.toUpperCase()}
+              </Text>
+
+              <CpfInput
+                value={cpf}
+                onChangeCpfText={onSetCpf}
+                placeholder={locale.cpf.toUpperCase()}
+                hasError={!!errors.cpf}
+                error={errors.cpf}
+                hint="Ex: 000.000.000-00"
+                onSubmitEditing={() => this.cpfInput.blur()}
+                ref={ref => this.cpfInput = ref}
               />
             </View>
 
             <FlatButton
               title={locale.sendCode.toUpperCase()}
-              enabled={this.formEnabled}
-              onPress={this.onSubmit.bind(this)}
+              enabled={this.isFormEnabled}
+              onPress={this.onSubmit}
               style={{marginHorizontal: 20, marginTop: 20}}
             />
 
@@ -93,11 +167,6 @@ export default class ForgotPasswordLayout extends Component {
       />
     );
   }
-
-  onSubmit() {
-    const { email } = this.state;
-    const { onSave } = this.props;
-
-    onSave(email);
-  }
 }
+
+export default enhance(ForgotPasswordLayout);

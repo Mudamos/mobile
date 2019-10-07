@@ -120,6 +120,7 @@ const translations = {
   noThanks: "Não, obrigado",
   ok: "Ok",
   okIGotIt: "Ok, entendi",
+  or: "ou",
   openGallery: "Abrir a galeria",
   openSettings: "Abrir configurações",
   openSite: "Acesse o site",

@@ -1,5 +1,7 @@
 # Next
 
+* [PR #494] Recover password with cpf
+
 ## [2.1.1] 27/09/2019
 
 * [PR #492] Allow TSE to work without encryption

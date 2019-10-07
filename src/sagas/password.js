@@ -34,13 +34,14 @@ import { blockBuilder } from "./crypto";
 function* retrievePassword({ mobileApi, Crypto }) {
   yield takeLatest("PASSWORD_RETRIEVE", function* ({ payload }) {
     try {
-      const { email } = payload;
+      const { cpf, email: userEmail } = payload;
+      const email = cpf ? null : userEmail;
 
       yield put(retrievingPassword(true));
 
-      const message = email;
+      const message = cpf || email;
       const block = yield call(blockBuilder, { message, mobileApi, Crypto });
-      yield call(mobileApi.retrievePassword, { email, block });
+      yield call(mobileApi.retrievePassword, { cpf, email, block });
 
       yield call([Toast, Toast.show], locale.codeSent);
       yield put(navigate("changeForgotPassword"));

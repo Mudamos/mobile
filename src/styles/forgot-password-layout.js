@@ -7,6 +7,14 @@ export default StyleSheet.create({
     backgroundColor: "#6000AA",
     flex: 1,
   },
+  fieldTextSeparator: {
+    alignSelf: "center",
+    color: "#fff",
+    fontFamily: "roboto",
+    fontSize: 14,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   full: {
     flex: 1,
   },

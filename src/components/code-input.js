@@ -84,6 +84,7 @@ export default class CodeInput extends Component {
         ref={ref}
         value={value}
         maxLength={1}
+        keyboardType="numeric"
         onFocus={() => this.hiddenField.focus()}
         mdContainerStyle={{
           flex: 0,
