@@ -54,6 +54,7 @@ const translations = {
   email: "E-mail",
   emailForAccess: "E-mail para acesso",
   emailRegistered: "E-mail cadastrado",
+  emailSentTo: "E-mail enviado para",
   enroll: "Cadastrar",
   enterNewPassword: "Agora a nova senha",
   executingActionWait: "Executando assinatura. Aguarde...",

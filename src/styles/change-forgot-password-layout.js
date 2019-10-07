@@ -2,18 +2,32 @@ import { StyleSheet } from "react-native";
 
 import textStyles from "./text";
 
+const actionText = {
+  textAlign: "center",
+  fontFamily: "roboto",
+  fontSize: 18,
+  fontWeight: "bold",
+  color: "#fff",
+  alignSelf: "center",
+};
+
 export default StyleSheet.create({
   actionText: {
-    textAlign: "center",
-    fontFamily: "roboto",
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#fff",
-    alignSelf: "center",
+    ...actionText,
   },
   container: {
     backgroundColor: "#6000AA",
     flex: 1,
+  },
+  fieldGroup: {
+    ...actionText,
+    fontSize: 14,
+    fontWeight: "normal",
+    marginTop: 20,
+  },
+  fieldTitle: {
+    ...actionText,
+    fontSize: 14,
   },
   full: {
     flex: 1,
