@@ -1,5 +1,7 @@
 import { call, put, spawn, select, takeLatest } from "redux-saga/effects";
 
+import { prop } from "ramda";
+
 import {
   isUnauthorized,
   logError,
@@ -41,10 +43,10 @@ function* retrievePassword({ mobileApi, Crypto }) {
 
       const message = cpf || email;
       const block = yield call(blockBuilder, { message, mobileApi, Crypto });
-      yield call(mobileApi.retrievePassword, { cpf, email, block });
+      const result = yield call(mobileApi.retrievePassword, { cpf, email, block });
 
       yield call([Toast, Toast.show], locale.codeSent);
-      yield put(navigate("changeForgotPassword"));
+      yield put(navigate("changeForgotPassword", { emailSent: prop("email", result) }));
     } catch(e) {
       logError(e);
       yield put(retrievePasswordError(true, e));

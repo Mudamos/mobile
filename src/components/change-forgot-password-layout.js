@@ -29,6 +29,7 @@ export default class ChangeForgotPasswordLayout extends Component {
   state = {};
 
   static propTypes = {
+    emailSent: PropTypes.string,
     errors: PropTypes.array,
     isSaving: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
@@ -48,6 +49,7 @@ export default class ChangeForgotPasswordLayout extends Component {
 
   render() {
     const {
+      emailSent,
       errors,
       isSaving,
       onResendCode,
@@ -62,6 +64,12 @@ export default class ChangeForgotPasswordLayout extends Component {
             <Text style={styles.headerTitle}>
               {locale.changeForgotPasswordTitle}
             </Text>
+
+            {emailSent && (
+              <Text style={styles.fieldGroup}>
+                <Text style={styles.fieldTitle}>{locale.emailSentTo}:</Text> {emailSent}
+              </Text>
+            )}
 
             <Text style={[styles.actionText, styles.highMargin]}>
               {locale.typeCode}
