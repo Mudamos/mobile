@@ -19,7 +19,7 @@ import {
 
 import PropTypes from "prop-types";
 
-import { clamp } from "ramda";
+import { clamp, prop } from "ramda";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -258,9 +258,9 @@ export default class PlipLayout extends Component {
     );
   }
 
-  signButtonTitle = ({ canSign, sameRegion, shouldLogin }) => {
+  signButtonTitle = ({ canSign, plip, sameRegion, shouldLogin }) => {
     if (canSign || shouldLogin) {
-      return locale.iWannaMakeTheDifference;
+      return prop("callToAction", plip) || locale.iWannaMakeTheDifference;
     } else if (!sameRegion) {
       return locale.thisPlipFromAnotherRegion;
     } else {
@@ -309,7 +309,7 @@ export default class PlipLayout extends Component {
     const shouldLogin = !logged;
     const canSign = logged && !hasSigned && sameRegion;
 
-    const title = this.signButtonTitle({ canSign, sameRegion, shouldLogin });
+    const title = this.signButtonTitle({ canSign, plip, sameRegion, shouldLogin });
     const onPress = this.signButtonOnPress({ canSign, sameRegion, shouldLogin });
     const iconName = this.signButtonIcon({ canSign, shouldLogin, sameRegion });
     const buttonStyle = signButtonStyle(!user || user && sameRegion);
@@ -322,6 +322,7 @@ export default class PlipLayout extends Component {
           style={buttonStyle}
           textStyle={{fontFamily: "lato"}}
           iconName={iconName}
+          numberOfLines={2}
         />
       </View>
     );
@@ -671,8 +672,6 @@ export default class PlipLayout extends Component {
 
 const signButtonStyle = active => ({
   backgroundColor: active ? "#00BFD8" : "#ACACAC",
-  marginHorizontal: 10,
-  marginVertical: 15,
   paddingHorizontal: 15,
   paddingVertical: 10,
   elevation: 3,

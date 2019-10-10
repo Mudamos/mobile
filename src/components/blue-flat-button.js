@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StyleSheet, Text } from "react-native";
+import { Platform, Text } from "react-native";
 import FlatButton from "./flat-button";
 
 import EStyleSheet from "react-native-extended-stylesheet";
@@ -9,29 +9,24 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const styles = EStyleSheet.create({
   container: {
-    borderRadius: 100,
+    borderRadius: 50,
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
   },
-  gradientContainer: {
-    borderRadius: 100,
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 10,
-
-    ...StyleSheet.absoluteFillObject,
-  },
   text: {
     fontFamily: "roboto",
     fontSize: "1rem",
     color: "#fff",
+    flexShrink: 2,
     fontWeight: "bold",
     textAlign: "center",
+    textAlignVertical: "center",
   },
 });
+
+const iconMarginTop = Platform.OS === "ios" ? 3 : 0;
 
 export default class BlueFlatButton extends FlatButton {
   renderButton() {
@@ -41,6 +36,7 @@ export default class BlueFlatButton extends FlatButton {
       style,
       title,
       iconName,
+      numberOfLines,
     } = this.props;
 
     const Button = this.buttonClass().withText("").build();
@@ -48,7 +44,7 @@ export default class BlueFlatButton extends FlatButton {
     return (
       <Button style={[styles.container, style]}>
         <Text
-          numberOfLines={1}
+          numberOfLines={numberOfLines || 1}
           textAnchor="middle"
           style={[styles.text, textStyle, { opacity: enabled ? 1 : 0.5 }]}
         >
@@ -59,7 +55,7 @@ export default class BlueFlatButton extends FlatButton {
             name={iconName}
             size={24}
             color="#FFF"
-            style={{marginLeft: 10}}
+            style={{ marginTop: iconMarginTop, marginLeft: 10 }}
           />
         }
       </Button>

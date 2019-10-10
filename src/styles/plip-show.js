@@ -261,9 +261,12 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
   },
   signButton: {
+    alignItems: "flex-end",
+    bottom: 10,
+    flex: 1,
+    left: 10,
     position: "absolute",
-    bottom: 0,
-    right: 0,
+    right: 10,
   },
   signaturesAndGoal: {
     color: "#000",
