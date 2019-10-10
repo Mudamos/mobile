@@ -1,5 +1,6 @@
 # Next
 
+* [PR #498] Use api call to action text
 * [PR #496] Show sent email when recovering password
 * [PR #494] Recover password with cpf
 
