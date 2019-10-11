@@ -3,6 +3,7 @@ import { all, call, spawn, put, select, fork, takeEvery, takeLatest } from "redu
 import { delay } from "redux-saga";
 
 import {
+  is,
   isEmpty,
   prop,
   uniq,
@@ -97,19 +98,24 @@ import {
   findSignedPlips,
   getCurrentMainTabView,
   getCurrentSigningPlip,
+  hasLoadedPlipsByKey,
   isAppReady,
   isUserLoggedIn,
   getIneligiblePlipReasonForScope,
   searchPlipTitle,
 } from "../selectors";
 
+import { getUserCurrentAddressByGeoLocation } from "./address";
+
 import {
   getMainTabViewKeyByIndex,
 } from "../models";
+import { UserLocationError } from "../models/error";
 
 import { fetchProfile } from "./profile";
 import { profileScreenForCurrentUser } from "./navigation";
 import { validateLocalWallet } from "./wallet";
+import locale from "../locales/pt-BR";
 
 import LibCrypto from "mudamos-libcrypto";
 
@@ -147,9 +153,12 @@ function* fetchPlipsMainTab() {
 
     const mainTabViewKey = getMainTabViewKeyByIndex(index);
 
-    const plips = yield call(getPlips, mainTabViewKey);
+    const [plips, loaded] = yield all([
+      call(getPlips, mainTabViewKey),
+      select(hasLoadedPlipsByKey(mainTabViewKey)),
+    ]);
 
-    if (isEmpty(plips)) {
+    if (isEmpty(plips) && !loaded) {
       yield put(fetchPlips());
     }
   });
@@ -426,9 +435,27 @@ function* fetchNationwidePlips({ mobileApi, page = 0 }) {
 function* fetchByUserLocationPlips({ mobileApi, page = 0 }) {
   const limit = PLIPS_PER_PAGE;
   const scope = CITYWIDE_SCOPE;
-  const city = yield select(currentUserCity);
-  const uf = yield select(currentUserUf);
+  const loggedInCity = yield select(currentUserCity);
+  const loggedInUf = yield select(currentUserUf);
   const includeCauses = true;
+  const hasLoggedInLocation = loggedInCity && loggedInUf;
+  const message = locale.permissions.locationForPlip;
+
+  let address;
+  try {
+    address = yield (hasLoggedInLocation ? Promise.resolve() : call(getUserCurrentAddressByGeoLocation, { message, mobileApi }));
+  } catch (error) {
+    if (!is(UserLocationError, error)) {
+      throw error;
+    }
+  }
+
+  const city = hasLoggedInLocation || !address ? loggedInCity : prop("city", address);
+  const uf = hasLoggedInLocation || !address ? loggedInUf : prop("uf", address);
+
+  if (!city || !uf) {
+    return { plips: [] };
+  }
 
   const response = yield call(mobileApi.listPlips, {
     city,

@@ -12,7 +12,7 @@ import {
 
 import { identity } from "ramda";
 
-import { UnauthorizedError } from "../models/net-error";
+import { UnauthorizedError } from "../models/error";
 
 const getPagination = ({ response, ...args }) => ({
   page: parseInt(response.headers.get("X-Page") || 0, 10),

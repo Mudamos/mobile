@@ -1,4 +1,5 @@
 import {
+  curry,
   propEq,
 } from "ramda";
 
@@ -50,6 +51,16 @@ export const hasLoadedAllPlips = state => !!state.plip.allPlips.loaded;
 export const hasLoadedUserFavoritePlips = state => !!state.plip.favoritePlips.loaded;
 
 export const hasLoadedSignedPlips = state => !!state.plip.signedPlips.loaded;
+
+export const hasLoadedPlipsByKey = curry((key, state) => {
+  switch (key) {
+    case "nationwidePlips": return hasLoadedNationwidePlips(state);
+    case "userLocationPlips": return hasLoadedUserLocationPlips(state);
+    case "allPlips": return hasLoadedAllPlips(state);
+    case "signedPlips": return hasLoadedSignedPlips(state);
+    case "favoritePlips": return hasLoadedUserFavoritePlips(state);
+  }
+});
 
 export const errorFetchingNationwidePlips = state => !!state.plip.nationwidePlips.error;
 

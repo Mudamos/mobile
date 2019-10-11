@@ -1,3 +1,5 @@
+import { uniq } from "ramda";
+
 const initialState = {
   unauthorized: [],
 };
@@ -11,7 +13,10 @@ export default (state = initialState, action) => {
     case "PERMISSION_UNAUTHORIZED":
       return {
         ...state,
-        unauthorized: state.notAuthorized.concat(payload.permission),
+        unauthorized: uniq([
+          ...state.unauthorized,
+          payload.permission,
+        ]),
       };
     default:
       return state;

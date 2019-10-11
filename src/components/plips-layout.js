@@ -14,7 +14,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Layout from "./layout";
 import NavigationBar from "./navigation-bar";
 import HeaderLogo from "./header-logo";
-import MainTabView from "../components/main-tab-view";
+import MainTabView from "./main-tab-view";
 import SafeAreaView from "./safe-area-view";
 
 import styles from "../styles/plips-layout";

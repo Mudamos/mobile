@@ -130,6 +130,7 @@ const translations = {
   passwordChangedSuccessfully: "Senha alterada com sucesso!",
   performLogin: "Faça o login",
   permissions: {
+    locationForPlip: "Para buscarmos projetos em sua localidade",
     locationForZipCode: "Para facilitar a busca do seu CEP",
     camera: "Para você escolher um avatar",
     photo: "Para você escolher um avatar",
@@ -236,6 +237,7 @@ const translations = {
   errors: {
     facebookLoginError: "Não foi possível conectar-se ao facebook.",
     fetchPlips: "Não foi possível carregar as informações",
+    geoLocationError: "Não foi possível obter sua localização.",
     genericError: "Algo deu errado, tente novamente em alguns segundos.",
     locationError: "Não foi possível obter sua localização.",
     loginError: "Não foi possível realizar o login.",
