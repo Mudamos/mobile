@@ -62,6 +62,9 @@ function appError({ type, payload }) {
       return handleWithPayload({ defaultMessage: locale.errors.saveAvatar });
     case "SHARE_LINK_ERROR":
       return handleWithPayload({ defaultMessage: locale.errors.shareLinkError });
+    case "PLIPS_BY_USER_LOCATION_ERROR": {
+      return handleWithPayload();
+    }
     default:
       return test(/.+_(ERROR|FAILURE)$/i, type) ? handleWithPayload() : null;
   }

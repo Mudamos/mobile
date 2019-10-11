@@ -37,7 +37,7 @@ function* location({ permissionService }) {
           yield take("APP_ON_FOREGROUND");
           return yield put(fetchUserLocation());
         default:
-          return permissionUnauthorized("location");
+          return yield put(permissionUnauthorized("location"));
       }
     } catch (e) {
       logError(e);
@@ -74,7 +74,7 @@ function* avatar({ permissionService }) {
         if (result === OPEN_SETTINGS) yield call(OpenSettings.openSettings);
         return;
       } else {
-        return permissionUnauthorized("avatar");
+        return yield put(permissionUnauthorized("avatar"));
       }
     } catch (e) {
       logError(e);

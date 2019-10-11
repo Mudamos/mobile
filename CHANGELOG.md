@@ -1,5 +1,6 @@
 # Next
 
+* [PR #500] Search slips using the user geo location when not logged in
 * [PR #498] Use api call to action text
 * [PR #496] Show sent email when recovering password
 * [PR #494] Recover password with cpf

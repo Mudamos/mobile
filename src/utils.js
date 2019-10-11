@@ -6,8 +6,10 @@ import {
   allPass,
   apply,
   complement,
+  compose,
   concat,
   contains,
+  curry,
   equals,
   filter,
   find,
@@ -21,6 +23,7 @@ import {
   mergeWith,
   not,
   pipe,
+  prop,
   propEq,
   reduce,
   reject,
@@ -31,7 +34,7 @@ import {
 
 import statesData from "./states.json";
 
-import { UnauthorizedError } from "./models/net-error";
+import { UnauthorizedError } from "./models/error";
 
 import { Buffer } from "buffer";
 import StringMask from "string-mask";
@@ -213,6 +216,8 @@ export const isBlank = value => isNil(value) || isEmpty(value) || isBlankString(
 export const isBlankString = value => allPass([isString, test(/^\s*$/)])(value);
 
 export const isPresent = complement(isBlank);
+
+export const propIsPresent = curry((attr, obj) => compose(isPresent, prop(attr))(obj));
 
 export const includes = flip(contains);
 
