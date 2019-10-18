@@ -1,5 +1,7 @@
 # Next
 
+## [2.2.0] 18/10/2019
+
 * [PR #502] Bump react-native-tab-view version
 * [PR #500] Search slips using the user geo location when not logged in
 * [PR #498] Use api call to action text
