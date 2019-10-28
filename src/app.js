@@ -26,6 +26,7 @@ import {
   ProfileConcludeContainer,
   ProfileUpdateContainer,
   ProfileSignUpContainer,
+  ProfileVoteAddressContainer,
   ProfileWalletContainer,
   SendYourPLContainer,
   ShowVideoContainer,
@@ -69,6 +70,7 @@ const scenes = Actions.create(
 
     <Scene key="signUp" component={SignUpContainer} hideNavBar={true} title="Identificação" />
     <Scene key="profileSignUp" component={ProfileSignUpContainer} hideNavBar={true} title="Dados Pessoais"/>
+    <Scene key="profileVoteAddress" component={ProfileVoteAddressContainer} hideNavBar={true} title="Confirme local de votação" />
     <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
     <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
     <Scene key="profileConclude" component={ProfileConcludeContainer} hideNavBar={true} title="Conclude" />

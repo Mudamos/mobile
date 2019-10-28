@@ -4,6 +4,8 @@ import Mobile from "./mobile";
 import ProfileType from "./profile-type";
 import Wallet from "./wallet";
 
+import { propIsPresent } from "../utils";
+
 
 export default class User {
   constructor(attrs = {}) {
@@ -18,6 +20,7 @@ export default class User {
     this.name = attrs.name;
     this.profileType = attrs.profileType;
     this.termsAccepted = attrs.termsAccepted;
+    this.voteAddress = attrs.voteAddress;
     this.voteCard = attrs.voteCard;
     this.wallet = attrs.wallet || new Wallet();
     this.zipCode = attrs.zipCode;
@@ -29,6 +32,10 @@ export default class User {
 
   get isFacebookUser() {
     return this.profileType === ProfileType.facebook;
+  }
+
+  get hasVoteAddress() {
+    return propIsPresent("uf", this.voteAddress) && propIsPresent("city", this.voteAddress);
   }
 
   clone() {
@@ -53,6 +60,7 @@ export default class User {
       hasSavedAvatar: this.hasSavedAvatar,
       profilePicture,
       termsAccepted: this.termsAccepted,
+      voteAddress: this.voteAddress,
 
       userDistrict: this.address.district,
       userState: this.address.state,
@@ -94,6 +102,7 @@ export default class User {
       profileType: json.profileType,
       termsAccepted: json.termsAccepted,
       voteCard: json.userVoteidcard,
+      voteAddress: json.voteAddress,
       wallet: Wallet.fromJson(json),
       zipCode: json.userZipcode,
     });

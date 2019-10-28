@@ -57,6 +57,11 @@ export const saveZipCode = location => ({
   payload: { location },
 });
 
+export const saveVoteAddress = ({ city, state }) => ({
+  type: "PROFILE_SAVE_VOTE_ADDRESS",
+  payload: { city, state },
+});
+
 export const sendPhoneValidation = ({ phone, shouldNavigate = false })  => ({
   type: "PROFILE_SEND_PHONE_VALIDATION",
   payload: { phone, shouldNavigate },
@@ -93,6 +98,15 @@ export const clearProfileSaveErrors = () => ({
 export const voteCardIdAcquired = voteCardId => ({
   type: "PROFILE_VOTE_CARD_ID_ACQUIRED",
   payload: { voteCardId },
+});
+
+export const tseVoteAddressAcquired = ({ tseVoteAddress } = {}) => ({
+  type: "PROFILE_TSE_VOTE_ADDRESS_ACQUIRED",
+  payload: { tseVoteAddress },
+});
+
+export const profileClearVoteAddressData = () => ({
+  type: "PROFILE_CLEAR_VOTE_ADDRESS_DATA",
 });
 
 export const profileSaveAvatar = ({ avatar, oldAvatarURL = null, shouldNavigate = true }) => ({

@@ -1,5 +1,7 @@
 const initialState = {
   isSigningUp: false,
+  tseVoteAddress: null,
+  voteCardId: null,
 };
 
 
@@ -9,6 +11,8 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case "PROFILE_CLEAR_VOTE_ADDRESS_DATA":
+      return { ...state, tseVoteAddress: null };
     case "PROFILE_FETCHING":
       return { ...state, isFetching: payload.isFetching };
     case "PROFILE_FETCHING_ERROR":
@@ -42,8 +46,14 @@ export default (state = initialState, action) => {
       return { ...state, errors: payload.error.validations, hasError: !!payload.error };
     case "PROFILE_CLEAR_SAVE_ERRORS":
       return { ...state, errors: null, hasError: false };
-    case "PROFILE_VOTE_CARD_ID_ACQUIRED":
-      return { ...state, voteCardId: payload.voteCardId };
+    case "PROFILE_VOTE_CARD_ID_ACQUIRED": {
+      const { voteCardId } = payload;
+      return { ...state, voteCardId };
+    }
+    case "PROFILE_TSE_VOTE_ADDRESS_ACQUIRED": {
+      const { tseVoteAddress } = payload;
+      return { ...state, tseVoteAddress };
+    }
     case "PROFILE_SAVING_AVATAR":
       return { ...state, isSavingAvatar: payload.isSaving, avatarError: null };
     case "PROFILE_SAVE_AVATAR_ERROR":
@@ -68,6 +78,7 @@ export default (state = initialState, action) => {
         phoneJustValidated: false,
         profileFetchError: false,
         sendValidationErrors: null,
+        tseVoteAddress: null,
         validatingProfile: false,
         voteCardId: null,
       };

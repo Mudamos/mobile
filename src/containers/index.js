@@ -13,6 +13,7 @@ export { default as ProfileAddressContainer } from "./profile-address";
 export { default as ProfileConcludeContainer } from "./profile-conclude";
 export { default as ProfileUpdateContainer } from "./profile-update";
 export { default as ProfileSignUpContainer } from "./profile-sign-up";
+export { default as ProfileVoteAddressContainer } from "./profile-vote-address";
 export { default as ProfileWalletContainer } from "./profile-wallet";
 export { default as SendYourPLContainer } from "./send-your-pl";
 export { default as ShowVideoContainer } from "./show-video";
