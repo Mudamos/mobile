@@ -11,7 +11,7 @@ import sagas from "./sagas";
 import Analytics from "./services/analytics";
 import ApiError from "./services/api-error";
 import Crypto from "./services/crypto";
-import DeviceInfo from "./services/device-info";
+import DeviceInfoService from "./services/device-info";
 import { defaultStorage } from "./services/local-storage";
 import LocationService from "./services/location";
 import MUDFirebaseDynamicLink from "./services/mud-firebase-dynamic-link";
@@ -25,9 +25,10 @@ import WalletManager from "./services/wallet";
 
 import * as repositories from "./repositories";
 
-const sessionStore = SessionManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP });
-const walletStore = WalletManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP });
 const localStorage = defaultStorage();
+const DeviceInfo = DeviceInfoService({ storage: localStorage });
+const sessionStore = SessionManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP });
+const walletStore = WalletManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP, DeviceInfo });
 
 const mudDynamicLink = new MUDFirebaseDynamicLink();
 

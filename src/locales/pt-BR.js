@@ -131,6 +131,7 @@ const translations = {
   performLogin: "Faça o login",
   permissions: {
     locationForPlip: "Para buscarmos projetos em sua localidade",
+    locationForSignPlip: "Para conferência da eligibilidade da assinatura",
     locationForZipCode: "Para facilitar a busca do seu CEP",
     camera: "Para você escolher um avatar",
     photo: "Para você escolher um avatar",

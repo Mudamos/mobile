@@ -1,6 +1,5 @@
 import LocalStorage from "./local-storage";
 import UserDefaults from "react-native-user-defaults";
-import DeviceInfo from "./device-info";
 
 import crypto from "./crypto";
 
@@ -22,14 +21,14 @@ const buildKey = (...args) => args.join(":");
 const walletKey = "wallet";
 const LANG = "BRAZILIAN-PORTUGUESE";
 
-export default (root, { suite }) => {
+export default (root, { DeviceInfo, suite }) => {
   const storage = UserDefaults;
   const oldStorage = LocalStorage(root);
 
   const key = buildKey(root, walletKey);
 
-  const create = password => {
-    const info = DeviceInfo.info();
+  const create = async password => {
+    const info = await DeviceInfo.info();
     if (isDev) console.log("Device info:", info);
 
     const entropy = [

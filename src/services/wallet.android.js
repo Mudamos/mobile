@@ -1,5 +1,4 @@
 import LocalStorage from "./local-storage";
-import DeviceInfo from "./device-info";
 
 import crypto from "./crypto";
 
@@ -20,11 +19,11 @@ import {
 const key = "wallet";
 const LANG = "BRAZILIAN-PORTUGUESE";
 
-export default root => {
+export default (root, { DeviceInfo }) => {
   const storage = LocalStorage(root);
 
-  const create = password => {
-    const info = DeviceInfo.info();
+  const create = async password => {
+    const info = await DeviceInfo.info();
     if (isDev) console.log("Device info:", info);
 
     const entropy = [
