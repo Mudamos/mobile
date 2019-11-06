@@ -1,21 +1,35 @@
+import { randomBytes } from "react-native-randombytes";
 import DeviceInfo from "react-native-device-info";
 
 import { Device } from "../models";
+import { isPresent } from "../utils";
 
+const UNIQUE_ID_KEY = "device-unique-id";
 
-const getInfo = () => new Device({
-  brand: DeviceInfo.getBrand(),
-  deviceId: DeviceInfo.getDeviceId(),
-  deviceUniqueId: DeviceInfo.getUniqueID(),
-  manufacturer: DeviceInfo.getManufacturer(),
-  model: DeviceInfo.getModel(),
-  systemName: DeviceInfo.getSystemName(),
-  systemVersion: DeviceInfo.getSystemVersion(),
-  userAgent: DeviceInfo.getUserAgent(),
-});
+const generateUniqueId = storage => storage.findOrCreate(UNIQUE_ID_KEY, () => randomBytes(32).toString("hex"));
 
-const service = {
-  info: getInfo,
-};
+const info = storage => () => new Promise(async (resolve) => {
+  const uniqueId = DeviceInfo.getUniqueID();
 
-export default service;
+  const deviceUniqueId = isPresent(uniqueId) ? uniqueId : await generateUniqueId(storage);
+
+  resolve(
+    new Device({
+      brand: DeviceInfo.getBrand(),
+      deviceId: DeviceInfo.getDeviceId(),
+      deviceUniqueId,
+      manufacturer: DeviceInfo.getManufacturer(),
+      model: DeviceInfo.getModel(),
+      systemName: DeviceInfo.getSystemName(),
+      systemVersion: DeviceInfo.getSystemVersion(),
+      userAgent: DeviceInfo.getUserAgent(),
+    })
+  );
+})
+
+const appVersion = () => Promise.resolve(DeviceInfo.getReadableVersion());
+
+export default ({ storage }) => ({
+  appVersion: appVersion,
+  info: info(storage),
+})

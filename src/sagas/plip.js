@@ -1,10 +1,11 @@
 import { Alert } from "react-native";
-import { all, call, spawn, put, select, fork, takeEvery, takeLatest } from "redux-saga/effects";
+import { all, call, spawn, put, select, fork, race, take, takeEvery, takeLatest } from "redux-saga/effects";
 import { delay } from "redux-saga";
 
 import {
   is,
   isEmpty,
+  pick,
   prop,
   uniq,
   zip,
@@ -21,8 +22,10 @@ import {
   isPresent,
   isDev,
   isUnauthorized,
+  log,
   logError,
   moment,
+  propIsPresent,
 } from "../utils";
 
 import {
@@ -81,6 +84,7 @@ import {
   refreshPlipsByLocation,
   refreshSignedPlips,
   refreshFavoritePlips,
+  requestUserLocation,
   signPlip as signPlipAction,
   signingPlip,
   shortPlipSigners,
@@ -631,7 +635,7 @@ function* fetchPlipSignersSaga({ mobileApi }) {
   });
 }
 
-function* signPlip({ mobileApi, walletStore, apiError }) {
+function* signPlip({ DeviceInfo, mobileApi, walletStore, apiError }) {
   yield takeLatest("PLIP_SIGN", function* ({ payload }) {
     try {
       const { plip } = payload;
@@ -675,6 +679,29 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
         return;
       }
 
+
+      yield put(requestUserLocation({ message: locale.permissions.locationForSignPlip }));
+
+      const {
+        locationResponse,
+        locationError,
+        unauthorized,
+      } = yield race({
+        locationResponse: take("LOCATION_FETCHED"),
+        locationError: take("LOCATION_FETCH_LOCATION_ERROR"),
+        unauthorized: take("PERMISSION_UNAUTHORIZED"),
+      });
+
+      log("Location result", { tag: "signPlip" }, { locationResponse, locationError, unauthorized });
+
+      const isLocationAvailable = !locationError
+        && !unauthorized
+        && locationResponse
+        && propIsPresent("latitude", locationResponse.payload)
+        && propIsPresent("longitude", locationResponse.payload);
+
+      const userCurrentCoordinates = pick(["latitude", "longitude"], isLocationAvailable ? locationResponse.payload : {});
+
       const difficulty = yield call(mobileApi.difficulty);
 
       const message = buildSignMessage({ user, plip });
@@ -686,8 +713,19 @@ function* signPlip({ mobileApi, walletStore, apiError }) {
         console.log("Will call sign plip api");
       }
 
+      const deviceInfo = yield call(DeviceInfo.info);
+      const appVersion = yield call(DeviceInfo.appVersion);
+      const additionalSignInfo = {
+        ...deviceInfo.toJson(),
+        appVersion,
+        userCurrentCoordinates,
+      };
+
+      log("Additional sign info", { tag: "signPlip" }, additionalSignInfo);
+
       try {
         const apiResult = yield call(mobileApi.signPlip, authToken, {
+          ...additionalSignInfo,
           petitionId: plip.id,
           block,
         });
@@ -883,13 +921,13 @@ function* loadStorePlipsInfo() {
   });
 }
 
-export default function* plipSaga({ mobileApi, walletStore, apiError }) {
+export default function* plipSaga({ DeviceInfo, mobileApi, walletStore, apiError }) {
   yield fork(searchPlips, { mobileApi });
   yield fork(fetchPlipsMainTab);
   yield fork(fetchPlipsSaga, { mobileApi });
   yield fork(refreshPlipsSaga, { mobileApi });
   yield fork(fetchPlipsNextPageSaga, { mobileApi });
-  yield spawn(signPlip, { mobileApi, walletStore, apiError });
+  yield spawn(signPlip, { DeviceInfo, mobileApi, walletStore, apiError });
   yield spawn(updatePlipSignInfoSaga, { mobileApi });
   yield spawn(fetchPlipSignersSaga, { mobileApi });
   yield spawn(fetchPlipRelatedInfo, { mobileApi });

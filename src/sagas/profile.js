@@ -229,13 +229,15 @@ function* savePhoneProfile({ mobileApi, DeviceInfo }) {
 
       yield put(savingProfile(true));
 
+      const deviceInfo = yield call(DeviceInfo.info);
+
       const authToken = yield select(currentAuthToken);
       const requestPayload = {
         mobile: {
           pinCode: code,
           number: phone,
 
-          ...DeviceInfo.info().toJson(),
+          ...deviceInfo.toJson(),
         },
       };
 

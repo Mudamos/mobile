@@ -1,5 +1,7 @@
 # Next
 
+* [PR #505] Add additional device info to the sign payload
+
 ## [2.2.0] 18/10/2019
 
 * [PR #502] Bump react-native-tab-view version
