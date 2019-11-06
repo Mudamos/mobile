@@ -75,8 +75,8 @@
 			</dict>
 		</dict>
 	</dict>
-  <key>NSBluetoothAlwaysUsageDescription</key>
-  <string>Não pedimos essa permissão</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Não pedimos essa permissão</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Não pedimos essa permissão</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
@@ -86,11 +86,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Para você tirar uma foto para seu avatar</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Não pedimos essa permissão</string>
+	<string>Compartilhar sua localização permite que o Mudamos personalize a aba &quot;Minha Região&quot; do seu aplicativo e o reconhecimento automático do seu CEP.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Não pedimos essa permissão</string>
+	<string>Compartilhar sua localização permite que o Mudamos personalize a aba &quot;Minha Região&quot; do seu aplicativo e o reconhecimento automático do seu CEP.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Compartilhar sua localização permite buscar automaticamente seu CEP</string>
+	<string>Compartilhar sua localização permite que o Mudamos personalize a aba &quot;Minha Região&quot; do seu aplicativo e o reconhecimento automático do seu CEP.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Não pedimos essa permissão</string>
 	<key>NSPhotoLibraryUsageDescription</key>
