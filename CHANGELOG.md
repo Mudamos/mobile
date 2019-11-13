@@ -1,5 +1,7 @@
 # Next
 
+## [2.3.0] 13/11/2019
+
 * [PR #505] Add additional device info to the sign payload
 
 ## [2.2.0] 18/10/2019
