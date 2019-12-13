@@ -1,5 +1,7 @@
 # Next
 
+* [PR #508] Add sms vote validation
+
 ## [2.3.0] 13/11/2019
 
 * [PR #505] Add additional device info to the sign payload
