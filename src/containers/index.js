@@ -18,6 +18,7 @@ export { default as SendYourPLContainer } from "./send-your-pl";
 export { default as ShowVideoContainer } from "./show-video";
 export { default as SignersContainer } from "./signers";
 export { default as TSEContainer } from "./tse";
+export * from "./vote";
 export { default as WebViewContainer } from "./web-view";
 
 export { ActionSignerContainer } from "./action-signer";

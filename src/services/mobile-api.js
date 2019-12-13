@@ -191,6 +191,20 @@ const sendPhoneValidation = ({ client }) => (authToken, number) =>
     .send({ mobile: { number }})
     .then(getData);
 
+const sendVoteConfirmation = ({ client }) => (authToken, { phone, plipId }) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post(`/petition/plip/${plipId}/send_mobile_verification`)
+    .send({ phone })
+    .then(getData);
+
+const sendVoteCodeConfirmation = ({ client }) => (authToken, { phone, pinCode, plipId }) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post(`/petition/plip/${plipId}/verify_mobile`)
+    .send({ phone, pinCode })
+    .then(getData);
+
 const saveWallet = ({ client }) => (authToken, walletKey) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
@@ -486,6 +500,8 @@ export default function MobileApi(host) {
     saveZipCode: saveZipCode({ client: v1Client }),
     searchZipCode: searchZipCode({ client: v2Client }),
     sendPhoneValidation: sendPhoneValidation({ client: v1Client }),
+    sendVoteConfirmation: sendVoteConfirmation({ client: v1Client }),
+    sendVoteCodeConfirmation: sendVoteCodeConfirmation({ client: v1Client }),
     signIn: signIn({ client: v1Client }),
     signMessage: signMessage({ client: v1Client }),
     signUp: signUp({ client: v3Client }),

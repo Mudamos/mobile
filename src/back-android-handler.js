@@ -10,6 +10,8 @@ import {
   signingPlip,
 } from "./actions";
 
+import { SCREEN_KEYS } from "./models";
+
 import { isDev } from "./utils";
 
 const defaultBackAction = () => {
@@ -56,7 +58,8 @@ export default store => () => {
     case "profileMissingFields":
     case "profilePhone":
     case "profileWallet":
-      return false;
+    case SCREEN_KEYS.CONFIRM_VOTE:
+      return true;
     default:
       return defaultBackAction();
   }
