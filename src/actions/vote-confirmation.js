@@ -1,4 +1,4 @@
-export const sendVoteConfirmation = ({ goBackToScreenKey, phone, plip }) => ({
+export const sendVotePhoneConfirmation = ({ goBackToScreenKey, phone, plip }) => ({
   type: "VOTE_CONFIRMATION_SEND_PHONE",
   payload: { goBackToScreenKey, phone, plip },
 });

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ConfirmVoteLayout from "../../components/vote/confirm-vote-layout";
 
 import {
-  sendVoteConfirmation,
+  sendVotePhoneConfirmation,
 } from "../../actions";
 
 import {
@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, { goBackToScreenKey, plip }) => ({
-  onSave: ({ phone }) => dispatch(sendVoteConfirmation({ goBackToScreenKey, phone, plip })),
+  onSave: ({ phone }) => dispatch(sendVotePhoneConfirmation({ goBackToScreenKey, phone, plip })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConfirmVoteLayout);
