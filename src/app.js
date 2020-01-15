@@ -14,6 +14,8 @@ import {
   AboutAppContainer,
   CantSignPlipContainer,
   ChangeForgotPasswordContainer,
+  ConfirmVoteContainer,
+  ConfirmVoteCodeContainer,
   ForgotPasswordContainer,
   HelpContainer,
   IntroContainer,
@@ -40,6 +42,7 @@ import {
   navigateBack,
 } from "./actions";
 
+import { SCREEN_KEYS } from "./models";
 
 import routeReducer from "./services/route-reducer";
 import backAndroidHandler from "./back-android-handler";
@@ -81,6 +84,9 @@ const scenes = Actions.create(
 
     <Scene key="tse" component={TSEContainer} hideNavBar={true} />
     <Scene key="showVideo" component={ShowVideoContainer} hideNavBar={true} direction="vertical" />
+
+    <Scene key={SCREEN_KEYS.CONFIRM_VOTE} component={ConfirmVoteContainer} hideNavBar />
+    <Scene key={SCREEN_KEYS.CONFIRM_VOTE_CODE} component={ConfirmVoteCodeContainer} hideNavBar />
   </Scene>
 );
 
@@ -92,8 +98,11 @@ EStyleSheet.build({
 
 const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
 
-const AppBuilder = store =>
-  class App extends Component {
+const AppBuilder = store => {
+  const reducer = routeReducer(store);
+  const backHandler = backAndroidHandler(store);
+
+  return class App extends Component {
     static childContextTypes = {
       navigate: PropTypes.func,
       navigateBack: PropTypes.func,
@@ -118,15 +127,16 @@ const AppBuilder = store =>
       return (
         <Provider store={store}>
           <Router
-            createReducer={routeReducer(store)}
+            createReducer={reducer}
             scenes={scenes}
             getSceneStyle={getSceneStyle}
             title="Mudamos"
-            backAndroidHandler={backAndroidHandler(store)}
+            backAndroidHandler={backHandler}
           />
         </Provider>
       );
     }
   }
+};
 
 export default AppBuilder

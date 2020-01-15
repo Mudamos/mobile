@@ -23,6 +23,7 @@ import localStorageSaga from "./local-storage";
 import locationSaga from "./location";
 import walletSaga from "./wallet";
 import setupSaga from "./setup";
+import voteConfirmationSaga from "./vote-confirmation";
 import appLinkSaga from "./app-link";
 
 import actionSignerSaga from "./action-signer";
@@ -70,4 +71,5 @@ export default function* rootSaga({
   yield fork(setupSaga, { mobileApi, mudamosSigner, sessionStore });
   yield spawn(appStateSaga);
   yield fork(appLinkSaga, { mobileApi, mudDynamicLink });
+  yield fork(voteConfirmationSaga, { dispatch, mobileApi });
 }

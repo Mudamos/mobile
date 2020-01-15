@@ -276,7 +276,11 @@ export const validateCpf = cpf => {
   return cpfFormatted.length === 11;
 }
 
+export const isValidPhone = phone => unMaskPhone(phone).length === 11;
+
 export const unMaskCpf = cpf => String(cpf).replace(/\D/g, "");
+
+export const unMaskPhone = unMaskCpf;
 
 export const errorMessageFromCode = ({ errorCode, locale }) => locale.errorsCode[errorCode];
 

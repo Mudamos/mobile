@@ -19,6 +19,7 @@ import session from "./session";
 import state from "./state";
 import navigation from "./navigation";
 import address from "./address";
+import voteConfirmation from "./vote-confirmation";
 import wallet from "./wallet";
 import mainTabview from "./main-tab-view";
 
@@ -43,5 +44,6 @@ export default combineReducers({
   session,
   state,
   navigation,
+  voteConfirmation,
   wallet,
 });

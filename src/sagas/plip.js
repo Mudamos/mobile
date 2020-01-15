@@ -93,6 +93,7 @@ import {
 
 import {
   currentAuthToken,
+  currentScreenKey,
   currentUserCity,
   currentUserUf,
   findAllPlips,
@@ -113,6 +114,7 @@ import { getUserCurrentAddressByGeoLocation } from "./address";
 
 import {
   getMainTabViewKeyByIndex,
+  SCREEN_KEYS,
 } from "../models";
 import { UserLocationError } from "../models/error";
 
@@ -733,9 +735,13 @@ function* signPlip({ DeviceInfo, mobileApi, walletStore, apiError }) {
         if (isDev) console.log("Sign api result:", apiResult);
 
         yield put(plipUserSignInfo({ plipId: plip.id, info: apiResult.signMessage }));
-        yield put(plipJustSigned({ plipId: plip.id })); //Marks the flow end
+        yield put(plipJustSigned({ plipId: plip.id })); // Marks the flow end
         yield put(signingPlip(null));
 
+        if (plip.requiresMobileValidation) {
+          const goBackToScreenKey = yield select(currentScreenKey);
+          yield put(navigate(SCREEN_KEYS.CONFIRM_VOTE, { goBackToScreenKey, plip }));
+        }
       } catch (e) {
         logError(e);
         if (isDev) console.log("is wallet invalid?", apiError.isInvalidWallet(e), e.errorCode, e);

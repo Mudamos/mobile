@@ -18,4 +18,5 @@ export * from "./facebook";
 export * from "./remote-config";
 export * from "./session";
 export * from "./state";
+export * from "./vote-confirmation";
 export * from "./wallet";

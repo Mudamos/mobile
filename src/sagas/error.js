@@ -65,6 +65,9 @@ function appError({ type, payload }) {
     case "PLIPS_BY_USER_LOCATION_ERROR": {
       return handleWithPayload();
     }
+    case "VOTE_CONFIRMATION_SEND_PHONE_ERROR": {
+      return handleWithPayload({ defaultMessage: locale.errors.sendVoteConfirmationError });
+    }
     default:
       return test(/.+_(ERROR|FAILURE)$/i, type) ? handleWithPayload() : null;
   }
