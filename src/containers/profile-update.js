@@ -4,6 +4,8 @@ import ProfileUpdateLayout from "../components/profile-update-layout";
 
 import {
   currentUser,
+  findCities,
+  findStates,
   getChangePasswordErrors,
   isChangingPassword,
   isSavingAvatar,
@@ -13,6 +15,8 @@ import {
 
 import {
   clearProfileSaveErrors,
+  fetchCities,
+  fetchStates,
   updateUser,
   navigateBack,
   requestAvatarAccess,
@@ -30,6 +34,7 @@ const mapStateToProps = state => {
   const user = currentUser(state);
 
   return {
+    cities: findCities(state),
     errorsUpdatePassword: getChangePasswordErrors(state),
     errorsUpdateProfile: profileSaveErrors(state),
     isAppUser: user ? user.isAppUser : null,
@@ -37,9 +42,12 @@ const mapStateToProps = state => {
     isSavingPassword: isChangingPassword(state),
     isSavingProfile: isSavingProfile(state),
     previousAvatar: user ? user.avatar : null,
+    previousCity: user ? user.voteCity : null,
     previousName: user ? user.name : null,
     previousBirthdate: user && user.birthdate ? fromISODate(user.birthdate) : null,
+    previousUf: user && user.voteCity ? user.voteCity.uf : null,
     previousZipCode: user && user.zipCode ? zipCodeMask(user.zipCode) : null,
+    states: findStates(state),
   };
 };
 
@@ -48,6 +56,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(clearProfileSaveErrors());
     dispatch(navigateBack());
   },
+  onFetchCities: () => dispatch(fetchCities()),
+  onFetchStates: () => dispatch(fetchStates()),
   onSave: ({ profile, validations }) => dispatch(
     updateUser({
       profile: {

@@ -1,8 +1,9 @@
 import { StyleSheet } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 import textStyles from "./text";
 
-export default StyleSheet.create({
+export default EStyleSheet.create({
   buttonContainer: {
     alignItems: "center",
     flex: 1,
@@ -35,6 +36,15 @@ export default StyleSheet.create({
   },
   inputContainer: {
     marginHorizontal: 33,
+  },
+  resultText: {
+    color: "#000",
+    fontFamily: "roboto",
+    fontSize: "0.775rem",
+    flex: 1,
+  },
+  selectContainer: {
+    zIndex: 1,
   },
   submitButton: {
     backgroundColor: "#00BFD8",

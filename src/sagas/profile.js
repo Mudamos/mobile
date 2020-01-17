@@ -349,12 +349,12 @@ function* saveAvatarProfile({ mobileApi }) {
   });
 }
 
-function* updateProfileSaga({ mobileApi, birthdate, name, zipCode, voteIdCard, shouldNavigate }) {
+function* updateProfileSaga({ mobileApi, birthdate, name, zipCode, voteCity, voteIdCard, shouldNavigate }) {
   try {
     yield put(savingProfile(true));
 
     const authToken = yield select(currentAuthToken);
-    const response = yield call(mobileApi.updateProfile, authToken, { birthdate, name, zipCode, voteIdCard });
+    const response = yield call(mobileApi.updateProfile, authToken, { birthdate, name, zipCode, voteCity, voteIdCard });
 
     const user = User.fromJson(response.user);
 
@@ -472,13 +472,13 @@ function* validateProfile({ dispatch, mobileApi, walletStore }) {
 
 function* updateUser({ mobileApi }) {
   yield takeLatest("UPDATE_USER", function* (action) {
-    const { avatar, birthdate, name, zipCode, currentPassword, newPassword } = action.payload.profile;
+    const { avatar, birthdate, name, zipCode, currentPassword, newPassword, voteCity } = action.payload.profile;
     const { validAvatar, validProfileFields, validPassword } = action.payload.validations;
     const shouldNavigate = false;
 
     yield all([
       validAvatar ? call(saveAvatarProfileSaga, { mobileApi, avatar, shouldNavigate }) : Promise.resolve(),
-      validProfileFields ? call(updateProfileSaga, { mobileApi, birthdate, name, zipCode, shouldNavigate }) : Promise.resolve(),
+      validProfileFields ? call(updateProfileSaga, { mobileApi, birthdate, name, zipCode, voteCity, shouldNavigate }) : Promise.resolve(),
       validPassword ? call(changePasswordSaga, { mobileApi, currentPassword, newPassword }) : Promise.resolve(),
     ]);
 

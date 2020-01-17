@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { compose, curry, filter, isEmpty, lensPath, prop, propEq, set, test } from "ramda";
+import { compose, curry, filter, isEmpty, lensPath, prop, propEq, set } from "ramda";
 import React, { PureComponent } from "react";
 import { Text, View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
@@ -19,11 +19,7 @@ import MDSelectInput from "./md-select-input";
 
 import locale from "../locales/pt-BR";
 import textStyles from "../styles/text";
-import { stripAccents } from "../utils";
-
-const filterDataByTerm = curry((term, formatter, collection) =>
-  filter(compose(test(new RegExp(stripAccents(`${term}`), "i")), compose(stripAccents, formatter) ))(collection)
-);
+import { filterDataByTerm } from "../utils";
 
 const keyExtractor = compose(String, prop("id"));
 
@@ -54,6 +50,7 @@ class ProfileVoteAddressLayout extends PureComponent {
   };
 
   cityInput = React.createRef();
+  mainScrollView = React.createRef();
   ufInput = React.createRef();
 
   state = {
@@ -112,7 +109,7 @@ class ProfileVoteAddressLayout extends PureComponent {
 
     const scopedCities = byUf(selectedState.uf, cities);
 
-    this.setState({ selectedState, scopedCities, filteredCities: scopedCities });
+    this.setState({ selectedCity: null, selectedState, scopedCities, filteredCities: scopedCities });
     this.ufInput.current.blur();
   };
 
@@ -126,7 +123,7 @@ class ProfileVoteAddressLayout extends PureComponent {
       const { mainScrollViewOffset } = this.state;
 
       if (mainScrollViewOffset) {
-        this.mainScrollView.scrollTo({ x: 0, y: mainScrollViewOffset.y + 60 });
+        this.mainScrollView.current.scrollTo({ x: 0, y: mainScrollViewOffset.y + 60 });
       }
     }, 100);
   };
@@ -188,7 +185,7 @@ class ProfileVoteAddressLayout extends PureComponent {
     return (
       <SafeAreaView style={styles.container}>
         <Layout>
-          <ScrollView ref={ref => this.mainScrollView = ref} onScroll={this.onMainScroll} scrollEventThrottle={16}>
+          <ScrollView ref={this.mainScrollView} onScroll={this.onMainScroll} scrollEventThrottle={16}>
             {this.renderNavBar()}
 
             <SignUpBreadCrumb highlightId={3} containerStyle={styles.breadcrumb} />
@@ -335,7 +332,7 @@ const styles = EStyleSheet.create({
   resultText: {
     color: "#000",
     fontFamily: "roboto",
-    fontSize: "0.875rem",
+    fontSize: "0.775rem",
     flex: 1,
   },
 });
