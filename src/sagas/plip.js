@@ -849,9 +849,11 @@ function* toggleFavoritePlipSaga({ mobileApi }) {
 
     } catch(e) {
       logError(e, { tag: "toggleFavoritePlipSaga" });
-    }
 
-    yield put(isAddingFavoritePlip(false));
+      if (isUnauthorized(e)) return yield put(unauthorized());
+    } finally {
+      yield put(isAddingFavoritePlip(false));
+    }
   });
 }
 
