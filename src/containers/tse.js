@@ -62,11 +62,36 @@ const jsCode = ({ birthdate, name }) => {
       }
       clearOuterHTML();
 
-      Array.from(document.getElementsByClassName("help-block")).forEach(
-        (element, index, array) => {
-          element.remove();
-        }
-      );
+      function removeUnusedHTML() {
+        var classes = [
+          "help-block",
+          "breadcrumb__conteudo_full",
+          "navbar-toggler",
+          "menu__item busca",
+          "acessibilidade",
+          "rodape__links",
+          "rodape__informacoes",
+          "mapa",
+          "ferramentas",
+        ];
+
+        classes.forEach(className => Array.from(document.getElementsByClassName(className)).forEach(e => e.remove()));
+
+        var ids = [
+          "compartilhar-conteudo",
+          "coluna-lateral-interna",
+          "faixa_aviso",
+        ];
+
+        ids.forEach(id => {
+          var e = document.getElementById(id);
+
+          if (e) {
+            e.remove();
+          }
+        });
+      }
+      removeUnusedHTML();
 
       const getUserInfo = () => {
         const labels = document.getElementById("resposta-local-votacao");
