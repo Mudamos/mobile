@@ -119,7 +119,7 @@ const jsCode = ({ birthdate, name }) => {
           }
         }
 
-        if (Object.keys(result)) return result;
+        if (Object.keys(result).length > 0) return result;
       };
 
       const postResponse = () => {
