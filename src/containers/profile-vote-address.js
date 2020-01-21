@@ -18,17 +18,6 @@ import {
   isSavingProfile,
 } from "../selectors";
 
-const enhance = compose(
-  lifecycle({
-    componentDidMount() {
-      const { onFetchCities, onFetchStates } = this.props;
-
-      onFetchCities();
-      onFetchStates();
-    },
-  })
-);
-
 const mapStateToProps = state => ({
   cities: findCities(state),
   isSaving: isSavingProfile(state),
@@ -42,6 +31,18 @@ const mapDispatchToProps = dispatch => ({
   onFetchStates: () => dispatch(fetchStates()),
   onOpenURL: url => dispatch(openURL(url)),
   onSave: ({ city, state }) => dispatch(saveVoteAddress({ city, state })),
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(enhance(ProfileVoteAddressLayout));
+const enhance = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  lifecycle({
+    componentDidMount() {
+      const { onFetchCities, onFetchStates } = this.props;
+
+      onFetchCities();
+      onFetchStates();
+    },
+  })
+);
+
+export default enhance(ProfileVoteAddressLayout);
