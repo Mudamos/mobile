@@ -3,5 +3,7 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
         <domain includeSubdomains="true">www.tse.jus.br</domain>
+        <domain includeSubdomains="true">www.tre-mt.jus.br</domain>
+        <domain includeSubdomains="true">www.tre-sp.jus.br</domain>
     </domain-config>
 </network-security-config>
