@@ -53,31 +53,43 @@ class ProfileVoteAddressLayout extends PureComponent {
   mainScrollView = React.createRef();
   ufInput = React.createRef();
 
-  state = {
-    citySearchTerm: "",
-    errors: {},
-    filteredCities: [],
-    filteredStates: this.props.states,
-    mainScrollViewOffset: null,
-    selectedCity: findCityForTse(this.props.tseVoteAddress || {}, this.props.cities),
-    selectedState: findStateForTse(this.props.tseVoteAddress || {}, this.props.states),
-    scopedCities: [],
-    ufSearchTerm: "",
-  };
+  constructor(props) {
+    super(props);
+
+    const selectedCity = findCityForTse(props.tseVoteAddress || {}, props.cities);
+    const selectedState = findStateForTse(props.tseVoteAddress || {}, props.states);
+    const filteredCities = selectedState ? byUf(selectedState.uf, props.cities) : [];
+
+    this.state = {
+      citySearchTerm: "",
+      errors: {},
+      filteredCities,
+      filteredStates: this.props.states,
+      mainScrollViewOffset: null,
+      selectedCity,
+      selectedState,
+      scopedCities: filteredCities,
+      ufSearchTerm: "",
+    };
+  }
 
   componentDidUpdate(prevProps) {
     const { cities, states, tseVoteAddress } = this.props;
 
-    if (isEmpty(prevProps.states) && !isEmpty(states)) {
+    const updatedCityData = (isEmpty(prevProps.states) && !isEmpty(states) && !isEmpty(cities))
+      || (isEmpty(prevProps.cities) && !isEmpty(cities) && !isEmpty(states))
+
+    if (updatedCityData) {
+      const selectedState = findStateForTse(tseVoteAddress || {}, states);
+      const selectedCity = findCityForTse(tseVoteAddress || {}, cities);
+      const scopedCities = selectedState ? byUf(selectedState.uf, cities) : [];
+
       this.setState({
         filteredStates: states,
-        selectedState: findStateForTse(tseVoteAddress || {}, states),
-      });
-    }
-
-    if (isEmpty(prevProps.cities) && !isEmpty(cities)) {
-      this.setState({
-        selectedCity: findCityForTse(tseVoteAddress || {}, cities),
+        selectedState,
+        selectedCity,
+        scopedCities,
+        filteredCities: scopedCities,
       });
     }
   }
@@ -109,7 +121,7 @@ class ProfileVoteAddressLayout extends PureComponent {
 
     const scopedCities = byUf(selectedState.uf, cities);
 
-    this.setState({ selectedCity: null, selectedState, scopedCities, filteredCities: scopedCities });
+    this.setState({ citySearchTerm: "", selectedCity: null, selectedState, scopedCities, filteredCities: scopedCities });
     this.ufInput.current.blur();
   };
 

@@ -98,32 +98,30 @@ export default class ProfileUpdateLayout extends Component {
   componentDidMount() {
     const { cities, states, onFetchCities, onFetchStates } = this.props;
 
-    if (isEmpty(cities)) {
-      onFetchCities();
-    }
-
     if (isEmpty(states)) {
       onFetchStates();
+    }
+
+    if (isEmpty(cities)) {
+      onFetchCities();
     }
   }
 
   componentDidUpdate(prevProps) {
     const { cities, states, previousCity, previousUf } = this.props;
 
-    if (isEmpty(prevProps.states) && !isEmpty(states)) {
-      this.setState({
-        filteredStates: states,
-        selectedState: findPreviousState(previousUf, states),
-      });
-    }
+    const updatedCityData = (isEmpty(prevProps.states) && !isEmpty(states) && !isEmpty(cities))
+      || ((isEmpty(prevProps.cities) && !isEmpty(cities) && !isEmpty(states)))
 
-    if (isEmpty(prevProps.cities) && !isEmpty(cities)) {
+    if (updatedCityData) {
       const scopedCities = previousUf ? byUf(previousUf, cities) : [];
 
       this.setState({
         selectedCity: findPreviousCity(previousCity, cities),
         scopedCities,
         filteredCities: scopedCities,
+        filteredStates: states,
+        selectedState: findPreviousState(previousUf, states),
       });
     }
   }
@@ -248,6 +246,7 @@ export default class ProfileUpdateLayout extends Component {
     const scopedCities = byUf(selectedState.uf, cities);
 
     this.setState({
+      citySearchTerm: "",
       selectedCity: null,
       selectedState,
       scopedCities,

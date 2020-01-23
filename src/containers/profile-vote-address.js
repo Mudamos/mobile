@@ -39,8 +39,8 @@ const enhance = compose(
     componentDidMount() {
       const { onFetchCities, onFetchStates } = this.props;
 
-      onFetchCities();
       onFetchStates();
+      onFetchCities();
     },
   })
 );
