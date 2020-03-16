@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 
-import { compose, curry, filter, isEmpty, lensPath, prop, propEq, set } from "ramda";
+import { curry, filter, propEq } from "ramda";
 
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
@@ -21,7 +21,6 @@ import Avatar from "./avatar";
 import AvatarModel from "../models/image";
 import RoundedButton from "./rounded-button";
 import SafeAreaView from "./safe-area-view";
-import MDSelectInput from "./md-select-input";
 
 import ImagePicker from "react-native-image-picker";
 
@@ -38,7 +37,6 @@ import { CityType, StateUfType } from "../prop-types";
 
 import styles from "../styles/profile-update-layout";
 
-const keyExtractor = compose(String, prop("id"));
 const formatState = state => state && `${state.name} - ${state.uf}`;
 const formatCity = city => city && city.name;
 
@@ -95,37 +93,6 @@ export default class ProfileUpdateLayout extends Component {
   mainScrollView = React.createRef();
   ufInput = React.createRef();
 
-  componentDidMount() {
-    const { cities, states, onFetchCities, onFetchStates } = this.props;
-
-    if (isEmpty(states)) {
-      onFetchStates();
-    }
-
-    if (isEmpty(cities)) {
-      onFetchCities();
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { cities, states, previousCity, previousUf } = this.props;
-
-    const updatedCityData = (isEmpty(prevProps.states) && !isEmpty(states) && !isEmpty(cities))
-      || ((isEmpty(prevProps.cities) && !isEmpty(cities) && !isEmpty(states)))
-
-    if (updatedCityData) {
-      const scopedCities = previousUf ? byUf(previousUf, cities) : [];
-
-      this.setState({
-        selectedCity: findPreviousCity(previousCity, cities),
-        scopedCities,
-        filteredCities: scopedCities,
-        filteredStates: states,
-        selectedState: findPreviousState(previousUf, states),
-      });
-    }
-  }
-
   selectAvatar = () => {
     const { onRequestAvatarPermission } = this.props;
 
@@ -160,19 +127,15 @@ export default class ProfileUpdateLayout extends Component {
   }
 
   get validProfileFields() {
-    const { birthdate, name, selectedCity, selectedState, zipCode } = this.state
-    const { previousBirthdate, previousCity, previousName, previousUf, previousZipCode } = this.props;
+    const { birthdate, name, zipCode } = this.state
+    const { previousBirthdate, previousName, previousZipCode } = this.props;
 
     const validBirth = String(birthdate).length === 10;
     const validName = String(name).length > 0;
     const validZip = String(zipCode).length === 9;
     const diffValues = String(previousBirthdate) !== String(birthdate)
       || String(previousName) !== String(name)
-      || String(previousZipCode) !== String(zipCode)
-      || (!previousCity && selectedCity)
-      || String(prop("id", previousCity)) !== String(prop("id", selectedCity))
-      || (!previousUf && selectedState)
-      || String(previousUf) !== String(prop("uf", selectedCity));
+      || String(previousZipCode) !== String(zipCode);
 
     return [
       validBirth,
@@ -306,17 +269,7 @@ export default class ProfileUpdateLayout extends Component {
 
     const {
       avatar,
-      citySearchTerm,
-      errors,
-      filteredCities,
-      filteredStates,
-      selectedCity,
-      selectedState,
-      ufSearchTerm,
     } = this.state;
-
-    const selectedUf = formatState(selectedState);
-    const selectedCityName = formatCity(selectedCity);
 
     return (
       <SafeAreaView style={styles.container}>
@@ -370,39 +323,6 @@ export default class ProfileUpdateLayout extends Component {
                 onSubmitEditing={() => this.zipInput.blur()}
                 ref={ref => this.zipInput = ref}
               />
-
-              <View style={styles.selectContainer}>
-                <MDSelectInput
-                  data={filteredStates}
-                  keyExtractor={keyExtractor}
-                  renderSearchResult={this.renderUfSearchResult}
-                  style={{ zIndex: 2 }}
-                  onChangeText={this.onChangeUfSearch}
-                  onFocus={this.onFocusSelectField}
-                  onSelection={this.onSetUf}
-                  placeholder={locale.votingState}
-                  value={selectedUf || ufSearchTerm}
-                  onSubmitEditing={this.onUfSubmitEditing}
-                  ref={this.ufInput}
-                  hasError={!!errors.state}
-                  error={errors.state}
-                />
-
-                <MDSelectInput
-                  data={filteredCities}
-                  keyExtractor={keyExtractor}
-                  renderSearchResult={this.renderCitySearchResult}
-                  onChangeText={this.onChangeCitySearch}
-                  onFocus={this.onFocusSelectField}
-                  onSelection={this.onSetCity}
-                  placeholder={locale.votingCity}
-                  value={selectedCityName || citySearchTerm}
-                  onSubmitEditing={this.onCitySubmitEditing}
-                  ref={this.cityInput}
-                  hasError={!!errors.city}
-                  error={errors.city}
-                />
-              </View>
 
               { isAppUser &&
                 <View>
@@ -461,24 +381,8 @@ export default class ProfileUpdateLayout extends Component {
   }
 
   onSubmit = () => {
-    const { avatar, birthdate, name, zipCode, currentPassword, newPassword, selectedCity, selectedState } = this.state;
+    const { avatar, birthdate, name, zipCode, currentPassword, newPassword } = this.state;
     const { onSave } = this.props;
-
-    const setError = (field, message) => set(lensPath(["errors", field]), message);
-
-    if (selectedState) {
-      this.setState(state => setError("state", null)(state));
-    } else {
-      this.setState(state => setError("state", locale.pleaseSelectUf)(state));
-      return;
-    }
-
-    if (selectedCity) {
-      this.setState(state => setError("city", null)(state));
-    } else {
-      this.setState(state => setError("city", locale.pleaseSelectCity)(state));
-      return;
-    }
 
     this.setState({ errors: {}, previousUri: avatar.uri });
 
@@ -489,7 +393,6 @@ export default class ProfileUpdateLayout extends Component {
       zipCode,
       currentPassword,
       newPassword,
-      voteCity: selectedCity,
     };
 
     const validations = {

@@ -39,7 +39,7 @@ const jsCode = ({ birthdate, name }) => {
 
     (function() {
       function fillOutForm() {
-        var nameField = document.getElementsByName("nomeTituloEleitor")[0];
+        var nameField = document.getElementsByName("nomeTituloCPF")[0];
         var birthField = document.getElementsByName("dataNascimento")[0];
         const userName = "${name}";
         const userBirthdate = "${birthdate}";

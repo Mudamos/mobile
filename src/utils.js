@@ -255,7 +255,7 @@ export const eligibleToSignPlip = ({ plip, user }) => {
   if (!user || !plip) return;
 
   const { scopeCoverage: scope, uf, cityName } = plip;
-  const { uf: userUF, name: userCityName } = (user.voteCity || {});
+  const { uf: userUF, city: userCityName } = user.address;
 
   const matchUF = () => userUF && uf && userUF.toLowerCase() === uf.toLowerCase();
   const matchCity = () => userUF && uf && userCityName && cityName && userUF.toLowerCase() === uf.toLowerCase() && userCityName.toLowerCase() === cityName.toLowerCase();

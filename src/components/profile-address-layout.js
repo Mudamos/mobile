@@ -138,7 +138,7 @@ class ProfileAddressLayout extends Component {
           <ScrollView>
             {this.renderNavBar()}
 
-            <SignUpBreadCrumb highlightId={4} containerStyle={styles.breadcrumb} />
+            <SignUpBreadCrumb highlightId={3} containerStyle={styles.breadcrumb} />
 
             {this.renderContent()}
 

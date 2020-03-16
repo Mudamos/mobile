@@ -14,7 +14,6 @@ import {
   isFacebookMainProfileComplete,
   isMainProfileComplete,
   isSigningUpComplete,
-  isVoteAddressProfileComplete,
   isWalletProfileComplete,
 } from "../selectors";
 
@@ -78,7 +77,6 @@ export function* profileScreenForCurrentUser(params = {}) {
     "signUp",
     "signUp",
     "profileSignUp",
-    "profileVoteAddress",
     "profileAddress",
     "profileWallet",
     "profileConclude",
@@ -89,7 +87,6 @@ export function* profileScreenForCurrentUser(params = {}) {
     yield select(isFacebookMainProfileComplete),
     yield select(isMainProfileComplete),
     yield select(isDetailProfileComplete),
-    yield select(isVoteAddressProfileComplete),
     yield select(isAddressProfileComplete),
     yield select(isWalletProfileComplete),
     yield select(isSigningUpComplete),

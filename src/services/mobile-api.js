@@ -285,7 +285,7 @@ const changePassword = ({ client }) => (authToken, { currentPassword, newPasswor
     .send({ user: { currentPassword, newPassword } })
     .then(getData);
 
-const updateProfile = ({ client }) => (authToken, { birthdate, name, voteCity, voteIdCard, zipCode }) =>
+const updateProfile = ({ client }) => (authToken, { birthdate, name, voteIdCard, zipCode }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
     .post("/users/profile/update")
@@ -293,7 +293,6 @@ const updateProfile = ({ client }) => (authToken, { birthdate, name, voteCity, v
       birthday: birthdate || "",
       name: name || "",
       zipcode: zipCode || "",
-      voteCity: voteCity,
       voteidcard: voteIdCard || "",
     }})
     .then(getData);

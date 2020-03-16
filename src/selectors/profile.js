@@ -100,7 +100,6 @@ export const isProfileComplete =
     isMainProfileComplete,
     isAvatarProfileComplete,
     isBirthProfileComplete,
-    isVoteAddressProfileComplete,
     isAddressProfileComplete,
     isDocumentsProfileComplete,
     isWalletProfileComplete,

@@ -1,5 +1,3 @@
-import { path } from "ramda";
-
 import Address from "./address";
 import Image from "./image";
 import Mobile from "./mobile";
@@ -22,7 +20,6 @@ export default class User {
     this.name = attrs.name;
     this.profileType = attrs.profileType;
     this.termsAccepted = attrs.termsAccepted;
-    this.voteCity = attrs.voteCity;
     this.voteCard = attrs.voteCard;
     this.wallet = attrs.wallet || new Wallet();
     this.zipCode = attrs.zipCode;
@@ -62,7 +59,6 @@ export default class User {
       hasSavedAvatar: this.hasSavedAvatar,
       profilePicture,
       termsAccepted: this.termsAccepted,
-      voteAddress: this.voteAddress,
 
       userDistrict: this.address.district,
       userState: this.address.state,
@@ -70,9 +66,6 @@ export default class User {
       userCity: this.address.city,
       userLat: this.address.latitude,
       userLng: this.address.longitude,
-      voteCityId: path(["voteCity", "id"], this.voteCity),
-      voteCityName: path(["voteCity", "name"], this.voteCity),
-      voteCityUf: path(["voteCity", "uf"], this.voteCity),
 
       ...mobileJson,
       ...walletJson,
@@ -94,8 +87,6 @@ export default class User {
       zipcode: json.userZipcode,
     });
 
-    const voteCity = json.voteCityId ? { id: json.voteCityId, name: json.voteCityName, uf: json.voteCityUf } : null;
-
     return new User({
       id: json.userId,
       address,
@@ -109,7 +100,6 @@ export default class User {
       profileType: json.profileType,
       termsAccepted: json.termsAccepted,
       voteCard: json.userVoteidcard,
-      voteCity: voteCity,
       wallet: Wallet.fromJson(json),
       zipCode: json.userZipcode,
     });
