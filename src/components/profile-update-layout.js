@@ -6,6 +6,8 @@ import {
   View,
 } from "react-native";
 
+import { curry, filter, propEq } from "ramda";
+
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
 import HeaderLogo from "./header-logo";
@@ -26,24 +28,47 @@ import locale from "../locales/pt-BR";
 
 import {
   baseName,
+  filterDataByTerm,
   log,
   errorForField,
 } from "../utils";
 
+import { CityType, StateUfType } from "../prop-types";
+
 import styles from "../styles/profile-update-layout";
 
+const formatState = state => state && `${state.name} - ${state.uf}`;
+const formatCity = city => city && city.name;
+
+const findPreviousCity = (city, collection) =>
+  !city ? null : collection.find(propEq("id", city.id));
+
+const findPreviousState = (uf, collection) =>
+  !uf ? null : collection.find(propEq("uf", uf.toUpperCase()));
+
+const byUf = curry((uf, collection) => filter(propEq("uf", uf))(collection));
 
 export default class ProfileUpdateLayout extends Component {
   state = {
     avatar: (this.props.previousAvatar && this.props.previousAvatar.url) ? { uri: this.props.previousAvatar.url } : null,
     birthdate: this.props.previousBirthdate,
+    citySearchTerm: "",
     currentPassword: "",
+    errors: {},
+    filteredCities: this.props.previousUf ? byUf(this.props.previousUf, this.props.cities) : [],
+    filteredStates: this.props.states,
+    mainScrollViewOffset: null,
     name: this.props.previousName,
     newPassword: "",
+    selectedCity: findPreviousCity(this.props.previousCity, this.props.cities),
+    selectedState: findPreviousState(this.props.previousUf, this.props.states),
+    scopedCities: this.props.previousUf ? byUf(this.props.previousUf, this.props.cities) : [],
+    ufSearchTerm: "",
     zipCode: this.props.previousZipCode,
   };
 
   static propTypes = {
+    cities: PropTypes.arrayOf(CityType).isRequired,
     errorsUpdatePassword: PropTypes.array,
     errorsUpdateProfile: PropTypes.array,
     isAppUser: PropTypes.bool,
@@ -52,12 +77,21 @@ export default class ProfileUpdateLayout extends Component {
     isSavingProfile: PropTypes.bool,
     previousAvatar: PropTypes.instanceOf(AvatarModel),
     previousBirthdate: PropTypes.string,
+    previousCity: CityType,
     previousName: PropTypes.string,
+    previousUf: PropTypes.string,
     previousZipCode: PropTypes.string,
+    states: PropTypes.arrayOf(StateUfType).isRequired,
     onBack: PropTypes.func.isRequired,
+    onFetchCities: PropTypes.func.isRequired,
+    onFetchStates: PropTypes.func.isRequired,
     onRequestAvatarPermission: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
-  }
+  };
+
+  cityInput = React.createRef();
+  mainScrollView = React.createRef();
+  ufInput = React.createRef();
 
   selectAvatar = () => {
     const { onRequestAvatarPermission } = this.props;
@@ -99,7 +133,9 @@ export default class ProfileUpdateLayout extends Component {
     const validBirth = String(birthdate).length === 10;
     const validName = String(name).length > 0;
     const validZip = String(zipCode).length === 9;
-    const diffValues = String(previousBirthdate) !== String(birthdate) || String(previousName) !== String(name) || String(previousZipCode) !== String(zipCode);
+    const diffValues = String(previousBirthdate) !== String(birthdate)
+      || String(previousName) !== String(name)
+      || String(previousZipCode) !== String(zipCode);
 
     return [
       validBirth,
@@ -133,6 +169,94 @@ export default class ProfileUpdateLayout extends Component {
     return this.validForm;
   }
 
+  onMainScroll = ({ nativeEvent: { contentOffset }}) => this.setState({ mainScrollViewOffset: contentOffset });
+
+  onChangeUfSearch = ufSearchTerm => {
+    const { states } = this.props;
+
+    this.setState({
+      citySearchTerm: "",
+      selectedCity: null,
+      selectedState: null,
+      ufSearchTerm,
+      filteredStates: filterDataByTerm(ufSearchTerm, formatState, states),
+      scopedCities: [],
+      filteredCities: [],
+    });
+  };
+
+  onChangeCitySearch = citySearchTerm => {
+    this.setState(({ scopedCities }) => ({
+      selectedCity: null,
+      citySearchTerm,
+      filteredCities: filterDataByTerm(citySearchTerm, formatCity, scopedCities),
+    }));
+  };
+
+  onFocusSelectField = () => {
+    setTimeout(() => {
+      const { mainScrollViewOffset } = this.state;
+
+      if (mainScrollViewOffset) {
+        this.mainScrollView.current.scrollTo({ x: 0, y: mainScrollViewOffset.y + 60 });
+      }
+    }, 100);
+  };
+
+  onSetUf = selectedState => {
+    const { cities } = this.props;
+
+    const scopedCities = byUf(selectedState.uf, cities);
+
+    this.setState({
+      citySearchTerm: "",
+      selectedCity: null,
+      selectedState,
+      scopedCities,
+      filteredCities: scopedCities,
+    });
+
+    this.ufInput.current.blur();
+  };
+
+  onSetCity = selectedCity => {
+    this.setState({ selectedCity });
+    this.cityInput.current.blur();
+  };
+
+  onUfSubmitEditing = () => {
+    const { states } = this.props;
+    const { selectedState } = this.state;
+
+    this.ufInput.current.blur();
+
+    if (!selectedState) {
+      this.setState({ ufSearchTerm: "", filteredStates: states });
+    }
+  };
+
+  onCitySubmitEditing = () => {
+    const { selectedCity } = this.state;
+
+    this.cityInput.current.blur();
+
+    if (!selectedCity) {
+      this.setState(({ scopedCities }) => ({ citySearchTerm: "", filteredCities: scopedCities }));
+    }
+  };
+
+  renderUfSearchResult = ({ item: state }) => {
+    return (
+      <Text style={styles.resultText}>{formatState(state)}</Text>
+    );
+  };
+
+  renderCitySearchResult = ({ item: city }) => {
+    return (
+      <Text style={styles.resultText}>{formatCity(city)}</Text>
+    );
+  };
+
   render() {
     const {
       errorsUpdatePassword,
@@ -143,12 +267,14 @@ export default class ProfileUpdateLayout extends Component {
       isSavingPassword,
     } = this.props;
 
-    const { avatar } = this.state;
+    const {
+      avatar,
+    } = this.state;
 
     return (
       <SafeAreaView style={styles.container}>
         <Layout>
-          <ScrollView>
+          <ScrollView ref={this.mainScrollView} onScroll={this.onMainScroll} scrollEventThrottle={16}>
             {this.renderNavBar()}
 
             <Text style={styles.headerTitle}>
@@ -258,7 +384,7 @@ export default class ProfileUpdateLayout extends Component {
     const { avatar, birthdate, name, zipCode, currentPassword, newPassword } = this.state;
     const { onSave } = this.props;
 
-    this.setState({ previousUri: avatar.uri });
+    this.setState({ errors: {}, previousUri: avatar.uri });
 
     const profile = {
       avatar,

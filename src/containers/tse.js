@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 
 import {
   navigateBack,
+  tseVoteAddressAcquired,
   voteCardIdAcquired,
 } from "../actions";
 
@@ -38,7 +39,7 @@ const jsCode = ({ birthdate, name }) => {
 
     (function() {
       function fillOutForm() {
-        var nameField = document.getElementsByName("nomeTituloEleitor")[0];
+        var nameField = document.getElementsByName("nomeTituloCPF")[0];
         var birthField = document.getElementsByName("dataNascimento")[0];
         const userName = "${name}";
         const userBirthdate = "${birthdate}";
@@ -61,13 +62,38 @@ const jsCode = ({ birthdate, name }) => {
       }
       clearOuterHTML();
 
-      Array.from(document.getElementsByClassName("help-block")).forEach(
-        (element, index, array) => {
-          element.remove();
-        }
-      );
+      function removeUnusedHTML() {
+        var classes = [
+          "help-block",
+          "breadcrumb__conteudo_full",
+          "navbar-toggler",
+          "menu__item busca",
+          "acessibilidade",
+          "rodape__links",
+          "rodape__informacoes",
+          "mapa",
+          "ferramentas",
+        ];
 
-      const getVoteCardId = () => {
+        classes.forEach(className => Array.from(document.getElementsByClassName(className)).forEach(e => e.remove()));
+
+        var ids = [
+          "compartilhar-conteudo",
+          "coluna-lateral-interna",
+          "faixa_aviso",
+        ];
+
+        ids.forEach(id => {
+          var e = document.getElementById(id);
+
+          if (e) {
+            e.remove();
+          }
+        });
+      }
+      removeUnusedHTML();
+
+      const getUserInfo = () => {
         const labels = document.getElementById("resposta-local-votacao");
 
         const nodes = labels.childNodes;
@@ -80,22 +106,52 @@ const jsCode = ({ birthdate, name }) => {
           return text.match(/[0-9]{12}/g)[0];
         };
 
+        const isVoteAddress = text => {
+          return /Município: \\w+/.test(text);
+        };
+
+        const getVoteAddress = text => {
+          const addressParts = text.replace("Município:", "").split(" - ");
+
+          if (addressParts.length === 0) return;
+
+          const uf = addressParts.slice(-1).join("").trim().toUpperCase();
+
+          if (!uf) return;
+
+          const city = addressParts.slice(0, addressParts.length - 1).join("").replace(/\\s{1,}/g," ").trim();
+
+          if (!city) return;
+
+          return { uf: uf, city: city };
+        };
+
+        const result = {};
         for (let i = 0; i < nodes.length; i++) {
-          const content = nodes[i].innerHTML;
+          const content = nodes[i].innerText;
           if (isVoteCard(content)) {
             const voteCardId = getVoteCard(content);
 
             if (voteCardId) {
-              return voteCardId;
+              result.voteCardId = voteCardId;
+            }
+          } else if (isVoteAddress(content)) {
+            const voteAddress = getVoteAddress(content);
+
+            if (voteAddress) {
+              result.voteAddress = voteAddress;
             }
           }
         }
+
+        if (Object.keys(result).length > 0) return result;
       };
 
-      const postVoteCardId = () => {
-        const voteCardId = getVoteCardId();
-        if (voteCardId) {
-          const message = JSON.stringify({voteCardId: voteCardId});
+      const postResponse = () => {
+        const info = getUserInfo();
+
+        if (info) {
+          const message = JSON.stringify(info);
           clearInterval(updateInterval);
           window.postMessage(message, "*");
         }
@@ -104,7 +160,7 @@ const jsCode = ({ birthdate, name }) => {
       const hasFound = () => {
         const labels = document.getElementById("resposta-local-votacao");
         if (labels.hasChildNodes()) {
-          return postVoteCardId();
+          return postResponse();
         } else {
           return null;
         }
@@ -130,13 +186,14 @@ const mapDispatchToProps = dispatch => ({
     log(`webView: ${message}`);
 
     try {
-      const { voteCardId } = JSON.parse(message);
-      log(voteCardId);
+      const { voteAddress, voteCardId } = JSON.parse(message);
+      log({ voteCardId, voteAddress });
 
       if (/^\d{12}$/.test(voteCardId)) {
         log("payload contains voteCardId");
 
         dispatch(voteCardIdAcquired(voteCardId));
+        dispatch(tseVoteAddressAcquired({ tseVoteAddress: voteAddress }));
         dispatch(navigateBack());
       }
     } catch(e) {

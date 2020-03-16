@@ -10,6 +10,7 @@ import {
   updatedUserProfile,
   navigate,
   phoneJustValidated,
+  profileClearVoteAddressData,
   profileStateMachine,
   saveUserProfileError,
   savingAvatar,
@@ -147,6 +148,38 @@ function* saveZipCodeProfile({ mobileApi }) {
       yield put(savingProfile(false));
 
       if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+
+      yield put(saveUserProfileError(e));
+    }
+  });
+}
+
+function* saveVoteAddress({ mobileApi }) {
+  yield takeLatest("PROFILE_SAVE_VOTE_ADDRESS", function* ({ payload }) {
+    try {
+      const { city, state } = payload;
+
+      yield put(savingProfile(true));
+
+      const authToken = yield select(currentAuthToken);
+      const response = yield call(mobileApi.saveVoteAddress, authToken, {
+        city,
+        state,
+      });
+
+      const user = User.fromJson(response.user);
+
+      yield put(updatedUserProfile({ user }));
+      yield put(savingProfile(false));
+      yield put(profileStateMachine())
+      yield put(logEvent({ name: "completed_vote_address" }));
+      yield put(profileClearVoteAddressData());
+    } catch (e) {
+      logError(e, { tag: "saveVoteAddress" });
+
+      yield put(savingProfile(false));
+
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
       yield put(saveUserProfileError(e));
     }
@@ -469,6 +502,7 @@ export default function* profileSaga({ dispatch, mobileApi, DeviceInfo, sessionS
   yield spawn(saveDocumentsProfile, { mobileApi });
   yield spawn(sendPhoneValidation, { mobileApi });
   yield spawn(savePhoneProfile, { mobileApi, DeviceInfo });
+  yield fork(saveVoteAddress, { mobileApi });
   yield spawn(fetchProfileSaga, { mobileApi });
   yield fork(validateProfile, { dispatch, mobileApi, walletStore });
   yield fork(updateUser, { mobileApi });

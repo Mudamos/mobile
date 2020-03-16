@@ -48,6 +48,11 @@ export const isAddressProfileComplete = state => {
   return !!currentUser.zipCode;
 }
 
+export const isVoteAddressProfileComplete = state => {
+  const currentUser = state.profile.currentUser || new User();
+  return currentUser.hasVoteAddress;
+}
+
 export const isDocumentsProfileComplete = state => {
   const currentUser = state.profile.currentUser || new User();
   return currentUser.cpf && currentUser.voteCard;
@@ -70,6 +75,8 @@ export const isWalletProfileComplete = state => !!state.wallet.hasWallet;
 export const wasPhoneValidated = state => state.profile.phoneJustValidated;
 
 export const getSearchedVoteCardId = state => state.profile.voteCardId;
+
+export const getTseVoteAddress = state => state.profile.tseVoteAddress;
 
 export const getCurrentUserAvatar = state => {
   const user = currentUser(state) || new User();

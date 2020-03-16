@@ -4,6 +4,8 @@ import Mobile from "./mobile";
 import ProfileType from "./profile-type";
 import Wallet from "./wallet";
 
+import { propIsPresent } from "../utils";
+
 
 export default class User {
   constructor(attrs = {}) {
@@ -29,6 +31,10 @@ export default class User {
 
   get isFacebookUser() {
     return this.profileType === ProfileType.facebook;
+  }
+
+  get hasVoteAddress() {
+    return propIsPresent("id", this.voteCity);
   }
 
   clone() {

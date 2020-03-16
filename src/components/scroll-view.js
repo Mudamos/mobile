@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 import {
   ScrollView,
@@ -7,15 +7,16 @@ import {
 import styles from "../styles/scroll-view";
 
 
-const MyScrollView = props => (
+const MyScrollView = forwardRef((props, ref) => (
   <ScrollView
     {...props}
 
+    ref={ref}
     style={[styles.scrollView, props.style]}
   >
     {props.children}
   </ScrollView>
-);
+));
 
 MyScrollView.propTypes = {
   ...ScrollView.propTypes,

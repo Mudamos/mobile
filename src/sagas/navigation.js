@@ -10,11 +10,11 @@ import { logout } from "./session";
 
 import {
   isAddressProfileComplete,
+  isDetailProfileComplete,
   isFacebookMainProfileComplete,
   isMainProfileComplete,
-  isWalletProfileComplete,
-  isDetailProfileComplete,
   isSigningUpComplete,
+  isWalletProfileComplete,
 } from "../selectors";
 
 import { navigate } from "../actions";
@@ -45,7 +45,7 @@ function* unauthorized({ mobileApi, sessionStore }) {
     try {
       const { params } = payload;
       yield call(logout, { mobileApi, sessionStore });
-      yield put(navigate("signUp", params));
+      yield put(navigate("signIn", params));
     } catch(e) {
       if (isDev) console.log("Error unauthorized navigation: ", e.message, e.stack, e);
     }

@@ -1,5 +1,6 @@
 # Next
 
+* [PR #507] Add signup screen vote address
 * [PR #508] Add sms vote validation
 
 ## [2.3.0] 13/11/2019

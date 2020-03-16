@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+  cities: [],
+};
 
 export default (state = initialState, action) => {
   if (!action) return state;
@@ -11,6 +13,7 @@ export default (state = initialState, action) => {
         ...state,
         cities: payload.cities,
       };
+    case "PROFILE_CLEAR_VOTE_ADDRESS_DATA":
     case "CITIES_CLEAR_CITIES":
       return {
         ...state,

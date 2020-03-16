@@ -295,3 +295,9 @@ export const plipRegion = plip => {
     default: return;
   }
 }
+
+export const escapeRegExp = string => string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+export const filterDataByTerm = curry((term, formatter, collection) =>
+  filter(compose(test(new RegExp(stripAccents(escapeRegExp(`${term}`)), "i")), compose(stripAccents, formatter) ))(collection)
+);

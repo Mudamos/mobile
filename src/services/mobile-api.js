@@ -170,6 +170,13 @@ const saveZipCode = ({ client }) => (authToken, location) =>
     .send({ user: location })
     .then(getData);
 
+const saveVoteAddress = ({ client }) => (authToken, { city, state }) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post("/profile/vote_address")
+    .send({ user: { city, state } })
+    .then(getData);
+
 const saveDocuments = ({ client }) => (authToken, { cpf, voteCard, termsAccepted }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
@@ -496,6 +503,7 @@ export default function MobileApi(host) {
     saveBirthdate: saveBirthdate({ client: v1Client }),
     saveDocuments: saveDocuments({ client: v1Client }),
     savePhone: savePhone({ client: v1Client }),
+    saveVoteAddress: saveVoteAddress({ client: v1Client }),
     saveWallet: saveWallet({ client: v1Client }),
     saveZipCode: saveZipCode({ client: v1Client }),
     searchZipCode: searchZipCode({ client: v2Client }),
