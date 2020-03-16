@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { isEmpty } from "ramda";
 import React, { PureComponent } from "react";
 import {
+  Alert,
   StyleSheet,
   Text,
   View,
@@ -12,6 +13,7 @@ import { compose, withStateHandlers } from "recompose";
 
 import textStyles from "../../styles/text";
 
+import ChevronButton from "../chevron-button";
 import PhoneInput from "../phone-input";
 import FlatButton from "../flat-button";
 import HeaderLogo from "../header-logo";
@@ -41,6 +43,7 @@ class ConfirmVoteLayout extends PureComponent {
   static propTypes = {
     isSaving: PropTypes.bool.isRequired,
     phone: PropTypes.string,
+    onBack: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onSetPhone: PropTypes.func.isRequired,
   }
@@ -71,6 +74,19 @@ class ConfirmVoteLayout extends PureComponent {
   };
 
   isValidPhone = phone => isEmpty(phone) || isValidPhone(phone);
+
+  onBack = () => {
+    const { onBack } = this.props;
+
+    Alert.alert(
+      locale.warning,
+      locale.voteConfirmDismiss,
+      [
+        { text: locale.cancel },
+        { text: locale.leaveAnyway, onPress: onBack },
+      ],
+    );
+  };
 
   onSubmit = () => {
     const { phone, onSave } = this.props;
@@ -133,6 +149,7 @@ class ConfirmVoteLayout extends PureComponent {
   renderNavBar() {
     return (
       <NavigationBar
+        leftView={<ChevronButton onPress={this.onBack} direction="left"/>}
         middleView={<HeaderLogo />}
       />
     );

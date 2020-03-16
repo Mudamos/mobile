@@ -16,11 +16,16 @@ import { currentAuthToken } from "../selectors";
 import { SCREEN_KEYS, SCREEN_NAVIGATION_TYPES } from "../models";
 import { isUnauthorized, log, logError } from "../utils";
 
-function* sendVoteConfirmation({ mobileApi }) {
+function* sendVoteConfirmation({ DeviceInfo, mobileApi }) {
   yield takeLatest("VOTE_CONFIRMATION_SEND_PHONE", function* ({ payload: { goBackToScreenKey, phone, plip } }) {
     try {
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.sendVoteConfirmation, authToken, { phone, plipId: plip.id });
+      const deviceInfo = yield call(DeviceInfo.info);
+      const response = yield call(mobileApi.sendVoteConfirmation, authToken, {
+        deviceUniqueId: deviceInfo.deviceUniqueId,
+        phone,
+        plipId: plip.id,
+      });
 
       log(response);
 
@@ -64,12 +69,12 @@ function* sendVoteCodeConfirmation({ dispatch, mobileApi }) {
 
 function* dismiss() {
   yield takeLatest("VOTE_CONFIRMATION_DISMISS", function* ({ payload: { goBackToScreenKey }}) {
-    yield put(navigate(goBackToScreenKey, { type: SCREEN_NAVIGATION_TYPES.pushOrPop }));
+    yield put(navigate(goBackToScreenKey, { type: SCREEN_NAVIGATION_TYPES.pushOrPop, refresh: { isMobileValidated: true }}));
   });
 }
 
-export default function* voteConfirmationSaga({ dispatch, mobileApi }) {
-  yield fork(sendVoteConfirmation, { mobileApi });
+export default function* voteConfirmationSaga({ DeviceInfo, dispatch, mobileApi }) {
+  yield fork(sendVoteConfirmation, { DeviceInfo, mobileApi });
   yield fork(sendVoteCodeConfirmation, { dispatch, mobileApi });
   yield fork(dismiss);
 }

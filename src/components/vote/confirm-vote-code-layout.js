@@ -4,7 +4,6 @@ import React, { PureComponent } from "react";
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
@@ -44,7 +43,6 @@ class ConfirmVoteCodeLayout extends PureComponent {
     onBack: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onSetPinCode: PropTypes.func.isRequired,
-    onSkip: PropTypes.func.isRequired,
   }
 
   get isValidForm() {
@@ -68,7 +66,6 @@ class ConfirmVoteCodeLayout extends PureComponent {
       pinCode,
       isSaving,
       onSetPinCode,
-      onSkip,
     } = this.props;
 
     return (
@@ -105,12 +102,6 @@ class ConfirmVoteCodeLayout extends PureComponent {
               onPress={this.onSubmit}
               style={{marginHorizontal: 20, marginTop: 20}}
             />
-
-            <TouchableOpacity onPress={onSkip}>
-              <Text style={styles.resendCode}>
-                {locale.confirmLater.toUpperCase()}
-              </Text>
-            </TouchableOpacity>
           </ScrollView>
         </Layout>
 
@@ -154,15 +145,5 @@ const styles = EStyleSheet.create({
   inputContainer: {
     marginTop: 20,
     marginHorizontal: 33,
-  },
-  resendCode: {
-    alignSelf: "center",
-    color: "#fff",
-    fontFamily: "roboto",
-    fontSize: 14,
-    fontWeight: "bold",
-    marginTop: 20,
-    marginBottom: 10,
-    textAlign: "center",
   },
 });

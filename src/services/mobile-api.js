@@ -198,11 +198,11 @@ const sendPhoneValidation = ({ client }) => (authToken, number) =>
     .send({ mobile: { number }})
     .then(getData);
 
-const sendVoteConfirmation = ({ client }) => (authToken, { phone, plipId }) =>
+const sendVoteConfirmation = ({ client }) => (authToken, { deviceUniqueId, phone, plipId }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
     .post(`/petition/plip/${plipId}/send_mobile_verification`)
-    .send({ phone })
+    .send({ deviceUniqueId, phone })
     .then(getData);
 
 const sendVoteCodeConfirmation = ({ client }) => (authToken, { phone, pinCode, plipId }) =>
@@ -473,6 +473,12 @@ const upload = ({ endpoint }) => (authToken, { contentType, name, uri, oldAvatar
   return uploader;
 };
 
+const requiresMobileValidation = ({ client }) => (authToken, { deviceUniqueId, plipId }) =>
+  authorizedClient(client, authToken)
+    .use(serializeJson)
+    .post(`/petition/plip/${plipId}/requires_mobile_validation`)
+    .send({ deviceUniqueId })
+    .then(getData);
 
 export default function MobileApi(host) {
   const v1Client = requester({ host, version: "v1" });
@@ -499,6 +505,7 @@ export default function MobileApi(host) {
     profile: profile({ client: v3Client }),
     retrievePassword: retrievePassword({ client: v2Client }),
     reverseSearchZipCode: reverseSearchZipCode({ client: v3Client }),
+    requiresMobileValidation: requiresMobileValidation({ client: v1Client }),
     saveAvatar: upload({ endpoint: `${host}/api/v1/profile/photo` }),
     saveBirthdate: saveBirthdate({ client: v1Client }),
     saveDocuments: saveDocuments({ client: v1Client }),
