@@ -23,6 +23,8 @@ import { clamp, prop } from "ramda";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+import { withAfterPlipValidation } from "../decorators";
+
 import Layout from "./purple-layout";
 import HeaderLogo from "./header-logo";
 import NavigationBar from "./navigation-bar";
@@ -48,7 +50,9 @@ import styles, {
 
 import locale from "../locales/pt-BR";
 
-export default class PlipLayout extends Component {
+const enhance = withAfterPlipValidation;
+
+class PlipLayout extends Component {
   state = {
     isSignModalVisible: false,
     isValidProfileModalVisible: false,
@@ -680,3 +684,5 @@ const signButtonStyle = active => ({
   shadowOpacity: 0.2,
   shadowRadius: 4,
 });
+
+export default enhance(PlipLayout);

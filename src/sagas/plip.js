@@ -681,6 +681,13 @@ function* signPlip({ DeviceInfo, mobileApi, walletStore, apiError }) {
         return;
       }
 
+      const deviceInfo = yield call(DeviceInfo.info);
+      const { requiresMobileValidation } = yield call(mobileApi.requiresMobileValidation, authToken, { deviceUniqueId: deviceInfo.deviceUniqueId, plipId: plip.id });
+
+      if (requiresMobileValidation) {
+        const goBackToScreenKey = yield select(currentScreenKey);
+        return yield put(navigate(SCREEN_KEYS.CONFIRM_VOTE, { goBackToScreenKey, plip }));
+      }
 
       yield put(requestUserLocation({ message: locale.permissions.locationForSignPlip }));
 
@@ -715,7 +722,6 @@ function* signPlip({ DeviceInfo, mobileApi, walletStore, apiError }) {
         console.log("Will call sign plip api");
       }
 
-      const deviceInfo = yield call(DeviceInfo.info);
       const appVersion = yield call(DeviceInfo.appVersion);
       const additionalSignInfo = {
         ...deviceInfo.toJson(),
@@ -737,11 +743,6 @@ function* signPlip({ DeviceInfo, mobileApi, walletStore, apiError }) {
         yield put(plipUserSignInfo({ plipId: plip.id, info: apiResult.signMessage }));
         yield put(plipJustSigned({ plipId: plip.id })); // Marks the flow end
         yield put(signingPlip(null));
-
-        if (plip.requiresMobileValidation) {
-          const goBackToScreenKey = yield select(currentScreenKey);
-          yield put(navigate(SCREEN_KEYS.CONFIRM_VOTE, { goBackToScreenKey, plip }));
-        }
       } catch (e) {
         logError(e);
         if (isDev) console.log("is wallet invalid?", apiError.isInvalidWallet(e), e.errorCode, e);

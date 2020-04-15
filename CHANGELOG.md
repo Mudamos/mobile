@@ -1,5 +1,6 @@
 # Next
 
+* [PR #510] Require mobile validation before voting
 * [PR #507] Add signup screen vote address
 * [PR #508] Add sms vote validation
 

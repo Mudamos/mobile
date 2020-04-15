@@ -5,7 +5,6 @@ import ConfirmVoteCodeLayout from "../../components/vote/confirm-vote-code-layou
 import {
   navigateBack,
   sendVoteCodeConfirmation,
-  voteCodeConfirmationDismiss,
 } from "../../actions";
 
 import {
@@ -19,7 +18,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, { goBackToScreenKey, phone, plip }) => ({
   onBack: () => dispatch(navigateBack()),
   onSave: ({ pinCode }) => dispatch(sendVoteCodeConfirmation({ goBackToScreenKey, phone, pinCode, plip })),
-  onSkip: () => dispatch(voteCodeConfirmationDismiss({ goBackToScreenKey })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConfirmVoteCodeLayout);

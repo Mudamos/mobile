@@ -71,5 +71,5 @@ export default function* rootSaga({
   yield fork(setupSaga, { mobileApi, mudamosSigner, sessionStore });
   yield spawn(appStateSaga);
   yield fork(appLinkSaga, { mobileApi, mudDynamicLink });
-  yield fork(voteConfirmationSaga, { dispatch, mobileApi });
+  yield fork(voteConfirmationSaga, { DeviceInfo, dispatch, mobileApi });
 }

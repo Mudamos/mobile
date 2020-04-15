@@ -7,6 +7,8 @@ import {
   View,
 } from "react-native";
 
+import { withAfterPlipValidation } from "../decorators";
+
 import {
   eligibleToSignPlip,
   moment,
@@ -28,8 +30,9 @@ import SafeAreaView from "./safe-area-view";
 import styles from "../styles/plip-viewer-layout";
 import plipHtmlStyles from "../styles/plip-html-styles";
 
+const enhance = withAfterPlipValidation;
 
-export default class PlipViewerLayout extends Component {
+class PlipViewerLayout extends Component {
   state = {
     showSignSuccess: false,
     isSignModalVisible: false,
@@ -222,3 +225,5 @@ const signButtonStyle = {
   shadowOpacity: 0.3,
   shadowRadius: 4,
 };
+
+export default enhance(PlipViewerLayout);
