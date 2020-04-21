@@ -4,7 +4,7 @@
   "private": true,
   "engines": {
     "node": "8.9.x",
-    "npm": "3.10.x"
+    "yarn": "^1.2.4"
   },
   "scripts": {
     "android": "android/gradlew -p android installDevelopmentDebug && adb reverse tcp:8081 tcp:8081 && adb shell am start -n br.com.tagview.petition.development/org.mudamos.petition.MainActivity",
