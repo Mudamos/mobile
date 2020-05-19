@@ -63,7 +63,7 @@ export default class ProfileConcludeLayout extends Component {
           <ScrollView>
             {this.renderNavBar()}
 
-            <SignUpBreadCrumb highlightId={4} containerStyle={styles.breadcrumb} />
+            <SignUpBreadCrumb highlightId={5} containerStyle={styles.breadcrumb} />
 
             {this.renderContent()}
 
