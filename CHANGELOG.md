@@ -1,5 +1,7 @@
 # Next
 
+* [PR #514] Add vote address
+
 ## [2.4.0] 21/04/2020
 
 * [PR #510] Require mobile validation before voting
