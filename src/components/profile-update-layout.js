@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 
-import { compose, curry, filter, isEmpty, lensPath, prop, propEq, set } from "ramda";
+import { compose, curry, filter, lensPath, prop, propEq, set } from "ramda";
 
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
@@ -27,6 +27,8 @@ import ImagePicker from "react-native-image-picker";
 
 import locale from "../locales/pt-BR";
 
+import { cityRepository, stateRepository } from "../repositories";
+
 import {
   baseName,
   filterDataByTerm,
@@ -34,9 +36,14 @@ import {
   errorForField,
 } from "../utils";
 
-import { CityType, StateUfType } from "../prop-types";
+import { CityType } from "../prop-types";
 
 import styles from "../styles/profile-update-layout";
+
+// Improve performance using the imported json data instead of using redux.
+// This won't change into an api anytime soon.
+const cities = cityRepository.listSync();
+const states = stateRepository.listSync();
 
 const keyExtractor = compose(String, prop("id"));
 const formatState = state => state && `${state.name} - ${state.uf}`;
@@ -57,20 +64,19 @@ export default class ProfileUpdateLayout extends Component {
     citySearchTerm: "",
     currentPassword: "",
     errors: {},
-    filteredCities: this.props.previousUf ? byUf(this.props.previousUf, this.props.cities) : [],
-    filteredStates: this.props.states,
+    filteredCities: this.props.previousUf ? byUf(this.props.previousUf, cities) : [],
+    filteredStates: states,
     mainScrollViewOffset: null,
     name: this.props.previousName,
     newPassword: "",
-    selectedCity: findPreviousCity(this.props.previousCity, this.props.cities),
-    selectedState: findPreviousState(this.props.previousUf, this.props.states),
-    scopedCities: this.props.previousUf ? byUf(this.props.previousUf, this.props.cities) : [],
+    selectedCity: findPreviousCity(this.props.previousCity, cities),
+    selectedState: findPreviousState(this.props.previousUf, states),
+    scopedCities: this.props.previousUf ? byUf(this.props.previousUf, cities) : [],
     ufSearchTerm: "",
     zipCode: this.props.previousZipCode,
   };
 
   static propTypes = {
-    cities: PropTypes.arrayOf(CityType).isRequired,
     errorsUpdatePassword: PropTypes.array,
     errorsUpdateProfile: PropTypes.array,
     isAppUser: PropTypes.bool,
@@ -83,10 +89,7 @@ export default class ProfileUpdateLayout extends Component {
     previousName: PropTypes.string,
     previousUf: PropTypes.string,
     previousZipCode: PropTypes.string,
-    states: PropTypes.arrayOf(StateUfType).isRequired,
     onBack: PropTypes.func.isRequired,
-    onFetchCities: PropTypes.func.isRequired,
-    onFetchStates: PropTypes.func.isRequired,
     onRequestAvatarPermission: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
   };
@@ -94,37 +97,6 @@ export default class ProfileUpdateLayout extends Component {
   cityInput = React.createRef();
   mainScrollView = React.createRef();
   ufInput = React.createRef();
-
-  componentDidMount() {
-    const { cities, states, onFetchCities, onFetchStates } = this.props;
-
-    if (isEmpty(states)) {
-      onFetchStates();
-    }
-
-    if (isEmpty(cities)) {
-      onFetchCities();
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { cities, states, previousCity, previousUf } = this.props;
-
-    const updatedCityData = (isEmpty(prevProps.states) && !isEmpty(states) && !isEmpty(cities))
-      || ((isEmpty(prevProps.cities) && !isEmpty(cities) && !isEmpty(states)))
-
-    if (updatedCityData) {
-      const scopedCities = previousUf ? byUf(previousUf, cities) : [];
-
-      this.setState({
-        selectedCity: findPreviousCity(previousCity, cities),
-        scopedCities,
-        filteredCities: scopedCities,
-        filteredStates: states,
-        selectedState: findPreviousState(previousUf, states),
-      });
-    }
-  }
 
   selectAvatar = () => {
     const { onRequestAvatarPermission } = this.props;
@@ -209,8 +181,6 @@ export default class ProfileUpdateLayout extends Component {
   onMainScroll = ({ nativeEvent: { contentOffset }}) => this.setState({ mainScrollViewOffset: contentOffset });
 
   onChangeUfSearch = ufSearchTerm => {
-    const { states } = this.props;
-
     this.setState({
       citySearchTerm: "",
       selectedCity: null,
@@ -241,8 +211,6 @@ export default class ProfileUpdateLayout extends Component {
   };
 
   onSetUf = selectedState => {
-    const { cities } = this.props;
-
     const scopedCities = byUf(selectedState.uf, cities);
 
     this.setState({
@@ -262,7 +230,6 @@ export default class ProfileUpdateLayout extends Component {
   };
 
   onUfSubmitEditing = () => {
-    const { states } = this.props;
     const { selectedState } = this.state;
 
     this.ufInput.current.blur();

@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
-import { compose, curry, filter, isEmpty, lensPath, prop, propEq, set } from "ramda";
+import { compose, curry, filter, lensPath, prop, propEq, set } from "ramda";
 import React, { PureComponent } from "react";
 import { Text, View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 import BackButton from "./back-button";
 import HeaderLogo from "./header-logo";
-import { CityType, StateUfType } from "../prop-types";
 import Layout from "./purple-layout";
 import NavigationBar from "./navigation-bar";
 import PageLoader from"./page-loader";
@@ -20,6 +19,13 @@ import MDSelectInput from "./md-select-input";
 import locale from "../locales/pt-BR";
 import textStyles from "../styles/text";
 import { filterDataByTerm } from "../utils";
+
+import { cityRepository, stateRepository } from "../repositories";
+
+// Improve performance using the imported json data instead of using redux.
+// This won't change into an api anytime soon.
+const cities = cityRepository.listSync();
+const states = stateRepository.listSync();
 
 const keyExtractor = compose(String, prop("id"));
 
@@ -37,9 +43,7 @@ const findStateForTse = ({ uf } = {}, collection) =>
 
 class ProfileVoteAddressLayout extends PureComponent {
   static propTypes = {
-    cities: PropTypes.arrayOf(CityType).isRequired,
     isSaving: PropTypes.bool,
-    states: PropTypes.arrayOf(StateUfType).isRequired,
     tseVoteAddress: PropTypes.shape({
       city: PropTypes.string,
       uf: PropTypes.string,
@@ -56,15 +60,15 @@ class ProfileVoteAddressLayout extends PureComponent {
   constructor(props) {
     super(props);
 
-    const selectedCity = findCityForTse(props.tseVoteAddress || {}, props.cities);
-    const selectedState = findStateForTse(props.tseVoteAddress || {}, props.states);
-    const filteredCities = selectedState ? byUf(selectedState.uf, props.cities) : [];
+    const selectedCity = findCityForTse(props.tseVoteAddress || {}, cities);
+    const selectedState = findStateForTse(props.tseVoteAddress || {}, states);
+    const filteredCities = selectedState ? byUf(selectedState.uf, cities) : [];
 
     this.state = {
       citySearchTerm: "",
       errors: {},
       filteredCities,
-      filteredStates: this.props.states,
+      filteredStates: states,
       mainScrollViewOffset: null,
       selectedCity,
       selectedState,
@@ -73,30 +77,7 @@ class ProfileVoteAddressLayout extends PureComponent {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    const { cities, states, tseVoteAddress } = this.props;
-
-    const updatedCityData = (isEmpty(prevProps.states) && !isEmpty(states) && !isEmpty(cities))
-      || (isEmpty(prevProps.cities) && !isEmpty(cities) && !isEmpty(states))
-
-    if (updatedCityData) {
-      const selectedState = findStateForTse(tseVoteAddress || {}, states);
-      const selectedCity = findCityForTse(tseVoteAddress || {}, cities);
-      const scopedCities = selectedState ? byUf(selectedState.uf, cities) : [];
-
-      this.setState({
-        filteredStates: states,
-        selectedState,
-        selectedCity,
-        scopedCities,
-        filteredCities: scopedCities,
-      });
-    }
-  }
-
   onChangeUfSearch = ufSearchTerm => {
-    const { states } = this.props;
-
     this.setState({
       citySearchTerm: "",
       selectedCity: null,
@@ -117,8 +98,6 @@ class ProfileVoteAddressLayout extends PureComponent {
   };
 
   onSetUf = selectedState => {
-    const { cities } = this.props;
-
     const scopedCities = byUf(selectedState.uf, cities);
 
     this.setState({ citySearchTerm: "", selectedCity: null, selectedState, scopedCities, filteredCities: scopedCities });
@@ -143,7 +122,6 @@ class ProfileVoteAddressLayout extends PureComponent {
   onMainScroll = ({ nativeEvent: { contentOffset }}) => this.setState({ mainScrollViewOffset: contentOffset });
 
   onUfSubmitEditing = () => {
-    const { states } = this.props;
     const { selectedState } = this.state;
 
     this.ufInput.current.blur();
