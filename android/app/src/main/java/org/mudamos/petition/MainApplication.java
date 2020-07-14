@@ -1,7 +1,7 @@
 package org.mudamos.petition;
 
 import android.app.Application;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;

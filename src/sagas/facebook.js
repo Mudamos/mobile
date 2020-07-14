@@ -26,7 +26,7 @@ const facebookPermissions = ["public_profile", "email"];
 function* login({ mobileApi, sessionStore, Crypto }) {
   yield takeLatest("FACEBOOK_USER_LOG_IN", function* () {
     try {
-      const fbResult = yield call(LoginManager.logInWithReadPermissions, facebookPermissions);
+      const fbResult = yield call(LoginManager.logInWithPermissions, facebookPermissions);
 
       if (fbResult.isCancelled) {
         yield put(finishedLogIn());
