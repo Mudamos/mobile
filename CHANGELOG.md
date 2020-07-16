@@ -1,5 +1,7 @@
 # Next
 
+* [PR #516] Upgrade Facebook sdk
+
 ## [2.4.0] 21/04/2020
 
 * [PR #510] Require mobile validation before voting

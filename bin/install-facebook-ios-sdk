@@ -1,0 +1,61 @@
+#!/bin/sh
+set -euxo pipefail
+
+echo "Downloading files to $TMPDIR"
+
+SDK_VERSION="v5.15.1"
+
+echo "SDK Version $SDK_VERSION"
+
+MAIN_URL="https://github.com/facebook/facebook-ios-sdk/releases/download"
+FACEBOOK_SDK_PATH=$HOME/Documents/FacebookSDK
+
+CORE_KIT_URL="$MAIN_URL/$SDK_VERSION/FBSDKCoreKit.zip"
+LOGIN_KIT_URL="$MAIN_URL/$SDK_VERSION/FBSDKLoginKit.zip"
+SHARE_KIT_URL="$MAIN_URL/$SDK_VERSION/FBSDKShareKit.zip"
+
+CORE_FILE="${TMPDIR}fbcorekit"
+LOGIN_FILE="${TMPDIR}fbloginkit"
+SHARE_FILE="${TMPDIR}fbsharekit"
+
+CORE_FILE_EXTRACTED_PATH="${TMPDIR}FBSDKCoreKit"
+LOGIN_FILE_EXTRACTED_PATH="${TMPDIR}FBSDKLoginKit"
+SHARE_FILE_EXTRACTED_PATH="${TMPDIR}FBSDKShareKit"
+
+CORE_FILE_FRAMEWORK_PATH="${CORE_FILE_EXTRACTED_PATH}/iOS"
+LOGIN_FILE_FRAMEWORK_PATH="${LOGIN_FILE_EXTRACTED_PATH}/iOS"
+SHARE_FILE_FRAMEWORK_PATH="${SHARE_FILE_EXTRACTED_PATH}/iOS"
+
+clean_previous_extraction() {
+  rm -rf $CORE_FILE_EXTRACTED_PATH \
+         $LOGIN_FILE_EXTRACTED_PATH \
+         $SHARE_FILE_EXTRACTED_PATH
+}
+
+download_sdk() {
+  curl -L -o $1 $2
+}
+
+extract_sdk() {
+  unzip $1 -d $TMPDIR
+}
+
+move_extracted_sdk() {
+  mv $1/* $FACEBOOK_SDK_PATH
+}
+
+mkdir -p $HOME/Documents/FacebookSDK
+
+clean_previous_extraction
+
+download_sdk $CORE_FILE $CORE_KIT_URL
+extract_sdk $CORE_FILE
+move_extracted_sdk $CORE_FILE_FRAMEWORK_PATH
+
+download_sdk $LOGIN_FILE $LOGIN_KIT_URL
+extract_sdk $LOGIN_FILE
+move_extracted_sdk $LOGIN_FILE_FRAMEWORK_PATH
+
+download_sdk $SHARE_FILE $SHARE_KIT_URL
+extract_sdk $SHARE_FILE
+move_extracted_sdk $SHARE_FILE_FRAMEWORK_PATH

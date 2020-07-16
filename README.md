@@ -69,8 +69,13 @@ $ pod install --project-directory=./ios
 
 ## Facebook SDK
 
-Para o iOS, dependemos da versão **4.31.1** do sdk que deve estar localizado em `~/Documents/FacebookSDK`.
-Android dependemos da versão **4.31.0** que é automaticamente baixada pelo Gradle.
+Para o iOS, dependemos da versão **5.15.1** do sdk que deve estar localizado em `~/Documents/FacebookSDK`.
+
+Rode o comando abaixo para instalar automaticamente:
+
+```
+$ yarn install-facebook-ios-sdk
+```
 
 ## Desenvolvimento
 
