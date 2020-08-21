@@ -33,10 +33,19 @@ const decrypt = (text, password) => {
 
 const sha256 = text => crypto.createHash("sha256").update(text, "utf8").digest().toString("hex");
 
+const uuid = (size = 32) => new Promise((resolve, reject) => crypto.randomBytes(size, (error, buffer) => {
+  if (error) {
+    reject(error);
+  } else {
+    resolve(buffer.toString("hex"));
+  }
+}));
+
 const myCrypto = {
   encrypt,
   decrypt,
   sha256,
+  uuid,
 };
 
 export default myCrypto;

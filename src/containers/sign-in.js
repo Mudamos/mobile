@@ -10,6 +10,7 @@ import {
 } from "../selectors";
 
 import {
+  appleSignIn,
   clearAuthLoginError,
   facebookUserLogIn,
   loginUser,
@@ -29,6 +30,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  onAppleSignIn: () => dispatch(appleSignIn()),
   onBack: () => {
     dispatch(signingUp(false));
     dispatch(navigateBack());

@@ -29,7 +29,10 @@ const info = storage => () => new Promise(async (resolve) => {
 
 const appVersion = () => Promise.resolve(DeviceInfo.getReadableVersion());
 
+const isEmulator = DeviceInfo.isEmulator;
+
 export default ({ storage }) => ({
   appVersion: appVersion,
   info: info(storage),
+  isEmulator,
 })

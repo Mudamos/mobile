@@ -2,6 +2,7 @@ export * from "./action-signer";
 export * from "./address";
 export * from "./analytics";
 export * from "./app";
+export * from "./apple-sign-in";
 export * from "./app-link";
 export * from "./authentication";
 export * from "./city";
