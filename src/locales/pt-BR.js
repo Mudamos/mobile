@@ -271,6 +271,8 @@ const translations = {
     sendVoteConfirmationError: "Não foi possível enviar o código por SMS. Tente novamente mais tarde.",
     shareLinkError: "Não foi possível compartilhar o conteúdo.",
     signPlipError: "Por algum motivo não conseguimos completar sua assinatura.",
+    unableToContactApple: "Não foi possível verificar sua identidade. Tente novamente mais tarde.",
+    userDeniedAppleAccess: "Acesso negado por parte do usuário",
     walletCreationError: "Houve um erro ao preparar algumas informações para suas assinaturas.",
   },
   errorsCode: {

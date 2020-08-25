@@ -8,7 +8,6 @@ import appleAuth, {
   AppleAuthRequestOperation,
   AppleAuthRequestScope,
   AppleAuthCredentialState,
-  AppleAuthRealUserStatus,
 } from "@invertase/react-native-apple-authentication";
 
 import Toast from "react-native-simple-toast";
@@ -60,13 +59,13 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
         fullName: signFullName,
         identityToken,
         nonce,
-        realUserStatus,
         state,
       } = (appleAuthRequestResponse || {});
 
-      const shouldFailWhenNotEmulator = !isDev && realUserStatus !== AppleAuthRealUserStatus.LIKELY_REAL;
-      if (!identityToken || shouldFailWhenNotEmulator || state !== myState) {
+      if (!identityToken || state !== myState) {
         yield put(finishedLogIn());
+        yield call([Toast, Toast.show], locale.unableToContactApple);
+
         return;
       }
 
@@ -83,7 +82,9 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
         if (credentialState !== AppleAuthCredentialState.AUTHORIZED) {
           log("Sign in has been denied", { tag: "Apple" }, { credentialState }, AppleAuthCredentialState);
 
+          yield call([Toast, Toast.show], locale.userDeniedAppleAccess);
           yield put(finishedLogIn());
+
           return;
         }
       }
@@ -106,7 +107,7 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
       const email = cacheInfo.email || tokenInfo.email;
 
       if (!isValidEmailRelaxed(email)) {
-        Toast.show(locale.errors.noEmailDuringSignIn);
+        yield call([Toast, Toast.show], locale.noEmailDuringSignIn);
         yield put(finishedLogIn());
 
         return;
