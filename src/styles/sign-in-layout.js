@@ -3,6 +3,12 @@ import { StyleSheet } from "react-native";
 import textStyles from "./text";
 
 export default StyleSheet.create({
+  appleButton: {
+    flex: 1,
+    height: 40,
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
   authErrorText: {
     color: "#F00",
   },

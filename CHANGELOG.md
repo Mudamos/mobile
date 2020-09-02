@@ -1,5 +1,7 @@
 # Next
 
+* [PR 518] Apple sign in
+
 ## [2.5.0] 16/07/2020
 
 * [PR #516] Upgrade Facebook sdk

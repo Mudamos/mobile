@@ -99,6 +99,33 @@ const authorizedClient = (client, token) =>
     .use(req => req.set("Authorization", `Bearer ${token}`));
 
 
+const appleSignIn = ({ client }) => ({
+  appleUserId,
+  authorizedScopes,
+  authorizationCode,
+  email,
+  fullName,
+  identityToken,
+  nonce,
+  plipId,
+  block,
+}) => client
+  .use(serializeJson)
+  .post("/auth/apple/sign-in")
+  .send(({
+    appleUserId,
+    authorizedScopes,
+    authorizationCode,
+    email,
+    fullName,
+    identityToken,
+    nonce,
+    plipId,
+    block,
+  }))
+  .then(getData)
+  .then(json => json.accessToken);
+
 const fbSignIn = ({ client }) => ({ fbToken, plipId, block }) => {
   let requester = client
     .use(req => req.set("access_token", fbToken))
@@ -486,6 +513,7 @@ export default function MobileApi(host) {
   const v3Client = requester({ host, version: "v3" });
 
   return {
+    appleSignIn: appleSignIn({ client: v3Client }),
     changePassword: changePassword({ client: v1Client }),
     changeForgotPassword: changeForgotPassword({ client: v2Client }),
     difficulty: fetchDifficulty({ client: v1Client }),

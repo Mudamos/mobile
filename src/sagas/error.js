@@ -37,6 +37,8 @@ function appError({ type, payload }) {
     defaultErrorHandler({ payload, defaultMessage });
 
   switch (type) {
+    case "APPLE_SIGN_IN_ERROR":
+      return handleWithPayload({ defaultMessage: locale.errors.appleSignInError });
     case "WALLET_CREATE_ERROR":
       return handleWithPayload({ defaultMessage: locale.errors.walletCreationError });
     case "FACEBOOK_LOGIN_ERROR":

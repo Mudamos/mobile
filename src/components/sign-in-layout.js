@@ -3,10 +3,13 @@ import React, { Component } from "react";
 
 import {
   Image,
+  Platform,
   TouchableOpacity,
   Text,
   View,
 } from "react-native";
+
+import appleAuth, { AppleButton } from "@invertase/react-native-apple-authentication";
 
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
@@ -38,6 +41,7 @@ class SignInLayout extends Component {
     isFacebookLogged: PropTypes.bool,
     isLogged: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
+    onAppleSignIn: PropTypes.func.isRequired,
     onBack: PropTypes.func.isRequired,
     onClearAuthLoginError: PropTypes.func.isRequired,
     onFacebookLogin: PropTypes.func.isRequired,
@@ -93,6 +97,7 @@ class SignInLayout extends Component {
 
             {this.renderOrSeparator()}
             {this.renderFBLogin()}
+            {this.renderAppleSignIn()}
             {this.renderSeparator()}
 
             {this.renderLinkToSignUp()}
@@ -195,6 +200,22 @@ class SignInLayout extends Component {
     return (
       <FBLoginButton
         onPress={onFacebookLogin}
+      />
+    );
+  }
+
+  renderAppleSignIn() {
+    if (Platform.OS !== "ios" || !appleAuth.isSupported) return;
+
+    const { onAppleSignIn } = this.props;
+
+    return (
+      <AppleButton
+        style={styles.appleButton}
+        cornerRadius={5}
+        buttonStyle={AppleButton.Style.WHITE}
+        buttonType={AppleButton.Type.SIGN_IN}
+        onPress={onAppleSignIn}
       />
     );
   }

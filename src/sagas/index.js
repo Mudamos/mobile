@@ -1,5 +1,6 @@
 import { fork, spawn } from "redux-saga/effects";
 
+import appleSignInSaga from "./apple-sign-in";
 import analyticsSaga from "./analytics";
 import appStateSaga from "./app-state";
 import citySaga from "./city";
@@ -47,6 +48,7 @@ export default function* rootSaga({
 }) {
   yield fork(actionSignerSaga, { mobileApi, mudamosSigner, walletStore });
 
+  yield fork(appleSignInSaga, { Crypto, DeviceInfo, localStorage, mobileApi, sessionStore });
   yield spawn(analyticsSaga, { analytics });
   yield spawn(citySaga, { repositories });
   yield spawn(navigationSaga, { mobileApi, sessionStore });
