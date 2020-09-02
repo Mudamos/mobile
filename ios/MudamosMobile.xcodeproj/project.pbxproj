@@ -3576,7 +3576,7 @@
 				CODE_SIGN_ENTITLEMENTS = MessageSignerActionProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.5.0;
+				CURRENT_PROJECT_VERSION = 2.6.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = YGK2CQTELW;
 				ENABLE_TESTABILITY = YES;
@@ -3611,7 +3611,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				MARKETING_VERSION = 2.5.0;
+				MARKETING_VERSION = 2.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition.MessageSignerAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "666ddbc4-844f-4bae-a6fe-679c442a0dfe";
@@ -3647,7 +3647,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2.5.0;
+				CURRENT_PROJECT_VERSION = 2.6.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YGK2CQTELW;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -3681,7 +3681,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				MARKETING_VERSION = 2.5.0;
+				MARKETING_VERSION = 2.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition.MessageSignerAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "96281e7c-fb13-45f3-9794-ca27e351fd54";
@@ -3703,7 +3703,7 @@
 				CODE_SIGN_ENTITLEMENTS = MudamosProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.5.0;
+				CURRENT_PROJECT_VERSION = 2.6.0;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = YGK2CQTELW;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3758,7 +3758,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				MARKETING_VERSION = 2.5.0;
+				MARKETING_VERSION = 2.6.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -3785,7 +3785,7 @@
 				CODE_SIGN_ENTITLEMENTS = MudamosProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Instituto de Tecnologia e Sociedade (YGK2CQTELW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 2.5.0;
+				CURRENT_PROJECT_VERSION = 2.6.0;
 				DEVELOPMENT_TEAM = YGK2CQTELW;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3839,7 +3839,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				MARKETING_VERSION = 2.5.0;
+				MARKETING_VERSION = 2.6.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
