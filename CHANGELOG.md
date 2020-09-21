@@ -1,5 +1,7 @@
 # Next
 
+* [PR 520] Properly remove accents and symbols from hashtags
+
 ## [2.6.0-ios] 02/09/2020
 
 * [PR 518] Apple sign in

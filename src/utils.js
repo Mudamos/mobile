@@ -27,6 +27,7 @@ import {
   propEq,
   reduce,
   reject,
+  replace,
   test,
   toPairs,
   unapply,
@@ -128,25 +129,8 @@ export const formatNumber = (value, locale = DEFAULT_LOCALE) => {
 
 export const deepMerge = (a, b) => is(Object, a) && is(Object, b) ? mergeWith(deepMerge, a, b) : b;
 
-export const stripAccents = text => {
-  const patternLetters = /[öäüÖÄÜáàâãéèêúùûóòôÁÀÂÃÉÈÊÚÙÛÓÒÔßçÇ]/g;
-  const table = {
-    "ä": "a", "ö": "o", "ü": "u",
-    "Ä": "A", "Ö": "O", "Ü": "U",
-    "á": "a", "à": "a", "â": "a",
-    "é": "e", "è": "e", "ê": "e",
-    "ú": "u", "ù": "u", "û": "u",
-    "ó": "o", "ò": "o", "ô": "o",
-    "Á": "A", "À": "A", "Â": "A",
-    "É": "E", "È": "E", "Ê": "E",
-    "Ú": "U", "Ù": "U", "Û": "U",
-    "Ó": "O", "Ò": "O", "Ô": "O",
-    "ß": "s", "ç": "c", "Ç": "C",
-    "ã": "a", "Ã": "A",
-  };
-
-  return text.replace(patternLetters, match => table[match] || match);
-};
+export const stripAccents = text =>
+  text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
 export const capitalizeWords = text => text.replace(/\b\w/g, l => l.toUpperCase());
 
@@ -154,8 +138,10 @@ export const removeSpaces = text => text.replace(/\s/g, "");
 
 export const removeHyphens = text => text.replace(/-/g, "");
 
+const removeSymbols = replace(/\W+/, "");
+
 export const hashtagfy = (...texts) => texts
-  .map(text => "#" + pipe(stripAccents, capitalizeWords, removeSpaces, removeHyphens)(text))
+  .map(text => "#" + pipe(stripAccents, removeSymbols, capitalizeWords, removeSpaces, removeHyphens)(text))
   .join(" ");
 
 export const facebookPicURI = ({ id, type = "normal" }) => `https://graph.facebook.com/${id}/picture?type=${type}`;
