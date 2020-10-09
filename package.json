@@ -18,6 +18,7 @@
     "generate-ios-action-sign-html": "cd action-sign-generator && yarn run build && cd -",
     "install-action-sign-deps": "cd action-sign-generator && yarn install && yarn run install-mudamos-libcrypto-deps && cd -",
     "install-android-beta": "ENVFILE=.env.beta android/gradlew -p android installMudamosBetaRelease",
+    "install-android-production": "ENVFILE=.env.production android/gradlew -p android installProductionRelease",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "ios-4s-beta": "node node_modules/react-native/local-cli/cli.js run-ios --simulator='iPhone 4s' --scheme MudamosMobileBeta",
     "ios-se-beta": "node node_modules/react-native/local-cli/cli.js run-ios --simulator='iPhone SE iOS 10' --scheme MudamosMobileBeta",
