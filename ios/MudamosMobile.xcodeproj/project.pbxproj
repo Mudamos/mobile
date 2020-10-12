@@ -234,14 +234,12 @@
 		46B76D26205822AB00547DA0 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463C8EB71E08419900E79749 /* libBVLinearGradient.a */; };
 		46B76D27205822C100547DA0 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463FA2AF1E30E7310035B49D /* libRNShare.a */; };
 		46B76D28205822CB00547DA0 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */; };
-		46B76D29205822D700547DA0 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
 		46B76D2F2058233800547DA0 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
 		46B76D302058234200547DA0 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46B76D312058234E00547DA0 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623C3E31E00818500158849 /* libRNDeviceInfo.a */; };
 		46B76D322058235B00547DA0 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463C8EB71E08419900E79749 /* libBVLinearGradient.a */; };
 		46B76D342058237100547DA0 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 463FA2AF1E30E7310035B49D /* libRNShare.a */; };
 		46B76D352058237A00547DA0 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */; };
-		46B76D362058238400547DA0 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
 		46B86B6020123271009E643E /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9602920122E5D00D5AEB9 /* ActionViewController.swift */; };
 		46B86B6420123271009E643E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */; };
 		46C00F0E1EBB5681006F17F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */; };
@@ -266,7 +264,6 @@
 		46CBB3721E268E52000B4F5A /* lato_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB35F1E268E52000B4F5A /* lato_light.ttf */; };
 		46CBB3731E268E52000B4F5A /* lato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3601E268E52000B4F5A /* lato.ttf */; };
 		46CBB3741E268E52000B4F5A /* lato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3601E268E52000B4F5A /* lato.ttf */; };
-		46D05B531E5F073B00350745 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
 		46D30D7C1DE46B8400CE09C0 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46D30D7B1DE46B8400CE09C0 /* FacebookSDKStrings.bundle */; };
 		46E7BBC41ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
 		46E7BBC51ECCC026001D1720 /* MUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7BBC31ECCC026001D1720 /* MUDFirebase.m */; };
@@ -427,13 +424,6 @@
 			remoteGlobalIDString = E72EC1401F7ABB5A0001BC90;
 			remoteInfo = "RNDeviceInfo-tvOS";
 		};
-		46D05B4D1E5F071300350745 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
-			remoteInfo = RNImagePicker;
-		};
 		46E9602F20122E5D00D5AEB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
@@ -583,12 +573,10 @@
 		52DA54ECA1B1B2C6DD060E83 /* Pods-MudamosMobile-MudamosMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile-MudamosMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile-MudamosMobileTests/Pods-MudamosMobile-MudamosMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		5B984827EF456536636B8D2D /* Pods-MudamosProduction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosProduction.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosProduction/Pods-MudamosProduction.release.xcconfig"; sourceTree = "<group>"; };
 		5CA59394A12E918879BC09D5 /* Pods-MudamosMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobileTests/Pods-MudamosMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
-		621C3D10CAD54FC5982F12BB /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		66F1E8C94AB3D4618ACD7013 /* Pods_MessageSignerActionBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerActionBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		6BFF38D4975C4835BF23E26A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		6D0B56C85FAE918C101C4C94 /* Pods_MessageSignerAction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerAction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		7BB5E7FCF51E832F7A4FB548 /* Pods_MessageSignerActionProduction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerActionProduction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobileTagviewBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D888BF4604E7D70A05F772 /* Pods-MudamosMobile-MudamosMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile-MudamosMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile-MudamosMobileTests/Pods-MudamosMobile-MudamosMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -638,7 +626,6 @@
 				46564FBE2534901C004A752F /* libRCTOneSignal.a in Frameworks */,
 				4644DB1324BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */,
 				46A05DF922CFE72200F757D9 /* JavaScriptCore.framework in Frameworks */,
-				46B76D29205822D700547DA0 /* libRNImagePicker.a in Frameworks */,
 				46B76D28205822CB00547DA0 /* libReact Native Open Settings.a in Frameworks */,
 				46B76D27205822C100547DA0 /* libRNShare.a in Frameworks */,
 				46B76D26205822AB00547DA0 /* libBVLinearGradient.a in Frameworks */,
@@ -914,14 +901,6 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		46D05B301E5F071300350745 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				46D05B4E1E5F071300350745 /* libRNImagePicker.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		46E9602820122E5D00D5AEB9 /* MessageSignerAction */ = {
 			isa = PBXGroup;
 			children = (
@@ -995,7 +974,6 @@
 				6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */,
 				D782C177FC6040C8A34D9B30 /* RNShare.xcodeproj */,
 				D4DD84D58E0F4CCBA2E32688 /* React Native Open Settings.xcodeproj */,
-				76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1343,10 +1321,6 @@
 					ProjectRef = 1BDA6C103B4A4B678E5DC06B /* RNDeviceInfo.xcodeproj */;
 				},
 				{
-					ProductGroup = 46D05B301E5F071300350745 /* Products */;
-					ProjectRef = 76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */;
-				},
-				{
 					ProductGroup = 4658C23C1DFF24EA0063E371 /* Products */;
 					ProjectRef = A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */;
 				},
@@ -1437,13 +1411,6 @@
 			fileType = archive.ar;
 			path = "libRNDeviceInfo-tvOS.a";
 			remoteRef = 46B76CB820581DDF00547DA0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		46D05B4E1E5F071300350745 /* libRNImagePicker.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNImagePicker.a;
-			remoteRef = 46D05B4D1E5F071300350745 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2624,7 +2591,6 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
-					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2689,7 +2655,6 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
-					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2887,7 +2852,6 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
-					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = MudamosMobile/InfoMudamosProduction.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2956,7 +2920,6 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
-					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = MudamosMobile/InfoMudamosProduction.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3275,7 +3238,6 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
-					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3343,7 +3305,6 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
-					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
