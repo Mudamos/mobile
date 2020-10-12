@@ -17,8 +17,6 @@
 		460373532012565900EC7EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 460373522012565900EC7EBE /* Images.xcassets */; };
 		460373542012565900EC7EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 460373522012565900EC7EBE /* Images.xcassets */; };
 		460373552012565900EC7EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 460373522012565900EC7EBE /* Images.xcassets */; };
-		46037398201257E300EC7EBE /* libRCTUserDefaults.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46037397201257A100EC7EBE /* libRCTUserDefaults.a */; };
-		46037399201257EE00EC7EBE /* libRCTUserDefaults.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46037397201257A100EC7EBE /* libRCTUserDefaults.a */; };
 		4603739C20125D7300EC7EBE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603739B20125D7300EC7EBE /* Date.swift */; };
 		4603739D20125D7300EC7EBE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603739B20125D7300EC7EBE /* Date.swift */; };
 		4603739E20125D7300EC7EBE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4603739B20125D7300EC7EBE /* Date.swift */; };
@@ -241,7 +239,6 @@
 		46B76D29205822D700547DA0 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
 		46B76D2B205822EF00547DA0 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
 		46B76D2C205822F800547DA0 /* libFirestack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD05CF1ED34C1B001173CC /* libFirestack.a */; };
-		46B76D2D2058230300547DA0 /* libRCTUserDefaults.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46037397201257A100EC7EBE /* libRCTUserDefaults.a */; };
 		46B76D2F2058233800547DA0 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
 		46B76D302058234200547DA0 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46B76D312058234E00547DA0 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623C3E31E00818500158849 /* libRNDeviceInfo.a */; };
@@ -351,13 +348,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = MudamosMobile;
-		};
-		46037396201257A100EC7EBE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BA2512E0E9D946D691598029 /* RCTUserDefaults.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RCTUserDefaults;
 		};
 		4615B190201253F1006CBF41 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -631,11 +621,9 @@
 		9E03105BDAAC5A0BB5ADB6DB /* Pods-MessageSignerActionBeta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerActionBeta.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerActionBeta/Pods-MessageSignerActionBeta.release.xcconfig"; sourceTree = "<group>"; };
 		9F016C18A1E94D748F17680C /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNRandomBytes.xcodeproj; path = "../node_modules/react-native-randombytes/RNRandomBytes.xcodeproj"; sourceTree = "<group>"; };
-		A8ECEA6C6F4D44C68E112068 /* libRCTUserDefaults.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTUserDefaults.a; sourceTree = "<group>"; };
 		AAFC20247486915F58C3D1A4 /* Pods-MessageSignerAction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerAction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerAction/Pods-MessageSignerAction.debug.xcconfig"; sourceTree = "<group>"; };
 		B15E59AB4D564186AE6276F2 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		B5AA2BE2727F416DA6981B84 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
-		BA2512E0E9D946D691598029 /* RCTUserDefaults.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTUserDefaults.xcodeproj; path = "../node_modules/react-native-user-defaults/RCTUserDefaults.xcodeproj"; sourceTree = "<group>"; };
 		BB620C49F665BCB96048640D /* Pods-MudamosMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile.release.xcconfig"; sourceTree = "<group>"; };
 		C31184017F8613138D7E49E4 /* Pods-MudamosProduction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosProduction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosProduction/Pods-MudamosProduction.debug.xcconfig"; sourceTree = "<group>"; };
 		CB358AEDAED7A7D4E7C8E06C /* Pods_MudamosMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -674,7 +662,6 @@
 				46564FBE2534901C004A752F /* libRCTOneSignal.a in Frameworks */,
 				4644DB1324BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */,
 				46A05DF922CFE72200F757D9 /* JavaScriptCore.framework in Frameworks */,
-				46B76D2D2058230300547DA0 /* libRCTUserDefaults.a in Frameworks */,
 				46B76D2C205822F800547DA0 /* libFirestack.a in Frameworks */,
 				46B76D2B205822EF00547DA0 /* libRNFirebaseCrashReport.a in Frameworks */,
 				46B76D29205822D700547DA0 /* libRNImagePicker.a in Frameworks */,
@@ -821,14 +808,6 @@
 				460B5A79201230B20028A617 /* MudamosProduction-Bridging-Header.h */,
 			);
 			name = MudamosMobile;
-			sourceTree = "<group>";
-		};
-		46037393201257A100EC7EBE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				46037397201257A100EC7EBE /* libRCTUserDefaults.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		4603739A20125D4F00EC7EBE /* Extensions */ = {
@@ -1061,7 +1040,6 @@
 				76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */,
 				0B04C0F7DF104E1F802EB2E1 /* RNFirebaseCrashReport.xcodeproj */,
 				D0BC2FAE33414083B13F7BDE /* Firestack.xcodeproj */,
-				BA2512E0E9D946D691598029 /* RCTUserDefaults.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1405,10 +1383,6 @@
 					ProjectRef = 46564F762534900F004A752F /* RCTOneSignal.xcodeproj */;
 				},
 				{
-					ProductGroup = 46037393201257A100EC7EBE /* Products */;
-					ProjectRef = BA2512E0E9D946D691598029 /* RCTUserDefaults.xcodeproj */;
-				},
-				{
 					ProductGroup = 468B52811E57272000A4E6B6 /* Products */;
 					ProjectRef = D4DD84D58E0F4CCBA2E32688 /* React Native Open Settings.xcodeproj */;
 				},
@@ -1447,13 +1421,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		46037397201257A100EC7EBE /* libRCTUserDefaults.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTUserDefaults.a;
-			remoteRef = 46037396201257A100EC7EBE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		4623C3E31E00818500158849 /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -2726,7 +2693,6 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
-					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2794,7 +2760,6 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
-					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2995,7 +2960,6 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
-					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = MudamosMobile/InfoMudamosProduction.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3067,7 +3031,6 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
-					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = MudamosMobile/InfoMudamosProduction.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3389,7 +3352,6 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
-					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3460,7 +3422,6 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport",
 					"$(SRCROOT)/../node_modules/react-native-firestack/ios/Firestack",
-					"$(SRCROOT)/../node_modules/react-native-user-defaults",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
