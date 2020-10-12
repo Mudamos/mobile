@@ -238,9 +238,6 @@
 		46B76D172058212800547DA0 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C0AB481DD5E40600447C6C /* libReactNativeConfig.a */; };
 		46B76D182058214500547DA0 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C0AB481DD5E40600447C6C /* libReactNativeConfig.a */; };
 		46B76D192058215200547DA0 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C0AB481DD5E40600447C6C /* libReactNativeConfig.a */; };
-		46B76D1A2058218300547DA0 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DBF04B1DE386CF006B43B5 /* libRNSpinkit.a */; };
-		46B76D1B2058219600547DA0 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DBF04B1DE386CF006B43B5 /* libRNSpinkit.a */; };
-		46B76D1C205821A300547DA0 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DBF04B1DE386CF006B43B5 /* libRNSpinkit.a */; };
 		46B76D232058228A00547DA0 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
 		46B76D242058229400547DA0 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46B76D252058229D00547DA0 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623C3E31E00818500158849 /* libRNDeviceInfo.a */; };
@@ -459,13 +456,6 @@
 			remoteGlobalIDString = E72EC1401F7ABB5A0001BC90;
 			remoteInfo = "RNDeviceInfo-tvOS";
 		};
-		46B76CC020581DDF00547DA0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0D705390BB914269AE72B86B /* RNSpinkit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 641194871EC9FD4A00D4FC03;
-			remoteInfo = "RNSpinkit-tvOS";
-		};
 		46B76D0920581F1A00547DA0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9F197207E38141BA967BA639 /* ReactNativePermissions.xcodeproj */;
@@ -486,13 +476,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
 			remoteInfo = RNImagePicker;
-		};
-		46DBF04A1DE386CF006B43B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0D705390BB914269AE72B86B /* RNSpinkit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D42CB3511B2538DE00FD0AE2;
-			remoteInfo = RNSpinkit;
 		};
 		46E9602F20122E5D00D5AEB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -552,7 +535,6 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* MudamosMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MudamosMobileTests.m; sourceTree = "<group>"; };
 		0B04C0F7DF104E1F802EB2E1 /* RNFirebaseCrashReport.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebaseCrashReport.xcodeproj; path = "../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport.xcodeproj"; sourceTree = "<group>"; };
-		0D705390BB914269AE72B86B /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		0F2DC68A75BF46FBBA40FCDC /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		10E569BB49504C0E8E0A286A /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* MudamosMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -662,7 +644,6 @@
 		6D0B56C85FAE918C101C4C94 /* Pods_MessageSignerAction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerAction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		7BB5E7FCF51E832F7A4FB548 /* Pods_MessageSignerActionProduction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageSignerActionProduction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C6E4E916C3B4AFEBB903B41 /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobileTagviewBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D888BF4604E7D70A05F772 /* Pods-MudamosMobile-MudamosMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile-MudamosMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile-MudamosMobileTests/Pods-MudamosMobile-MudamosMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		97451B22B8FD4C2CB64542DB /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
@@ -727,7 +708,6 @@
 				46B76D252058229D00547DA0 /* libRNDeviceInfo.a in Frameworks */,
 				46B76D242058229400547DA0 /* libRNRandomBytes.a in Frameworks */,
 				46B76D232058228A00547DA0 /* libRCTMaterialKit.a in Frameworks */,
-				46B76D1B2058219600547DA0 /* libRNSpinkit.a in Frameworks */,
 				46B76D182058214500547DA0 /* libReactNativeConfig.a in Frameworks */,
 				46B76D1520581F7200547DA0 /* libReactNativePermissions.a in Frameworks */,
 				4644DB1924BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */,
@@ -1039,15 +1019,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		46DBF0471DE386CF006B43B5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				46DBF04B1DE386CF006B43B5 /* libRNSpinkit.a */,
-				46B76CC120581DDF00547DA0 /* libRNSpinkit.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		46E9602820122E5D00D5AEB9 /* MessageSignerAction */ = {
 			isa = PBXGroup;
 			children = (
@@ -1124,7 +1095,6 @@
 			children = (
 				46564F762534900F004A752F /* RCTOneSignal.xcodeproj */,
 				4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */,
-				0D705390BB914269AE72B86B /* RNSpinkit.xcodeproj */,
 				97451B22B8FD4C2CB64542DB /* RCTMaterialKit.xcodeproj */,
 				A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */,
 				1BDA6C103B4A4B678E5DC06B /* RNDeviceInfo.xcodeproj */,
@@ -1514,10 +1484,6 @@
 					ProductGroup = 463FA2921E30E7310035B49D /* Products */;
 					ProjectRef = D782C177FC6040C8A34D9B30 /* RNShare.xcodeproj */;
 				},
-				{
-					ProductGroup = 46DBF0471DE386CF006B43B5 /* Products */;
-					ProjectRef = 0D705390BB914269AE72B86B /* RNSpinkit.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1617,13 +1583,6 @@
 			remoteRef = 46B76CB820581DDF00547DA0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		46B76CC120581DDF00547DA0 /* libRNSpinkit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNSpinkit.a;
-			remoteRef = 46B76CC020581DDF00547DA0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		46B76D0A20581F1A00547DA0 /* libReactNativePermissions.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1643,13 +1602,6 @@
 			fileType = archive.ar;
 			path = libRNImagePicker.a;
 			remoteRef = 46D05B4D1E5F071300350745 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		46DBF04B1DE386CF006B43B5 /* libRNSpinkit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNSpinkit.a;
-			remoteRef = 46DBF04A1DE386CF006B43B5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		46FD05CF1ED34C1B001173CC /* libFirestack.a */ = {
@@ -2830,7 +2782,6 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
-					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
@@ -2901,7 +2852,6 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
-					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
@@ -3105,7 +3055,6 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
-					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
@@ -3180,7 +3129,6 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
-					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
@@ -3505,7 +3453,6 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
-					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
@@ -3579,7 +3526,6 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
-					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
