@@ -204,9 +204,6 @@
 		46564FC025349038004A752F /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46564F8C2534900F004A752F /* libRCTOneSignal.a */; };
 		4658C25A1DFF25020063E371 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46668FAE1DFB3875002ECF64 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
-		466E44C922D3B08D002957AD /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 466E44BE22D3B080002957AD /* libRNCWebView.a */; };
-		466E44CA22D3B095002957AD /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 466E44BE22D3B080002957AD /* libRNCWebView.a */; };
-		466E44CB22D3B09D002957AD /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 466E44BE22D3B080002957AD /* libRNCWebView.a */; };
 		4675EBF31ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
 		4675EBF41ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
 		4675EBF51ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
@@ -453,13 +450,6 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
-		466E44BD22D3B080002957AD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 466E448A22D3B080002957AD /* RNCWebView.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNCWebView;
-		};
 		468B52981E57272000A4E6B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D4DD84D58E0F4CCBA2E32688 /* React Native Open Settings.xcodeproj */;
@@ -653,7 +643,6 @@
 		4649D92A233BD49D00674DAF /* MessageSignerActionBeta-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MessageSignerActionBeta-Info.plist"; sourceTree = "<group>"; };
 		4649D92C233BD4B500674DAF /* MessageSignerActionProduction-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MessageSignerActionProduction-Info.plist"; sourceTree = "<group>"; };
 		46564F762534900F004A752F /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
-		466E448A22D3B080002957AD /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCWebView.xcodeproj; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; };
 		4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDFirebaseConfig.m; sourceTree = "<group>"; };
 		4675EBF61ECCB947004C8A69 /* MUDFirebaseConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUDFirebaseConfig.h; sourceTree = "<group>"; };
 		467749AE20160362001717E1 /* MudamosPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MudamosPayload.swift; sourceTree = "<group>"; };
@@ -776,7 +765,6 @@
 				46564FBE2534901C004A752F /* libRCTOneSignal.a in Frameworks */,
 				46C50D8924BE056000A77090 /* libRCTFBSDK.a in Frameworks */,
 				4644DB1324BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */,
-				466E44C922D3B08D002957AD /* libRNCWebView.a in Frameworks */,
 				46A05DF922CFE72200F757D9 /* JavaScriptCore.framework in Frameworks */,
 				46BF09FE206025B000C5C095 /* libAirMaps.a in Frameworks */,
 				46B76D2D2058230300547DA0 /* libRCTUserDefaults.a in Frameworks */,
@@ -1050,14 +1038,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		466E448B22D3B080002957AD /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				466E44BE22D3B080002957AD /* libRNCWebView.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4675EBD01ECCB8BF004C8A69 /* MUDFirebase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1227,7 +1207,6 @@
 			isa = PBXGroup;
 			children = (
 				46564F762534900F004A752F /* RCTOneSignal.xcodeproj */,
-				466E448A22D3B080002957AD /* RNCWebView.xcodeproj */,
 				46BF09C1206025A200C5C095 /* AirMaps.xcodeproj */,
 				4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */,
 				0D705390BB914269AE72B86B /* RNSpinkit.xcodeproj */,
@@ -1616,10 +1595,6 @@
 					ProjectRef = 9F197207E38141BA967BA639 /* ReactNativePermissions.xcodeproj */;
 				},
 				{
-					ProductGroup = 466E448B22D3B080002957AD /* Products */;
-					ProjectRef = 466E448A22D3B080002957AD /* RNCWebView.xcodeproj */;
-				},
-				{
 					ProductGroup = 4623C3C91E00818500158849 /* Products */;
 					ProjectRef = 1BDA6C103B4A4B678E5DC06B /* RNDeviceInfo.xcodeproj */;
 				},
@@ -1730,13 +1705,6 @@
 			fileType = archive.ar;
 			path = libRCTFBSDK.a;
 			remoteRef = 46672CE124BDFD3400C64ED7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		466E44BE22D3B080002957AD /* libRNCWebView.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNCWebView.a;
-			remoteRef = 466E44BD22D3B080002957AD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */ = {
