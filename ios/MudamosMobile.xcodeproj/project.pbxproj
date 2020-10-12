@@ -197,7 +197,6 @@
 		46564FBE2534901C004A752F /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46564F8C2534900F004A752F /* libRCTOneSignal.a */; };
 		46564FBF25349026004A752F /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46564F8C2534900F004A752F /* libRCTOneSignal.a */; };
 		46564FC025349038004A752F /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46564F8C2534900F004A752F /* libRCTOneSignal.a */; };
-		4658C25A1DFF25020063E371 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46668FAE1DFB3875002ECF64 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
 		4675EBF31ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
 		4675EBF41ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
@@ -225,9 +224,7 @@
 		46A05DFC22CFE74F00F757D9 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A05DB522CFE72200F757D9 /* JavaScriptCore.framework */; };
 		46A2BA9D201233D4006EFFBB /* MessageSignerActionBeta.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 46B86B6920123271009E643E /* MessageSignerActionBeta.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		46B76D232058228A00547DA0 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
-		46B76D242058229400547DA0 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46B76D2F2058233800547DA0 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
-		46B76D302058234200547DA0 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46B86B6020123271009E643E /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9602920122E5D00D5AEB9 /* ActionViewController.swift */; };
 		46B86B6420123271009E643E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */; };
 		46C00F0E1EBB5681006F17F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */; };
@@ -342,26 +339,12 @@
 			remoteGlobalIDString = 3245CDED1BFEE35C00EABF68;
 			remoteInfo = RCTOneSignal;
 		};
-		4658C2561DFF24EB0063E371 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 73EEC9391BFE4B1D00D468EB;
-			remoteInfo = RNRandomBytes;
-		};
 		46668F9D1DFB35F7002ECF64 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 97451B22B8FD4C2CB64542DB /* RCTMaterialKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8A1B8E771B22E4E300DB45C2;
 			remoteInfo = RCTMaterialKit;
-		};
-		46A05DF322CFE72200F757D9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 163CDE4E2087CAD3001065FB;
-			remoteInfo = "RNRandomBytes-tvOS";
 		};
 		46A2BA9E201233D4006EFFBB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -528,14 +511,12 @@
 		9B5E533F39E44066933C7E40 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		9E03105BDAAC5A0BB5ADB6DB /* Pods-MessageSignerActionBeta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerActionBeta.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerActionBeta/Pods-MessageSignerActionBeta.release.xcconfig"; sourceTree = "<group>"; };
 		9F016C18A1E94D748F17680C /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNRandomBytes.xcodeproj; path = "../node_modules/react-native-randombytes/RNRandomBytes.xcodeproj"; sourceTree = "<group>"; };
 		AAFC20247486915F58C3D1A4 /* Pods-MessageSignerAction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerAction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerAction/Pods-MessageSignerAction.debug.xcconfig"; sourceTree = "<group>"; };
 		B15E59AB4D564186AE6276F2 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		BB620C49F665BCB96048640D /* Pods-MudamosMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile.release.xcconfig"; sourceTree = "<group>"; };
 		C31184017F8613138D7E49E4 /* Pods-MudamosProduction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosProduction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosProduction/Pods-MudamosProduction.debug.xcconfig"; sourceTree = "<group>"; };
 		CB358AEDAED7A7D4E7C8E06C /* Pods_MudamosMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6443B90852D3BE7AB57D2A1 /* Pods-MessageSignerActionProduction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerActionProduction.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerActionProduction/Pods-MessageSignerActionProduction.release.xcconfig"; sourceTree = "<group>"; };
-		D8424FEEF17243CFB758995F /* libRNRandomBytes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRandomBytes.a; sourceTree = "<group>"; };
 		DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E26FDBD24B0A4D90A5A1EB13 /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTMaterialKit.a; sourceTree = "<group>"; };
 		E5572CE9DA3D411E8DF2CBBB /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -564,7 +545,6 @@
 				46564FBE2534901C004A752F /* libRCTOneSignal.a in Frameworks */,
 				4644DB1324BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */,
 				46A05DF922CFE72200F757D9 /* JavaScriptCore.framework in Frameworks */,
-				46B76D242058229400547DA0 /* libRNRandomBytes.a in Frameworks */,
 				46B76D232058228A00547DA0 /* libRCTMaterialKit.a in Frameworks */,
 				4644DB1924BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */,
 				4644DB1624BE16F000C10281 /* FBSDKLoginKit.framework in Frameworks */,
@@ -747,15 +727,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4658C23C1DFF24EA0063E371 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */,
-				46A05DF422CFE72200F757D9 /* libRNRandomBytes-tvOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		46668F911DFB35F7002ECF64 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -869,7 +840,6 @@
 			children = (
 				46564F762534900F004A752F /* RCTOneSignal.xcodeproj */,
 				97451B22B8FD4C2CB64542DB /* RCTMaterialKit.xcodeproj */,
-				A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1204,10 +1174,6 @@
 					ProductGroup = 46564F772534900F004A752F /* Products */;
 					ProjectRef = 46564F762534900F004A752F /* RCTOneSignal.xcodeproj */;
 				},
-				{
-					ProductGroup = 4658C23C1DFF24EA0063E371 /* Products */;
-					ProjectRef = A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1228,13 +1194,6 @@
 			fileType = archive.ar;
 			path = libRCTOneSignal.a;
 			remoteRef = 46564F8B2534900F004A752F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNRandomBytes.a;
-			remoteRef = 4658C2561DFF24EB0063E371 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */ = {
@@ -2437,7 +2396,6 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
-					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
@@ -2497,7 +2455,6 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
-					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = MudamosMobile/Info.plist;
@@ -2690,7 +2647,6 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
-					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = MudamosMobile/InfoMudamosProduction.plist;
@@ -2754,7 +2710,6 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
-					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = MudamosMobile/InfoMudamosProduction.plist;
@@ -3068,7 +3023,6 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
-					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
@@ -3131,7 +3085,6 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
-					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MudamosMobile/InfoTagviewBeta.plist";
