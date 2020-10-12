@@ -200,8 +200,6 @@
 		4644DB1924BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DB1224BE16F000C10281 /* FBSDKCoreKit.framework */; };
 		4644DB1A24BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DB1224BE16F000C10281 /* FBSDKCoreKit.framework */; };
 		4644DB1B24BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DB1224BE16F000C10281 /* FBSDKCoreKit.framework */; };
-		4649D92B233BD49D00674DAF /* MessageSignerActionBeta-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4649D92A233BD49D00674DAF /* MessageSignerActionBeta-Info.plist */; };
-		4649D92D233BD4B500674DAF /* MessageSignerActionProduction-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4649D92C233BD4B500674DAF /* MessageSignerActionProduction-Info.plist */; };
 		46564FBE2534901C004A752F /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46564F8C2534900F004A752F /* libRCTOneSignal.a */; };
 		46564FBF25349026004A752F /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46564F8C2534900F004A752F /* libRCTOneSignal.a */; };
 		46564FC025349038004A752F /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46564F8C2534900F004A752F /* libRCTOneSignal.a */; };
@@ -227,7 +225,6 @@
 		467749DC2016232A001717E1 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467749D92016232A001717E1 /* Bool.swift */; };
 		468261211EBA7E330044D471 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
 		468261421EBA7E3C0044D471 /* libRNFirebaseCrashReport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4632072F1EBA795C00778DCC /* libRNFirebaseCrashReport.a */; };
-		4684B111233BCFF600CFBC63 /* InfoMudamosProduction.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4684B110233BCFF500CFBC63 /* InfoMudamosProduction.plist */; };
 		468B52A31E57273200A4E6B6 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468B52991E57272000A4E6B6 /* libReact Native Open Settings.a */; };
 		46918CE11E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
 		46918CE21E26989000AF78FF /* pt_sans_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46918CDD1E26989000AF78FF /* pt_sans_bold_italic.ttf */; };
@@ -280,7 +277,6 @@
 		46B76D362058238400547DA0 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
 		46B86B6020123271009E643E /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9602920122E5D00D5AEB9 /* ActionViewController.swift */; };
 		46B86B6420123271009E643E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */; };
-		46BD9FDC1DF1A0E600366372 /* InfoTagviewBeta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */; };
 		46BF09FE206025B000C5C095 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BF09C6206025A200C5C095 /* libAirMaps.a */; };
 		46BF09FF206025B600C5C095 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BF09C6206025A200C5C095 /* libAirMaps.a */; };
 		46BF0A00206025BC00C5C095 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BF09C6206025A200C5C095 /* libAirMaps.a */; };
@@ -1530,7 +1526,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 920;
-				LastUpgradeCheck = 610;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = ITS;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -1957,7 +1953,6 @@
 			files = (
 				460CEDD42016661F008ECD65 /* lato_black.ttf in Resources */,
 				460CEDD02016661F008ECD65 /* pt_sans_bold.ttf in Resources */,
-				4649D92D233BD4B500674DAF /* MessageSignerActionProduction-Info.plist in Resources */,
 				460CEDC82016661F008ECD65 /* roboto_light_italic.ttf in Resources */,
 				460CEDC62016661F008ECD65 /* roboto_bold.ttf in Resources */,
 				460CEDCA2016661F008ECD65 /* roboto_medium_italic.ttf in Resources */,
@@ -2000,7 +1995,6 @@
 				46439D5F1E709B03008577C0 /* lato_italic.ttf in Resources */,
 				46439D601E709B03008577C0 /* lato_hairline.ttf in Resources */,
 				46439D611E709B03008577C0 /* roboto_bold.ttf in Resources */,
-				4684B111233BCFF600CFBC63 /* InfoMudamosProduction.plist in Resources */,
 				46439D621E709B03008577C0 /* LaunchScreen.xib in Resources */,
 				46439D631E709B03008577C0 /* Entypo.ttf in Resources */,
 				46439D641E709B03008577C0 /* pt_sans.ttf in Resources */,
@@ -2048,7 +2042,6 @@
 				460CEDAE2016661F008ECD65 /* roboto_light_italic.ttf in Resources */,
 				460CEDAC2016661F008ECD65 /* roboto_bold.ttf in Resources */,
 				460CEDB02016661F008ECD65 /* roboto_medium_italic.ttf in Resources */,
-				4649D92B233BD49D00674DAF /* MessageSignerActionBeta-Info.plist in Resources */,
 				460CEDBE2016661F008ECD65 /* lato_hairline.ttf in Resources */,
 				460CEDAA2016661F008ECD65 /* roboto_black.ttf in Resources */,
 				460CEDAF2016661F008ECD65 /* roboto_light.ttf in Resources */,
@@ -2122,7 +2115,6 @@
 				46CBB3661E268E52000B4F5A /* lato_bold_italic.ttf in Resources */,
 				46F35B6B1E269C810002728D /* roboto_medium.ttf in Resources */,
 				46ED2A821DF194E400B36CD0 /* Images.xcassets in Resources */,
-				46BD9FDC1DF1A0E600366372 /* InfoTagviewBeta.plist in Resources */,
 				46CBB3701E268E52000B4F5A /* lato_light_italic.ttf in Resources */,
 				46F35B651E269C810002728D /* roboto_light_italic.ttf in Resources */,
 				46CBB3681E268E52000B4F5A /* lato_bold.ttf in Resources */,
@@ -3005,6 +2997,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MudamosMobile.app/MudamosMobile";
 			};
@@ -3021,6 +3014,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MudamosMobile.app/MudamosMobile";
 			};
@@ -3869,20 +3863,33 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -3933,13 +3940,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3947,6 +3965,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -3978,6 +3997,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
