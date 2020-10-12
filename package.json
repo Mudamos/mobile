@@ -30,7 +30,8 @@
     "reset-adb": "adb kill-server; sleep 2; adb start-server && adb reverse tcp:8081 tcp:8081 && adb devices",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "mocha --compilers js:babel-core/register --require spec/support.js 'spec/**/*.spec.js'",
-    "install-facebook-ios-sdk": "bin/install-facebook-ios-sdk"
+    "install-facebook-ios-sdk": "bin/install-facebook-ios-sdk",
+    "fix-xcode-12-valid-archs": "find node_modules/ -name \"project.pbxproj\" -exec sed -i '' '/VALID_ARCHS/d' {} +"
   },
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^1.1.2",

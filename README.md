@@ -254,3 +254,11 @@ Agora gere o html,
 ```
 $ yarn run generate-ios-action-sign-html
 ```
+
+### Troubleshooting
+
+#### Fix VALID_ARCHS for Xcode 12
+
+```
+$ yarn run fix-xcode-12-valid-archs
+```
