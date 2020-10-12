@@ -266,9 +266,6 @@
 		46B76D362058238400547DA0 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D05B4E1E5F071300350745 /* libRNImagePicker.a */; };
 		46B86B6020123271009E643E /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9602920122E5D00D5AEB9 /* ActionViewController.swift */; };
 		46B86B6420123271009E643E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46E9602B20122E5D00D5AEB9 /* MainInterface.storyboard */; };
-		46BF09FE206025B000C5C095 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BF09C6206025A200C5C095 /* libAirMaps.a */; };
-		46BF09FF206025B600C5C095 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BF09C6206025A200C5C095 /* libAirMaps.a */; };
-		46BF0A00206025BC00C5C095 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BF09C6206025A200C5C095 /* libAirMaps.a */; };
 		46C00F0E1EBB5681006F17F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */; };
 		46C00F101EBB56FA006F17F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C00F0F1EBB56FA006F17F1 /* GoogleService-Info.plist */; };
 		46CBB3611E268E52000B4F5A /* lato_black_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */; };
@@ -489,13 +486,6 @@
 			remoteGlobalIDString = 9D23B34F1C767B80008B4819;
 			remoteInfo = ReactNativePermissions;
 		};
-		46BF09C5206025A200C5C095 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 46BF09C1206025A200C5C095 /* AirMaps.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
-			remoteInfo = AirMaps;
-		};
 		46C0AB471DD5E40600447C6C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */;
@@ -585,7 +575,6 @@
 		0B04C0F7DF104E1F802EB2E1 /* RNFirebaseCrashReport.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebaseCrashReport.xcodeproj; path = "../node_modules/react-native-firebase-crash-report/ios/RNFirebaseCrashReport.xcodeproj"; sourceTree = "<group>"; };
 		0D705390BB914269AE72B86B /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		0F2DC68A75BF46FBBA40FCDC /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
-		1082FEFEA6B34CF8A23BF45D /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		10E569BB49504C0E8E0A286A /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* MudamosMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MudamosMobile/AppDelegate.h; sourceTree = "<group>"; };
@@ -648,7 +637,6 @@
 		46B86B6920123271009E643E /* MessageSignerActionBeta.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionBeta.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		46BAB489202240CC0068CE6F /* MessageSignerActionProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageSignerActionProduction.entitlements; sourceTree = "<group>"; };
 		46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InfoTagviewBeta.plist; path = MudamosMobile/InfoTagviewBeta.plist; sourceTree = "<group>"; };
-		46BF09C1206025A200C5C095 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		46C00F0D1EBB5681006F17F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/development/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46C00F0F1EBB56FA006F17F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/mudamos-beta/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato_black_italic.ttf; sourceTree = "<group>"; };
@@ -753,7 +741,6 @@
 				46564FBE2534901C004A752F /* libRCTOneSignal.a in Frameworks */,
 				4644DB1324BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */,
 				46A05DF922CFE72200F757D9 /* JavaScriptCore.framework in Frameworks */,
-				46BF09FE206025B000C5C095 /* libAirMaps.a in Frameworks */,
 				46B76D2D2058230300547DA0 /* libRCTUserDefaults.a in Frameworks */,
 				46B76D2C205822F800547DA0 /* libFirestack.a in Frameworks */,
 				46B76D2B205822EF00547DA0 /* libRNFirebaseCrashReport.a in Frameworks */,
@@ -1046,14 +1033,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		46BF09C2206025A200C5C095 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				46BF09C6206025A200C5C095 /* libAirMaps.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		46C0AB251DD5E40600447C6C /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1186,7 +1165,6 @@
 			isa = PBXGroup;
 			children = (
 				46564F762534900F004A752F /* RCTOneSignal.xcodeproj */,
-				46BF09C1206025A200C5C095 /* AirMaps.xcodeproj */,
 				4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */,
 				0D705390BB914269AE72B86B /* RNSpinkit.xcodeproj */,
 				05CE97551B064F0BBF41E711 /* RNVectorIcons.xcodeproj */,
@@ -1529,10 +1507,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 46BF09C2206025A200C5C095 /* Products */;
-					ProjectRef = 46BF09C1206025A200C5C095 /* AirMaps.xcodeproj */;
-				},
-				{
 					ProductGroup = 463C8EB21E08419900E79749 /* Products */;
 					ProjectRef = 6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */;
 				},
@@ -1714,13 +1688,6 @@
 			fileType = archive.ar;
 			path = libReactNativePermissions.a;
 			remoteRef = 46B76D0920581F1A00547DA0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		46BF09C6206025A200C5C095 /* libAirMaps.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libAirMaps.a;
-			remoteRef = 46BF09C5206025A200C5C095 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		46C0AB481DD5E40600447C6C /* libReactNativeConfig.a */ = {
