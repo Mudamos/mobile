@@ -235,9 +235,6 @@
 		46B76D1420581F5000547DA0 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B76D0A20581F1A00547DA0 /* libReactNativePermissions.a */; };
 		46B76D1520581F7200547DA0 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B76D0A20581F1A00547DA0 /* libReactNativePermissions.a */; };
 		46B76D162058202E00547DA0 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B76D0A20581F1A00547DA0 /* libReactNativePermissions.a */; };
-		46B76D172058212800547DA0 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C0AB481DD5E40600447C6C /* libReactNativeConfig.a */; };
-		46B76D182058214500547DA0 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C0AB481DD5E40600447C6C /* libReactNativeConfig.a */; };
-		46B76D192058215200547DA0 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C0AB481DD5E40600447C6C /* libReactNativeConfig.a */; };
 		46B76D232058228A00547DA0 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46668F9E1DFB35F7002ECF64 /* libRCTMaterialKit.a */; };
 		46B76D242058229400547DA0 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4658C2571DFF24EB0063E371 /* libRNRandomBytes.a */; };
 		46B76D252058229D00547DA0 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623C3E31E00818500158849 /* libRNDeviceInfo.a */; };
@@ -463,13 +460,6 @@
 			remoteGlobalIDString = 9D23B34F1C767B80008B4819;
 			remoteInfo = ReactNativePermissions;
 		};
-		46C0AB471DD5E40600447C6C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
-			remoteInfo = ReactNativeConfig;
-		};
 		46D05B4D1E5F071300350745 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 76EF07E9C40448AAAE91E27F /* RNImagePicker.xcodeproj */;
@@ -632,7 +622,6 @@
 		46F35B591E269C800002728D /* roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = roboto.ttf; sourceTree = "<group>"; };
 		4CE658E76DACD7F18D5A1961 /* Pods_MudamosMobile_MudamosMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MudamosMobile_MudamosMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB5F27F75FA40E7B12ACE07 /* libReact Native Open Settings.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libReact Native Open Settings.a"; sourceTree = "<group>"; };
-		4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		52CFEA4AA81E45E9A3978748 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		52DA54ECA1B1B2C6DD060E83 /* Pods-MudamosMobile-MudamosMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile-MudamosMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile-MudamosMobileTests/Pods-MudamosMobile-MudamosMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		5B984827EF456536636B8D2D /* Pods-MudamosProduction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosProduction.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosProduction/Pods-MudamosProduction.release.xcconfig"; sourceTree = "<group>"; };
@@ -656,7 +645,6 @@
 		A8ECEA6C6F4D44C68E112068 /* libRCTUserDefaults.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTUserDefaults.a; sourceTree = "<group>"; };
 		AAFC20247486915F58C3D1A4 /* Pods-MessageSignerAction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageSignerAction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessageSignerAction/Pods-MessageSignerAction.debug.xcconfig"; sourceTree = "<group>"; };
 		B15E59AB4D564186AE6276F2 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		B55C452B89744C8C88F648C4 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		B5AA2BE2727F416DA6981B84 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
 		BA2512E0E9D946D691598029 /* RCTUserDefaults.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTUserDefaults.xcodeproj; path = "../node_modules/react-native-user-defaults/RCTUserDefaults.xcodeproj"; sourceTree = "<group>"; };
 		BB620C49F665BCB96048640D /* Pods-MudamosMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MudamosMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-MudamosMobile/Pods-MudamosMobile.release.xcconfig"; sourceTree = "<group>"; };
@@ -708,7 +696,6 @@
 				46B76D252058229D00547DA0 /* libRNDeviceInfo.a in Frameworks */,
 				46B76D242058229400547DA0 /* libRNRandomBytes.a in Frameworks */,
 				46B76D232058228A00547DA0 /* libRCTMaterialKit.a in Frameworks */,
-				46B76D182058214500547DA0 /* libReactNativeConfig.a in Frameworks */,
 				46B76D1520581F7200547DA0 /* libReactNativePermissions.a in Frameworks */,
 				4644DB1924BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */,
 				4644DB1624BE16F000C10281 /* FBSDKLoginKit.framework in Frameworks */,
@@ -979,14 +966,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		46C0AB251DD5E40600447C6C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				46C0AB481DD5E40600447C6C /* libReactNativeConfig.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		46C5FFFE1F7996AA00D0A974 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -1094,7 +1073,6 @@
 			isa = PBXGroup;
 			children = (
 				46564F762534900F004A752F /* RCTOneSignal.xcodeproj */,
-				4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */,
 				97451B22B8FD4C2CB64542DB /* RCTMaterialKit.xcodeproj */,
 				A4A8F411DC404B74BB451AE6 /* RNRandomBytes.xcodeproj */,
 				1BDA6C103B4A4B678E5DC06B /* RNDeviceInfo.xcodeproj */,
@@ -1457,10 +1435,6 @@
 					ProjectRef = D4DD84D58E0F4CCBA2E32688 /* React Native Open Settings.xcodeproj */;
 				},
 				{
-					ProductGroup = 46C0AB251DD5E40600447C6C /* Products */;
-					ProjectRef = 4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */;
-				},
-				{
 					ProductGroup = 46B76CDF20581F1A00547DA0 /* Products */;
 					ProjectRef = 9F197207E38141BA967BA639 /* ReactNativePermissions.xcodeproj */;
 				},
@@ -1588,13 +1562,6 @@
 			fileType = archive.ar;
 			path = libReactNativePermissions.a;
 			remoteRef = 46B76D0920581F1A00547DA0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		46C0AB481DD5E40600447C6C /* libReactNativeConfig.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libReactNativeConfig.a;
-			remoteRef = 46C0AB471DD5E40600447C6C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		46D05B4E1E5F071300350745 /* libRNImagePicker.a */ = {
@@ -2781,7 +2748,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
@@ -2851,7 +2817,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
@@ -3054,7 +3019,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
@@ -3128,7 +3092,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
@@ -3452,7 +3415,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
@@ -3525,7 +3487,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
