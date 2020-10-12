@@ -236,9 +236,6 @@
 		46A05DFC22CFE74F00F757D9 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A05DB522CFE72200F757D9 /* JavaScriptCore.framework */; };
 		46A1DFCD24BDFDBD001BDE68 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46672CE224BDFD3400C64ED7 /* libRCTFBSDK.a */; };
 		46A2BA9D201233D4006EFFBB /* MessageSignerActionBeta.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 46B86B6920123271009E643E /* MessageSignerActionBeta.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		46AE0BA222D3CD5500D39CFA /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AE0B9622D3CD4700D39CFA /* libRNCAsyncStorage.a */; };
-		46AE0BA322D3CD6200D39CFA /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AE0B9622D3CD4700D39CFA /* libRNCAsyncStorage.a */; };
-		46AE0BA422D3CD6C00D39CFA /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AE0B9622D3CD4700D39CFA /* libRNCAsyncStorage.a */; };
 		46B76D1420581F5000547DA0 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B76D0A20581F1A00547DA0 /* libReactNativePermissions.a */; };
 		46B76D1520581F7200547DA0 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B76D0A20581F1A00547DA0 /* libReactNativePermissions.a */; };
 		46B76D162058202E00547DA0 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B76D0A20581F1A00547DA0 /* libReactNativePermissions.a */; };
@@ -484,13 +481,6 @@
 			remoteGlobalIDString = 46B86B5D20123271009E643E;
 			remoteInfo = MessageSignerActionBeta;
 		};
-		46AE0B9522D3CD4700D39CFA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 46AE0B6022D3CD4700D39CFA /* RNCAsyncStorage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNCAsyncStorage;
-		};
 		46B76C8F20581DDF00547DA0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6BF6EDA4C34140538D9B92B9 /* BVLinearGradient.xcodeproj */;
@@ -676,7 +666,6 @@
 		46918CE01E26989000AF78FF /* pt_sans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt_sans.ttf; sourceTree = "<group>"; };
 		46A05DB522CFE72200F757D9 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		46AA978D1E9BBCD200B76B3F /* MudamosMobileTagviewBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MudamosMobileTagviewBeta.entitlements; sourceTree = "<group>"; };
-		46AE0B6022D3CD4700D39CFA /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		46B86B6920123271009E643E /* MessageSignerActionBeta.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageSignerActionBeta.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		46BAB489202240CC0068CE6F /* MessageSignerActionProduction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageSignerActionProduction.entitlements; sourceTree = "<group>"; };
 		46BD9FDB1DF1A0E600366372 /* InfoTagviewBeta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InfoTagviewBeta.plist; path = MudamosMobile/InfoTagviewBeta.plist; sourceTree = "<group>"; };
@@ -786,7 +775,6 @@
 			files = (
 				46564FBE2534901C004A752F /* libRCTOneSignal.a in Frameworks */,
 				46C50D8924BE056000A77090 /* libRCTFBSDK.a in Frameworks */,
-				46AE0BA222D3CD5500D39CFA /* libRNCAsyncStorage.a in Frameworks */,
 				4644DB1324BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */,
 				466E44C922D3B08D002957AD /* libRNCWebView.a in Frameworks */,
 				46A05DF922CFE72200F757D9 /* JavaScriptCore.framework in Frameworks */,
@@ -1091,14 +1079,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		46AE0B6122D3CD4700D39CFA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				46AE0B9622D3CD4700D39CFA /* libRNCAsyncStorage.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		46B76CDF20581F1A00547DA0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1247,7 +1227,6 @@
 			isa = PBXGroup;
 			children = (
 				46564F762534900F004A752F /* RCTOneSignal.xcodeproj */,
-				46AE0B6022D3CD4700D39CFA /* RNCAsyncStorage.xcodeproj */,
 				466E448A22D3B080002957AD /* RNCWebView.xcodeproj */,
 				46BF09C1206025A200C5C095 /* AirMaps.xcodeproj */,
 				4FE2169637FE40188168F6C0 /* ReactNativeConfig.xcodeproj */,
@@ -1637,10 +1616,6 @@
 					ProjectRef = 9F197207E38141BA967BA639 /* ReactNativePermissions.xcodeproj */;
 				},
 				{
-					ProductGroup = 46AE0B6122D3CD4700D39CFA /* Products */;
-					ProjectRef = 46AE0B6022D3CD4700D39CFA /* RNCAsyncStorage.xcodeproj */;
-				},
-				{
 					ProductGroup = 466E448B22D3B080002957AD /* Products */;
 					ProjectRef = 466E448A22D3B080002957AD /* RNCWebView.xcodeproj */;
 				},
@@ -1776,13 +1751,6 @@
 			fileType = archive.ar;
 			path = "libRNRandomBytes-tvOS.a";
 			remoteRef = 46A05DF322CFE72200F757D9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		46AE0B9622D3CD4700D39CFA /* libRNCAsyncStorage.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNCAsyncStorage.a;
-			remoteRef = 46AE0B9522D3CD4700D39CFA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		46B76C9020581DDF00547DA0 /* libBVLinearGradient.a */ = {
