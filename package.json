@@ -72,7 +72,7 @@
     "react-native-linear-gradient": "^2.4.0",
     "react-native-maps": "0.24.2",
     "react-native-material-kit": "https://github.com/itsriodejaneiro/react-native-material-kit.git#mudamos",
-    "react-native-onesignal": "3.2.14",
+    "react-native-onesignal": "3.9.1",
     "react-native-open-settings": "https://github.com/itsriodejaneiro/react-native-open-settings.git#952440d",
     "react-native-permissions": "^1.1.1",
     "react-native-randombytes": "^3.5.3",
