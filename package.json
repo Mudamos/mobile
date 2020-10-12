@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": "8.9.x",
+    "node": "10.22.x",
     "yarn": "^1.2.4"
   },
   "scripts": {
@@ -20,15 +20,15 @@
     "install-android-beta": "ENVFILE=.env.beta android/gradlew -p android installMudamosBetaRelease",
     "install-android-production": "ENVFILE=.env.production android/gradlew -p android installProductionRelease",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
-    "ios-4s-beta": "node node_modules/react-native/local-cli/cli.js run-ios --simulator='iPhone 4s' --scheme MudamosMobileBeta",
-    "ios-se-beta": "node node_modules/react-native/local-cli/cli.js run-ios --simulator='iPhone SE iOS 10' --scheme MudamosMobileBeta",
-    "ios-4s-dev": "node node_modules/react-native/local-cli/cli.js run-ios --simulator='iPhone 4s' --scheme MudamosMobile",
-    "ios-beta": "node node_modules/react-native/local-cli/cli.js run-ios --scheme MudamosMobileBeta",
+    "ios-4s-beta": "react-native run-ios --simulator='iPhone 4s' --scheme MudamosMobileBeta",
+    "ios-se-beta": "react-native run-ios --simulator='iPhone SE iOS 10' --scheme MudamosMobileBeta",
+    "ios-4s-dev": "react-native run-ios --simulator='iPhone 4s' --scheme MudamosMobile",
+    "ios-beta": "react-native run-ios --scheme MudamosMobileBeta",
     "lint": "eslint src/ main.*.js index.js",
     "list-ios-simulators": "xcrun simctl list devices",
     "postinstall": "./node_modules/.bin/rn-nodeify -y --install vm,buffer,stream,events,crypto,assert,process,react-native-randombytes,react-native-crypto --hack; jetify",
     "reset-adb": "adb kill-server; sleep 2; adb start-server && adb reverse tcp:8081 tcp:8081 && adb devices",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "react-native start",
     "test": "mocha --compilers js:babel-core/register --require spec/support.js 'spec/**/*.spec.js'",
     "install-facebook-ios-sdk": "bin/install-facebook-ios-sdk",
     "fix-xcode-12-valid-archs": "find node_modules/ -name \"project.pbxproj\" -exec sed -i '' '/VALID_ARCHS/d' {} +"
@@ -53,9 +53,9 @@
     "process": "^0.11.9",
     "prop-types": "^15.6.1",
     "ramda": "0.26.1",
-    "react": "16.8.3",
+    "react": "16.11.0",
     "react-addons-shallow-compare": "15.6.2",
-    "react-native": "0.59.10",
+    "react-native": "0.62.2",
     "react-native-animatable": "^1.1.0",
     "react-native-animate-number": "^0.1.2",
     "react-native-collapsible": "^0.13.0",
@@ -100,19 +100,20 @@
     "preset": "jest-react-native"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/runtime": "^7.4.5",
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "@react-native-community/eslint-config": "^0.0.5",
     "babel-eslint": "^7.1.1",
-    "babel-jest": "^24.8.0",
+    "babel-jest": "^24.9.0",
     "chai": "^4.1.2",
-    "eslint": "^4.19.0",
+    "eslint": "^6.5.1",
     "eslint-plugin-react": "^7.7.0",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "jest-react-native": "18.0.0",
     "jetifier": "^1.6.6",
-    "metro-react-native-babel-preset": "^0.54.1",
+    "metro-react-native-babel-preset": "^0.58.0",
     "mocha": "^5.0.4",
-    "react-test-renderer": "16.8.3",
+    "react-test-renderer": "16.11.0",
     "rn-nodeify": "^10.0.1"
   },
   "eslintConfig": {
@@ -136,7 +137,8 @@
     },
     "extends": [
       "eslint:recommended",
-      "plugin:react/recommended"
+      "plugin:react/recommended",
+      "@react-native-community"
     ],
     "plugins": [
       "react"
