@@ -50,6 +50,8 @@
     "moment": "^2.16.0",
     "mudamos-libcrypto": "0.6.4",
     "numeral": "^2.0.4",
+    "patch-package": "^6.2.2",
+    "postinstall-postinstall": "^2.1.0",
     "process": "^0.11.9",
     "prop-types": "^15.6.1",
     "ramda": "0.26.1",
