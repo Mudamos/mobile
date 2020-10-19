@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1200"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "NO"
       buildImplicitDependencies = "YES">
@@ -10,7 +10,16 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "echo &quot;.env.beta&quot; &gt; /tmp/envfile">
+               scriptText = "cp ${PROJECT_DIR}/../.env.staging .env&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "46ED2A6B1DF194E400B36CD0"
+                     BuildableName = "MudamosMobileTagviewBeta.app"
+                     BlueprintName = "MudamosMobileTagviewBeta"
+                     ReferencedContainer = "container:MudamosMobile.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
             </ActionContent>
          </ExecutionAction>
       </PreActions>
@@ -23,7 +32,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07039185F7539DBA0728400D9A2BF555"
+               BlueprintIdentifier = "F967E2440F8A8A9178C190FC13DA0985"
                BuildableName = "React"
                BlueprintName = "React"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
