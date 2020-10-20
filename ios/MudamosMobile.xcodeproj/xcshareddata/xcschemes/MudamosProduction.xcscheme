@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cp ${PROJECT_DIR}/../.env.production .env&#10;">
+               scriptText = "exec &gt; ${PROJECT_DIR}/prebuild-production.log 2&gt;&amp;1&#10;echo &quot;Picking env vars .env.production&quot;&#10;cat &quot;${PROJECT_DIR}/../.env.production&quot;&#10;cp &quot;${PROJECT_DIR}/../.env.production&quot; &quot;${PROJECT_DIR}/../.env&quot;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
@@ -32,7 +32,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F967E2440F8A8A9178C190FC13DA0985"
+               BlueprintIdentifier = "ACF61A4FC79ED5FAC44E8E39F09BE17C"
                BuildableName = "React"
                BlueprintName = "React"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">

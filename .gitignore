@@ -84,3 +84,7 @@ android/app/src/production/google-services.json
 # action-sign-generator
 action-sign-generator/output/*
 !action-sign-generator/output/.gitkeep
+
+# React native config pre build env vars log
+ios/prebuild-beta.log
+ios/prebuild-production.log
