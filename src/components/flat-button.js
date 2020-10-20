@@ -66,7 +66,7 @@ export default class MyFlatButton extends Component {
 
     if (enabled) {
       button
-        .withOnPress(this.onPress.bind(this))
+        .withOnPress(this.onPress)
         .withRippleColor("transparent"); // Disabling ripple effect as it does not work on android
     } else {
       button.withRippleColor("transparent")
@@ -78,7 +78,7 @@ export default class MyFlatButton extends Component {
     return button;
   }
 
-  onPress() {
+  onPress = () => {
     const { dismissKeyboardOnPress, onPress } = this.props;
 
     if (dismissKeyboardOnPress) Keyboard.dismiss();
