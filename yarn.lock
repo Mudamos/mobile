@@ -8279,6 +8279,12 @@ rn-nodeify@^10.0.1:
   dependencies:
     "@react-native-community/viewpager" "^3.3.0"
 
+"rn-viewpager@https://github.com/itsriodejaneiro/React-Native-ViewPager.git#801f264":
+  version "1.2.9"
+  resolved "https://github.com/itsriodejaneiro/React-Native-ViewPager.git#801f264f68a8e1f84a8a6762cb722040854007c6"
+  dependencies:
+    "@react-native-community/viewpager" "^3.3.0"
+
 rsvp@^4.8.4:
   version "4.8.5"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
