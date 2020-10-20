@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
+import ListView from "deprecated-react-native-listview";
 import {
-  ListView,
   Text,
   TouchableOpacity,
   View,

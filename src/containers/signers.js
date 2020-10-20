@@ -7,9 +7,7 @@ import {
   reject,
 } from "ramda";
 
-import {
-  ListView,
-} from "react-native";
+import ListView from "deprecated-react-native-listview";
 
 import SignersLayout from "../components/signers-layout";
 

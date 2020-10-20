@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "React";
 
-import { ListView } from "react-native";
+import ListView from "deprecated-react-native-listview";
 
 
 export default class MyListView extends Component {
