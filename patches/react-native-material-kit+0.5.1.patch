@@ -1,0 +1,35 @@
+diff --git a/node_modules/react-native-material-kit/iOS/RCTMaterialKit/MKTouchableManager.m b/node_modules/react-native-material-kit/iOS/RCTMaterialKit/MKTouchableManager.m
+index 146813d..7677c56 100644
+--- a/node_modules/react-native-material-kit/iOS/RCTMaterialKit/MKTouchableManager.m
++++ b/node_modules/react-native-material-kit/iOS/RCTMaterialKit/MKTouchableManager.m
+@@ -8,7 +8,7 @@
+ 
+ #import <React/RCTViewManager.h>
+ #import <React/RCTEventDispatcher.h>
+-#import <UIView+React.h>
++#import <React/UIView+React.h>
+ #import "MKTouchable.h"
+ 
+ @interface MKTouchableManager : RCTViewManager <MKTouchableDelegate>
+@@ -56,7 +56,7 @@ - (void)sendTouchEvent:(NSString*)type touch:(UITouch*)touch source:(MKTouchable
+                            @"x": [NSNumber numberWithFloat:location.x],
+                            @"y": [NSNumber numberWithFloat:location.y],
+                            };
+-    [self.bridge.eventDispatcher sendInputEventWithName:@"topChange" body:dict];
++    [self.bridge enqueueJSCall:@"RCTEventEmitter" method:@"receiveEvent" args:@[dict[@"target"], RCTNormalizeInputEventName(@"topChange"), dict] completion:NULL];
+ }
+ 
+ @end
+diff --git a/node_modules/react-native-material-kit/iOS/RCTMaterialKit/TickViewManager.m b/node_modules/react-native-material-kit/iOS/RCTMaterialKit/TickViewManager.m
+index abaaba7..e4bcdb7 100644
+--- a/node_modules/react-native-material-kit/iOS/RCTMaterialKit/TickViewManager.m
++++ b/node_modules/react-native-material-kit/iOS/RCTMaterialKit/TickViewManager.m
+@@ -7,7 +7,7 @@
+ //
+ 
+ #import <React/RCTViewManager.h>
+-#import <UIView+React.h>
++#import <React/UIView+React.h>
+ #import "TickView.h"
+ 
+ @interface TickViewManager : RCTViewManager
