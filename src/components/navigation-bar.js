@@ -11,7 +11,7 @@ import style from "../styles/navigation-bar";
 
 class NavigationBar extends Component {
   static propTypes = {
-    containerStyle: Animated.View.propTypes.style,
+    containerStyle: PropTypes.any,
     leftView: PropTypes.node,
     middleView: PropTypes.node,
     rightView: PropTypes.node,
