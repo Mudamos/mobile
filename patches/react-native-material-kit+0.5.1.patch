@@ -33,3 +33,146 @@ index abaaba7..e4bcdb7 100644
  #import "TickView.h"
  
  @interface TickViewManager : RCTViewManager
+diff --git a/node_modules/react-native-material-kit/lib/TouchableWithoutFeedback.js b/node_modules/react-native-material-kit/lib/TouchableWithoutFeedback.js
+new file mode 100644
+index 0000000..56b57ab
+--- /dev/null
++++ b/node_modules/react-native-material-kit/lib/TouchableWithoutFeedback.js
+@@ -0,0 +1,48 @@
++import PropTypes from 'prop-types';
++import { TouchableWithoutFeedback } from 'react-native';
++
++class MKTouchableWithoutFeedback extends TouchableWithoutFeedback {
++};
++
++MKTouchableWithoutFeedback.propTypes = {
++    accessible: PropTypes.bool,
++    accessibilityLabel: PropTypes.node,
++    accessibilityHint: PropTypes.string,
++    accessibilityIgnoresInvertColors: PropTypes.bool,
++    accessibilityRole: PropTypes.any,
++    accessibilityState: PropTypes.object,
++    accessibilityActions: PropTypes.array,
++    onAccessibilityAction: PropTypes.func,
++    accessibilityValue: PropTypes.object,
++    accessibilityLiveRegion: PropTypes.oneOf([
++      'none',
++      'polite',
++      'assertive',
++    ]),
++    importantForAccessibility: PropTypes.oneOf([
++      'auto',
++      'yes',
++      'no',
++      'no-hide-descendants',
++    ]),
++    accessibilityViewIsModal: PropTypes.bool,
++    accessibilityElementsHidden: PropTypes.bool,
++    onFocus: PropTypes.func,
++    onBlur: PropTypes.func,
++    disabled: PropTypes.bool,
++    onPress: PropTypes.func,
++    onPressIn: PropTypes.func,
++    onPressOut: PropTypes.func,
++    onLayout: PropTypes.func,
++    touchSoundDisabled: PropTypes.bool,
++    onLongPress: PropTypes.func,
++    nativeID: PropTypes.string,
++    testID: PropTypes.string,
++    delayPressIn: PropTypes.number,
++    delayPressOut: PropTypes.number,
++    delayLongPress: PropTypes.number,
++    pressRetentionOffset: PropTypes.any,
++    hitSlop: PropTypes.any,
++  };
++
++export default MKTouchableWithoutFeedback;
+diff --git a/node_modules/react-native-material-kit/lib/mdl/Button.js b/node_modules/react-native-material-kit/lib/mdl/Button.js
+index 735221f..832855a 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/Button.js
++++ b/node_modules/react-native-material-kit/lib/mdl/Button.js
+@@ -14,8 +14,8 @@ import React, {
+ } from 'react';
+ import PropTypes from 'prop-types';
+ 
++import TouchableWithoutFeedback from '../TouchableWithoutFeedback';
+ import {
+-  TouchableWithoutFeedback,
+   Text,
+ } from 'react-native';
+ 
+diff --git a/node_modules/react-native-material-kit/lib/mdl/Checkbox.js b/node_modules/react-native-material-kit/lib/mdl/Checkbox.js
+index 772f3d5..1fe90bd 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/Checkbox.js
++++ b/node_modules/react-native-material-kit/lib/mdl/Checkbox.js
+@@ -13,9 +13,9 @@ import React, {
+ } from 'react';
+ import PropTypes from 'prop-types';
+ 
++import TouchableWithoutFeedback from '../TouchableWithoutFeedback';
+ import {
+   Animated,
+-  TouchableWithoutFeedback,
+   View,
+ } from 'react-native';
+ 
+diff --git a/node_modules/react-native-material-kit/lib/mdl/IconToggle.js b/node_modules/react-native-material-kit/lib/mdl/IconToggle.js
+index bbda855..3a8765b 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/IconToggle.js
++++ b/node_modules/react-native-material-kit/lib/mdl/IconToggle.js
+@@ -14,9 +14,7 @@ import React, {
+ } from 'react';
+ import PropTypes from 'prop-types';
+ 
+-import {
+-  TouchableWithoutFeedback,
+-} from 'react-native';
++import TouchableWithoutFeedback from '../TouchableWithoutFeedback';
+ 
+ import MKColor from '../MKColor';
+ import Ripple from './Ripple';
+diff --git a/node_modules/react-native-material-kit/lib/mdl/RadioButton.js b/node_modules/react-native-material-kit/lib/mdl/RadioButton.js
+index 171bfc1..6239017 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/RadioButton.js
++++ b/node_modules/react-native-material-kit/lib/mdl/RadioButton.js
+@@ -13,9 +13,9 @@ import React, {
+ } from 'react';
+ import PropTypes from 'prop-types';
+ 
++import TouchableWithoutFeedback from '../TouchableWithoutFeedback';
+ import {
+   Animated,
+-  TouchableWithoutFeedback,
+   View,
+ } from 'react-native';
+ 
+diff --git a/node_modules/react-native-material-kit/lib/mdl/Switch.js b/node_modules/react-native-material-kit/lib/mdl/Switch.js
+index 2df5ee2..18e5a99 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/Switch.js
++++ b/node_modules/react-native-material-kit/lib/mdl/Switch.js
+@@ -16,9 +16,9 @@ import React, {
+ } from 'react';
+ import PropTypes from 'prop-types';
+ 
++import TouchableWithoutFeedback from '../TouchableWithoutFeedback';
+ import {
+   Animated,
+-  TouchableWithoutFeedback,
+   View
+ } from 'react-native';
+ 
+diff --git a/node_modules/react-native-material-kit/lib/utils.js b/node_modules/react-native-material-kit/lib/utils.js
+index 60fc657..af78d39 100644
+--- a/node_modules/react-native-material-kit/lib/utils.js
++++ b/node_modules/react-native-material-kit/lib/utils.js
+@@ -3,9 +3,9 @@
+ // Created by ywu on 15/7/18.
+ //
+ 
++import TouchableWithoutFeedback from './TouchableWithoutFeedback';
+ import {
+   PixelRatio,
+-  TouchableWithoutFeedback,
+   Platform,
+   processColor,
+   View,
