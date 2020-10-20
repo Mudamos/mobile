@@ -1,0 +1,20 @@
+diff --git a/node_modules/react-native-experimental-navigation/.NavigationAnimatedView.js.swp b/node_modules/react-native-experimental-navigation/.NavigationAnimatedView.js.swp
+new file mode 100644
+index 0000000..6d4e3a4
+Binary files /dev/null and b/node_modules/react-native-experimental-navigation/.NavigationAnimatedView.js.swp differ
+diff --git a/node_modules/react-native-experimental-navigation/.package.json.swp b/node_modules/react-native-experimental-navigation/.package.json.swp
+new file mode 100644
+index 0000000..c11055c
+Binary files /dev/null and b/node_modules/react-native-experimental-navigation/.package.json.swp differ
+diff --git a/node_modules/react-native-experimental-navigation/NavigationAnimatedView.js b/node_modules/react-native-experimental-navigation/NavigationAnimatedView.js
+index 9976183..2d9a6ce 100644
+--- a/node_modules/react-native-experimental-navigation/NavigationAnimatedView.js
++++ b/node_modules/react-native-experimental-navigation/NavigationAnimatedView.js
+@@ -55,6 +55,7 @@ function applyDefaultAnimation(
+     {
+       bounciness: 0,
+       toValue: navigationState.index,
++      useNativeDriver: false,
+     }
+   ).start();
+ }
