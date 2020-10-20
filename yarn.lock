@@ -1277,6 +1277,11 @@
     eslint-plugin-react-native "3.6.0"
     prettier "1.16.4"
 
+"@react-native-community/viewpager@^3.3.0":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/viewpager/-/viewpager-3.3.1.tgz#c2c530fb99653252a4272c8cf1bb85dbd1edf57d"
+  integrity sha512-UeCJBS172uCcsiAOLhAOsVjiWsj4YdeM44v0bGik/JXqFoplSmo/SPKFQm5ZQWRjYTckcOL5zkli+WULBwzJgQ==
+
 "@shoutem/animation@^0.12.2":
   version "0.12.2"
   resolved "https://registry.yarnpkg.com/@shoutem/animation/-/animation-0.12.2.tgz#ea64b3d982f3a76e79dc736da6f45a5772cba4a8"
@@ -8225,9 +8230,11 @@ rn-nodeify@^10.0.1:
     semver "^5.0.1"
     xtend "^4.0.0"
 
-rn-viewpager@^1.1.4:
+"rn-viewpager@https://github.com/itsriodejaneiro/React-Native-ViewPager.git#544443c":
   version "1.2.9"
-  resolved "https://registry.yarnpkg.com/rn-viewpager/-/rn-viewpager-1.2.9.tgz#7f06f898e23b296f3b5be7c98bd9101d94427779"
+  resolved "https://github.com/itsriodejaneiro/React-Native-ViewPager.git#544443c791f0332b016304de5a8bb1df6562a291"
+  dependencies:
+    "@react-native-community/viewpager" "^3.3.0"
 
 rsvp@^4.8.4:
   version "4.8.5"

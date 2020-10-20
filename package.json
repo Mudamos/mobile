@@ -92,7 +92,7 @@
     "redux": "^3.6.0",
     "redux-logger": "3.0.6",
     "redux-saga": "0.16.0",
-    "rn-viewpager": "^1.1.4",
+    "rn-viewpager": "https://github.com/itsriodejaneiro/React-Native-ViewPager.git#544443c",
     "sjcl": "^1.0.7",
     "stream-browserify": "^2.0.1",
     "string-mask": "^0.3.0",
