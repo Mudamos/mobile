@@ -109,6 +109,10 @@ index 9a1f47f..2b5dbd9 100644
      this._onRadiiUpdate(nextProps);
    }
  
+diff --git a/node_modules/react-native-material-kit/lib/mdl/.Spinner.ios.js.swp b/node_modules/react-native-material-kit/lib/mdl/.Spinner.ios.js.swp
+new file mode 100644
+index 0000000..2fc7335
+Binary files /dev/null and b/node_modules/react-native-material-kit/lib/mdl/.Spinner.ios.js.swp differ
 diff --git a/node_modules/react-native-material-kit/lib/mdl/Button.js b/node_modules/react-native-material-kit/lib/mdl/Button.js
 index 735221f..832855a 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/Button.js
@@ -124,7 +128,7 @@ index 735221f..832855a 100644
  } from 'react-native';
  
 diff --git a/node_modules/react-native-material-kit/lib/mdl/Checkbox.js b/node_modules/react-native-material-kit/lib/mdl/Checkbox.js
-index 772f3d5..883a169 100644
+index 772f3d5..183344d 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/Checkbox.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/Checkbox.js
 @@ -13,9 +13,9 @@ import React, {
@@ -152,6 +156,14 @@ index 772f3d5..883a169 100644
      if (nextProps.checked !== this.props.checked) {
        this._initView(nextProps.checked);
      }
+@@ -151,6 +151,7 @@ class Checkbox extends Component {
+     Animated.timing(this._animatedTickAlpha, {
+       toValue: checked ? 1 : 0,
+       duration: 220,
++      useNativeDriver: false,
+     }).start();
+   }
+ 
 diff --git a/node_modules/react-native-material-kit/lib/mdl/IconToggle.js b/node_modules/react-native-material-kit/lib/mdl/IconToggle.js
 index bbda855..f6d5df1 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/IconToggle.js
@@ -181,8 +193,54 @@ index bbda855..f6d5df1 100644
      if (nextProps.checked !== this.props.checked) {
        this.setState({ checked: nextProps.checked });
      }
+diff --git a/node_modules/react-native-material-kit/lib/mdl/IndeterminateProgress.js b/node_modules/react-native-material-kit/lib/mdl/IndeterminateProgress.js
+index 5286a8f..3e181a9 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/IndeterminateProgress.js
++++ b/node_modules/react-native-material-kit/lib/mdl/IndeterminateProgress.js
+@@ -86,10 +86,12 @@ class IndeterminateProgress extends Component {
+         Animated.timing(this._animatedBlock1.left, {
+           toValue: this._totalLength * 0.25,
+           duration: this.props.progressAniDuration || 1250,
++          useNativeDriver: false,
+         }),
+         Animated.timing(this._animatedBlock1.right, {
+           toValue: 0,
+           duration: this.props.progressAniDuration || 1250,
++          useNativeDriver: false,
+         }),
+       ]),
+       Animated.parallel([
+@@ -97,6 +99,7 @@ class IndeterminateProgress extends Component {
+           toValue: this._totalLength,
+           duration: this.props.progressAniDuration || 500,
+           easing: Easing.out(Easing.quad),
++          useNativeDriver: false,
+         }),
+         this._getBlock2Ani(),
+       ]),
+@@ -111,17 +114,20 @@ class IndeterminateProgress extends Component {
+       Animated.timing(this._animatedBlock2.right, {
+         toValue: this._totalLength * 0.75,
+         duration: this.props.progressAniDuration || 500,
++        useNativeDriver: false,
+       }),
+       Animated.parallel([
+         Animated.timing(this._animatedBlock2.left, {
+           toValue: this._totalLength,
+           duration: this.props.progressAniDuration || 705,
+           easing: Easing.out(Easing.quad),
++          useNativeDriver: false,
+         }),
+         Animated.timing(this._animatedBlock2.right, {
+           toValue: 0,
+           duration: this.props.progressAniDuration || 700,
+           easing: Easing.out(Easing.quad),
++          useNativeDriver: false,
+         }),
+       ]),
+     ]);
 diff --git a/node_modules/react-native-material-kit/lib/mdl/Progress.js b/node_modules/react-native-material-kit/lib/mdl/Progress.js
-index aacef0e..bb1eb52 100644
+index aacef0e..8fe7644 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/Progress.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/Progress.js
 @@ -70,12 +70,12 @@ class Progress extends Component {
@@ -200,8 +258,24 @@ index aacef0e..bb1eb52 100644
      this.progress = nextProps.progress;
      this.buffer = nextProps.buffer;
    }
+@@ -100,6 +100,7 @@ class Progress extends Component {
+       toValue: theProgress * this._totalLength,
+       duration: this.props.progressAniDuration || 300,
+       easing: Easing.out(Easing.quad),
++      useNativeDriver: false,
+     }).start();
+   }
+ 
+@@ -111,6 +112,7 @@ class Progress extends Component {
+     Animated.timing(this._animatedBufferLength, {
+       toValue: buffer * this._totalLength,
+       duration: this.props.bufferAniDuration || 200,
++      useNativeDriver: false,
+     }).start();
+   }
+ 
 diff --git a/node_modules/react-native-material-kit/lib/mdl/RadioButton.js b/node_modules/react-native-material-kit/lib/mdl/RadioButton.js
-index 171bfc1..d71781e 100644
+index 171bfc1..feb3a07 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/RadioButton.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/RadioButton.js
 @@ -13,9 +13,9 @@ import React, {
@@ -233,8 +307,21 @@ index 171bfc1..d71781e 100644
      if (this.group !== nextProps.group) {
        if (this.group && this.group.remove instanceof Function)
          this.group.remove(this);
+@@ -182,10 +182,12 @@ class RadioButton extends Component {
+       Animated.timing(this._animatedRadius, {
+         toValue: checked ? 5 : 0,
+         duration: 220,
++        useNativeDriver: false,
+       }),
+       Animated.timing(this._animatedSize, {
+         toValue: checked ? 10 : 0,
+         duration: 220,
++        useNativeDriver: false,
+       }),
+     ]).start();
+   }
 diff --git a/node_modules/react-native-material-kit/lib/mdl/RangeSlider.js b/node_modules/react-native-material-kit/lib/mdl/RangeSlider.js
-index 1b283d8..d226791 100644
+index 1b283d8..529402f 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/RangeSlider.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/RangeSlider.js
 @@ -47,11 +47,11 @@ class RangeSlider extends Component {
@@ -251,8 +338,21 @@ index 1b283d8..d226791 100644
      this._onThumbRadiiUpdate(nextProps);
      this._setRange({ min: nextProps.minValue, max: nextProps.maxValue });
      this._updateValue(this._range);
+@@ -246,10 +246,12 @@ class RangeSlider extends Component {
+       Animated.timing(this._lowerTrackMin, {
+         toValue: this._range.min,
+         duration: 0,
++        useNativeDriver: false,
+       }),
+       Animated.timing(this._lowerTrackLength, {
+         toValue: this._range.max - this._range.min,
+         duration: 0,
++        useNativeDriver: false,
+       }),
+     ]).start();
+   }
 diff --git a/node_modules/react-native-material-kit/lib/mdl/Slider.js b/node_modules/react-native-material-kit/lib/mdl/Slider.js
-index af4d466..1e8c5a1 100644
+index af4d466..6f37c6d 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/Slider.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/Slider.js
 @@ -129,12 +129,12 @@ class Slider extends Component {
@@ -270,8 +370,33 @@ index af4d466..1e8c5a1 100644
      this._onThumbRadiiUpdate(nextProps);
      this._internalSetValue(nextProps.value, false);
      this._aniUpdateValue(nextProps.value);
+@@ -290,6 +290,7 @@ class Slider extends Component {
+     Animated.timing(this._animatedTrackLength, {
+       toValue: x,
+       duration: 0,
++      useNativeDriver: false,
+     }).start();
+   }
+ 
+diff --git a/node_modules/react-native-material-kit/lib/mdl/Spinner.ios.js b/node_modules/react-native-material-kit/lib/mdl/Spinner.ios.js
+index 657ebf1..4ebf034 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/Spinner.ios.js
++++ b/node_modules/react-native-material-kit/lib/mdl/Spinner.ios.js
+@@ -121,10 +121,12 @@ class Spinner extends Component {
+         Animated.timing(this._animatedContainerAngle, {
+           duration,
+           toValue: 1,
++          useNativeDriver: false,
+         }),
+         Animated.timing(this._animatedArcAngle, {
+           duration,
+           toValue: 1,
++          useNativeDriver: false,
+         }),
+       ]).start(({ finished }) => finished && setImmediate(this._aniUpdateSpinner));
+     });
 diff --git a/node_modules/react-native-material-kit/lib/mdl/Switch.js b/node_modules/react-native-material-kit/lib/mdl/Switch.js
-index 2df5ee2..9fe9227 100644
+index 2df5ee2..b51f1f0 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/Switch.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/Switch.js
 @@ -16,9 +16,9 @@ import React, {
@@ -299,7 +424,33 @@ index 2df5ee2..9fe9227 100644
      if (nextProps.checked !== this.props.checked) {
        this.setState({ checked: nextProps.checked });
      }
-@@ -205,7 +205,7 @@ class Switch extends Component {
+@@ -100,10 +100,12 @@ class Thumb extends Component {
+       Animated.timing(this._animatedRippleAlpha, {
+         toValue: 1,
+         duration: this.props.rippleAniDuration || 250,
++        useNativeDriver: false,
+       }),
+       Animated.timing(this._animatedRippleScale, {
+         toValue: 1,
+         duration: this.props.rippleAniDuration || 250,
++        useNativeDriver: false,
+       }),
+     ]);
+ 
+@@ -124,10 +126,12 @@ class Thumb extends Component {
+         Animated.timing(this._animatedRippleScale, {
+           toValue: 0,
+           duration: this.props.rippleAniDuration || 250,
++          useNativeDriver: false,
+         }),
+         Animated.timing(this._animatedRippleAlpha, {
+           toValue: 0,
+           duration: this.props.rippleAniDuration || 250,
++          useNativeDriver: false,
+         }),
+       ]).start();
+ 
+@@ -205,7 +209,7 @@ class Switch extends Component {
      };
    }
  
@@ -308,7 +459,7 @@ index 2df5ee2..9fe9227 100644
      const nextState = this._layoutThumb(this.props.checked,
        this.props.thumbRadius,
        this.props.trackLength,
-@@ -213,7 +213,7 @@ class Switch extends Component {
+@@ -213,7 +217,7 @@ class Switch extends Component {
      this.setState(Object.assign(nextState, { checked: this.props.checked }));
    }
  
@@ -317,6 +468,14 @@ index 2df5ee2..9fe9227 100644
      const nextState = this._layoutThumb(nextProps.checked,
        nextProps.thumbRadius,
        nextProps.trackLength,
+@@ -283,6 +287,7 @@ class Switch extends Component {
+     Animated.timing(this._animatedThumbLeft, {
+       toValue: newX,
+       duration: this.props.thumbAniDuration || 300,
++      useNativeDriver: false,
+     }).start(() => {
+       this.state.thumbFrame.x = newX;
+     });
 diff --git a/node_modules/react-native-material-kit/lib/mdl/Textfield.js b/node_modules/react-native-material-kit/lib/mdl/Textfield.js
 index 7df6423..952bc26 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/Textfield.js
