@@ -318,7 +318,7 @@ index 2df5ee2..9fe9227 100644
        nextProps.thumbRadius,
        nextProps.trackLength,
 diff --git a/node_modules/react-native-material-kit/lib/mdl/Textfield.js b/node_modules/react-native-material-kit/lib/mdl/Textfield.js
-index 7df6423..49dd235 100644
+index 7df6423..952bc26 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/Textfield.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/Textfield.js
 @@ -48,11 +48,11 @@ class FloatingLabel extends Component {
@@ -335,7 +335,59 @@ index 7df6423..49dd235 100644
      this.updateText(nextProps.text);
    }
  
-@@ -356,13 +356,13 @@ class Textfield extends Component {
+@@ -95,10 +95,12 @@ class FloatingLabel extends Component {
+       Animated.timing(this.state.opacity, {
+         toValue: 1,
+         duration: this.props.opacityAniDur,
++        useNativeDriver: false,
+       }),
+       Animated.timing(this.state.progress, {
+         toValue: 0,
+         duration: this.props.floatingLabelAniDuration,
++        useNativeDriver: false,
+       }),
+     ])];
+   }
+@@ -112,10 +114,12 @@ class FloatingLabel extends Component {
+       Animated.timing(this.state.progress, {
+         toValue: 1,
+         duration: this.props.floatingLabelAniDuration,
++        useNativeDriver: false,
+       }),
+       Animated.timing(this.state.opacity, {
+         toValue: 0,
+         duration: this.props.opacityAniDur,
++        useNativeDriver: false,
+       }),
+     ])];
+   }
+@@ -234,10 +238,12 @@ class Underline extends Component {
+       Animated.timing(this.animatedLeft, {
+         toValue: 0,
+         duration: this.props.underlineAniDur,
++        useNativeDriver: false,
+       }),
+       Animated.timing(this.animatedLineLength, {
+         toValue: this.state.lineLength,
+         duration: this.props.underlineAniDur,
++        useNativeDriver: false,
+       }),
+     ];
+   }
+@@ -252,10 +258,12 @@ class Underline extends Component {
+       Animated.timing(this.animatedLeft, {
+         toValue: this.state.lineLength / 2,
+         duration: this.props.underlineAniDur,
++        useNativeDriver: false,
+       }),
+       Animated.timing(this.animatedLineLength, {
+         toValue: 0,
+         duration: this.props.underlineAniDur,
++        useNativeDriver: false,
+       }),
+     ];
+   }
+@@ -356,13 +364,13 @@ class Textfield extends Component {
      }
    }
  
@@ -351,6 +403,15 @@ index 7df6423..49dd235 100644
      const newText = nextProps.value || nextProps.text || nextProps.defaultValue;
      if (newText) {
        this.bufferedValue = newText;
+@@ -399,7 +407,7 @@ class Textfield extends Component {
+       this.anim.stop();
+     }
+ 
+-    this.anim = Animated.parallel(animations).start(cb);
++    this.anim = Animated.parallel(animations, { useNativeDriver: false }).start(cb);
+   }
+ 
+   _doMeasurement() {
 diff --git a/node_modules/react-native-material-kit/lib/utils.js b/node_modules/react-native-material-kit/lib/utils.js
 index 60fc657..af78d39 100644
 --- a/node_modules/react-native-material-kit/lib/utils.js
