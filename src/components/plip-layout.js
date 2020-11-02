@@ -56,6 +56,7 @@ class PlipLayout extends Component {
   state = {
     isSignModalVisible: false,
     isValidProfileModalVisible: false,
+    scrollY: new Animated.Value(0),
   };
 
   static propTypes = {
@@ -163,12 +164,6 @@ class PlipLayout extends Component {
 
   onToggleValidProfileModal = () => {
     this.setState(({ isValidProfileModalVisible }) => ({ isValidProfileModalVisible: !isValidProfileModalVisible }));
-  }
-
-  componentWillMount() {
-    this.setState({
-      scrollY: new Animated.Value(0),
-    });
   }
 
   componentDidMount() {

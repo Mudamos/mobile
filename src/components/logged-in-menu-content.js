@@ -23,11 +23,6 @@ import locale from "../locales/pt-BR";
 
 
 export default class Menu extends Component {
-  state = {
-    entries: [],
-    newAvatar: null,
-  };
-
   static propTypes = {
     currentUser: PropTypes.object,
     isFetchingProfile: PropTypes.bool,
@@ -37,17 +32,20 @@ export default class Menu extends Component {
     onLogout: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
 
-    this.setState({
+    this.state = {
       entries: this.dataSource.cloneWithRows(this.props.menuEntries),
-    });
+      newAvatar: null,
+    };
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     if (newProps.menuEntries !== undefined) {
       this.setState({
         entries: this.dataSource.cloneWithRows(newProps.menuEntries),

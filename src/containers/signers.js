@@ -41,12 +41,12 @@ class Container extends Component {
     onFetchSigners: PropTypes.func.isRequired,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { plipId, onFetchSigners } = this.props;
     onFetchSigners(plipId);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.users !== nextProps.users) {
       this.setState({
         userDataSource: this.state.userDataSource.cloneWithRowsAndSections(nextProps.users || {}),

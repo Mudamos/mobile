@@ -91,7 +91,7 @@ class PlipViewerLayout extends Component {
     this.setState(({ isSignModalVisible }) => ({ isSignModalVisible: !isSignModalVisible }));
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // Handling the success modal after signing the plip. It should be just displayed once.
     if (nextProps.justSignedPlip && nextProps.justSignedPlip !== this.props.justSignedPlip) {
       this.setState({ showSignSuccess: true });

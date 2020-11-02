@@ -30,7 +30,7 @@ export default class NetworkImage extends Component {
     loading: false,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { source } = this.props;
 
     if (source && source.uri) {
@@ -42,7 +42,7 @@ export default class NetworkImage extends Component {
     this.cancelPrefetch();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const newUri = nextProps.source && nextProps.source.uri;
 
     if (!newUri && this.state.loading) {

@@ -62,7 +62,7 @@ class Container extends Component {
     onViewPlip: PropTypes.func.isRequired,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { plip, onFetchPlipRelatedInfo } = this.props;
     if (nextProps.plip && (plip == null || plip.id !== nextProps.plip.id)) {
       onFetchPlipRelatedInfo(nextProps.plip.id);

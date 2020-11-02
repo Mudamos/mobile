@@ -21,7 +21,7 @@ class Container extends Component {
     ...WalletLayout.propTypes,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { revalidateProfileSignPlip, onCreateWallet } = this.props;
 
     if (!revalidateProfileSignPlip) {

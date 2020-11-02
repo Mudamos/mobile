@@ -202,15 +202,13 @@ class Container extends Component {
     return sortMenuEntries(entries);
   }
 
-  componentWillMount() {
-    if (isDev) Toast.show("PlipsList componentWillMount");
-  }
-
   componentDidMount() {
     const {
       currentSigningPlip,
       onGoToPlip,
     } = this.props;
+
+    if (isDev) Toast.show("PlipsList componentDidMount");
 
     if (currentSigningPlip) {
       // For some reason, the router is not done loading the current screen

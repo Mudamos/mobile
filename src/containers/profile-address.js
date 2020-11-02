@@ -35,7 +35,7 @@ class Container extends Component {
     onSearchZipCodeWithCoords: PropTypes.func.isRequired,
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const isSearching = nextProps.isSearching || this.props.isSearching;
 
     if (!isSearching && nextProps.userLocation && !this.props.userLocation) {

@@ -7,7 +7,7 @@ export default class ComponentWithKeyboardEvent extends Component {
     hasKeyboard: false,
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", this.keyboardDidShow.bind(this));
     this.keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", this.keyboardDidHide.bind(this));
   }
