@@ -87,6 +87,28 @@ index 0000000..56b57ab
 +  };
 +
 +export default MKTouchableWithoutFeedback;
+diff --git a/node_modules/react-native-material-kit/lib/internal/Thumb.js b/node_modules/react-native-material-kit/lib/internal/Thumb.js
+index 9a1f47f..2b5dbd9 100644
+--- a/node_modules/react-native-material-kit/lib/internal/Thumb.js
++++ b/node_modules/react-native-material-kit/lib/internal/Thumb.js
+@@ -53,7 +53,7 @@ class Thumb extends Component {
+     };
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     this._panResponder = PanResponder.create({
+       onStartShouldSetPanResponder: () => true,
+       onStartShouldSetPanResponderCapture: () => true,
+@@ -78,7 +78,7 @@ class Thumb extends Component {
+     this._animatedLeft.addListener(this._getOnSliding());
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     this._onRadiiUpdate(nextProps);
+   }
+ 
 diff --git a/node_modules/react-native-material-kit/lib/mdl/Button.js b/node_modules/react-native-material-kit/lib/mdl/Button.js
 index 735221f..832855a 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/Button.js
@@ -102,7 +124,7 @@ index 735221f..832855a 100644
  } from 'react-native';
  
 diff --git a/node_modules/react-native-material-kit/lib/mdl/Checkbox.js b/node_modules/react-native-material-kit/lib/mdl/Checkbox.js
-index 772f3d5..1fe90bd 100644
+index 772f3d5..883a169 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/Checkbox.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/Checkbox.js
 @@ -13,9 +13,9 @@ import React, {
@@ -116,8 +138,22 @@ index 772f3d5..1fe90bd 100644
    View,
  } from 'react-native';
  
+@@ -93,11 +93,11 @@ class Checkbox extends Component {
+     };
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     this._initView(this.props.checked);
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     if (nextProps.checked !== this.props.checked) {
+       this._initView(nextProps.checked);
+     }
 diff --git a/node_modules/react-native-material-kit/lib/mdl/IconToggle.js b/node_modules/react-native-material-kit/lib/mdl/IconToggle.js
-index bbda855..3a8765b 100644
+index bbda855..f6d5df1 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/IconToggle.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/IconToggle.js
 @@ -14,9 +14,7 @@ import React, {
@@ -131,8 +167,41 @@ index bbda855..3a8765b 100644
  
  import MKColor from '../MKColor';
  import Ripple from './Ripple';
+@@ -69,11 +67,11 @@ class IconToggle extends Component {
+     this.state = { checked: false };
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     this.setState({ checked: this.props.checked });
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     if (nextProps.checked !== this.props.checked) {
+       this.setState({ checked: nextProps.checked });
+     }
+diff --git a/node_modules/react-native-material-kit/lib/mdl/Progress.js b/node_modules/react-native-material-kit/lib/mdl/Progress.js
+index aacef0e..bb1eb52 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/Progress.js
++++ b/node_modules/react-native-material-kit/lib/mdl/Progress.js
+@@ -70,12 +70,12 @@ class Progress extends Component {
+     this._animatedBufferLength = new Animated.Value(0);
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     this.progress = this.props.progress;
+     this.buffer = this.props.buffer;
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     this.progress = nextProps.progress;
+     this.buffer = nextProps.buffer;
+   }
 diff --git a/node_modules/react-native-material-kit/lib/mdl/RadioButton.js b/node_modules/react-native-material-kit/lib/mdl/RadioButton.js
-index 171bfc1..6239017 100644
+index 171bfc1..d71781e 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/RadioButton.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/RadioButton.js
 @@ -13,9 +13,9 @@ import React, {
@@ -146,8 +215,63 @@ index 171bfc1..6239017 100644
    View,
  } from 'react-native';
  
+@@ -88,7 +88,7 @@ class RadioButton extends Component {
+     };
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     this.group = this.props.group;
+     this._initView(this.props.checked);
+ 
+@@ -96,7 +96,7 @@ class RadioButton extends Component {
+       this.group.add(this);
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     if (this.group !== nextProps.group) {
+       if (this.group && this.group.remove instanceof Function)
+         this.group.remove(this);
+diff --git a/node_modules/react-native-material-kit/lib/mdl/RangeSlider.js b/node_modules/react-native-material-kit/lib/mdl/RangeSlider.js
+index 1b283d8..d226791 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/RangeSlider.js
++++ b/node_modules/react-native-material-kit/lib/mdl/RangeSlider.js
+@@ -47,11 +47,11 @@ class RangeSlider extends Component {
+     this._lowerTrackMin = new Animated.Value(this._range.min);
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     this._onThumbRadiiUpdate(this.props);
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     this._onThumbRadiiUpdate(nextProps);
+     this._setRange({ min: nextProps.minValue, max: nextProps.maxValue });
+     this._updateValue(this._range);
+diff --git a/node_modules/react-native-material-kit/lib/mdl/Slider.js b/node_modules/react-native-material-kit/lib/mdl/Slider.js
+index af4d466..1e8c5a1 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/Slider.js
++++ b/node_modules/react-native-material-kit/lib/mdl/Slider.js
+@@ -129,12 +129,12 @@ class Slider extends Component {
+     });
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     this._onThumbRadiiUpdate(this.props);
+     this._internalSetValue(this.props.value, false);
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     this._onThumbRadiiUpdate(nextProps);
+     this._internalSetValue(nextProps.value, false);
+     this._aniUpdateValue(nextProps.value);
 diff --git a/node_modules/react-native-material-kit/lib/mdl/Switch.js b/node_modules/react-native-material-kit/lib/mdl/Switch.js
-index 2df5ee2..18e5a99 100644
+index 2df5ee2..9fe9227 100644
 --- a/node_modules/react-native-material-kit/lib/mdl/Switch.js
 +++ b/node_modules/react-native-material-kit/lib/mdl/Switch.js
 @@ -16,9 +16,9 @@ import React, {
@@ -161,6 +285,72 @@ index 2df5ee2..18e5a99 100644
    View
  } from 'react-native';
  
+@@ -63,11 +63,11 @@ class Thumb extends Component {
+     };
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     this.setState({ checked: this.props.checked });
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     if (nextProps.checked !== this.props.checked) {
+       this.setState({ checked: nextProps.checked });
+     }
+@@ -205,7 +205,7 @@ class Switch extends Component {
+     };
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     const nextState = this._layoutThumb(this.props.checked,
+       this.props.thumbRadius,
+       this.props.trackLength,
+@@ -213,7 +213,7 @@ class Switch extends Component {
+     this.setState(Object.assign(nextState, { checked: this.props.checked }));
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     const nextState = this._layoutThumb(nextProps.checked,
+       nextProps.thumbRadius,
+       nextProps.trackLength,
+diff --git a/node_modules/react-native-material-kit/lib/mdl/Textfield.js b/node_modules/react-native-material-kit/lib/mdl/Textfield.js
+index 7df6423..49dd235 100644
+--- a/node_modules/react-native-material-kit/lib/mdl/Textfield.js
++++ b/node_modules/react-native-material-kit/lib/mdl/Textfield.js
+@@ -48,11 +48,11 @@ class FloatingLabel extends Component {
+     };
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     this.updateText(this.props.text);
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     this.updateText(nextProps.text);
+   }
+ 
+@@ -356,13 +356,13 @@ class Textfield extends Component {
+     }
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     this.bufferedValue = this.props.value || this.props.text ||
+     this.props.defaultValue;
+     this._originPlaceholder = this.props.placeholder;
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     const newText = nextProps.value || nextProps.text || nextProps.defaultValue;
+     if (newText) {
+       this.bufferedValue = newText;
 diff --git a/node_modules/react-native-material-kit/lib/utils.js b/node_modules/react-native-material-kit/lib/utils.js
 index 60fc657..af78d39 100644
 --- a/node_modules/react-native-material-kit/lib/utils.js
