@@ -35,6 +35,7 @@ export default class Modal extends Component {
         toValue: 1,
         duration: ANIMATION_DURATION,
         easing: Easing.quad,
+        useNativeDriver: false,
       }
     ).start();
   }
@@ -48,6 +49,7 @@ export default class Modal extends Component {
         toValue: 1,
         duration: ANIMATION_DURATION,
         easing: Easing.quad,
+        useNativeDriver: false,
       }
     ).start(done);
   }

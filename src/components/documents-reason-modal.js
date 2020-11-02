@@ -86,12 +86,14 @@ class DocumentsReasonModal extends Component {
             {
               toValue: 1,
               duration: 200,
+              useNativeDriver: false,
             }),
           Animated.timing(
             this.state.top,
             {
               toValue: 0,
               duration: 300,
+              useNativeDriver: false,
             }),
         ]).start();
       } else {
@@ -101,12 +103,14 @@ class DocumentsReasonModal extends Component {
             {
               toValue: -300,
               duration: 100,
+              useNativeDriver: false,
             }),
           Animated.timing(
             this.state.fadeAnim,
             {
               toValue: 0,
               duration: 200,
+              useNativeDriver: false,
             }),
         ]).start();
       }

@@ -224,6 +224,7 @@ class PlipLayout extends Component {
           scrollEventThrottle={16}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {y: this.state.scrollY}}}],
+            { useNativeDriver: false }
           )}
         >
           {this.renderScrollViewHeader()}

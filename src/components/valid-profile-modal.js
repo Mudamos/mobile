@@ -88,6 +88,7 @@ class ValidProfileModal extends Component {
           {
             toValue: 0,
             duration: 200,
+            useNativeDriver: false,
           }
         ).start();
       } else {
@@ -96,6 +97,7 @@ class ValidProfileModal extends Component {
           {
             toValue: 1,
             duration: 200,
+            useNativeDriver: false,
           }
         ).start();
       }

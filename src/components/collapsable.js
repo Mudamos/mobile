@@ -21,6 +21,7 @@ export default class Collapsable extends Component {
     Animated.timing(this.state.animation, {
       toValue: 0,
       duration,
+      useNativeDriver: true,
     }).start(() => this.setState({ collapsed: true }));
   }
 
@@ -28,6 +29,7 @@ export default class Collapsable extends Component {
     Animated.timing(this.state.animation, {
       toValue: this.state.height,
       duration,
+      useNativeDriver: true,
     }).start(() => this.setState({ collapsed: false }));
   }
 
@@ -35,8 +37,8 @@ export default class Collapsable extends Component {
     this.props.collapsed ? this.close() : this.open();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const shouldCollapse = nextProps.collapsed;
+  componentDidUpdate() {
+    const shouldCollapse = this.props.collapsed;
     if (this.state.collapsed != shouldCollapse) {
       shouldCollapse ? this.close() : this.open();
     }
@@ -47,14 +49,14 @@ export default class Collapsable extends Component {
 
     return (
       <Animated.View style={{ height, overflow: "hidden" }}>
-        <View onLayout={this.wrapperOnLayout.bind(this)}>
+        <View onLayout={this.wrapperOnLayout}>
           {this.props.children}
         </View>
       </Animated.View>
     );
   }
 
-  wrapperOnLayout(event) {
+  wrapperOnLayout = event => {
     if (this.state.firstRender) {
       const height = event.nativeEvent.layout.height;
 

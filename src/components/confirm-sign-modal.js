@@ -81,12 +81,14 @@ class ConfirmSignModal extends Component {
             {
               toValue: 1,
               duration: 200,
+              useNativeDriver: false,
             }),
           Animated.timing(
             this.state.bottom,
             {
               toValue: 0,
               duration: 300,
+              useNativeDriver: false,
             }),
         ]).start();
       } else {
@@ -96,12 +98,14 @@ class ConfirmSignModal extends Component {
             {
               toValue: -300,
               duration: 100,
+              useNativeDriver: false,
             }),
           Animated.timing(
             this.state.fadeAnim,
             {
               toValue: 0,
               duration: 200,
+              useNativeDriver: false,
             }),
         ]).start();
       }
