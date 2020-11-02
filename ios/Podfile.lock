@@ -320,7 +320,7 @@ PODS:
     - React
   - react-native-image-picker (0.14.3):
     - React
-  - react-native-maps (0.24.2):
+  - react-native-maps (0.27.1):
     - React
   - react-native-material-kit (0.3.4):
     - React
@@ -630,7 +630,7 @@ SPEC CHECKSUMS:
   react-native-config: e8c71f602c92ddd2f5c24b0b7a90d239ecab8d9f
   react-native-fbsdk: 6e8697bdaf14db367b70a5d1c546b490f1f7b032
   react-native-image-picker: 3693786b3d5958c8f71deed66ec068b323565e0d
-  react-native-maps: 0316ed017dbb64b33b227751fa810e2454fcfa39
+  react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-material-kit: e779e910356c15278dcd2d2153b8656d24084c05
   react-native-onesignal: ad2eaab1517951e50d19fa3eccd16d3048167181
   react-native-randombytes: 3638d24759d67c68f6ccba60c52a7a8a8faa6a23
