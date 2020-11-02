@@ -34,6 +34,10 @@ export default class AboutAppLayout extends Component {
     onSetFeedback: PropTypes.func.isRequired,
   }
 
+  state = {
+    activeSections: [],
+  };
+
   onGoToMudamosSite = () => {
     const { remoteLinks, onLogEvent, onOpenURL } = this.props;
 
@@ -114,17 +118,23 @@ export default class AboutAppLayout extends Component {
     );
   }
 
+  updateSections = activeSections => this.setState({ activeSections });
+
   renderContent() {
+    const { activeSections } = this.state;
+
     return (
       <View>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{locale.aboutApp.title}</Text>
         </View>
         <Accordion
+          activeSections={activeSections}
           sections={locale.aboutApp.sections}
           renderHeader={this.renderAccordionHeader}
           renderContent={this.renderAccordionContent}
           underlayColor="rgba(0,0,0,0.15)"
+          onChange={this.updateSections}
         />
       </View>
     );
