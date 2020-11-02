@@ -94,8 +94,6 @@ def pods
   # Add new pods below this line
 
   #pod 'Firestack', :path => '../node_modules/react-native-firestack'
-
-  pod "RNAppleAuthentication", :path => "../node_modules/@invertase/react-native-apple-authentication"
 end
 
 def message_signer_pods

@@ -1,0 +1,16 @@
+diff --git a/node_modules/@invertase/react-native-apple-authentication/.RNAppleAuthentication.podspec.swp b/node_modules/@invertase/react-native-apple-authentication/.RNAppleAuthentication.podspec.swp
+new file mode 100644
+index 0000000..ad5cf27
+Binary files /dev/null and b/node_modules/@invertase/react-native-apple-authentication/.RNAppleAuthentication.podspec.swp differ
+diff --git a/node_modules/@invertase/react-native-apple-authentication/RNAppleAuthentication.podspec b/node_modules/@invertase/react-native-apple-authentication/RNAppleAuthentication.podspec
+index b70fada..aa1d714 100644
+--- a/node_modules/@invertase/react-native-apple-authentication/RNAppleAuthentication.podspec
++++ b/node_modules/@invertase/react-native-apple-authentication/RNAppleAuthentication.podspec
+@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
+   s.social_media_url    = 'http://twitter.com/invertaseio'
+   s.ios.deployment_target = "9.0"
+   s.source_files        = 'ios/**/*.{h,m}'
+-  s.dependency          'React'
++  s.dependency          'React-Core'
+   s.static_framework    = true
+ end
