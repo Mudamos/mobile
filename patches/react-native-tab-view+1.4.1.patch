@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-native-tab-view/src/.TabBar.js.swp b/node_modules/react-native-tab-view/src/.TabBar.js.swp
+new file mode 100644
+index 0000000..fa2b0ed
+Binary files /dev/null and b/node_modules/react-native-tab-view/src/.TabBar.js.swp differ
+diff --git a/node_modules/react-native-tab-view/src/TabBar.js b/node_modules/react-native-tab-view/src/TabBar.js
+index 4c87503..a0e8e35 100644
+--- a/node_modules/react-native-tab-view/src/TabBar.js
++++ b/node_modules/react-native-tab-view/src/TabBar.js
+@@ -409,7 +409,7 @@ export default class TabBar<T: *> extends React.Component<Props<T>, State> {
+             onMomentumScrollBegin={this._handleMomentumScrollBegin}
+             onMomentumScrollEnd={this._handleMomentumScrollEnd}
+             contentOffset={this.state.initialOffset}
+-            ref={el => (this._scrollView = el && el.getNode())}
++            ref={el => this._scrollView = el}
+           >
+             {routes.map((route, i) => {
+               const outputRange = inputRange.map(
