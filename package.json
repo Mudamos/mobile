@@ -87,7 +87,7 @@
     "react-native-user-defaults": "https://github.com/itsriodejaneiro/react-native-user-defaults.git#ce490d2",
     "react-native-vector-icons": "4.6.0",
     "react-native-webview": "4.1.0",
-    "react-redux": "5.0.7",
+    "react-redux": "7.2.2",
     "readable-stream": "^2.3.5",
     "recompose": "^0.26.0",
     "redux": "^3.6.0",
