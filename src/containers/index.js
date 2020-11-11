@@ -9,6 +9,7 @@ export { default as PlipsContainer } from "./plips";
 export { default as PlipViewerContainer } from "./plip-viewer";
 export { default as SignInContainer } from "./sign-in";
 export { default as SignUpContainer } from "./sign-up";
+export { default as PrivacyPolicyContainer } from "./privacy-policy";
 export { default as ProfileAddressContainer } from "./profile-address";
 export { default as ProfileConcludeContainer } from "./profile-conclude";
 export { default as ProfileUpdateContainer } from "./profile-update";

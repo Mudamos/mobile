@@ -92,6 +92,8 @@ import {
   searchPlipTitle,
 } from "../selectors";
 
+import { SCREEN_KEYS } from "../models";
+
 import PageLoader from "../components/page-loader";
 import PlipsLayout from "../components/plips-layout";
 import SplashLoader from "../components/splash-loader";
@@ -159,6 +161,7 @@ class Container extends Component {
     onLogEvent: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
+    onPrivacyPolicy: PropTypes.func.isRequired,
     onProfileEdit: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
     onRetryPlips: PropTypes.func.isRequired,
@@ -184,7 +187,8 @@ class Container extends Component {
       { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout, position: 2 },
       { icon: "account-balance", title: locale.links.sendYourPL, action: this.onSendYourPl, position: 3 },
       { icon: "help", title: locale.menu.help, action: this.onHelp, position: 5 },
-      { icon: "share", title: locale.menu.tellAFriend, action: this.onTellAFriend, position: 6 },
+      { icon: "description", title: locale.menu.privacyPolicy, action: this.onPrivacyPolicy, position: 6 },
+      { icon: "share", title: locale.menu.tellAFriend, action: this.onTellAFriend, position: 7 },
     ];
 
     if (!isFetchingProfile && currentUser) {
@@ -301,6 +305,12 @@ class Container extends Component {
     onLogEvent({ name: "tapped_menu_about_app" });
   }
 
+  onPrivacyPolicy = () => {
+    const { onLogEvent, onPrivacyPolicy } = this.props;
+    onLogEvent({ name: "tapped_menu_privacy_policy" });
+    onPrivacyPolicy();
+  };
+
   onTellAFriend = () => {
     const { onLogEvent, onTellAFriend } = this.props;
     onLogEvent({ name: "tapped_menu_tell_a_friend" });
@@ -403,6 +413,7 @@ const mapDispatchToProps = dispatch => ({
   onLogEvent: ({ name, extraData }) => dispatch(logEvent({ name, extraData })),
   onLogout: () => dispatch(logout()),
   onOpenURL: url => dispatch(openURL(url)),
+  onPrivacyPolicy: () => dispatch(navigate(SCREEN_KEYS.PRIVACY_POLICY)),
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
   onRefresh: ({ typeList }) => dispatch(refreshPlips({ typeList })),
   onSignIn: () => dispatch(navigate("signIn")),
