@@ -8,6 +8,7 @@ const initialState = {
     help: "https://itsrio2.typeform.com/to/nGzwjv",
     sendYourIdea: "https://itsrio2.typeform.com/to/iulNZI",
     whyProjectsLink: "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular",
+    privacyPolicyURL: "https://www.mudamos.org/institucional/politica-de-privacidade",
   },
   config: {
     authenticatedSignersButtonTitle: "Lista de assinantes e outras informações",

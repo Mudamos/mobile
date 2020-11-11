@@ -18,6 +18,7 @@ const REMOTE_LINK_NAMES = [
   "link_help",
   "link_send_your_idea",
   "link_why_projects",
+  "link_privacy_policy",
 ];
 
 const OTHER_CONFIGS = {
@@ -34,6 +35,7 @@ function* fetchLinks({ RemoteConfigService }) {
         help,
         sendYourIdea,
         whyProjectsLink,
+        privacyPolicyURL,
       ] = yield all(REMOTE_LINK_NAMES.map(name => call(RemoteConfigService.asString, name)));
 
       const links = {
@@ -41,6 +43,7 @@ function* fetchLinks({ RemoteConfigService }) {
         help,
         sendYourIdea,
         whyProjectsLink,
+        privacyPolicyURL,
       };
 
       yield put(remoteLinksFetched(links));

@@ -1,3 +1,5 @@
+import { compose, prop } from "ramda";
+
 import {
   CITYWIDE_SCOPE,
   STATEWIDE_SCOPE,
@@ -13,3 +15,5 @@ export const getIneligiblePlipReasonForScope = scope => state => {
     case STATEWIDE_SCOPE: return config.ineligibleToSignStatewidePlipReason;
   }
 }
+
+export const privacyPolicyURL = compose(prop("privacyPolicyURL"), findRemoteLinks);

@@ -1,6 +1,8 @@
 # Next
 
 * [PR 520] Properly remove accents and symbols from hashtags
+* [PR 522] Add menu privacy policy entry
+  - Added new remote config `link_privacy_policy` which must hold the privacy policy url
 
 ## [2.6.0-ios] 02/09/2020
 

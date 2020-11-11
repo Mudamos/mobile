@@ -54,6 +54,7 @@
     @"link_help": @"https://itsrio2.typeform.com/to/nGzwjv",
     @"link_send_your_idea": @"https://itsrio2.typeform.com/to/iulNZI",
     @"link_why_projects": @"https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular",
+    @"link_privacy_policy": @"https://www.mudamos.org/institucional/politica-de-privacidade",
     @"ineligible_to_sign_citywide_plip_reason": @"Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do município para o qual ele se destina. Se deseja propor essa lei para o seu município, use a função \"Proponha um PL\" no menu do App.",
     @"ineligible_to_sign_statewide_plip_reason": @"Obrigado por seu apoio, mas você só pode assinar esse projeto de lei sendo eleitor do estado para o qual ele se destina. Se deseja propor essa lei para o seu município, use a função \"Proponha um PL\" no menu do App."
   }];

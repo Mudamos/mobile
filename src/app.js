@@ -22,6 +22,7 @@ import {
   PlipContainer,
   PlipsContainer,
   PlipViewerContainer,
+  PrivacyPolicyContainer,
   ProfileAddressContainer,
   ProfileConcludeContainer,
   ProfileUpdateContainer,
@@ -89,6 +90,8 @@ const scenes = Actions.create(
 
     <Scene key={SCREEN_KEYS.CONFIRM_VOTE} component={ConfirmVoteContainer} hideNavBar />
     <Scene key={SCREEN_KEYS.CONFIRM_VOTE_CODE} component={ConfirmVoteCodeContainer} hideNavBar />
+
+    <Scene key={SCREEN_KEYS.PRIVACY_POLICY} component={PrivacyPolicyContainer} hideNavBar />
   </Scene>
 );
 

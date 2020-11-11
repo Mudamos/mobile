@@ -112,6 +112,7 @@ const translations = {
     changePassword: "Alterar senha",
     myProfile: "Meu perfil",
     help: "Dúvidas",
+    privacyPolicy: "Política de privacidade",
     tellAFriend: "Contar para um amigo",
     validateProfile: "Validar perfil",
   },
