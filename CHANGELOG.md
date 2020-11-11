@@ -1,5 +1,7 @@
 # Next
 
+## [2.6.1-android] 11/11/2020
+
 * [PR 524] Bump android target sdk version to 29 (android 10)
 
 ## [2.6.0-android] 11/11/2020
