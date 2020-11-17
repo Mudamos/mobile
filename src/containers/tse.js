@@ -14,29 +14,10 @@ import {
 import TSELayout from "../components/tse-layout";
 
 const TSE_URL = "http://www.tse.jus.br/eleitor/servicos/titulo-de-eleitor/titulo-e-local-de-votacao/consulta-por-nome#form-consultar-local-votacao";
-
-const reactNativePostMessageBugHack = `
-  var patchPostMessageFunction = function() {
-    var originalPostMessage = window.postMessage;
-
-    var patchedPostMessage = function(message, targetOrigin, transfer) {
-      originalPostMessage(message, targetOrigin, transfer);
-    };
-
-    patchedPostMessage.toString = function() {
-      return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage');
-    };
-
-    window.postMessage = patchedPostMessage;
-  };
-
-  patchPostMessageFunction();
-`;
+const source = { uri: TSE_URL };
 
 const jsCode = ({ birthdate, name }) => {
   return `
-    ${reactNativePostMessageBugHack}
-
     (function() {
       function fillOutForm() {
         var nameField = document.getElementsByName("nomeTituloCPF")[0];
@@ -153,7 +134,7 @@ const jsCode = ({ birthdate, name }) => {
         if (info) {
           const message = JSON.stringify(info);
           clearInterval(updateInterval);
-          window.postMessage(message, "*");
+          window.ReactNativeWebView.postMessage(message, "*");
         }
       };
 
@@ -207,8 +188,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...dispatchProps,
   ...ownProps,
 
-  source: { uri: TSE_URL },
+  source,
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(TSELayout);

@@ -33,9 +33,10 @@ export default class TSELayout extends Component {
   }
 
   static propTypes = {
+    injectedJavaScript: PropTypes.string.isRequired,
+    source: PropTypes.object.isRequired,
     onBack: PropTypes.func.isRequired,
-
-    ...WebView.propTypes,
+    onMessage: PropTypes.func.isRequired,
   }
 
   get totalPages() {
@@ -240,12 +241,16 @@ export default class TSELayout extends Component {
 
   renderWebView() {
     const {
-      ...webViewProps
+      injectedJavaScript,
+      source,
+      onMessage,
     } = this.props;
 
     return (
       <WebView
-        {...webViewProps}
+        injectedJavaScript={injectedJavaScript}
+        source={source}
+        onMessage={onMessage}
         onLoadEnd={this.onLoadEnd.bind(this)}
       />
     );
