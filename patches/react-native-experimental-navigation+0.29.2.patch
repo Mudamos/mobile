@@ -41,6 +41,18 @@ index f368b38..439759c 100644
      this._renderScene = this._renderScene.bind(this);
    }
  
+diff --git a/node_modules/react-native-experimental-navigation/NavigationCardStackPanResponder.js b/node_modules/react-native-experimental-navigation/NavigationCardStackPanResponder.js
+index 74f7b8a..9daebf0 100644
+--- a/node_modules/react-native-experimental-navigation/NavigationCardStackPanResponder.js
++++ b/node_modules/react-native-experimental-navigation/NavigationCardStackPanResponder.js
+@@ -199,6 +199,7 @@ class NavigationCardStackPanResponder extends NavigationAbstractPanResponder {
+       {
+         toValue: props.navigationState.index,
+         duration: ANIMATION_DURATION,
++        useNativeDriver: false,
+       }
+     ).start();
+   }
 diff --git a/node_modules/react-native-experimental-navigation/NavigationLegacyNavigator.js b/node_modules/react-native-experimental-navigation/NavigationLegacyNavigator.js
 index c46bcea..97e1711 100644
 --- a/node_modules/react-native-experimental-navigation/NavigationLegacyNavigator.js
