@@ -1,5 +1,7 @@
+import Geolocation from "@react-native-community/geolocation";
+
 const getCurrentPosition = options => new Promise((resolve, reject) => {
-  navigator.geolocation.getCurrentPosition(
+  Geolocation.getCurrentPosition(
     resolve,
     reject,
     options,
