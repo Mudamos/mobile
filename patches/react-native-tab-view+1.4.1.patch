@@ -1,7 +1,20 @@
 diff --git a/node_modules/react-native-tab-view/src/.TabBar.js.swp b/node_modules/react-native-tab-view/src/.TabBar.js.swp
 new file mode 100644
-index 0000000..fa2b0ed
-Binary files /dev/null and b/node_modules/react-native-tab-view/src/.TabBar.js.swp differ
+index 0000000..e69de29
+diff --git a/node_modules/react-native-tab-view/src/PagerAndroid.js b/node_modules/react-native-tab-view/src/PagerAndroid.js
+index c55b761..9a6cf0e 100644
+--- a/node_modules/react-native-tab-view/src/PagerAndroid.js
++++ b/node_modules/react-native-tab-view/src/PagerAndroid.js
+@@ -1,7 +1,8 @@
+ /* @flow */
+ 
+ import * as React from 'react';
+-import { View, ViewPagerAndroid, StyleSheet, I18nManager } from 'react-native';
++import { View, StyleSheet, I18nManager } from 'react-native';
++import ViewPagerAndroid from "@react-native-community/viewpager";
+ import { PagerRendererPropType } from './PropTypes';
+ import type { PagerRendererProps } from './TypeDefinitions';
+ 
 diff --git a/node_modules/react-native-tab-view/src/TabBar.js b/node_modules/react-native-tab-view/src/TabBar.js
 index 4c87503..a0e8e35 100644
 --- a/node_modules/react-native-tab-view/src/TabBar.js
