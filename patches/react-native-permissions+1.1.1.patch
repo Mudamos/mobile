@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-permissions/lib/permissions.android.js b/node_modules/react-native-permissions/lib/permissions.android.js
+index a0c35a3..dd09759 100644
+--- a/node_modules/react-native-permissions/lib/permissions.android.js
++++ b/node_modules/react-native-permissions/lib/permissions.android.js
+@@ -1,6 +1,7 @@
+ // @flow
+ 
+-import { AsyncStorage, NativeModules, PermissionsAndroid } from 'react-native'
++import { NativeModules, PermissionsAndroid } from 'react-native'
++import AsyncStorage from "@react-native-community/async-storage";
+ 
+ type Status = 'authorized' | 'denied' | 'restricted' | 'undetermined'
+ type Rationale = { title: string, message: string }
