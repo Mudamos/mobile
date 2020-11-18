@@ -86,9 +86,18 @@ index 33182b6..f7fea76 100644
      }
  
 diff --git a/node_modules/react-native-experimental-navigation/NavigationRootContainer.js b/node_modules/react-native-experimental-navigation/NavigationRootContainer.js
-index dcc94c7..ca4a834 100644
+index dcc94c7..8e7b951 100644
 --- a/node_modules/react-native-experimental-navigation/NavigationRootContainer.js
 +++ b/node_modules/react-native-experimental-navigation/NavigationRootContainer.js
+@@ -11,7 +11,7 @@
+  */
+ 'use strict';
+ 
+-const AsyncStorage = require('react-native').AsyncStorage;
++const AsyncStorage = require("@react-native-community/async-storage");
+ const Linking = require('react-native').Linking;
+ const NavigationPropTypes = require('./NavigationPropTypes');
+ const NavigationStateUtils = require('./NavigationStateUtils');
 @@ -110,7 +110,7 @@ class NavigationRootContainer extends React.Component<any, Props, State> {
      this.state = { navState };
    }
