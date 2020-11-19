@@ -332,8 +332,8 @@ PODS:
   - react-native-onesignal (3.9.1):
     - OneSignal (= 2.15.2)
     - React (< 1.0.0, >= 0.13.0)
-  - react-native-randombytes (3.5.3):
-    - React
+  - react-native-randombytes (3.6.0):
+    - React-Core
   - react-native-simple-toast (0.0.8):
     - React-Core
   - react-native-spinkit (1.0.2):
@@ -646,7 +646,7 @@ SPEC CHECKSUMS:
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-material-kit: e779e910356c15278dcd2d2153b8656d24084c05
   react-native-onesignal: ad2eaab1517951e50d19fa3eccd16d3048167181
-  react-native-randombytes: 3638d24759d67c68f6ccba60c52a7a8a8faa6a23
+  react-native-randombytes: b6677f7d495c27e9ee0dbd77ebc97b3c59173729
   react-native-simple-toast: 89160aec21d1e7e67ef0564546d2562f76908b07
   react-native-spinkit: 9a5d2f95aa975d5660fd3e76b7eac38e7329e46c
   react-native-webview: 0aa2cde4ee7e3e1c5fffdf64dbce9c709aa18155
