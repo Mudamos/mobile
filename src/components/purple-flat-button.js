@@ -8,7 +8,7 @@ import styles from "../styles/purple-flat-button";
 
 const gradientStart = { x: 0.0, y: 0.25 };
 const gradientEnd = { x: 0.7, y: 1.0 };
-const gradientLocation = [0, 1.5, 2.0];
+const gradientLocation = [0, 0.9, 1.0];
 const gradientColors = ["#7E52D8", "#9427DB", "#9526DB"];
 
 export default class PurpleFlatButton extends FlatButton {

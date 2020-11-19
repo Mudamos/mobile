@@ -17,7 +17,7 @@ const drawerStyles = {
 
 const gradientStart = { x: 0.0, y: 0.25 };
 const gradientEnd = { x: 1.0, y: 1.0 };
-const gradientLocation = [0, 2.0];
+const gradientLocation = [0, 1.0];
 const gradientColors = ["#3D3D3D", "#212121"];
 
 const styles = StyleSheet.create({
