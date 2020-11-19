@@ -1,0 +1,28 @@
+diff --git a/node_modules/react-native-firestack/lib/firestack.js b/node_modules/react-native-firestack/lib/firestack.js
+index 8bcbbfa..0ecf7e5 100644
+--- a/node_modules/react-native-firestack/lib/firestack.js
++++ b/node_modules/react-native-firestack/lib/firestack.js
+@@ -10,7 +10,8 @@ import Log from './utils/log'
+ // const storage = require('firebase/storage');
+ // const db = require('firebase/database');
+
+-import {NativeModules, NativeEventEmitter, AsyncStorage} from 'react-native';
++import {NativeModules, NativeEventEmitter} from 'react-native';
++import AsyncStorage from "@react-native-community/async-storage";
+ // TODO: Break out modules into component pieces
+ // i.e. auth component, storage component, etc.
+ const FirestackModule = NativeModules.Firestack;
+diff --git a/node_modules/react-native-firestack/lib/modules/base.js b/node_modules/react-native-firestack/lib/modules/base.js
+index 56bf538..c339c7e 100644
+--- a/node_modules/react-native-firestack/lib/modules/base.js
++++ b/node_modules/react-native-firestack/lib/modules/base.js
+@@ -3,7 +3,8 @@
+  */
+ import Log from '../utils/log'
+
+-import {NativeModules, NativeEventEmitter, AsyncStorage} from 'react-native';
++import {NativeModules, NativeEventEmitter} from 'react-native';
++import AsyncStorage from "@react-native-community/async-storage";
+ const FirestackModule = NativeModules.Firestack;
+ const FirestackModuleEvt = new NativeEventEmitter(FirestackModule);
+
