@@ -229,6 +229,7 @@ class Container extends Component {
       <View style={styles.full}>
         <Menu
           open={open}
+          acceptPan={false}
           content={this.renderMenuContent()}
           onOpenStart={onFetchProfile}
           onOpen={() => this.setState({ menuOpen: true })}

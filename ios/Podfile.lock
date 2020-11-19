@@ -408,6 +408,10 @@ PODS:
     - React-Core
   - RNDeviceInfo (0.21.2):
     - React-Core
+  - RNGestureHandler (1.8.0):
+    - React
+  - RNReanimated (1.13.2):
+    - React-Core
   - RNShare (1.2.1):
     - React
   - RNVectorIcons (4.6.0):
@@ -472,6 +476,8 @@ DEPENDENCIES:
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -589,6 +595,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/async-storage"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNShare:
     :path: "../node_modules/react-native-share"
   RNVectorIcons:
@@ -664,6 +674,8 @@ SPEC CHECKSUMS:
   RNAppleAuthentication: 6234393db10551d36c4c199ed008b274605a456a
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNDeviceInfo: 7991d02468a8574c10b4ffb0bb00c7f2ece7ca83
+  RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
+  RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNShare: 48cf88cadf9ca2143cdaa557c1ec7f8808040ffc
   RNVectorIcons: a3c395829c56e2cb054a0730126298bf805a2dca
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a

@@ -1,6 +1,5 @@
 import {
   Dimensions,
-  Platform,
   Text,
   View,
 } from "react-native";
@@ -196,7 +195,7 @@ export default class MainTabView extends Component {
         <Text
           style={styles.label}
           numberOfLines={1}
-          ellipsizeMode={Platform.OS === "ios" ? "clip" : "tail"}>
+        >
             {title}
         </Text>
       </View>
