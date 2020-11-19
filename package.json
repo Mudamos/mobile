@@ -34,7 +34,7 @@
     "fix-xcode-12-valid-archs": "find node_modules/ -name \"project.pbxproj\" -exec sed -i '' '/VALID_ARCHS/d' {} +"
   },
   "dependencies": {
-    "@invertase/react-native-apple-authentication": "^1.1.2",
+    "@invertase/react-native-apple-authentication": "^2.1.0",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/geolocation": "^2.0.2",
     "@shoutem/animation": "^0.12.2",

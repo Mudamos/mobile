@@ -3,12 +3,7 @@ import { call, fork, put, select } from "redux-saga/effects";
 import { prop } from "ramda";
 import jwtDecode from "jwt-decode";
 
-import appleAuth, {
-  AppleAuthError,
-  AppleAuthRequestOperation,
-  AppleAuthRequestScope,
-  AppleAuthCredentialState,
-} from "@invertase/react-native-apple-authentication";
+import { appleAuth } from "@invertase/react-native-apple-authentication";
 
 import Toast from "react-native-simple-toast";
 
@@ -44,8 +39,8 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
       const myState = yield call(Crypto.uuid);
 
       const appleAuthRequestResponse = yield call([appleAuth, appleAuth.performRequest], {
-        requestedOperation: AppleAuthRequestOperation.LOGIN,
-        requestedScopes: [AppleAuthRequestScope.EMAIL, AppleAuthRequestScope.FULL_NAME],
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
         state: myState,
       });
 
@@ -79,8 +74,8 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
 
         const credentialState = yield call([appleAuth, appleAuth.getCredentialStateForUser], appleUserId);
 
-        if (credentialState !== AppleAuthCredentialState.AUTHORIZED) {
-          log("Sign in has been denied", { tag: "Apple" }, { credentialState }, AppleAuthCredentialState);
+        if (credentialState !== appleAuth.State.AUTHORIZED) {
+          log("Sign in has been denied", { tag: "Apple" }, { credentialState }, appleAuth.State);
 
           yield call([Toast, Toast.show], locale.userDeniedAppleAccess);
           yield put(finishedLogIn());
@@ -145,7 +140,7 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
 
       yield put(logEvent({ name: "apple_sign_in" }));
     } catch(error) {
-      if (prop("code", error) === AppleAuthError.CANCELED) {
+      if (prop("code", error) === appleAuth.Error.CANCELED) {
         log("User cancelled operation");
         return;
       }

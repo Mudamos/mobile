@@ -402,7 +402,7 @@ PODS:
     - React-jsi (= 0.63.3)
   - ReactNativePermissions (1.1.1):
     - React
-  - RNAppleAuthentication (1.1.2):
+  - RNAppleAuthentication (2.1.0):
     - React-Core
   - RNCAsyncStorage (1.12.1):
     - React-Core
@@ -671,7 +671,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
   ReactNativePermissions: b64e084dff6a5cad51587d38c306f09246246384
-  RNAppleAuthentication: 6234393db10551d36c4c199ed008b274605a456a
+  RNAppleAuthentication: 46cbc67739bae83ca229497f9b0038f3f5431443
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNDeviceInfo: 7991d02468a8574c10b4ffb0bb00c7f2ece7ca83
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39

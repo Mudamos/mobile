@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 
-import appleAuth, { AppleButton } from "@invertase/react-native-apple-authentication";
+import { appleAuth, AppleButton } from "@invertase/react-native-apple-authentication";
 
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
