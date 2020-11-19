@@ -134,7 +134,7 @@ const jsCode = ({ birthdate, name }) => {
         if (info) {
           const message = JSON.stringify(info);
           clearInterval(updateInterval);
-          window.ReactNativeWebView.postMessage(message, "*");
+          window.ReactNativeWebView.postMessage(message);
         }
       };
 

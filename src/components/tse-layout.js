@@ -251,16 +251,10 @@ export default class TSELayout extends Component {
         injectedJavaScript={injectedJavaScript}
         source={source}
         onMessage={onMessage}
-        onLoadEnd={this.onLoadEnd.bind(this)}
+        onLoadEnd={this.onLoadEnd}
       />
     );
   }
 
-  onLoadEnd() {
-    const { onLoadEnd } = this.props;
-
-    this.setState({ loading: false });
-
-    onLoadEnd && onLoadEnd();
-  }
+  onLoadEnd = () => this.setState({ loading: false });
 }
