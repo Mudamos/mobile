@@ -336,7 +336,7 @@ PODS:
     - React-Core
   - react-native-simple-toast (0.0.8):
     - React-Core
-  - react-native-spinkit (1.0.2):
+  - react-native-spinkit (1.4.1):
     - React
   - react-native-webview (10.10.2):
     - React-Core
@@ -648,7 +648,7 @@ SPEC CHECKSUMS:
   react-native-onesignal: ad2eaab1517951e50d19fa3eccd16d3048167181
   react-native-randombytes: b6677f7d495c27e9ee0dbd77ebc97b3c59173729
   react-native-simple-toast: 89160aec21d1e7e67ef0564546d2562f76908b07
-  react-native-spinkit: 9a5d2f95aa975d5660fd3e76b7eac38e7329e46c
+  react-native-spinkit: da294fd828216ad211fe36a5c14c1e09f09e62db
   react-native-webview: 0aa2cde4ee7e3e1c5fffdf64dbce9c709aa18155
   React-RCTActionSheet: 53ea72699698b0b47a6421cb1c8b4ab215a774aa
   React-RCTAnimation: 1befece0b5183c22ae01b966f5583f42e69a83c2
