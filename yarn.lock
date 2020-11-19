@@ -8424,10 +8424,10 @@ react-native-maps@0.27.1:
     prop-types "^15.5.10"
     ramda "^0.24.1"
 
-react-native-onesignal@3.9.1:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.9.1.tgz#b47c2ab61e84dcc7fce63cd565574760c01b1f46"
-  integrity sha512-m511mn6Kgh6AbU8TiGvA5u1yp7od1b/0rVK4m3pz13Yp8PDceGEBd8IxoghLSZRR1/HHBxxe+CWZS9Tsa/IKsg==
+react-native-onesignal@3.9.2:
+  version "3.9.2"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.9.2.tgz#d53fa6aa19b8c73bc8f2fd627423d0a9f9f0975a"
+  integrity sha512-tir7cDYzB7lGvy9f3iLTuVOC53fQzOexdLOei6oGuklVTJbwni3rrB9JP/Jw23TbbfgDDpTaTkPhvyZL4A6b5A==
   dependencies:
     invariant "^2.2.2"
 

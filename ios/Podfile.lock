@@ -133,7 +133,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - OneSignal (2.15.2)
+  - OneSignal (2.15.4)
   - Protobuf (3.5.0)
   - RCTRequired (0.63.3)
   - RCTTypeSafety (0.63.3):
@@ -329,8 +329,8 @@ PODS:
     - React
   - react-native-material-kit (0.3.4):
     - React
-  - react-native-onesignal (3.9.1):
-    - OneSignal (= 2.15.2)
+  - react-native-onesignal (3.9.2):
+    - OneSignal (= 2.15.4)
     - React (< 1.0.0, >= 0.13.0)
   - react-native-randombytes (3.6.0):
     - React-Core
@@ -626,7 +626,7 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 4a6f83b540283c2645aaeba2bd8dc0f09b5c77f8
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  OneSignal: 9531e385388565f4d31797ddadbe0fcc786430ec
+  OneSignal: 6647275955d0f06d9e17c90dc93af9d85ecfd2b9
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
   RCTTypeSafety: edf4b618033c2f1c5b7bc3d90d8e085ed95ba2ab
@@ -645,7 +645,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: 3693786b3d5958c8f71deed66ec068b323565e0d
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-material-kit: e779e910356c15278dcd2d2153b8656d24084c05
-  react-native-onesignal: ad2eaab1517951e50d19fa3eccd16d3048167181
+  react-native-onesignal: ab5bd48dfc62d6f502ee2087cef317cd1c2b72f7
   react-native-randombytes: b6677f7d495c27e9ee0dbd77ebc97b3c59173729
   react-native-simple-toast: 89160aec21d1e7e67ef0564546d2562f76908b07
   react-native-spinkit: da294fd828216ad211fe36a5c14c1e09f09e62db
