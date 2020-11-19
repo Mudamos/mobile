@@ -10,7 +10,7 @@
 
 #import "MUDFirebaseDynamicLink.h"
 
-//#if DEBUG
+//#ifdef FB_SONARKIT_ENABLED
 //#import <FlipperKit/FlipperClient.h>
 //#import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
 //#import <FlipperKitUserDefaultsPlugin/FKUserDefaultsPlugin.h>
@@ -40,7 +40,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
- // #if DEBUG
+ // #ifdef FB_SONARKIT_ENABLED
  //   InitializeFlipper(application);
  // #endif
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
