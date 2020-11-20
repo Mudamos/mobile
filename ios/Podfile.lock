@@ -18,20 +18,20 @@ PODS:
     - React-Core (= 0.63.3)
     - React-jsi (= 0.63.3)
     - ReactCommon/turbomodule/core (= 0.63.3)
-  - FBSDKCoreKit (5.6.0):
-    - FBSDKCoreKit/Basics (= 5.6.0)
-    - FBSDKCoreKit/Core (= 5.6.0)
-  - FBSDKCoreKit/Basics (5.6.0)
-  - FBSDKCoreKit/Core (5.6.0):
+  - FBSDKCoreKit (7.1.1):
+    - FBSDKCoreKit/Basics (= 7.1.1)
+    - FBSDKCoreKit/Core (= 7.1.1)
+  - FBSDKCoreKit/Basics (7.1.1)
+  - FBSDKCoreKit/Core (7.1.1):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.6.0):
-    - FBSDKLoginKit/Login (= 5.6.0)
-  - FBSDKLoginKit/Login (5.6.0):
-    - FBSDKCoreKit (~> 5.0)
-  - FBSDKShareKit (5.6.0):
-    - FBSDKShareKit/Share (= 5.6.0)
-  - FBSDKShareKit/Share (5.6.0):
-    - FBSDKCoreKit (~> 5.0)
+  - FBSDKLoginKit (7.1.1):
+    - FBSDKLoginKit/Login (= 7.1.1)
+  - FBSDKLoginKit/Login (7.1.1):
+    - FBSDKCoreKit (~> 7.1.1)
+  - FBSDKShareKit (7.1.1):
+    - FBSDKShareKit/Share (= 7.1.1)
+  - FBSDKShareKit/Share (7.1.1):
+    - FBSDKCoreKit (~> 7.1.1)
   - Firebase (4.13.0):
     - Firebase/Core (= 4.13.0)
   - Firebase/Auth (4.13.0):
@@ -307,19 +307,19 @@ PODS:
     - react-native-config/App (= 1.3.3)
   - react-native-config/App (1.3.3):
     - React-Core
-  - react-native-fbsdk (0.10.3):
+  - react-native-fbsdk (2.0.0):
     - React
-    - react-native-fbsdk/Core (= 0.10.3)
-    - react-native-fbsdk/Login (= 0.10.3)
-    - react-native-fbsdk/Share (= 0.10.3)
-  - react-native-fbsdk/Core (0.10.3):
-    - FBSDKCoreKit (~> 5.6.0)
+    - react-native-fbsdk/Core (= 2.0.0)
+    - react-native-fbsdk/Login (= 2.0.0)
+    - react-native-fbsdk/Share (= 2.0.0)
+  - react-native-fbsdk/Core (2.0.0):
+    - FBSDKCoreKit (~> 7.0)
     - React
-  - react-native-fbsdk/Login (0.10.3):
-    - FBSDKLoginKit (~> 5.6.0)
+  - react-native-fbsdk/Login (2.0.0):
+    - FBSDKLoginKit (~> 7.0)
     - React
-  - react-native-fbsdk/Share (0.10.3):
-    - FBSDKShareKit (~> 5.6.0)
+  - react-native-fbsdk/Share (2.0.0):
+    - FBSDKShareKit (~> 7.0)
     - React
   - react-native-geolocation (2.0.2):
     - React
@@ -614,9 +614,9 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 878b59e31113e289e275165efbe4b54fa614d43d
   FBReactNativeSpec: 7da9338acfb98d4ef9e5536805a0704572d33c2f
-  FBSDKCoreKit: d6655a343868d4bb5c29a60859bab07c3be14a0b
-  FBSDKLoginKit: c5a623de88a6b0cda35b35582921f6cec2efcc36
-  FBSDKShareKit: 0d8c4cfd5c1f185d5f9c26d79758b141086e1251
+  FBSDKCoreKit: b46507dc8b8cefed31d644e74d7cc30e2a715ef8
+  FBSDKLoginKit: 1a61d79e2b25e2fc0d03dccab1e34b38bbdf2546
+  FBSDKShareKit: 00a055c1999b099596e00212dd1c0600c6697019
   Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
   FirebaseABTesting: d07d0ee833b842d5153549e4c7e2e2cb1c23a3f9
   FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
@@ -650,7 +650,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: b56c03e61c0dd5f5801255f2160a815f4a53d451
   React-jsinspector: 8e68ffbfe23880d3ee9bafa8be2777f60b25cbe2
   react-native-config: e8c71f602c92ddd2f5c24b0b7a90d239ecab8d9f
-  react-native-fbsdk: 6e8697bdaf14db367b70a5d1c546b490f1f7b032
+  react-native-fbsdk: 00c15d138bba6d4efa628670886fc58cec858c19
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-image-picker: 3693786b3d5958c8f71deed66ec068b323565e0d
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c

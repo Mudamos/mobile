@@ -30,7 +30,6 @@
     "reset-adb": "adb kill-server; sleep 2; adb start-server && adb reverse tcp:8081 tcp:8081 && adb devices",
     "start": "react-native start",
     "test": "mocha --compilers js:babel-core/register --require spec/support.js 'spec/**/*.spec.js'",
-    "install-facebook-ios-sdk": "bin/install-facebook-ios-sdk",
     "fix-xcode-12-valid-archs": "find node_modules/ -name \"project.pbxproj\" -exec sed -i '' '/VALID_ARCHS/d' {} +"
   },
   "dependencies": {
@@ -68,7 +67,7 @@
     "react-native-device-info": "0.21.2",
     "react-native-drawer": "^2.3.0",
     "react-native-extended-stylesheet": "^0.9.0",
-    "react-native-fbsdk": "0.10.3",
+    "react-native-fbsdk": "2.0.0",
     "react-native-fence-html": "https://github.com/itsriodejaneiro/react-native-fence-html.git#9eb096c",
     "react-native-firebase-crash-report": "https://github.com/itsriodejaneiro/react-native-firebase-crash-report.git#mudamos",
     "react-native-firestack": "https://github.com/itsriodejaneiro/react-native-firestack.git#9917232",

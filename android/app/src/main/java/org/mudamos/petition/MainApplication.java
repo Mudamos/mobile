@@ -5,12 +5,9 @@ import android.content.Context;
 import com.facebook.react.PackageList;
 import androidx.multidex.MultiDexApplication;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 //import io.fullstack.firestack.FirestackPackage;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
@@ -23,11 +20,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class MainApplication extends MultiDexApplication implements ReactApplication {
-  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
-
-  protected static CallbackManager getCallbackManager() {
-    return mCallbackManager;
-  }
 
   private final ReactNativeHost mReactNativeHost =
     new ReactNativeHost(this) {
@@ -44,7 +36,6 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
         // packages.add(new MyReactNativePackage());
 
        // packages.add(new FirestackPackage());
-        packages.add(new FBSDKPackage(mCallbackManager));
         packages.add(new FirebasePackage());
         packages.add(new MUDFirebaseDynamicLinkPackage());
         packages.add(new SignerPackage());
@@ -66,7 +57,6 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
   @Override
   public void onCreate() {
     super.onCreate();
-    FacebookSdk.sdkInitialize(getApplicationContext());
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }

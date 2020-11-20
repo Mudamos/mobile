@@ -7,13 +7,6 @@ module.exports = {
       },
     },
 
-    // Manually linked on Android
-    "react-native-fbsdk": {
-      platforms: {
-        android: null, // disable Android platform, other platforms will still autolink if provided
-      },
-    },
-
     // Dependency of rn-viewpager
     "@react-native-community/viewpager": {
       platforms: {

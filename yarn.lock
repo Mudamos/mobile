@@ -8388,10 +8388,10 @@ react-native-extended-stylesheet@^0.9.0:
     css-mediaquery "^0.1.2"
     object-resolve-path "^1.1.0"
 
-react-native-fbsdk@0.10.3:
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-0.10.3.tgz#5bd6c7e3b19490d61c368e7f569e6990520dbdd9"
-  integrity sha512-qIej8QvDbKVAin7jIDnd5qH+LxfzlIIXE0xEY4z4SBaIMiSL1MqPx8OfdVasu453Qza58dm/hj7UyXP4loX+Iw==
+react-native-fbsdk@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-2.0.0.tgz#eb041bdb8f9b9180a1696d3bd7d7accee6554262"
+  integrity sha512-CyPKoBVt9Y+KznALcnN4lkh6dUNqZjyFS6GbkXXTFf72wR9Dl8bXF2dDj56w/o5/TFoCnNCmQlZgh7P/NiElZQ==
 
 "react-native-fence-html@https://github.com/itsriodejaneiro/react-native-fence-html.git#9eb096c":
   version "1.0.6"

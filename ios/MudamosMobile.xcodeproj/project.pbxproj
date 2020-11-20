@@ -186,15 +186,6 @@
 		46439D7F1E709B03008577C0 /* lato_black_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CBB3571E268E52000B4F5A /* lato_black_italic.ttf */; };
 		46439D801E709B03008577C0 /* roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B561E269C800002728D /* roboto_medium.ttf */; };
 		46439D811E709B03008577C0 /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F35B591E269C800002728D /* roboto.ttf */; };
-		4644DB1324BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DAD524BE16F000C10281 /* FBSDKShareKit.framework */; };
-		4644DB1424BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DAD524BE16F000C10281 /* FBSDKShareKit.framework */; };
-		4644DB1524BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DAD524BE16F000C10281 /* FBSDKShareKit.framework */; };
-		4644DB1624BE16F000C10281 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DB1124BE16F000C10281 /* FBSDKLoginKit.framework */; };
-		4644DB1724BE16F000C10281 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DB1124BE16F000C10281 /* FBSDKLoginKit.framework */; };
-		4644DB1824BE16F000C10281 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DB1124BE16F000C10281 /* FBSDKLoginKit.framework */; };
-		4644DB1924BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DB1224BE16F000C10281 /* FBSDKCoreKit.framework */; };
-		4644DB1A24BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DB1224BE16F000C10281 /* FBSDKCoreKit.framework */; };
-		4644DB1B24BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4644DB1224BE16F000C10281 /* FBSDKCoreKit.framework */; };
 		4675EBF31ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
 		4675EBF41ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
 		4675EBF51ECCB924004C8A69 /* MUDFirebaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */; };
@@ -423,9 +414,6 @@
 		463207391EBA7D0800778DCC /* google */ = {isa = PBXFileReference; lastKnownFileType = folder; path = google; sourceTree = "<group>"; };
 		463D557A1EBB9E1700D1D8C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "google/production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46439D881E709B03008577C0 /* MudamosProduction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MudamosProduction.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4644DAD524BE16F000C10281 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		4644DB1124BE16F000C10281 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		4644DB1224BE16F000C10281 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		4649D92A233BD49D00674DAF /* MessageSignerActionBeta-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MessageSignerActionBeta-Info.plist"; sourceTree = "<group>"; };
 		4649D92C233BD4B500674DAF /* MessageSignerActionProduction-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MessageSignerActionProduction-Info.plist"; sourceTree = "<group>"; };
 		4675EBF21ECCB924004C8A69 /* MUDFirebaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDFirebaseConfig.m; sourceTree = "<group>"; };
@@ -517,10 +505,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4644DB1324BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */,
 				46A05DF922CFE72200F757D9 /* JavaScriptCore.framework in Frameworks */,
-				4644DB1924BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */,
-				4644DB1624BE16F000C10281 /* FBSDKLoginKit.framework in Frameworks */,
 				6DEB6F7A5414DE00DCABF21D /* Pods_MudamosMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,10 +522,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4644DB1824BE16F000C10281 /* FBSDKLoginKit.framework in Frameworks */,
 				46A05DFC22CFE74F00F757D9 /* JavaScriptCore.framework in Frameworks */,
-				4644DB1B24BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */,
-				4644DB1524BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */,
 				46439D4F1E709B03008577C0 /* Pods_MudamosMobile.framework in Frameworks */,
 				8FFD6EB8614D6594CD5E902C /* Pods_MudamosProduction.framework in Frameworks */,
 			);
@@ -566,10 +548,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4644DB1724BE16F000C10281 /* FBSDKLoginKit.framework in Frameworks */,
 				46A05DFB22CFE74400F757D9 /* JavaScriptCore.framework in Frameworks */,
-				4644DB1A24BE16F000C10281 /* FBSDKCoreKit.framework in Frameworks */,
-				4644DB1424BE16F000C10281 /* FBSDKShareKit.framework in Frameworks */,
 				46ED2A7F1DF194E400B36CD0 /* Pods_MudamosMobile.framework in Frameworks */,
 				30910D199404C3C085B8EE95 /* Pods_MudamosMobileTagviewBeta.framework in Frameworks */,
 			);
@@ -805,9 +784,6 @@
 		E37103BD91427355FD24D359 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4644DB1224BE16F000C10281 /* FBSDKCoreKit.framework */,
-				4644DB1124BE16F000C10281 /* FBSDKLoginKit.framework */,
-				4644DAD524BE16F000C10281 /* FBSDKShareKit.framework */,
 				46A05DB522CFE72200F757D9 /* JavaScriptCore.framework */,
 				DBBB0EDB6FB4D46948F2A27B /* Pods_MudamosMobile.framework */,
 				8015D2F0699133166A12BA63 /* Pods_MudamosMobileTagviewBeta.framework */,
@@ -2264,7 +2240,6 @@
 					"\"${PODS_ROOT}/FirebaseMessaging/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseRemoteConfig/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
-					"$(HOME)/Documents/FacebookSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2322,7 +2297,6 @@
 					"\"${PODS_ROOT}/FirebaseMessaging/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseRemoteConfig/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
-					"$(HOME)/Documents/FacebookSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2386,7 +2360,6 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
@@ -2453,7 +2426,6 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
@@ -2513,7 +2485,6 @@
 					"\"${PODS_ROOT}/FirebaseMessaging/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseRemoteConfig/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
-					"$(HOME)/Documents/FacebookSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2575,7 +2546,6 @@
 					"\"${PODS_ROOT}/FirebaseMessaging/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseRemoteConfig/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
-					"$(HOME)/Documents/FacebookSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2642,7 +2612,6 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
@@ -2707,7 +2676,6 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
@@ -2769,7 +2737,6 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
@@ -2830,7 +2797,6 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
@@ -2887,7 +2853,6 @@
 					"\"${PODS_ROOT}/FirebaseMessaging/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseRemoteConfig/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
-					"$(HOME)/Documents/FacebookSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2948,7 +2913,6 @@
 					"\"${PODS_ROOT}/FirebaseMessaging/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseRemoteConfig/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
-					"$(HOME)/Documents/FacebookSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3035,7 +2999,6 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",
@@ -3110,7 +3073,6 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-open-settings",

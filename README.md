@@ -67,16 +67,6 @@ Vamos instalar agora as dependências de build:
 $ pod install --project-directory=./ios
 ```
 
-## Facebook SDK
-
-Para o iOS, dependemos da versão **5.15.1** do sdk que deve estar localizado em `~/Documents/FacebookSDK`.
-
-Rode o comando abaixo para instalar automaticamente:
-
-```
-$ yarn install-facebook-ios-sdk
-```
-
 ## Desenvolvimento
 
 Primeiramente, crie um arquivo de configuração a partir do sample
