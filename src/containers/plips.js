@@ -111,6 +111,10 @@ const styles = StyleSheet.create({
   full: {
     flex: 1,
   },
+  menuOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, .6)",
+  },
 });
 
 class Container extends Component {
@@ -245,13 +249,17 @@ class Container extends Component {
   }
 
   renderPage() {
+    const { menuOpen } = this.state;
+
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.full}>
         <PlipsLayout
           {...this.props}
 
           openMenu={this.openMenu}
         />
+
+        {menuOpen && <View style={styles.menuOverlay} />}
       </View>
     );
   }

@@ -34,7 +34,7 @@ export default class Menu extends Component {
 
   static defaultProps = {
     tapToClose: true,
-    type: "static",
+    type: "overlay",
     openDrawerOffset: 0.2,
     panOpenMask: 100,
     negotiatePan: true,
