@@ -265,19 +265,6 @@ dependencies {
     implementation "com.google.android.gms:play-services-location:${rootProject.ext.googlePlayServicesVersion}"
     implementation "com.google.android.gms:play-services-maps:${rootProject.ext.googlePlayServicesVersion}"
 
-    // Most of theses dependencies are here because of the firestack dependency
-    // always check required dependencies on the react-native-{project}/android/build.gradle
-    // in order to sync when removing dependencies
-    implementation "com.google.firebase:firebase-core:${rootProject.ext.firebaseVersion}"
-    implementation "com.google.firebase:firebase-auth:${rootProject.ext.firebaseVersion}"
-    implementation "com.google.firebase:firebase-analytics:${rootProject.ext.firebaseVersion}"
-    implementation "com.google.firebase:firebase-config:${rootProject.ext.firebaseVersion}"
-    implementation "com.google.firebase:firebase-crash:${rootProject.ext.firebaseVersion}"
-    implementation "com.google.firebase:firebase-database:${rootProject.ext.firebaseVersion}"
-    implementation "com.google.firebase:firebase-storage:${rootProject.ext.firebaseVersion}"
-    implementation "com.google.firebase:firebase-messaging:${rootProject.ext.firebaseVersion}"
-    implementation "com.google.firebase:firebase-invites:${rootProject.ext.firebaseVersion}"
-
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
 

@@ -7,7 +7,6 @@ import androidx.multidex.MultiDexApplication;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
-//import io.fullstack.firestack.FirestackPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
@@ -35,7 +34,6 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
         // Packages that cannot be autolinked yet can be added manually here, for example:
         // packages.add(new MyReactNativePackage());
 
-       // packages.add(new FirestackPackage());
         packages.add(new FirebasePackage());
         packages.add(new MUDFirebaseDynamicLinkPackage());
         packages.add(new SignerPackage());

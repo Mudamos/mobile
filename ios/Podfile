@@ -15,15 +15,6 @@ def pods
 
   pod "Bolts"
   pod "IQKeyboardManager"
-  pod "Firebase"
-  pod "Firebase/Core"
-  pod "Firebase/Auth"
-  pod "Firebase/Crash"
-  pod "Firebase/Database"
-  pod "Firebase/Messaging"
-  pod "Firebase/RemoteConfig"
-  pod "Firebase/Storage"
-  pod "Firebase/DynamicLinks"
 
   pod "OneSignal", ">= 2.9.3", "< 3.0"
 end
