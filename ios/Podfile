@@ -4,6 +4,10 @@ require_relative "../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, "10.0"
 
+# Override Firebase SDK Version: used by react-native-firebase
+$FirebaseSDKVersion = "7.1.0"
+$RNFirebaseAsStaticFramework = true
+
 def pods
   config = use_native_modules!
 
@@ -15,6 +19,8 @@ def pods
 
   pod "Bolts"
   pod "IQKeyboardManager"
+  pod "Firebase/DynamicLinks", $FirebaseSDKVersion
+  pod "Firebase/RemoteConfig", $FirebaseSDKVersion
 
   pod "OneSignal", ">= 2.9.3", "< 3.0"
 end

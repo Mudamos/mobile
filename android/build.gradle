@@ -5,7 +5,8 @@ def DEFAULT_COMPILE_SDK_VERSION = 29
 def DEFAULT_TARGET_SDK_VERSION = 29
 def DEFAULT_MIN_SDK_VERSION = 16
 def DEFAULT_SUPPORT_LIB_VERSION = "28.0.0"
-def DEFAULT_GOOGLE_PLAY_SERVICES_VERSION = "11.8.0"
+def DEFAULT_GOOGLE_PLAY_SERVICES_VERSION = "17.0.0"
+def DEFAULT_FIREBASE_VERSION = "26.1.0"
 def DEFAULT_FACEBOOK_SDK_VERSION = "7.1.0"
 def DEFAULT_KOTLIN_VERSION = "1.4.10"
 
@@ -17,8 +18,30 @@ ext {
   minSdkVersion = DEFAULT_MIN_SDK_VERSION
   supportLibVersion = DEFAULT_SUPPORT_LIB_VERSION
   googlePlayServicesVersion = DEFAULT_GOOGLE_PLAY_SERVICES_VERSION
+  firebaseVersion = DEFAULT_FIREBASE_VERSION
   facebookSdkVersion = DEFAULT_FACEBOOK_SDK_VERSION
   kotlinVersion = DEFAULT_KOTLIN_VERSION
+}
+
+project.ext {
+  // Used by react-native-firebase
+  set('react-native', [
+    versions: [
+      android : [
+        minSdk: DEFAULT_MIN_SDK_VERSION,
+        targetSdk: DEFAULT_TARGET_SDK_VERSION,
+        compileSdk: DEFAULT_COMPILE_SDK_VERSION,
+      ],
+
+      firebase: [
+        // Override Firebase SDK Version
+        bom: DEFAULT_FIREBASE_VERSION
+      ],
+      play     : [
+        "play-services-auth": DEFAULT_GOOGLE_PLAY_SERVICES_VERSION,
+      ],
+    ],
+  ])
 }
 
 buildscript {
@@ -29,7 +52,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
-        classpath 'com.google.gms:google-services:3.2.0'
+        classpath 'com.google.gms:google-services:4.3.3'
         classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.9, 0.99.99]'
 
         // NOTE: Do not place your application dependencies here; they belong

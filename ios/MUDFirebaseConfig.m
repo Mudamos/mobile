@@ -7,7 +7,7 @@
 //
 
 
-@import Firebase;
+#import <Firebase.h>
 #import "MUDFirebaseConfig.h"
 #import <React/RCTLog.h>
 
@@ -31,7 +31,8 @@
     _remoteConfig = [FIRRemoteConfig remoteConfig];
 
     #ifdef DEBUG
-      FIRRemoteConfigSettings *remoteConfigSettings = [[FIRRemoteConfigSettings alloc] initWithDeveloperModeEnabled:YES];
+      FIRRemoteConfigSettings *remoteConfigSettings = [[FIRRemoteConfigSettings alloc] init];
+      remoteConfigSettings.minimumFetchInterval = 0;
       _remoteConfig.configSettings = remoteConfigSettings;
     #endif
 
@@ -62,14 +63,11 @@
 
 - (void)fetchConfig {
   long expirationDuration = 3600;
-  if (self.remoteConfig.configSettings.isDeveloperModeEnabled) {
-    expirationDuration = 0;
-  }
 
   [self.remoteConfig fetchWithExpirationDuration:expirationDuration completionHandler:^(FIRRemoteConfigFetchStatus status, NSError *error) {
     if (status == FIRRemoteConfigFetchStatusSuccess) {
       RCTLog(@"Firebase remote config fetched");
-      [self.remoteConfig activateFetched];
+      [self.remoteConfig activateWithCompletion:nil];
     } else {
       RCTLog(@"Firebase remote config not fetched");
     }

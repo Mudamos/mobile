@@ -265,6 +265,10 @@ dependencies {
     implementation "com.google.android.gms:play-services-location:${rootProject.ext.googlePlayServicesVersion}"
     implementation "com.google.android.gms:play-services-maps:${rootProject.ext.googlePlayServicesVersion}"
 
+    implementation platform("com.google.firebase:firebase-bom:${rootProject.ext.firebaseVersion}")
+    implementation "com.google.firebase:firebase-config"
+    implementation "com.google.firebase:firebase-dynamic-links"
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
 

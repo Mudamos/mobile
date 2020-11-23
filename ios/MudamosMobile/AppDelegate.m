@@ -6,7 +6,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "IQKeyboardManager.h"
 #import "ReactNativeConfig.h"
-@import Firebase;
+#import <Firebase.h>
 
 #import "MUDFirebaseDynamicLink.h"
 
