@@ -5,7 +5,8 @@ const buildAddress = ({ seed = 1, uf = "SP", city } = {}) => {
     city: city ? city : `City ${seed}`,
     uf,
   });
-}
+};
+
 const buildUser = ({ seed = 1, address = {} }) => {
   return new User({
     id: seed,

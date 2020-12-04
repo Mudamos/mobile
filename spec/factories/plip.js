@@ -26,7 +26,7 @@ const buildPhase = ({ seed = 1, ...attrs }) => {
     initialDate: `2017-10-0${(seed % 9) + 1}T23:59:59-03:00`,
 
     ...attrs,
-  }
+  };
 };
 
 const buildPlip = ({
@@ -42,7 +42,7 @@ const buildPlip = ({
     phase: buildPhase({ ...phase, seed }),
 
     ...attrs,
-  }
+  };
 };
 
 export { buildPlip };
