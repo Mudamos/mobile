@@ -9,7 +9,7 @@ const UNIQUE_ID_KEY = "device-unique-id";
 const generateUniqueId = storage => storage.findOrCreate(UNIQUE_ID_KEY, () => randomBytes(32).toString("hex"));
 
 const info = storage => () => new Promise(async (resolve) => {
-  const uniqueId = DeviceInfo.getUniqueID();
+  const uniqueId = DeviceInfo.getUniqueId();
 
   const deviceUniqueId = isPresent(uniqueId) ? uniqueId : await generateUniqueId(storage);
 
@@ -18,18 +18,18 @@ const info = storage => () => new Promise(async (resolve) => {
       brand: DeviceInfo.getBrand(),
       deviceId: DeviceInfo.getDeviceId(),
       deviceUniqueId,
-      manufacturer: DeviceInfo.getManufacturer(),
+      manufacturer: await DeviceInfo.getManufacturer(),
       model: DeviceInfo.getModel(),
       systemName: DeviceInfo.getSystemName(),
       systemVersion: DeviceInfo.getSystemVersion(),
-      userAgent: DeviceInfo.getUserAgent(),
+      userAgent: await DeviceInfo.getUserAgent(),
     })
   );
 })
 
 const appVersion = () => Promise.resolve(DeviceInfo.getReadableVersion());
 
-const isEmulator = DeviceInfo.isEmulator;
+const isEmulator = () => DeviceInfo.isEmulator();
 
 export default ({ storage }) => ({
   appVersion: appVersion,

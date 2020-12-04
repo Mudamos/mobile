@@ -394,7 +394,7 @@ PODS:
     - React-Core
   - RNCAsyncStorage (1.12.1):
     - React-Core
-  - RNDeviceInfo (0.21.2):
+  - RNDeviceInfo (7.2.1):
     - React-Core
   - RNFBAnalytics (10.1.1):
     - Firebase/Analytics (= 7.1.0)
@@ -659,7 +659,7 @@ SPEC CHECKSUMS:
   ReactNativePermissions: b64e084dff6a5cad51587d38c306f09246246384
   RNAppleAuthentication: 46cbc67739bae83ca229497f9b0038f3f5431443
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
-  RNDeviceInfo: 7991d02468a8574c10b4ffb0bb00c7f2ece7ca83
+  RNDeviceInfo: ae953cf4af2775e45597304fc9513a7931ef81ff
   RNFBAnalytics: 9737fa36d38a7724fc9f91c281cbcf126e974cdd
   RNFBApp: 2b6229d9b0c052e09e6a39067421ff48e2b1c81d
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
