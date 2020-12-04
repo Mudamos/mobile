@@ -47,7 +47,7 @@
     "farfetch": "0.7.0",
     "humps": "^2.0.0",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.20",
     "marked": "^0.3.6",
     "moment": "^2.16.0",
     "mudamos-libcrypto": "0.6.4",
