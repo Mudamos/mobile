@@ -27,6 +27,7 @@
     "lint": "eslint src/ main.*.js index.js",
     "list-ios-simulators": "xcrun simctl list devices",
     "postinstall": "./node_modules/.bin/rn-nodeify -y --install vm,buffer,stream,events,crypto,assert,process,react-native-randombytes,react-native-crypto --hack; jetify; patch-package",
+    "prettier": "prettier --write src/ main.*.js index.js",
     "reset-adb": "adb kill-server; sleep 2; adb start-server && adb reverse tcp:8081 tcp:8081 && adb devices",
     "start": "react-native start",
     "test": "mocha --compilers js:babel-core/register --require spec/support.js 'spec/**/*.spec.js'",
@@ -101,7 +102,7 @@
     "vm-browserify": "0.0.4"
   },
   "jest": {
-    "preset": "jest-react-native"
+    "preset": "react-native"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -119,55 +120,6 @@
     "mocha": "^5.0.4",
     "react-test-renderer": "16.13.1",
     "rn-nodeify": "^10.2.0"
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "sourceType": "module",
-      "ecmaVersion": 6,
-      "ecmaFeatures": {
-        "classes": true,
-        "jsx": true,
-        "modules": true
-      }
-    },
-    "env": {
-      "browser": true,
-      "es6": true
-    },
-    "globals": {
-      "fetch": false,
-      "require": false
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "@react-native-community"
-    ],
-    "plugins": [
-      "react"
-    ],
-    "rules": {
-      "comma-dangle": [
-        "error",
-        "always-multiline"
-      ],
-      "no-console": "off",
-      "quotes": [
-        "error",
-        "double"
-      ],
-      "react/sort-prop-types": [
-        "warn",
-        {
-          "callbacksLast": true
-        }
-      ],
-      "strict": [
-        "error",
-        "global"
-      ]
-    }
   },
   "react-native": {
     "crypto": "react-native-crypto",
