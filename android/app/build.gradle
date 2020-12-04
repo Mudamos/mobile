@@ -1,6 +1,7 @@
+// Must be before com.android.application plugin
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 apply plugin: "com.android.application"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
 
 import com.android.build.OutputFile
