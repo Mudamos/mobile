@@ -407,8 +407,8 @@ PODS:
     - React-Core
   - RNReanimated (1.13.2):
     - React-Core
-  - RNShare (1.2.1):
-    - React
+  - RNShare (4.1.0):
+    - React-Core
   - RNVectorIcons (4.6.0):
     - React
   - Yoga (1.14.0)
@@ -664,7 +664,7 @@ SPEC CHECKSUMS:
   RNFBApp: 2b6229d9b0c052e09e6a39067421ff48e2b1c81d
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
-  RNShare: 48cf88cadf9ca2143cdaa557c1ec7f8808040ffc
+  RNShare: 106a76243ac90f43ddb9028dcb78ade406b8adff
   RNVectorIcons: a3c395829c56e2cb054a0730126298bf805a2dca
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 

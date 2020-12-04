@@ -8478,10 +8478,10 @@ react-native-router-flux@3.45.0:
     react-native-tabs "^1.0.9"
     react-static-container "^1.0.2"
 
-react-native-share@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.2.1.tgz#3756a3cf383c1489a6a0edf2b529ec025ee8f8f7"
-  integrity sha512-V9q1FM+LuYJ65qN3k6BLWs17mIbJCzGyMOhF3rb4MIQXdJfCUbtkDX9aaV86PzcsL1EudCA53HVTJBmWPDed0Q==
+react-native-share@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-4.1.0.tgz#78083d03c236849342decd0ecbc0bb9b77f1eb72"
+  integrity sha512-ytkgi9UsjQviKgWKuniApomB3opjydxPKnrApBF+SPMnQFVVDlH5EyHR6rK+qxMtIAcspb7ylNPj3KzgO+YCrg==
 
 "react-native-simple-toast@https://github.com/itsriodejaneiro/react-native-simple-toast.git#52a1268":
   version "0.0.8"

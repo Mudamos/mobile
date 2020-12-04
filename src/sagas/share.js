@@ -31,7 +31,7 @@ function* shareLinkSaga() {
     } catch (e) {
       logError(e);
 
-      if (e.error !== SHARE_CANCEL_ERROR_MESSAGE) {
+      if (e.message !== SHARE_CANCEL_ERROR_MESSAGE) {
         yield put(shareLinkError(e));
       }
     }
@@ -57,7 +57,7 @@ function* sharePlip() {
     } catch (e) {
       logError(e);
 
-      if (e.error !== SHARE_CANCEL_ERROR_MESSAGE) {
+      if (e.message !== SHARE_CANCEL_ERROR_MESSAGE) {
         yield put(shareLinkError(e));
       }
     }
@@ -78,7 +78,7 @@ function* tellAFriend() {
     } catch (e) {
       logError(e);
 
-      if (e.error !== SHARE_CANCEL_ERROR_MESSAGE) {
+      if (e.message !== SHARE_CANCEL_ERROR_MESSAGE) {
         yield put(shareLinkError(e));
       }
     }
