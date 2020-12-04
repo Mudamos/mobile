@@ -17,18 +17,6 @@
     -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove" />
 
-    <!--
-      Warning:
-      This was added because react-native-image-picker version is old and there is an issue with current sdk 29 (Android 10)
-      android:requestLegacyExternalStorage="true"
-
-      This config will not work on sdk 30 (Android 11) and is a noop.
-
-      Consider later upgrading react-native-image-picker.
-      https://developer.android.com/training/data-storage/use-cases#opt-out-scoped-storage
-      https://github.com/react-native-image-picker/react-native-image-picker/issues/1447#issuecomment-721520908
-      https://github.com/react-native-image-picker/react-native-image-picker/issues/1492
-    -->
     <application
       android:name=".MainApplication"
       android:label="@string/ANDROID_APP_NAME"
@@ -37,7 +25,6 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme"
       android:networkSecurityConfig="@xml/network_security_config"
-      android:requestLegacyExternalStorage="true"
       tools:replace="android:label">
 
       <uses-library android:name="org.apache.http.legacy" android:required="false" />
