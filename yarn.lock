@@ -8377,10 +8377,10 @@ react-native-experimental-navigation@^0.29.2:
     fbjs "^0.8.1"
     prop-types "^15.5.10"
 
-react-native-extended-stylesheet@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/react-native-extended-stylesheet/-/react-native-extended-stylesheet-0.9.0.tgz#e427283153586f873616d0258ab8a8420854e9b5"
-  integrity sha512-x2ExtCAzN9ylL3KxEi47l9VLKogKXlviNm8+izIWaFLpPG2bN6Ku4z4g46M04GePA9LATjYJ+mNoA2OXrU0Hvg==
+react-native-extended-stylesheet@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-extended-stylesheet/-/react-native-extended-stylesheet-0.12.0.tgz#ebacf22d78a8e2173bdef2a08cbf1acba4dc051f"
+  integrity sha512-y4MEI+a9F8qtAKEjxKbwqotJg1FqKfl6vaiF25ULZ/VGkWI4GNTnsFunU9x6B3XJ6ly1E8O9fybO63u6UazL/A==
   dependencies:
     css-mediaquery "^0.1.2"
     object-resolve-path "^1.1.0"
