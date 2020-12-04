@@ -1,9 +1,6 @@
 import React from "react";
 
-import {
-  Text,
-  View,
-} from "react-native";
+import { Text, View } from "react-native";
 
 import FlatButton from "./flat-button";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -11,12 +8,9 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "../styles/retry-button";
 import locale from "../locales/pt-BR";
 
-
 class RetryButton extends FlatButton {
   renderButton() {
-    const {
-      enabled,
-    } = this.props;
+    const { enabled } = this.props;
 
     const builder = this.buttonClass().withText("");
 
@@ -26,10 +20,13 @@ class RetryButton extends FlatButton {
     return (
       <Button>
         <View style={styles.container}>
-          <Icon name="error" size={24} color="#595959" style={[styles.icon, opacity]}/>
-          <Text style={[styles.text, opacity]}>
-            {locale.retry}
-          </Text>
+          <Icon
+            name="error"
+            size={24}
+            color="#595959"
+            style={[styles.icon, opacity]}
+          />
+          <Text style={[styles.text, opacity]}>{locale.retry}</Text>
         </View>
       </Button>
     );
@@ -37,4 +34,3 @@ class RetryButton extends FlatButton {
 }
 
 export default RetryButton;
-

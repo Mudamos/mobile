@@ -2,12 +2,7 @@ import React from "react";
 
 import { compose, withHandlers } from "recompose";
 
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
 import PropTypes from "prop-types";
 
@@ -17,6 +12,9 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+
+const defaultRightMargin = { marginRight: 20 };
+const defaultHorizontalMargin = { marginHorizontal: 20 };
 
 const styles = EStyleSheet.create({
   aboutMudamosContainer: {
@@ -51,20 +49,23 @@ const styles = EStyleSheet.create({
 
 const enhance = compose(
   withHandlers({
-    onFacebook: ({ onOpenURL }) => () => onOpenURL("https://www.facebook.com/mudamos/"),
-    onInstagram: ({ onOpenURL }) => () => onOpenURL("https://www.instagram.com/itsriodejaneiro/"),
-    onTwitter: ({ onOpenURL }) => () => onOpenURL("https://twitter.com/itsriodejaneiro"),
-  })
+    onFacebook: ({ onOpenURL }) => () =>
+      onOpenURL("https://www.facebook.com/mudamos/"),
+    onInstagram: ({ onOpenURL }) => () =>
+      onOpenURL("https://www.instagram.com/itsriodejaneiro/"),
+    onTwitter: ({ onOpenURL }) => () =>
+      onOpenURL("https://twitter.com/itsriodejaneiro"),
+  }),
 );
 
 const StaticFooter = ({ onFacebook, onInstagram, onTwitter }) => (
   <View style={styles.mainContent}>
     <View style={styles.securityInfoContainer}>
       <MaterialIcon
-        name={"lock"}
+        name="lock"
         size={24}
         color="#FFF"
-        style={{marginRight: 20}}
+        style={defaultRightMargin}
       />
       <View style={styles.textContainer}>
         <Text style={styles.text}>{locale.securityMessage}</Text>
@@ -73,41 +74,35 @@ const StaticFooter = ({ onFacebook, onInstagram, onTwitter }) => (
     <View style={styles.aboutMudamosContainer}>
       <Image
         source={require("../images/its-black-logo.png")}
-        style={{marginRight: 20}}
+        style={defaultRightMargin}
       />
       <View style={styles.textContainer}>
         <Text style={styles.text}>{locale.whatIsMudamos}</Text>
       </View>
     </View>
     <View style={styles.linksContainer}>
-      <TouchableOpacity
-        onPress={onFacebook}
-      >
+      <TouchableOpacity onPress={onFacebook}>
         <FontAwesomeIcon
-          name={"facebook"}
+          name="facebook"
           size={24}
           color="#FFF"
-          style={{marginHorizontal: 20}}
+          style={defaultHorizontalMargin}
         />
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={onTwitter}
-      >
+      <TouchableOpacity onPress={onTwitter}>
         <FontAwesomeIcon
-          name={"twitter"}
+          name="twitter"
           size={24}
           color="#FFF"
-          style={{marginHorizontal: 20}}
+          style={defaultHorizontalMargin}
         />
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={onInstagram}
-      >
+      <TouchableOpacity onPress={onInstagram}>
         <FontAwesomeIcon
-          name={"instagram"}
+          name="instagram"
           size={24}
           color="#FFF"
-          style={{marginHorizontal: 20}}
+          style={defaultHorizontalMargin}
         />
       </TouchableOpacity>
     </View>
@@ -119,6 +114,6 @@ StaticFooter.propTypes = {
   onInstagram: PropTypes.func,
   onOpenURL: PropTypes.func.isRequired,
   onTwitter: PropTypes.func,
-}
+};
 
 export default enhance(StaticFooter);

@@ -15,6 +15,11 @@ import { identity } from "ramda";
 
 import locale from "../locales/pt-BR";
 
+const textInputStyle = ({ hideBack, heightAdjust }) => ({
+  marginLeft: hideBack ? 30 : 0,
+  marginTop: Platform.OS === "ios" ? heightAdjust / 2 + 10 : 0,
+});
+
 const INITIAL_TOP = Platform.OS === "ios" ? -80 : -60;
 
 export default class Search extends Component {
@@ -62,8 +67,10 @@ export default class Search extends Component {
   static defaultProps = {
     data: [],
     placeholder: locale.defaultSearchBarPlaceholder,
-    backButtonAccessibilityLabel: locale.defaultSearchBarBackButtonAccessibilityLabel,
-    closeButtonAccessibilityLabel: locale.defaultSearchBarCloseButtonAccessibilityLabel,
+    backButtonAccessibilityLabel:
+      locale.defaultSearchBarBackButtonAccessibilityLabel,
+    closeButtonAccessibilityLabel:
+      locale.defaultSearchBarCloseButtonAccessibilityLabel,
     heightAdjust: 0,
     backgroundColor: "white",
     iconColor: "gray",
@@ -95,7 +102,7 @@ export default class Search extends Component {
     input: "",
     show: this.props.showOnLoad,
     top: new Animated.Value(
-      this.props.showOnLoad ? 0 : INITIAL_TOP + this.props.heightAdjust
+      this.props.showOnLoad ? 0 : INITIAL_TOP + this.props.heightAdjust,
     ),
   };
 
@@ -103,8 +110,8 @@ export default class Search extends Component {
     return this.state.input;
   };
 
-  setValue = input => {
-    return this.setState({ input })
+  setValue = (input) => {
+    return this.setState({ input });
   };
 
   show = () => {
@@ -170,7 +177,7 @@ export default class Search extends Component {
     this.onChangeText("");
   };
 
-  onChangeText = input => {
+  onChangeText = (input) => {
     const { handleChangeText } = this.props;
     this.setState({ input });
     if (handleChangeText) {
@@ -178,13 +185,13 @@ export default class Search extends Component {
     }
   };
 
-  setTextInput = input => this.textInput = input;
+  setTextInput = (input) => (this.textInput = input);
 
   onTextInputLayout = () => {
     const { focusOnLayout } = this.props;
 
     focusOnLayout && this.textInput && this.textInput.focus();
-  }
+  };
 
   render() {
     const {
@@ -226,17 +233,18 @@ export default class Search extends Component {
             ],
           },
           { backgroundColor },
-          { paddingTop: (Platform.OS === "android" ? 26 : 0)},
         ]}>
         {this.state.show && (
           <View style={styles.navWrapper}>
-            {Platform.OS === "ios" &&
-              iosPadding && <View style={{ height: 20, backgroundColor: iosPaddingBackgroundColor }} />}
-            <View
-              style={[
-                styles.nav,
-                { height: 52 + heightAdjust },
-              ]}>
+            {Platform.OS === "ios" && iosPadding && (
+              <View
+                style={[
+                  styles.navIos,
+                  { backgroundColor: iosPaddingBackgroundColor },
+                ]}
+              />
+            )}
+            <View style={[styles.nav, { height: 52 + heightAdjust }]}>
               {!hideBack && (
                 <TouchableOpacity
                   accessible={true}
@@ -266,11 +274,10 @@ export default class Search extends Component {
                 style={[
                   styles.input,
                   {
-                    fontSize: fontSize,
+                    fontSize,
                     color: textColor,
-                    fontFamily: fontFamily,
-                    marginLeft: hideBack ? 30 : 0,
-                    marginTop: Platform.OS === "ios" ? heightAdjust / 2 + 10 : 0,
+                    fontFamily,
+                    ...textInputStyle({ hideBack, heightAdjust }),
                   },
                 ]}
                 selectionColor={selectionColor}
@@ -297,7 +304,7 @@ export default class Search extends Component {
                 onPress={
                   hideX || this.state.input === "" ? null : this.handleX
                 }>
-                { closeButton ? (
+                {closeButton ? (
                   <View style={{ width: backCloseSize, height: backCloseSize }}>
                     {closeButton}
                   </View>
@@ -328,15 +335,20 @@ const styles = StyleSheet.create({
     ...Platform.select({
       android: {
         height: 90,
+        paddingTop: 26,
       },
       ios: {
         height: 80,
+        paddingTop: 0,
       },
     }),
     padding: 10,
   },
   navWrapper: {
     flex: 1,
+  },
+  navIos: {
+    height: 20,
   },
   nav: {
     ...Platform.select({

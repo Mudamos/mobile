@@ -14,19 +14,18 @@ import {
 
 import OpenSettings from "react-native-open-settings";
 
-import {
-  AUTHORIZED,
-  DENIED,
-  OPEN_SETTINGS,
-} from "../services/permission";
-
+import { AUTHORIZED, DENIED, OPEN_SETTINGS } from "../services/permission";
 
 function* location({ permissionService }) {
   yield takeLatest("PERMISSION_REQUEST_LOCATION", function* ({ payload }) {
     try {
       const { message } = payload;
 
-      const result = yield call(permissionService.requestPermission, "location", { message });
+      const result = yield call(
+        permissionService.requestPermission,
+        "location",
+        { message },
+      );
       log(result, { tag: "location" });
 
       switch (result) {
@@ -49,27 +48,39 @@ function* location({ permissionService }) {
 function* avatar({ permissionService }) {
   yield takeLatest("PERMISSION_REQUEST_AVATAR", function* () {
     try {
-      const cameraResult = yield call(permissionService.requestPermission, "camera", {
-        message: locale.permissions.camera,
-        rationale: false,
-      });
-      const photoResult = yield call(permissionService.requestPermission, "photo", {
-        message: locale.permissions.photo,
-        rationale: false,
-      });
+      const cameraResult = yield call(
+        permissionService.requestPermission,
+        "camera",
+        {
+          message: locale.permissions.camera,
+          rationale: false,
+        },
+      );
+      const photoResult = yield call(
+        permissionService.requestPermission,
+        "photo",
+        {
+          message: locale.permissions.photo,
+          rationale: false,
+        },
+      );
 
       log(cameraResult, { tag: "camera" });
       log(photoResult, { tag: "camera" });
 
       const results = [cameraResult, photoResult];
-      const accepted = all(v => v === AUTHORIZED);
+      const accepted = all((v) => v === AUTHORIZED);
       const shouldPresentRationale = contains(DENIED);
 
       if (accepted(results)) {
         return; // no-op
       } else if (shouldPresentRationale(results)) {
-        const result = yield call(permissionService.presentRationale, "camera", { message: locale.permissions.camera });
-        log(result, { tag: "avatar explanation"});
+        const result = yield call(
+          permissionService.presentRationale,
+          "camera",
+          { message: locale.permissions.camera },
+        );
+        log(result, { tag: "avatar explanation" });
 
         if (result === OPEN_SETTINGS) yield call(OpenSettings.openSettings);
         return;
@@ -82,7 +93,7 @@ function* avatar({ permissionService }) {
   });
 }
 
-export default function* permissionSaga ({ permissionService }) {
+export default function* permissionSaga({ permissionService }) {
   yield spawn(location, { permissionService });
   yield spawn(avatar, { permissionService });
 }

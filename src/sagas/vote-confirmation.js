@@ -17,7 +17,9 @@ import { SCREEN_KEYS, SCREEN_NAVIGATION_TYPES } from "../models";
 import { isUnauthorized, log, logError } from "../utils";
 
 function* sendVoteConfirmation({ DeviceInfo, mobileApi }) {
-  yield takeLatest("VOTE_CONFIRMATION_SEND_PHONE", function* ({ payload: { goBackToScreenKey, phone, plip } }) {
+  yield takeLatest("VOTE_CONFIRMATION_SEND_PHONE", function* ({
+    payload: { goBackToScreenKey, phone, plip },
+  }) {
     try {
       const authToken = yield select(currentAuthToken);
       const deviceInfo = yield call(DeviceInfo.info);
@@ -30,11 +32,17 @@ function* sendVoteConfirmation({ DeviceInfo, mobileApi }) {
       log(response);
 
       yield put(sendVotePhoneConfirmationSuccess());
-      yield put(navigate(SCREEN_KEYS.CONFIRM_VOTE_CODE, { goBackToScreenKey, phone, plip }));
+      yield put(
+        navigate(SCREEN_KEYS.CONFIRM_VOTE_CODE, {
+          goBackToScreenKey,
+          phone,
+          plip,
+        }),
+      );
     } catch (e) {
       logError(e, { tag: "sendVoteConfirmation" });
 
-      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
       yield put(sendVotePhoneConfirmationError(e));
     }
@@ -42,25 +50,30 @@ function* sendVoteConfirmation({ DeviceInfo, mobileApi }) {
 }
 
 function* sendVoteCodeConfirmation({ dispatch, mobileApi }) {
-  yield takeLatest("VOTE_CONFIRMATION_SEND_CODE", function* ({ payload: { goBackToScreenKey, phone, pinCode, plip } }) {
+  yield takeLatest("VOTE_CONFIRMATION_SEND_CODE", function* ({
+    payload: { goBackToScreenKey, phone, pinCode, plip },
+  }) {
     try {
       const authToken = yield select(currentAuthToken);
-      yield call(mobileApi.sendVoteCodeConfirmation, authToken, { phone, pinCode, plipId: plip.id });
+      yield call(mobileApi.sendVoteCodeConfirmation, authToken, {
+        phone,
+        pinCode,
+        plipId: plip.id,
+      });
 
       yield put(sendVoteCodeConfirmationSuccess());
 
-      Alert.alert(
-        locale.confirmed,
-        locale.voteCodeConfirmed,
-        [{
+      Alert.alert(locale.confirmed, locale.voteCodeConfirmed, [
+        {
           text: locale.ok,
-          onPress: () => dispatch(voteCodeConfirmationDismiss({ goBackToScreenKey })),
-        }]
-      );
+          onPress: () =>
+            dispatch(voteCodeConfirmationDismiss({ goBackToScreenKey })),
+        },
+      ]);
     } catch (e) {
       logError(e, { tag: "sendVoteCodeConfirmation" });
 
-      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
       yield put(sendVoteCodeConfirmationError(e));
     }
@@ -68,12 +81,23 @@ function* sendVoteCodeConfirmation({ dispatch, mobileApi }) {
 }
 
 function* dismiss() {
-  yield takeLatest("VOTE_CONFIRMATION_DISMISS", function* ({ payload: { goBackToScreenKey }}) {
-    yield put(navigate(goBackToScreenKey, { type: SCREEN_NAVIGATION_TYPES.pushOrPop, refresh: { isMobileValidated: true }}));
+  yield takeLatest("VOTE_CONFIRMATION_DISMISS", function* ({
+    payload: { goBackToScreenKey },
+  }) {
+    yield put(
+      navigate(goBackToScreenKey, {
+        type: SCREEN_NAVIGATION_TYPES.pushOrPop,
+        refresh: { isMobileValidated: true },
+      }),
+    );
   });
 }
 
-export default function* voteConfirmationSaga({ DeviceInfo, dispatch, mobileApi }) {
+export default function* voteConfirmationSaga({
+  DeviceInfo,
+  dispatch,
+  mobileApi,
+}) {
   yield fork(sendVoteConfirmation, { DeviceInfo, mobileApi });
   yield fork(sendVoteCodeConfirmation, { dispatch, mobileApi });
   yield fork(dismiss);

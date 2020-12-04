@@ -1,13 +1,8 @@
-import React, {
-  Component,
-} from "react";
+import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import {
-  View,
-  ViewPropTypes,
-} from "react-native";
+import { View, ViewPropTypes } from "react-native";
 
 import StatusBarSpacer from "./status-bar-spacer";
 

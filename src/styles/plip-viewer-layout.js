@@ -20,4 +20,7 @@ export default StyleSheet.create({
     marginHorizontal: 15,
     paddingVertical: 20,
   },
+  white: {
+    backgroundColor: "#FFF",
+  },
 });

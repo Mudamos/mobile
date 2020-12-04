@@ -13,7 +13,7 @@ export const navigateBack = () => ({
 export const navigationHappened = ({ sceneKey }) => ({
   type: "NAVIGATION",
   payload: { sceneKey },
-})
+});
 
 export const profileStateMachine = (params = {}) => ({
   type: "USER_PROFILE_NAVIGATOR",

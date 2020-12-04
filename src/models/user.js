@@ -6,7 +6,6 @@ import Wallet from "./wallet";
 
 import { propIsPresent } from "../utils";
 
-
 export default class User {
   constructor(attrs = {}) {
     this.id = attrs.id;
@@ -69,7 +68,7 @@ export default class User {
 
       ...mobileJson,
       ...walletJson,
-    }
+    };
   }
 
   static fromJson(json = {}) {

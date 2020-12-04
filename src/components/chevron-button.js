@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  Text,
-  TouchableOpacity,
-  ViewPropTypes,
-} from "react-native";
+import { Text, TouchableOpacity, ViewPropTypes } from "react-native";
 
 import Icon from "react-native-vector-icons/Feather";
 
@@ -18,13 +14,13 @@ export default class ChevronButton extends Component {
     size: PropTypes.number,
 
     ...Text.propTypes,
-  }
+  };
 
   static defaultProps = {
     clickable: true,
     color: "#fff",
     size: 30,
-  }
+  };
 
   render() {
     const {
@@ -41,13 +37,7 @@ export default class ChevronButton extends Component {
     const iconName = `chevron-${direction}`;
 
     const icon = (
-      <Icon
-        name={iconName}
-        size={size}
-        color={color}
-
-        {...textProps}
-      />
+      <Icon name={iconName} size={size} color={color} {...textProps} />
     );
 
     const iconWithTouch = (

@@ -102,7 +102,7 @@ export default (state = initialState, action) => {
           isFetchingNextPage: false,
           error: null,
         },
-      }
+      };
     }
     case "RESET_USER_LOCATION_PLIPS": {
       return {
@@ -117,7 +117,7 @@ export default (state = initialState, action) => {
           isFetchingNextPage: false,
           error: null,
         },
-      }
+      };
     }
     case "ALL_PLIPS_FETCHED": {
       return {
@@ -400,7 +400,7 @@ export default (state = initialState, action) => {
           isFetching: false,
           isFetchingNextPage: false,
         },
-      }
+      };
     }
     case "FAVORITE_PLIPS_ERROR": {
       return {
@@ -412,7 +412,7 @@ export default (state = initialState, action) => {
           isFetchingNextPage: false,
           error: payload.error,
         },
-      }
+      };
     }
     case "REFRESH_FAVORITE_PLIPS": {
       return {
@@ -425,7 +425,7 @@ export default (state = initialState, action) => {
           loaded: true,
           error: null,
         },
-      }
+      };
     }
     case "REFRESHING_FAVORITE_PLIPS": {
       return {
@@ -544,7 +544,10 @@ export default (state = initialState, action) => {
     case "PLIP_PLIPS_FAVORITE_INFO_FETCHED":
       return {
         ...state,
-        plipsFavoriteInfo: { ...state.plipsFavoriteInfo, ...payload.favoriteInfo },
+        plipsFavoriteInfo: {
+          ...state.plipsFavoriteInfo,
+          ...payload.favoriteInfo,
+        },
       };
     case "PLIP_CLEAR_INFO":
       return {
@@ -561,7 +564,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         currentPlip: payload.plip,
-      }
+      };
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,

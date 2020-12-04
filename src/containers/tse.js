@@ -6,14 +6,12 @@ import {
   voteCardIdAcquired,
 } from "../actions";
 
-import {
-  log,
-  logError,
-} from "../utils";
+import { log, logError } from "../utils";
 
 import TSELayout from "../components/tse-layout";
 
-const TSE_URL = "http://www.tse.jus.br/eleitor/servicos/titulo-de-eleitor/titulo-e-local-de-votacao/consulta-por-nome#form-consultar-local-votacao";
+const TSE_URL =
+  "http://www.tse.jus.br/eleitor/servicos/titulo-de-eleitor/titulo-e-local-de-votacao/consulta-por-nome#form-consultar-local-votacao";
 const source = { uri: TSE_URL };
 
 const jsCode = ({ birthdate, name }) => {
@@ -159,9 +157,9 @@ const mapStateToProps = (state, ownProps) => ({
   }),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onBack: () => dispatch(navigateBack()),
-  onMessage: event => {
+  onMessage: (event) => {
     const message = event.nativeEvent.data;
 
     log(`webView: ${message}`);
@@ -177,7 +175,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(tseVoteAddressAcquired({ tseVoteAddress: voteAddress }));
         dispatch(navigateBack());
       }
-    } catch(e) {
+    } catch (e) {
       logError(e);
     }
   },
@@ -191,4 +189,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   source,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(TSELayout);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps,
+)(TSELayout);

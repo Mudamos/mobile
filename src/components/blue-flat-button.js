@@ -27,6 +27,8 @@ const styles = EStyleSheet.create({
 });
 
 const iconMarginTop = Platform.OS === "ios" ? 3 : 0;
+const iconMarginLeft = 10;
+const opacityFor = (enabled) => (enabled ? 1 : 0.5);
 
 export default class BlueFlatButton extends FlatButton {
   renderButton() {
@@ -46,18 +48,17 @@ export default class BlueFlatButton extends FlatButton {
         <Text
           numberOfLines={numberOfLines || 1}
           textAnchor="middle"
-          style={[styles.text, textStyle, { opacity: enabled ? 1 : 0.5 }]}
-        >
+          style={[styles.text, textStyle, { opacity: opacityFor(enabled) }]}>
           {title}
         </Text>
-        { iconName &&
+        {iconName && (
           <Icon
             name={iconName}
             size={24}
             color="#FFF"
-            style={{ marginTop: iconMarginTop, marginLeft: 10 }}
+            style={{ marginTop: iconMarginTop, marginLeft: iconMarginLeft }}
           />
-        }
+        )}
       </Button>
     );
   }

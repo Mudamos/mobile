@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 export default class Menu extends Component {
   static propTypes = {
     ...Drawer.propTypes,
@@ -41,10 +40,7 @@ export default class Menu extends Component {
   };
 
   render() {
-    const {
-      content,
-      ...props
-    } = this.props;
+    const { content, ...props } = this.props;
 
     const wrappedContent = (
       <LinearGradient
@@ -52,8 +48,7 @@ export default class Menu extends Component {
         end={gradientEnd}
         locations={gradientLocation}
         style={styles.full}
-        colors={gradientColors}
-      >
+        colors={gradientColors}>
         {content}
       </LinearGradient>
     );
@@ -61,11 +56,9 @@ export default class Menu extends Component {
     return (
       <Drawer
         {...props}
-
         content={wrappedContent}
-        ref={ref => this.drawer = ref}
-        styles={drawerStyles}
-      >
+        ref={(ref) => (this.drawer = ref)}
+        styles={drawerStyles}>
         {this.props.children}
       </Drawer>
     );

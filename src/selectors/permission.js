@@ -1,1 +1,1 @@
-export const getLocationPermission = state => state.permission.location;
+export const getLocationPermission = (state) => state.permission.location;

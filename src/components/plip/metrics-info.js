@@ -1,18 +1,10 @@
 import React from "react";
 
-import {
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import PropTypes from "prop-types";
 
-import {
-  any,
-  clamp,
-  isNil,
-} from "ramda";
+import { any, clamp, isNil } from "ramda";
 
 import {
   countTimingFunction,
@@ -32,13 +24,12 @@ import locale from "../../locales/pt-BR";
 import { MKProgress } from "react-native-material-kit";
 import AnimateNumber from "react-native-animate-number";
 
-
-const percentageFormatter = v => `${v}%`;
+const percentageFormatter = (v) => `${v}%`;
 
 const noCounters = (...args) => any(isNil)(args);
 
 const plipProgress = ({ signaturesRequired, signaturesCount }) => {
-  if (!signaturesRequired || signaturesRequired == 0 || !signaturesCount) {
+  if (!signaturesRequired || signaturesRequired === 0 || !signaturesCount) {
     return 0;
   }
 
@@ -50,7 +41,9 @@ const plipProgress = ({ signaturesRequired, signaturesCount }) => {
 };
 
 const progressPercentage = ({ signaturesRequired, signaturesCount }) => {
-  return Math.floor(plipProgress({ signaturesRequired, signaturesCount }) * 100);
+  return Math.floor(
+    plipProgress({ signaturesRequired, signaturesCount }) * 100,
+  );
 };
 
 const messageForDaysLeft = ({ finalDate }) => {
@@ -68,7 +61,7 @@ const messageForDaysLeft = ({ finalDate }) => {
 const renderPlipFinished = () => {
   return (
     <View>
-      <View style={{flex: 1, justifyContent: "flex-end"}}>
+      <View style={styles.plipFinishedContainer}>
         <Text style={styles.infoTextSubtitle}>{locale.petitionEnded}</Text>
       </View>
     </View>
@@ -92,12 +85,19 @@ const MetricsInfo = ({
   return (
     <View>
       <View style={styles.infoContainer}>
-        <View style={isNationalCause(plip) ? styles.infoNationalCauseContainerRow : styles.infoContainerRow}>
-          { !isNationalCause(plip) && <TargetPercentage
-            signaturesRequired={signaturesRequired}
-            signaturesCount={signaturesCount}
-            append={showGoal ? "*" : ""}
-          /> }
+        <View
+          style={
+            isNationalCause(plip)
+              ? styles.infoNationalCauseContainerRow
+              : styles.infoContainerRow
+          }>
+          {!isNationalCause(plip) && (
+            <TargetPercentage
+              signaturesRequired={signaturesRequired}
+              signaturesCount={signaturesCount}
+              append={showGoal ? "*" : ""}
+            />
+          )}
           <SignaturesCount
             canSign={canSign}
             plip={plip}
@@ -106,17 +106,24 @@ const MetricsInfo = ({
             showGoal={showGoal}
             user={user}
           />
-          {canSign && isRemainingDaysEnabled && <RemainingDays finalDate={finalDate} />}
+          {canSign && isRemainingDaysEnabled && (
+            <RemainingDays finalDate={finalDate} />
+          )}
           {!canSign && renderPlipFinished()}
         </View>
 
-        {
-          showGoal &&
-            <Text style={styles.finalGoalText}>* Nossa meta final é de {formatNumber(totalSignaturesRequired)} assinaturas</Text>
-        }
+        {showGoal && (
+          <Text style={styles.finalGoalText}>
+            * Nossa meta final é de {formatNumber(totalSignaturesRequired)}{" "}
+            assinaturas
+          </Text>
+        )}
       </View>
 
-      <Progress signaturesRequired={signaturesRequired} signaturesCount={signaturesCount} />
+      <Progress
+        signaturesRequired={signaturesRequired}
+        signaturesCount={signaturesCount}
+      />
     </View>
   );
 };
@@ -150,7 +157,10 @@ Progress.propTypes = {
 };
 
 const TargetPercentage = ({ append, signaturesRequired, signaturesCount }) => {
-  const percentage = progressPercentage({ signaturesRequired, signaturesCount });
+  const percentage = progressPercentage({
+    signaturesRequired,
+    signaturesCount,
+  });
 
   return (
     <View>
@@ -172,17 +182,25 @@ TargetPercentage.propTypes = {
   signaturesRequired: PropTypes.number.isRequired,
 };
 
-const SignaturesCount = ({ canSign, plip, showGoal, signaturesCount, signaturesRequired, user }) => {
+const SignaturesCount = ({
+  canSign,
+  plip,
+  showGoal,
+  signaturesCount,
+  signaturesRequired,
+  user,
+}) => {
   const count = signaturesCount;
   const goal = signaturesRequired;
 
-  const CountView = () =>
+  const CountView = () => (
     <AnimateNumber
       value={count}
       timing={countTimingFunction}
       formatter={formatNumber}
       style={styles.infoText}
-    />;
+    />
+  );
 
   const getMessage = () => {
     if (isUserGoals({ user, plip })) {
@@ -198,23 +216,28 @@ const SignaturesCount = ({ canSign, plip, showGoal, signaturesCount, signaturesR
     }
 
     return canSign ? "já assinaram" : "assinaram";
-  }
+  };
 
   const signatureMessage = getMessage();
 
   return (
     <View style={styles.signaturesCountContainer}>
-      {
-        showGoal &&
-          <View style={{ alignSelf: "flex-end", flexDirection: "row", alignItems: "flex-start" }}>
-            <CountView />
-            <Text style={[styles.infoTextSubtitle, { alignSelf: "center", marginLeft: 5 }]}>de</Text>
-            <Text style={[styles.infoText, { marginLeft: 5 }]}>{formatNumber(goal)}</Text>
-          </View>
-      }
+      {showGoal && (
+        <View style={styles.countWrapper}>
+          <CountView />
+          <Text style={[styles.infoTextSubtitle, styles.infoAligned]}>de</Text>
+          <Text style={[styles.infoText, styles.withLeftMargin]}>
+            {formatNumber(goal)}
+          </Text>
+        </View>
+      )}
 
       {!showGoal && <CountView />}
-      <Text style={[styles.infoTextSubtitle, showGoal ? { alignSelf: "flex-end" } : null]} numberOfLines={2}>{signatureMessage}</Text>
+      <Text
+        style={[styles.infoTextSubtitle, showGoal ? styles.endAligned : null]}
+        numberOfLines={2}>
+        {signatureMessage}
+      </Text>
     </View>
   );
 };
@@ -240,7 +263,6 @@ const RemainingDays = ({ finalDate }) => {
 RemainingDays.propTypes = {
   finalDate: PropTypes.string.isRequired,
 };
-
 
 const textShadow = {
   textShadowColor: "rgba(0,0,0, 1)",
@@ -269,6 +291,14 @@ const infoContainerRow = {
 };
 
 const styles = StyleSheet.create({
+  countWrapper: {
+    alignSelf: "flex-end",
+    flexDirection: "row",
+    alignItems: "flex-start",
+  },
+  endAligned: {
+    alignSelf: "flex-end",
+  },
   finalGoalText: {
     marginTop: 10,
     textAlign: "right",
@@ -277,6 +307,10 @@ const styles = StyleSheet.create({
   },
   full: {
     flex: 1,
+  },
+  infoAligned: {
+    alignSelf: "center",
+    marginLeft: 5,
   },
   infoContainer: {
     paddingHorizontal: 12,
@@ -303,12 +337,19 @@ const styles = StyleSheet.create({
   infoTextSubtitle: {
     ...infoTextSubtitle,
   },
+  plipFinishedContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
   progress: {
     height: 7,
     backgroundColor: "#484848",
   },
   signaturesCountContainer: {
     flex: 1,
+    marginLeft: 5,
+  },
+  withLeftMargin: {
     marginLeft: 5,
   },
 });

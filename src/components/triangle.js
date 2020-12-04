@@ -1,16 +1,14 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  Animated,
-  StyleSheet,
-} from "react-native";
+import { Animated, StyleSheet } from "react-native";
 
-const Triangle = ({ color, style, ...props }) =>
+const Triangle = ({ color, style, ...props }) => (
   <Animated.View
     {...props}
     style={[styles.triangle, { borderBottomColor: color }, style]}
-  />;
+  />
+);
 
 Triangle.propTypes = {
   ...Animated.View.propTypes,

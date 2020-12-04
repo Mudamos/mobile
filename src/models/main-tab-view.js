@@ -8,6 +8,8 @@ export const defaultMainTabViewRoutes = [
   { key: "favoritePlips", title: "Favoritos" },
 ];
 
-export const getMainTabViewKeyByIndex = index => defaultMainTabViewRoutes[index].key;
+export const getMainTabViewKeyByIndex = (index) =>
+  defaultMainTabViewRoutes[index].key;
 
-export const getMainTabViewIndexByKey = key => findIndex(propEq("key", key))(defaultMainTabViewRoutes)
+export const getMainTabViewIndexByKey = (key) =>
+  findIndex(propEq("key", key))(defaultMainTabViewRoutes);

@@ -22,15 +22,9 @@ import {
   requestAvatarAccess,
 } from "../actions";
 
-import {
-  extractNumbers,
-  fromISODate,
-  toISODate,
-  zipCodeMask,
-} from "../utils";
+import { extractNumbers, fromISODate, toISODate, zipCodeMask } from "../utils";
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const user = currentUser(state);
 
   return {
@@ -44,30 +38,36 @@ const mapStateToProps = state => {
     previousAvatar: user ? user.avatar : null,
     previousCity: user ? user.voteCity : null,
     previousName: user ? user.name : null,
-    previousBirthdate: user && user.birthdate ? fromISODate(user.birthdate) : null,
+    previousBirthdate:
+      user && user.birthdate ? fromISODate(user.birthdate) : null,
     previousUf: user && user.voteCity ? user.voteCity.uf : null,
     previousZipCode: user && user.zipCode ? zipCodeMask(user.zipCode) : null,
     states: findStates(state),
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onBack: () => {
     dispatch(clearProfileSaveErrors());
     dispatch(navigateBack());
   },
   onFetchCities: () => dispatch(fetchCities()),
   onFetchStates: () => dispatch(fetchStates()),
-  onSave: ({ profile, validations }) => dispatch(
-    updateUser({
-      profile: {
-        ...profile,
-        birthdate: toISODate(profile.birthdate),
-        zipCode: extractNumbers(profile.zipCode),
-      },
-      validations,
-    })),
+  onSave: ({ profile, validations }) =>
+    dispatch(
+      updateUser({
+        profile: {
+          ...profile,
+          birthdate: toISODate(profile.birthdate),
+          zipCode: extractNumbers(profile.zipCode),
+        },
+        validations,
+      }),
+    ),
   onRequestAvatarPermission: () => dispatch(requestAvatarAccess()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdateLayout);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ProfileUpdateLayout);

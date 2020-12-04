@@ -14,6 +14,9 @@ export default EStyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  gradientImage: {
+    marginVertical: 17,
+  },
   separatorContainer: {
     alignItems: "center",
     flexDirection: "row",
@@ -27,6 +30,9 @@ export default EStyleSheet.create({
   },
   small: {
     fontSize: "0.8rem",
+  },
+  smallLeftMargin: {
+    margin: 20,
   },
   text: {
     color: "#FFF",

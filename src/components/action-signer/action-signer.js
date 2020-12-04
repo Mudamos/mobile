@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Image,
-  Text,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Image, Text, StyleSheet, View } from "react-native";
 
 import {
   branch,
@@ -16,9 +11,7 @@ import {
 
 import PropTypes from "prop-types";
 
-import {
-  prop,
-} from "ramda";
+import { prop } from "ramda";
 
 import Layout from "../purple-layout";
 import SplashLoader from "../splash-loader";
@@ -27,7 +20,9 @@ import locale from "../../locales/pt-BR";
 
 const enhance = compose(
   withProps(({ done, error, errorIdentifier }) => ({
-    errorMessage: error ? locale.actionSignerError[errorIdentifier] || errorIdentifier : null,
+    errorMessage: error
+      ? locale.actionSignerError[errorIdentifier] || errorIdentifier
+      : null,
     isLoading: !done,
     success: done && !error,
   })),
@@ -38,24 +33,23 @@ const enhance = compose(
   }),
   branch(
     prop("isLoading"),
-    renderComponent(() => <SplashLoader isVisible={true} loadingTitle={locale.executingActionWait} />)
+    renderComponent(() => (
+      <SplashLoader
+        isVisible={true}
+        loadingTitle={locale.executingActionWait}
+      />
+    )),
   ),
 );
 
-const ActionSigner = enhance(({
-  error,
-  errorMessage,
-  success,
-}) => (
+const ActionSigner = enhance(({ error, errorMessage, success }) => (
   <View style={styles.container}>
     <Layout contentStyle={styles.layout}>
-      <Image
-        source={require("../../images/Logo-alt.png")}
-      />
+      <Image source={require("../../images/Logo-alt.png")} />
 
       <View style={styles.result}>
-        { success && <Text style={styles.resultText}>{locale["success!"]}</Text> }
-        { error && <Text style={styles.resultText}>{errorMessage}</Text> }
+        {success && <Text style={styles.resultText}>{locale["success!"]}</Text>}
+        {error && <Text style={styles.resultText}>{errorMessage}</Text>}
       </View>
     </Layout>
   </View>

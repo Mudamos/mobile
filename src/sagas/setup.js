@@ -43,7 +43,7 @@ function* setup({ mobileApi, mudamosSigner, sessionStore }) {
     try {
       yield call(fetchProfile, { mobileApi });
       yield put(increaseAppLoading());
-    } catch(e) {
+    } catch (e) {
       logError(e);
     }
 

@@ -1,12 +1,7 @@
 import PropTypes from "prop-types";
-import React, {
-  Component,
-} from "react";
+import React, { Component } from "react";
 
-import {
-  StatusBar,
-} from "react-native";
-
+import { StatusBar } from "react-native";
 
 export default class StatusBarSpacer extends Component {
   static propTypes = {
@@ -23,14 +18,9 @@ export default class StatusBarSpacer extends Component {
     translucent: true,
     backgroundColor: "#20000000",
     barStyle: "light-content",
-  }
+  };
 
   render() {
-
-    return (
-      <StatusBar
-        {...this.props}
-      />
-    );
+    return <StatusBar {...this.props} />;
   }
 }

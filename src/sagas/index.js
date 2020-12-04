@@ -48,7 +48,13 @@ export default function* rootSaga({
 }) {
   yield fork(actionSignerSaga, { mobileApi, mudamosSigner, walletStore });
 
-  yield fork(appleSignInSaga, { Crypto, DeviceInfo, localStorage, mobileApi, sessionStore });
+  yield fork(appleSignInSaga, {
+    Crypto,
+    DeviceInfo,
+    localStorage,
+    mobileApi,
+    sessionStore,
+  });
   yield spawn(analyticsSaga, { analytics });
   yield spawn(citySaga, { repositories });
   yield spawn(navigationSaga, { mobileApi, sessionStore });
@@ -58,8 +64,21 @@ export default function* rootSaga({
   yield spawn(notificationSaga, { mobileApi });
   yield spawn(passwordSaga, { mobileApi, sessionStore, Crypto });
   yield spawn(permissionSaga, { permissionService });
-  yield spawn(plipSaga, { apiError, DeviceInfo, localStorage, mobileApi, walletStore });
-  yield spawn(profileSaga, { dispatch, mobileApi, DeviceInfo, sessionStore, Crypto, walletStore });
+  yield spawn(plipSaga, {
+    apiError,
+    DeviceInfo,
+    localStorage,
+    mobileApi,
+    walletStore,
+  });
+  yield spawn(profileSaga, {
+    dispatch,
+    mobileApi,
+    DeviceInfo,
+    sessionStore,
+    Crypto,
+    walletStore,
+  });
   yield spawn(stateSaga, { repositories });
   yield spawn(errorSaga);
   yield spawn(remoteConfigSaga, { RemoteConfigService });

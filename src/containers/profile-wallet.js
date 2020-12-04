@@ -4,14 +4,9 @@ import { connect } from "react-redux";
 
 import WalletLayout from "../components/profile-wallet-layout";
 
-import {
-  createWallet,
-} from "../actions";
+import { createWallet } from "../actions";
 
-import {
-  hasWalletCreationError,
-  isCreatingWallet,
-} from "../selectors";
+import { hasWalletCreationError, isCreatingWallet } from "../selectors";
 
 class Container extends Component {
   static propTypes = {
@@ -19,7 +14,7 @@ class Container extends Component {
     onCreateWallet: PropTypes.func.isRequired,
 
     ...WalletLayout.propTypes,
-  }
+  };
 
   componentDidMount() {
     const { revalidateProfileSignPlip, onCreateWallet } = this.props;
@@ -30,21 +25,18 @@ class Container extends Component {
   }
 
   render() {
-    return (
-      <WalletLayout
-        {...this.props}
-      />
-    );
+    return <WalletLayout {...this.props} />;
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   hasError: hasWalletCreationError(state),
   isCreatingWallet: isCreatingWallet(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  onCreateWallet: ({ revalidateProfileSignPlip }) => dispatch(createWallet({ revalidateProfileSignPlip })),
+const mapDispatchToProps = (dispatch) => ({
+  onCreateWallet: ({ revalidateProfileSignPlip }) =>
+    dispatch(createWallet({ revalidateProfileSignPlip })),
   onRetry: () => dispatch(createWallet()),
 });
 

@@ -6,7 +6,7 @@ import Player from "./you-tube/player";
 
 import styles from "../styles/show-video-layout";
 
-const ShowVideoLayout = props => {
+const ShowVideoLayout = (props) => {
   const { videoId } = props;
 
   return (

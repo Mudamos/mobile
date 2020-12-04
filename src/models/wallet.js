@@ -8,7 +8,7 @@ export default class Wallet {
     return {
       walletKey: this.key,
       walletStatus: this.status,
-    }
+    };
   }
 
   static fromJson(json = {}) {

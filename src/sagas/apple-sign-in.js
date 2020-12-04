@@ -27,22 +27,31 @@ import { isDev, isValidEmailRelaxed, log, logError } from "../utils";
 
 function* decodeToken(token) {
   try {
-    return yield jwtDecode(token)
-  } catch(error) {
+    return yield jwtDecode(token);
+  } catch (error) {
     log("Invalid identity token", { tag: "Apple" }, error);
   }
 }
 
-function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) {
+function* signIn({
+  DeviceInfo,
+  mobileApi,
+  localStorage,
+  sessionStore,
+  Crypto,
+}) {
   yield takeLatest("APPLE_SIGN_IN", function* () {
     try {
       const myState = yield call(Crypto.uuid);
 
-      const appleAuthRequestResponse = yield call([appleAuth, appleAuth.performRequest], {
-        requestedOperation: appleAuth.Operation.LOGIN,
-        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-        state: myState,
-      });
+      const appleAuthRequestResponse = yield call(
+        [appleAuth, appleAuth.performRequest],
+        {
+          requestedOperation: appleAuth.Operation.LOGIN,
+          requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+          state: myState,
+        },
+      );
 
       log("Response: ", { tag: "Apple" }, appleAuthRequestResponse);
 
@@ -55,7 +64,7 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
         identityToken,
         nonce,
         state,
-      } = (appleAuthRequestResponse || {});
+      } = appleAuthRequestResponse || {};
 
       if (!identityToken || state !== myState) {
         yield put(finishedLogIn());
@@ -67,15 +76,23 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
       const isEmulator = yield call(DeviceInfo.isEmulator);
 
       // Credential checking does not work on emulators
-      const checkCredentialAuthorization = !isDev || isDev && !isEmulator;
+      const checkCredentialAuthorization = !isDev || (isDev && !isEmulator);
 
       if (checkCredentialAuthorization) {
         log("Checking credential state");
 
-        const credentialState = yield call([appleAuth, appleAuth.getCredentialStateForUser], appleUserId);
+        const credentialState = yield call(
+          [appleAuth, appleAuth.getCredentialStateForUser],
+          appleUserId,
+        );
 
         if (credentialState !== appleAuth.State.AUTHORIZED) {
-          log("Sign in has been denied", { tag: "Apple" }, { credentialState }, appleAuth.State);
+          log(
+            "Sign in has been denied",
+            { tag: "Apple" },
+            { credentialState },
+            appleAuth.State,
+          );
 
           yield call([Toast, Toast.show], locale.userDeniedAppleAccess);
           yield put(finishedLogIn());
@@ -91,10 +108,14 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
       //
       // Only the email is really required for us, so the email can be retrieved
       // from the identityToken anyway. See decodeToken.
-      const cacheInfo = yield call(localStorage.findOrCreate, appleUserInfoKey, () => ({
-        email: signEmail,
-        fullName: signFullName,
-      }));
+      const cacheInfo = yield call(
+        localStorage.findOrCreate,
+        appleUserInfoKey,
+        () => ({
+          email: signEmail,
+          fullName: signFullName,
+        }),
+      );
 
       const tokenInfo = yield call(decodeToken, identityToken);
 
@@ -112,9 +133,13 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
 
       const currentSigningPlip = yield select(getCurrentSigningPlip);
       const plipId = prop("id", currentSigningPlip);
-      const block = yield call(blockBuilder, { message: identityToken, mobileApi, Crypto });
+      const block = yield call(blockBuilder, {
+        message: identityToken,
+        mobileApi,
+        Crypto,
+      });
 
-      const token =  yield call(mobileApi.appleSignIn, {
+      const token = yield call(mobileApi.appleSignIn, {
         appleUserId,
         authorizedScopes,
         authorizationCode,
@@ -139,7 +164,7 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
       yield put(profileStateMachine());
 
       yield put(logEvent({ name: "apple_sign_in" }));
-    } catch(error) {
+    } catch (error) {
       if (prop("code", error) === appleAuth.Error.CANCELED) {
         log("User cancelled operation");
         return;
@@ -155,6 +180,18 @@ function* signIn({ DeviceInfo, mobileApi, localStorage, sessionStore, Crypto }) 
   });
 }
 
-export default function* appleSignInSaga({ Crypto, DeviceInfo, localStorage, mobileApi, sessionStore }) {
-  yield fork(signIn, { Crypto, DeviceInfo, localStorage, mobileApi, sessionStore });
+export default function* appleSignInSaga({
+  Crypto,
+  DeviceInfo,
+  localStorage,
+  mobileApi,
+  sessionStore,
+}) {
+  yield fork(signIn, {
+    Crypto,
+    DeviceInfo,
+    localStorage,
+    mobileApi,
+    sessionStore,
+  });
 }

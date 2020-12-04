@@ -8,7 +8,7 @@ export default class Mobile {
     return {
       mobileNumber: this.number,
       mobileStatus: this.status,
-    }
+    };
   }
 
   static fromJson(json = {}) {

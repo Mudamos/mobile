@@ -8,7 +8,13 @@ export default (props, computedProps) =>
     scene: {
       flex: 1,
       backgroundColor: "#fff",
-      marginTop: computedProps.hideNavBar || computedProps.hideNavBar === undefined ? 0 : defaultNavBarSize,
-      marginBottom: (computedProps.hideTabBar || computedProps.hideTabBar === undefined) ? 0 : defaultTabBarSize,
+      marginTop:
+        computedProps.hideNavBar || computedProps.hideNavBar === undefined
+          ? 0
+          : defaultNavBarSize,
+      marginBottom:
+        computedProps.hideTabBar || computedProps.hideTabBar === undefined
+          ? 0
+          : defaultTabBarSize,
     },
-  })
+  });

@@ -12,9 +12,7 @@ import {
   View,
 } from "react-native";
 
-import {
-  calcCustomTotalSignatures,
-} from "../models";
+import { calcCustomTotalSignatures } from "../models";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -28,15 +26,19 @@ import styles from "../styles/plips-list";
 import noPlipsImage from "../images/plip-page.png";
 
 import locale from "../locales/pt-BR";
-import {
-  RemoteLinksType,
-} from "../prop-types";
+import { RemoteLinksType } from "../prop-types";
 
-import {
-  isBlank,
-  notEmpty,
-  notNil,
-} from "../utils";
+import { isBlank, notEmpty, notNil } from "../utils";
+
+const refreshFlatStyle = {
+  backgroundColor: "#00c084",
+  marginTop: 10,
+};
+
+const refreshFlatTextStyle = { color: "#fff" };
+const sendYourIdeaFlatStyle = { backgroundColor: "#00c084" };
+const sendYourIdeaFlatTextStyle = { color: "#fff" };
+const retryButtonStyle = { marginHorizontal: 20, backgroundColor: "#ddd" };
 
 export default class PlipsList extends Component {
   static propTypes = {
@@ -64,22 +66,27 @@ export default class PlipsList extends Component {
     onRetryPlips: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onToggleFavorite: PropTypes.func.isRequired,
-  }
+  };
 
-  plipListKey = item => String(item.id);
+  plipListKey = (item) => String(item.id);
 
-  onGoToPlip = plip => {
+  onGoToPlip = (plip) => {
     const { onGoToPlip } = this.props;
     onGoToPlip(plip);
-  }
+  };
 
-  onShare = plip => {
+  onShare = (plip) => {
     const { onShare } = this.props;
     onShare(plip);
-  }
+  };
 
   onFetchPlipsNextPage = () => {
-    const { isFetchingPlipsNextPage, onFetchPlipsNextPage, nextPage, typeList } = this.props;
+    const {
+      isFetchingPlipsNextPage,
+      onFetchPlipsNextPage,
+      nextPage,
+      typeList,
+    } = this.props;
 
     if (!isFetchingPlipsNextPage) onFetchPlipsNextPage({ typeList, nextPage });
   };
@@ -97,13 +104,15 @@ export default class PlipsList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      isSearchingPlips,
-      typeList,
-    } = this.props
+    const { isSearchingPlips, typeList } = this.props;
 
-    if (typeList === "allPlips" && isSearchingPlips && isSearchingPlips !== prevProps.isSearchingPlips) {
-      this.flatList && this.flatList.scrollToOffset({ offset: 1, animated: true });
+    if (
+      typeList === "allPlips" &&
+      isSearchingPlips &&
+      isSearchingPlips !== prevProps.isSearchingPlips
+    ) {
+      this.flatList &&
+        this.flatList.scrollToOffset({ offset: 1, animated: true });
     }
   }
 
@@ -117,36 +126,33 @@ export default class PlipsList extends Component {
     } = this.props;
 
     const hasRows = plips && plips.length > 0;
-    const shouldShowNoPlips =
-      !error &&
-      !isFetchingPlips &&
-      !hasRows;
+    const shouldShowNoPlips = !error && !isFetchingPlips && !hasRows;
 
     return (
-      <View style={{ flex: 1, backgroundColor: "#DDD" }}>
-        {
-          !error && hasRows && !isFetchingPlips &&
-            this.renderListView({
-              plips,
-              isRefreshingPlips,
-            })
-        }
+      <View style={styles.main}>
+        {!error &&
+          hasRows &&
+          !isFetchingPlips &&
+          this.renderListView({
+            plips,
+            isRefreshingPlips,
+          })}
 
-        {!!shouldShowNoPlips && !isFetchingPlips && hasLoadedPlips && this.renderNoPlips()}
+        {!!shouldShowNoPlips &&
+          !isFetchingPlips &&
+          hasLoadedPlips &&
+          this.renderNoPlips()}
         {error && this.renderRetry()}
-        {isFetchingPlips && this.renderInnerLoader({ animating: isFetchingPlips })}
+        {isFetchingPlips &&
+          this.renderInnerLoader({ animating: isFetchingPlips })}
       </View>
     );
   }
 
   renderInnerLoader({ animating }) {
     return (
-      <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-        <ActivityIndicator
-          animating={animating}
-          color="black"
-          size="large"
-        />
+      <View style={styles.innerLoaderContainer}>
+        <ActivityIndicator animating={animating} color="black" size="large" />
       </View>
     );
   }
@@ -158,7 +164,7 @@ export default class PlipsList extends Component {
       <View style={styles.footerContainer}>
         <StaticFooter onOpenURL={onOpenURL} />
       </View>
-    )
+    );
   }
 
   renderListView({ plips, isRefreshingPlips }) {
@@ -185,9 +191,15 @@ export default class PlipsList extends Component {
         data={plips}
         renderItem={this.renderCommonRow}
         extraData={extraData}
-        onEndReached={(this.hasNextPage && !isFetchingPlipsNextPage) ? this.onFetchPlipsNextPage : null}
+        onEndReached={
+          this.hasNextPage && !isFetchingPlipsNextPage
+            ? this.onFetchPlipsNextPage
+            : null
+        }
         onEndReachedThreshold={0.9}
-        ref={ref => { this.flatList = ref; }}
+        ref={(ref) => {
+          this.flatList = ref;
+        }}
         refreshing={isRefreshingPlips || isSearchingPlips}
         refreshControl={
           <RefreshControl
@@ -197,9 +209,12 @@ export default class PlipsList extends Component {
           />
         }
         ListFooterComponent={
-          isFetchingPlipsNextPage ?
-            this.renderInnerLoader({ animating: true }) :
-            !this.hasNextPage && !isRefreshingPlips && this.renderStaticFooter()}
+          isFetchingPlipsNextPage
+            ? this.renderInnerLoader({ animating: true })
+            : !this.hasNextPage &&
+              !isRefreshingPlips &&
+              this.renderStaticFooter()
+        }
       />
     );
   }
@@ -215,7 +230,8 @@ export default class PlipsList extends Component {
     } = this.props;
 
     const plipSignInfo = plipsSignInfo && plipsSignInfo[plip.id];
-    const plipFavoriteInfo = plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
+    const plipFavoriteInfo =
+      plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
     const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);
     const plipUserSignInfo = userSignInfo && userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
@@ -234,48 +250,44 @@ export default class PlipsList extends Component {
         isFavorite={isFavorite || this.isFavoriteList}
         isAddingFavoritePlip={isAddingFavoritePlip}
         onToggleFavorite={onToggleFavorite}
-
         height={height}
         margin={margin}
       />
     );
-  }
+  };
 
   renderCommonRow = this.renderRow({ height: 360, margin: 0 });
 
   renderNoPlips() {
-    const {
-      currentUser,
-      searchTitle,
-      typeList,
-    } = this.props;
+    const { currentUser, searchTitle, typeList } = this.props;
 
     const isLogged = !!currentUser;
 
-    switch(typeList) {
+    switch (typeList) {
       case "allPlips":
         return (
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
-              <Image
-                source={noPlipsImage}
-                style={styles.noProjectsIcon}
-              />
+              <Image source={noPlipsImage} style={styles.noProjectsIcon} />
 
-              { isBlank(searchTitle) ?
-                  <Text style={styles.noProjectsText}>{locale.noProjectsMatch}</Text>
-                :
-                  <View>
-                    <Text style={styles.noProjectsText}>{locale.searchPlipNotFound({ searchTitle })}</Text>
+              {isBlank(searchTitle) ? (
+                <Text style={styles.noProjectsText}>
+                  {locale.noProjectsMatch}
+                </Text>
+              ) : (
+                <View>
+                  <Text style={styles.noProjectsText}>
+                    {locale.searchPlipNotFound({ searchTitle })}
+                  </Text>
 
-                    <FlatButton
-                      title={locale.clearSearch.toUpperCase()}
-                      onPress={this.onRefresh}
-                      style={{backgroundColor: "#00c084", marginTop: 10 }}
-                      textStyle={{color: "#fff"}}
-                    />
-                  </View>
-              }
+                  <FlatButton
+                    title={locale.clearSearch.toUpperCase()}
+                    onPress={this.onRefresh}
+                    style={refreshFlatStyle}
+                    textStyle={refreshFlatTextStyle}
+                  />
+                </View>
+              )}
             </View>
           </View>
         );
@@ -284,12 +296,13 @@ export default class PlipsList extends Component {
         return (
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
-              <Image
-                source={noPlipsImage}
-                style={styles.noProjectsIcon}
-              />
+              <Image source={noPlipsImage} style={styles.noProjectsIcon} />
 
-              <Text style={styles.noProjectsText}>{isLogged ? locale.noSignedProjects : locale.youShouldBeLoggedToSeeYourSignedProjects}</Text>
+              <Text style={styles.noProjectsText}>
+                {isLogged
+                  ? locale.noSignedProjects
+                  : locale.youShouldBeLoggedToSeeYourSignedProjects}
+              </Text>
             </View>
           </View>
         );
@@ -298,12 +311,13 @@ export default class PlipsList extends Component {
         return (
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
-              <Image
-                source={noPlipsImage}
-                style={styles.noProjectsIcon}
-              />
+              <Image source={noPlipsImage} style={styles.noProjectsIcon} />
 
-              <Text style={styles.noProjectsText}>{isLogged ? locale.noFavoriteProjects : locale.youShouldBeLoggedToSeeYourFavoriteProjects}</Text>
+              <Text style={styles.noProjectsText}>
+                {isLogged
+                  ? locale.noFavoriteProjects
+                  : locale.youShouldBeLoggedToSeeYourFavoriteProjects}
+              </Text>
             </View>
           </View>
         );
@@ -312,10 +326,7 @@ export default class PlipsList extends Component {
         return (
           <View style={styles.noProjectsContainer}>
             <View style={styles.noProjectsInnerContainer}>
-              <Image
-                source={noPlipsImage}
-                style={styles.noProjectsIcon}
-              />
+              <Image source={noPlipsImage} style={styles.noProjectsIcon} />
 
               <Text style={styles.noProjectsText}>{locale.noProjectsYet}</Text>
             </View>
@@ -323,8 +334,8 @@ export default class PlipsList extends Component {
             <FlatButton
               title={locale.links.sendYourIdea.toUpperCase()}
               onPress={this.onSendYourIdea}
-              style={{backgroundColor: "#00c084" }}
-              textStyle={{color: "#fff"}}
+              style={sendYourIdeaFlatStyle}
+              textStyle={sendYourIdeaFlatTextStyle}
             />
           </View>
         );
@@ -334,10 +345,7 @@ export default class PlipsList extends Component {
   renderRetry() {
     return (
       <View style={styles.retryContainer}>
-        <RetryButton
-          onPress={this.onRetryPlips}
-          style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
-        />
+        <RetryButton onPress={this.onRetryPlips} style={retryButtonStyle} />
       </View>
     );
   }
@@ -347,23 +355,20 @@ export default class PlipsList extends Component {
   }
 
   onRefresh = () => {
-    const {
-      onRefresh,
-      typeList,
-    } = this.props;
+    const { onRefresh, typeList } = this.props;
 
     onRefresh({ typeList });
-  }
+  };
 
   onSendYourIdea = () => {
     const { onOpenURL, remoteLinks } = this.props;
     onOpenURL(remoteLinks.sendYourIdea);
-  }
+  };
 
   onRetryPlips = () => {
     const { onRetryPlips } = this.props;
     onRetryPlips();
-  }
+  };
 }
 
 export class Plip extends Component {
@@ -382,41 +387,42 @@ export class Plip extends Component {
     onGoToPlip: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onToggleFavorite: PropTypes.func.isRequired,
-  }
+  };
 
   shouldComponentUpdate(nextProps) {
     const { props } = this;
 
-    const shouldUpdate = props.index !== nextProps.index
-      || props.plip.id !== nextProps.plip.id
-      || props.height !== nextProps.height
-      || props.margin !== nextProps.margin
-      || props.user !== nextProps.user
-      || props.signaturesCount !== nextProps.signaturesCount
-      || props.isFavorite !== nextProps.isFavorite
-      || props.hasSigned !== nextProps.hasSigned
-      || props.isAddingFavoritePlip !== nextProps.isAddingFavoritePlip
-      || props.plipsFavoriteInfo !== nextProps.plipsFavoriteInfo
+    const shouldUpdate =
+      props.index !== nextProps.index ||
+      props.plip.id !== nextProps.plip.id ||
+      props.height !== nextProps.height ||
+      props.margin !== nextProps.margin ||
+      props.user !== nextProps.user ||
+      props.signaturesCount !== nextProps.signaturesCount ||
+      props.isFavorite !== nextProps.isFavorite ||
+      props.hasSigned !== nextProps.hasSigned ||
+      props.isAddingFavoritePlip !== nextProps.isAddingFavoritePlip ||
+      props.plipsFavoriteInfo !== nextProps.plipsFavoriteInfo;
 
-      return shouldUpdate;
+    return shouldUpdate;
   }
 
   onGoToPlip = () => {
     const { plip, onGoToPlip } = this.props;
 
     onGoToPlip(plip);
-  }
+  };
 
   onToggleFavorite = () => {
     const { plip, onToggleFavorite, isAddingFavoritePlip } = this.props;
 
     !isAddingFavoritePlip && onToggleFavorite(plip.detailId);
-  }
+  };
 
   onShare = () => {
     const { plip, onShare } = this.props;
     onShare(plip);
-  }
+  };
 
   render() {
     const {
@@ -428,82 +434,77 @@ export class Plip extends Component {
 
     return (
       <View
-        style={[styles.rowContainer, {
-          minHeight: height,
-          margin,
-        }]}
-      >
+        style={[
+          styles.rowContainer,
+          {
+            minHeight: height,
+            margin,
+          },
+        ]}>
         {this.renderPlip({ plip })}
       </View>
     );
   }
 
   renderPlip({ plip }) {
-    const {
-      cover,
-      hasSigned,
-      signaturesCount,
-    } = this.props;
+    const { cover, hasSigned, signaturesCount } = this.props;
 
     const customTotalSignatures = calcCustomTotalSignatures(signaturesCount);
 
     return (
-      <TouchableOpacity
-        onPress={this.onGoToPlip}
-        style={styles.plipView}
-      >
+      <TouchableOpacity onPress={this.onGoToPlip} style={styles.plipView}>
         <View style={styles.plipImageView}>
           <NetworkImage
-            source={{uri: cover}}
+            source={{ uri: cover }}
             style={styles.plipImage}
             resizeMode="cover"
           />
         </View>
         <View style={styles.plipMainContainer}>
-          <View style={[styles.plipHeaderContainer, hasSigned ? styles.plipHeaderContainerSigned : styles.plipHeaderContainerNotSigned]}>
+          <View
+            style={[
+              styles.plipHeaderContainer,
+              hasSigned
+                ? styles.plipHeaderContainerSigned
+                : styles.plipHeaderContainerNotSigned,
+            ]}>
             <View style={styles.plipTitleContainer}>
               <Text
                 style={styles.plipTitle}
                 numberOfLines={1}
-                ellipsizeMode="tail"
-              >
+                ellipsizeMode="tail">
                 {plip.title}
               </Text>
             </View>
-            { hasSigned &&
+            {hasSigned && (
               <View style={styles.plipSignedContainer}>
-                <Text style={styles.plipSignedText}>
-                  Assinado
-                </Text>
+                <Text style={styles.plipSignedText}>Assinado</Text>
                 {this.renderSignedIcon()}
               </View>
-            }
+            )}
           </View>
           <View style={styles.plipSubtitleContainer}>
-            <Text>
-              {plip.subtitle}
-            </Text>
+            <Text>{plip.subtitle}</Text>
           </View>
           <View style={styles.plipOptionsContainer}>
             <View style={styles.plipSignatureContainer}>
               {this.renderAssignmentIcon()}
-              {customTotalSignatures && this.renderAssignmentText(customTotalSignatures)}
+              {customTotalSignatures &&
+                this.renderAssignmentText(customTotalSignatures)}
             </View>
             <View style={styles.plipOptions}>
               {this.renderFavoriteButton()}
               {this.renderShareButton()}
             </View>
           </View>
-          <View style={{backgroundColor: "#6000AA"}}>
-            {this.renderDetailLinkButton()}
-          </View>
+          <View style={styles.purple}>{this.renderDetailLinkButton()}</View>
         </View>
       </TouchableOpacity>
-    )
+    );
   }
 
   renderSignedIcon() {
-    return(
+    return (
       <Icon
         name="check-circle"
         style={styles.signedIcon}
@@ -514,20 +515,15 @@ export class Plip extends Component {
   }
 
   renderFavoriteButton() {
-    const {
-      user,
-      isFavorite,
-    } = this.props;
+    const { user, isFavorite } = this.props;
 
     const isLogged = !!user;
-    const iconShape = isFavorite ? "favorite-border" : "favorite"
+    const iconShape = isFavorite ? "favorite-border" : "favorite";
 
     if (!isLogged) return;
 
     return (
-      <TouchableOpacity
-        onPress={this.onToggleFavorite}
-      >
+      <TouchableOpacity onPress={this.onToggleFavorite}>
         <Icon
           name={iconShape}
           style={styles.favoriteIcon}
@@ -540,9 +536,7 @@ export class Plip extends Component {
 
   renderShareButton() {
     return (
-      <TouchableOpacity
-        onPress={this.onShare}
-      >
+      <TouchableOpacity onPress={this.onShare}>
         <Icon
           name="share"
           style={styles.shareIcon}
@@ -566,11 +560,14 @@ export class Plip extends Component {
 
   renderAssignmentText(customTotalSignatures) {
     const hasMoreThan10 = customTotalSignatures > 10;
-    const verbose = (customTotalSignatures > 1) ? locale.signatures.toLowerCase() : locale.signature.toLowerCase();
+    const verbose =
+      customTotalSignatures > 1
+        ? locale.signatures.toLowerCase()
+        : locale.signature.toLowerCase();
 
-    return(
+    return (
       <Text style={styles.plipSignatureText}>
-        {hasMoreThan10 && "+ de" } {customTotalSignatures} {verbose}
+        {hasMoreThan10 && "+ de"} {customTotalSignatures} {verbose}
       </Text>
     );
   }
@@ -579,8 +576,7 @@ export class Plip extends Component {
     return (
       <TouchableOpacity
         onPress={this.onGoToPlip}
-        style={[styles.plipDetailsLinkContainer]}
-      >
+        style={[styles.plipDetailsLinkContainer]}>
         <Animated.Text style={styles.plipDetailsLink}>
           {locale.moreInfo.toUpperCase()}
         </Animated.Text>

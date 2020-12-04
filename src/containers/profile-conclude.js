@@ -21,7 +21,7 @@ import {
   toggleFavorite,
 } from "../actions";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAddingFavoritePlip: isAddingFavoritePlip(state),
   isSaving: isSavingProfile(state),
   currentUser: getCurrentUser(state),
@@ -31,16 +31,19 @@ const mapStateToProps = state => ({
   plip: mostRecentNationalPlip(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  onBack: () =>  dispatch(navigate("plipsNav")),
+const mapDispatchToProps = (dispatch) => ({
+  onBack: () => dispatch(navigate("plipsNav")),
   onConcludeSignUp: () => dispatch(signingUp(false)),
-  onOpenURL: url => dispatch(openURL(url)),
-  onGoToPlip: plip => {
+  onOpenURL: (url) => dispatch(openURL(url)),
+  onGoToPlip: (plip) => {
     dispatch(navigate("showPlip"));
     dispatch(setCurrentPlip(plip));
   },
-  onShare: plip => dispatch(sharePlip(plip)),
-  onToggleFavorite: detailId => dispatch(toggleFavorite({ detailId })),
+  onShare: (plip) => dispatch(sharePlip(plip)),
+  onToggleFavorite: (detailId) => dispatch(toggleFavorite({ detailId })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileConcludeLayout);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ProfileConcludeLayout);

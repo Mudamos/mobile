@@ -16,42 +16,35 @@ import styles from "../styles/modal";
 
 const ANIMATION_DURATION = 500;
 
-
 export default class Modal extends Component {
   state = {
     slideInAnimation: new Animated.Value(0),
     slideOutAnimation: new Animated.Value(0),
     isHidding: false,
-  }
+  };
 
   static propTypes = {
     children: PropTypes.node,
-  }
+  };
 
   componentDidMount() {
-    Animated.timing(
-      this.state.slideInAnimation,
-      {
-        toValue: 1,
-        duration: ANIMATION_DURATION,
-        easing: Easing.quad,
-        useNativeDriver: false,
-      }
-    ).start();
+    Animated.timing(this.state.slideInAnimation, {
+      toValue: 1,
+      duration: ANIMATION_DURATION,
+      easing: Easing.quad,
+      useNativeDriver: false,
+    }).start();
   }
 
   hideAnimated(done) {
     this.setState({ isHidding: true });
 
-    Animated.timing(
-      this.state.slideOutAnimation,
-      {
-        toValue: 1,
-        duration: ANIMATION_DURATION,
-        easing: Easing.quad,
-        useNativeDriver: false,
-      }
-    ).start(done);
+    Animated.timing(this.state.slideOutAnimation, {
+      toValue: 1,
+      duration: ANIMATION_DURATION,
+      easing: Easing.quad,
+      useNativeDriver: false,
+    }).start(done);
   }
 
   render() {
@@ -61,30 +54,27 @@ export default class Modal extends Component {
 
     const { isHidding } = this.state;
 
-    const slide = isHidding ?
-      this.state.slideOutAnimation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, windowHeight],
-      }) :
-      this.state.slideInAnimation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [windowHeight, 0],
-      });
+    const slide = isHidding
+      ? this.state.slideOutAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, windowHeight],
+        })
+      : this.state.slideInAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [windowHeight, 0],
+        });
 
     return (
       <Animated.View style={[styles.container, { height, top: slide }]}>
         <ImageBackground
           source={require("../images/header-people.png")}
           style={styles.peopleImage}
-          resizeMode="cover"
-        >
-          <HeaderLogo style={styles.logo}/>
+          resizeMode="cover">
+          <HeaderLogo style={styles.logo} />
         </ImageBackground>
 
         <View style={styles.contentContainer}>
-          <ScrollView bounces={false}>
-            {this.props.children}
-          </ScrollView>
+          <ScrollView bounces={false}>{this.props.children}</ScrollView>
 
           {this.renderFooter()}
         </View>

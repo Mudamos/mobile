@@ -7,7 +7,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   disabled: {
-    opacity: .5,
+    opacity: 0.5,
   },
   enabled: {
     opacity: 1,

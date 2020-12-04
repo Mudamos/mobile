@@ -1,4 +1,4 @@
-import { call , fork, put, select, take, takeLatest } from "redux-saga/effects";
+import { call, fork, put, select, take, takeLatest } from "redux-saga/effects";
 
 import { buffers, eventChannel } from "redux-saga";
 
@@ -17,16 +17,14 @@ import {
   handlingAppLinkError,
 } from "../selectors";
 
-import {
-  logError,
-} from "../utils";
+import { logError } from "../utils";
 
-import {
-  head,
-} from "ramda";
+import { head } from "ramda";
 
-const createMessageChannel = ({ mudDynamicLink, buffer = buffers.sliding(1)}) =>
-  eventChannel(emitter => mudDynamicLink.subscribe(emitter), buffer);
+const createMessageChannel = ({
+  mudDynamicLink,
+  buffer = buffers.sliding(1),
+}) => eventChannel((emitter) => mudDynamicLink.subscribe(emitter), buffer);
 
 function* receiveAppLink({ mudDynamicLink }) {
   const channel = yield call(createMessageChannel, { mudDynamicLink });
@@ -65,7 +63,7 @@ function* handlePlip({ mobileApi }) {
             page: 0,
             scope: "all",
             path,
-           });
+          });
           const plip = head(response.plips);
           yield put(setCurrentPlip(plip));
         }
@@ -93,4 +91,3 @@ export default function* appLinkSaga({ mobileApi, mudDynamicLink }) {
   yield fork(handlePlip, { mobileApi });
   yield fork(clearError);
 }
-

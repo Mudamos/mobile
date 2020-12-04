@@ -27,8 +27,13 @@ import * as repositories from "./repositories";
 
 const localStorage = defaultStorage();
 const DeviceInfo = DeviceInfoService({ storage: localStorage });
-const sessionStore = SessionManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP });
-const walletStore = WalletManager(Config.STORAGE_ROOT_PREFIX, { suite: Config.IOS_APP_GROUP, DeviceInfo });
+const sessionStore = SessionManager(Config.STORAGE_ROOT_PREFIX, {
+  suite: Config.IOS_APP_GROUP,
+});
+const walletStore = WalletManager(Config.STORAGE_ROOT_PREFIX, {
+  suite: Config.IOS_APP_GROUP,
+  DeviceInfo,
+});
 
 const mudDynamicLink = new MUDFirebaseDynamicLink();
 
@@ -52,9 +57,9 @@ export const storeBuilder = () => {
     },
   });
 
-  const store = isDev ?
-    createStore(reducer, applyMiddleware(sagaRunner, logger)) :
-    createStore(reducer, applyMiddleware(sagaRunner));
+  const store = isDev
+    ? createStore(reducer, applyMiddleware(sagaRunner, logger))
+    : createStore(reducer, applyMiddleware(sagaRunner));
 
   return {
     store,

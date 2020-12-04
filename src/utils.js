@@ -1,6 +1,4 @@
-import {
-  Platform,
-} from "react-native";
+import { Platform } from "react-native";
 
 import {
   allPass,
@@ -52,10 +50,12 @@ const DEFAULT_LOCALE = "pt-br";
 
 moment.locale(DEFAULT_LOCALE);
 
-
 export { moment };
 
-const toLogTag = (...tags) => compact(tags).map(t => `[${t}]`).join(" ");
+const toLogTag = (...tags) =>
+  compact(tags)
+    .map((t) => `[${t}]`)
+    .join(" ");
 
 export const MUDAMOS_WEB_SITE = "https://www.mudamos.org";
 
@@ -71,88 +71,111 @@ export const ALL_SCOPE = "all";
 
 export const different = complement(equals);
 
-export const isNationwideScope = scope => scope === NATIONWIDE_SCOPE;
+export const isNationwideScope = (scope) => scope === NATIONWIDE_SCOPE;
 
-export const isStatewideScope = scope => scope === STATEWIDE_SCOPE;
+export const isStatewideScope = (scope) => scope === STATEWIDE_SCOPE;
 
-export const isCitywideScope = scope => scope === CITYWIDE_SCOPE;
+export const isCitywideScope = (scope) => scope === CITYWIDE_SCOPE;
 
-export const isUnauthorized = error => error instanceof UnauthorizedError;
+export const isUnauthorized = (error) => error instanceof UnauthorizedError;
 
 export const isString = is(String);
 
-export const baseName = file => last(file.split("/"));
+export const baseName = (file) => last(file.split("/"));
 
 export const homeSceneKey = "plipsNav";
 
-export const first = list => head(list || []);
+export const first = (list) => head(list || []);
 
 export const findByStrIndex = (index, object) => (object || {})[String(index)];
 
-// eslint-disable-next-line no-undef
 export const isDev = __DEV__;
 
-export const compact = list => reject(isNil, list);
+export const compact = (list) => reject(isNil, list);
 
 export const notEmpty = complement(isEmpty);
 
 export const notNil = complement(isNil);
 
-export const log = (message, { level = "DEBUG", tag } = {}, ...args) => isDev && console.log(toLogTag(level, tag), message, ...args);
+export const log = (message, { level = "DEBUG", tag } = {}, ...args) =>
+  isDev && console.log(toLogTag(level, tag), message, ...args);
 
-export const logError = (error, { tag } = {}) => log(error.message, { level: "ERROR", tag }, error.stack, error);
+export const logError = (error, { tag } = {}) =>
+  log(error.message, { level: "ERROR", tag }, error.stack, error);
 
-export const toCredential = (email, password) => new Buffer(`${email}:${password}`).toString("base64");
+export const toCredential = (email, password) =>
+  new Buffer(`${email}:${password}`).toString("base64");
 
-export const errorForField = (field, errors) => (find(propEq("key", field))(errors || []) || {}).message;
+export const errorForField = (field, errors) =>
+  (find(propEq("key", field))(errors || []) || {}).message;
 
-export const dateMask = (text, separator = "/") => StringMask.apply(text, `00${separator}00${separator}0000`);
+export const dateMask = (text, separator = "/") =>
+  StringMask.apply(text, `00${separator}00${separator}0000`);
 
-export const cpfMask = text => StringMask.apply(text, "000.000.000-00");
+export const cpfMask = (text) => StringMask.apply(text, "000.000.000-00");
 
-export const phoneMask = text => StringMask.apply(text, "(00) 90000-0000");
+export const phoneMask = (text) => StringMask.apply(text, "(00) 90000-0000");
 
-export const voteCardMask = text => StringMask.apply(text, "0000.0000.0000");
+export const voteCardMask = (text) => StringMask.apply(text, "0000.0000.0000");
 
-export const zipCodeMask = text => StringMask.apply(text, "00000-000");
+export const zipCodeMask = (text) => StringMask.apply(text, "00000-000");
 
-export const toISODate = (value, format = "DD/MM/YYYY") => moment(value, format).format("YYYY-MM-DD");
+export const toISODate = (value, format = "DD/MM/YYYY") =>
+  moment(value, format).format("YYYY-MM-DD");
 
-export const fromISODate = value => moment(value, "YYYY-MM-DD").format("DD/MM/YYYY");
+export const fromISODate = (value) =>
+  moment(value, "YYYY-MM-DD").format("DD/MM/YYYY");
 
-export const extractNumbers = text => (String(text).match(/\d+/g) || []).join("");
+export const extractNumbers = (text) =>
+  (String(text).match(/\d+/g) || []).join("");
 
 export const formatNumber = (value, locale = DEFAULT_LOCALE) => {
   numeral.locale(locale);
   return numeral(value).format("0,0");
-}
+};
 
-export const deepMerge = (a, b) => is(Object, a) && is(Object, b) ? mergeWith(deepMerge, a, b) : b;
+export const deepMerge = (a, b) =>
+  is(Object, a) && is(Object, b) ? mergeWith(deepMerge, a, b) : b;
 
-export const stripAccents = text =>
+export const stripAccents = (text) =>
   text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-export const capitalizeWords = text => text.replace(/\b\w/g, l => l.toUpperCase());
+export const capitalizeWords = (text) =>
+  text.replace(/\b\w/g, (l) => l.toUpperCase());
 
-export const removeSpaces = text => text.replace(/\s/g, "");
+export const removeSpaces = (text) => text.replace(/\s/g, "");
 
-export const removeHyphens = text => text.replace(/-/g, "");
+export const removeHyphens = (text) => text.replace(/-/g, "");
 
 const removeSymbols = replace(/\W+/, "");
 
-export const hashtagfy = (...texts) => texts
-  .map(text => "#" + pipe(stripAccents, removeSymbols, capitalizeWords, removeSpaces, removeHyphens)(text))
-  .join(" ");
+export const hashtagfy = (...texts) =>
+  texts
+    .map(
+      (text) =>
+        "#" +
+        pipe(
+          stripAccents,
+          removeSymbols,
+          capitalizeWords,
+          removeSpaces,
+          removeHyphens,
+        )(text),
+    )
+    .join(" ");
 
-export const facebookPicURI = ({ id, type = "normal" }) => `https://graph.facebook.com/${id}/picture?type=${type}`;
+export const facebookPicURI = ({ id, type = "normal" }) =>
+  `https://graph.facebook.com/${id}/picture?type=${type}`;
 
-export const cancelablePromise = promise => {
+export const cancelablePromise = (promise) => {
   let hasCanceled = false;
 
   const wrappedPromise = new Promise((resolve, reject) =>
     promise
-      .then(val => hasCanceled ? reject({ isCanceled: true }) : resolve(val))
-      .catch(e => hasCanceled ? reject({ isCanceled: true }) : reject(e))
+      .then((val) =>
+        hasCanceled ? reject({ isCanceled: true }) : resolve(val),
+      )
+      .catch((e) => (hasCanceled ? reject({ isCanceled: true }) : reject(e))),
   );
 
   return {
@@ -163,9 +186,9 @@ export const cancelablePromise = promise => {
   };
 };
 
-export const findStateByUF = uf => find(propEq("uf", uf), statesData.states);
+export const findStateByUF = (uf) => find(propEq("uf", uf), statesData.states);
 
-export const findStateNameByUF = uf => (findStateByUF(uf) || {}).name;
+export const findStateNameByUF = (uf) => (findStateByUF(uf) || {}).name;
 
 export const remainingDays = ({ date }) => {
   const start = moment();
@@ -182,60 +205,69 @@ export const signatureEnabled = ({ finalDate }) => {
   return days != null && days >= 0;
 };
 
-export const filterWithKeys = (pred, obj) => pipe(
-  toPairs,
-  filter(apply(pred)),
-  fromPairs
-)(obj);
+export const filterWithKeys = (pred, obj) =>
+  pipe(toPairs, filter(apply(pred)), fromPairs)(obj);
 
-export const pickObjNonNilValues = obj => filterWithKeys((_, val) => !isNil(val), obj);
+export const pickObjNonNilValues = (obj) =>
+  filterWithKeys((_, val) => !isNil(val), obj);
 
-export const concatLists = unapply(reduce((acc, list) => concat(acc, list || []), []));
+export const concatLists = unapply(
+  reduce((acc, list) => concat(acc, list || []), []),
+);
 
-export const randomItem = list => list[Math.floor(Math.random() * list.length)];
+export const randomItem = (list) =>
+  list[Math.floor(Math.random() * list.length)];
 
 // slow start, slow end
-export const countTimingFunction = (interval, progress) => interval * (1 - Math.sin(Math.PI*progress)) * 10;
+export const countTimingFunction = (interval, progress) =>
+  interval * (1 - Math.sin(Math.PI * progress)) * 10;
 
-export const isBlank = value => isNil(value) || isEmpty(value) || isBlankString(value);
+export const isBlank = (value) =>
+  isNil(value) || isEmpty(value) || isBlankString(value);
 
-export const isBlankString = value => allPass([isString, test(/^\s*$/)])(value);
+export const isBlankString = (value) =>
+  allPass([isString, test(/^\s*$/)])(value);
 
 export const isPresent = complement(isBlank);
 
-export const propIsPresent = curry((attr, obj) => compose(isPresent, prop(attr))(obj));
+export const propIsPresent = curry((attr, obj) =>
+  compose(isPresent, prop(attr))(obj),
+);
 
 export const includes = flip(contains);
 
 export const excludes = complement(includes);
 
-export const buildQueryString = params =>
-  Object
-    .keys(params)
-    .map(k => {
-        if (isNil(params[k])) return null;
-        if (Array.isArray(params[k])) {
-            return params[k]
-                .map(val => `${encodeURIComponent(k)}[]=${encodeURIComponent(val)}`)
-                .join("&")
-        }
+export const buildQueryString = (params) =>
+  Object.keys(params)
+    .map((k) => {
+      if (isNil(params[k])) return null;
+      if (Array.isArray(params[k])) {
+        return params[k]
+          .map((val) => `${encodeURIComponent(k)}[]=${encodeURIComponent(val)}`)
+          .join("&");
+      }
 
-        return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`
+      return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`;
     })
-    .filter(value => not(isNil(value)))
-    .join("&")
+    .filter((value) => not(isNil(value)))
+    .join("&");
 
 export const isNotNil = complement(isNil);
 
-export const delay = duration => new Promise(r => setTimeout(r, duration));
+export const delay = (duration) => new Promise((r) => setTimeout(r, duration));
 
 export const backoff = (fn, { attempts, delay: duration = 100 } = {}) =>
-  fn().catch(err => isNil(attempts) || attempts > 1
-    ? delay(duration).then(() => backoff(fn, {
-      attempts: isNil(attempts) ? attempts : attempts - 1,
-      delay: duration * 2,
-    }))
-    : Promise.reject(err));
+  fn().catch((err) =>
+    isNil(attempts) || attempts > 1
+      ? delay(duration).then(() =>
+          backoff(fn, {
+            attempts: isNil(attempts) ? attempts : attempts - 1,
+            delay: duration * 2,
+          }),
+        )
+      : Promise.reject(err),
+  );
 
 export const eligibleToSignPlip = ({ plip, user }) => {
   if (!user || !plip) return;
@@ -243,49 +275,73 @@ export const eligibleToSignPlip = ({ plip, user }) => {
   const { scopeCoverage: scope, uf, cityName } = plip;
   const { uf: userUF, city: userCityName } = user.address;
 
-  const matchUF = () => userUF && uf && userUF.toLowerCase() === uf.toLowerCase();
-  const matchCity = () => userUF && uf && userCityName && cityName && userUF.toLowerCase() === uf.toLowerCase() && userCityName.toLowerCase() === cityName.toLowerCase();
+  const matchUF = () =>
+    userUF && uf && userUF.toLowerCase() === uf.toLowerCase();
+  const matchCity = () =>
+    userUF &&
+    uf &&
+    userCityName &&
+    cityName &&
+    userUF.toLowerCase() === uf.toLowerCase() &&
+    userCityName.toLowerCase() === cityName.toLowerCase();
 
   switch (scope) {
-    case NATIONWIDE_SCOPE: return true;
-    case STATEWIDE_SCOPE: return isBlank(userUF) || isNationalCause(plip) || matchUF();
-    case CITYWIDE_SCOPE: return isBlank(userCityName) || isNationalCause(plip) || matchCity();
+    case NATIONWIDE_SCOPE:
+      return true;
+    case STATEWIDE_SCOPE:
+      return isBlank(userUF) || isNationalCause(plip) || matchUF();
+    case CITYWIDE_SCOPE:
+      return isBlank(userCityName) || isNationalCause(plip) || matchCity();
   }
-}
+};
 
 // Read more about this email validation at http://emailregex.com/
 /* eslint-disable no-useless-escape */
-export const validateEmail = email => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
+export const validateEmail = (email) =>
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    email,
+  );
 
 export const isValidEmailRelaxed = test(/^.+@.+$/);
 
-export const validateCpf = cpf => {
+export const validateCpf = (cpf) => {
   const cpfFormatted = unMaskCpf(cpf);
   return cpfFormatted.length === 11;
-}
+};
 
-export const isValidPhone = phone => unMaskPhone(phone).length === 11;
+export const isValidPhone = (phone) => unMaskPhone(phone).length === 11;
 
-export const unMaskCpf = cpf => String(cpf).replace(/\D/g, "");
+export const unMaskCpf = (cpf) => String(cpf).replace(/\D/g, "");
 
 export const unMaskPhone = unMaskCpf;
 
-export const errorMessageFromCode = ({ errorCode, locale }) => locale.errorsCode[errorCode];
+export const errorMessageFromCode = ({ errorCode, locale }) =>
+  locale.errorsCode[errorCode];
 
-export const isIOSVersionBellow11 = (Platform.OS === "ios") && (parseInt(Platform.Version, 10) <= 11);
+export const isIOSVersionBellow11 =
+  Platform.OS === "ios" && parseInt(Platform.Version, 10) <= 11;
 
-export const plipRegion = plip => {
+export const plipRegion = (plip) => {
   if (!plip) return;
 
   switch (plip.scopeCoverage) {
-    case STATEWIDE_SCOPE: return plip.uf;
-    case CITYWIDE_SCOPE: return plip.cityName;
-    default: return;
+    case STATEWIDE_SCOPE:
+      return plip.uf;
+    case CITYWIDE_SCOPE:
+      return plip.cityName;
+    default:
+      return;
   }
-}
+};
 
-export const escapeRegExp = string => string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+export const escapeRegExp = (string) =>
+  string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 export const filterDataByTerm = curry((term, formatter, collection) =>
-  filter(compose(test(new RegExp(stripAccents(escapeRegExp(`${term}`)), "i")), compose(stripAccents, formatter) ))(collection)
+  filter(
+    compose(
+      test(new RegExp(stripAccents(escapeRegExp(`${term}`)), "i")),
+      compose(stripAccents, formatter),
+    ),
+  )(collection),
 );

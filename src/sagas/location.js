@@ -12,13 +12,13 @@ import {
 
 import { AUTHORIZED } from "../services/permission";
 
-
 function* location({ locationService, permissionService }) {
   yield takeLatest("LOCATION_FETCH_LOCATION", function* () {
     try {
       yield put(fetchingLocation(true));
 
-      const isAuthorized = (yield call(permissionService.checkStatus, "location")) === AUTHORIZED;
+      const isAuthorized =
+        (yield call(permissionService.checkStatus, "location")) === AUTHORIZED;
 
       if (!isAuthorized) {
         yield put(permissionUnauthorized("location"));
@@ -35,7 +35,10 @@ function* location({ locationService, permissionService }) {
         };
       }
 
-      const result = yield call(locationService.getCurrentPosition, locationOptions);
+      const result = yield call(
+        locationService.getCurrentPosition,
+        locationOptions,
+      );
 
       log(result);
 
@@ -52,6 +55,6 @@ function* location({ locationService, permissionService }) {
   });
 }
 
-export default function* locationSaga ({ locationService, permissionService }) {
+export default function* locationSaga({ locationService, permissionService }) {
   yield spawn(location, { locationService, permissionService });
 }

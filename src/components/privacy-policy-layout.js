@@ -1,10 +1,8 @@
 import PropTypes from "prop-types";
 import React, { Component, createRef } from "react";
-import { identity } from 'ramda';
+import { identity } from "ramda";
 
-import {
-  View,
-} from "react-native";
+import { View } from "react-native";
 
 import { WebView } from "react-native-webview";
 
@@ -23,12 +21,12 @@ export default class WebViewLayout extends Component {
     initialized: false,
     loading: true,
     ref: createRef(),
-  }
+  };
 
   static propTypes = {
     source: PropTypes.object,
     onBack: PropTypes.func.isRequired,
-  }
+  };
 
   onLoadEnd = () => {
     this.setState({ loading: false, initialized: true });
@@ -42,12 +40,10 @@ export default class WebViewLayout extends Component {
      * is going to be set on the second time
      */
     this.state.ref.current.reload();
-  }
+  };
 
   render() {
-    const {
-      source,
-    } = this.props;
+    const { source } = this.props;
 
     const { loading } = this.state;
 

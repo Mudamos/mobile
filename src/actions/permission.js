@@ -3,7 +3,7 @@ export const requestUserLocation = ({ message }) => ({
   payload: { message },
 });
 
-export const permissionUnauthorized = permission => ({
+export const permissionUnauthorized = (permission) => ({
   type: "PERMISSION_UNAUTHORIZED",
   payload: { permission },
 });

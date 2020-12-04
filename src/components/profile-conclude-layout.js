@@ -1,10 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  Text,
-  View,
-} from "react-native";
+import { Text, View } from "react-native";
 
 import styles from "../styles/profile-conclude-layout";
 
@@ -22,10 +19,7 @@ import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 
-import {
-  notEmpty,
-  notNil,
-} from "../utils";
+import { notEmpty, notNil } from "../utils";
 
 export default class ProfileConcludeLayout extends Component {
   static propTypes = {
@@ -42,7 +36,7 @@ export default class ProfileConcludeLayout extends Component {
     onOpenURL: PropTypes.func.isRequired,
     onShare: PropTypes.func,
     onToggleFavorite: PropTypes.func,
-  }
+  };
 
   componentDidMount() {
     const { onConcludeSignUp } = this.props;
@@ -51,11 +45,7 @@ export default class ProfileConcludeLayout extends Component {
   }
 
   render() {
-    const {
-      isSaving,
-      onBack,
-      onOpenURL,
-    } = this.props;
+    const { isSaving, onBack, onOpenURL } = this.props;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -63,12 +53,20 @@ export default class ProfileConcludeLayout extends Component {
           <ScrollView>
             {this.renderNavBar()}
 
-            <SignUpBreadCrumb highlightId={4} containerStyle={styles.breadcrumb} />
+            <SignUpBreadCrumb
+              highlightId={4}
+              containerStyle={styles.breadcrumb}
+            />
 
             {this.renderContent()}
 
             <View style={styles.buttonContainer}>
-              <RoundedButton title={locale.seeAllProjects} action={onBack} buttonStyle={styles.blueRoundedButton} titleStyle={styles.blueRoundedButtonTitle}/>
+              <RoundedButton
+                title={locale.seeAllProjects}
+                action={onBack}
+                buttonStyle={styles.blueRoundedButton}
+                titleStyle={styles.blueRoundedButtonTitle}
+              />
             </View>
 
             <StaticFooter onOpenURL={onOpenURL} />
@@ -94,37 +92,36 @@ export default class ProfileConcludeLayout extends Component {
     const plipUserSignInfo = userSignInfo && plip && userSignInfo[plip.id];
     const hasSigned = !!(plipUserSignInfo && plipUserSignInfo.updatedAt);
     const cover = plip && plip.pictureThumb;
-    const plipFavoriteInfo = plip && plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
+    const plipFavoriteInfo =
+      plip && plipsFavoriteInfo && plipsFavoriteInfo[plip.detailId];
     const isFavorite = notEmpty(plipFavoriteInfo) && notNil(plipFavoriteInfo);
 
-    const onGoToPlip = plip => {
+    const onGoToPlip = (plip) => {
       const { onGoToPlip } = this.props;
       onGoToPlip(plip);
-    }
+    };
 
-    const onToggleFavorite = detailId => {
+    const onToggleFavorite = (detailId) => {
       const { onToggleFavorite } = this.props;
       onToggleFavorite(detailId);
-    }
+    };
 
-    const onShare = plip => {
+    const onShare = (plip) => {
       const { onShare } = this.props;
       onShare(plip);
-    }
+    };
 
     return (
       <View style={styles.contentContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>
-            {locale.concludeHeaderTitle}
-          </Text>
+          <Text style={styles.headerTitle}>{locale.concludeHeaderTitle}</Text>
           <Text style={styles.headerSubTitle}>
             {locale.concludeHeaderSubtitle}
           </Text>
         </View>
 
         <View style={styles.plipContainer}>
-          { plip &&
+          {plip && (
             <Plip
               user={currentUser}
               index={0}
@@ -137,11 +134,10 @@ export default class ProfileConcludeLayout extends Component {
               onShare={onShare}
               onGoToPlip={onGoToPlip}
               onToggleFavorite={onToggleFavorite}
-
               height={30}
               margin={0}
             />
-          }
+          )}
         </View>
       </View>
     );

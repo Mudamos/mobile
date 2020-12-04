@@ -13,7 +13,6 @@ import HTMLBox from "../components/html-box";
 
 import defaultHtmlStyles from "../styles/default-html-styles";
 
-
 const defaultProps = {
   content: "",
   contentContainerStyle: defaultHtmlStyles,
@@ -21,9 +20,7 @@ const defaultProps = {
     blockquote: (attributes, children, passProps) => {
       const Blockquote = (
         <View style={passProps.htmlStyles.blockquote}>
-          <Text>
-            {children}
-          </Text>
+          <Text>{children}</Text>
         </View>
       );
 
@@ -32,13 +29,12 @@ const defaultProps = {
   },
 };
 
-
 class MarkdownView extends Component {
   static propTypes = {
     content: PropTypes.string,
     contentContainerStyle: PropTypes.object,
     renderers: PropTypes.object,
-  }
+  };
 
   render() {
     const props = deepMerge(defaultProps, this.props);
@@ -49,7 +45,8 @@ class MarkdownView extends Component {
       <HTMLBox
         html={html}
         renderers={renderers}
-        style={contentContainerStyle}/>
+        style={contentContainerStyle}
+      />
     );
   }
 }

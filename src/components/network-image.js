@@ -11,7 +11,9 @@ import { cancelablePromise } from "../utils";
 
 import styles from "../styles/network-image";
 
-const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground);
+const AnimatedImageBackground = Animated.createAnimatedComponent(
+  ImageBackground,
+);
 
 export default class NetworkImage extends Component {
   static propTypes = {
@@ -73,11 +75,7 @@ export default class NetworkImage extends Component {
 
     if (children) {
       return (
-        <AnimatedImageBackground
-          {...props}
-        >
-          {children}
-        </AnimatedImageBackground>
+        <AnimatedImageBackground {...props}>{children}</AnimatedImageBackground>
       );
     } else {
       return <Animated.Image {...props} />;
@@ -91,7 +89,7 @@ export default class NetworkImage extends Component {
     this.prefetchTask = cancelablePromise(Image.prefetch(uri));
     this.prefetchTask.promise
       .then(() => this.setState({ loading: false }))
-      .catch(e => {
+      .catch((e) => {
         if (e && e.isCanceled) return;
         this.setState({ loading: false });
       });

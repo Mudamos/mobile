@@ -27,7 +27,7 @@ class MDSelectInput extends PureComponent {
 
   onSetSearchOff = () => this.setState({ isSearchOn: false });
 
-  onChangeText = text => {
+  onChangeText = (text) => {
     const { onChangeText } = this.props;
 
     this.onSetSearchOn();
@@ -52,7 +52,7 @@ class MDSelectInput extends PureComponent {
     }, 500);
   };
 
-  onSelection = item => () => {
+  onSelection = (item) => () => {
     const { onSelection } = this.props;
 
     this.onSetSearchOff();
@@ -60,17 +60,14 @@ class MDSelectInput extends PureComponent {
     if (onSelection) onSelection(item);
   };
 
-  renderSearchResult = data => {
+  renderSearchResult = (data) => {
     const { renderSearchResult } = this.props;
 
     return (
       <TouchableOpacity
         onPress={this.onSelection(data.item)}
-        style={styles.searchRow}
-      >
-        <View style={styles.resultRow}>
-          {renderSearchResult(data)}
-        </View>
+        style={styles.searchRow}>
+        <View style={styles.resultRow}>{renderSearchResult(data)}</View>
       </TouchableOpacity>
     );
   };
@@ -80,10 +77,9 @@ class MDSelectInput extends PureComponent {
     const { isSearchOn } = this.state;
 
     return (
-      <View style={[{ zIndex: 1 }, style]}>
+      <View style={[styles.upper, style]}>
         <MDTextInput
           {...props}
-
           onChangeText={this.onChangeText}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
@@ -127,17 +123,24 @@ const styles = EStyleSheet.create({
     shadowOpacity: 0.7,
     zIndex: 1,
 
-    ...(Platform.OS === "ios" ? {
-      bottom: -68,
-      position: "absolute",
-      left: 0,
-      right: 0,
-    } : { marginTop: -24 }),
+    ...(Platform.OS === "ios"
+      ? {
+          bottom: -68,
+          position: "absolute",
+          left: 0,
+          right: 0,
+        }
+      : { marginTop: -24 }),
   },
   searchRow: {
     height: 30,
     flex: 1,
   },
+  upper: {
+    zIndex: 1,
+  },
 });
 
-export default forwardRef((props, ref) => <MDSelectInput {...props} innerRef={ref} />);
+export default forwardRef((props, ref) => (
+  <MDSelectInput {...props} innerRef={ref} />
+));

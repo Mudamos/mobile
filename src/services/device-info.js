@@ -6,26 +6,30 @@ import { isPresent } from "../utils";
 
 const UNIQUE_ID_KEY = "device-unique-id";
 
-const generateUniqueId = storage => storage.findOrCreate(UNIQUE_ID_KEY, () => randomBytes(32).toString("hex"));
+const generateUniqueId = (storage) =>
+  storage.findOrCreate(UNIQUE_ID_KEY, () => randomBytes(32).toString("hex"));
 
-const info = storage => () => new Promise(async (resolve) => {
-  const uniqueId = DeviceInfo.getUniqueId();
+const info = (storage) => () =>
+  new Promise(async (resolve) => {
+    const uniqueId = DeviceInfo.getUniqueId();
 
-  const deviceUniqueId = isPresent(uniqueId) ? uniqueId : await generateUniqueId(storage);
+    const deviceUniqueId = isPresent(uniqueId)
+      ? uniqueId
+      : await generateUniqueId(storage);
 
-  resolve(
-    new Device({
-      brand: DeviceInfo.getBrand(),
-      deviceId: DeviceInfo.getDeviceId(),
-      deviceUniqueId,
-      manufacturer: await DeviceInfo.getManufacturer(),
-      model: DeviceInfo.getModel(),
-      systemName: DeviceInfo.getSystemName(),
-      systemVersion: DeviceInfo.getSystemVersion(),
-      userAgent: await DeviceInfo.getUserAgent(),
-    })
-  );
-})
+    resolve(
+      new Device({
+        brand: DeviceInfo.getBrand(),
+        deviceId: DeviceInfo.getDeviceId(),
+        deviceUniqueId,
+        manufacturer: await DeviceInfo.getManufacturer(),
+        model: DeviceInfo.getModel(),
+        systemName: DeviceInfo.getSystemName(),
+        systemVersion: DeviceInfo.getSystemVersion(),
+        userAgent: await DeviceInfo.getUserAgent(),
+      }),
+    );
+  });
 
 const appVersion = () => Promise.resolve(DeviceInfo.getReadableVersion());
 
@@ -35,4 +39,4 @@ export default ({ storage }) => ({
   appVersion: appVersion,
   info: info(storage),
   isEmulator,
-})
+});

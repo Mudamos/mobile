@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  Text,
-  View,
-} from "react-native";
-
+import { Text, View } from "react-native";
 
 import SimpleModal from "./simple-modal";
 import ModalLink from "./modal-link-button";
@@ -14,7 +10,6 @@ import locale from "../locales/pt-BR";
 
 import textStyles from "../styles/text";
 import styles from "../styles/plip-signed-modal";
-
 
 class MyModal extends SimpleModal {
   static propTypes = {
@@ -42,18 +37,11 @@ class MyModal extends SimpleModal {
   }
 }
 
-const PlipSignedModal = props => {
-  const {
-    plipName,
-    onClose,
-    onShare,
-  } = props;
+const PlipSignedModal = (props) => {
+  const { plipName, onClose, onShare } = props;
 
   return (
-    <MyModal
-      onClose={onClose}
-      onShare={onShare}
-    >
+    <MyModal onClose={onClose} onShare={onShare}>
       <Text style={textStyles.modalTitle}>
         {locale.projectSignedYeah({ plipName })}
       </Text>
@@ -64,7 +52,6 @@ const PlipSignedModal = props => {
     </MyModal>
   );
 };
-
 
 PlipSignedModal.propTypes = {
   plipName: PropTypes.string.isRequired,

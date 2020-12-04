@@ -18,18 +18,18 @@ import {
   isSavingProfile,
 } from "../selectors";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   cities: findCities(state),
   isSaving: isSavingProfile(state),
   states: findStates(state),
   tseVoteAddress: getTseVoteAddress(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onBack: () => dispatch(navigate("plipsNav")),
   onFetchCities: () => dispatch(fetchCities()),
   onFetchStates: () => dispatch(fetchStates()),
-  onOpenURL: url => dispatch(openURL(url)),
+  onOpenURL: (url) => dispatch(openURL(url)),
   onSave: ({ city, state }) => dispatch(saveVoteAddress({ city, state })),
 });
 
@@ -42,7 +42,7 @@ const enhance = compose(
       onFetchStates();
       onFetchCities();
     },
-  })
+  }),
 );
 
 export default enhance(ProfileVoteAddressLayout);

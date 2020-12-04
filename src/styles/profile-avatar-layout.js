@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 import textStyles from "./text";
 
-
 export default StyleSheet.create({
   avatarContainer: {
     flex: 1,

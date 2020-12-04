@@ -1,1 +1,1 @@
-export const appInForeground = state => state.appState.foreground;
+export const appInForeground = (state) => state.appState.foreground;

@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  Image,
-  ViewPropTypes,
-  TouchableOpacity,
-} from "react-native";
+import { Image, ViewPropTypes, TouchableOpacity } from "react-native";
 
 import NetworkImage from "./network-image";
 
@@ -25,7 +21,7 @@ export default class Avatar extends Component {
   static defaultProps = {
     defaultPicture: require("../images/default-avatar.jpg"),
     size: 100,
-  }
+  };
 
   get picture() {
     const { source, defaultPicture } = this.props;
@@ -33,30 +29,24 @@ export default class Avatar extends Component {
   }
 
   render() {
-    const {
-      avatarStyle,
-      children,
-      size,
-      onPress,
-    } = this.props;
+    const { avatarStyle, children, size, onPress } = this.props;
 
     return (
-      <TouchableOpacity
-        onPress={onPress}
-        style={styles.container}
-      >
+      <TouchableOpacity onPress={onPress} style={styles.container}>
         <NetworkImage
           source={this.picture}
-          style={[styles.bubble, {
-            borderRadius: size / 2,
-            width: size,
-            height: size,
-          }, avatarStyle]}
-          imageStyle={styles.imageBubble}
-        >
+          style={[
+            styles.bubble,
+            {
+              borderRadius: size / 2,
+              width: size,
+              height: size,
+            },
+            avatarStyle,
+          ]}
+          imageStyle={styles.imageBubble}>
           {children}
         </NetworkImage>
-
       </TouchableOpacity>
     );
   }

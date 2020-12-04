@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  Animated,
-  Text,
-  View,
-} from "react-native";
+import { Animated, Text, View } from "react-native";
 
 import style from "../styles/navigation-bar";
 
@@ -17,7 +13,7 @@ class NavigationBar extends Component {
     rightView: PropTypes.node,
     title: PropTypes.string,
     titleStyle: Text.propTypes.style,
-  }
+  };
 
   setNativeProps(nativeProps) {
     this.container.setNativeProps(nativeProps);
@@ -34,21 +30,21 @@ class NavigationBar extends Component {
     } = this.props;
 
     return (
-      <Animated.View ref={ref => this.container = ref} style={[style.container, containerStyle]}>
+      <Animated.View
+        ref={(ref) => (this.container = ref)}
+        style={[style.container, containerStyle]}>
         <View style={[style.bar]}>
-          <View style={style.left}>
-            {leftView}
-          </View>
+          <View style={style.left}>{leftView}</View>
           <View style={style.middle}>
-          {
-            middleView ?
-              middleView :
-              <Text numberOfLines={1} style={[style.title, titleStyle]}>{title}</Text>
-          }
+            {middleView ? (
+              middleView
+            ) : (
+              <Text numberOfLines={1} style={[style.title, titleStyle]}>
+                {title}
+              </Text>
+            )}
           </View>
-          <View style={style.right}>
-            {rightView}
-          </View>
+          <View style={style.right}>{rightView}</View>
         </View>
       </Animated.View>
     );

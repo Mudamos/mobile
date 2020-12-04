@@ -1,9 +1,9 @@
-export const appLinkHandleError = error => ({
+export const appLinkHandleError = (error) => ({
   type: "HANDLING_APP_LINK_ERROR",
   payload: { error },
 });
 
-export const setAppLinkUrl = url => ({
+export const setAppLinkUrl = (url) => ({
   type: "SET_APP_LINK_URL",
   payload: { url },
 });

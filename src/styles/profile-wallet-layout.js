@@ -8,6 +8,12 @@ export default EStyleSheet.create({
     backgroundColor: "#6000AA",
     flex: 1,
   },
+  full: {
+    flex: 1,
+  },
+  pressButton: {
+    marginVertical: 10,
+  },
   retryButton: {
     marginHorizontal: 20,
   },
@@ -34,5 +40,8 @@ export default EStyleSheet.create({
   },
   title: {
     fontSize: "1.8rem",
+  },
+  weNeed: {
+    marginTop: 10,
   },
 });

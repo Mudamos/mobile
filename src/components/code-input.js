@@ -2,10 +2,16 @@ import React, { Component } from "react";
 
 import MDTextInput from "./md-text-input";
 import PropTypes from "prop-types";
-import {
-  View,
-} from "react-native";
+import { View } from "react-native";
 import styles from "../styles/code-input";
+
+const transparentTextStyle = { color: "transparent" };
+const inputContainerStyle = ({ codeSize, last, marginFromCode }) => ({
+  flex: 0,
+  width: codeSize,
+  marginRight: last ? 0 : marginFromCode,
+});
+const inputTextStyle = { textAlign: "center" };
 
 export default class CodeInput extends Component {
   static propTypes = {
@@ -15,52 +21,44 @@ export default class CodeInput extends Component {
     value: PropTypes.string,
     onChangeCodeText: PropTypes.func.isRequired,
     onCodeTyped: PropTypes.func,
-  }
+  };
 
   static defaultProps = {
     codeSize: 36,
     length: 5,
     marginFromCode: 5,
-  }
+  };
 
   get hiddenFieldWidth() {
     const { codeSize, length, marginFromCode } = this.props;
 
-    return codeSize * length + (marginFromCode * (length - 1))
+    return codeSize * length + marginFromCode * (length - 1);
   }
 
   render() {
-    const {
-      value,
-      length,
-      ...mdInputProps
-    } = this.props;
+    const { value, length, ...mdInputProps } = this.props;
 
     const fields = new Array(length).fill(0).map(this.buildField.bind(this));
 
     return (
       <View style={styles.container}>
-        <View style={styles.fieldsContainer}>
-          {fields}
-        </View>
+        <View style={styles.fieldsContainer}>{fields}</View>
 
         <View style={styles.hiddenFieldContainer} pointerEvents="none">
           <MDTextInput
             {...mdInputProps}
-
-            ref={ref => this.hiddenField = ref}
+            ref={(ref) => (this.hiddenField = ref)}
             value={value}
             maxLength={length}
             keyboardType="numeric"
-            onChangeText={text => this.onChangeText(text)}
+            onChangeText={(text) => this.onChangeText(text)}
             underlineEnabled={false}
             mdContainerStyle={{
               width: this.hiddenFieldWidth,
             }}
-            textInputStyle={{ color: "transparent" }}
+            textInputStyle={transparentTextStyle}
             selectionColor="transparent"
           />
-
         </View>
       </View>
     );
@@ -69,11 +67,7 @@ export default class CodeInput extends Component {
   buildField(_value, index) {
     const ref = this.fieldRefStr(index);
 
-    const {
-      length,
-      codeSize,
-      marginFromCode,
-    } = this.props;
+    const { length, codeSize, marginFromCode } = this.props;
 
     const value = this.getValue(ref);
     const last = index + 1 === length;
@@ -86,12 +80,12 @@ export default class CodeInput extends Component {
         maxLength={1}
         keyboardType="numeric"
         onFocus={() => this.hiddenField.focus()}
-        mdContainerStyle={{
-          flex: 0,
-          width: codeSize,
-          marginRight: (last ? 0 : marginFromCode),
-        }}
-        textInputStyle={{ textAlign: "center"  }}
+        mdContainerStyle={inputContainerStyle({
+          codeSize,
+          last,
+          marginFromCode,
+        })}
+        textInputStyle={inputTextStyle}
       />
     );
   }
@@ -107,7 +101,7 @@ export default class CodeInput extends Component {
   onChangeText(text) {
     const { length, onChangeCodeText, onCodeTyped } = this.props;
 
-    onChangeCodeText(text)
+    onChangeCodeText(text);
 
     if (onCodeTyped && text && text.length === length) {
       onCodeTyped(text);

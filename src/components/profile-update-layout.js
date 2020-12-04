@@ -1,10 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  Text,
-  View,
-} from "react-native";
+import { Text, View } from "react-native";
 
 import { curry, filter, propEq } from "ramda";
 
@@ -26,19 +23,14 @@ import ImagePicker from "react-native-image-picker";
 
 import locale from "../locales/pt-BR";
 
-import {
-  baseName,
-  filterDataByTerm,
-  log,
-  errorForField,
-} from "../utils";
+import { baseName, filterDataByTerm, log, errorForField } from "../utils";
 
 import { CityType, StateUfType } from "../prop-types";
 
 import styles from "../styles/profile-update-layout";
 
-const formatState = state => state && `${state.name} - ${state.uf}`;
-const formatCity = city => city && city.name;
+const formatState = (state) => state && `${state.name} - ${state.uf}`;
+const formatCity = (city) => city && city.name;
 
 const findPreviousCity = (city, collection) =>
   !city ? null : collection.find(propEq("id", city.id));
@@ -50,19 +42,26 @@ const byUf = curry((uf, collection) => filter(propEq("uf", uf))(collection));
 
 export default class ProfileUpdateLayout extends Component {
   state = {
-    avatar: (this.props.previousAvatar && this.props.previousAvatar.url) ? { uri: this.props.previousAvatar.url } : null,
+    avatar:
+      this.props.previousAvatar && this.props.previousAvatar.url
+        ? { uri: this.props.previousAvatar.url }
+        : null,
     birthdate: this.props.previousBirthdate,
     citySearchTerm: "",
     currentPassword: "",
     errors: {},
-    filteredCities: this.props.previousUf ? byUf(this.props.previousUf, this.props.cities) : [],
+    filteredCities: this.props.previousUf
+      ? byUf(this.props.previousUf, this.props.cities)
+      : [],
     filteredStates: this.props.states,
     mainScrollViewOffset: null,
     name: this.props.previousName,
     newPassword: "",
     selectedCity: findPreviousCity(this.props.previousCity, this.props.cities),
     selectedState: findPreviousState(this.props.previousUf, this.props.states),
-    scopedCities: this.props.previousUf ? byUf(this.props.previousUf, this.props.cities) : [],
+    scopedCities: this.props.previousUf
+      ? byUf(this.props.previousUf, this.props.cities)
+      : [],
     ufSearchTerm: "",
     zipCode: this.props.previousZipCode,
   };
@@ -98,55 +97,59 @@ export default class ProfileUpdateLayout extends Component {
 
     onRequestAvatarPermission();
 
-    ImagePicker.showImagePicker({
-      title: locale.chooseAvatar,
-      cancelButtonTitle: locale.cancel,
-      takePhotoButtonTitle: locale.takePhoto,
-      chooseFromLibraryButtonTitle: locale.openGallery,
-      mediaType: "photo",
-      previousUri: null,
-      storageOptions: {
-        skipBackup: true,
-      },
-      allowsEditing: true,
-    }, response => {
-      if (!response.uri) return;
-
-      const uri = response.uri;
-      const name = baseName(uri);
-      log(uri, { tag: "avatar uri" });
-
-      this.setState({
-        avatar: {
-          uri,
-          name,
-          contentType: "image/jpeg",
+    ImagePicker.showImagePicker(
+      {
+        title: locale.chooseAvatar,
+        cancelButtonTitle: locale.cancel,
+        takePhotoButtonTitle: locale.takePhoto,
+        chooseFromLibraryButtonTitle: locale.openGallery,
+        mediaType: "photo",
+        previousUri: null,
+        storageOptions: {
+          skipBackup: true,
         },
-      });
-    });
-  }
+        allowsEditing: true,
+      },
+      (response) => {
+        if (!response.uri) return;
+
+        const uri = response.uri;
+        const name = baseName(uri);
+        log(uri, { tag: "avatar uri" });
+
+        this.setState({
+          avatar: {
+            uri,
+            name,
+            contentType: "image/jpeg",
+          },
+        });
+      },
+    );
+  };
 
   get validProfileFields() {
-    const { birthdate, name, zipCode } = this.state
+    const { birthdate, name, zipCode } = this.state;
     const { previousBirthdate, previousName, previousZipCode } = this.props;
 
     const validBirth = String(birthdate).length === 10;
     const validName = String(name).length > 0;
     const validZip = String(zipCode).length === 9;
-    const diffValues = String(previousBirthdate) !== String(birthdate)
-      || String(previousName) !== String(name)
-      || String(previousZipCode) !== String(zipCode);
+    const diffValues =
+      String(previousBirthdate) !== String(birthdate) ||
+      String(previousName) !== String(name) ||
+      String(previousZipCode) !== String(zipCode);
 
-    return [
-      validBirth,
-      validName,
-      validZip,
-      diffValues,
-    ].every(v => v);
+    return [validBirth, validName, validZip, diffValues].every((v) => v);
   }
 
   get validAvatar() {
-    return this.state.avatar && this.props.previousAvatar && this.state.avatar.uri !== this.props.previousAvatar.url && this.state.avatar.uri !== this.state.previousUri;
+    return (
+      this.state.avatar &&
+      this.props.previousAvatar &&
+      this.state.avatar.uri !== this.props.previousAvatar.url &&
+      this.state.avatar.uri !== this.state.previousUri
+    );
   }
 
   get validPassword() {
@@ -155,23 +158,21 @@ export default class ProfileUpdateLayout extends Component {
     const validCurrentPassword = String(currentPassword).length > 0;
     const validNewPassword = String(newPassword).length > 0;
 
-    return [
-      validCurrentPassword,
-      validNewPassword,
-    ].every(v => v);
+    return [validCurrentPassword, validNewPassword].every((v) => v);
   }
 
   get validForm() {
-    return this.validProfileFields || this.validAvatar || this.validPassword
+    return this.validProfileFields || this.validAvatar || this.validPassword;
   }
 
   get formEnabled() {
     return this.validForm;
   }
 
-  onMainScroll = ({ nativeEvent: { contentOffset }}) => this.setState({ mainScrollViewOffset: contentOffset });
+  onMainScroll = ({ nativeEvent: { contentOffset } }) =>
+    this.setState({ mainScrollViewOffset: contentOffset });
 
-  onChangeUfSearch = ufSearchTerm => {
+  onChangeUfSearch = (ufSearchTerm) => {
     const { states } = this.props;
 
     this.setState({
@@ -185,11 +186,15 @@ export default class ProfileUpdateLayout extends Component {
     });
   };
 
-  onChangeCitySearch = citySearchTerm => {
+  onChangeCitySearch = (citySearchTerm) => {
     this.setState(({ scopedCities }) => ({
       selectedCity: null,
       citySearchTerm,
-      filteredCities: filterDataByTerm(citySearchTerm, formatCity, scopedCities),
+      filteredCities: filterDataByTerm(
+        citySearchTerm,
+        formatCity,
+        scopedCities,
+      ),
     }));
   };
 
@@ -198,12 +203,15 @@ export default class ProfileUpdateLayout extends Component {
       const { mainScrollViewOffset } = this.state;
 
       if (mainScrollViewOffset) {
-        this.mainScrollView.current.scrollTo({ x: 0, y: mainScrollViewOffset.y + 60 });
+        this.mainScrollView.current.scrollTo({
+          x: 0,
+          y: mainScrollViewOffset.y + 60,
+        });
       }
     }, 100);
   };
 
-  onSetUf = selectedState => {
+  onSetUf = (selectedState) => {
     const { cities } = this.props;
 
     const scopedCities = byUf(selectedState.uf, cities);
@@ -219,7 +227,7 @@ export default class ProfileUpdateLayout extends Component {
     this.ufInput.current.blur();
   };
 
-  onSetCity = selectedCity => {
+  onSetCity = (selectedCity) => {
     this.setState({ selectedCity });
     this.cityInput.current.blur();
   };
@@ -241,20 +249,19 @@ export default class ProfileUpdateLayout extends Component {
     this.cityInput.current.blur();
 
     if (!selectedCity) {
-      this.setState(({ scopedCities }) => ({ citySearchTerm: "", filteredCities: scopedCities }));
+      this.setState(({ scopedCities }) => ({
+        citySearchTerm: "",
+        filteredCities: scopedCities,
+      }));
     }
   };
 
   renderUfSearchResult = ({ item: state }) => {
-    return (
-      <Text style={styles.resultText}>{formatState(state)}</Text>
-    );
+    return <Text style={styles.resultText}>{formatState(state)}</Text>;
   };
 
   renderCitySearchResult = ({ item: city }) => {
-    return (
-      <Text style={styles.resultText}>{formatCity(city)}</Text>
-    );
+    return <Text style={styles.resultText}>{formatCity(city)}</Text>;
   };
 
   render() {
@@ -267,27 +274,25 @@ export default class ProfileUpdateLayout extends Component {
       isSavingPassword,
     } = this.props;
 
-    const {
-      avatar,
-    } = this.state;
+    const { avatar } = this.state;
 
     return (
       <SafeAreaView style={styles.container}>
         <Layout>
-          <ScrollView ref={this.mainScrollView} onScroll={this.onMainScroll} scrollEventThrottle={16}>
+          <ScrollView
+            ref={this.mainScrollView}
+            onScroll={this.onMainScroll}
+            scrollEventThrottle={16}>
             {this.renderNavBar()}
 
-            <Text style={styles.headerTitle}>
-              {locale.profileUpdateTitle}
-            </Text>
+            <Text style={styles.headerTitle}>{locale.profileUpdateTitle}</Text>
 
             <View style={styles.inputContainer}>
               <View style={styles.avatarContainer}>
                 <Avatar
                   onPress={this.selectAvatar}
                   source={avatar}
-                  avatarStyle={styles.avatar}
-                >
+                  avatarStyle={styles.avatar}>
                   <Text style={styles.avatarText}>alterar</Text>
                 </Avatar>
               </View>
@@ -295,47 +300,54 @@ export default class ProfileUpdateLayout extends Component {
               <MDTextInput
                 placeholder={locale.name}
                 value={this.state.name}
-                onChangeText={name => this.setState({ name })}
+                onChangeText={(name) => this.setState({ name })}
                 hasError={!!errorForField("name", errorsUpdateProfile)}
                 error={errorForField("name", errorsUpdateProfile)}
                 onSubmitEditing={() => this.nameInput.blur()}
-                ref={ref => this.nameInput = ref}
+                ref={(ref) => (this.nameInput = ref)}
               />
 
               <DateInput
                 placeholder={locale.birthdate}
                 value={this.state.birthdate}
-                onChangeDateText={birthdate => this.setState({ birthdate })}
+                onChangeDateText={(birthdate) => this.setState({ birthdate })}
                 hasError={!!errorForField("birthday", errorsUpdateProfile)}
                 error={errorForField("birthday", errorsUpdateProfile)}
                 hint="Ex: 31/12/1980"
                 onSubmitEditing={() => this.birthInput.blur()}
-                ref={ref => this.birthInput = ref}
+                ref={(ref) => (this.birthInput = ref)}
               />
 
               <ZipCodeInput
                 value={this.state.zipCode}
-                onChangeZipCodeText={zipCode => this.setState({zipCode})}
+                onChangeZipCodeText={(zipCode) => this.setState({ zipCode })}
                 placeholder={locale.zipCode}
                 hasError={!!errorForField("zipcode", errorsUpdateProfile)}
                 error={errorForField("zipcode", errorsUpdateProfile)}
                 hint="Ex: 00000-000"
                 onSubmitEditing={() => this.zipInput.blur()}
-                ref={ref => this.zipInput = ref}
+                ref={(ref) => (this.zipInput = ref)}
               />
 
-              { isAppUser &&
+              {isAppUser && (
                 <View>
                   <MDTextInput
                     placeholder={locale.currentPassword}
                     value={this.state.currentPassword}
                     password={true}
                     autoCapitalize="none"
-                    onChangeText={password => this.setState({ currentPassword: password })}
-                    hasError={!!errorForField("currentPassword", errorsUpdatePassword)}
-                    error={errorForField("currentPassword", errorsUpdatePassword)}
+                    onChangeText={(password) =>
+                      this.setState({ currentPassword: password })
+                    }
+                    hasError={
+                      !!errorForField("currentPassword", errorsUpdatePassword)
+                    }
+                    error={errorForField(
+                      "currentPassword",
+                      errorsUpdatePassword,
+                    )}
                     onSubmitEditing={() => this.currentPasswordInput.blur()}
-                    ref={ref => this.currentPasswordInput = ref}
+                    ref={(ref) => (this.currentPasswordInput = ref)}
                   />
 
                   <MDTextInput
@@ -343,14 +355,18 @@ export default class ProfileUpdateLayout extends Component {
                     value={this.state.newPassword}
                     password={true}
                     autoCapitalize="none"
-                    onChangeText={password => this.setState({ newPassword: password })}
-                    hasError={!!errorForField("newPassword", errorsUpdatePassword)}
+                    onChangeText={(password) =>
+                      this.setState({ newPassword: password })
+                    }
+                    hasError={
+                      !!errorForField("newPassword", errorsUpdatePassword)
+                    }
                     error={errorForField("newPassword", errorsUpdatePassword)}
                     onSubmitEditing={() => this.newPasswordInput.blur()}
-                    ref={ref => this.newPasswordInput = ref}
+                    ref={(ref) => (this.newPasswordInput = ref)}
                   />
                 </View>
-              }
+              )}
             </View>
 
             <View style={styles.buttonContainer}>
@@ -365,7 +381,9 @@ export default class ProfileUpdateLayout extends Component {
           </ScrollView>
         </Layout>
 
-        <PageLoader isVisible={isSavingProfile || isSavingAvatar || isSavingPassword} />
+        <PageLoader
+          isVisible={isSavingProfile || isSavingAvatar || isSavingPassword}
+        />
       </SafeAreaView>
     );
   }
@@ -374,14 +392,21 @@ export default class ProfileUpdateLayout extends Component {
     const { onBack } = this.props;
     return (
       <NavigationBar
-        leftView={<ChevronButton onPress={onBack} direction="left"/>}
+        leftView={<ChevronButton onPress={onBack} direction="left" />}
         middleView={<HeaderLogo />}
       />
     );
   }
 
   onSubmit = () => {
-    const { avatar, birthdate, name, zipCode, currentPassword, newPassword } = this.state;
+    const {
+      avatar,
+      birthdate,
+      name,
+      zipCode,
+      currentPassword,
+      newPassword,
+    } = this.state;
     const { onSave } = this.props;
 
     this.setState({ errors: {}, previousUri: avatar.uri });
@@ -399,8 +424,8 @@ export default class ProfileUpdateLayout extends Component {
       validAvatar: this.validAvatar,
       validProfileFields: this.validProfileFields,
       validPassword: this.validPassword,
-    }
+    };
 
     onSave({ profile, validations });
-  }
+  };
 }

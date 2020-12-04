@@ -19,10 +19,7 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
     flex: 1,
   },
-  headerTitle: StyleSheet.flatten([
-    textStyles.header,
-    { marginTop: 12 },
-  ]),
+  headerTitle: StyleSheet.flatten([textStyles.header, { marginTop: 12 }]),
   inputContainer: {
     marginHorizontal: 33,
   },

@@ -1,18 +1,9 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  compose,
-  withHandlers,
-  withStateHandlers,
-} from "recompose";
+import { compose, withHandlers, withStateHandlers } from "recompose";
 
-import {
-  Keyboard,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Keyboard, Text, TouchableOpacity, View } from "react-native";
 
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
@@ -41,14 +32,15 @@ const enhance = compose(
   withStateHandlers(
     { birthdate: "", name: "", voteCard: "" },
     {
-      onSetBirthdate: () => birthdate => ({ birthdate }),
-      onSetName: () => name => ({ name }),
-      onSetVoteCard: () => voteCard => ({ voteCard }),
-    }
+      onSetBirthdate: () => (birthdate) => ({ birthdate }),
+      onSetName: () => (name) => ({ name }),
+      onSetVoteCard: () => (voteCard) => ({ voteCard }),
+    },
   ),
   withHandlers({
-    onSubmit: ({ birthdate, name, voteCard, onSave }) => () => onSave({ birthdate, name, voteCard }),
-  })
+    onSubmit: ({ birthdate, name, voteCard, onSave }) => () =>
+      onSave({ birthdate, name, voteCard }),
+  }),
 );
 
 class ProfileSignUpLayout extends Component {
@@ -70,7 +62,7 @@ class ProfileSignUpLayout extends Component {
     onSetVoteCard: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onTSERequested: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     reasonEnabled: false,
@@ -78,7 +70,14 @@ class ProfileSignUpLayout extends Component {
   };
 
   componentDidMount() {
-    const { previousName, previousBirthdate, previousVoteCard, onSetName, onSetBirthdate, onSetVoteCard } = this.props;
+    const {
+      previousName,
+      previousBirthdate,
+      previousVoteCard,
+      onSetName,
+      onSetBirthdate,
+      onSetVoteCard,
+    } = this.props;
 
     if (previousBirthdate) {
       onSetBirthdate(previousBirthdate);
@@ -119,24 +118,20 @@ class ProfileSignUpLayout extends Component {
     }
   }
 
-  validBirthdate = birthdate => String(birthdate).length === 10;
+  validBirthdate = (birthdate) => String(birthdate).length === 10;
 
-  validName = name => String(name).length > 0;
+  validName = (name) => String(name).length > 0;
 
-  validVoteCard = voteCard => String(voteCard).length === 14;
+  validVoteCard = (voteCard) => String(voteCard).length === 14;
 
   get validForm() {
-    const {
-      birthdate,
-      name,
-      voteCard,
-    } = this.props;
+    const { birthdate, name, voteCard } = this.props;
 
     return [
       this.validBirthdate(birthdate),
       this.validName(name),
       this.validVoteCard(voteCard),
-    ].every(v => v);
+    ].every((v) => v);
   }
 
   get formEnabled() {
@@ -149,7 +144,9 @@ class ProfileSignUpLayout extends Component {
     this.setState(({ errors }) => ({
       errors: {
         ...errors,
-        birthdate: this.validBirthdate(birthdate) ? null : locale.invalidBirthdate,
+        birthdate: this.validBirthdate(birthdate)
+          ? null
+          : locale.invalidBirthdate,
       },
     }));
   };
@@ -179,16 +176,16 @@ class ProfileSignUpLayout extends Component {
   enableReason = () => {
     Keyboard.dismiss();
     this.onToggleReasonEnabled();
-  }
+  };
 
   onToggleReasonEnabled = () => {
     this.setState(({ reasonEnabled }) => ({ reasonEnabled: !reasonEnabled }));
-  }
+  };
 
   onTSERequested = () => {
     const { onTSERequested, birthdate, name } = this.props;
     onTSERequested({ birthdate, name });
-  }
+  };
 
   render() {
     const {
@@ -204,10 +201,7 @@ class ProfileSignUpLayout extends Component {
       onSetVoteCard,
     } = this.props;
 
-    const {
-      errors,
-      reasonEnabled,
-     } = this.state;
+    const { errors, reasonEnabled } = this.state;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -215,19 +209,25 @@ class ProfileSignUpLayout extends Component {
           <ScrollView>
             {this.renderNavBar()}
 
-            <SignUpBreadCrumb highlightId={2} containerStyle={styles.breadcrumb} />
+            <SignUpBreadCrumb
+              highlightId={2}
+              containerStyle={styles.breadcrumb}
+            />
 
-            <Text style={styles.headerTitle}>
-              {locale.profileSignUpTitle}
-            </Text>
+            <Text style={styles.headerTitle}>{locale.profileSignUpTitle}</Text>
 
             <View>
               <TouchableOpacity
                 onPress={this.enableReason}
-                style={[styles.whyDocumentsContainer, styles.warningContainer]}
-              >
-                <MaterialCommunityIcons name="alert-decagram" size={24} color={"#FFF"} />
-                <Text style={styles.whyDocumentsText}>{locale.whyRequestDocuments}</Text>
+                style={[styles.whyDocumentsContainer, styles.warningContainer]}>
+                <MaterialCommunityIcons
+                  name="alert-decagram"
+                  size={24}
+                  color={"#FFF"}
+                />
+                <Text style={styles.whyDocumentsText}>
+                  {locale.whyRequestDocuments}
+                </Text>
               </TouchableOpacity>
             </View>
 
@@ -239,31 +239,41 @@ class ProfileSignUpLayout extends Component {
                 hasError={!!errorForField("name", saveErrors) || !!errors.name}
                 error={errorForField("name", saveErrors) || errors.name}
                 onSubmitEditing={() => this.nameInput.blur()}
-                ref={ref => this.nameInput = ref}
+                ref={(ref) => (this.nameInput = ref)}
               />
 
               <DateInput
                 placeholder={locale.birthdate}
                 value={birthdate}
                 onChangeDateText={onSetBirthdate}
-                hasError={!!errorForField("birthday", saveErrors) || !!errors.birthdate}
-                error={errorForField("birthday", saveErrors) || errors.birthdate}
+                hasError={
+                  !!errorForField("birthday", saveErrors) || !!errors.birthdate
+                }
+                error={
+                  errorForField("birthday", saveErrors) || errors.birthdate
+                }
                 hint="Ex: 31/12/1980"
                 onSubmitEditing={() => this.birthInput.blur()}
-                ref={ref => this.birthInput = ref}
+                ref={(ref) => (this.birthInput = ref)}
               />
 
               <VoteCardInput
                 value={voteCard}
                 onChangeVoteCardText={onSetVoteCard}
                 placeholder={locale.voteCard}
-                hasError={!!errorForField("voteidcard", saveErrors) || !!errors.voteCard}
-                error={errorForField("voteidcard", saveErrors) || errors.voteCard}
+                hasError={
+                  !!errorForField("voteidcard", saveErrors) || !!errors.voteCard
+                }
+                error={
+                  errorForField("voteidcard", saveErrors) || errors.voteCard
+                }
                 hint="Ex: 0000.0000.0000"
                 onSubmitEditing={() => this.cardInput.blur()}
-                ref={ref => this.cardInput = ref}
+                ref={(ref) => (this.cardInput = ref)}
               />
-              <TouchableOpacity onPress={this.onTSERequested} style={styles.cantRememberVoteCardContainer}>
+              <TouchableOpacity
+                onPress={this.onTSERequested}
+                style={styles.cantRememberVoteCardContainer}>
                 <Text style={styles.cantRememberVoteCardText}>
                   {locale.cantRememberVoteCard}
                 </Text>
@@ -271,12 +281,21 @@ class ProfileSignUpLayout extends Component {
             </View>
 
             <View style={styles.buttonContainer}>
-              <RoundedButton title={locale.continue} enabled={this.formEnabled} action={onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+              <RoundedButton
+                title={locale.continue}
+                enabled={this.formEnabled}
+                action={onSubmit}
+                buttonStyle={styles.continueButton}
+                titleStyle={styles.continueButtonTitle}
+              />
             </View>
 
             <StaticFooter onOpenURL={onOpenURL} />
 
-            <DocumentsReasonModal isVisible={reasonEnabled} onToggleReasonEnabled={this.onToggleReasonEnabled}/>
+            <DocumentsReasonModal
+              isVisible={reasonEnabled}
+              onToggleReasonEnabled={this.onToggleReasonEnabled}
+            />
           </ScrollView>
         </Layout>
 

@@ -8,23 +8,23 @@ const store = (namespace, key, value) =>
   AsyncStorage.setItem(buildKey(namespace, key), JSON.stringify(value));
 
 const fetch = (namespace, key) =>
-  AsyncStorage
-    .getItem(buildKey(namespace, key))
-    .then(value => value && JSON.parse(value));
+  AsyncStorage.getItem(buildKey(namespace, key)).then(
+    (value) => value && JSON.parse(value),
+  );
 
 const destroy = (namespace, key) =>
   AsyncStorage.removeItem(buildKey(namespace, key));
 
 const findOrCreate = curry((namespace, key, valueBuilder) =>
-  fetch(namespace, key)
-  .then(async persistedValue => {
+  fetch(namespace, key).then(async (persistedValue) => {
     if (persistedValue) return persistedValue;
 
     const value = await Promise.resolve().then(() => valueBuilder());
     return store(namespace, key, value).then(() => value);
-  }));
+  }),
+);
 
-const service = namespace => ({
+const service = (namespace) => ({
   findOrCreate: findOrCreate(namespace),
   store: curry(store)(namespace),
   fetch: curry(fetch)(namespace),

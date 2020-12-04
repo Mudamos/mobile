@@ -1,5 +1,4 @@
-const initialState = {
-};
+const initialState = {};
 
 export default (state = initialState, action) => {
   if (!action) return state;
@@ -33,4 +32,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

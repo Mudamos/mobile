@@ -1,13 +1,8 @@
 import { call, fork, put, select, spawn, takeEvery } from "redux-saga/effects";
 
-import {
-  userFirstTimeFetched,
-  aboutAppFeedbackFetched,
-} from "../actions";
+import { userFirstTimeFetched, aboutAppFeedbackFetched } from "../actions";
 
-import {
-  aboutAppUserFeedback,
-} from "../selectors";
+import { aboutAppUserFeedback } from "../selectors";
 
 import { logError } from "../utils";
 
@@ -18,23 +13,28 @@ function* fetchUserFirstTimeSaga({ localStorage }) {
   yield takeEvery("LOCAL_FETCH_IS_USER_FIRST_TIME", function* () {
     try {
       const isUserFirstTime = yield call(localStorage.fetch, FIRST_OPEN_KEY);
-      yield put(userFirstTimeFetched({ isUserFirstTime: isUserFirstTime !== false }));
+      yield put(
+        userFirstTimeFetched({ isUserFirstTime: isUserFirstTime !== false }),
+      );
     } catch (e) {
-      logError(e, { tag: "fetchUserFirstTimeSaga"});
+      logError(e, { tag: "fetchUserFirstTimeSaga" });
     }
-  })
+  });
 }
 
 function* fetchAboutAppFeedbackSaga({ localStorage }) {
   yield takeEvery("LOCAL_FETCH_ABOUT_APP_FEEDBACK", function* () {
     try {
-      const userFeedback = yield call(localStorage.fetch, ABOUT_APP_FEEDBACK_KEY);
+      const userFeedback = yield call(
+        localStorage.fetch,
+        ABOUT_APP_FEEDBACK_KEY,
+      );
       const localUserFeedBack = JSON.parse(userFeedback) || {};
       yield put(aboutAppFeedbackFetched({ userFeedback: localUserFeedBack }));
     } catch (e) {
-      logError(e, { tag: "fetchAboutAppFeedbackSaga"});
+      logError(e, { tag: "fetchAboutAppFeedbackSaga" });
     }
-  })
+  });
 }
 
 function* userFirstTimeDoneSaga({ localStorage }) {
@@ -42,9 +42,9 @@ function* userFirstTimeDoneSaga({ localStorage }) {
     try {
       yield call(localStorage.store, FIRST_OPEN_KEY, false);
     } catch (e) {
-      logError(e, { tag: "userFirstTimeDoneSaga"});
+      logError(e, { tag: "userFirstTimeDoneSaga" });
     }
-  })
+  });
 }
 
 function* userAboutAppFeedbackSaga({ localStorage }) {
@@ -53,16 +53,24 @@ function* userAboutAppFeedbackSaga({ localStorage }) {
       const { questionAnsweredKey, answer } = action.payload;
 
       const aboutAppFeedback = yield select(aboutAppUserFeedback);
-      const updatedAboutAppFeedBack = { ...aboutAppFeedback, [questionAnsweredKey]: answer };
+      const updatedAboutAppFeedBack = {
+        ...aboutAppFeedback,
+        [questionAnsweredKey]: answer,
+      };
 
-      yield put(aboutAppFeedbackFetched({ userFeedback: updatedAboutAppFeedBack }));
-      yield call(localStorage.store, ABOUT_APP_FEEDBACK_KEY, JSON.stringify(updatedAboutAppFeedBack));
+      yield put(
+        aboutAppFeedbackFetched({ userFeedback: updatedAboutAppFeedBack }),
+      );
+      yield call(
+        localStorage.store,
+        ABOUT_APP_FEEDBACK_KEY,
+        JSON.stringify(updatedAboutAppFeedBack),
+      );
     } catch (e) {
-      logError(e, { tag: "userAboutAppFeedbackSaga"});
+      logError(e, { tag: "userAboutAppFeedbackSaga" });
     }
-  })
+  });
 }
-
 
 export default function* localStorageSaga({ localStorage }) {
   yield spawn(fetchUserFirstTimeSaga, { localStorage });

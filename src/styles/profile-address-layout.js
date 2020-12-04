@@ -5,7 +5,7 @@ import textStyles from "./text";
 
 const { width } = Dimensions.get("window");
 
-const address =  {
+const address = {
   color: "#FFF",
   fontSize: "1rem",
   marginHorizontal: 10,
@@ -67,10 +67,7 @@ export default EStyleSheet.create({
     marginHorizontal: 10,
     textAlign: "justify",
   },
-  headerTitle: StyleSheet.flatten([
-    textStyles.header,
-    { marginBottom: 8 },
-  ]),
+  headerTitle: StyleSheet.flatten([textStyles.header, { marginBottom: 8 }]),
   map: {
     flex: 1,
     height: 500,

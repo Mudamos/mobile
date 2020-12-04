@@ -7,7 +7,12 @@ export const actionSignerError = ({ message }) => ({
   payload: { message },
 });
 
-export const actionSignerSuccess = ({ message, signature, timestamp, publicKey }) => ({
+export const actionSignerSuccess = ({
+  message,
+  signature,
+  timestamp,
+  publicKey,
+}) => ({
   type: "ACTION_SIGNER_SIGN_SUCCESS",
   payload: {
     message,

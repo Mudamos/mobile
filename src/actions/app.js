@@ -1,7 +1,7 @@
-export const appReady = isReady => ({
+export const appReady = (isReady) => ({
   type: "APP_READY",
   payload: { isReady },
-})
+});
 
 export const appOnForeground = () => ({
   type: "APP_ON_FOREGROUND",

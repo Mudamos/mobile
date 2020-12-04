@@ -14,12 +14,6 @@ export default StyleSheet.create({
   full: {
     flex: 1,
   },
-  headerTitle: StyleSheet.flatten([
-    textStyles.header,
-    { marginBottom: 8 },
-  ]),
-  subHeader: StyleSheet.flatten([
-    textStyles.subtitle,
-    { marginBottom: 5 },
-  ]),
+  headerTitle: StyleSheet.flatten([textStyles.header, { marginBottom: 8 }]),
+  subHeader: StyleSheet.flatten([textStyles.subtitle, { marginBottom: 5 }]),
 });

@@ -1,12 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  Image,
-  TouchableOpacity,
-  View,
-  ViewPropTypes,
-} from "react-native";
+import { Image, TouchableOpacity, View, ViewPropTypes } from "react-native";
 
 import FIcon from "react-native-vector-icons/FontAwesome";
 
@@ -32,8 +27,10 @@ export default class YouTube extends Component {
     const { navigate } = this.context;
 
     return (
-      <TouchableOpacity onPress={() => navigate("showVideo", { videoId })} style={[styles.container, style]}>
-        <Image style={styles.thumb} source={{ uri: this.thumb }}/>
+      <TouchableOpacity
+        onPress={() => navigate("showVideo", { videoId })}
+        style={[styles.container, style]}>
+        <Image style={styles.thumb} source={{ uri: this.thumb }} />
 
         <View style={styles.thumbOverlay}>
           <View style={styles.bigPlayButton}>

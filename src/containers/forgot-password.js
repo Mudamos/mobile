@@ -2,24 +2,21 @@ import { connect } from "react-redux";
 
 import ForgotPasswordLayout from "../components/forgot-password-layout";
 
-import {
-  isRetrievingPassword,
-} from "../selectors";
+import { isRetrievingPassword } from "../selectors";
 
-import {
-  navigate,
-  navigateBack,
-  retrievePassword,
-} from "../actions";
+import { navigate, navigateBack, retrievePassword } from "../actions";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isSaving: isRetrievingPassword(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onBack: () => dispatch(navigateBack()),
   onHasCode: () => dispatch(navigate("changeForgotPassword")),
   onSave: ({ cpf, email }) => dispatch(retrievePassword({ cpf, email })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ForgotPasswordLayout);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ForgotPasswordLayout);

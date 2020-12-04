@@ -20,16 +20,16 @@ import {
   signingUp,
 } from "../actions";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoggingIn: isLoggingIn(state),
     isLogged: !!currentUser(state),
     isFacebookLogged: isFacebookLoggedIn(state),
     authErrorCode: authErrorCode(state),
   };
-}
+};
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onAppleSignIn: () => dispatch(appleSignIn()),
   onBack: () => {
     dispatch(signingUp(false));
@@ -38,14 +38,14 @@ const mapDispatchToProps = dispatch => ({
   onClearAuthLoginError: () => dispatch(clearAuthLoginError()),
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
   onForgotPassword: () => dispatch(navigate("forgotPassword")),
-  onOpenURL: url => dispatch(openURL(url)),
+  onOpenURL: (url) => dispatch(openURL(url)),
   onSignUp: () => {
     dispatch(signingUp(true));
     dispatch(navigate("signUp"));
   },
   onSignIn: (email, password) => {
     dispatch(signingUp(false));
-    dispatch(loginUser(email, password))
+    dispatch(loginUser(email, password));
   },
 });
 

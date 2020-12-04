@@ -3,12 +3,12 @@ export const shareLink = ({ url, type, message, title, subject }) => ({
   payload: { url, type, message, title, subject },
 });
 
-export const shareLinkError = error => ({
+export const shareLinkError = (error) => ({
   type: "SHARE_LINK_ERROR",
   payload: { error },
 });
 
-export const sharePlip = plip => ({
+export const sharePlip = (plip) => ({
   type: "SHARE_PLIP",
   payload: { plip },
 });

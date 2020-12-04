@@ -16,6 +16,9 @@ import locale from "../locales/pt-BR";
 
 import RoundedButton from "./rounded-button";
 
+const profileActiveDefaultStyle = { marginBottom: 20 };
+const youCanSignAndShareDefaultStyle = profileActiveDefaultStyle;
+
 const styles = EStyleSheet.create({
   background: {
     ...StyleSheet.absoluteFillObject,
@@ -68,38 +71,32 @@ class ValidProfileModal extends Component {
 
     onOk: PropTypes.func.isRequired,
     onToggleModal: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     fadeAnim: new Animated.Value(0),
-  }
+  };
 
   static defaultProps = {
     isVisible: false,
-  }
+  };
 
   componentDidUpdate(prevProps) {
     const { isVisible } = this.props;
 
     if (isVisible !== prevProps.isVisible) {
       if (isVisible === false) {
-        Animated.timing(
-          this.state.fadeAnim,
-          {
-            toValue: 0,
-            duration: 200,
-            useNativeDriver: false,
-          }
-        ).start();
+        Animated.timing(this.state.fadeAnim, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: false,
+        }).start();
       } else {
-        Animated.timing(
-          this.state.fadeAnim,
-          {
-            toValue: 1,
-            duration: 200,
-            useNativeDriver: false,
-          }
-        ).start();
+        Animated.timing(this.state.fadeAnim, {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: false,
+        }).start();
       }
     }
   }
@@ -115,20 +112,20 @@ class ValidProfileModal extends Component {
 
     return (
       <View style={styles.buttonContainer}>
-        <RoundedButton title={title} action={action} buttonStyle={[buttonStyle, okButton]} titleStyle={titleStyle}/>
+        <RoundedButton
+          title={title}
+          action={action}
+          buttonStyle={[buttonStyle, okButton]}
+          titleStyle={titleStyle}
+        />
       </View>
     );
   }
 
   render() {
-    const {
-      isVisible,
-      onToggleModal,
-    } = this.props;
+    const { isVisible, onToggleModal } = this.props;
 
-    const {
-      fadeAnim,
-    } = this.state;
+    const { fadeAnim } = this.state;
 
     if (!isVisible) return null;
 
@@ -137,11 +134,13 @@ class ValidProfileModal extends Component {
         <TouchableOpacity style={styles.background} onPress={onToggleModal} />
         <Animated.View style={styles.modal}>
           <Text style={[styles.text, styles.title]}>{locale.validProfile}</Text>
-          <Image
-            source={require("../images/valid.png")}
-          />
-          <Text style={[styles.text, styles.bold, { marginBottom: 20 }]}>{locale.profileActive}</Text>
-          <Text style={[styles.text, { marginBottom: 20 }]}>{locale.youCanSignAndShare}</Text>
+          <Image source={require("../images/valid.png")} />
+          <Text style={[styles.text, styles.bold, profileActiveDefaultStyle]}>
+            {locale.profileActive}
+          </Text>
+          <Text style={[styles.text, youCanSignAndShareDefaultStyle]}>
+            {locale.youCanSignAndShare}
+          </Text>
           {this.renderButtonSign()}
         </Animated.View>
       </Animated.View>

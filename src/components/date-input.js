@@ -5,38 +5,34 @@ import MDTextInput from "./md-text-input";
 
 import { dateMask } from "../utils";
 
-
 export default class DateInput extends Component {
   static propTypes = {
     separator: PropTypes.oneOf(["/", "-"]),
     value: PropTypes.string,
     onChangeDateText: PropTypes.func.isRequired,
-  }
+  };
 
   static defaultProps = {
     separator: "/",
     keyboardType: "numeric",
     returnKeyType: "send",
-  }
+  };
 
   get separatorRegex() {
     return new RegExp(this.props.separator, "g");
   }
 
   render() {
-    const {
-      value,
-      ...mdInputProps
-    } = this.props;
+    const { value, ...mdInputProps } = this.props;
 
     return (
       <MDTextInput
         {...mdInputProps}
-
-        ref={ref => this.input = ref}
+        ref={(ref) => (this.input = ref)}
         value={this.removeLastSeparator(value)}
         maxLength={10}
-        onChangeText={this.onChangeText.bind(this)} />
+        onChangeText={this.onChangeText.bind(this)}
+      />
     );
   }
 
@@ -57,9 +53,7 @@ export default class DateInput extends Component {
   }
 
   removeLastSeparator(text) {
-    return dateMask(this.cleanText(text))
-      .replace(/-$/, "")
-      .replace(/\/$/, "");
+    return dateMask(this.cleanText(text)).replace(/-$/, "").replace(/\/$/, "");
   }
 
   focus() {

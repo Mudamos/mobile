@@ -20,7 +20,7 @@ export default class Address {
       lat: this.latitude,
       lng: this.longitude,
       zipcode: this.zipCode,
-    }
+    };
   }
 
   static fromJson(json = {}) {

@@ -2,11 +2,7 @@ import { delay } from "redux-saga";
 import { all, call, fork, put, select, takeLatest } from "redux-saga/effects";
 import LibCrypto from "mudamos-libcrypto";
 
-import {
-  nth,
-  pipe,
-  split,
-} from "ramda";
+import { nth, pipe, split } from "ramda";
 
 import {
   actionSignerError,
@@ -26,10 +22,7 @@ import { isDev, isUnauthorized, moment } from "../utils";
 import { fetchProfile } from "./profile";
 import { validateLocalWallet } from "./wallet";
 
-const buildMessage = ({ message, timestamp }) => [
-  message,
-  timestamp,
-].join(";");
+const buildMessage = ({ message, timestamp }) => [message, timestamp].join(";");
 
 const signature = pipe(split(";"), nth(-2));
 
@@ -69,7 +62,12 @@ function* signMessage({ mobileApi, mudamosSigner, walletStore }) {
 
       const timestamp = moment().toISOString();
       const message = buildMessage({ message: userMessage, timestamp });
-      const block = yield call([LibCrypto, LibCrypto.signMessage], seed, message, difficulty);
+      const block = yield call(
+        [LibCrypto, LibCrypto.signMessage],
+        seed,
+        message,
+        difficulty,
+      );
 
       if (isDev) {
         console.log("Block:", block);
@@ -81,20 +79,24 @@ function* signMessage({ mobileApi, mudamosSigner, walletStore }) {
         message: block,
       });
 
-      yield put(actionSignerSuccess({
-        message,
-        signature: signature(block),
-        timestamp,
-        publicKey,
-      }));
-    } catch(e) {
+      yield put(
+        actionSignerSuccess({
+          message,
+          signature: signature(block),
+          timestamp,
+          publicKey,
+        }),
+      );
+    } catch (e) {
       if (isUnauthorized(e)) {
         return yield put(actionSignerError({ message: "user-not-logged-in" }));
       }
 
-      yield put(actionSignerError({
-        message: e.userMessage || "unknown-error",
-      }));
+      yield put(
+        actionSignerError({
+          message: e.userMessage || "unknown-error",
+        }),
+      );
     }
   });
 }
@@ -118,7 +120,11 @@ function* closeActionSigner({ mudamosSigner }) {
   });
 }
 
-export default function* actionSigner({ mobileApi, mudamosSigner, walletStore }) {
+export default function* actionSigner({
+  mobileApi,
+  mudamosSigner,
+  walletStore,
+}) {
   yield fork(signMessage, { mobileApi, mudamosSigner, walletStore });
   yield fork(closeActionSigner, { mudamosSigner });
 }

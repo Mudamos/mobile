@@ -1,4 +1,12 @@
-import { all, call, fork, put, spawn, select, takeLatest } from "redux-saga/effects";
+import {
+  all,
+  call,
+  fork,
+  put,
+  spawn,
+  select,
+  takeLatest,
+} from "redux-saga/effects";
 import { Alert } from "react-native";
 
 import { monitorUpload } from "./upload";
@@ -35,9 +43,7 @@ import {
   profileSaveErrors,
 } from "../selectors";
 
-import {
-  User,
-} from "../models";
+import { User } from "../models";
 
 import { isDev, isUnauthorized, log, logError, isBlank } from "../utils";
 
@@ -66,8 +72,17 @@ function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
         const currentSigningPlip = yield select(getCurrentSigningPlip);
         if (currentSigningPlip) apiPayload.plipId = currentSigningPlip.id;
 
-        const message = [apiPayload.user.cpf, apiPayload.user.email, apiPayload.user.password, apiPayload.user.termsAccepted].join(";");
-        apiPayload.block = yield call(blockBuilder, { message, mobileApi, Crypto });
+        const message = [
+          apiPayload.user.cpf,
+          apiPayload.user.email,
+          apiPayload.user.password,
+          apiPayload.user.termsAccepted,
+        ].join(";");
+        apiPayload.block = yield call(blockBuilder, {
+          message,
+          mobileApi,
+          Crypto,
+        });
       }
 
       const response = yield call(mobileApi.signUp, authToken, apiPayload);
@@ -85,7 +100,7 @@ function* saveMainProfile({ mobileApi, sessionStore, Crypto }) {
       yield put(savingProfile(false));
       yield put(profileStateMachine());
       yield put(logEvent({ name: "app_signup" }));
-    } catch(e) {
+    } catch (e) {
       logError(e, { tag: "saveMainProfile" });
 
       yield put(savingProfile(false));
@@ -102,7 +117,11 @@ function* saveBirthdateProfile({ mobileApi }) {
       yield put(savingProfile(true));
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.saveBirthdate, authToken, birthdate);
+      const response = yield call(
+        mobileApi.saveBirthdate,
+        authToken,
+        birthdate,
+      );
 
       const user = User.fromJson(response.user);
 
@@ -140,14 +159,14 @@ function* saveZipCodeProfile({ mobileApi }) {
 
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
-      yield put(profileStateMachine())
+      yield put(profileStateMachine());
       yield put(logEvent({ name: "completed_zip_code" }));
     } catch (e) {
       logError(e, { tag: "saveZipCodeProfile" });
 
       yield put(savingProfile(false));
 
-      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
       yield put(saveUserProfileError(e));
     }
@@ -171,7 +190,7 @@ function* saveVoteAddress({ mobileApi }) {
 
       yield put(updatedUserProfile({ user }));
       yield put(savingProfile(false));
-      yield put(profileStateMachine())
+      yield put(profileStateMachine());
       yield put(logEvent({ name: "completed_vote_address" }));
       yield put(profileClearVoteAddressData());
     } catch (e) {
@@ -194,7 +213,11 @@ function* saveDocumentsProfile({ mobileApi }) {
       yield put(savingProfile(true));
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.saveDocuments, authToken, { cpf, voteCard, termsAccepted });
+      const response = yield call(mobileApi.saveDocuments, authToken, {
+        cpf,
+        voteCard,
+        termsAccepted,
+      });
 
       const user = User.fromJson(response.user);
 
@@ -207,7 +230,7 @@ function* saveDocumentsProfile({ mobileApi }) {
 
       yield put(savingProfile(false));
 
-      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
       yield put(saveUserProfileError(e));
     } finally {
@@ -227,7 +250,11 @@ function* sendPhoneValidation({ mobileApi }) {
       yield put(sendingPhoneValidation(true));
 
       const authToken = yield select(currentAuthToken);
-      const response = yield call(mobileApi.sendPhoneValidation, authToken, phone);
+      const response = yield call(
+        mobileApi.sendPhoneValidation,
+        authToken,
+        phone,
+      );
 
       if (isDev) {
         console.log("[PIN CODE]", response);
@@ -248,7 +275,7 @@ function* sendPhoneValidation({ mobileApi }) {
 
       yield put(sendingPhoneValidation(false));
 
-      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
       yield put(sendingPhoneValidationError(e));
     }
@@ -274,7 +301,11 @@ function* savePhoneProfile({ mobileApi, DeviceInfo }) {
         },
       };
 
-      const response = yield call(mobileApi.savePhone, authToken, requestPayload);
+      const response = yield call(
+        mobileApi.savePhone,
+        authToken,
+        requestPayload,
+      );
 
       const user = User.fromJson(response.user);
 
@@ -288,36 +319,46 @@ function* savePhoneProfile({ mobileApi, DeviceInfo }) {
 
       yield put(savingProfile(false));
 
-      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
       yield put(saveUserProfileError(e));
     }
   });
 }
 
-function* saveAvatarProfileSaga({ mobileApi, avatar = {}, oldAvatarURL, shouldNavigate }) {
+function* saveAvatarProfileSaga({
+  mobileApi,
+  avatar = {},
+  oldAvatarURL,
+  shouldNavigate,
+}) {
   try {
     yield put(savingAvatar(true));
 
     const authToken = yield select(currentAuthToken);
-    const avatarPayload = avatar && avatar.uri && avatar.uri !== oldAvatarURL ?
-      { ...avatar } :
-      { oldAvatarURL };
+    const avatarPayload =
+      avatar && avatar.uri && avatar.uri !== oldAvatarURL
+        ? { ...avatar }
+        : { oldAvatarURL };
 
     log(`avatar payload: ${JSON.stringify(avatarPayload)}`);
 
-    yield call(monitorUpload, mobileApi.saveAvatar(authToken, avatarPayload), function ({ type, payload: uploadPayload }) {
-      switch (type) {
-        case "UPLOAD_PROGRESS":
-          log(`upload progress ${uploadPayload}`);
-          break;
-        case "UPLOAD_FINISHED":
-          log("upload finished", uploadPayload)
-          break;
-        case "UPLOAD_FAILED":
-          throw uploadPayload;
-      }
-    });
+    yield call(
+      monitorUpload,
+      mobileApi.saveAvatar(authToken, avatarPayload),
+      function ({ type, payload: uploadPayload }) {
+        switch (type) {
+          case "UPLOAD_PROGRESS":
+            log(`upload progress ${uploadPayload}`);
+            break;
+          case "UPLOAD_FINISHED":
+            log("upload finished", uploadPayload);
+            break;
+          case "UPLOAD_FAILED":
+            throw uploadPayload;
+        }
+      },
+    );
 
     const response = yield call(mobileApi.profile, authToken);
     const user = User.fromJson(response.user);
@@ -335,7 +376,9 @@ function* saveAvatarProfileSaga({ mobileApi, avatar = {}, oldAvatarURL, shouldNa
 
     yield put(savingAvatar(false));
 
-    if (shouldNavigate && isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
+    if (shouldNavigate && isUnauthorized(e)) {
+      return yield put(unauthorized({ type: "reset" }));
+    }
 
     yield put(saveAvatarError(e));
   }
@@ -345,16 +388,33 @@ function* saveAvatarProfile({ mobileApi }) {
   yield takeLatest("PROFILE_SAVE_AVATAR", function* ({ payload }) {
     const { avatar = {}, oldAvatarURL, shouldNavigate } = payload;
 
-    yield call(saveAvatarProfileSaga, { mobileApi, avatar, oldAvatarURL, shouldNavigate });
+    yield call(saveAvatarProfileSaga, {
+      mobileApi,
+      avatar,
+      oldAvatarURL,
+      shouldNavigate,
+    });
   });
 }
 
-function* updateProfileSaga({ mobileApi, birthdate, name, zipCode, voteIdCard, shouldNavigate }) {
+function* updateProfileSaga({
+  mobileApi,
+  birthdate,
+  name,
+  zipCode,
+  voteIdCard,
+  shouldNavigate,
+}) {
   try {
     yield put(savingProfile(true));
 
     const authToken = yield select(currentAuthToken);
-    const response = yield call(mobileApi.updateProfile, authToken, { birthdate, name, zipCode, voteIdCard });
+    const response = yield call(mobileApi.updateProfile, authToken, {
+      birthdate,
+      name,
+      zipCode,
+      voteIdCard,
+    });
 
     const user = User.fromJson(response.user);
 
@@ -368,7 +428,7 @@ function* updateProfileSaga({ mobileApi, birthdate, name, zipCode, voteIdCard, s
 
     yield put(savingProfile(false));
 
-    if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+    if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
     yield put(saveUserProfileError(e));
   }
@@ -378,10 +438,16 @@ function* updateProfile({ mobileApi }) {
   yield takeLatest("PROFILE_UPDATE", function* ({ payload }) {
     const { birthdate, name, zipCode, voteIdCard, shouldNavigate } = payload;
 
-    yield call(updateProfileSaga, { mobileApi, birthdate, name, zipCode, voteIdCard, shouldNavigate })
+    yield call(updateProfileSaga, {
+      mobileApi,
+      birthdate,
+      name,
+      zipCode,
+      voteIdCard,
+      shouldNavigate,
+    });
   });
 }
-
 
 export function* fetchProfile({ mobileApi, force = false }) {
   try {
@@ -436,13 +502,11 @@ function* validateProfile({ dispatch, mobileApi, walletStore }) {
       const publicKey = yield call(walletStore.publicKey, user.voteCard);
       log(`User public key: ${publicKey}`);
 
-      if (!publicKey || (publicKey !== user.wallet.key || !user.wallet.status)) {
+      if (!publicKey || publicKey !== user.wallet.key || !user.wallet.status) {
         log("Public key does not match");
-        Alert.alert(
-          locale.invalidSignature,
-          locale.willCreateNewWallet,
-          [{text: locale.ok, onPress: () => dispatch(profileStateMachine())}]
-        );
+        Alert.alert(locale.invalidSignature, locale.willCreateNewWallet, [
+          { text: locale.ok, onPress: () => dispatch(profileStateMachine()) },
+        ]);
 
         yield put(invalidatePhone());
         return yield put(profileValidationCompleted({ error: false }));
@@ -462,7 +526,7 @@ function* validateProfile({ dispatch, mobileApi, walletStore }) {
 
       yield call([Toast, Toast.show], locale.validProfile);
       yield put(profileValidationCompleted({ error: false }));
-    } catch(e) {
+    } catch (e) {
       if (isUnauthorized(e)) return yield put(unauthorized());
 
       yield put(profileValidationCompleted({ error: true }));
@@ -472,28 +536,62 @@ function* validateProfile({ dispatch, mobileApi, walletStore }) {
 
 function* updateUser({ mobileApi }) {
   yield takeLatest("UPDATE_USER", function* (action) {
-    const { avatar, birthdate, name, zipCode, currentPassword, newPassword } = action.payload.profile;
-    const { validAvatar, validProfileFields, validPassword } = action.payload.validations;
+    const {
+      avatar,
+      birthdate,
+      name,
+      zipCode,
+      currentPassword,
+      newPassword,
+    } = action.payload.profile;
+    const {
+      validAvatar,
+      validProfileFields,
+      validPassword,
+    } = action.payload.validations;
     const shouldNavigate = false;
 
     yield all([
-      validAvatar ? call(saveAvatarProfileSaga, { mobileApi, avatar, shouldNavigate }) : Promise.resolve(),
-      validProfileFields ? call(updateProfileSaga, { mobileApi, birthdate, name, zipCode, shouldNavigate }) : Promise.resolve(),
-      validPassword ? call(changePasswordSaga, { mobileApi, currentPassword, newPassword }) : Promise.resolve(),
+      validAvatar
+        ? call(saveAvatarProfileSaga, { mobileApi, avatar, shouldNavigate })
+        : Promise.resolve(),
+      validProfileFields
+        ? call(updateProfileSaga, {
+            mobileApi,
+            birthdate,
+            name,
+            zipCode,
+            shouldNavigate,
+          })
+        : Promise.resolve(),
+      validPassword
+        ? call(changePasswordSaga, { mobileApi, currentPassword, newPassword })
+        : Promise.resolve(),
     ]);
 
     const avatarError = yield select(avatarSaveErrors);
     const profileErrors = yield select(profileSaveErrors);
     const passwordErrors = yield select(getChangePasswordErrors);
 
-    if (isBlank(avatarError) && isBlank(profileErrors) && isBlank(passwordErrors)) {
+    if (
+      isBlank(avatarError) &&
+      isBlank(profileErrors) &&
+      isBlank(passwordErrors)
+    ) {
       yield put(navigate("plipsNav", { type: "reset" }));
       yield call([Toast, Toast.show], locale.profileUpdated);
     }
   });
 }
 
-export default function* profileSaga({ dispatch, mobileApi, DeviceInfo, sessionStore, Crypto, walletStore }) {
+export default function* profileSaga({
+  dispatch,
+  mobileApi,
+  DeviceInfo,
+  sessionStore,
+  Crypto,
+  walletStore,
+}) {
   yield spawn(saveMainProfile, { mobileApi, sessionStore, Crypto });
   yield spawn(updateProfile, { mobileApi });
   yield spawn(saveAvatarProfile, { mobileApi });

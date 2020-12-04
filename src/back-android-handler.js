@@ -26,7 +26,7 @@ const defaultBackAction = () => {
 
 // By returning false, we don't allow the user to go back
 // on the stack, instead he/she leaves the app.
-export default store => () => {
+export default (store) => () => {
   const state = store.getState();
   const currentKey = state.navigation.currentKey || "";
 
@@ -63,4 +63,4 @@ export default store => () => {
     default:
       return defaultBackAction();
   }
-}
+};

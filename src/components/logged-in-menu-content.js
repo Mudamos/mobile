@@ -2,11 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import ListView from "deprecated-react-native-listview";
-import {
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import Spinner from "react-native-spinkit";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -20,7 +16,6 @@ import styles from "../styles/logged-in-menu";
 import { baseName, log } from "../utils";
 
 import locale from "../locales/pt-BR";
-
 
 export default class Menu extends Component {
   static propTypes = {
@@ -58,7 +53,9 @@ export default class Menu extends Component {
     const { newAvatar } = this.state;
 
     if (newAvatar) return newAvatar;
-    if (currentUser && currentUser.avatar.url) return { uri: currentUser.avatar.url };
+    if (currentUser && currentUser.avatar.url) {
+      return { uri: currentUser.avatar.url };
+    }
   }
 
   render() {
@@ -76,31 +73,30 @@ export default class Menu extends Component {
 
     return (
       <View style={styles.menuHeaderContainer}>
-        {
-          currentUser &&
-            <View style={styles.profileInfoContainer}>
-              <Avatar
-                source={this.avatar}
-                onPress={this.selectAvatar}
-                size={56}
-                avatarStyle={styles.avatar}
-              />
+        {currentUser && (
+          <View style={styles.profileInfoContainer}>
+            <Avatar
+              source={this.avatar}
+              onPress={this.selectAvatar}
+              size={56}
+              avatarStyle={styles.avatar}
+            />
 
-              <View style={styles.userNameContainer}>
-                <Text style={styles.userName} numberOfLines={2}>
-                  {currentUser.name}
-                </Text>
+            <View style={styles.userNameContainer}>
+              <Text style={styles.userName} numberOfLines={2}>
+                {currentUser.name}
+              </Text>
 
-                <Text style={styles.darkSmallText} numberOfLines={2}>
-                  {currentUser.email}
-                </Text>
-              </View>
+              <Text style={styles.darkSmallText} numberOfLines={2}>
+                {currentUser.email}
+              </Text>
             </View>
-        }
+          </View>
+        )}
 
-        { !currentUser && <HeaderLogo /> }
+        {!currentUser && <HeaderLogo />}
 
-        { isFetchingProfile && this.renderLoader() }
+        {isFetchingProfile && this.renderLoader()}
       </View>
     );
   }
@@ -125,8 +121,7 @@ export default class Menu extends Component {
           this.menuSelected(entry);
           highlightRow(section, row);
         }}
-        style={styles.rowContainer}
-      >
+        style={styles.rowContainer}>
         <View style={styles.row}>
           <Icon
             name={entry.icon}
@@ -134,13 +129,11 @@ export default class Menu extends Component {
             color="rgba(255, 255, 255, .2)"
             style={styles.icon}
           />
-          <Text style={styles.mediumText}>
-            {entry.title}
-          </Text>
+          <Text style={styles.mediumText}>{entry.title}</Text>
         </View>
       </TouchableOpacity>
     );
-  }
+  };
 
   menuSelected(entry) {
     entry.action();
@@ -148,16 +141,16 @@ export default class Menu extends Component {
 
   renderFooter() {
     const { isFetchingProfile, isUserLoggedIn } = this.props;
-    return isFetchingProfile || !isUserLoggedIn ? null : this.renderEnabledFooter();
+    return isFetchingProfile || !isUserLoggedIn
+      ? null
+      : this.renderEnabledFooter();
   }
 
   renderEnabledFooter() {
     const { onLogout } = this.props;
 
     return (
-      <TouchableOpacity
-        onPress={onLogout}
-      >
+      <TouchableOpacity onPress={onLogout}>
         <View style={styles.footer}>
           <Icon
             name="power-settings-new"
@@ -165,9 +158,7 @@ export default class Menu extends Component {
             color="rgba(255, 255, 255, .2)"
             style={styles.icon}
           />
-          <Text style={styles.mediumText}>
-            {locale.logout}
-          </Text>
+          <Text style={styles.mediumText}>{locale.logout}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -176,15 +167,8 @@ export default class Menu extends Component {
   renderLoader() {
     return (
       <View style={styles.loader}>
-        <Spinner
-          color="#FFFFFF"
-          isVisible={true}
-          type="Bounce"
-          size={50}
-        />
-        <Text style={styles.loaderText}>
-          {locale.loading}
-        </Text>
+        <Spinner color="#FFFFFF" isVisible={true} type="Bounce" size={50} />
+        <Text style={styles.loaderText}>{locale.loading}</Text>
       </View>
     );
   }
@@ -192,32 +176,35 @@ export default class Menu extends Component {
   selectAvatar = () => {
     const { onAvatarChanged } = this.props;
 
-    ImagePicker.showImagePicker({
-      title: locale.chooseAvatar,
-      cancelButtonTitle: locale.cancel,
-      takePhotoButtonTitle: locale.takePhoto,
-      chooseFromLibraryButtonTitle: locale.openGallery,
-      mediaType: "photo",
-      storageOptions: {
-        skipBackup: true,
+    ImagePicker.showImagePicker(
+      {
+        title: locale.chooseAvatar,
+        cancelButtonTitle: locale.cancel,
+        takePhotoButtonTitle: locale.takePhoto,
+        chooseFromLibraryButtonTitle: locale.openGallery,
+        mediaType: "photo",
+        storageOptions: {
+          skipBackup: true,
+        },
+        allowsEditing: true,
       },
-      allowsEditing: true,
-    }, response => {
-      if (!response.uri) return;
+      (response) => {
+        if (!response.uri) return;
 
-      const uri = response.uri;
-      const name = baseName(uri);
-      log(uri, { tag: "avatar uri" });
+        const uri = response.uri;
+        const name = baseName(uri);
+        log(uri, { tag: "avatar uri" });
 
-      const newAvatar = {
-        uri,
-        name,
-        contentType: "image/jpeg",
-      };
+        const newAvatar = {
+          uri,
+          name,
+          contentType: "image/jpeg",
+        };
 
-      this.setState({ newAvatar });
+        this.setState({ newAvatar });
 
-      onAvatarChanged(newAvatar);
-    });
-  }
+        onAvatarChanged(newAvatar);
+      },
+    );
+  };
 }

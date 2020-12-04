@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  ImageBackground,
-  Text,
-  View,
-} from "react-native";
+import { ImageBackground, Text, View } from "react-native";
 
 import Accordion from "react-native-collapsible/Accordion";
 
@@ -32,7 +28,7 @@ export default class AboutAppLayout extends Component {
     onLogEvent: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
     onSetFeedback: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     activeSections: [],
@@ -43,20 +39,19 @@ export default class AboutAppLayout extends Component {
 
     onLogEvent({ name: "go_to_mudamos_site" });
     onOpenURL(remoteLinks.getToKnowMudamos);
-  }
+  };
 
   onLogFeedback = ({ section, answer }) => {
     const { onLogEvent, onSetFeedback } = this.props;
     onLogEvent({ name: `about_app_${section.key}_${answer}` });
     onSetFeedback({ questionAnsweredKey: section.key, answer });
-  }
+  };
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
         {this.renderNavBar()}
         <ScrollView style={styles.body}>
-
           {this.renderContent()}
 
           {this.renderFooter()}
@@ -73,8 +68,7 @@ export default class AboutAppLayout extends Component {
         <ImageBackground
           source={require("../images/header-people.png")}
           style={styles.peopleImage}
-          resizeMode="cover"
-        >
+          resizeMode="cover">
           <NavigationBar
             leftView={<ChevronButton onPress={onBack} direction="left" />}
             middleView={<HeaderLogo />}
@@ -89,36 +83,59 @@ export default class AboutAppLayout extends Component {
     return (
       <View style={styles.accordionHeaderContainer}>
         <Text style={styles.accordionHeaderText}>{section.title}</Text>
-        <ChevronButton style={styles.accordionHeaderChevron} clickable={false} direction={direction} color="#000"/>
+        <ChevronButton
+          style={styles.accordionHeaderChevron}
+          clickable={false}
+          direction={direction}
+          color="#000"
+        />
       </View>
     );
-  }
+  };
 
-  renderAccordionContent = section => {
+  renderAccordionContent = (section) => {
     const { localFeedback } = this.props;
     const gaveFeedback = localFeedback && isNotNil(localFeedback[section.key]);
 
     return (
       <View style={styles.accordionContentContainer}>
         <Text style={styles.accordionContentText}>{section.content}</Text>
-        { gaveFeedback ?
-            <View style={styles.classifyQuestionView}>
-              <Text style={styles.thanksForFeedback}>{locale.thanksForFeedback}</Text>
+        {gaveFeedback ? (
+          <View style={styles.classifyQuestionView}>
+            <Text style={styles.thanksForFeedback}>
+              {locale.thanksForFeedback}
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.classifyQuestionView}>
+            <Text
+              style={[
+                styles.accordionContentText,
+                styles.accordionContentTextFooter,
+              ]}>
+              {locale.thisInfoWasUseful}
+            </Text>
+            <View style={styles.buttonPanel}>
+              <RoundedButton
+                title={locale.yes}
+                action={() => this.onLogFeedback({ section, answer: "yes" })}
+                buttonStyle={styles.classifyQuestionButton}
+                titleStyle={styles.classifyQuestionButtonTitle}
+              />
+              <RoundedButton
+                title={locale.no}
+                action={() => this.onLogFeedback({ section, answer: "no" })}
+                buttonStyle={styles.classifyQuestionButton}
+                titleStyle={styles.classifyQuestionButtonTitle}
+              />
             </View>
-          :
-            <View style={styles.classifyQuestionView}>
-              <Text style={[styles.accordionContentText, styles.accordionContentTextFooter]}>{locale.thisInfoWasUseful}</Text>
-              <View style={styles.buttonPanel}>
-                <RoundedButton title={locale.yes} action={() => this.onLogFeedback({ section, answer: "yes" })} buttonStyle={styles.classifyQuestionButton} titleStyle={styles.classifyQuestionButtonTitle}/>
-                <RoundedButton title={locale.no} action={() => this.onLogFeedback({ section, answer: "no" })} buttonStyle={styles.classifyQuestionButton} titleStyle={styles.classifyQuestionButtonTitle}/>
-              </View>
-            </View>
-        }
+          </View>
+        )}
       </View>
     );
-  }
+  };
 
-  updateSections = activeSections => this.setState({ activeSections });
+  updateSections = (activeSections) => this.setState({ activeSections });
 
   renderContent() {
     const { activeSections } = this.state;
@@ -144,13 +161,22 @@ export default class AboutAppLayout extends Component {
     return (
       <View style={styles.footerContainer}>
         <View style={styles.moreAboutMudamos}>
-          <Text style={styles.moreAboutMudamosTitle}>{locale.wannaKnowMoreAboutMudamos}</Text>
+          <Text style={styles.moreAboutMudamosTitle}>
+            {locale.wannaKnowMoreAboutMudamos}
+          </Text>
           <View style={styles.buttonContainer}>
-            <RoundedButton title={locale.goToSite} action={this.onGoToMudamosSite} buttonStyle={styles.goToMudamosSiteButton} titleStyle={styles.goToMudamosSiteTitle} />
-            </View>
-          <Text style={styles.moreAboutMudamosInfo}>{locale.youWillBeRedirectToMudamos}</Text>
+            <RoundedButton
+              title={locale.goToSite}
+              action={this.onGoToMudamosSite}
+              buttonStyle={styles.goToMudamosSiteButton}
+              titleStyle={styles.goToMudamosSiteTitle}
+            />
+          </View>
+          <Text style={styles.moreAboutMudamosInfo}>
+            {locale.youWillBeRedirectToMudamos}
+          </Text>
         </View>
       </View>
-    )
+    );
   }
 }

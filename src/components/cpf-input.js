@@ -9,19 +9,15 @@ export default class CpfInput extends Component {
   static propTypes = {
     value: PropTypes.string,
     onChangeCpfText: PropTypes.func.isRequired,
-  }
+  };
 
   render() {
-    const {
-      value,
-      ...mdInputProps
-    } = this.props;
+    const { value, ...mdInputProps } = this.props;
 
     return (
       <MDTextInput
         {...mdInputProps}
-
-        ref={ref => this.input = ref}
+        ref={(ref) => (this.input = ref)}
         value={this.removeLastSeparator(value)}
         keyboardType="numeric"
         maxLength={14}
@@ -47,9 +43,7 @@ export default class CpfInput extends Component {
   }
 
   removeLastSeparator(text) {
-    return cpfMask(this.cleanText(text))
-      .replace(/\.$/, "")
-      .replace(/-$/,"")
+    return cpfMask(this.cleanText(text)).replace(/\.$/, "").replace(/-$/, "");
   }
 
   focus() {

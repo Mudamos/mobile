@@ -3,7 +3,7 @@ export const retrievePassword = ({ cpf, email }) => ({
   payload: { cpf, email },
 });
 
-export const retrievingPassword = isRetrieving => ({
+export const retrievingPassword = (isRetrieving) => ({
   type: "PASSWORD_RETRIEVING",
   payload: { isRetrieving },
 });
@@ -18,12 +18,12 @@ export const changePassword = ({ currentPassword, newPassword }) => ({
   payload: { currentPassword, newPassword },
 });
 
-export const changingPassword = isChanging => ({
+export const changingPassword = (isChanging) => ({
   type: "PASSWORD_CHANGING",
   payload: { isChanging },
 });
 
-export const changePasswordError = error => ({
+export const changePasswordError = (error) => ({
   type: "PASSWORD_CHANGE_ERROR",
   payload: { error },
 });
@@ -33,12 +33,12 @@ export const changeForgotPassword = ({ code, password }) => ({
   payload: { code, password },
 });
 
-export const changingForgotPassword = isChangingForgot => ({
+export const changingForgotPassword = (isChangingForgot) => ({
   type: "PASSWORD_CHANGING_FORGOT",
   payload: { isChangingForgot },
 });
 
-export const changeForgotPasswordError = error => ({
+export const changeForgotPasswordError = (error) => ({
   type: "PASSWORD_CHANGE_FORGOT_ERROR",
   payload: { error },
 });

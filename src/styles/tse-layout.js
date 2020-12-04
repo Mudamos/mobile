@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 import textStyles from "./text";
 
-
 export default StyleSheet.create({
   container: {
     backgroundColor: "#6000AA",
@@ -37,8 +36,5 @@ export default StyleSheet.create({
   smallVMargin: {
     marginVertical: 10,
   },
-  tutorialText: StyleSheet.flatten([
-    textStyles.subtitle,
-    { marginBottom: 10 },
-  ]),
+  tutorialText: StyleSheet.flatten([textStyles.subtitle, { marginBottom: 10 }]),
 });
