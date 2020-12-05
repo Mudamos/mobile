@@ -8,14 +8,13 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import IonIcons from "react-native-vector-icons/Ionicons";
 
 import locale from "../locales/pt-BR";
 
 const styles = EStyleSheet.create({
   arrowIcon: {
-    marginTop: 6,
-    marginHorizontal: -10,
+    marginTop: -26,
+    marginHorizontal: -16,
   },
   container: {
     flex: 1,
@@ -82,8 +81,8 @@ const SignUpBreadCrumb = (props) => {
           </Text>
         </View>
 
-        <IonIcons
-          name="ios-arrow-round-forward"
+        <MaterialIcons
+          name="arrow-forward"
           size={iconSize}
           style={styles.arrowIcon}
           color={defaultColor}
@@ -102,8 +101,8 @@ const SignUpBreadCrumb = (props) => {
           </Text>
         </View>
 
-        <IonIcons
-          name="ios-arrow-round-forward"
+        <MaterialIcons
+          name="arrow-forward"
           size={iconSize}
           style={styles.arrowIcon}
           color={defaultColor}
@@ -122,8 +121,8 @@ const SignUpBreadCrumb = (props) => {
           </Text>
         </View>
 
-        <IonIcons
-          name="ios-arrow-round-forward"
+        <MaterialIcons
+          name="arrow-forward"
           size={iconSize}
           style={styles.arrowIcon}
           color={defaultColor}

@@ -7,7 +7,7 @@ import { withAfterPlipValidation } from "../decorators";
 
 import { eligibleToSignPlip, moment } from "../utils";
 
-import Ionicon from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import Layout from "./layout";
 import NavigationBar from "./navigation-bar";
@@ -184,7 +184,7 @@ class PlipViewerLayout extends Component {
 
     return (
       <TouchableOpacity onPress={() => onShare(plip)}>
-        <Ionicon name="md-share-alt" size={24} color="#fff" />
+        <Icon name="share" size={24} color="#fff" />
       </TouchableOpacity>
     );
   }
