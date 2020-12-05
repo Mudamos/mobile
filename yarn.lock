@@ -8123,9 +8123,9 @@ react-native-collapsible@1.5.3:
   dependencies:
     prop-types "^15.6.2"
 
-"react-native-config@https://github.com/itsriodejaneiro/react-native-config.git#master":
-  version "1.3.3"
-  resolved "https://github.com/itsriodejaneiro/react-native-config.git#a9da71d98094348001a32df85fe7cbc94e81d372"
+"react-native-config@https://github.com/luggit/react-native-config.git#master":
+  version "1.4.1"
+  resolved "https://github.com/luggit/react-native-config.git#caecb14ded9009713cffccdd37710c8555d284bc"
 
 react-native-crypto@2.1.2:
   version "2.1.2"
