@@ -273,9 +273,6 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
 
-    // TODO: test if wee really need this using a old android version
-    //implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-    //implementation "com.android.support:cardview-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
