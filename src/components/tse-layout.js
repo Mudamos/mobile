@@ -21,7 +21,7 @@ import locale from "../locales/pt-BR";
 
 const noHeight = { height: null };
 const darkGray = "#595959";
-const whiteStyle = "#ffffff";
+const whiteStyle = { color: "#ffffff" };
 
 export default class TSELayout extends Component {
   state = {
