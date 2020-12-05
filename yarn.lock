@@ -8227,10 +8227,6 @@ react-native-onesignal@^3.9.3:
   dependencies:
     invariant "^2.2.2"
 
-"react-native-open-settings@https://github.com/itsriodejaneiro/react-native-open-settings.git#952440d":
-  version "1.0.0"
-  resolved "https://github.com/itsriodejaneiro/react-native-open-settings.git#952440d"
-
 react-native-permissions@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.1.1.tgz#4876004681ff8556454613d85249b01baff9b35b"

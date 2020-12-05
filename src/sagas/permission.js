@@ -12,7 +12,7 @@ import {
   permissionUnauthorized,
 } from "../actions";
 
-import OpenSettings from "react-native-open-settings";
+import { Linking } from "react-native";
 
 import { AUTHORIZED, DENIED, OPEN_SETTINGS } from "../services/permission";
 
@@ -32,7 +32,7 @@ function* location({ permissionService }) {
         case AUTHORIZED:
           return yield put(fetchUserLocation());
         case OPEN_SETTINGS:
-          yield call(OpenSettings.openSettings);
+          yield call(Linking.openSettings);
           yield take("APP_ON_FOREGROUND");
           return yield put(fetchUserLocation());
         default:
@@ -82,7 +82,7 @@ function* avatar({ permissionService }) {
         );
         log(result, { tag: "avatar explanation" });
 
-        if (result === OPEN_SETTINGS) yield call(OpenSettings.openSettings);
+        if (result === OPEN_SETTINGS) yield call(Linking.openSettings);
         return;
       } else {
         return yield put(permissionUnauthorized("avatar"));

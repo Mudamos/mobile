@@ -77,7 +77,6 @@
     "react-native-maps": "0.27.1",
     "react-native-material-kit": "https://github.com/itsriodejaneiro/react-native-material-kit.git#mudamos",
     "react-native-onesignal": "^3.9.3",
-    "react-native-open-settings": "https://github.com/itsriodejaneiro/react-native-open-settings.git#952440d",
     "react-native-permissions": "^1.1.1",
     "react-native-randombytes": "^3.6.0",
     "react-native-reanimated": "^1.13.2",
