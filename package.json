@@ -9,6 +9,7 @@
   "scripts": {
     "android": "android/gradlew -p android installDevelopmentDebug && adb reverse tcp:8081 tcp:8081 && adb shell am start -n br.com.tagview.petition.development/org.mudamos.petition.MainActivity",
     "android-beta": "ENVFILE=.env.beta android/gradlew -p android installMudamosBetaDebug && adb reverse tcp:8081 tcp:8081 && adb shell am start -n br.com.tagview.petition.mudamos.beta/org.mudamos.petition.MainActivity",
+    "android-clean": "cd android && ./gradlew clean; cd -",
     "build-android-beta": "ENVFILE=.env.beta android/gradlew -p android assembleMudamosBetaRelease",
     "build-android-production": "ENVFILE=.env.production android/gradlew -p android assembleProductionRelease",
     "build-ios-beta": " ipa build -w ios/MudamosMobile.xcworkspace -s 'MudamosMobileBeta' -d ios/ipa --ipa MudamosTagviewBeta.ipa",
