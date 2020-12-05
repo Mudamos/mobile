@@ -4397,9 +4397,10 @@ fancy-log@^1.3.2:
     parse-node-version "^1.0.0"
     time-stamp "^1.0.0"
 
-farfetch@0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/farfetch/-/farfetch-0.7.0.tgz#08e4f1a00edf37aa2b07b5781cb56b6062e78e42"
+farfetch@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/farfetch/-/farfetch-0.8.0.tgz#e3671b8b92ac5b272e693f40a4bd2e4aa3b58e8d"
+  integrity sha1-42cbi5KsWycuaT9ApL0uSqO1jo0=
 
 fast-deep-equal@^3.1.1:
   version "3.1.3"
