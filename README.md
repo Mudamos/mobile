@@ -212,24 +212,6 @@ Obtenha com um responsável o arquivo `GoogleService-Info.plist` e adicione na p
 - MudamosMobileProduction
   - adicionar em `ios/google/production/`
 
-#### Para gerar o `.ipa`:
-
-Versão beta:
-
-```
-$ yarn run build-ios-beta -- -m <PATH_TO_THE_PROVISION_PROFILE>
-```
-
-Para distruibuir, envie o `.ipa` gerado para o storage S3:
-
-```
-$ yarn run distribute-ios-beta -- -a <AWS_ACCESS_KEY> -s <AWS_SECRET_ACCESS_KEY>
-```
-
-Essas chaves podem ser obtidas com um responsável.
-
-Para a versão de produção use o xcode.
-
 ### Gerando o html/js para o ios action extension
 
 Para gerar o html, instale as dependências do mudamos-libcrypto e do sub projeto `./action-sign-generator`.

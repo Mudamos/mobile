@@ -23,7 +23,7 @@ function* location({ permissionService }) {
 
       const result = yield call(
         permissionService.requestPermission,
-        "location",
+        permissionService.permissions.location,
         { message },
       );
       log(result, { tag: "location" });
@@ -50,15 +50,16 @@ function* avatar({ permissionService }) {
     try {
       const cameraResult = yield call(
         permissionService.requestPermission,
-        "camera",
+        permissionService.permissions.camera,
         {
           message: locale.permissions.camera,
           rationale: false,
         },
       );
+
       const photoResult = yield call(
         permissionService.requestPermission,
-        "photo",
+        permissionService.permissions.photo,
         {
           message: locale.permissions.photo,
           rationale: false,
@@ -75,11 +76,9 @@ function* avatar({ permissionService }) {
       if (accepted(results)) {
         return; // no-op
       } else if (shouldPresentRationale(results)) {
-        const result = yield call(
-          permissionService.presentRationale,
-          "camera",
-          { message: locale.permissions.camera },
-        );
+        const result = yield call(permissionService.presentRationale, {
+          message: locale.permissions.camera,
+        });
         log(result, { tag: "avatar explanation" });
 
         if (result === OPEN_SETTINGS) yield call(Linking.openSettings);

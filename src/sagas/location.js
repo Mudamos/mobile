@@ -18,7 +18,10 @@ function* location({ locationService, permissionService }) {
       yield put(fetchingLocation(true));
 
       const isAuthorized =
-        (yield call(permissionService.checkStatus, "location")) === AUTHORIZED;
+        (yield call(
+          permissionService.checkStatus,
+          permissionService.permissions.location,
+        )) === AUTHORIZED;
 
       if (!isAuthorized) {
         yield put(permissionUnauthorized("location"));

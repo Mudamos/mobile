@@ -1,5 +1,6 @@
-import { Alert } from "react-native";
+import { Alert, Platform } from "react-native";
 import Permissions from "react-native-permissions";
+import { includes } from "ramda";
 
 import { log } from "../utils";
 import locale from "../locales/pt-BR";
@@ -8,9 +9,14 @@ export const DENIED = "denied";
 export const AUTHORIZED = "authorized";
 export const OPEN_SETTINGS = "open_settings";
 
-const isAuthorized = (status) => status === AUTHORIZED;
+const successStatuses = [
+  Permissions.RESULTS.GRANTED,
+  Permissions.RESULTS.LIMITED,
+];
 
-const presentRationale = (permission, { message }) =>
+const isAuthorized = (status) => includes(status, successStatuses);
+
+const presentRationale = ({ message }) =>
   new Promise((resolve) => {
     const onCancel = () => resolve(DENIED);
     const onOk = () => resolve(OPEN_SETTINGS);
@@ -32,7 +38,7 @@ const onPermissionRequest = (response, { permission, message, rationale }) => {
   if (isAuthorized(response)) return AUTHORIZED;
   if (!rationale) return DENIED;
 
-  return presentRationale(permission, { message });
+  return presentRationale({ message });
 };
 
 const requestPermission = (permission, { message, rationale = true } = {}) =>
@@ -40,12 +46,29 @@ const requestPermission = (permission, { message, rationale = true } = {}) =>
     onPermissionRequest(response, { permission, message, rationale }),
   );
 
-const checkStatus = (permission) => Permissions.check(permission);
+const checkStatus = (permission) =>
+  Permissions.check(permission).then((result) =>
+    isAuthorized(result) ? AUTHORIZED : DENIED,
+  );
 
 const service = () => ({
   checkStatus,
   presentRationale,
   requestPermission,
+  permissions: {
+    camera: Platform.select({
+      android: Permissions.PERMISSIONS.ANDROID.CAMERA,
+      ios: Permissions.PERMISSIONS.IOS.CAMERA,
+    }),
+    location: Platform.select({
+      android: Permissions.PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+      ios: Permissions.PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+    }),
+    photo: Platform.select({
+      android: Permissions.PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+      ios: Permissions.PERMISSIONS.IOS.PHOTO_LIBRARY,
+    }),
+  },
 });
 
 export default service;

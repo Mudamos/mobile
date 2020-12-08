@@ -1,4 +1,5 @@
-# Uncomment the next line to define a global platform for your project
+source "https://cdn.cocoapods.org/"
+
 require_relative "../node_modules/react-native/scripts/react_native_pods"
 require_relative "../node_modules/@react-native-community/cli-platform-ios/native_modules"
 
@@ -8,6 +9,23 @@ platform :ios, "10.0"
 $FirebaseSDKVersion = "7.1.0"
 $RNFirebaseAsStaticFramework = true
 
+# Convert all permission pods into static libraries (react-native-permissions)
+# Required because of the use_frameworks! usage above
+pre_install do |installer|
+  Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+
+  installer.pod_targets.each do |pod|
+    if pod.name.eql?('RNPermissions') || pod.name.start_with?('Permission-')
+      puts "Setting static library for: #{pod.name}"
+
+      def pod.build_type;
+        # Uncomment the line corresponding to your CocoaPods version
+        Pod::BuildType.static_library # >= 1.9
+      end
+    end
+  end
+end
+
 def pods
   config = use_native_modules!
 
@@ -15,14 +33,17 @@ def pods
 
   # Add new pods below this line
 
-  # pod 'Firestack', :path => '../node_modules/react-native-firestack'
-
   pod "Bolts"
   pod "IQKeyboardManager"
   pod "Firebase/DynamicLinks", $FirebaseSDKVersion
   pod "Firebase/RemoteConfig", $FirebaseSDKVersion
 
   pod "OneSignal", ">= 2.9.3", "< 3.0"
+
+  permissions_path = "../node_modules/react-native-permissions/ios"
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
+  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
 end
 
 def message_signer_pods
