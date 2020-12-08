@@ -1,6 +1,6 @@
 # Next
 
-* [PR xxx] Upgrade to RN 0.63.3
+* [PR 526] Upgrade to RN 0.63.3
   - Added new env var `FACEBOOK_CONTENT_PROVIDER` which is used on AndroidManifest. This must be the value `com.facebook.app.FacebookContentProvider{facebook-app-id}`
 
 ## [2.6.1-android] 11/11/2020
