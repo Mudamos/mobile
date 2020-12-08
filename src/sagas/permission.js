@@ -1,6 +1,6 @@
-import { take, call, put, spawn, takeLatest } from "redux-saga/effects";
+import { fork, take, call, put, spawn, takeLatest } from "redux-saga/effects";
 
-import { all, contains } from "ramda";
+import { equals } from "ramda";
 
 import { log, logError } from "../utils";
 
@@ -9,12 +9,16 @@ import locale from "../locales/pt-BR";
 import {
   fetchUserLocation,
   fetchUserLocationError,
+  permissionAuthorized,
   permissionUnauthorized,
 } from "../actions";
 
 import { Linking } from "react-native";
 
 import { AUTHORIZED, DENIED, OPEN_SETTINGS } from "../services/permission";
+
+const isPermissionGranted = equals(AUTHORIZED);
+const shouldPresentRationale = equals(DENIED);
 
 function* location({ permissionService }) {
   yield takeLatest("PERMISSION_REQUEST_LOCATION", function* ({ payload }) {
@@ -45,46 +49,63 @@ function* location({ permissionService }) {
   });
 }
 
-function* avatar({ permissionService }) {
-  yield takeLatest("PERMISSION_REQUEST_AVATAR", function* () {
+function* camera({ permissionService }) {
+  yield takeLatest("PERMISSION_REQUEST_CAMERA", function* () {
     try {
+      const permission = permissionService.permissions.camera;
       const cameraResult = yield call(
         permissionService.requestPermission,
-        permissionService.permissions.camera,
+        permission,
         {
           message: locale.permissions.camera,
           rationale: false,
         },
       );
 
+      log(cameraResult, { tag: "camera" });
+
+      if (isPermissionGranted(cameraResult)) {
+        return yield put(permissionAuthorized(permission));
+      } else if (shouldPresentRationale(cameraResult)) {
+        const result = yield call(permissionService.presentRationale, {
+          message: locale.permissions.camera,
+        });
+        log(result, { tag: "Camera explanation" });
+
+        if (result === OPEN_SETTINGS) yield call(Linking.openSettings);
+        return;
+      }
+    } catch (e) {
+      logError(e);
+    }
+  });
+}
+
+function* gallery({ permissionService }) {
+  yield takeLatest("PERMISSION_REQUEST_GALLERY", function* () {
+    try {
+      const permission = permissionService.permissions.photo;
       const photoResult = yield call(
         permissionService.requestPermission,
-        permissionService.permissions.photo,
+        permission,
         {
           message: locale.permissions.photo,
           rationale: false,
         },
       );
 
-      log(cameraResult, { tag: "camera" });
-      log(photoResult, { tag: "camera" });
+      log(photoResult, { tag: "photo" });
 
-      const results = [cameraResult, photoResult];
-      const accepted = all((v) => v === AUTHORIZED);
-      const shouldPresentRationale = contains(DENIED);
-
-      if (accepted(results)) {
-        return; // no-op
-      } else if (shouldPresentRationale(results)) {
+      if (isPermissionGranted(photoResult)) {
+        return yield put(permissionAuthorized(permission));
+      } else if (shouldPresentRationale(photoResult)) {
         const result = yield call(permissionService.presentRationale, {
           message: locale.permissions.camera,
         });
-        log(result, { tag: "avatar explanation" });
+        log(result, { tag: "Camera explanation" });
 
         if (result === OPEN_SETTINGS) yield call(Linking.openSettings);
         return;
-      } else {
-        return yield put(permissionUnauthorized("avatar"));
       }
     } catch (e) {
       logError(e);
@@ -94,5 +115,6 @@ function* avatar({ permissionService }) {
 
 export default function* permissionSaga({ permissionService }) {
   yield spawn(location, { permissionService });
-  yield spawn(avatar, { permissionService });
+  yield fork(camera, { permissionService });
+  yield fork(gallery, { permissionService });
 }

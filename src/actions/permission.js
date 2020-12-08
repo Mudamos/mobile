@@ -3,11 +3,20 @@ export const requestUserLocation = ({ message }) => ({
   payload: { message },
 });
 
+export const permissionAuthorized = (permission) => ({
+  type: "PERMISSION_AUTHORIZED",
+  payload: { permission },
+});
+
 export const permissionUnauthorized = (permission) => ({
   type: "PERMISSION_UNAUTHORIZED",
   payload: { permission },
 });
 
-export const requestAvatarAccess = () => ({
-  type: "PERMISSION_REQUEST_AVATAR",
+export const requestCameraAccess = () => ({
+  type: "PERMISSION_REQUEST_CAMERA",
+});
+
+export const requestGalleryAccess = () => ({
+  type: "PERMISSION_REQUEST_GALLERY",
 });

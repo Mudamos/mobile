@@ -39,6 +39,8 @@ import {
   TSEContainer,
 } from "./containers";
 
+import { PermissionProvider } from "./providers/permisson-provider";
+
 import { appDidMount, appWillUnmount, navigate, navigateBack } from "./actions";
 
 import { SCREEN_KEYS } from "./models";
@@ -203,13 +205,15 @@ const AppBuilder = (store) => {
     render() {
       return (
         <Provider store={store}>
-          <Router
-            createReducer={reducer}
-            scenes={scenes}
-            getSceneStyle={getSceneStyle}
-            title="Mudamos"
-            backAndroidHandler={backHandler}
-          />
+          <PermissionProvider>
+            <Router
+              createReducer={reducer}
+              scenes={scenes}
+              getSceneStyle={getSceneStyle}
+              title="Mudamos"
+              backAndroidHandler={backHandler}
+            />
+          </PermissionProvider>
         </Provider>
       );
     }

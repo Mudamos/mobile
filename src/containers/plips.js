@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View } from "react-native";
+import {
+  ActionSheetProvider,
+  connectActionSheet,
+} from "@expo/react-native-action-sheet";
+
+import { compose } from "recompose";
 
 import PropTypes from "prop-types";
 
 import { prop, sortBy } from "ramda";
+
+import { connectPermissionService } from "../providers/permisson-provider";
 
 import { isDev } from "../utils";
 
@@ -26,6 +34,8 @@ import {
   userFirstTimeDone,
   validateProfile,
   clearSearchPlip,
+  requestCameraAccess,
+  requestGalleryAccess,
   searchPlip,
   setCurrentPlip,
   toggleFavorite,
@@ -33,6 +43,7 @@ import {
 
 import {
   appLoadingProgress,
+  getCurrentAuthorizedPermission,
   isAppReady,
   isFetchingPlipsNextPageAllPlips,
   isFetchingPlipsNextPageFavoritePlips,
@@ -92,11 +103,13 @@ import PageLoader from "../components/page-loader";
 import PlipsLayout from "../components/plips-layout";
 import SplashLoader from "../components/splash-loader";
 import Menu from "../components/side-menu";
-import LoggedInMenu from "../components/logged-in-menu-content";
+import LoggedInMenuContent from "../components/logged-in-menu-content";
 
 import Toast from "react-native-simple-toast";
 
 import { RemoteLinksType } from "../prop-types/remote-config";
+
+const LoggedInMenu = connectActionSheet(LoggedInMenuContent);
 
 const sortMenuEntries = (entries) => sortBy(prop("position"), entries);
 
@@ -256,16 +269,18 @@ class Container extends Component {
 
     return (
       <View style={styles.full}>
-        <Menu
-          open={open}
-          acceptPan={false}
-          content={this.renderMenuContent()}
-          onOpenStart={onFetchProfile}
-          onOpen={() => this.setState({ menuOpen: true })}
-          onClose={() => this.setState({ menuOpen: false })}>
-          {this.renderPage()}
-          {this.renderFirstTimeLoader()}
-        </Menu>
+        <ActionSheetProvider>
+          <Menu
+            open={open}
+            acceptPan={false}
+            content={this.renderMenuContent()}
+            onOpenStart={onFetchProfile}
+            onOpen={() => this.setState({ menuOpen: true })}
+            onClose={() => this.setState({ menuOpen: false })}>
+            {this.renderPage()}
+            {this.renderFirstTimeLoader()}
+          </Menu>
+        </ActionSheetProvider>
 
         <PageLoader isVisible={isValidatingProfile} />
       </View>
@@ -293,20 +308,28 @@ class Container extends Component {
 
   renderMenuContent() {
     const {
+      authorizedPermission,
       currentUser,
       isFetchingProfile,
       isUserLoggedIn,
+      permission,
       onAvatarChanged,
       onLogout,
+      onRequestCameraPermission,
+      onRequestGalleryPermission,
     } = this.props;
 
     return (
       <LoggedInMenu
+        authorizedPermission={authorizedPermission}
         currentUser={currentUser}
         isFetchingProfile={isFetchingProfile}
         isUserLoggedIn={isUserLoggedIn}
+        permission={permission}
         onAvatarChanged={onAvatarChanged}
         onLogout={onLogout}
+        onRequestCameraPermission={onRequestCameraPermission}
+        onRequestGalleryPermission={onRequestGalleryPermission}
         menuEntries={this.menuEntries}
       />
     );
@@ -372,6 +395,7 @@ class Container extends Component {
 
 const mapStateToProps = (state) => ({
   appLoadingProgress: appLoadingProgress(state),
+  authorizedPermission: getCurrentAuthorizedPermission(state),
   currentSigningPlip: getCurrentSigningPlip(state),
   currentUser: getCurrentUser(state),
   errorFetchingAllPlips: errorFetchingAllPlips(state),
@@ -457,9 +481,16 @@ const mapDispatchToProps = (dispatch) => ({
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),
   onClearSearch: () => dispatch(clearSearchPlip()),
+  onRequestCameraPermission: () => dispatch(requestCameraAccess()),
+  onRequestGalleryPermission: () => dispatch(requestGalleryAccess()),
   onSearchPlip: (title) => dispatch(searchPlip(title)),
   onShare: (plip) => dispatch(sharePlip(plip)),
   onToggleFavorite: (detailId) => dispatch(toggleFavorite({ detailId })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Container);
+const enhance = compose(
+  connectPermissionService,
+  connect(mapStateToProps, mapDispatchToProps),
+);
+
+export default enhance(Container);

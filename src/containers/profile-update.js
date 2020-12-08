@@ -1,12 +1,18 @@
 import { connect } from "react-redux";
 
+import React from "react";
 import ProfileUpdateLayout from "../components/profile-update-layout";
+import {
+  ActionSheetProvider,
+  connectActionSheet,
+} from "@expo/react-native-action-sheet";
 
 import {
   currentUser,
   findCities,
   findStates,
   getChangePasswordErrors,
+  getCurrentAuthorizedPermission,
   isChangingPassword,
   isSavingAvatar,
   isSavingProfile,
@@ -19,15 +25,29 @@ import {
   fetchStates,
   updateUser,
   navigateBack,
-  requestAvatarAccess,
+  requestCameraAccess,
+  requestGalleryAccess,
 } from "../actions";
 
+import { compose } from "recompose";
+
+import { connectPermissionService } from "../providers/permisson-provider";
+
 import { extractNumbers, fromISODate, toISODate, zipCodeMask } from "../utils";
+
+const Layout = connectActionSheet(ProfileUpdateLayout);
+
+const Container = (props) => (
+  <ActionSheetProvider>
+    <Layout {...props} />
+  </ActionSheetProvider>
+);
 
 const mapStateToProps = (state) => {
   const user = currentUser(state);
 
   return {
+    authorizedPermission: getCurrentAuthorizedPermission(state),
     cities: findCities(state),
     errorsUpdatePassword: getChangePasswordErrors(state),
     errorsUpdateProfile: profileSaveErrors(state),
@@ -64,10 +84,13 @@ const mapDispatchToProps = (dispatch) => ({
         validations,
       }),
     ),
-  onRequestAvatarPermission: () => dispatch(requestAvatarAccess()),
+  onRequestCameraPermission: () => dispatch(requestCameraAccess()),
+  onRequestGalleryPermission: () => dispatch(requestGalleryAccess()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ProfileUpdateLayout);
+const enhance = compose(
+  connectPermissionService,
+  connect(mapStateToProps, mapDispatchToProps),
+);
+
+export default enhance(Container);

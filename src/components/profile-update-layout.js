@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import { Text, View } from "react-native";
 
-import { curry, filter, propEq } from "ramda";
+import { curry, filter, propEq, cond, T, equals, identity } from "ramda";
 
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
@@ -19,11 +19,14 @@ import AvatarModel from "../models/image";
 import RoundedButton from "./rounded-button";
 import SafeAreaView from "./safe-area-view";
 
-import ImagePicker from "react-native-image-picker";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
 import locale from "../locales/pt-BR";
 
 import { baseName, filterDataByTerm, log, errorForField } from "../utils";
+
+import { AUTHORIZED } from "../services/permission";
+import { PermissionShape } from "../providers/permisson-provider";
 
 import { CityType, StateUfType } from "../prop-types";
 
@@ -39,6 +42,15 @@ const findPreviousState = (uf, collection) =>
   !uf ? null : collection.find(propEq("uf", uf.toUpperCase()));
 
 const byUf = curry((uf, collection) => filter(propEq("uf", uf))(collection));
+
+const sheetOptions = [locale.takePhoto, locale.openGallery, locale.cancel];
+const cameraIndexSheetIndex = 0;
+const gallerySheetIndexSheetIndex = 1;
+const cancelButtonSheetIndex = 2;
+
+const mediaOptions = {
+  mediaType: "photo",
+};
 
 export default class ProfileUpdateLayout extends Component {
   state = {
@@ -67,6 +79,7 @@ export default class ProfileUpdateLayout extends Component {
   };
 
   static propTypes = {
+    authorizedPermission: PropTypes.string,
     cities: PropTypes.arrayOf(CityType).isRequired,
     errorsUpdatePassword: PropTypes.array,
     errorsUpdateProfile: PropTypes.array,
@@ -74,17 +87,20 @@ export default class ProfileUpdateLayout extends Component {
     isSavingAvatar: PropTypes.bool,
     isSavingPassword: PropTypes.bool,
     isSavingProfile: PropTypes.bool,
+    permission: PermissionShape.isRequired,
     previousAvatar: PropTypes.instanceOf(AvatarModel),
     previousBirthdate: PropTypes.string,
     previousCity: CityType,
     previousName: PropTypes.string,
     previousUf: PropTypes.string,
     previousZipCode: PropTypes.string,
+    showActionSheetWithOptions: PropTypes.func.isRequired,
     states: PropTypes.arrayOf(StateUfType).isRequired,
     onBack: PropTypes.func.isRequired,
     onFetchCities: PropTypes.func.isRequired,
     onFetchStates: PropTypes.func.isRequired,
-    onRequestAvatarPermission: PropTypes.func.isRequired,
+    onRequestCameraPermission: PropTypes.func.isRequired,
+    onRequestGalleryPermission: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
   };
 
@@ -92,38 +108,111 @@ export default class ProfileUpdateLayout extends Component {
   mainScrollView = React.createRef();
   ufInput = React.createRef();
 
-  selectAvatar = () => {
-    const { onRequestAvatarPermission } = this.props;
+  componentDidUpdate(prevProps) {
+    const { authorizedPermission } = this.props;
 
-    onRequestAvatarPermission();
+    if (
+      authorizedPermission &&
+      authorizedPermission !== prevProps.authorizedPermission
+    ) {
+      this.continueAvatarFlow(authorizedPermission);
+    }
+  }
 
-    ImagePicker.showImagePicker(
-      {
-        title: locale.chooseAvatar,
-        cancelButtonTitle: locale.cancel,
-        takePhotoButtonTitle: locale.takePhoto,
-        chooseFromLibraryButtonTitle: locale.openGallery,
-        mediaType: "photo",
-        previousUri: null,
-        storageOptions: {
-          skipBackup: true,
+  isPermissionGranted = (permission) =>
+    this.props.permission.service
+      .checkStatus(permission)
+      .then(equals(AUTHORIZED));
+
+  continueAvatarFlow = (authorizedPermission) => {
+    const {
+      permission: { service },
+    } = this.props;
+
+    cond([
+      [
+        equals(service.permissions.camera),
+        () => {
+          launchCamera(mediaOptions, this.onImageResult);
         },
-        allowsEditing: true,
+      ],
+      [
+        equals(service.permissions.photo),
+        () => {
+          launchImageLibrary(mediaOptions, this.onImageResult);
+        },
+      ],
+    ])(authorizedPermission);
+  };
+
+  onImageResult = ({ didCancel, errorCode, uri }) => {
+    log({ didCancel, errorCode }, { tag: "avatar" });
+
+    if (didCancel || !uri) return;
+
+    const name = baseName(uri);
+    log(uri, { tag: "avatar" }, { errorCode });
+
+    this.setState({
+      avatar: {
+        uri,
+        name,
+        contentType: "image/jpeg",
       },
-      (response) => {
-        if (!response.uri) return;
+    });
+  };
 
-        const uri = response.uri;
-        const name = baseName(uri);
-        log(uri, { tag: "avatar uri" });
+  selectAvatar = () => {
+    const {
+      onRequestCameraPermission,
+      onRequestGalleryPermission,
+      showActionSheetWithOptions,
+      permission: { service },
+    } = this.props;
 
-        this.setState({
-          avatar: {
-            uri,
-            name,
-            contentType: "image/jpeg",
-          },
-        });
+    showActionSheetWithOptions(
+      {
+        options: sheetOptions,
+        cancelButtonIndex: cancelButtonSheetIndex,
+      },
+      (buttonIndex) => {
+        log("Sheet index", { tag: "Sheet" }, { buttonIndex });
+
+        cond([
+          [
+            equals(cameraIndexSheetIndex),
+            async () => {
+              const isGranted = await this.isPermissionGranted(
+                service.permissions.camera,
+              );
+
+              log({ isGranted }, { tag: "camera" });
+
+              if (isGranted) {
+                this.continueAvatarFlow(service.permissions.camera);
+              } else {
+                onRequestCameraPermission();
+              }
+            },
+          ],
+          [
+            equals(gallerySheetIndexSheetIndex),
+            async () => {
+              const isGranted = await this.isPermissionGranted(
+                service.permissions.photo,
+              );
+
+              log({ isGranted }, { tag: "photo" });
+
+              if (isGranted) {
+                this.continueAvatarFlow(service.permissions.photo);
+              } else {
+                onRequestGalleryPermission();
+              }
+            },
+          ],
+          [T, identity],
+        ])(buttonIndex);
       },
     );
   };

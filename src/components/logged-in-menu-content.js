@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import { equals, cond, T, identity } from "ramda";
 
 import ListView from "deprecated-react-native-listview";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -9,22 +10,38 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import HeaderLogo from "./header-logo";
 import Avatar from "./avatar";
 import SafeAreaView from "./safe-area-view";
+import { AUTHORIZED } from "../services/permission";
+import { PermissionShape } from "../providers/permisson-provider";
 
-import ImagePicker from "react-native-image-picker";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
 import styles from "../styles/logged-in-menu";
 import { baseName, log } from "../utils";
 
 import locale from "../locales/pt-BR";
 
+const sheetOptions = [locale.takePhoto, locale.openGallery, locale.cancel];
+const cameraIndexSheetIndex = 0;
+const gallerySheetIndexSheetIndex = 1;
+const cancelButtonSheetIndex = 2;
+
+const mediaOptions = {
+  mediaType: "photo",
+};
+
 export default class Menu extends Component {
   static propTypes = {
+    authorizedPermission: PropTypes.string,
     currentUser: PropTypes.object,
     isFetchingProfile: PropTypes.bool,
     isUserLoggedIn: PropTypes.bool,
     menuEntries: PropTypes.array.isRequired,
+    permission: PermissionShape.isRequired,
+    showActionSheetWithOptions: PropTypes.func.isRequired,
     onAvatarChanged: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
+    onRequestCameraPermission: PropTypes.func.isRequired,
+    onRequestGalleryPermission: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -45,6 +62,17 @@ export default class Menu extends Component {
       this.setState({
         entries: this.dataSource.cloneWithRows(newProps.menuEntries),
       });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { authorizedPermission } = this.props;
+
+    if (
+      authorizedPermission &&
+      authorizedPermission !== prevProps.authorizedPermission
+    ) {
+      this.continueAvatarFlow(authorizedPermission);
     }
   }
 
@@ -173,37 +201,104 @@ export default class Menu extends Component {
     );
   }
 
-  selectAvatar = () => {
+  isPermissionGranted = (permission) =>
+    this.props.permission.service
+      .checkStatus(permission)
+      .then(equals(AUTHORIZED));
+
+  continueAvatarFlow = (authorizedPermission) => {
+    const {
+      permission: { service },
+    } = this.props;
+
+    cond([
+      [
+        equals(service.permissions.camera),
+        () => {
+          launchCamera(mediaOptions, this.onImageResult);
+        },
+      ],
+      [
+        equals(service.permissions.photo),
+        () => {
+          launchImageLibrary(mediaOptions, this.onImageResult);
+        },
+      ],
+    ])(authorizedPermission);
+  };
+
+  onImageResult = ({ didCancel, errorCode, uri }) => {
     const { onAvatarChanged } = this.props;
 
-    ImagePicker.showImagePicker(
+    log({ didCancel, errorCode }, { tag: "avatar" });
+
+    if (didCancel || !uri) return;
+
+    const name = baseName(uri);
+    log(uri, { tag: "avatar" }, { errorCode });
+
+    const newAvatar = {
+      uri,
+      name,
+      contentType: "image/jpeg",
+    };
+
+    this.setState({ newAvatar });
+
+    onAvatarChanged(newAvatar);
+  };
+
+  selectAvatar = () => {
+    const {
+      onRequestCameraPermission,
+      onRequestGalleryPermission,
+      showActionSheetWithOptions,
+      permission: { service },
+    } = this.props;
+
+    showActionSheetWithOptions(
       {
-        title: locale.chooseAvatar,
-        cancelButtonTitle: locale.cancel,
-        takePhotoButtonTitle: locale.takePhoto,
-        chooseFromLibraryButtonTitle: locale.openGallery,
-        mediaType: "photo",
-        storageOptions: {
-          skipBackup: true,
-        },
-        allowsEditing: true,
+        options: sheetOptions,
+        cancelButtonIndex: cancelButtonSheetIndex,
       },
-      (response) => {
-        if (!response.uri) return;
+      (buttonIndex) => {
+        log("Sheet index", { tag: "Sheet" }, { buttonIndex });
 
-        const uri = response.uri;
-        const name = baseName(uri);
-        log(uri, { tag: "avatar uri" });
+        cond([
+          [
+            equals(cameraIndexSheetIndex),
+            async () => {
+              const isGranted = await this.isPermissionGranted(
+                service.permissions.camera,
+              );
 
-        const newAvatar = {
-          uri,
-          name,
-          contentType: "image/jpeg",
-        };
+              log({ isGranted }, { tag: "camera" });
 
-        this.setState({ newAvatar });
+              if (isGranted) {
+                this.continueAvatarFlow(service.permissions.camera);
+              } else {
+                onRequestCameraPermission();
+              }
+            },
+          ],
+          [
+            equals(gallerySheetIndexSheetIndex),
+            async () => {
+              const isGranted = await this.isPermissionGranted(
+                service.permissions.photo,
+              );
 
-        onAvatarChanged(newAvatar);
+              log({ isGranted }, { tag: "photo" });
+
+              if (isGranted) {
+                this.continueAvatarFlow(service.permissions.photo);
+              } else {
+                onRequestGalleryPermission();
+              }
+            },
+          ],
+          [T, identity],
+        ])(buttonIndex);
       },
     );
   };

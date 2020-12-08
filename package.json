@@ -33,6 +33,7 @@
     "fix-xcode-12-valid-archs": "find node_modules/ -name \"project.pbxproj\" -exec sed -i '' '/VALID_ARCHS/d' {} +"
   },
   "dependencies": {
+    "@expo/react-native-action-sheet": "^3.8.0",
     "@invertase/react-native-apple-authentication": "^2.1.0",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/geolocation": "^2.0.2",
@@ -71,7 +72,7 @@
     "react-native-fbsdk": "^3.0.0",
     "react-native-fence-html": "https://github.com/itsriodejaneiro/react-native-fence-html.git#9eb096c",
     "react-native-gesture-handler": "^1.9.0",
-    "react-native-image-picker": "^2.3.4",
+    "react-native-image-picker": "^3.0.0",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-maps": "0.27.1",
     "react-native-material-kit": "https://github.com/itsriodejaneiro/react-native-material-kit.git#mudamos",
