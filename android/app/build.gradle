@@ -257,8 +257,6 @@ android {
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    // implementation project(':react-native-firestack')
-
     implementation "com.google.android.gms:play-services-base:${rootProject.ext.googlePlayServicesVersion}"
     implementation "com.google.android.gms:play-services-basement:${rootProject.ext.googlePlayServicesVersion}"
     implementation "com.google.android.gms:play-services-analytics:${rootProject.ext.googlePlayServicesVersion}"
