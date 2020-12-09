@@ -25,6 +25,7 @@
     "ios-beta": "react-native run-ios --scheme MudamosMobileBeta",
     "lint": "eslint src/ main.*.js index.js spec/",
     "list-ios-simulators": "xcrun simctl list devices",
+    "pod-install": "bundle exec pod install --project-directory=./ios",
     "postinstall": "./node_modules/.bin/rn-nodeify -y --install vm,buffer,stream,events,crypto,assert,process,react-native-randombytes,react-native-crypto --hack; jetify; patch-package",
     "prettier": "prettier --write src/ main.*.js index.js spec/",
     "reset-adb": "adb kill-server; sleep 2; adb start-server && adb reverse tcp:8081 tcp:8081 && adb devices",
