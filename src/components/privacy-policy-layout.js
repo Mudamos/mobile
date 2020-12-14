@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Component, createRef } from "react";
-import { identity } from "ramda";
+import React, { Component } from "react";
 
 import { View } from "react-native";
 
@@ -14,13 +13,10 @@ import PageLoader from "./page-loader";
 
 import styles from "../styles/web-view-layout";
 
-const onMessage = identity;
-
 export default class WebViewLayout extends Component {
   state = {
     initialized: false,
     loading: true,
-    ref: createRef(),
   };
 
   static propTypes = {
@@ -28,23 +24,10 @@ export default class WebViewLayout extends Component {
     onBack: PropTypes.func.isRequired,
   };
 
-  onLoadEnd = () => {
-    this.setState({ loading: false, initialized: true });
-
-    /**
-     * Because mudamos.org displays a landing page when the user
-     * does not have an specific cookie, which tracks if the landing page has
-     * been displayed, we have to hack in order to skip it.
-     *
-     * A simple solution for now is just reload the page, therefore the cookie
-     * is going to be set on the second time
-     */
-    this.state.ref.current.reload();
-  };
+  onLoadEnd = () => this.setState({ loading: false, initialized: true });
 
   render() {
     const { source } = this.props;
-
     const { loading } = this.state;
 
     return (
@@ -52,12 +35,7 @@ export default class WebViewLayout extends Component {
         <Layout>
           {this.renderNavBar()}
 
-          <WebView
-            ref={this.state.ref}
-            source={source}
-            onMessage={onMessage}
-            onLoadEnd={this.onLoadEnd}
-          />
+          <WebView source={source} onLoadEnd={this.onLoadEnd} />
         </Layout>
 
         <PageLoader isVisible={loading} />

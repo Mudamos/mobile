@@ -10,7 +10,7 @@ const initialState = {
     whyProjectsLink:
       "https://www.mudamos.org/institucional/projetos-de-lei-de-iniciativa-popular",
     privacyPolicyURL:
-      "https://www.mudamos.org/institucional/politica-de-privacidade",
+      "https://www.mudamos.org/institucional/politica-de-privacidade?no_app_landing_page",
   },
   config: {
     authenticatedSignersButtonTitle: "Lista de assinantes e outras informações",
