@@ -13,6 +13,7 @@ import {
   clearProfileSaveErrors,
   navigate,
   openURL,
+  profileResetVoteCardIdAndTseAddress,
   profileUpdate,
 } from "../actions";
 
@@ -48,6 +49,8 @@ const mapDispatchToProps = (dispatch) => ({
     );
   },
   onOpenURL: (url) => dispatch(openURL(url)),
+  onResetVoteCardIdAndTseAddress: () =>
+    dispatch(profileResetVoteCardIdAndTseAddress()),
   onTSERequested: ({ birthdate, name }) =>
     dispatch(navigate("tse", { birthdate, name })),
 });

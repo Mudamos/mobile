@@ -111,6 +111,10 @@ export const tseVoteAddressAcquired = ({ tseVoteAddress } = {}) => ({
   payload: { tseVoteAddress },
 });
 
+export const profileResetVoteCardIdAndTseAddress = () => ({
+  type: "PROFILE_RESET_VOTE_CARD_ID_AND_TSE_ADDRESS",
+});
+
 export const profileClearVoteAddressData = () => ({
   type: "PROFILE_CLEAR_VOTE_ADDRESS_DATA",
 });

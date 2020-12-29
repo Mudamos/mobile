@@ -62,6 +62,9 @@ export default (state = initialState, action) => {
       const { tseVoteAddress } = payload;
       return { ...state, tseVoteAddress };
     }
+    case "PROFILE_RESET_VOTE_CARD_ID_AND_TSE_ADDRESS": {
+      return { ...state, tseVoteAddress: null, voteCardId: null };
+    }
     case "PROFILE_SAVING_AVATAR":
       return { ...state, isSavingAvatar: payload.isSaving, avatarError: null };
     case "PROFILE_SAVE_AVATAR_ERROR":

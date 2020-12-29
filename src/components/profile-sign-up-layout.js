@@ -22,7 +22,7 @@ import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 
-import { errorForField } from "../utils";
+import { errorForField, isPresent } from "../utils";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -56,6 +56,7 @@ class ProfileSignUpLayout extends Component {
     voteCardIdFromTSE: PropTypes.string,
     onBack: PropTypes.func.isRequired,
     onOpenURL: PropTypes.func.isRequired,
+    onResetVoteCardIdAndTseAddress: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onSetBirthdate: PropTypes.func.isRequired,
     onSetName: PropTypes.func.isRequired,
@@ -101,7 +102,10 @@ class ProfileSignUpLayout extends Component {
       onSetVoteCard,
     } = this.props;
 
-    if (prevProps.voteCardIdFromTSE !== voteCardIdFromTSE) {
+    if (
+      voteCardIdFromTSE &&
+      prevProps.voteCardIdFromTSE !== voteCardIdFromTSE
+    ) {
       onSetVoteCard(voteCardIdFromTSE);
     }
 
@@ -187,6 +191,21 @@ class ProfileSignUpLayout extends Component {
     onTSERequested({ birthdate, name });
   };
 
+  onChangeVoteCardText = (value) => {
+    const {
+      voteCardIdFromTSE,
+      voteCard,
+      onResetVoteCardIdAndTseAddress,
+      onSetVoteCard,
+    } = this.props;
+
+    if (isPresent(voteCardIdFromTSE) && voteCard !== value) {
+      onResetVoteCardIdAndTseAddress();
+    }
+
+    onSetVoteCard(value);
+  };
+
   render() {
     const {
       birthdate,
@@ -198,7 +217,6 @@ class ProfileSignUpLayout extends Component {
       onSubmit,
       onSetName,
       onSetBirthdate,
-      onSetVoteCard,
     } = this.props;
 
     const { errors, reasonEnabled } = this.state;
@@ -259,7 +277,7 @@ class ProfileSignUpLayout extends Component {
 
               <VoteCardInput
                 value={voteCard}
-                onChangeVoteCardText={onSetVoteCard}
+                onChangeVoteCardText={this.onChangeVoteCardText}
                 placeholder={locale.voteCard}
                 hasError={
                   !!errorForField("voteidcard", saveErrors) || !!errors.voteCard
