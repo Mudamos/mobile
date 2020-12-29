@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import { View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 
 import { WebView } from "react-native-webview";
 
@@ -11,9 +11,7 @@ import BackButton from "./back-button";
 import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
 
-import styles from "../styles/web-view-layout";
-
-export default class WebViewLayout extends Component {
+export default class PrivacyPolicyLayout extends Component {
   state = {
     initialized: false,
     loading: true,
@@ -31,7 +29,7 @@ export default class WebViewLayout extends Component {
     const { loading } = this.state;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           {this.renderNavBar()}
 
@@ -39,7 +37,7 @@ export default class WebViewLayout extends Component {
         </Layout>
 
         <PageLoader isVisible={loading} />
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -54,3 +52,10 @@ export default class WebViewLayout extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#6000AA",
+    flex: 1,
+  },
+});
