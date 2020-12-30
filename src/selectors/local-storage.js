@@ -1,3 +1,4 @@
-export const isUserFirstTime = state => state.localStorage.isUserFirstTime;
+export const isUserFirstTime = (state) => state.localStorage.isUserFirstTime;
 
-export const aboutAppUserFeedback = state => state.localStorage.aboutAppUserFeedback;
+export const aboutAppUserFeedback = (state) =>
+  state.localStorage.aboutAppUserFeedback;

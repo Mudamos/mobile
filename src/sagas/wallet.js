@@ -1,4 +1,11 @@
-import { call, put, select, spawn, takeLatest, takeEvery } from "redux-saga/effects";
+import {
+  call,
+  put,
+  select,
+  spawn,
+  takeLatest,
+  takeEvery,
+} from "redux-saga/effects";
 
 import {
   creatingWallet,
@@ -9,20 +16,11 @@ import {
   unauthorized,
 } from "../actions";
 
-import {
-  currentAuthToken,
-  currentUser,
-} from "../selectors";
+import { currentAuthToken, currentUser } from "../selectors";
 
-import {
-  isDev,
-  isUnauthorized,
-  log,
-  logError,
-} from "../utils";
+import { isDev, isUnauthorized, log, logError } from "../utils";
 
 import { User } from "../models";
-
 
 function* createWallet({ mobileApi, walletStore }) {
   yield takeLatest("WALLET_CREATE", function* ({ payload }) {
@@ -38,7 +36,11 @@ function* createWallet({ mobileApi, walletStore }) {
         const seed = yield call(walletStore.create, user.voteCard);
 
         const authToken = yield select(currentAuthToken);
-        const response = yield call(mobileApi.saveWallet, authToken, seed.publicKey);
+        const response = yield call(
+          mobileApi.saveWallet,
+          authToken,
+          seed.publicKey,
+        );
         const newUser = User.fromJson(response.user);
 
         yield put(updatedUserProfile({ user: newUser }));
@@ -50,12 +52,12 @@ function* createWallet({ mobileApi, walletStore }) {
       yield put(walletAvailable(true));
       yield put(profileStateMachine(payload));
     } catch (e) {
-      logError(e, { tag: "createWallet"});
+      logError(e, { tag: "createWallet" });
 
       yield call(walletStore.destroy);
       yield put(creatingWallet(false));
 
-      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+      if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
       yield put(createWalletError(e));
     }
@@ -92,7 +94,6 @@ function* invalidateWallet({ walletStore }) {
     }
   });
 }
-
 
 export default function* walletSaga({ mobileApi, walletStore }) {
   yield spawn(createWallet, { mobileApi, walletStore });

@@ -16,6 +16,11 @@ export default EStyleSheet.create({
     height: 40,
     borderColor: "#FFF",
   },
+  buttonContainer: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
+  },
   buttonTitle: {
     color: "#FFF",
   },
@@ -31,6 +36,9 @@ export default EStyleSheet.create({
   full: {
     flex: 7,
   },
+  left: {
+    left: 0,
+  },
   page: {
     flex: 1,
     flexDirection: "column",
@@ -43,6 +51,9 @@ export default EStyleSheet.create({
   },
   pagerContainer: {
     flex: 1,
+  },
+  right: {
+    right: 0,
   },
   selectedDot: {
     backgroundColor: "#00BFD8",

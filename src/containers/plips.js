@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { StyleSheet, View } from "react-native";
 import {
-  StyleSheet,
-  View,
-} from "react-native";
+  ActionSheetProvider,
+  connectActionSheet,
+} from "@expo/react-native-action-sheet";
+
+import { compose } from "recompose";
 
 import PropTypes from "prop-types";
 
-import {
-  prop,
-  sortBy,
-} from "ramda";
+import { prop, sortBy } from "ramda";
+
+import { connectPermissionService } from "../providers/permisson-provider";
 
 import { isDev } from "../utils";
 
@@ -32,6 +34,8 @@ import {
   userFirstTimeDone,
   validateProfile,
   clearSearchPlip,
+  requestCameraAccess,
+  requestGalleryAccess,
   searchPlip,
   setCurrentPlip,
   toggleFavorite,
@@ -39,6 +43,7 @@ import {
 
 import {
   appLoadingProgress,
+  getCurrentAuthorizedPermission,
   isAppReady,
   isFetchingPlipsNextPageAllPlips,
   isFetchingPlipsNextPageFavoritePlips,
@@ -98,18 +103,23 @@ import PageLoader from "../components/page-loader";
 import PlipsLayout from "../components/plips-layout";
 import SplashLoader from "../components/splash-loader";
 import Menu from "../components/side-menu";
-import LoggedInMenu from "../components/logged-in-menu-content";
+import LoggedInMenuContent from "../components/logged-in-menu-content";
 
 import Toast from "react-native-simple-toast";
 
 import { RemoteLinksType } from "../prop-types/remote-config";
 
+const LoggedInMenu = connectActionSheet(LoggedInMenuContent);
 
-const sortMenuEntries = entries => sortBy(prop("position"), entries);
+const sortMenuEntries = (entries) => sortBy(prop("position"), entries);
 
 const styles = StyleSheet.create({
   full: {
     flex: 1,
+  },
+  menuOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, .6)",
   },
 });
 
@@ -184,33 +194,63 @@ class Container extends Component {
     } = this.props;
 
     const entries = [
-      { icon: "bubble-chart", title: locale.menu.about, action: this.onAbout, position: 2 },
-      { icon: "account-balance", title: locale.links.sendYourPL, action: this.onSendYourPl, position: 3 },
-      { icon: "help", title: locale.menu.help, action: this.onHelp, position: 5 },
-      { icon: "description", title: locale.menu.privacyPolicy, action: this.onPrivacyPolicy, position: 6 },
-      { icon: "share", title: locale.menu.tellAFriend, action: this.onTellAFriend, position: 7 },
+      {
+        icon: "bubble-chart",
+        title: locale.menu.about,
+        action: this.onAbout,
+        position: 2,
+      },
+      {
+        icon: "account-balance",
+        title: locale.links.sendYourPL,
+        action: this.onSendYourPl,
+        position: 3,
+      },
+      {
+        icon: "help",
+        title: locale.menu.help,
+        action: this.onHelp,
+        position: 5,
+      },
+      {
+        icon: "description",
+        title: locale.menu.privacyPolicy,
+        action: this.onPrivacyPolicy,
+        position: 6,
+      },
+      {
+        icon: "share",
+        title: locale.menu.tellAFriend,
+        action: this.onTellAFriend,
+        position: 7,
+      },
     ];
 
     if (!isFetchingProfile && currentUser) {
-      entries.push({ icon: "account-circle", title: locale.menu.myProfile, action: onProfileEdit, position: 0 });
+      entries.push({
+        icon: "account-circle",
+        title: locale.menu.myProfile,
+        action: onProfileEdit,
+        position: 0,
+      });
     }
 
     if (!isFetchingProfile && !currentUser && !isUserLoggedIn) {
-      entries.push({ icon: "person", title: locale.getIn, action: this.onSignIn, position: 0});
+      entries.push({
+        icon: "person",
+        title: locale.getIn,
+        action: this.onSignIn,
+        position: 0,
+      });
     }
 
     return sortMenuEntries(entries);
   }
 
-  componentWillMount() {
-    if (isDev) Toast.show("PlipsList componentWillMount");
-  }
-
   componentDidMount() {
-    const {
-      currentSigningPlip,
-      onGoToPlip,
-    } = this.props;
+    const { currentSigningPlip, onGoToPlip } = this.props;
+
+    if (isDev) Toast.show("PlipsList componentDidMount");
 
     if (currentSigningPlip) {
       // For some reason, the router is not done loading the current screen
@@ -229,16 +269,18 @@ class Container extends Component {
 
     return (
       <View style={styles.full}>
-        <Menu
-          open={open}
-          content={this.renderMenuContent()}
-          onOpenStart={onFetchProfile}
-          onOpen={() => this.setState({ menuOpen: true })}
-          onClose={() => this.setState({ menuOpen: false })}
-        >
-          {this.renderPage()}
-          {this.renderFirstTimeLoader()}
-        </Menu>
+        <ActionSheetProvider>
+          <Menu
+            open={open}
+            acceptPan={false}
+            content={this.renderMenuContent()}
+            onOpenStart={onFetchProfile}
+            onOpen={() => this.setState({ menuOpen: true })}
+            onClose={() => this.setState({ menuOpen: false })}>
+            {this.renderPage()}
+            {this.renderFirstTimeLoader()}
+          </Menu>
+        </ActionSheetProvider>
 
         <PageLoader isVisible={isValidatingProfile} />
       </View>
@@ -246,39 +288,48 @@ class Container extends Component {
   }
 
   renderPage() {
-    return (
-      <View style={{flex: 1}}>
-        <PlipsLayout
-          {...this.props}
+    const { menuOpen } = this.state;
 
-          openMenu={this.openMenu}
-        />
+    return (
+      <View style={styles.full}>
+        <PlipsLayout {...this.props} openMenu={this.openMenu} />
+
+        {menuOpen && <View style={styles.menuOverlay} />}
       </View>
     );
   }
 
   renderFirstTimeLoader() {
     const { isAppReady, appLoadingProgress } = this.props;
-    return <SplashLoader isVisible={!isAppReady} progress={appLoadingProgress}/>
+    return (
+      <SplashLoader isVisible={!isAppReady} progress={appLoadingProgress} />
+    );
   }
 
   renderMenuContent() {
     const {
+      authorizedPermission,
       currentUser,
       isFetchingProfile,
       isUserLoggedIn,
+      permission,
       onAvatarChanged,
       onLogout,
+      onRequestCameraPermission,
+      onRequestGalleryPermission,
     } = this.props;
 
     return (
       <LoggedInMenu
+        authorizedPermission={authorizedPermission}
         currentUser={currentUser}
         isFetchingProfile={isFetchingProfile}
         isUserLoggedIn={isUserLoggedIn}
+        permission={permission}
         onAvatarChanged={onAvatarChanged}
         onLogout={onLogout}
-
+        onRequestCameraPermission={onRequestCameraPermission}
+        onRequestGalleryPermission={onRequestGalleryPermission}
         menuEntries={this.menuEntries}
       />
     );
@@ -289,21 +340,18 @@ class Container extends Component {
 
     this.setState({ menuOpen: true });
     onFetchProfile();
-  }
+  };
 
   closeMenu() {
     this.setState({ menuOpen: false });
   }
 
   onAbout = () => {
-    const {
-      onTapAboutApp,
-      onLogEvent,
-    } = this.props;
+    const { onTapAboutApp, onLogEvent } = this.props;
 
     onTapAboutApp();
     onLogEvent({ name: "tapped_menu_about_app" });
-  }
+  };
 
   onPrivacyPolicy = () => {
     const { onLogEvent, onPrivacyPolicy } = this.props;
@@ -315,21 +363,21 @@ class Container extends Component {
     const { onLogEvent, onTellAFriend } = this.props;
     onLogEvent({ name: "tapped_menu_tell_a_friend" });
     onTellAFriend();
-  }
+  };
 
   onHelp = () => {
     const { onTapHelp, onLogEvent } = this.props;
 
     onTapHelp();
     onLogEvent({ name: "tapped_menu_help" });
-  }
+  };
 
   onSendYourPl = () => {
     const { onTapSendYourPl, onLogEvent } = this.props;
 
     onTapSendYourPl();
     onLogEvent({ name: "tapped_menu_send_your_pl" });
-  }
+  };
 
   onOpenURL({ eventName, link }) {
     const { onLogEvent, onOpenURL } = this.props;
@@ -342,11 +390,12 @@ class Container extends Component {
 
     onSignIn();
     onLogEvent({ name: "tapped_menu_signup" });
-  }
+  };
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   appLoadingProgress: appLoadingProgress(state),
+  authorizedPermission: getCurrentAuthorizedPermission(state),
   currentSigningPlip: getCurrentSigningPlip(state),
   currentUser: getCurrentUser(state),
   errorFetchingAllPlips: errorFetchingAllPlips(state),
@@ -357,9 +406,15 @@ const mapStateToProps = state => ({
   currentMainTabViewTab: getCurrentMainTabView(state),
   isAppReady: isAppReady(state),
   isFetchingPlipsNextPageAllPlips: isFetchingPlipsNextPageAllPlips(state),
-  isFetchingPlipsNextPageFavoritePlips: isFetchingPlipsNextPageFavoritePlips(state),
-  isFetchingPlipsNextPageNationwidePlips: isFetchingPlipsNextPageNationwidePlips(state),
-  isFetchingPlipsNextPagePlipsByLocation: isFetchingPlipsNextPagePlipsByLocation(state),
+  isFetchingPlipsNextPageFavoritePlips: isFetchingPlipsNextPageFavoritePlips(
+    state,
+  ),
+  isFetchingPlipsNextPageNationwidePlips: isFetchingPlipsNextPageNationwidePlips(
+    state,
+  ),
+  isFetchingPlipsNextPagePlipsByLocation: isFetchingPlipsNextPagePlipsByLocation(
+    state,
+  ),
   isFetchingPlipsNextPageSignedPlips: isFetchingPlipsNextPageSignedPlips(state),
   isFetchingAllPlips: isFetchingAllPlips(state),
   isFetchingFavoritePlips: isFetchingFavoritePlips(state),
@@ -371,7 +426,7 @@ const mapStateToProps = state => ({
   isSearchingPlips: isSearchingPlips(state),
   isRefreshingAllPlips: isRefreshingAllPlips(state),
   isRefreshingFavoritePlips: isRefreshingFavoritePlips(state),
-  isRefreshingNationwidePlips: isRefreshingNationwidePlips (state),
+  isRefreshingNationwidePlips: isRefreshingNationwidePlips(state),
   isRefreshingPlipsByLocation: isRefreshingPlipsByLocation(state),
   isRefreshingSignedPlips: isRefreshingSignedPlips(state),
   isUserFirstTime: isUserFirstTime(state),
@@ -400,19 +455,21 @@ const mapStateToProps = state => ({
   plipsFavoriteInfo: findPlipsFavoriteInfo(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  onAvatarChanged: avatar => dispatch(profileSaveAvatar({ avatar, shouldNavigate: false })),
+const mapDispatchToProps = (dispatch) => ({
+  onAvatarChanged: (avatar) =>
+    dispatch(profileSaveAvatar({ avatar, shouldNavigate: false })),
   onRetryPlips: () => dispatch(fetchPlips()),
-  onFetchPlipsNextPage: ({ typeList, nextPage }) => dispatch(fetchPlipsNextPage({ typeList, nextPage })),
+  onFetchPlipsNextPage: ({ typeList, nextPage }) =>
+    dispatch(fetchPlipsNextPage({ typeList, nextPage })),
   onFetchProfile: () => dispatch(fetchProfile()),
   onFirstTimeModalClose: () => dispatch(userFirstTimeDone()),
-  onGoToPlip: plip => {
+  onGoToPlip: (plip) => {
     dispatch(navigate("showPlip"));
     dispatch(setCurrentPlip(plip));
   },
   onLogEvent: ({ name, extraData }) => dispatch(logEvent({ name, extraData })),
   onLogout: () => dispatch(logout()),
-  onOpenURL: url => dispatch(openURL(url)),
+  onOpenURL: (url) => dispatch(openURL(url)),
   onPrivacyPolicy: () => dispatch(navigate(SCREEN_KEYS.PRIVACY_POLICY)),
   onProfileEdit: () => dispatch(navigate("profileUpdate")),
   onRefresh: ({ typeList }) => dispatch(refreshPlips({ typeList })),
@@ -424,9 +481,16 @@ const mapDispatchToProps = dispatch => ({
   onTellAFriend: () => dispatch(tellAFriend()),
   onValidateProfile: () => dispatch(validateProfile()),
   onClearSearch: () => dispatch(clearSearchPlip()),
-  onSearchPlip: title => dispatch(searchPlip(title)),
-  onShare: plip => dispatch(sharePlip(plip)),
-  onToggleFavorite: detailId => dispatch(toggleFavorite({ detailId })),
+  onRequestCameraPermission: () => dispatch(requestCameraAccess()),
+  onRequestGalleryPermission: () => dispatch(requestGalleryAccess()),
+  onSearchPlip: (title) => dispatch(searchPlip(title)),
+  onShare: (plip) => dispatch(sharePlip(plip)),
+  onToggleFavorite: (detailId) => dispatch(toggleFavorite({ detailId })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Container);
+const enhance = compose(
+  connectPermissionService,
+  connect(mapStateToProps, mapDispatchToProps),
+);
+
+export default enhance(Container);

@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  TouchableOpacity,
-  Text,
-  View,
-} from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
@@ -24,6 +20,8 @@ import locale from "../locales/pt-BR";
 
 import styles from "../styles/change-forgot-password-layout";
 
+const codeInputContainerStyle = { marginHorizontal: 13 };
+const submitButtonStyle = { marginHorizontal: 20, marginTop: 20 };
 
 export default class ChangeForgotPasswordLayout extends Component {
   state = {};
@@ -35,7 +33,7 @@ export default class ChangeForgotPasswordLayout extends Component {
     onBack: PropTypes.func.isRequired,
     onResendCode: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
-  }
+  };
 
   get validForm() {
     const code = this.state.code || "";
@@ -48,12 +46,7 @@ export default class ChangeForgotPasswordLayout extends Component {
   }
 
   render() {
-    const {
-      emailSent,
-      errors,
-      isSaving,
-      onResendCode,
-    } = this.props;
+    const { emailSent, errors, isSaving, onResendCode } = this.props;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -67,7 +60,8 @@ export default class ChangeForgotPasswordLayout extends Component {
 
             {emailSent && (
               <Text style={styles.fieldGroup}>
-                <Text style={styles.fieldTitle}>{locale.emailSentTo}:</Text> {emailSent}
+                <Text style={styles.fieldTitle}>{locale.emailSentTo}:</Text>{" "}
+                {emailSent}
               </Text>
             )}
 
@@ -78,12 +72,12 @@ export default class ChangeForgotPasswordLayout extends Component {
             <View style={styles.inputContainer}>
               <CodeInput
                 value={this.state.code}
-                onChangeCodeText={code => this.setState({code})}
+                onChangeCodeText={(code) => this.setState({ code })}
                 keyboardType="numeric"
                 length={5}
-                mdContainerStyle={{marginHorizontal: 13}}
+                mdContainerStyle={codeInputContainerStyle}
                 onSubmitEditing={() => this.codeInput.blur()}
-                ref={ref => this.codeInput = ref}
+                ref={(ref) => (this.codeInput = ref)}
               />
 
               <Text style={[styles.actionText, styles.highMargin]}>
@@ -93,12 +87,12 @@ export default class ChangeForgotPasswordLayout extends Component {
               <MDTextInput
                 placeholder={locale.password}
                 value={this.state.password}
-                onChangeText={password => this.setState({ password })}
+                onChangeText={(password) => this.setState({ password })}
                 password={true}
                 hasError={!!errorForField("password", errors)}
                 error={errorForField("password", errors)}
                 onSubmitEditing={() => this.passwordInput.blur()}
-                ref={ref => this.passwordInput = ref}
+                ref={(ref) => (this.passwordInput = ref)}
               />
             </View>
 
@@ -106,7 +100,7 @@ export default class ChangeForgotPasswordLayout extends Component {
               title={locale.change.toUpperCase()}
               enabled={this.formEnabled}
               onPress={this.onSubmit.bind(this)}
-              style={{marginHorizontal: 20, marginTop: 20}}
+              style={submitButtonStyle}
             />
 
             <TouchableOpacity onPress={onResendCode}>
@@ -136,6 +130,6 @@ export default class ChangeForgotPasswordLayout extends Component {
     const { code, password } = this.state;
     const { onSave } = this.props;
 
-    onSave({code, password});
+    onSave({ code, password });
   }
 }

@@ -1,13 +1,9 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  TouchableOpacity,
-} from "react-native";
+import { TouchableOpacity } from "react-native";
 
-import {
-  TabViewType,
-} from "../prop-types";
+import { TabViewType } from "../prop-types";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -23,9 +19,7 @@ import SearchModal from "./search-modal";
 
 import { getMainTabViewIndexByKey } from "./../models/main-tab-view";
 
-import {
-  RemoteLinksType,
-} from "../prop-types";
+import { RemoteLinksType } from "../prop-types";
 
 export default class PlipsLayout extends Component {
   static propTypes = {
@@ -62,7 +56,7 @@ export default class PlipsLayout extends Component {
     onSearchPlip: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     onToggleFavorite: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     isSearchModalVisible: false,
@@ -71,7 +65,7 @@ export default class PlipsLayout extends Component {
   goToAllPlips = () => {
     const { onMainTabChange } = this.props;
 
-    const index = getMainTabViewIndexByKey("allPlips")
+    const index = getMainTabViewIndexByKey("allPlips");
     onMainTabChange({ index });
   };
 
@@ -83,7 +77,9 @@ export default class PlipsLayout extends Component {
       this.goToAllPlips();
     }
 
-    this.setState(({ isSearchModalVisible }) => ({ isSearchModalVisible: !isSearchModalVisible }));
+    this.setState(({ isSearchModalVisible }) => ({
+      isSearchModalVisible: !isSearchModalVisible,
+    }));
   };
 
   onClearSearch = () => {
@@ -91,15 +87,15 @@ export default class PlipsLayout extends Component {
 
     this.onToggleSearchModal();
     onClearSearch();
-  }
+  };
 
   render() {
     return (
       <SafeAreaView style={styles.full}>
         <Layout>
-          { this.renderNavBar() }
-          <MainTabView {...this.props}/>
-          { this.renderSearchModal() }
+          {this.renderNavBar()}
+          <MainTabView {...this.props} />
+          {this.renderSearchModal()}
         </Layout>
       </SafeAreaView>
     );
@@ -117,19 +113,13 @@ export default class PlipsLayout extends Component {
   }
 
   renderLogo() {
-    return <HeaderLogo />
+    return <HeaderLogo />;
   }
 
   renderMenuButton() {
     return (
-      <TouchableOpacity
-        onPress={this.onOpenMenu}
-      >
-        <Icon
-          name="dehaze"
-          size={24}
-          color="#fff"
-        />
+      <TouchableOpacity onPress={this.onOpenMenu}>
+        <Icon name="dehaze" size={24} color="#fff" />
       </TouchableOpacity>
     );
   }
@@ -144,20 +134,15 @@ export default class PlipsLayout extends Component {
         onToggleModal={this.onToggleSearchModal}
         onSearch={onSearchPlip}
         onClearSearch={this.onClearSearch}
-        searchTitle={searchTitle} />
+        searchTitle={searchTitle}
+      />
     );
   }
 
   renderSearchButton() {
     return (
-      <TouchableOpacity
-        onPress={this.onToggleSearchModal}
-      >
-        <Icon
-          name="search"
-          size={24}
-          color="#fff"
-        />
+      <TouchableOpacity onPress={this.onToggleSearchModal}>
+        <Icon name="search" size={24} color="#fff" />
       </TouchableOpacity>
     );
   }
@@ -165,5 +150,5 @@ export default class PlipsLayout extends Component {
   onOpenMenu = () => {
     const { openMenu } = this.props;
     openMenu();
-  }
+  };
 }

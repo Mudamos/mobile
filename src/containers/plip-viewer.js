@@ -26,16 +26,18 @@ const mapStateToProps = (state, ownProps) => {
     user: currentUser(state),
     isSigning: isSigningPlip(state),
     justSignedPlip: hasUserJustSignedPlip(state, ownProps.plip.id),
-    userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
+    userSignDate:
+      userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
-}
+};
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onBack: () => dispatch(navigateBack()),
-  onPlipSign: plip => dispatch(signPlip({ plip })),
+  onPlipSign: (plip) => dispatch(signPlip({ plip })),
   onLogin: () => dispatch(navigate("signIn")),
-  onShare: plip => dispatch(sharePlip(plip)),
-  onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
+  onShare: (plip) => dispatch(sharePlip(plip)),
+  onSignSuccessClose: (plip) =>
+    dispatch(removeJustSignedPlip({ plipId: plip.id })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlipViewerLayout);

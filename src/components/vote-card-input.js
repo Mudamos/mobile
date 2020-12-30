@@ -5,24 +5,19 @@ import MDTextInput from "./md-text-input";
 
 import { voteCardMask } from "../utils";
 
-
 export default class VoteCardInput extends Component {
   static propTypes = {
     value: PropTypes.string,
     onChangeVoteCardText: PropTypes.func.isRequired,
-  }
+  };
 
   render() {
-    const {
-      value,
-      ...mdInputProps
-    } = this.props;
+    const { value, ...mdInputProps } = this.props;
 
     return (
       <MDTextInput
         {...mdInputProps}
-
-        ref={ref => this.input = ref}
+        ref={(ref) => (this.input = ref)}
         value={this.removeLastSeparator(value)}
         keyboardType="numeric"
         maxLength={14}

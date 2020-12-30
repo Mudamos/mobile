@@ -12,7 +12,11 @@ export default class YouTubePlayer extends Component {
   };
 
   get source() {
-    return "https://www.youtube.com/embed/" + this.props.videoId + "?autoplay=1&modestbranding=1&showinfo=0&iv_load_policy=3&playsinline=0&rel=0";
+    return (
+      "https://www.youtube.com/embed/" +
+      this.props.videoId +
+      "?autoplay=1&modestbranding=1&showinfo=0&iv_load_policy=3&playsinline=0&rel=0"
+    );
   }
 
   render() {
@@ -53,7 +57,7 @@ export default class YouTubePlayer extends Component {
     return (
       <YouTubeWebView
         scrollEnabled={false}
-        source={{html: HTML}}
+        source={{ html: HTML }}
         style={this.props.style}
       />
     );

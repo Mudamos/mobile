@@ -1,1 +1,1 @@
-export const currentScreenKey = state => state.navigation.currentKey;
+export const currentScreenKey = (state) => state.navigation.currentKey;

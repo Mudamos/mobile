@@ -1,11 +1,8 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  ListView,
-  Text,
-  View,
-} from "react-native";
+import ListView from "deprecated-react-native-listview";
+import { Text, View } from "react-native";
 
 import { moment } from "../utils";
 
@@ -21,6 +18,7 @@ import locale from "../locales/pt-BR";
 
 import styles from "../styles/signers-layout";
 
+const retryButtonStyle = { marginHorizontal: 20, backgroundColor: "#ddd" };
 
 export default class SignersLayout extends Component {
   static propTypes = {
@@ -29,7 +27,7 @@ export default class SignersLayout extends Component {
     userDataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     onBack: PropTypes.func.isRequired,
     onRetry: PropTypes.func.isRequired,
-  }
+  };
 
   render() {
     const { hasError, isFetching } = this.props;
@@ -65,18 +63,11 @@ export default class SignersLayout extends Component {
   renderRow(user) {
     return (
       <View style={styles.tableRow}>
-        <NetworkImage
-          source={{uri: user.pictureUrl}}
-          style={styles.avatar}
-        />
+        <NetworkImage source={{ uri: user.pictureUrl }} style={styles.avatar} />
 
         <View style={styles.full}>
-          <Text style={styles.userName}>
-            {user.name}
-          </Text>
-          <Text style={styles.signDate}>
-            {this.formatDate(user.signedAt)}
-          </Text>
+          <Text style={styles.userName}>{user.name}</Text>
+          <Text style={styles.signDate}>{this.formatDate(user.signedAt)}</Text>
         </View>
       </View>
     );
@@ -85,18 +76,13 @@ export default class SignersLayout extends Component {
   renderSectionHeader(sectionData, sectionID) {
     return (
       <View style={styles.tableSection}>
-        <Text style={styles.section}>
-          {sectionID.toUpperCase()}
-        </Text>
+        <Text style={styles.section}>{sectionID.toUpperCase()}</Text>
       </View>
     );
   }
 
   renderSeparator(sectionID, rowID) {
-    return <View
-      key={`sep:${sectionID}:${rowID}`}
-      style={styles.separator}
-    />
+    return <View key={`sep:${sectionID}:${rowID}`} style={styles.separator} />;
   }
 
   renderNavBar() {
@@ -116,10 +102,7 @@ export default class SignersLayout extends Component {
 
     return (
       <View style={styles.retryContainer}>
-        <RetryButton
-          onPress={onRetry}
-          style={{marginHorizontal: 20, backgroundColor: "#ddd"}}
-        />
+        <RetryButton onPress={onRetry} style={retryButtonStyle} />
       </View>
     );
   }

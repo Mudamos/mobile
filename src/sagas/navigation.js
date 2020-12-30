@@ -1,4 +1,12 @@
-import { call, fork, put, spawn, select, takeEvery, takeLatest } from "redux-saga/effects";
+import {
+  call,
+  fork,
+  put,
+  spawn,
+  select,
+  takeEvery,
+  takeLatest,
+} from "redux-saga/effects";
 
 import { Actions } from "react-native-router-flux";
 
@@ -19,7 +27,6 @@ import {
 
 import { navigate } from "../actions";
 
-
 function* forward() {
   yield takeEvery("NAVIGATE", function* ({ payload }) {
     const { route, params } = payload;
@@ -28,7 +35,7 @@ function* forward() {
 
     try {
       yield call(Actions[route], params);
-    } catch(e) {
+    } catch (e) {
       if (isDev) console.log(e);
     }
   });
@@ -46,8 +53,10 @@ function* unauthorized({ mobileApi, sessionStore }) {
       const { params } = payload;
       yield call(logout, { mobileApi, sessionStore });
       yield put(navigate("signIn", params));
-    } catch(e) {
-      if (isDev) console.log("Error unauthorized navigation: ", e.message, e.stack, e);
+    } catch (e) {
+      if (isDev) {
+        console.log("Error unauthorized navigation: ", e.message, e.stack, e);
+      }
     }
   });
 }
@@ -82,7 +91,8 @@ export function* profileScreenForCurrentUser(params = {}) {
     "profileConclude",
   ];
 
-  const firstScreenNotDone = screensDone => screenKeys[findIndex(s => !s)(screensDone)];
+  const firstScreenNotDone = (screensDone) =>
+    screenKeys[findIndex((s) => !s)(screensDone)];
   const screensDone = [
     yield select(isFacebookMainProfileComplete),
     yield select(isMainProfileComplete),

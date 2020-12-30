@@ -1,3 +1,3 @@
-export const isSearchingZipCode = state => !!state.address.isSearchingZipCode;
+export const isSearchingZipCode = (state) => !!state.address.isSearchingZipCode;
 
-export const fetchLocation = state => state.address.location;
+export const fetchLocation = (state) => state.address.location;

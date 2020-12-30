@@ -1,12 +1,7 @@
 import PropTypes from "prop-types";
 import { isEmpty } from "ramda";
 import React, { PureComponent } from "react";
-import {
-  Alert,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 import { compose, withStateHandlers } from "recompose";
@@ -26,13 +21,15 @@ import locale from "../../locales/pt-BR";
 
 import { unMaskPhone, isPresent, isValidPhone } from "../../utils";
 
+const confirmButtonStyle = { marginHorizontal: 20, marginTop: 20 };
+
 const enhance = compose(
   withStateHandlers(
     { phone: "" },
     {
-      onSetPhone: () => phone => ({ phone }),
-    }
-  )
+      onSetPhone: () => (phone) => ({ phone }),
+    },
+  ),
 );
 
 class ConfirmVoteLayout extends PureComponent {
@@ -46,7 +43,7 @@ class ConfirmVoteLayout extends PureComponent {
     onBack: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onSetPhone: PropTypes.func.isRequired,
-  }
+  };
 
   get isValidForm() {
     return this.isValidPhone(this.props.phone);
@@ -73,19 +70,15 @@ class ConfirmVoteLayout extends PureComponent {
     }));
   };
 
-  isValidPhone = phone => isEmpty(phone) || isValidPhone(phone);
+  isValidPhone = (phone) => isEmpty(phone) || isValidPhone(phone);
 
   onBack = () => {
     const { onBack } = this.props;
 
-    Alert.alert(
-      locale.warning,
-      locale.voteConfirmDismiss,
-      [
-        { text: locale.cancel },
-        { text: locale.leaveAnyway, onPress: onBack },
-      ],
-    );
+    Alert.alert(locale.warning, locale.voteConfirmDismiss, [
+      { text: locale.cancel },
+      { text: locale.leaveAnyway, onPress: onBack },
+    ]);
   };
 
   onSubmit = () => {
@@ -95,11 +88,7 @@ class ConfirmVoteLayout extends PureComponent {
   };
 
   render() {
-    const {
-      phone,
-      isSaving,
-      onSetPhone,
-    } = this.props;
+    const { phone, isSaving, onSetPhone } = this.props;
 
     const { errors } = this.state;
 
@@ -110,9 +99,7 @@ class ConfirmVoteLayout extends PureComponent {
             {this.renderNavBar()}
 
             <View style={styles.headerContainer}>
-              <Text style={styles.headerTitle}>
-                {locale.confirmVoteTitle}
-              </Text>
+              <Text style={styles.headerTitle}>{locale.confirmVoteTitle}</Text>
 
               <Text style={styles.headerSubtitle}>
                 {locale.confirmVoteSubtitle}
@@ -128,7 +115,7 @@ class ConfirmVoteLayout extends PureComponent {
                 error={errors.phone}
                 hint="Ex: (00) 90000-0000"
                 onSubmitEditing={() => this.phoneInput.blur()}
-                ref={ref => this.phoneInput = ref}
+                ref={(ref) => (this.phoneInput = ref)}
               />
             </View>
 
@@ -136,7 +123,7 @@ class ConfirmVoteLayout extends PureComponent {
               title={locale.send.toUpperCase()}
               enabled={this.isFormEnabled}
               onPress={this.onSubmit}
-              style={{marginHorizontal: 20, marginTop: 20}}
+              style={confirmButtonStyle}
             />
           </ScrollView>
         </Layout>
@@ -149,7 +136,7 @@ class ConfirmVoteLayout extends PureComponent {
   renderNavBar() {
     return (
       <NavigationBar
-        leftView={<ChevronButton onPress={this.onBack} direction="left"/>}
+        leftView={<ChevronButton onPress={this.onBack} direction="left" />}
         middleView={<HeaderLogo />}
       />
     );

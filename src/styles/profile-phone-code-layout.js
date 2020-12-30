@@ -14,25 +14,14 @@ export default StyleSheet.create({
   full: {
     flex: 1,
   },
-  phoneText: StyleSheet.flatten([
-    textStyles.subtitle,
-    { fontWeight: "bold" },
-  ]),
-  link: StyleSheet.flatten([
-    textStyles.link,
-  ]),
+  phoneText: StyleSheet.flatten([textStyles.subtitle, { fontWeight: "bold" }]),
+  link: StyleSheet.flatten([textStyles.link]),
   phoneInfoContainer: {
     flexDirection: "row",
     justifyContent: "center",
   },
-  resendLink: StyleSheet.flatten([
-    textStyles.link,
-    { marginTop: 24 },
-  ]),
-  subHeader: StyleSheet.flatten([
-    textStyles.subtitle,
-    { marginBottom: 5 },
-  ]),
+  resendLink: StyleSheet.flatten([textStyles.link, { marginTop: 24 }]),
+  subHeader: StyleSheet.flatten([textStyles.subtitle, { marginBottom: 5 }]),
   typeCodeText: {
     marginTop: 30,
     textAlign: "center",

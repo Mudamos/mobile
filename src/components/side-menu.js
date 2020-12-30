@@ -17,7 +17,7 @@ const drawerStyles = {
 
 const gradientStart = { x: 0.0, y: 0.25 };
 const gradientEnd = { x: 1.0, y: 1.0 };
-const gradientLocation = [0, 2.0];
+const gradientLocation = [0, 1.0];
 const gradientColors = ["#3D3D3D", "#212121"];
 
 const styles = StyleSheet.create({
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 export default class Menu extends Component {
   static propTypes = {
     ...Drawer.propTypes,
@@ -34,17 +33,14 @@ export default class Menu extends Component {
 
   static defaultProps = {
     tapToClose: true,
-    type: "static",
+    type: "overlay",
     openDrawerOffset: 0.2,
     panOpenMask: 100,
     negotiatePan: true,
   };
 
   render() {
-    const {
-      content,
-      ...props
-    } = this.props;
+    const { content, ...props } = this.props;
 
     const wrappedContent = (
       <LinearGradient
@@ -52,8 +48,7 @@ export default class Menu extends Component {
         end={gradientEnd}
         locations={gradientLocation}
         style={styles.full}
-        colors={gradientColors}
-      >
+        colors={gradientColors}>
         {content}
       </LinearGradient>
     );
@@ -61,11 +56,9 @@ export default class Menu extends Component {
     return (
       <Drawer
         {...props}
-
         content={wrappedContent}
-        ref={ref => this.drawer = ref}
-        styles={drawerStyles}
-      >
+        ref={(ref) => (this.drawer = ref)}
+        styles={drawerStyles}>
         {this.props.children}
       </Drawer>
     );

@@ -13,10 +13,12 @@ const SignedMessageView = ({ date }) => {
 
   return (
     <View style={styles.outerContainer}>
-      <Text style={styles.projectSigned}>{locale.youSignedThisProjectAt({ day: day, time: time })}</Text>
+      <Text style={styles.projectSigned}>
+        {locale.youSignedThisProjectAt({ day: day, time: time })}
+      </Text>
     </View>
   );
-}
+};
 
 SignedMessageView.propTypes = {
   date: PropTypes.object.isRequired,

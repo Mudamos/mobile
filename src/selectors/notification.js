@@ -1,2 +1,2 @@
-export const oneSignalUserInfo = state =>
+export const oneSignalUserInfo = (state) =>
   state.notification.oneSignalUserInfo;

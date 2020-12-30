@@ -1,17 +1,10 @@
-import {
-  curry,
-} from "ramda";
+import analytics from "@react-native-firebase/analytics";
 
-import Firestack from "react-native-firestack";
+const logEvent = ({ name, extraData = {} }) =>
+  analytics().logEvent(name, extraData);
 
-const logEvent = (firestack, { name, extraData }) => firestack.analytics.logEventWithName(name, (extraData || {}));
-
-const service = options => {
-  const firestack = new Firestack(options);
-
-  return {
-    logEvent: curry(logEvent)(firestack),
-  };
-};
+const service = () => ({
+  logEvent,
+});
 
 export default service;

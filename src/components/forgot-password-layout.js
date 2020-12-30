@@ -1,10 +1,6 @@
 import { anyPass, isEmpty, isNil } from "ramda";
 import React, { PureComponent } from "react";
-import {
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import { compose, withStateHandlers } from "recompose";
 
@@ -24,20 +20,22 @@ import styles from "../styles/forgot-password-layout";
 
 import { unMaskCpf, validateCpf } from "../utils";
 
+const submitButtonStyle = { marginHorizontal: 20, marginTop: 20 };
+
 const isNotPresent = anyPass([isNil, isEmpty]);
 
 const enhance = compose(
   withStateHandlers(
     { cpf: "", email: "" },
     {
-      onSetCpf: () => value => ({
+      onSetCpf: () => (value) => ({
         cpf: value,
       }),
-      onSetEmail: () => value => ({
+      onSetEmail: () => (value) => ({
         email: value,
       }),
-    }
-  )
+    },
+  ),
 );
 
 class ForgotPasswordLayout extends PureComponent {
@@ -54,7 +52,7 @@ class ForgotPasswordLayout extends PureComponent {
     onSave: PropTypes.func.isRequired,
     onSetCpf: PropTypes.func.isRequired,
     onSetEmail: PropTypes.func.isRequired,
-  }
+  };
 
   get isValidForm() {
     return this.isValidCpf(this.props.cpf);
@@ -81,7 +79,7 @@ class ForgotPasswordLayout extends PureComponent {
     }));
   };
 
-  isValidCpf = cpf => isNotPresent(cpf) || validateCpf(cpf);
+  isValidCpf = (cpf) => isNotPresent(cpf) || validateCpf(cpf);
 
   onSubmit = () => {
     const { cpf, email, onSave } = this.props;
@@ -107,9 +105,7 @@ class ForgotPasswordLayout extends PureComponent {
           <ScrollView>
             {this.renderNavBar()}
 
-            <Text style={styles.headerTitle}>
-              {locale.forgotPasswordTitle}
-            </Text>
+            <Text style={styles.headerTitle}>{locale.forgotPasswordTitle}</Text>
 
             <View style={styles.inputContainer}>
               <MDTextInput
@@ -119,7 +115,7 @@ class ForgotPasswordLayout extends PureComponent {
                 onChangeText={onSetEmail}
                 keyboardType="email-address"
                 onSubmitEditing={() => this.emailInput.blur()}
-                ref={ref => this.emailInput = ref}
+                ref={(ref) => (this.emailInput = ref)}
               />
 
               <Text style={styles.fieldTextSeparator}>
@@ -134,7 +130,7 @@ class ForgotPasswordLayout extends PureComponent {
                 error={errors.cpf}
                 hint="Ex: 000.000.000-00"
                 onSubmitEditing={() => this.cpfInput.blur()}
-                ref={ref => this.cpfInput = ref}
+                ref={(ref) => (this.cpfInput = ref)}
               />
             </View>
 
@@ -142,7 +138,7 @@ class ForgotPasswordLayout extends PureComponent {
               title={locale.sendCode.toUpperCase()}
               enabled={this.isFormEnabled}
               onPress={this.onSubmit}
-              style={{marginHorizontal: 20, marginTop: 20}}
+              style={submitButtonStyle}
             />
 
             <TouchableOpacity onPress={onHasCode}>

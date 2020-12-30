@@ -1,19 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
-import {
-  compose,
-  withHandlers,
-  withProps,
-} from "recompose";
+import { compose, withHandlers, withProps } from "recompose";
 
 import SafeAreaView from "./safe-area-view";
 import NavigationBar from "./navigation-bar";
@@ -23,13 +13,14 @@ import HeaderLogo from "./header-logo";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ChevronButton from "./chevron-button";
 
-import styles from "../styles/cant-sign-plip-layout"
+import styles from "../styles/cant-sign-plip-layout";
 
 import locale from "../locales/pt-BR";
 
-import {
-  plipRegion,
-} from "../utils";
+import { plipRegion } from "../utils";
+
+const shareStyle = { marginVertical: 17 };
+const myLocationTitleStyle = { color: "#FFF" };
 
 const NavBar = ({ onBack }) => (
   <NavigationBar
@@ -57,31 +48,44 @@ const enhance = compose(
   }),
 );
 
-const CantSignPlipLayout = ({ region, plip, onMyLocation, onBack, onShare }) => {
+const CantSignPlipLayout = ({
+  region,
+  plip,
+  onMyLocation,
+  onBack,
+  onShare,
+}) => {
   if (!plip) return null;
 
   return (
     <SafeAreaView>
       <Layout>
         <ScrollView>
-          <NavBar onBack={onBack}/>
+          <NavBar onBack={onBack} />
 
           <View style={styles.container}>
-            <Text style={[styles.text, styles.title]}>{locale.itsNotPossibleToSignThatPl}</Text>
-            <Image
-              source={require("../images/erro.png")}
-            />
-            <Text style={[styles.text, styles.small]}>{locale.wrongRegionThanks}</Text>
-            <Text style={[styles.text, styles.bold]}>{locale.helpPl({ plName: plip.title, region })}</Text>
-            <Text style={[styles.text, styles.small]}>{locale.knowSomeoneToShare}
-              <Text style={[styles.text, styles.bold, styles.small]}>{locale.clickOnIconAndShare}</Text>
+            <Text style={[styles.text, styles.title]}>
+              {locale.itsNotPossibleToSignThatPl}
+            </Text>
+            <Image source={require("../images/erro.png")} />
+            <Text style={[styles.text, styles.small]}>
+              {locale.wrongRegionThanks}
+            </Text>
+            <Text style={[styles.text, styles.bold]}>
+              {locale.helpPl({ plName: plip.title, region })}
+            </Text>
+            <Text style={[styles.text, styles.small]}>
+              {locale.knowSomeoneToShare}
+              <Text style={[styles.text, styles.bold, styles.small]}>
+                {locale.clickOnIconAndShare}
+              </Text>
             </Text>
             <TouchableOpacity onPress={onShare}>
               <Icon
                 color="#FFF"
                 name="share-variant"
                 size={68}
-                style={{marginVertical: 17}}
+                style={shareStyle}
               />
             </TouchableOpacity>
 
@@ -89,18 +93,27 @@ const CantSignPlipLayout = ({ region, plip, onMyLocation, onBack, onShare }) => 
 
             <Image
               source={require("../images/gradient-clipboard.png")}
-              style={{marginVertical: 17}}
+              style={styles.gradientImage}
             />
-            <Text style={[styles.text, styles.bold]}>{locale.signPlipAtYourRegion}</Text>
-            <Text style={[styles.text, { margin: 20 }]}>{locale.backToMainPageToSignAndShareNationalPlipOrFromYourRegion}</Text>
+            <Text style={[styles.text, styles.bold]}>
+              {locale.signPlipAtYourRegion}
+            </Text>
+            <Text style={[styles.text, styles.smallLeftMargin]}>
+              {locale.backToMainPageToSignAndShareNationalPlipOrFromYourRegion}
+            </Text>
 
-            <RoundedButton title={locale.showMe} action={onMyLocation} buttonStyle={styles.buttonStyle} titleStyle={{color: "#FFF"}}/>
+            <RoundedButton
+              title={locale.showMe}
+              action={onMyLocation}
+              buttonStyle={styles.buttonStyle}
+              titleStyle={myLocationTitleStyle}
+            />
           </View>
         </ScrollView>
       </Layout>
     </SafeAreaView>
   );
-}
+};
 
 CantSignPlipLayout.propTypes = {
   plip: PropTypes.object,
@@ -108,6 +121,6 @@ CantSignPlipLayout.propTypes = {
   onBack: PropTypes.func.isRequired,
   onMyLocation: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
-}
+};
 
 export default enhance(CantSignPlipLayout);

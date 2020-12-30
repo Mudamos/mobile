@@ -35,7 +35,6 @@ import {
 
 import PlipLayout from "../components/plip-layout";
 
-
 class Container extends Component {
   static propTypes = {
     errorFetching: PropTypes.bool,
@@ -62,7 +61,7 @@ class Container extends Component {
     onViewPlip: PropTypes.func.isRequired,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { plip, onFetchPlipRelatedInfo } = this.props;
     if (nextProps.plip && (plip == null || plip.id !== nextProps.plip.id)) {
       onFetchPlipRelatedInfo(nextProps.plip.id);
@@ -70,15 +69,11 @@ class Container extends Component {
   }
 
   render() {
-    return (
-      <PlipLayout
-        {...this.props}
-      />
-    );
+    return <PlipLayout {...this.props} />;
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const currentPlip = getCurrentPlip(state);
   const plipId = currentPlip ? currentPlip.id : null;
   const userSignInfo = getUserCurrentPlipSignInfo(state, plipId);
@@ -108,26 +103,28 @@ const mapStateToProps = state => {
     signers: currentPlipShortSignersInfo.users,
     signersTotal: currentPlipShortSignersInfo.total,
     user: currentUser(state),
-    userSignDate: userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
+    userSignDate:
+      userSignInfo && userSignInfo.updatedAt && moment(userSignInfo.updatedAt),
   };
-}
+};
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onBack: () => {
     dispatch(clearPlipInfo());
     dispatch(navigate("plipsNav"));
   },
   onRedirectToCantSign: () => dispatch(navigate("cantSignPlip")),
-  onFetchPlipRelatedInfo: plipId => dispatch(fetchPlipRelatedInfo(plipId)),
-  onOpenSigners: plipId => dispatch(navigate("signers", { plipId })),
-  onOpenURL: url => dispatch(openURL(url)),
+  onFetchPlipRelatedInfo: (plipId) => dispatch(fetchPlipRelatedInfo(plipId)),
+  onOpenSigners: (plipId) => dispatch(navigate("signers", { plipId })),
+  onOpenURL: (url) => dispatch(openURL(url)),
   onLogin: () => dispatch(navigate("signIn")),
-  onPlipSign: plip => dispatch(signPlip({ plip })),
+  onPlipSign: (plip) => dispatch(signPlip({ plip })),
   onRetryAppLink: () => dispatch(handleAppLink()),
-  onShare: plip => dispatch(sharePlip(plip)),
-  onSignSuccessClose: plip => dispatch(removeJustSignedPlip({ plipId: plip.id })),
-  onToggleFavorite: detailId => dispatch(toggleFavorite({ detailId })),
-  onViewPlip: plip => dispatch(navigate("plipViewer", { plip })),
+  onShare: (plip) => dispatch(sharePlip(plip)),
+  onSignSuccessClose: (plip) =>
+    dispatch(removeJustSignedPlip({ plipId: plip.id })),
+  onToggleFavorite: (detailId) => dispatch(toggleFavorite({ detailId })),
+  onViewPlip: (plip) => dispatch(navigate("plipViewer", { plip })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

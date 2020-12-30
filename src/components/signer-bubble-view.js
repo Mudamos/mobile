@@ -4,12 +4,7 @@ import PropTypes from "prop-types";
 
 import { clamp } from "ramda";
 
-import {
-  TouchableOpacity,
-  Text,
-  View,
-  ViewPropTypes,
-} from "react-native";
+import { TouchableOpacity, Text, View, ViewPropTypes } from "react-native";
 
 import NetworkImage from "./network-image";
 import styles from "../styles/signer-bubble-view";
@@ -21,11 +16,11 @@ export default class SignerBubbleView extends Component {
     total: PropTypes.number.isRequired,
     users: PropTypes.array.isRequired,
     onPress: PropTypes.func,
-  }
+  };
 
   static defaultProps = {
     size: 5,
-  }
+  };
 
   get profiles() {
     const { size, users } = this.props;
@@ -54,19 +49,19 @@ export default class SignerBubbleView extends Component {
     const image = (
       <NetworkImage
         key={`bubble-head-${user.id}`}
-        source={{uri: user.pictureUrl}}
+        source={{ uri: user.pictureUrl }}
         style={styles.bubble}
         imageStyle={styles.imageBubble}
       />
     );
 
-    return onPress ?
-      <TouchableOpacity
-        onPress={onPress}
-        key={`bubble-head-touch-${user.id}`}>
-          {image}
-      </TouchableOpacity> :
-      image;
+    return onPress ? (
+      <TouchableOpacity onPress={onPress} key={`bubble-head-touch-${user.id}`}>
+        {image}
+      </TouchableOpacity>
+    ) : (
+      image
+    );
   }
 
   renderExceeding() {
@@ -76,15 +71,15 @@ export default class SignerBubbleView extends Component {
     if (!exceeding) return null;
 
     const bubble = (
-      <View style={[styles.bubble, {backgroundColor: "#D6C0E9", borderColor: "transparent"}]}>
-        <Text style={styles.exceeding}>
-          +
-        </Text>
+      <View style={styles.bubbleWithBorder}>
+        <Text style={styles.exceeding}>+</Text>
       </View>
     );
 
-    return onPress ?
-      <TouchableOpacity onPress={onPress}>{bubble}</TouchableOpacity> :
-      bubble;
+    return onPress ? (
+      <TouchableOpacity onPress={onPress}>{bubble}</TouchableOpacity>
+    ) : (
+      bubble
+    );
   }
 }

@@ -7,7 +7,7 @@ export const HEADER_MAX_HEIGHT = IMAGE_HEIGHT - HEADER_OFFSET;
 export const HEADER_MIN_HEIGHT = 0;
 export const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
-const IMAGE_HEIGHT_WITH_LEAK = IMAGE_HEIGHT + (HEADER_OFFSET * 2);
+const IMAGE_HEIGHT_WITH_LEAK = IMAGE_HEIGHT + HEADER_OFFSET * 2;
 
 const SIGN_BUTTON_HEIGHT = 42;
 const SIGN_BUTTON_SHADOW_OFFSET = 10;
@@ -74,6 +74,14 @@ export default StyleSheet.create({
     fontFamily: "lato",
     fontSize: 10,
     marginTop: 5,
+  },
+  buttonPdfContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  buttonSignerListContainer: {
+    alignItems: "center",
+    marginBottom: 20,
   },
   column: {
     flex: 1,
@@ -154,7 +162,7 @@ export default StyleSheet.create({
   },
   infoFakeBottom: {
     backgroundColor: "#fff",
-    height: (SIGN_BUTTON_HEIGHT / 2) + SIGN_BUTTON_SHADOW_OFFSET,
+    height: SIGN_BUTTON_HEIGHT / 2 + SIGN_BUTTON_SHADOW_OFFSET,
   },
   infoFakeTop: {
     backgroundColor: "#000",
@@ -195,6 +203,10 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
+  },
+  progressContainer: {
+    flex: 1,
+    justifyContent: "center",
   },
   favoriteIcon: {
     marginHorizontal: 10,
@@ -306,4 +318,4 @@ export default StyleSheet.create({
     marginBottom: 30,
     height: 300,
   },
-})
+});

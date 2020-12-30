@@ -1,9 +1,4 @@
-import {
-  Dimensions,
-  Platform,
-  Text,
-  View,
-} from "react-native";
+import { Dimensions, Text, View } from "react-native";
 import React, { Component } from "react";
 import { TabBar, TabView } from "react-native-tab-view";
 
@@ -30,7 +25,6 @@ const styles = EStyleSheet.create({
     borderBottomWidth: 3,
   },
 });
-
 
 const initialLayout = {
   height: 0,
@@ -80,7 +74,7 @@ export default class MainTabView extends Component {
     onToggleFavorite: PropTypes.func.isRequired,
   };
 
-  handleIndexChange = index => {
+  handleIndexChange = (index) => {
     const { onMainTabChange } = this.props;
 
     onMainTabChange({ index });
@@ -126,84 +120,96 @@ export default class MainTabView extends Component {
     } = this.props;
 
     switch (route.key) {
-    case "nationwidePlips":
-      return <PlipsList
-        {...this.props}
-        typeList={route.key}
-        plips={nationwidePlips}
-        nextPage={nationwidePlipsNextPage}
-        hasLoadedPlips={loadedNationwidePlips}
-        isFetchingPlips={isFetchingNationwidePlips}
-        isFetchingPlipsNextPage={isFetchingPlipsNextPageNationwidePlips}
-        isRefreshingPlips={isRefreshingNationwidePlips}
-        fetchingError={errorFetchingNationwidePlips}/>;
-    case "userLocationPlips":
-      return <PlipsList
-        {...this.props}
-        typeList={route.key}
-        plips={userLocationPlips}
-        nextPage={userLocationPlipsNextPage}
-        hasLoadedPlips={loadedUserLocationPlips}
-        isFetchingPlips={isFetchingPlipsByLocation}
-        isFetchingPlipsNextPage={isFetchingPlipsNextPagePlipsByLocation}
-        isRefreshingPlips={isRefreshingPlipsByLocation}
-        fetchingError={errorFetchingUserLocationPlips}/>;
-    case "allPlips":
-      return <PlipsList
-        {...this.props}
-        typeList={route.key}
-        plips={allPlips}
-        nextPage={allPlipsNextPage}
-        hasLoadedPlips={loadedAllPlips}
-        isFetchingPlips={isFetchingAllPlips}
-        isFetchingPlipsNextPage={isFetchingPlipsNextPageAllPlips}
-        isRefreshingPlips={isRefreshingAllPlips}
-        fetchingError={errorFetchingAllPlips}/>;
-    case "signedPlips":
-      return <PlipsList
-        {...this.props}
-        typeList={route.key}
-        plips={signedPlips}
-        nextPage={signedPlipsNextPage}
-        hasLoadedPlips={loadedSignedPlips}
-        isFetchingPlips={isFetchingSignedPlips}
-        isFetchingPlipsNextPage={isFetchingPlipsNextPageSignedPlips}
-        isRefreshingPlips={isRefreshingSignedPlips}
-        fetchingError={errorFetchingSignedPlips}/>;
-    case "favoritePlips":
-      return <PlipsList
-        {...this.props}
-        typeList={route.key}
-        plips={favoritePlips}
-        nextPage={favoritePlipsNextPage}
-        hasLoadedPlips={loadedUserFavoritePlips}
-        isFetchingPlips={isFetchingFavoritePlips}
-        isFetchingPlipsNextPage={isFetchingPlipsNextPageFavoritePlips}
-        isRefreshingPlips={isRefreshingFavoritePlips}
-        fetchingError={errorFetchingUserFavoritePlips}/>;
-    default:
-      return null;
+      case "nationwidePlips":
+        return (
+          <PlipsList
+            {...this.props}
+            typeList={route.key}
+            plips={nationwidePlips}
+            nextPage={nationwidePlipsNextPage}
+            hasLoadedPlips={loadedNationwidePlips}
+            isFetchingPlips={isFetchingNationwidePlips}
+            isFetchingPlipsNextPage={isFetchingPlipsNextPageNationwidePlips}
+            isRefreshingPlips={isRefreshingNationwidePlips}
+            fetchingError={errorFetchingNationwidePlips}
+          />
+        );
+      case "userLocationPlips":
+        return (
+          <PlipsList
+            {...this.props}
+            typeList={route.key}
+            plips={userLocationPlips}
+            nextPage={userLocationPlipsNextPage}
+            hasLoadedPlips={loadedUserLocationPlips}
+            isFetchingPlips={isFetchingPlipsByLocation}
+            isFetchingPlipsNextPage={isFetchingPlipsNextPagePlipsByLocation}
+            isRefreshingPlips={isRefreshingPlipsByLocation}
+            fetchingError={errorFetchingUserLocationPlips}
+          />
+        );
+      case "allPlips":
+        return (
+          <PlipsList
+            {...this.props}
+            typeList={route.key}
+            plips={allPlips}
+            nextPage={allPlipsNextPage}
+            hasLoadedPlips={loadedAllPlips}
+            isFetchingPlips={isFetchingAllPlips}
+            isFetchingPlipsNextPage={isFetchingPlipsNextPageAllPlips}
+            isRefreshingPlips={isRefreshingAllPlips}
+            fetchingError={errorFetchingAllPlips}
+          />
+        );
+      case "signedPlips":
+        return (
+          <PlipsList
+            {...this.props}
+            typeList={route.key}
+            plips={signedPlips}
+            nextPage={signedPlipsNextPage}
+            hasLoadedPlips={loadedSignedPlips}
+            isFetchingPlips={isFetchingSignedPlips}
+            isFetchingPlipsNextPage={isFetchingPlipsNextPageSignedPlips}
+            isRefreshingPlips={isRefreshingSignedPlips}
+            fetchingError={errorFetchingSignedPlips}
+          />
+        );
+      case "favoritePlips":
+        return (
+          <PlipsList
+            {...this.props}
+            typeList={route.key}
+            plips={favoritePlips}
+            nextPage={favoritePlipsNextPage}
+            hasLoadedPlips={loadedUserFavoritePlips}
+            isFetchingPlips={isFetchingFavoritePlips}
+            isFetchingPlipsNextPage={isFetchingPlipsNextPageFavoritePlips}
+            isRefreshingPlips={isRefreshingFavoritePlips}
+            fetchingError={errorFetchingUserFavoritePlips}
+          />
+        );
+      default:
+        return null;
     }
   };
 
   routeTitle = ({ route }) => route.title;
 
-  tabBarLabel = attrs => {
+  tabBarLabel = (attrs) => {
     const { title } = attrs.route;
 
     return (
       <View style={styles.tab}>
-        <Text
-          style={styles.label}
-          numberOfLines={1}
-          ellipsizeMode={Platform.OS === "ios" ? "clip" : "tail"}>
-            {title}
+        <Text style={styles.label} numberOfLines={1}>
+          {title}
         </Text>
       </View>
-    )
+    );
   };
 
-  renderTabBar = props => (
+  renderTabBar = (props) => (
     <TabBar
       {...props}
       scrollEnabled

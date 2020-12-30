@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 
 import actionSigner from "./action-signer";
 import app from "./app";
-import appLink from "./app-link"
+import appLink from "./app-link";
 import appState from "./app-state";
 import city from "./city";
 import facebook from "./facebook";

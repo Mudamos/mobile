@@ -1,8 +1,4 @@
-import {
-  Dimensions,
-  Platform,
-  StyleSheet,
-} from "react-native";
+import { Dimensions, Platform, StyleSheet } from "react-native";
 
 const { width: windowWidth } = Dimensions.get("window");
 
@@ -17,6 +13,11 @@ export default StyleSheet.create({
     borderBottomColor: "rgba(255,255,255,0.23)",
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+  innerLoaderContainer: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
+  },
   link: {
     color: "#00c084",
     fontFamily: "lato",
@@ -27,6 +28,13 @@ export default StyleSheet.create({
   },
   listView: {
     flex: 1,
+  },
+  main: {
+    backgroundColor: "#DDD",
+    flex: 1,
+  },
+  purple: {
+    backgroundColor: "#6000AA",
   },
   noProjectsContainer: {
     flex: 1,
@@ -55,8 +63,7 @@ export default StyleSheet.create({
     maxWidth: windowWidth,
     ...StyleSheet.absoluteFillObject,
   },
-  rowContainer: {
-  },
+  rowContainer: {},
   plipView: {
     backgroundColor: "#FFF",
     marginVertical: 10,
@@ -77,9 +84,9 @@ export default StyleSheet.create({
     overflow: "hidden",
   },
   plipMainContainer: {
-  borderBottomLeftRadius: 10,
-  borderBottomRightRadius: 10,
-  overflow: "hidden",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    overflow: "hidden",
   },
   plipHeaderContainer: {
     paddingVertical: 15,

@@ -1,3 +1,5 @@
+import "react-native-gesture-handler";
+
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
@@ -37,12 +39,9 @@ import {
   TSEContainer,
 } from "./containers";
 
-import {
-  appDidMount,
-  appWillUnmount,
-  navigate,
-  navigateBack,
-} from "./actions";
+import { PermissionProvider } from "./providers/permisson-provider";
+
+import { appDidMount, appWillUnmount, navigate, navigateBack } from "./actions";
 
 import { SCREEN_KEYS } from "./models";
 
@@ -59,40 +58,114 @@ const scenes = Actions.create(
       <Scene key="plipsList" component={PlipsContainer} hideNavBar={true} />
     </Scene>
 
-    <Scene key="intro" initial={true} component={IntroContainer} hideNavBar={true} />
+    <Scene
+      key="intro"
+      initial={true}
+      component={IntroContainer}
+      hideNavBar={true}
+    />
 
     <Scene key="showPlip" component={PlipContainer} hideNavBar={true} />
-    <Scene key="plipViewer" component={PlipViewerContainer} hideNavBar={true} title="Texto do projeto"/>
+    <Scene
+      key="plipViewer"
+      component={PlipViewerContainer}
+      hideNavBar={true}
+      title="Texto do projeto"
+    />
     <Scene key="signers" component={SignersContainer} hideNavBar={true} />
 
-    <Scene key="cantSignPlip" component={CantSignPlipContainer} hideNavBar={true} />
+    <Scene
+      key="cantSignPlip"
+      component={CantSignPlipContainer}
+      hideNavBar={true}
+    />
 
     <Scene key="signIn" component={SignInContainer} hideNavBar={true} />
 
-    <Scene key="signUp" component={SignUpContainer} hideNavBar={true} title="Identificação" />
-    <Scene key="profileSignUp" component={ProfileSignUpContainer} hideNavBar={true} title="Dados Pessoais"/>
-    <Scene key="profileVoteAddress" component={ProfileVoteAddressContainer} hideNavBar={true} title="Confirme local de votação" />
-    <Scene key="profileAddress" component={ProfileAddressContainer} hideNavBar={true} title="CEP" />
-    <Scene key="profileWallet" component={ProfileWalletContainer} hideNavBar={true} duration={0} title="Wallet" />
-    <Scene key="profileConclude" component={ProfileConcludeContainer} hideNavBar={true} title="Conclude" />
+    <Scene
+      key="signUp"
+      component={SignUpContainer}
+      hideNavBar={true}
+      title="Identificação"
+    />
+    <Scene
+      key="profileSignUp"
+      component={ProfileSignUpContainer}
+      hideNavBar={true}
+      title="Dados Pessoais"
+    />
+    <Scene
+      key="profileVoteAddress"
+      component={ProfileVoteAddressContainer}
+      hideNavBar={true}
+      title="Confirme local de votação"
+    />
+    <Scene
+      key="profileAddress"
+      component={ProfileAddressContainer}
+      hideNavBar={true}
+      title="CEP"
+    />
+    <Scene
+      key="profileWallet"
+      component={ProfileWalletContainer}
+      hideNavBar={true}
+      duration={0}
+      title="Wallet"
+    />
+    <Scene
+      key="profileConclude"
+      component={ProfileConcludeContainer}
+      hideNavBar={true}
+      title="Conclude"
+    />
 
-    <Scene key="forgotPassword" component={ForgotPasswordContainer} hideNavBar={true} />
-    <Scene key="changeForgotPassword" component={ChangeForgotPasswordContainer} hideNavBar={true} />
+    <Scene
+      key="forgotPassword"
+      component={ForgotPasswordContainer}
+      hideNavBar={true}
+    />
+    <Scene
+      key="changeForgotPassword"
+      component={ChangeForgotPasswordContainer}
+      hideNavBar={true}
+    />
 
-    <Scene key="profileUpdate" component={ProfileUpdateContainer} hideNavBar={true} />
+    <Scene
+      key="profileUpdate"
+      component={ProfileUpdateContainer}
+      hideNavBar={true}
+    />
 
     <Scene key="aboutApp" component={AboutAppContainer} hideNavBar={true} />
     <Scene key="help" component={HelpContainer} hideNavBar={true} />
     <Scene key="sendYourPl" component={SendYourPLContainer} hideNavBar={true} />
 
     <Scene key="tse" component={TSEContainer} hideNavBar={true} />
-    <Scene key="showVideo" component={ShowVideoContainer} hideNavBar={true} direction="vertical" />
+    <Scene
+      key="showVideo"
+      component={ShowVideoContainer}
+      hideNavBar={true}
+      direction="vertical"
+    />
 
-    <Scene key={SCREEN_KEYS.CONFIRM_VOTE} component={ConfirmVoteContainer} hideNavBar />
-    <Scene key={SCREEN_KEYS.CONFIRM_VOTE_CODE} component={ConfirmVoteCodeContainer} hideNavBar />
+    <Scene
+      key={SCREEN_KEYS.CONFIRM_VOTE}
+      component={ConfirmVoteContainer}
+      hideNavBar
+    />
+    <Scene
+      key={SCREEN_KEYS.CONFIRM_VOTE_CODE}
+      component={ConfirmVoteCodeContainer}
+      hideNavBar
+    />
 
-    <Scene key={SCREEN_KEYS.PRIVACY_POLICY} component={PrivacyPolicyContainer} hideNavBar />
-  </Scene>
+    <Scene
+      key={SCREEN_KEYS.PRIVACY_POLICY}
+      component={PrivacyPolicyContainer}
+      hideNavBar
+    />
+  </Scene>,
 );
 
 const entireScreenWidth = Dimensions.get("window").width;
@@ -101,9 +174,10 @@ EStyleSheet.build({
   $rem: entireScreenWidth > 360 ? 20 : 16,
 });
 
-const getSceneStyle = (props, computedProps) => sceneStyle(props, computedProps).scene
+const getSceneStyle = (props, computedProps) =>
+  sceneStyle(props, computedProps).scene;
 
-const AppBuilder = store => {
+const AppBuilder = (store) => {
   const reducer = routeReducer(store);
   const backHandler = backAndroidHandler(store);
 
@@ -111,7 +185,7 @@ const AppBuilder = store => {
     static childContextTypes = {
       navigate: PropTypes.func,
       navigateBack: PropTypes.func,
-    }
+    };
 
     getChildContext() {
       return {
@@ -131,17 +205,19 @@ const AppBuilder = store => {
     render() {
       return (
         <Provider store={store}>
-          <Router
-            createReducer={reducer}
-            scenes={scenes}
-            getSceneStyle={getSceneStyle}
-            title="Mudamos"
-            backAndroidHandler={backHandler}
-          />
+          <PermissionProvider>
+            <Router
+              createReducer={reducer}
+              scenes={scenes}
+              getSceneStyle={getSceneStyle}
+              title="Mudamos"
+              backAndroidHandler={backHandler}
+            />
+          </PermissionProvider>
         </Provider>
       );
     }
-  }
+  };
 };
 
-export default AppBuilder
+export default AppBuilder;

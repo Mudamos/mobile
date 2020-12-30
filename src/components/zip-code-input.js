@@ -5,24 +5,19 @@ import MDTextInput from "./md-text-input";
 
 import { zipCodeMask } from "../utils";
 
-
 export default class ZipCodeInput extends Component {
   static propTypes = {
     value: PropTypes.string,
     onChangeZipCodeText: PropTypes.func.isRequired,
-  }
+  };
 
   render() {
-    const {
-      value,
-      ...mdInputProps
-    } = this.props;
+    const { value, ...mdInputProps } = this.props;
 
     return (
       <MDTextInput
         {...mdInputProps}
-
-        ref={ref => this.input = ref}
+        ref={(ref) => (this.input = ref)}
         value={this.removeLastSeparator(value)}
         keyboardType="numeric"
         maxLength={9}
@@ -48,8 +43,7 @@ export default class ZipCodeInput extends Component {
   }
 
   removeLastSeparator(text) {
-    return zipCodeMask(this.cleanText(text))
-      .replace(/-$/, "");
+    return zipCodeMask(this.cleanText(text)).replace(/-$/, "");
   }
 
   focus() {

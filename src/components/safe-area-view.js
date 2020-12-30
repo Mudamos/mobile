@@ -1,17 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  SafeAreaView,
-  View,
-  ViewPropTypes,
-} from "react-native";
+import { SafeAreaView, View, ViewPropTypes } from "react-native";
 
 import EStyleSheet from "react-native-extended-stylesheet";
 
-import {
-  isIOSVersionBellow11,
-} from "../utils";
+import { isIOSVersionBellow11 } from "../utils";
 
 const styles = EStyleSheet.create({
   defaultStyle: {
@@ -23,19 +17,18 @@ const styles = EStyleSheet.create({
   },
 });
 
-const SafeArea = ({ children, style }) => isIOSVersionBellow11 ? (
+const SafeArea = ({ children, style }) =>
+  isIOSVersionBellow11 ? (
     <View style={[styles.defaultStyle, styles.extraPadding, style]}>
       {children}
     </View>
   ) : (
-    <SafeAreaView style={[styles.defaultStyle, style]}>
-      {children}
-    </SafeAreaView>
+    <SafeAreaView style={[styles.defaultStyle, style]}>{children}</SafeAreaView>
   );
 
 SafeArea.propTypes = {
   children: PropTypes.node,
   style: ViewPropTypes.style,
-}
+};
 
 export default SafeArea;

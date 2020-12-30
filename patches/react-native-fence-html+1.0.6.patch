@@ -1,0 +1,21 @@
+diff --git a/node_modules/react-native-fence-html/.HTMLStyles.js.swp b/node_modules/react-native-fence-html/.HTMLStyles.js.swp
+new file mode 100644
+index 0000000..73d0cfe
+Binary files /dev/null and b/node_modules/react-native-fence-html/.HTMLStyles.js.swp differ
+diff --git a/node_modules/react-native-fence-html/HTMLStyles.js b/node_modules/react-native-fence-html/HTMLStyles.js
+index 2819d0e..3cb6fb0 100644
+--- a/node_modules/react-native-fence-html/HTMLStyles.js
++++ b/node_modules/react-native-fence-html/HTMLStyles.js
+@@ -3,11 +3,9 @@ import React from 'react'
+ import PropTypes from 'prop-types';
+ 
+ // We have to do some munging here as the objects are wrapped
+-import _RNTextStylePropTypes from 'react-native/Libraries/Text/TextStylePropTypes'
+ import _RNViewStylePropTypes from 'react-native/Libraries/DeprecatedPropTypes/DeprecatedViewStylePropTypes'
+ import _RNImageStylePropTypes from 'react-native/Libraries/DeprecatedPropTypes/DeprecatedImageStylePropTypes'
+-const RNTextStylePropTypes = Object.keys(_RNTextStylePropTypes)
+-  .reduce((acc, k) => { acc[k] = _RNTextStylePropTypes[k]; return acc }, {})
++const RNTextStylePropTypes = {};
+ const RNViewStylePropTypes = Object.keys(_RNViewStylePropTypes)
+   .reduce((acc, k) => { acc[k] = _RNViewStylePropTypes[k]; return acc }, {})
+ const RNImageStylePropTypes = Object.keys(_RNImageStylePropTypes)

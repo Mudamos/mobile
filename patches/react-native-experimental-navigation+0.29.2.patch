@@ -1,0 +1,143 @@
+diff --git a/node_modules/react-native-experimental-navigation/NavigationAnimatedView.js b/node_modules/react-native-experimental-navigation/NavigationAnimatedView.js
+index 9976183..24b69d7 100644
+--- a/node_modules/react-native-experimental-navigation/NavigationAnimatedView.js
++++ b/node_modules/react-native-experimental-navigation/NavigationAnimatedView.js
+@@ -55,6 +55,7 @@ function applyDefaultAnimation(
+     {
+       bounciness: 0,
+       toValue: navigationState.index,
++      useNativeDriver: false,
+     }
+   ).start();
+ }
+@@ -101,7 +102,7 @@ class NavigationAnimatedView
+     };
+   }
+ 
+-  componentWillMount(): void {
++  UNSAFE_componentWillMount(): void {
+     this._onLayout = this._onLayout.bind(this);
+     this._onProgressChange = this._onProgressChange.bind(this);
+   }
+@@ -111,7 +112,7 @@ class NavigationAnimatedView
+       this.state.position.addListener(this._onProgressChange);
+   }
+ 
+-  componentWillReceiveProps(nextProps: Props): void {
++  UNSAFE_componentWillReceiveProps(nextProps: Props): void {
+     if (nextProps.navigationState !== this.props.navigationState) {
+       this.setState({
+         scenes: NavigationScenesReducer(
+diff --git a/node_modules/react-native-experimental-navigation/NavigationCardStack.js b/node_modules/react-native-experimental-navigation/NavigationCardStack.js
+index f368b38..439759c 100644
+--- a/node_modules/react-native-experimental-navigation/NavigationCardStack.js
++++ b/node_modules/react-native-experimental-navigation/NavigationCardStack.js
+@@ -101,7 +101,7 @@ class NavigationCardStack extends React.PureComponent<DefaultProps, Props, void>
+     super(props, context);
+   }
+ 
+-  componentWillMount(): void {
++  UNSAFE_componentWillMount(): void {
+     this._renderScene = this._renderScene.bind(this);
+   }
+ 
+diff --git a/node_modules/react-native-experimental-navigation/NavigationCardStackPanResponder.js b/node_modules/react-native-experimental-navigation/NavigationCardStackPanResponder.js
+index 74f7b8a..9daebf0 100644
+--- a/node_modules/react-native-experimental-navigation/NavigationCardStackPanResponder.js
++++ b/node_modules/react-native-experimental-navigation/NavigationCardStackPanResponder.js
+@@ -199,6 +199,7 @@ class NavigationCardStackPanResponder extends NavigationAbstractPanResponder {
+       {
+         toValue: props.navigationState.index,
+         duration: ANIMATION_DURATION,
++        useNativeDriver: false,
+       }
+     ).start();
+   }
+diff --git a/node_modules/react-native-experimental-navigation/NavigationLegacyNavigator.js b/node_modules/react-native-experimental-navigation/NavigationLegacyNavigator.js
+index c46bcea..97e1711 100644
+--- a/node_modules/react-native-experimental-navigation/NavigationLegacyNavigator.js
++++ b/node_modules/react-native-experimental-navigation/NavigationLegacyNavigator.js
+@@ -190,7 +190,7 @@ class NavigationLegacyNavigator extends React.PureComponent<any, Props, State> {
+ 
+   // Life cycle and private methods below.
+ 
+-  componentWillMount(): void {
++  UNSAFE_componentWillMount(): void {
+     this._applyAnimation = this._applyAnimation.bind(this);
+     this._onNavigate = this._onNavigate.bind(this);
+     this._onNavigationBarRef = this._onNavigationBarRef.bind(this);
+@@ -210,7 +210,7 @@ class NavigationLegacyNavigator extends React.PureComponent<any, Props, State> {
+     this._positionListener && this._positionListener.remove();
+   }
+ 
+-  componentWillUpdate(nextProps: Props, nextState: State): void {
++  UNSAFE_componentWillUpdate(nextProps: Props, nextState: State): void {
+     this._willFocus();
+   }
+ 
+diff --git a/node_modules/react-native-experimental-navigation/NavigationPointerEventsContainer.js b/node_modules/react-native-experimental-navigation/NavigationPointerEventsContainer.js
+index 33182b6..f7fea76 100644
+--- a/node_modules/react-native-experimental-navigation/NavigationPointerEventsContainer.js
++++ b/node_modules/react-native-experimental-navigation/NavigationPointerEventsContainer.js
+@@ -69,7 +69,7 @@ function create(
+       this._pointerEvents = this._computePointerEvents();
+     }
+ 
+-    componentWillMount(): void {
++    UNSAFE_componentWillMount(): void {
+       this._onPositionChange = this._onPositionChange.bind(this);
+       this._onComponentRef = this._onComponentRef.bind(this);
+     }
+@@ -82,7 +82,7 @@ function create(
+       this._positionListener && this._positionListener.remove();
+     }
+ 
+-    componentWillReceiveProps(nextProps: Props): void {
++    UNSAFE_componentWillReceiveProps(nextProps: Props): void {
+       this._bindPosition(nextProps);
+     }
+ 
+diff --git a/node_modules/react-native-experimental-navigation/NavigationRootContainer.js b/node_modules/react-native-experimental-navigation/NavigationRootContainer.js
+index dcc94c7..8e7b951 100644
+--- a/node_modules/react-native-experimental-navigation/NavigationRootContainer.js
++++ b/node_modules/react-native-experimental-navigation/NavigationRootContainer.js
+@@ -11,7 +11,7 @@
+  */
+ 'use strict';
+ 
+-const AsyncStorage = require('react-native').AsyncStorage;
++const AsyncStorage = require("@react-native-community/async-storage");
+ const Linking = require('react-native').Linking;
+ const NavigationPropTypes = require('./NavigationPropTypes');
+ const NavigationStateUtils = require('./NavigationStateUtils');
+@@ -110,7 +110,7 @@ class NavigationRootContainer extends React.Component<any, Props, State> {
+     this.state = { navState };
+   }
+ 
+-  componentWillMount(): void {
++  UNSAFE_componentWillMount(): void {
+     (this: any).handleNavigation = this.handleNavigation.bind(this);
+     (this: any)._handleOpenURLEvent = this._handleOpenURLEvent.bind(this);
+   }
+diff --git a/node_modules/react-native-experimental-navigation/NavigationView.js b/node_modules/react-native-experimental-navigation/NavigationView.js
+index 6db7185..5631f19 100644
+--- a/node_modules/react-native-experimental-navigation/NavigationView.js
++++ b/node_modules/react-native-experimental-navigation/NavigationView.js
+@@ -80,7 +80,7 @@ class NavigationView extends React.PureComponent<any, Props, any> {
+     };
+   }
+ 
+-  componentWillReceiveProps(nextProps: Props): void {
++  UNSAFE_componentWillReceiveProps(nextProps: Props): void {
+     if (nextProps.navigationState !== this.props.navigationState) {
+       const {navigationState} = nextProps;
+       this.setState(
+@@ -98,7 +98,7 @@ class NavigationView extends React.PureComponent<any, Props, any> {
+     }
+   }
+ 
+-  componentWillMount(): void {
++  UNSAFE_componentWillMount(): void {
+     this._onLayout = this._onLayout.bind(this);
+   }
+ 

@@ -4,4 +4,4 @@ export default StyleSheet.create({
   loader: {
     ...StyleSheet.absoluteFillObject,
   },
-})
+});

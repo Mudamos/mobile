@@ -25,9 +25,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         appLoading: state.appLoading + 1,
-      }
+      };
     }
     default:
       return state;
   }
-}
+};

@@ -13,20 +13,24 @@ import {
   navigateBack,
 } from "../actions";
 
-const clearErrorsAndGoBack = dispatch => {
+const clearErrorsAndGoBack = (dispatch) => {
   dispatch(clearChangeForgotPasswordError());
   dispatch(navigateBack());
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   errors: getChangeForgotPasswordErrors(state),
   isSaving: isChangingForgotPassword(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onBack: () => clearErrorsAndGoBack(dispatch),
   onResendCode: () => clearErrorsAndGoBack(dispatch),
-  onSave: ({ code, password }) => dispatch(changeForgotPassword({ code, password })),
+  onSave: ({ code, password }) =>
+    dispatch(changeForgotPassword({ code, password })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChangeForgotPasswordLayout);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ChangeForgotPasswordLayout);

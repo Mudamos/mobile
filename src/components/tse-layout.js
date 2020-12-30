@@ -1,12 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  Dimensions,
-  Image,
-  Text,
-  View,
-} from "react-native";
+import { Dimensions, Image, Text, View } from "react-native";
 
 import { WebView } from "react-native-webview";
 
@@ -24,19 +19,23 @@ import styles from "../styles/tse-layout";
 
 import locale from "../locales/pt-BR";
 
+const noHeight = { height: null };
+const darkGray = "#595959";
+const whiteStyle = { color: "#ffffff" };
 
 export default class TSELayout extends Component {
   state = {
     loading: true,
     page: 0,
     tutorialDone: false,
-  }
+  };
 
   static propTypes = {
+    injectedJavaScript: PropTypes.string.isRequired,
+    source: PropTypes.object.isRequired,
     onBack: PropTypes.func.isRequired,
-
-    ...WebView.propTypes,
-  }
+    onMessage: PropTypes.func.isRequired,
+  };
 
   get totalPages() {
     return 5;
@@ -56,10 +55,7 @@ export default class TSELayout extends Component {
   }
 
   render() {
-    const {
-      tutorialDone,
-    } = this.state;
-
+    const { tutorialDone } = this.state;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -70,7 +66,6 @@ export default class TSELayout extends Component {
         </Layout>
 
         <PageLoader isVisible={this.loadingWebView} />
-
       </SafeAreaView>
     );
   }
@@ -89,18 +84,15 @@ export default class TSELayout extends Component {
     return (
       <View style={styles.full}>
         <IndicatorViewPager
-          ref={pager => this.pager = pager}
+          ref={(pager) => (this.pager = pager)}
           style={styles.pager}
           indicator={this.renderIndicator()}
-          onPageSelected={({ position }) => this.setState({ page: position })}
-        >
-
+          onPageSelected={({ position }) => this.setState({ page: position })}>
           {this.renderStep0()}
           {this.renderStep1()}
           {this.renderStep2()}
           {this.renderStep3()}
           {this.renderStep4()}
-
         </IndicatorViewPager>
 
         {this.renderTutorialControls()}
@@ -128,14 +120,26 @@ export default class TSELayout extends Component {
       <View style={styles.page}>
         <View style={[styles.hPadded]}>
           <Text style={styles.tutorialText}>
-            {locale.tseTutorial3} <Text style={[styles.tutorialText, styles.reference]}>{locale.voterName}</Text>, <Text style={[styles.tutorialText, styles.reference]}>{locale.voterBirthDay}</Text> e <Text style={[styles.tutorialText, styles.reference]}>{locale.voterMotherName}</Text>.
+            {locale.tseTutorial3}{" "}
+            <Text style={[styles.tutorialText, styles.reference]}>
+              {locale.voterName}
+            </Text>
+            ,{" "}
+            <Text style={[styles.tutorialText, styles.reference]}>
+              {locale.voterBirthDay}
+            </Text>{" "}
+            e{" "}
+            <Text style={[styles.tutorialText, styles.reference]}>
+              {locale.voterMotherName}
+            </Text>
+            .
           </Text>
         </View>
 
         <Image
           source={require("../images/TSE-name-birth-field.png")}
           resizeMode="contain"
-          style={[styles.mediumVMargin, styles.full, { width, height: null }]}
+          style={[styles.mediumVMargin, styles.full, { width }, noHeight]}
         />
 
         <View style={[styles.hPadded]}>
@@ -151,13 +155,19 @@ export default class TSELayout extends Component {
     return (
       <View style={[styles.page]}>
         <View style={[styles.hPadded]}>
-          <Text style={styles.tutorialText}>{locale.tseTutorial5} <Text style={[styles.tutorialText, styles.reference]}>{locale.tseNotRobot}</Text>.</Text>
+          <Text style={styles.tutorialText}>
+            {locale.tseTutorial5}{" "}
+            <Text style={[styles.tutorialText, styles.reference]}>
+              {locale.tseNotRobot}
+            </Text>
+            .
+          </Text>
         </View>
 
         <Image
           source={require("../images/TSE-not-robot.png")}
           resizeMode="contain"
-          style={[styles.mediumVMargin, styles.full, { width, height: null }]}
+          style={[styles.mediumVMargin, styles.full, { width }, noHeight]}
         />
 
         <View style={[styles.hPadded]}>
@@ -179,7 +189,7 @@ export default class TSELayout extends Component {
         <Image
           source={require("../images/TSE-questions.png")}
           resizeMode="contain"
-          style={[styles.mediumVMargin, styles.full, { width, height: null }]}
+          style={[styles.mediumVMargin, styles.full, { width }, noHeight]}
         />
       </View>
     );
@@ -191,13 +201,19 @@ export default class TSELayout extends Component {
     return (
       <View style={[styles.page]}>
         <View style={[styles.hPadded]}>
-          <Text style={styles.tutorialText}>{locale.tseTutorial8} <Text style={[styles.tutorialText, styles.reference]}>{locale.tseSubmit}</Text>.</Text>
+          <Text style={styles.tutorialText}>
+            {locale.tseTutorial8}{" "}
+            <Text style={[styles.tutorialText, styles.reference]}>
+              {locale.tseSubmit}
+            </Text>
+            .
+          </Text>
         </View>
 
         <Image
           source={require("../images/TSE-done.png")}
           resizeMode="contain"
-          style={[styles.smallVMargin, styles.full, { width, height: null }]}
+          style={[styles.smallVMargin, styles.full, { width }, noHeight]}
         />
 
         <View style={[styles.hPadded]}>
@@ -218,44 +234,37 @@ export default class TSELayout extends Component {
           onPress={() => this.setState({ tutorialDone: true })}
         />
 
-        {
-          this.isLastPage ?
-            <FlatButton
-              title={locale.okIGotIt.toUpperCase()}
-              style={{ ...commonBtnStyle, backgroundColor: "#595959"}}
-              textStyle={{color: "#fff"}}
-              onPress={() => this.setState({ tutorialDone: true })}
-            />
-            :
-            <FlatButton
-              title={locale.next.toUpperCase()}
-              style={{ ...commonBtnStyle, backgroundColor: "#595959"}}
-              textStyle={{color: "#fff"}}
-              onPress={() => this.pager.setPage(this.nextPage)}
-            />
-        }
+        {this.isLastPage ? (
+          <FlatButton
+            title={locale.okIGotIt.toUpperCase()}
+            style={{ ...commonBtnStyle, backgroundColor: darkGray }}
+            textStyle={whiteStyle}
+            onPress={() => this.setState({ tutorialDone: true })}
+          />
+        ) : (
+          <FlatButton
+            title={locale.next.toUpperCase()}
+            style={{ ...commonBtnStyle, backgroundColor: darkGray }}
+            textStyle={whiteStyle}
+            onPress={() => this.pager.setPage(this.nextPage)}
+          />
+        )}
       </View>
     );
   }
 
   renderWebView() {
-    const {
-      ...webViewProps
-    } = this.props;
+    const { injectedJavaScript, source, onMessage } = this.props;
 
     return (
       <WebView
-        {...webViewProps}
-        onLoadEnd={this.onLoadEnd.bind(this)}
+        injectedJavaScript={injectedJavaScript}
+        source={source}
+        onMessage={onMessage}
+        onLoadEnd={this.onLoadEnd}
       />
     );
   }
 
-  onLoadEnd() {
-    const { onLoadEnd } = this.props;
-
-    this.setState({ loading: false });
-
-    onLoadEnd && onLoadEnd();
-  }
+  onLoadEnd = () => this.setState({ loading: false });
 }

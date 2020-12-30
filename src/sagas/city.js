@@ -1,9 +1,6 @@
 import { call, spawn, put, takeLatest } from "redux-saga/effects";
 
-import {
-  citiesFetched,
-} from "../actions";
-
+import { citiesFetched } from "../actions";
 
 function* fetchCities({ repositories }) {
   yield takeLatest("CITIES_FETCH_CITIES", function* () {

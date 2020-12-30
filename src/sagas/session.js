@@ -4,15 +4,9 @@ import { LoginManager } from "react-native-fbsdk";
 
 import { isDev } from "../utils";
 
-import {
-  clearSession,
-  logginSucceeded,
-  userLoggedOut,
-} from "../actions";
+import { clearSession, logginSucceeded, userLoggedOut } from "../actions";
 
-import {
-  currentAuthToken,
-} from "../selectors";
+import { currentAuthToken } from "../selectors";
 
 import { logError } from "../utils";
 
@@ -20,7 +14,7 @@ export function* fetchSession({ sessionStore }) {
   try {
     const user = yield call(sessionStore.retrieve);
     yield put(logginSucceeded(user));
-  } catch(e) {
+  } catch (e) {
     logError(e);
   }
 }
@@ -29,7 +23,7 @@ function* fetchSessionSaga({ sessionStore }) {
   yield takeLatest("SESSION_FETCH_SESSION", function* () {
     try {
       yield call(fetchSession, { sessionStore });
-    } catch(e) {
+    } catch (e) {
       logError(e);
     }
   });

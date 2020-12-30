@@ -6,7 +6,6 @@ import { logError } from "../utils";
 
 import { openURLError } from "../actions";
 
-
 function* openURL() {
   yield takeEvery("LINKING_OPEN_URL", function* ({ payload }) {
     try {

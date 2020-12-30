@@ -1,18 +1,9 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  compose,
-  withHandlers,
-  withStateHandlers,
-} from "recompose";
+import { compose, withHandlers, withStateHandlers } from "recompose";
 
-import {
-  Keyboard,
-  TouchableOpacity,
-  Text,
-  View,
-} from "react-native";
+import { Keyboard, TouchableOpacity, Text, View } from "react-native";
 
 import MapView, { Marker } from "react-native-maps";
 
@@ -24,7 +15,7 @@ import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
 import ZipCodeInput from "./zip-code-input";
 import HeaderLogo from "./header-logo";
-import PageLoader from"./page-loader";
+import PageLoader from "./page-loader";
 import NavigationBar from "./navigation-bar";
 import SignUpBreadCrumb from "./sign-up-breadcrumb";
 import StaticFooter from "./static-footer";
@@ -34,19 +25,22 @@ import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
 
-const LATITUDE_DELTA = 0.010;
-const LONGITUDE_DELTA = 0.010;
+const zipCodeContainerStyle = { marginHorizontal: 13 };
 
-const hasCoordinates = location => location && location.latitude && location.longitude;
+const LATITUDE_DELTA = 0.01;
+const LONGITUDE_DELTA = 0.01;
+
+const hasCoordinates = (location) =>
+  location && location.latitude && location.longitude;
 
 const enhance = compose(
   withStateHandlers(
     { zipCode: "" },
     {
-      onSetZipCode: () => value => ({
+      onSetZipCode: () => (value) => ({
         zipCode: value,
       }),
-    }
+    },
   ),
   withHandlers({
     onSearch: ({ zipCode, onSearch }) => () => {
@@ -57,7 +51,7 @@ const enhance = compose(
       Keyboard.dismiss();
       onSave(location);
     },
-  })
+  }),
 );
 
 class ProfileAddressLayout extends Component {
@@ -74,7 +68,7 @@ class ProfileAddressLayout extends Component {
     onSave: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
     onSetZipCode: PropTypes.func.isRequired,
-  }
+  };
 
   get validSearch() {
     const { zipCode } = this.props;
@@ -95,7 +89,7 @@ class ProfileAddressLayout extends Component {
     const address = this.locationAddress;
     if (!address) return;
 
-    return address.split(",")[0]
+    return address.split(",")[0];
   }
 
   get locationDescription() {
@@ -112,7 +106,11 @@ class ProfileAddressLayout extends Component {
       if (location && !prevProps.location) {
         onSetZipCode(zipCodeMask(location.zipCode));
       }
-      if (this.searchEnabled && prevProps.zipCode !== zipCode && zipCode.length === 9) {
+      if (
+        this.searchEnabled &&
+        prevProps.zipCode !== zipCode &&
+        zipCode.length === 9
+      ) {
         onSearch();
       }
     }
@@ -125,12 +123,7 @@ class ProfileAddressLayout extends Component {
   }
 
   render() {
-    const {
-      isFetchingLocation,
-      isSaving,
-      isSearching,
-      onOpenURL,
-    } = this.props;
+    const { isFetchingLocation, isSaving, isSearching, onOpenURL } = this.props;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -138,7 +131,10 @@ class ProfileAddressLayout extends Component {
           <ScrollView>
             {this.renderNavBar()}
 
-            <SignUpBreadCrumb highlightId={3} containerStyle={styles.breadcrumb} />
+            <SignUpBreadCrumb
+              highlightId={3}
+              containerStyle={styles.breadcrumb}
+            />
 
             {this.renderContent()}
 
@@ -152,17 +148,12 @@ class ProfileAddressLayout extends Component {
   }
 
   renderContent() {
-    const {
-      location,
-      onSave,
-    } = this.props;
+    const { location, onSave } = this.props;
 
     return (
       <View style={styles.contentContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>
-            {locale.addressSearchHeader}
-          </Text>
+          <Text style={styles.headerTitle}>{locale.addressSearchHeader}</Text>
           <Text style={styles.headerSubTitle}>
             {locale.addressSearchSubtitle}
           </Text>
@@ -173,7 +164,13 @@ class ProfileAddressLayout extends Component {
         {!hasCoordinates(location) && this.renderAddress()}
 
         <View style={styles.buttonContainer}>
-          <RoundedButton title={locale.continue} enabled={this.searchEnabled} action={onSave} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+          <RoundedButton
+            title={locale.continue}
+            enabled={this.searchEnabled}
+            action={onSave}
+            buttonStyle={styles.continueButton}
+            titleStyle={styles.continueButtonTitle}
+          />
         </View>
 
         {hasCoordinates(location) && this.renderMap()}
@@ -182,11 +179,7 @@ class ProfileAddressLayout extends Component {
   }
 
   renderZipCodeInput() {
-    const {
-      onDontKnowZipCode,
-      onSetZipCode,
-      zipCode,
-    } = this.props;
+    const { onDontKnowZipCode, onSetZipCode, zipCode } = this.props;
 
     return (
       <View style={styles.zipCodeContainer}>
@@ -195,12 +188,14 @@ class ProfileAddressLayout extends Component {
           hint="Ex: 00000-000"
           onChangeZipCodeText={onSetZipCode}
           placeholder={locale.zipCode}
-          mdContainerStyle={{marginHorizontal: 13}}
+          mdContainerStyle={zipCodeContainerStyle}
           onSubmitEditing={() => this.zipInput.blur()}
-          ref={ref => this.zipInput = ref}
+          ref={(ref) => (this.zipInput = ref)}
         />
 
-        <TouchableOpacity onPress={onDontKnowZipCode} style={styles.dontRememberZipCodeContainer}>
+        <TouchableOpacity
+          onPress={onDontKnowZipCode}
+          style={styles.dontRememberZipCodeContainer}>
           <Text style={styles.dontRememberZipCode}>
             {locale.dontRememberZipCode}
           </Text>
@@ -221,11 +216,14 @@ class ProfileAddressLayout extends Component {
   }
 
   renderMap() {
-    const { location: { latitude, longitude } } = this.props;
+    const {
+      location: { latitude, longitude },
+    } = this.props;
 
     return (
       <View style={styles.mapContainer}>
-        <MapView style={styles.map}
+        <MapView
+          style={styles.map}
           scrollEnabled={false}
           zoomEnabled={false}
           region={{
@@ -233,10 +231,9 @@ class ProfileAddressLayout extends Component {
             longitude,
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
-          }}
-        >
+          }}>
           <Marker
-            coordinate={{latitude, longitude}}
+            coordinate={{ latitude, longitude }}
             title={this.locationTitle}
             description={this.locationDescription}
           />
@@ -252,7 +249,8 @@ class ProfileAddressLayout extends Component {
     return (
       <View style={styles.addressContainer}>
         <Text style={styles.address}>
-          <Text style={styles.addressItem}>{locale.address}:</Text> {location.address}
+          <Text style={styles.addressItem}>{locale.address}:</Text>{" "}
+          {location.address}
         </Text>
       </View>
     );

@@ -11,25 +11,27 @@ export default (root, { suite } = {}) => {
   const oldStorage = LocalStorage(root);
 
   return {
-    persist: value => storage.set(key, JSON.stringify(value), suite),
-    retrieve: () => storage.get(key, suite)
-      .catch(always(null))
-      .then(async session => {
-        // Try migrate from old storage
-        if (!session) {
-          const oldSession = await oldStorage.fetch(sessionKey);
-          if (!oldSession) return;
+    persist: (value) => storage.set(key, JSON.stringify(value), suite),
+    retrieve: () =>
+      storage
+        .get(key, suite)
+        .catch(always(null))
+        .then(async (session) => {
+          // Try migrate from old storage
+          if (!session) {
+            const oldSession = await oldStorage.fetch(sessionKey);
+            if (!oldSession) return;
 
-          await storage.set(key, JSON.stringify(oldSession), suite);
-          await oldStorage.destroy(sessionKey);
-          return JSON.stringify(oldSession);
-        }
+            await storage.set(key, JSON.stringify(oldSession), suite);
+            await oldStorage.destroy(sessionKey);
+            return JSON.stringify(oldSession);
+          }
 
-        return session;
-      })
-      .then(session => session || Promise.reject())
-      .then(JSON.parse)
-      .catch(() => Promise.reject("No sesssion available")),
+          return session;
+        })
+        .then((session) => session || Promise.reject())
+        .then(JSON.parse)
+        .catch(() => Promise.reject("No sesssion available")),
     destroy: () => storage.remove(key, suite),
   };
 };

@@ -1,31 +1,12 @@
 import OneSignal from "react-native-onesignal";
 
-import {
-  delay,
-} from "redux-saga";
+import { delay } from "redux-saga";
 
-import {
-  all,
-  call,
-  fork,
-  put,
-  select,
-  takeLatest,
-} from "redux-saga/effects";
+import { all, call, fork, put, select, takeLatest } from "redux-saga/effects";
 
-import {
-  concat,
-  fromPairs,
-  map,
-  pick,
-  pipe,
-  prop,
-  zipObj,
-} from "ramda";
+import { concat, fromPairs, map, pick, pipe, prop, zipObj } from "ramda";
 
-import {
-  oneSignalUserInfoUpdated,
-} from "../actions";
+import { oneSignalUserInfoUpdated } from "../actions";
 
 import {
   currentAuthToken,
@@ -33,24 +14,28 @@ import {
   oneSignalUserInfo,
 } from "../selectors";
 
-import {
-  different,
-  logError,
-} from "../utils";
+import { different, logError } from "../utils";
 
-const getUserTags = pipe(pick(["city", "uf"]), map(v => v || "-"));
+const getUserTags = pipe(
+  pick(["city", "uf"]),
+  map((v) => v || "-"),
+);
 
 const signedPlipTag = pipe(String, concat("signed-plip-"));
 
 function* updateOneSignalProfile() {
-  yield takeLatest("PROFILE_USER_UPDATED", function* ({ payload: { currentUser } }) {
+  yield takeLatest("PROFILE_USER_UPDATED", function* ({
+    payload: { currentUser },
+  }) {
     try {
       if (!currentUser) return;
       const info = yield select(oneSignalUserInfo);
 
       const newAttrs = {
         email: currentUser.email,
-        uf: currentUser.address.uf ? currentUser.address.uf.toLowerCase() : null,
+        uf: currentUser.address.uf
+          ? currentUser.address.uf.toLowerCase()
+          : null,
         city: currentUser.address.city,
       };
 
@@ -62,7 +47,7 @@ function* updateOneSignalProfile() {
 
         yield put(oneSignalUserInfoUpdated(newAttrs));
       }
-    } catch(e) {
+    } catch (e) {
       logError(e, { tag: "updateOneSignal" });
     }
   });
@@ -81,15 +66,15 @@ function* signedPlips({ mobileApi }) {
       const plips = response.petitions;
 
       const tags = zipObj(
-        plips.map(plip => signedPlipTag(plip.idPetition)),
+        plips.map((plip) => signedPlipTag(plip.idPetition)),
         plips.map(prop("hasVoted")).map(String),
       );
 
       yield call([OneSignal, OneSignal.sendTags], tags);
-    } catch(e) {
+    } catch (e) {
       logError(e, { tag: "signedPlips" });
     }
-  })
+  });
 }
 
 function* clearOneSinalProfileInfo() {
@@ -105,7 +90,7 @@ function* clearOneSinalProfileInfo() {
         call([OneSignal, OneSignal.sendTags], getUserTags(newAttrs)),
         call([OneSignal, OneSignal.syncHashedEmail], newAttrs.email),
       ]);
-    } catch(e) {
+    } catch (e) {
       logError(e, { tag: "clearOneSinalProfileInfo" });
     }
   });
@@ -118,12 +103,12 @@ function* clearSignedPlips() {
       const tags = pipe(
         map(prop("detailId")),
         map(signedPlipTag),
-        map(tag => [tag, "false"]),
-        fromPairs
+        map((tag) => [tag, "false"]),
+        fromPairs,
       )(plips);
 
       yield call([OneSignal, OneSignal.sendTags], tags);
-    } catch(e) {
+    } catch (e) {
       logError(e, { tag: "clearSignedPlips" });
     }
   });

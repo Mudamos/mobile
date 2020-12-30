@@ -1,17 +1,9 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  compose,
-  withHandlers,
-  withStateHandlers,
-} from "recompose";
+import { compose, withHandlers, withStateHandlers } from "recompose";
 
-import {
-  Text,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
@@ -28,11 +20,7 @@ import Checkbox from "./multicolor-flat-checkbox";
 import SafeAreaView from "./safe-area-view";
 
 import locale from "../locales/pt-BR";
-import {
-  errorForField,
-  validateCpf,
-  validateEmail,
-} from "../utils";
+import { errorForField, validateCpf, validateEmail } from "../utils";
 
 import styles from "../styles/sign-up-layout";
 
@@ -40,24 +28,32 @@ const enhance = compose(
   withStateHandlers(
     { cpf: "", email: "", password: "", termsAccepted: false },
     {
-      onSetCpf: () => value => ({
+      onSetCpf: () => (value) => ({
         cpf: value,
       }),
-      onSetEmail: () => value => ({
+      onSetEmail: () => (value) => ({
         email: value,
       }),
-      onSetPassword: () => value => ({
+      onSetPassword: () => (value) => ({
         password: value,
       }),
-      onSetTermsAccepted: () => value => ({
+      onSetTermsAccepted: () => (value) => ({
         termsAccepted: value.checked,
       }),
-    }
+    },
   ),
   withHandlers({
-    onSubmit: ({ email, cpf, password, termsAccepted, isFacebookUser, onCreate, onUpdate }) => () => {
+    onSubmit: ({
+      email,
+      cpf,
+      password,
+      termsAccepted,
+      isFacebookUser,
+      onCreate,
+      onUpdate,
+    }) => () => {
       if (isFacebookUser) {
-        return onUpdate({ cpf, email, termsAccepted })
+        return onUpdate({ cpf, email, termsAccepted });
       } else {
         return onCreate({ cpf, email, password, termsAccepted });
       }
@@ -69,7 +65,7 @@ const enhance = compose(
         onNavigate("back");
       }
     },
-  })
+  }),
 );
 
 class SignUpLayout extends Component {
@@ -100,14 +96,21 @@ class SignUpLayout extends Component {
     onSubmit: PropTypes.func.isRequired,
     onTermsRequested: PropTypes.func.isRequired,
     onUpdate: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     errors: {},
   };
 
   componentDidMount() {
-    const { userCpf, userEmail, userTermsAccepted, onSetCpf, onSetEmail, onSetTermsAccepted } = this.props;
+    const {
+      userCpf,
+      userEmail,
+      userTermsAccepted,
+      onSetCpf,
+      onSetEmail,
+      onSetTermsAccepted,
+    } = this.props;
 
     if (this.validCpf(userCpf)) {
       onSetCpf(userCpf);
@@ -118,7 +121,7 @@ class SignUpLayout extends Component {
     }
 
     if (userTermsAccepted) {
-      onSetTermsAccepted({checked: userTermsAccepted});
+      onSetTermsAccepted({ checked: userTermsAccepted });
     }
   }
 
@@ -142,11 +145,11 @@ class SignUpLayout extends Component {
     }
   }
 
-  validCpf = cpf => cpf && validateCpf(cpf);
+  validCpf = (cpf) => cpf && validateCpf(cpf);
 
-  validPassword = password => String(password).length > 0;
+  validPassword = (password) => String(password).length > 0;
 
-  validEmail = email => email && validateEmail(email);
+  validEmail = (email) => email && validateEmail(email);
 
   get validForm() {
     const {
@@ -159,18 +162,16 @@ class SignUpLayout extends Component {
     } = this.props;
 
     if (isFacebookUser || !isSigningUp) {
-      return [
-        this.validCpf(cpf),
-        this.validEmail(email),
-        termsAccepted,
-      ].every(v => v);
+      return [this.validCpf(cpf), this.validEmail(email), termsAccepted].every(
+        (v) => v,
+      );
     } else {
       return [
         this.validCpf(cpf),
         this.validEmail(email),
         this.validPassword(password),
         termsAccepted,
-      ].every(v => v);
+      ].every((v) => v);
     }
   }
 
@@ -179,27 +180,18 @@ class SignUpLayout extends Component {
   }
 
   allTextFieldsValid = () => {
-    const {
-      cpf,
-      email,
-      isFacebookUser,
-      isSigningUp,
-      password,
-    } = this.props;
+    const { cpf, email, isFacebookUser, isSigningUp, password } = this.props;
 
     if (isFacebookUser || !isSigningUp) {
-      return [
-        this.validCpf(cpf),
-        this.validEmail(email),
-      ].every(v => v);
+      return [this.validCpf(cpf), this.validEmail(email)].every((v) => v);
     } else {
       return [
         this.validCpf(cpf),
         this.validEmail(email),
         this.validPassword(password),
-      ].every(v => v);
+      ].every((v) => v);
     }
-  }
+  };
 
   checkCpf = () => {
     const { cpf, termsAccepted } = this.props;
@@ -261,14 +253,10 @@ class SignUpLayout extends Component {
     if (isLogged) {
       onLogout();
     }
-  }
+  };
 
   render() {
-    const {
-      createErrors,
-      isCreating,
-      isLoggingIn,
-    } = this.props;
+    const { createErrors, isCreating, isLoggingIn } = this.props;
 
     const {
       email,
@@ -288,64 +276,74 @@ class SignUpLayout extends Component {
       onTermsRequested,
     } = this.props;
 
-    const {
-      errors,
-    } = this.state;
+    const { errors } = this.state;
 
     return (
       <SafeAreaView style={styles.container}>
         <Layout>
           <ScrollView>
-            { this.renderNavBar() }
+            {this.renderNavBar()}
 
-            <SignUpBreadCrumb highlightId={1} containerStyle={styles.breadcrumb} />
+            <SignUpBreadCrumb
+              highlightId={1}
+              containerStyle={styles.breadcrumb}
+            />
 
-            { isSigningUp &&
+            {isSigningUp && (
               <Text style={styles.headerTitleText}>{locale.signUpTitle}</Text>
-            }
+            )}
 
             <View style={styles.inputContainer}>
-              { !this.validCpf(userCpf) &&
+              {!this.validCpf(userCpf) && (
                 <CpfInput
                   value={cpf}
                   onChangeCpfText={onSetCpf}
                   placeholder={locale.cpf.toUpperCase()}
-                  hasError={!!errorForField("cpf", createErrors) || !!errors.cpf}
+                  hasError={
+                    !!errorForField("cpf", createErrors) || !!errors.cpf
+                  }
                   error={errorForField("cpf", createErrors) || errors.cpf}
                   errorLink={this.onBack}
                   hint="Ex: 000.000.000-00"
                   onSubmitEditing={() => this.cpfInput.blur()}
-                  ref={ref => this.cpfInput = ref}
+                  ref={(ref) => (this.cpfInput = ref)}
                 />
-              }
+              )}
 
-              { !this.validEmail(userEmail) &&
+              {!this.validEmail(userEmail) && (
                 <MDTextInput
                   placeholder={locale.emailForAccess}
                   value={email}
                   onChangeText={onSetEmail}
-                  hasError={!!errorForField("email", createErrors) || !!errors.email}
+                  hasError={
+                    !!errorForField("email", createErrors) || !!errors.email
+                  }
                   error={errorForField("email", createErrors) || errors.email}
                   errorLink={this.onBack}
                   keyboardType="email-address"
                   onSubmitEditing={() => this.emailInput.blur()}
-                  ref={ref => this.emailInput = ref}
+                  ref={(ref) => (this.emailInput = ref)}
                   autoCapitalize="none"
                 />
-              }
+              )}
 
-              { !isFacebookUser && isSigningUp &&
+              {!isFacebookUser && isSigningUp && (
                 <MDTextInput
                   placeholder={locale.choosePassword}
                   value={password}
                   onChangeText={onSetPassword}
                   password={true}
-                  hasError={!!errorForField("password", createErrors) || !!errors.password}
-                  error={errorForField("password", createErrors) || errors.password}
+                  hasError={
+                    !!errorForField("password", createErrors) ||
+                    !!errors.password
+                  }
+                  error={
+                    errorForField("password", createErrors) || errors.password
+                  }
                   onSubmitEditing={() => this.passwordInput.blur()}
-                  ref={ref => this.passwordInput = ref}
+                  ref={(ref) => (this.passwordInput = ref)}
                 />
-              }
+              )}
 
               <View style={styles.termsAcceptedContainer}>
                 <Checkbox
@@ -359,19 +357,32 @@ class SignUpLayout extends Component {
                   </Text>
 
                   <TouchableOpacity onPress={onTermsRequested}>
-                    <Text style={[styles.termsAcceptedText, styles.text, styles.termsAcceptedLink]}>{locale.termsOfUse.toUpperCase()}</Text>
+                    <Text
+                      style={[
+                        styles.termsAcceptedText,
+                        styles.text,
+                        styles.termsAcceptedLink,
+                      ]}>
+                      {locale.termsOfUse.toUpperCase()}
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>
-              { !!errors.termsAccepted &&
+              {!!errors.termsAccepted && (
                 <Text style={styles.termsAcceptedTextAlert}>
                   {errors.termsAccepted}
                 </Text>
-              }
+              )}
             </View>
 
             <View style={styles.buttonContainer}>
-              <RoundedButton title={locale.continue} enabled={this.createEnabled} action={onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+              <RoundedButton
+                title={locale.continue}
+                enabled={this.createEnabled}
+                action={onSubmit}
+                buttonStyle={styles.continueButton}
+                titleStyle={styles.continueButtonTitle}
+              />
             </View>
 
             <StaticFooter onOpenURL={onOpenURL} />

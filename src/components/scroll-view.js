@@ -1,19 +1,11 @@
 import React, { forwardRef } from "react";
 
-import {
-  ScrollView,
-} from "react-native";
+import { ScrollView } from "react-native";
 
 import styles from "../styles/scroll-view";
 
-
 const MyScrollView = forwardRef((props, ref) => (
-  <ScrollView
-    {...props}
-
-    ref={ref}
-    style={[styles.scrollView, props.style]}
-  >
+  <ScrollView {...props} ref={ref} style={[styles.scrollView, props.style]}>
     {props.children}
   </ScrollView>
 ));

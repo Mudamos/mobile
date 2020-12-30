@@ -20,17 +20,19 @@ import { User } from "../models";
 import { logError } from "../utils";
 import { blockBuilder } from "./crypto";
 
-
 const facebookPermissions = ["public_profile", "email"];
 
 function* login({ mobileApi, sessionStore, Crypto }) {
   yield takeLatest("FACEBOOK_USER_LOG_IN", function* () {
     try {
-      const fbResult = yield call(LoginManager.logInWithPermissions, facebookPermissions);
+      const fbResult = yield call(
+        LoginManager.logInWithPermissions,
+        facebookPermissions,
+      );
 
       if (fbResult.isCancelled) {
         yield put(finishedLogIn());
-        return
+        return;
       }
 
       yield put(isLoggingIn());
@@ -44,7 +46,7 @@ function* login({ mobileApi, sessionStore, Crypto }) {
       const message = fbToken;
       const block = yield call(blockBuilder, { message, mobileApi, Crypto });
 
-      const token =  yield call(mobileApi.fbSignIn, { fbToken, plipId, block });
+      const token = yield call(mobileApi.fbSignIn, { fbToken, plipId, block });
       const appAuth = { token };
 
       yield call(sessionStore.persist, appAuth);
@@ -58,7 +60,7 @@ function* login({ mobileApi, sessionStore, Crypto }) {
       yield put(profileStateMachine());
 
       yield put(logEvent({ name: "facebook_login" }));
-    } catch(e) {
+    } catch (e) {
       logError(e);
 
       yield call(sessionStore.destroy);

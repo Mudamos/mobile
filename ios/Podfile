@@ -1,18 +1,49 @@
-# Uncomment the next line to define a global platform for your project
-platform :ios, "9.0"
+source "https://cdn.cocoapods.org/"
+
+require_relative "../node_modules/react-native/scripts/react_native_pods"
+require_relative "../node_modules/@react-native-community/cli-platform-ios/native_modules"
+
+platform :ios, "10.0"
+
+# Override Firebase SDK Version: used by react-native-firebase
+$FirebaseSDKVersion = "7.1.0"
+$RNFirebaseAsStaticFramework = true
+
+# Convert all permission pods into static libraries (react-native-permissions)
+# Required because of the use_frameworks! usage above
+pre_install do |installer|
+  Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+
+  installer.pod_targets.each do |pod|
+    if pod.name.eql?('RNPermissions') || pod.name.start_with?('Permission-')
+      puts "Setting static library for: #{pod.name}"
+
+      def pod.build_type;
+        # Uncomment the line corresponding to your CocoaPods version
+        Pod::BuildType.static_library # >= 1.9
+      end
+    end
+  end
+end
 
 def pods
+  config = use_native_modules!
+
+  use_react_native!(:path => config["reactNativePath"])
+
+  # Add new pods below this line
+
   pod "Bolts"
   pod "IQKeyboardManager"
-  pod "Firebase"
-  pod "Firebase/Core"
-  pod "Firebase/Auth"
-  pod "Firebase/Crash"
-  pod "Firebase/Database"
-  pod "Firebase/Messaging"
-  pod "Firebase/RemoteConfig"
-  pod "Firebase/Storage"
-  pod "Firebase/DynamicLinks"
+  pod "Firebase/DynamicLinks", $FirebaseSDKVersion
+  pod "Firebase/RemoteConfig", $FirebaseSDKVersion
+
+  pod "OneSignal", ">= 2.9.3", "< 3.0"
+
+  permissions_path = "../node_modules/react-native-permissions/ios"
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
+  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
 end
 
 def message_signer_pods
@@ -25,11 +56,19 @@ target "MudamosMobile" do
 
   pods
 
+ # # Enables Flipper.
+ # #
+ # # Note that if you have use_frameworks! enabled, Flipper will not work and
+ # # you should disable these next few lines.
+ # use_flipper!!
+ # post_install do |installer|
+ #   flipper_post_install(installer)
+ # end
+
   target "MudamosMobileTests" do
-    inherit! :search_paths
+    inherit! :complete
     # Pods for testing
   end
-
 end
 
 target "MudamosMobileTagviewBeta" do
@@ -61,3 +100,22 @@ target "MessageSignerActionProduction" do
 
   message_signer_pods
 end
+
+#post_install do |installer|
+#  installer.pods_project.build_configurations.each do |config|
+#    puts "Excluding arm64"
+#    config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+#  end
+#end
+#post_install do |installer|
+#  installer.pods_project.targets.each do |target|
+#    target.build_configurations.each do |config|
+#      puts "Exluding arm64"
+#      config.build_settings['ONLY_ACTIVE_ARCH'] = 'YES'
+#      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+#      config.build_settings['EXCLUDED_ARCHS[sdk=watchsimulator*]'] = 'arm64'
+#      config.build_settings['EXCLUDED_ARCHS[sdk=appletvsimulator*]'] = 'arm64'
+#
+#    end
+#  end
+#end

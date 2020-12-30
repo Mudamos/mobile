@@ -1,9 +1,6 @@
 import { call, fork, takeEvery } from "redux-saga/effects";
 
-import {
-  log,
-  logError,
-} from "../utils";
+import { log, logError } from "../utils";
 
 function* logEvent({ analytics }) {
   yield takeEvery("ANALYTICS_LOG_EVENT", function* ({ payload }) {

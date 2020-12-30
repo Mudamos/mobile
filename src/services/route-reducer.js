@@ -3,8 +3,7 @@ import { Reducer } from "react-native-router-flux";
 
 import { navigationHappened } from "../actions";
 
-
-export default store => params => {
+export default (store) => (params) => {
   const defaultReducer = new Reducer(params);
 
   return (state, action) => {

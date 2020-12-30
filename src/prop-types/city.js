@@ -5,4 +5,3 @@ export const CityType = PropTypes.shape({
   name: PropTypes.string.isRequired,
   uf: PropTypes.string.isRequired,
 });
-

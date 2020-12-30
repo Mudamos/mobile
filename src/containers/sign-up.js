@@ -4,10 +4,7 @@ import { connect } from "react-redux";
 
 import SignUpLayout from "../components/sign-up-layout";
 
-import {
-  cpfMask,
-  extractNumbers,
-} from "../utils";
+import { cpfMask, extractNumbers } from "../utils";
 
 import {
   clearProfileSaveErrors,
@@ -30,7 +27,7 @@ import {
 
 const TERMS_OF_USE_URL = `${Config.MUDAMOS_WEB_API_URL}/institucional/termos-de-uso`;
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const user = currentUser(state);
 
   return {
@@ -46,8 +43,8 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  onNavigate: scene => {
+const mapDispatchToProps = (dispatch) => ({
+  onNavigate: (scene) => {
     dispatch(clearProfileSaveErrors());
     dispatch(signingPlip(null)); // Clear the user plip sign intention if they gave up
 
@@ -58,23 +55,27 @@ const mapDispatchToProps = dispatch => ({
     }
   },
   onCreate: ({ cpf, email, password, termsAccepted }) => {
-    dispatch(profileSaveMain({
-      cpf: extractNumbers(cpf),
-      email,
-      password,
-      termsAccepted,
-    }))
+    dispatch(
+      profileSaveMain({
+        cpf: extractNumbers(cpf),
+        email,
+        password,
+        termsAccepted,
+      }),
+    );
   },
   onUpdate: ({ cpf, email, termsAccepted }) => {
-    dispatch(profileSaveMain({
-      cpf: extractNumbers(cpf),
-      email,
-      termsAccepted,
-    }))
+    dispatch(
+      profileSaveMain({
+        cpf: extractNumbers(cpf),
+        email,
+        termsAccepted,
+      }),
+    );
   },
   onLogout: () => dispatch(logout()),
   onFacebookLogin: () => dispatch(facebookUserLogIn()),
-  onOpenURL: url => dispatch(openURL(url)),
+  onOpenURL: (url) => dispatch(openURL(url)),
   onTermsRequested: () => dispatch(openURL(TERMS_OF_USE_URL)),
 });
 

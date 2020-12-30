@@ -3,17 +3,17 @@ export const createWallet = ({ revalidateProfileSignPlip } = {}) => ({
   payload: { revalidateProfileSignPlip },
 });
 
-export const creatingWallet = isCreating => ({
+export const creatingWallet = (isCreating) => ({
   type: "WALLET_CREATING",
   payload: { isCreating },
 });
 
-export const createWalletError = error => ({
+export const createWalletError = (error) => ({
   type: "WALLET_CREATE_ERROR",
   payload: { error },
 });
 
-export const walletAvailable = hasWallet => ({
+export const walletAvailable = (hasWallet) => ({
   type: "WALLET_AVAILABLE",
   payload: { hasWallet },
 });

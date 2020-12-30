@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 
-import {
-  ActionSignerContainer,
-} from "./containers/action-signer";
+import { ActionSignerContainer } from "./containers/action-signer";
 
-import {
-  actionSignAppSetup,
-} from "./actions";
+import { actionSignAppSetup } from "./actions";
 
-const AppBuilder = store =>
+const AppBuilder = (store) =>
   class App extends Component {
     componentDidMount() {
       store.dispatch(actionSignAppSetup());
@@ -22,6 +18,6 @@ const AppBuilder = store =>
         </Provider>
       );
     }
-  }
+  };
 
-export default AppBuilder
+export default AppBuilder;

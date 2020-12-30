@@ -9,9 +9,9 @@ export default (state = initialState, action) => {
 
   switch (type) {
     case "APP_ON_FOREGROUND":
-      return { foreground: true }
+      return { foreground: true };
     case "APP_ON_BACKGROUND":
-      return { foreground: false }
+      return { foreground: false };
     default:
       return state;
   }

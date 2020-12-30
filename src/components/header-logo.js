@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import { Animated, StyleSheet } from "react-native";
@@ -10,8 +11,8 @@ const style = StyleSheet.create({
 
 export default class HeaderLogo extends Component {
   static propTypes = {
-    imgStyle: Animated.Image.propTypes.style,
-  }
+    imgStyle: PropTypes.any,
+  };
 
   setNativeProps(nativeProps) {
     this.image.setNativeProps(nativeProps);
@@ -22,7 +23,7 @@ export default class HeaderLogo extends Component {
 
     return (
       <Animated.Image
-        ref={ref => this.image = ref}
+        ref={(ref) => (this.image = ref)}
         source={require("../images/Logo.png")}
         style={[style.image, imgStyle]}
       />

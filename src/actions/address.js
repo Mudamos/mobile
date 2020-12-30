@@ -2,27 +2,27 @@ export const addressClear = () => ({
   type: "ADDRESS_CLEAR_LOCATION",
 });
 
-export const addressZipCodeSearch = zipCode => ({
+export const addressZipCodeSearch = (zipCode) => ({
   type: "ADDRESS_ZIP_CODE_SEARCH",
   payload: { zipCode },
 });
 
-export const addressZipCodeSearching = isSearchingZipCode => ({
+export const addressZipCodeSearching = (isSearchingZipCode) => ({
   type: "ADDRESS_ZIP_CODE_SEARCHING",
   payload: { isSearchingZipCode },
 });
 
-export const addressZipCodeSearchError = error => ({
+export const addressZipCodeSearchError = (error) => ({
   type: "ADDRESS_ZIP_CODE_SEARCH_ERROR",
   payload: { error },
 });
 
-export const addressReverseZipCodeSearchError = error => ({
+export const addressReverseZipCodeSearchError = (error) => ({
   type: "ADDRESS_REVERSE_ZIP_CODE_SEARCH_ERROR",
   payload: { error },
 });
 
-export const addressFound = location => ({
+export const addressFound = (location) => ({
   type: "ADDRESS_FOUND",
   payload: { location },
 });

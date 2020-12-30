@@ -2,12 +2,12 @@ export const fetchUserLocation = () => ({
   type: "LOCATION_FETCH_LOCATION",
 });
 
-export const fetchUserLocationError = error => ({
+export const fetchUserLocationError = (error) => ({
   type: "LOCATION_FETCH_LOCATION_ERROR",
   payload: { error },
 });
 
-export const fetchingLocation = isFetching => ({
+export const fetchingLocation = (isFetching) => ({
   type: "LOCATION_FETCHING_LOCATION",
   payload: { isFetching },
 });

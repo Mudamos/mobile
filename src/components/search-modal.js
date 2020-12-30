@@ -1,10 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 
 import SearchBar from "./search-bar";
 import SafeAreaView from "./safe-area-view";
@@ -30,15 +27,16 @@ class SearchModal extends Component {
     onClearSearch: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
     onToggleModal: PropTypes.func.isRequired,
-  }
+  };
 
   static defaultProps = {
     isVisible: false,
-  }
+  };
 
   componentDidUpdate(prevProps) {
     const { searchTitle } = this.props;
-    const { input: searchBarInput } = this.searchBar && this.searchBar.state || {};
+    const { input: searchBarInput } =
+      (this.searchBar && this.searchBar.state) || {};
 
     if (this.props.isVisible !== prevProps.isVisible && this.searchBar) {
       if (this.props.isVisible) {
@@ -52,24 +50,16 @@ class SearchModal extends Component {
   }
 
   onSearch = () => {
-    const {
-      onSearch,
-      onToggleModal,
-    } = this.props;
+    const { onSearch, onToggleModal } = this.props;
 
     this.searchBar && onSearch(this.searchBar.getValue());
     onToggleModal();
-  }
+  };
 
-  setSearchBar = ref => this.searchBar = ref;
+  setSearchBar = (ref) => (this.searchBar = ref);
 
   render() {
-    const {
-      isVisible,
-      onClearSearch,
-      onSearch,
-      onToggleModal,
-    } = this.props;
+    const { isVisible, onClearSearch, onSearch, onToggleModal } = this.props;
 
     if (!isVisible) return null;
 
@@ -84,7 +74,8 @@ class SearchModal extends Component {
           backgroundColor="#6000AA"
           iconColor="#6000AA"
           fontSize={15}
-          onSubmitEditing={this.onSearch} />
+          onSubmitEditing={this.onSearch}
+        />
       </SafeAreaView>
     );
   }

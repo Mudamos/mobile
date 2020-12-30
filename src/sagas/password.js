@@ -2,10 +2,7 @@ import { call, put, spawn, select, takeLatest } from "redux-saga/effects";
 
 import { prop } from "ramda";
 
-import {
-  isUnauthorized,
-  logError,
-} from "../utils";
+import { isUnauthorized, logError } from "../utils";
 
 import {
   changingPassword,
@@ -21,9 +18,7 @@ import {
   updatedUserProfile,
 } from "../actions";
 
-import {
-  currentAuthToken,
-} from "../selectors";
+import { currentAuthToken } from "../selectors";
 
 import { User } from "../models";
 
@@ -31,7 +26,6 @@ import Toast from "react-native-simple-toast";
 
 import locale from "../locales/pt-BR";
 import { blockBuilder } from "./crypto";
-
 
 function* retrievePassword({ mobileApi, Crypto }) {
   yield takeLatest("PASSWORD_RETRIEVE", function* ({ payload }) {
@@ -43,11 +37,17 @@ function* retrievePassword({ mobileApi, Crypto }) {
 
       const message = cpf || email;
       const block = yield call(blockBuilder, { message, mobileApi, Crypto });
-      const result = yield call(mobileApi.retrievePassword, { cpf, email, block });
+      const result = yield call(mobileApi.retrievePassword, {
+        cpf,
+        email,
+        block,
+      });
 
       yield call([Toast, Toast.show], locale.codeSent);
-      yield put(navigate("changeForgotPassword", { emailSent: prop("email", result) }));
-    } catch(e) {
+      yield put(
+        navigate("changeForgotPassword", { emailSent: prop("email", result) }),
+      );
+    } catch (e) {
       logError(e);
       yield put(retrievePasswordError(true, e));
     } finally {
@@ -56,17 +56,24 @@ function* retrievePassword({ mobileApi, Crypto }) {
   });
 }
 
-export function* changePasswordSaga({ mobileApi, currentPassword, newPassword }) {
+export function* changePasswordSaga({
+  mobileApi,
+  currentPassword,
+  newPassword,
+}) {
   try {
     yield put(changingPassword(true));
 
     const authToken = yield select(currentAuthToken);
-    yield call(mobileApi.changePassword, authToken, { currentPassword, newPassword });
+    yield call(mobileApi.changePassword, authToken, {
+      currentPassword,
+      newPassword,
+    });
 
     yield put(changingPassword(false));
-  } catch(e) {
+  } catch (e) {
     logError(e);
-    if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset"}));
+    if (isUnauthorized(e)) return yield put(unauthorized({ type: "reset" }));
 
     yield put(changingPassword(false));
     yield put(changePasswordError(e));
@@ -89,7 +96,11 @@ function* changeForgotPassword({ mobileApi, sessionStore, Crypto }) {
       yield put(changingForgotPassword(true));
       const message = [password, code].join(";");
       const block = yield call(blockBuilder, { message, mobileApi, Crypto });
-      const response = yield call(mobileApi.changeForgotPassword, { code, password, block });
+      const response = yield call(mobileApi.changeForgotPassword, {
+        code,
+        password,
+        block,
+      });
 
       const user = User.fromJson(response.user);
 
@@ -101,7 +112,7 @@ function* changeForgotPassword({ mobileApi, sessionStore, Crypto }) {
 
       yield put(changingForgotPassword(false));
       yield put(profileStateMachine());
-    } catch(e) {
+    } catch (e) {
       logError(e);
 
       yield put(changingForgotPassword(false));
@@ -110,7 +121,6 @@ function* changeForgotPassword({ mobileApi, sessionStore, Crypto }) {
     }
   });
 }
-
 
 export default function* passwordSaga({ mobileApi, sessionStore, Crypto }) {
   yield spawn(retrievePassword, { mobileApi, Crypto });

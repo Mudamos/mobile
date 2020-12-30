@@ -1,11 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 const barColor = "#00BFD8";
 const textColor = "#000";
@@ -44,14 +40,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const ProgressBarClassic = props => {
+const ProgressBarClassic = (props) => {
   const { value } = props;
 
   return (
     <View>
       <View style={[styles.flexBox, styles.progressBar]}>
-        <View style={[styles.barLeft, {flex: value}]}></View>
-        <View style={[styles.barRight, {flex:100 - value}]}>
+        <View style={[styles.barLeft, { flex: value }]} />
+        <View style={[styles.barRight, { flex: 100 - value }]}>
           <View style={styles.textContainer}>
             <Text style={styles.text}>{value}%</Text>
           </View>
@@ -59,7 +55,7 @@ const ProgressBarClassic = props => {
       </View>
     </View>
   );
-}
+};
 
 ProgressBarClassic.propTypes = {
   value: PropTypes.number,

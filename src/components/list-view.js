@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "React";
 
-import { ListView } from "react-native";
-
+import ListView from "deprecated-react-native-listview";
 
 export default class MyListView extends Component {
   state = { isFirstRender: true };
@@ -15,9 +14,9 @@ export default class MyListView extends Component {
       y: PropTypes.number,
       animated: PropTypes.bool,
     }),
-  }
+  };
 
-  static defaultProps = { ...ListView.defaultProps }
+  static defaultProps = { ...ListView.defaultProps };
 
   render() {
     const { scrollTo, onLayout } = this.props;
@@ -25,14 +24,13 @@ export default class MyListView extends Component {
     return (
       <ListView
         {...this.props}
-        ref={ref => this.ref = ref}
-
+        ref={(ref) => (this.ref = ref)}
         onLayout={(...args) => {
           if (onLayout) onLayout(...args);
 
           if (this.state.isFirstRender && scrollTo && this.ref) {
             this.ref.scrollTo(scrollTo);
-            this.setState({ isFirstRender: false })
+            this.setState({ isFirstRender: false });
           }
         }}
       />

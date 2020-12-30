@@ -2,9 +2,7 @@ import { call, put, spawn, fork, takeEvery } from "redux-saga/effects";
 
 import { keys } from "ramda";
 
-import {
-  shareLinkError,
-} from "../actions";
+import { shareLinkError } from "../actions";
 
 import {
   MUDAMOS_APP_SITE,
@@ -19,7 +17,6 @@ import Share from "react-native-share";
 
 const SHARE_CANCEL_ERROR_MESSAGE = "User did not share";
 
-
 function* shareLink(options) {
   yield call([Share, Share.open], options);
 }
@@ -31,11 +28,11 @@ function* shareLinkSaga() {
     } catch (e) {
       logError(e);
 
-      if (e.error !== SHARE_CANCEL_ERROR_MESSAGE) {
+      if (e.message !== SHARE_CANCEL_ERROR_MESSAGE) {
         yield put(shareLinkError(e));
       }
     }
-  })
+  });
 }
 
 function* sharePlip() {
@@ -57,7 +54,7 @@ function* sharePlip() {
     } catch (e) {
       logError(e);
 
-      if (e.error !== SHARE_CANCEL_ERROR_MESSAGE) {
+      if (e.message !== SHARE_CANCEL_ERROR_MESSAGE) {
         yield put(shareLinkError(e));
       }
     }
@@ -78,13 +75,12 @@ function* tellAFriend() {
     } catch (e) {
       logError(e);
 
-      if (e.error !== SHARE_CANCEL_ERROR_MESSAGE) {
+      if (e.message !== SHARE_CANCEL_ERROR_MESSAGE) {
         yield put(shareLinkError(e));
       }
     }
   });
 }
-
 
 export default function* shareSaga() {
   yield spawn(shareLinkSaga);

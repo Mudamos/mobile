@@ -1,7 +1,13 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import { Animated, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Animated,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import locale from "../locales/pt-BR";
 
@@ -37,7 +43,7 @@ const styles = EStyleSheet.create({
   },
   descriptionContainer: {
     marginBottom: 20,
-    flexDirection:"row",
+    flexDirection: "row",
   },
   modal: {
     position: "absolute",
@@ -53,6 +59,9 @@ const styles = EStyleSheet.create({
     flex: 1,
     flexWrap: "wrap",
   },
+  textHeight: {
+    height: 200,
+  },
   title: {
     fontSize: "1rem",
     fontWeight: "bold",
@@ -66,63 +75,53 @@ class DocumentsReasonModal extends Component {
     isVisible: PropTypes.bool,
 
     onToggleReasonEnabled: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     fadeAnim: new Animated.Value(0),
     top: new Animated.Value(-300),
-  }
+  };
 
   static defaultProps = {
     isVisible: false,
-  }
+  };
 
   componentDidUpdate(prevProps) {
     if (this.props.isVisible !== prevProps.isVisible) {
       if (prevProps.isVisible === false) {
         Animated.sequence([
-          Animated.timing(
-            this.state.fadeAnim,
-            {
-              toValue: 1,
-              duration: 200,
-            }),
-          Animated.timing(
-            this.state.top,
-            {
-              toValue: 0,
-              duration: 300,
-            }),
+          Animated.timing(this.state.fadeAnim, {
+            toValue: 1,
+            duration: 200,
+            useNativeDriver: false,
+          }),
+          Animated.timing(this.state.top, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: false,
+          }),
         ]).start();
       } else {
         Animated.sequence([
-          Animated.timing(
-            this.state.top,
-            {
-              toValue: -300,
-              duration: 100,
-            }),
-          Animated.timing(
-            this.state.fadeAnim,
-            {
-              toValue: 0,
-              duration: 200,
-            }),
+          Animated.timing(this.state.top, {
+            toValue: -300,
+            duration: 100,
+            useNativeDriver: false,
+          }),
+          Animated.timing(this.state.fadeAnim, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: false,
+          }),
         ]).start();
       }
     }
   }
 
   render() {
-    const {
-      isVisible,
-      onToggleReasonEnabled,
-    } = this.props;
+    const { isVisible, onToggleReasonEnabled } = this.props;
 
-    const {
-      fadeAnim,
-      top,
-    } = this.state;
+    const { fadeAnim, top } = this.state;
 
     if (!isVisible) return null;
 
@@ -131,17 +130,20 @@ class DocumentsReasonModal extends Component {
 
     return (
       <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-        <TouchableOpacity style={styles.background} onPress={onToggleReasonEnabled} />
+        <TouchableOpacity
+          style={styles.background}
+          onPress={onToggleReasonEnabled}
+        />
         <Animated.View style={[styles.modal, { top: top }]}>
-          <NavigationBar
-            middleView={<HeaderLogo />}
-          />
+          <NavigationBar middleView={<HeaderLogo />} />
           <Text style={[styles.text, styles.title]}>{modalTitle}</Text>
           <View style={styles.descriptionContainer}>
-            <Text style={[styles.text, {height: 200}]}>{modalDescription}</Text>
+            <Text style={[styles.text, styles.textHeight]}>
+              {modalDescription}
+            </Text>
           </View>
           <View style={styles.buttonPanel}>
-            <TouchableOpacity onPress={onToggleReasonEnabled} >
+            <TouchableOpacity onPress={onToggleReasonEnabled}>
               <EvilIcons name="close-o" size={44} color="#A9A9A9" />
             </TouchableOpacity>
           </View>

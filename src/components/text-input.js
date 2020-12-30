@@ -1,12 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  Text,
-  TextInput,
-  View,
-  ViewPropTypes,
-} from "react-native";
+import { Text, TextInput, View, ViewPropTypes } from "react-native";
 
 import MIcon from "react-native-vector-icons/MaterialIcons";
 
@@ -36,7 +31,7 @@ class MyTextInput extends Component {
 
   input = null;
 
-  setInput = component => this.input = component;
+  setInput = (component) => (this.input = component);
 
   focus() {
     this.input.focus();
@@ -52,13 +47,14 @@ class MyTextInput extends Component {
     }
 
     return (
-      <View style={[
-        styles.container,
-        properProps.style,
-        properProps.editable === false ? styles.containerDisabled : {},
-        properProps.hasError ? styles.containerError : {},
-        properProps.hasError ? properProps.errorStyle : {},
-      ]}>
+      <View
+        style={[
+          styles.container,
+          properProps.style,
+          properProps.editable === false ? styles.containerDisabled : {},
+          properProps.hasError ? styles.containerError : {},
+          properProps.hasError ? properProps.errorStyle : {},
+        ]}>
         {this.renderLabel(properProps.label)}
 
         <TextInput
@@ -86,9 +82,7 @@ class MyTextInput extends Component {
 
     return (
       <View style={styles.hintWrapper}>
-        <Text style={styles.hint}>
-          {hint}
-        </Text>
+        <Text style={styles.hint}>{hint}</Text>
       </View>
     );
   }
@@ -108,9 +102,7 @@ class MyTextInput extends Component {
 
     return (
       <View style={styles.labelWrapper}>
-        <Text style={[styles.label, this.props.labelStyle]}>
-          {label}
-        </Text>
+        <Text style={[styles.label, this.props.labelStyle]}>{label}</Text>
       </View>
     );
   }

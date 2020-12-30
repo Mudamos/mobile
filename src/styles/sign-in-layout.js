@@ -44,10 +44,7 @@ export default StyleSheet.create({
     marginBottom: 10,
     textAlign: "center",
   },
-  headerTitle: StyleSheet.flatten([
-    textStyles.header,
-    { fontSize: 18 },
-  ]),
+  headerTitle: StyleSheet.flatten([textStyles.header, { fontSize: 18 }]),
   inputContainer: {
     marginTop: 12,
     marginHorizontal: 33,

@@ -1,10 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  View,
-} from "react-native";
-
+import { View } from "react-native";
 
 import Modal from "./modal";
 import ModalLink from "./modal-link-button";
@@ -12,7 +9,6 @@ import ModalLink from "./modal-link-button";
 import locale from "../locales/pt-BR";
 
 import styles from "../styles/simple-modal";
-
 
 export default class SimpleModal extends Modal {
   static propTypes = {

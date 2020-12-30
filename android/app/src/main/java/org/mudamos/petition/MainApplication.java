@@ -1,86 +1,51 @@
 package org.mudamos.petition;
 
 import android.app.Application;
+import android.content.Context;
+import com.facebook.react.PackageList;
 import androidx.multidex.MultiDexApplication;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
 import com.facebook.react.ReactApplication;
-import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.reactnativecommunity.webview.RNCWebViewPackage;
-import io.fullstack.firestack.FirestackPackage;
-import com.ianlin.RNFirebaseCrashReport.RNFirebaseCrashReportPackage;
-import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
-import com.imagepicker.ImagePickerPackage;
-import com.opensettings.OpenSettingsPackage;
-import cl.json.RNSharePackage;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.bitgo.randombytes.RandomBytesPackage;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
-import com.airbnb.android.react.maps.MapsPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.react.rnspinkit.RNSpinkitPackage;
-import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
 import org.mudamos.petition.firebase.FirebasePackage;
 import org.mudamos.petition.firebase.MUDFirebaseDynamicLinkPackage;
 import org.mudamos.petition.signer.SignerPackage;
 
-import java.util.Arrays;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class MainApplication extends MultiDexApplication implements ReactApplication {
-  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
-  protected static CallbackManager getCallbackManager() {
-    return mCallbackManager;
-  }
+  private final ReactNativeHost mReactNativeHost =
+    new ReactNativeHost(this) {
+      @Override
+      public boolean getUseDeveloperSupport() {
+        return BuildConfig.DEBUG;
+      }
 
-  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-    @Override
-    public boolean getUseDeveloperSupport() {
-      return BuildConfig.DEBUG;
-    }
+      @Override
+      protected List<ReactPackage> getPackages() {
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        List<ReactPackage> packages = new PackageList(this).getPackages();
+        // Packages that cannot be autolinked yet can be added manually here, for example:
+        // packages.add(new MyReactNativePackage());
 
-    @Override
-    protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new AsyncStoragePackage(),
-            new RNCWebViewPackage(),
-            new FirestackPackage(),
-            new RNFirebaseCrashReportPackage(),
-            new ReactNativeOneSignalPackage(),
-            new ImagePickerPackage(),
-            new OpenSettingsPackage(),
-            new RNSharePackage(),
-            new FBSDKPackage(mCallbackManager),
-            new LinearGradientPackage(),
-            new RNDeviceInfo(),
-            new RandomBytesPackage(),
-            new ReactMaterialKitPackage(),
-            new MapsPackage(),
-            new VectorIconsPackage(),
-            new RNSpinkitPackage(),
-            new ReactNativeConfigPackage(),
-            new YouTubeWebViewReactPackage(),
-            new FirebasePackage(),
-            new MUDFirebaseDynamicLinkPackage(),
-            new SignerPackage()
-      );
-    }
+        packages.add(new FirebasePackage());
+        packages.add(new MUDFirebaseDynamicLinkPackage());
+        packages.add(new SignerPackage());
 
-    @Override
-    protected String getJSMainModuleName() {
-      return "index";
-    }
-  };
+        return packages;
+      }
+
+      @Override
+      protected String getJSMainModuleName() {
+        return "index";
+      }
+    };
 
   @Override
   public ReactNativeHost getReactNativeHost() {
@@ -90,7 +55,38 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
   @Override
   public void onCreate() {
     super.onCreate();
-    FacebookSdk.sdkInitialize(getApplicationContext());
     SoLoader.init(this, /* native exopackage */ false);
+    initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+  }
+
+  /**
+   * Loads Flipper in React Native templates. Call this in the onCreate method with something like
+   * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+   *
+   * @param context
+   * @param reactInstanceManager
+   */
+  private static void initializeFlipper(
+      Context context, ReactInstanceManager reactInstanceManager) {
+    if (BuildConfig.DEBUG) {
+      try {
+        /*
+         We use reflection here to pick up the class that initializes Flipper,
+        since Flipper library is not available in release mode
+        */
+        Class<?> aClass = Class.forName("org.mudamos.petition.ReactNativeFlipper");
+        aClass
+            .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
+            .invoke(null, context, reactInstanceManager);
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      }
+    }
   }
 }

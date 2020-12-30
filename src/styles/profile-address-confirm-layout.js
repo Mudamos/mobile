@@ -14,9 +14,7 @@ export default StyleSheet.create({
     textStyles.header,
     { marginBottom: 8, marginTop: 12 },
   ]),
-  link: StyleSheet.flatten([
-    textStyles.link,
-  ]),
+  link: StyleSheet.flatten([textStyles.link]),
   map: {
     ...StyleSheet.absoluteFillObject,
   },
@@ -33,10 +31,7 @@ export default StyleSheet.create({
     opacity: 0.5,
     zIndex: 10,
   },
-  subHeader: StyleSheet.flatten([
-    textStyles.subtitle,
-    { marginBottom: 5 },
-  ]),
+  subHeader: StyleSheet.flatten([textStyles.subtitle, { marginBottom: 5 }]),
   wrongZipCodeContainer: {
     marginLeft: 10,
     marginTop: 2,

@@ -1,6 +1,5 @@
 import Checkbox from "./flat-checkbox";
 
-
 export default class MyCheckbox extends Checkbox {
   static defaultProps = {
     ...Checkbox.defaultProps,
@@ -10,5 +9,5 @@ export default class MyCheckbox extends Checkbox {
     borderOffColor: "#000",
     overflow: "hidden",
     rippleColor: "rgba(255,255,255,0.2)",
-  }
+  };
 }

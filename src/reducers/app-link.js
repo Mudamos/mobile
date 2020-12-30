@@ -13,18 +13,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         handlingAppLinkError: true,
-      }
+      };
     case "SET_APP_LINK_URL":
       return {
         ...state,
         lastUrlReceived: payload.url,
         handlingAppLinkError: false,
-      }
+      };
     case "CLEAR_APP_LINK_ERROR":
       return {
         ...state,
         handlingAppLinkError: false,
-      }
+      };
     default:
       return state;
   }

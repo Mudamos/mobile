@@ -13,7 +13,7 @@ export const refreshPlips = ({ typeList }) => ({
   payload: { typeList },
 });
 
-export const plipsFetchNextPageError = error => ({
+export const plipsFetchNextPageError = (error) => ({
   type: "FETCHING_PLIPS_NEXT_PAGE_ERROR",
   payload: { error },
 });
@@ -76,112 +76,112 @@ export const favoritePlipsFetched = ({ plips, page, nextPage }) => ({
   payload: { plips, page, nextPage },
 });
 
-export const refreshingAllPlips = isRefreshing => ({
+export const refreshingAllPlips = (isRefreshing) => ({
   type: "REFRESHING_ALL_PLIPS",
   payload: { isRefreshing },
 });
 
-export const refreshingNationwidePlips = isRefreshing => ({
+export const refreshingNationwidePlips = (isRefreshing) => ({
   type: "REFRESHING_NATIONWIDE_PLIPS",
   payload: { isRefreshing },
 });
 
-export const refreshingPlipsByLocation = isRefreshing => ({
+export const refreshingPlipsByLocation = (isRefreshing) => ({
   type: "REFRESHING_PLIPS_BY_USER_LOCATION",
   payload: { isRefreshing },
 });
 
-export const refreshingSignedPlips = isRefreshing => ({
+export const refreshingSignedPlips = (isRefreshing) => ({
   type: "REFRESHING_SIGNED_PLIPS",
   payload: { isRefreshing },
 });
 
-export const refreshingFavoritePlips = isRefreshing => ({
+export const refreshingFavoritePlips = (isRefreshing) => ({
   type: "REFRESHING_FAVORITE_PLIPS",
   payload: { isRefreshing },
 });
 
-export const fetchingAllPlips = isFetching => ({
+export const fetchingAllPlips = (isFetching) => ({
   type: "FETCHING_ALL_PLIPS",
   payload: { isFetching },
 });
 
-export const fetchingNationwidePlips = isFetching => ({
+export const fetchingNationwidePlips = (isFetching) => ({
   type: "FETCHING_NATIONWIDE_PLIPS",
   payload: { isFetching },
 });
 
-export const fetchingPlipsByLocation = isFetching => ({
+export const fetchingPlipsByLocation = (isFetching) => ({
   type: "FETCHING_PLIPS_BY_USER_LOCATION",
   payload: { isFetching },
 });
 
-export const fetchingSignedPlips = isFetching => ({
+export const fetchingSignedPlips = (isFetching) => ({
   type: "FETCHING_SIGNED_PLIPS",
   payload: { isFetching },
 });
 
-export const fetchingFavoritePlips = isFetching => ({
+export const fetchingFavoritePlips = (isFetching) => ({
   type: "FETCHING_FAVORITE_PLIPS",
   payload: { isFetching },
 });
 
-export const fetchingAllPlipsNextPage = isFetchingNextPage => ({
+export const fetchingAllPlipsNextPage = (isFetchingNextPage) => ({
   type: "FETCHING_ALL_PLIPS_NEXT_PAGE",
   payload: { isFetchingNextPage },
 });
 
-export const fetchingNationwidePlipsNextPage = isFetchingNextPage => ({
+export const fetchingNationwidePlipsNextPage = (isFetchingNextPage) => ({
   type: "FETCHING_NATIONWIDE_PLIPS_NEXT_PAGE",
   payload: { isFetchingNextPage },
 });
 
-export const fetchingPlipsByLocationNextPage = isFetchingNextPage => ({
+export const fetchingPlipsByLocationNextPage = (isFetchingNextPage) => ({
   type: "FETCHING_PLIPS_BY_USER_LOCATION_NEXT_PAGE",
   payload: { isFetchingNextPage },
 });
 
-export const fetchingSignedPlipsNextPage = isFetchingNextPage => ({
+export const fetchingSignedPlipsNextPage = (isFetchingNextPage) => ({
   type: "FETCHING_SIGNED_PLIPS_NEXT_PAGE",
   payload: { isFetchingNextPage },
 });
 
-export const fetchingFavoritePlipsNextPage = isFetchingNextPage => ({
+export const fetchingFavoritePlipsNextPage = (isFetchingNextPage) => ({
   type: "FETCHING_FAVORITE_PLIPS_NEXT_PAGE",
   payload: { isFetchingNextPage },
 });
 
-export const isAddingFavoritePlip = isAddingFavorite => ({
+export const isAddingFavoritePlip = (isAddingFavorite) => ({
   type: "ADDING_FAVORITE_PLIP",
   payload: { isAddingFavorite },
 });
 
-export const allPlipsError = error => ({
+export const allPlipsError = (error) => ({
   type: "ALL_PLIPS_ERROR",
   payload: { error },
 });
 
-export const nationwidePlipsError = error => ({
+export const nationwidePlipsError = (error) => ({
   type: "NATIONWIDE_PLIPS_ERROR",
   payload: { error },
 });
 
-export const plipsByLocationError = error => ({
+export const plipsByLocationError = (error) => ({
   type: "PLIPS_BY_USER_LOCATION_ERROR",
   payload: { error },
 });
 
-export const signedPlipsError = error => ({
+export const signedPlipsError = (error) => ({
   type: "SIGNED_PLIPS_ERROR",
   payload: { error },
 });
 
-export const favoritePlipsError = error => ({
+export const favoritePlipsError = (error) => ({
   type: "FAVORITE_PLIPS_ERROR",
   payload: { error },
 });
 
-export const plipsRefreshError = error => ({
+export const plipsRefreshError = (error) => ({
   type: "PLIPS_REFRESH_ERROR",
   payload: { error },
 });
@@ -210,12 +210,12 @@ export const fetchCitywidePlips = () => ({
   type: "PLIPS_FETCH_CITYWIDE_PLIPS",
 });
 
-export const fetchingShortPlipSigners = isFetching => ({
+export const fetchingShortPlipSigners = (isFetching) => ({
   type: "PLIP_FETCHING_SHORT_SIGNERS",
   payload: { isFetching },
 });
 
-export const fetchingPlipSigners = isFetching => ({
+export const fetchingPlipSigners = (isFetching) => ({
   type: "PLIP_FETCHING_SIGNERS",
   payload: { isFetching },
 });
@@ -230,7 +230,7 @@ export const plipSigners = ({ signers }) => ({
   payload: { signers },
 });
 
-export const fetchPlipSigners = plipId => ({
+export const fetchPlipSigners = (plipId) => ({
   type: "PLIP_FETCH_SIGNERS",
   payload: { plipId },
 });
@@ -250,12 +250,12 @@ export const removeJustSignedPlip = ({ plipId }) => ({
   payload: { plipId },
 });
 
-export const plipSignError = error => ({
+export const plipSignError = (error) => ({
   type: "PLIP_SIGN_ERROR",
   payload: { error },
 });
 
-export const fetchPlipSignersError = error => ({
+export const fetchPlipSignersError = (error) => ({
   type: "PLIP_FETCH_SIGNERS_ERROR",
   payload: { error },
 });
@@ -273,22 +273,22 @@ export const clearPlipSignersError = () => ({
   type: "PLIP_CLEAR_SIGNERS_ERROR",
 });
 
-export const signingPlip = plip => ({
+export const signingPlip = (plip) => ({
   type: "PLIP_SIGNING_PLIP",
   payload: { plip },
 });
 
-export const fetchPlipRelatedInfo = plipId => ({
+export const fetchPlipRelatedInfo = (plipId) => ({
   type: "PLIP_FETCH_PLIP_RELATED_INFO",
   payload: { plipId },
 });
 
-export const fetchPlipRelatedInfoError = error => ({
+export const fetchPlipRelatedInfoError = (error) => ({
   type: "PLIP_FETCH_PLIP_RELATED_INFO_ERROR",
   payload: { error },
 });
 
-export const fetchingPlipRelatedInfo = isFetching => ({
+export const fetchingPlipRelatedInfo = (isFetching) => ({
   type: "PLIP_FETCHING_PLIP_RELATED_INFO",
   payload: { isFetching },
 });
@@ -307,7 +307,7 @@ export const plipsFavoriteInfoFetched = ({ favoriteInfo }) => ({
   payload: { favoriteInfo },
 });
 
-export const setCurrentPlip = plip => ({
+export const setCurrentPlip = (plip) => ({
   type: "SET_CURRENT_PLIP",
   payload: { plip },
 });
@@ -317,12 +317,12 @@ export const toggleFavorite = ({ detailId }) => ({
   payload: { detailId },
 });
 
-export const searchPlip = title => ({
+export const searchPlip = (title) => ({
   type: "SEARCH_PLIP",
   payload: { title },
 });
 
-export const isSearchingPlip = isSearching => ({
+export const isSearchingPlip = (isSearching) => ({
   type: "PLIP_SEARCHING",
   payload: { isSearching },
 });

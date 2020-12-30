@@ -16,36 +16,25 @@ class PageLoader extends Component {
     size: PropTypes.number,
     style: ViewPropTypes.style,
     type: PropTypes.string,
-  }
+  };
 
   static defaultProps = {
     color: "#FFFFFF",
     isVisible: false,
     size: 70,
     type: "9CubeGrid",
-  }
+  };
 
   render() {
-    const {
-      append,
-      size,
-      color,
-      isVisible,
-      prepend,
-      style,
-      type,
-    } = this.props;
+    const { append, size, color, isVisible, prepend, style, type } = this.props;
 
-    if (!isVisible) return (<View/>);
+    if (!isVisible) return <View />;
 
     return (
       <View style={[styles.container, style]}>
         {prepend}
 
-        <Spinner color={color}
-          isVisible={isVisible}
-          type={type}
-          size={size}/>
+        <Spinner color={color} isVisible={isVisible} type={type} size={size} />
 
         {append}
       </View>

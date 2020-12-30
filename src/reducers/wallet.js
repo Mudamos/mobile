@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         hasWallet: payload.hasWallet,
-      }
+      };
     case "SESSION_CLEAR_SESSION":
       return {
         ...state,
@@ -38,4 +38,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

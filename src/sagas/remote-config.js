@@ -1,17 +1,10 @@
 import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 
-import {
-  toPairs,
-} from "ramda";
+import { toPairs } from "ramda";
 
-import {
-  logError,
-} from "../utils";
+import { logError } from "../utils";
 
-import {
-  remoteConfigFetched,
-  remoteLinksFetched,
-} from "../actions";
+import { remoteConfigFetched, remoteLinksFetched } from "../actions";
 
 const REMOTE_LINK_NAMES = [
   "link_get_to_know_mudamos",
@@ -36,7 +29,11 @@ function* fetchLinks({ RemoteConfigService }) {
         sendYourIdea,
         whyProjectsLink,
         privacyPolicyURL,
-      ] = yield all(REMOTE_LINK_NAMES.map(name => call(RemoteConfigService.asString, name)));
+      ] = yield all(
+        REMOTE_LINK_NAMES.map((name) =>
+          call(RemoteConfigService.asString, name),
+        ),
+      );
 
       const links = {
         getToKnowMudamos,
@@ -47,7 +44,7 @@ function* fetchLinks({ RemoteConfigService }) {
       };
 
       yield put(remoteLinksFetched(links));
-    } catch(e) {
+    } catch (e) {
       logError(e, { tag: "fetchLinks" });
     }
   });
@@ -60,7 +57,11 @@ function* fetchRemoteConfigs({ RemoteConfigService }) {
         authenticatedSignersButtonTitle,
         ineligibleToSignCitywidePlipReason,
         ineligibleToSignStatewidePlipReason,
-      ] = yield all(toPairs(OTHER_CONFIGS).map(([name, type]) => call(RemoteConfigService[type], name)));
+      ] = yield all(
+        toPairs(OTHER_CONFIGS).map(([name, type]) =>
+          call(RemoteConfigService[type], name),
+        ),
+      );
 
       const config = {
         authenticatedSignersButtonTitle,
@@ -69,7 +70,7 @@ function* fetchRemoteConfigs({ RemoteConfigService }) {
       };
 
       yield put(remoteConfigFetched(config));
-    } catch(e) {
+    } catch (e) {
       logError(e, { tag: "fetchRemoteConfigs" });
     }
   });

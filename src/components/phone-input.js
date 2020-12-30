@@ -5,24 +5,19 @@ import MDTextInput from "./md-text-input";
 
 import { phoneMask } from "../utils";
 
-
 export default class PhoneInput extends Component {
   static propTypes = {
     value: PropTypes.string,
     onChangePhoneText: PropTypes.func.isRequired,
-  }
+  };
 
   render() {
-    const {
-      value,
-      ...mdInputProps
-    } = this.props;
+    const { value, ...mdInputProps } = this.props;
 
     return (
       <MDTextInput
         {...mdInputProps}
-
-        ref={ref => this.input = ref}
+        ref={(ref) => (this.input = ref)}
         value={this.removeLastSeparator(value)}
         keyboardType="numeric"
         maxLength={15}
@@ -47,7 +42,7 @@ export default class PhoneInput extends Component {
     return phoneMask(this.cleanText(text))
       .replace(/\($/, "")
       .replace(/\)\s$/, "")
-      .replace(/-$/,"");
+      .replace(/-$/, "");
   }
 
   focus() {

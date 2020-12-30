@@ -1,9 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  View,
-} from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 
 import { WebView } from "react-native-webview";
 
@@ -13,46 +11,39 @@ import BackButton from "./back-button";
 import HeaderLogo from "./header-logo";
 import PageLoader from "./page-loader";
 
-import styles from "../styles/web-view-layout";
-
-
-export default class WebViewLayout extends Component {
+export default class PrivacyPolicyLayout extends Component {
   state = {
+    initialized: false,
     loading: true,
-  }
+  };
 
   static propTypes = {
+    source: PropTypes.object,
     onBack: PropTypes.func.isRequired,
+  };
 
-    ...WebView.propTypes,
-  }
+  onLoadEnd = () => this.setState({ loading: false, initialized: true });
 
   render() {
-    const {
-      ...webViewProps
-    } = this.props;
-
+    const { source } = this.props;
     const { loading } = this.state;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Layout>
           {this.renderNavBar()}
 
-          <WebView
-            {...webViewProps}
-            onLoadEnd={this.onLoadEnd.bind(this)}
-          />
+          <WebView source={source} onLoadEnd={this.onLoadEnd} />
         </Layout>
 
         <PageLoader isVisible={loading} />
-
-      </View>
+      </SafeAreaView>
     );
   }
 
   renderNavBar() {
     const { onBack } = this.props;
+
     return (
       <NavigationBar
         leftView={<BackButton onPress={onBack} />}
@@ -60,12 +51,11 @@ export default class WebViewLayout extends Component {
       />
     );
   }
-
-  onLoadEnd() {
-    const { onLoadEnd } = this.props;
-
-    this.setState({ loading: false });
-
-    onLoadEnd && onLoadEnd();
-  }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#6000AA",
+    flex: 1,
+  },
+});

@@ -33,10 +33,7 @@ export default EStyleSheet.create({
     marginTop: 20,
     marginHorizontal: 10,
   },
-  headerTitle: StyleSheet.flatten([
-    textStyles.header,
-    { marginBottom: 8 },
-  ]),
+  headerTitle: StyleSheet.flatten([textStyles.header, { marginBottom: 8 }]),
   plipContainer: {
     marginVertical: 20,
   },

@@ -1,6 +1,4 @@
-import {
-  defaultMainTabViewRoutes,
-} from "../models";
+import { defaultMainTabViewRoutes } from "../models";
 
 const initialState = {
   index: 0,
@@ -21,4 +19,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

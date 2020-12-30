@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 
 import { StyleSheet } from "react-native";
 
-import {
-  Text,
-  TouchableOpacity,
-  View,
-  ViewPropTypes,
-} from "react-native";
+import { Text, TouchableOpacity, View, ViewPropTypes } from "react-native";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -57,19 +52,14 @@ export default class RoundedButton extends Component {
 
   static defaultProps = {
     enabled: true,
-  }
+  };
 
   render() {
-    const {
-      action,
-      enabled,
-    } = this.props;
+    const { action, enabled } = this.props;
 
     if (enabled) {
       return (
-        <TouchableOpacity
-          onPress={action}
-        >
+        <TouchableOpacity onPress={action}>
           {this.renderButton()}
         </TouchableOpacity>
       );
@@ -89,18 +79,26 @@ export default class RoundedButton extends Component {
       titleStyle,
     } = this.props;
 
-    return(
-      <View style={[styles.defaultButtonContainer, icon && styles.withIcon, buttonStyle, !enabled && styles.buttonDisable]}>
-        { icon &&
+    return (
+      <View
+        style={[
+          styles.defaultButtonContainer,
+          icon && styles.withIcon,
+          buttonStyle,
+          !enabled && styles.buttonDisable,
+        ]}>
+        {icon && (
           <Icon
             name={icon}
             size={24}
-            color= { iconColor ? iconColor : "#000" }
+            color={iconColor ? iconColor : "#000"}
             style={[styles.actionIcon, iconStyle]}
           />
-        }
+        )}
         <View style={styles.titleContainer}>
-          <Text style={[styles.actionTitle, titleStyle]}>{title.toUpperCase()}</Text>
+          <Text style={[styles.actionTitle, titleStyle]}>
+            {title.toUpperCase()}
+          </Text>
         </View>
       </View>
     );

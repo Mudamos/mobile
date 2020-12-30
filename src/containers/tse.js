@@ -6,37 +6,16 @@ import {
   voteCardIdAcquired,
 } from "../actions";
 
-import {
-  log,
-  logError,
-} from "../utils";
+import { log, logError } from "../utils";
 
 import TSELayout from "../components/tse-layout";
 
-const TSE_URL = "http://www.tse.jus.br/eleitor/servicos/titulo-de-eleitor/titulo-e-local-de-votacao/consulta-por-nome#form-consultar-local-votacao";
-
-const reactNativePostMessageBugHack = `
-  var patchPostMessageFunction = function() {
-    var originalPostMessage = window.postMessage;
-
-    var patchedPostMessage = function(message, targetOrigin, transfer) {
-      originalPostMessage(message, targetOrigin, transfer);
-    };
-
-    patchedPostMessage.toString = function() {
-      return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage');
-    };
-
-    window.postMessage = patchedPostMessage;
-  };
-
-  patchPostMessageFunction();
-`;
+const TSE_URL =
+  "http://www.tse.jus.br/eleitor/servicos/titulo-de-eleitor/titulo-e-local-de-votacao/consulta-por-nome#form-consultar-local-votacao";
+const source = { uri: TSE_URL };
 
 const jsCode = ({ birthdate, name }) => {
   return `
-    ${reactNativePostMessageBugHack}
-
     (function() {
       function fillOutForm() {
         var nameField = document.getElementsByName("nomeTituloCPF")[0];
@@ -153,7 +132,7 @@ const jsCode = ({ birthdate, name }) => {
         if (info) {
           const message = JSON.stringify(info);
           clearInterval(updateInterval);
-          window.postMessage(message, "*");
+          window.ReactNativeWebView.postMessage(message);
         }
       };
 
@@ -178,9 +157,9 @@ const mapStateToProps = (state, ownProps) => ({
   }),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onBack: () => dispatch(navigateBack()),
-  onMessage: event => {
+  onMessage: (event) => {
     const message = event.nativeEvent.data;
 
     log(`webView: ${message}`);
@@ -196,7 +175,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(tseVoteAddressAcquired({ tseVoteAddress: voteAddress }));
         dispatch(navigateBack());
       }
-    } catch(e) {
+    } catch (e) {
       logError(e);
     }
   },
@@ -207,8 +186,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...dispatchProps,
   ...ownProps,
 
-  source: { uri: TSE_URL },
+  source,
 });
 
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(TSELayout);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps,
+)(TSELayout);

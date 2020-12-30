@@ -1,6 +1,5 @@
 source "https://rubygems.org"
 
-ruby "2.3.1"
+ruby "2.7.2"
 
-gem "cocoapods", "1.6.2"
-gem "shenzhen"
+gem "cocoapods", "1.10.0"

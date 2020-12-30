@@ -17,7 +17,6 @@ export const buttonStyle = {
   height: 42,
 };
 
-
 export default class MyFlatButton extends Component {
   static propTypes = {
     dismissKeyboardOnPress: PropTypes.bool,
@@ -26,14 +25,14 @@ export default class MyFlatButton extends Component {
     title: PropTypes.string,
     onPress: PropTypes.func.isRequired,
     ...MKButton.propTypes,
-  }
+  };
 
   static defaultProps = {
     dismissKeyboardOnPress: true,
     enabled: true,
     textStyle: {},
     style: {},
-  }
+  };
 
   render() {
     return this.renderButton();
@@ -46,11 +45,7 @@ export default class MyFlatButton extends Component {
   }
 
   buttonClass() {
-    const {
-      enabled,
-      style,
-      title,
-    } = this.props;
+    const { enabled, style, title } = this.props;
 
     const mergedStyle = { ...buttonStyle, ...style };
 
@@ -65,11 +60,10 @@ export default class MyFlatButton extends Component {
     }
 
     if (enabled) {
-      button
-        .withOnPress(this.onPress.bind(this))
-        .withRippleColor("transparent"); // Disabling ripple effect as it does not work on android
+      button.withOnPress(this.onPress).withRippleColor("transparent"); // Disabling ripple effect as it does not work on android
     } else {
-      button.withRippleColor("transparent")
+      button
+        .withRippleColor("transparent")
         .withMaskEnabled(false)
         .withMaskColor("transparent")
         .withTextStyle({ ...textStyle, ...this.props.textStyle, opacity: 0.5 });
@@ -78,10 +72,10 @@ export default class MyFlatButton extends Component {
     return button;
   }
 
-  onPress() {
+  onPress = () => {
     const { dismissKeyboardOnPress, onPress } = this.props;
 
     if (dismissKeyboardOnPress) Keyboard.dismiss();
     onPress();
-  }
+  };
 }

@@ -1,15 +1,12 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  Image,
-  Platform,
-  TouchableOpacity,
-  Text,
-  View,
-} from "react-native";
+import { Image, Platform, TouchableOpacity, Text, View } from "react-native";
 
-import appleAuth, { AppleButton } from "@invertase/react-native-apple-authentication";
+import {
+  appleAuth,
+  AppleButton,
+} from "@invertase/react-native-apple-authentication";
 
 import Layout from "./purple-layout";
 import ScrollView from "./scroll-view";
@@ -26,18 +23,15 @@ import locale from "../locales/pt-BR";
 
 import styles from "../styles/sign-in-layout";
 
-import Logo from "../images/Logo-alt.png"
+import Logo from "../images/Logo-alt.png";
 
-import { errorMessageFromCode } from "../utils"
+import { errorMessageFromCode } from "../utils";
 
 class SignInLayout extends Component {
   state = {};
 
   static propTypes = {
-    authErrorCode: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
+    authErrorCode: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     isFacebookLogged: PropTypes.bool,
     isLogged: PropTypes.bool,
     isLoggingIn: PropTypes.bool,
@@ -49,13 +43,10 @@ class SignInLayout extends Component {
     onOpenURL: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
     onSignUp: PropTypes.func.isRequired,
-  }
+  };
 
   get validForm() {
-    return [
-      this.state.email,
-      this.state.password,
-    ].every(v => v);
+    return [this.state.email, this.state.password].every((v) => v);
   }
 
   get signInEnabled() {
@@ -74,12 +65,7 @@ class SignInLayout extends Component {
   }
 
   render() {
-    const {
-      isFacebookLogged,
-      isLogged,
-      isLoggingIn,
-      onOpenURL,
-    } = this.props;
+    const { isFacebookLogged, isLogged, isLoggingIn, onOpenURL } = this.props;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -114,14 +100,9 @@ class SignInLayout extends Component {
   renderHeader() {
     return (
       <View>
-        <Image
-          source={Logo}
-          style={styles.logo}
-        />
+        <Image source={Logo} style={styles.logo} />
 
-        <Text style={styles.headerTitle}>
-          {locale.imAlreadyRegistered}
-        </Text>
+        <Text style={styles.headerTitle}>{locale.imAlreadyRegistered}</Text>
       </View>
     );
   }
@@ -131,11 +112,11 @@ class SignInLayout extends Component {
       <MDTextInput
         placeholder={locale.emailRegistered}
         value={this.state.email}
-        onChangeText={email => this.setState({ email })}
+        onChangeText={(email) => this.setState({ email })}
         keyboardType="email-address"
         autoCapitalize="none"
         onSubmitEditing={() => this.emailInput.blur()}
-        ref={ref => this.emailInput = ref}
+        ref={(ref) => (this.emailInput = ref)}
       />
     );
   }
@@ -147,9 +128,9 @@ class SignInLayout extends Component {
         value={this.state.password}
         password={true}
         autoCapitalize="none"
-        onChangeText={password => this.setState({ password })}
+        onChangeText={(password) => this.setState({ password })}
         onSubmitEditing={() => this.passwordInput.blur()}
-        ref={ref => this.passwordInput = ref}
+        ref={(ref) => (this.passwordInput = ref)}
       />
     );
   }
@@ -158,9 +139,16 @@ class SignInLayout extends Component {
     const { authErrorCode } = this.props;
     return (
       <View style={styles.continueContainer}>
-      { authErrorCode && <Text style={styles.authErrorText}>{this.errorMessage}</Text>}
+        {authErrorCode && (
+          <Text style={styles.authErrorText}>{this.errorMessage}</Text>
+        )}
         <View style={styles.continueButtonContainer}>
-          <RoundedButton title={locale.continue} action={this.onSubmit} buttonStyle={styles.continueButton} titleStyle={styles.continueButtonTitle}/>
+          <RoundedButton
+            title={locale.continue}
+            action={this.onSubmit}
+            buttonStyle={styles.continueButton}
+            titleStyle={styles.continueButtonTitle}
+          />
         </View>
       </View>
     );
@@ -187,21 +175,13 @@ class SignInLayout extends Component {
   renderNavBar() {
     const { onBack } = this.props;
 
-    return (
-      <NavigationBar
-        leftView={<BackButton onPress={onBack} />}
-      />
-    );
+    return <NavigationBar leftView={<BackButton onPress={onBack} />} />;
   }
 
   renderFBLogin() {
     const { onFacebookLogin } = this.props;
 
-    return (
-      <FBLoginButton
-        onPress={onFacebookLogin}
-      />
-    );
+    return <FBLoginButton onPress={onFacebookLogin} />;
   }
 
   renderAppleSignIn() {
@@ -225,9 +205,7 @@ class SignInLayout extends Component {
 
     return (
       <TouchableOpacity onPress={onForgotPassword}>
-        <Text style={styles.forgotPassword}>
-          {locale.forgotPasswordTitle}
-        </Text>
+        <Text style={styles.forgotPassword}>{locale.forgotPasswordTitle}</Text>
       </TouchableOpacity>
     );
   }
@@ -250,7 +228,7 @@ class SignInLayout extends Component {
     const { onSignIn } = this.props;
 
     onSignIn(email, password);
-  }
+  };
 }
 
 export default SignInLayout;

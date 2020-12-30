@@ -1,2 +1,2 @@
-import "./shim.js"
-import "./main"
+import "./shim.js";
+import "./main";

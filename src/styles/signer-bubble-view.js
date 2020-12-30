@@ -3,19 +3,25 @@ import { StyleSheet } from "react-native";
 const BUBBLE_SIZE = 30;
 const BUBBLE_MARGIN = 4;
 
+const bubble = {
+  height: BUBBLE_SIZE,
+  width: BUBBLE_SIZE,
+  borderRadius: BUBBLE_SIZE / 2,
+  borderColor: "rgba(0,0,0,.5)",
+  borderWidth: 1,
+  marginRight: BUBBLE_MARGIN,
+  flex: 1,
+  alignSelf: "center",
+  justifyContent: "center",
+  overflow: "hidden",
+};
 
 export default StyleSheet.create({
-  bubble: {
-    height: BUBBLE_SIZE,
-    width: BUBBLE_SIZE,
-    borderRadius: BUBBLE_SIZE / 2,
-    borderColor: "rgba(0,0,0,.5)",
-    borderWidth: 1,
-    marginRight: BUBBLE_MARGIN,
-    flex: 1,
-    alignSelf: "center",
-    justifyContent: "center",
-    overflow: "hidden",
+  bubble,
+  bubbleWithBorder: {
+    ...bubble,
+    backgroundColor: "#D6C0E9",
+    borderColor: "transparent",
   },
   imageBubble: {
     overflow: "visible",

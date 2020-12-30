@@ -24,7 +24,7 @@ export default class SimpleButton extends Component {
 
   static defaultProps = {
     disabled: false,
-  }
+  };
 
   render() {
     const {
@@ -36,25 +36,42 @@ export default class SimpleButton extends Component {
       onPress,
     } = this.props;
 
-    const text = isString(children) ?
-      <Text style={[defaultStyle.textStyle, textStyle]}>{children}</Text> :
-      children;
+    const text = isString(children) ? (
+      <Text style={[defaultStyle.textStyle, textStyle]}>{children}</Text>
+    ) : (
+      children
+    );
 
-    const content = disabled ?
-      <View style={{ opacity: 0.5 }}>{text}</View> :
-      text;
+    const content = disabled ? (
+      <View style={defaultStyle.disabledContentStyle}>{text}</View>
+    ) : (
+      text
+    );
 
-    const button = <View style={[defaultStyle.buttonStyle, buttonStyle]}>{content}</View>;
+    const button = (
+      <View style={[defaultStyle.buttonStyle, buttonStyle]}>{content}</View>
+    );
 
-    const touchableButton = disabled ?
-      <View style={[defaultStyle.containerStyle, containerStyle]}>{button}</View> :
-      <TouchableHighlight style={[defaultStyle.containerStyle, containerStyle]} onPress={e => !disabled && onPress(e)}>{button}</TouchableHighlight>;
+    const touchableButton = disabled ? (
+      <View style={[defaultStyle.containerStyle, containerStyle]}>
+        {button}
+      </View>
+    ) : (
+      <TouchableHighlight
+        style={[defaultStyle.containerStyle, containerStyle]}
+        onPress={(e) => !disabled && onPress(e)}>
+        {button}
+      </TouchableHighlight>
+    );
 
     return touchableButton;
   }
 }
 
 const defaultStyle = StyleSheet.create({
+  disabledContentStyle: {
+    opacity: 0.5,
+  },
   textStyle: {
     color: "white",
     fontSize: 15,

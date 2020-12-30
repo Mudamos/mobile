@@ -7,7 +7,7 @@ export default (state = initialState, action) => {
 
   const { type, payload } = action;
 
-  switch(type) {
+  switch (type) {
     case "CITIES_CITIES_FETCHED":
       return {
         ...state,

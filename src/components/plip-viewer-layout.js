@@ -1,20 +1,13 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 
 import { withAfterPlipValidation } from "../decorators";
 
-import {
-  eligibleToSignPlip,
-  moment,
-} from "../utils";
+import { eligibleToSignPlip, moment } from "../utils";
 
-import Ionicon from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import Layout from "./layout";
 import NavigationBar from "./navigation-bar";
@@ -29,6 +22,8 @@ import SafeAreaView from "./safe-area-view";
 
 import styles from "../styles/plip-viewer-layout";
 import plipHtmlStyles from "../styles/plip-html-styles";
+
+const callToActionTextStyle = { fontSize: 19, fontFamily: "lato" };
 
 const enhance = withAfterPlipValidation;
 
@@ -85,32 +80,38 @@ class PlipViewerLayout extends Component {
     const { plip, onPlipSign } = this.props;
     this.onToggleSignModal();
     onPlipSign(plip);
-  }
+  };
 
   onToggleSignModal = () => {
-    this.setState(({ isSignModalVisible }) => ({ isSignModalVisible: !isSignModalVisible }));
-  }
+    this.setState(({ isSignModalVisible }) => ({
+      isSignModalVisible: !isSignModalVisible,
+    }));
+  };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // Handling the success modal after signing the plip. It should be just displayed once.
-    if (nextProps.justSignedPlip && nextProps.justSignedPlip !== this.props.justSignedPlip) {
+    if (
+      nextProps.justSignedPlip &&
+      nextProps.justSignedPlip !== this.props.justSignedPlip
+    ) {
       this.setState({ showSignSuccess: true });
-    } else if (nextProps.justSignedPlip === false && this.state.showSignSuccess) {
+    } else if (
+      nextProps.justSignedPlip === false &&
+      this.state.showSignSuccess
+    ) {
       // Handling the case the modal was displayed on another view and we need to dismiss it here
       this.setState({ showSignSuccess: false });
     }
   }
 
   render() {
-    const {
-      isSigning,
-    } = this.props;
+    const { isSigning } = this.props;
 
     const { showSignSuccess, isSignModalVisible } = this.state;
 
     return (
       <SafeAreaView style={styles.container}>
-        <Layout style={{backgroundColor: "#FFF"}}>
+        <Layout style={styles.white}>
           {this.renderNavBar()}
           {this.renderMainContent()}
         </Layout>
@@ -118,24 +119,25 @@ class PlipViewerLayout extends Component {
         {showSignSuccess && this.renderSignSuccess()}
 
         <PageLoader isVisible={isSigning} />
-        <ConfirmSignModal isVisible={isSignModalVisible} plipName={this.plipName} onToggleSignModal={this.onToggleSignModal} onPlipSign={this.onPlipSign}/>
+        <ConfirmSignModal
+          isVisible={isSignModalVisible}
+          plipName={this.plipName}
+          onToggleSignModal={this.onToggleSignModal}
+          onPlipSign={this.onPlipSign}
+        />
       </SafeAreaView>
     );
   }
 
   renderMainContent() {
-    const {
-      plip,
-      userSignDate,
-      user,
-      onLogin,
-    } = this.props;
+    const { plip, userSignDate, user, onLogin } = this.props;
 
     const canSign = eligibleToSignPlip({ plip, user });
     const willSign = canSign && !userSignDate && this.signatureEnabled;
-    const shouldLogin = !user && this.signatureEnabled
+    const shouldLogin = !user && this.signatureEnabled;
 
-    const onPress = shouldLogin && onLogin || willSign && this.onToggleSignModal;
+    const onPress =
+      (shouldLogin && onLogin) || (willSign && this.onToggleSignModal);
 
     return (
       <View style={styles.full}>
@@ -145,23 +147,21 @@ class PlipViewerLayout extends Component {
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}
           bounces={false}
-          showsVerticalScrollIndicator={false}
-        >
+          showsVerticalScrollIndicator={false}>
           <MarkdownView
             content={plip.content}
             contentContainerStyle={plipHtmlStyles}
           />
         </ScrollView>
 
-        {
-          !userSignDate && plip && this.signatureEnabled &&
-            <PurpleFlatButton
-              title={this.callToAction}
-              onPress={onPress}
-              style={signButtonStyle}
-              textStyle={{fontSize: 19, fontFamily: "lato"}}
-            />
-        }
+        {!userSignDate && plip && this.signatureEnabled && (
+          <PurpleFlatButton
+            title={this.callToAction}
+            onPress={onPress}
+            style={signButtonStyle}
+            textStyle={callToActionTextStyle}
+          />
+        )}
       </View>
     );
   }
@@ -184,11 +184,7 @@ class PlipViewerLayout extends Component {
 
     return (
       <TouchableOpacity onPress={() => onShare(plip)}>
-        <Ionicon
-          name="md-share-alt"
-          size={24}
-          color="#fff"
-        />
+        <Icon name="share" size={24} color="#fff" />
       </TouchableOpacity>
     );
   }

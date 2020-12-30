@@ -1,7 +1,13 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-import { Animated, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Animated,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import locale from "../locales/pt-BR";
 
@@ -61,48 +67,44 @@ class ConfirmSignModal extends Component {
 
     onPlipSign: PropTypes.func.isRequired,
     onToggleSignModal: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     fadeAnim: new Animated.Value(0),
     bottom: new Animated.Value(-300),
-  }
+  };
 
   static defaultProps = {
     isVisible: false,
-  }
+  };
 
   componentDidUpdate(prevProps) {
     if (this.props.isVisible !== prevProps.isVisible) {
       if (prevProps.isVisible === false) {
         Animated.sequence([
-          Animated.timing(
-            this.state.fadeAnim,
-            {
-              toValue: 1,
-              duration: 200,
-            }),
-          Animated.timing(
-            this.state.bottom,
-            {
-              toValue: 0,
-              duration: 300,
-            }),
+          Animated.timing(this.state.fadeAnim, {
+            toValue: 1,
+            duration: 200,
+            useNativeDriver: false,
+          }),
+          Animated.timing(this.state.bottom, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: false,
+          }),
         ]).start();
       } else {
         Animated.sequence([
-          Animated.timing(
-            this.state.bottom,
-            {
-              toValue: -300,
-              duration: 100,
-            }),
-          Animated.timing(
-            this.state.fadeAnim,
-            {
-              toValue: 0,
-              duration: 200,
-            }),
+          Animated.timing(this.state.bottom, {
+            toValue: -300,
+            duration: 100,
+            useNativeDriver: false,
+          }),
+          Animated.timing(this.state.fadeAnim, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: false,
+          }),
         ]).start();
       }
     }
@@ -118,12 +120,17 @@ class ConfirmSignModal extends Component {
     const buttonStyle = styles.button;
 
     return (
-      <RoundedButton title={title} action={action} buttonStyle={[buttonStyle, signButton]} titleStyle={titleStyle}/>
+      <RoundedButton
+        title={title}
+        action={action}
+        buttonStyle={[buttonStyle, signButton]}
+        titleStyle={titleStyle}
+      />
     );
   }
 
   renderButtonCancel() {
-    const { onToggleSignModal } = this.props
+    const { onToggleSignModal } = this.props;
 
     const title = locale.cancel;
     const action = onToggleSignModal;
@@ -131,38 +138,43 @@ class ConfirmSignModal extends Component {
     const buttonStyle = styles.button;
 
     return (
-      <RoundedButton title={title} action={action} buttonStyle={buttonStyle} titleStyle={titleStyle}/>
+      <RoundedButton
+        title={title}
+        action={action}
+        buttonStyle={buttonStyle}
+        titleStyle={titleStyle}
+      />
     );
   }
 
   render() {
-    const {
-      isVisible,
-      onToggleSignModal,
-      plipName,
-    } = this.props;
+    const { isVisible, onToggleSignModal, plipName } = this.props;
 
-    const {
-      fadeAnim,
-      bottom,
-    } = this.state;
+    const { fadeAnim, bottom } = this.state;
 
     if (!isVisible) return null;
 
     const modalTitle = locale.signPlip;
-    const modalDescription = (<Text style={styles.text}>Clique em &quot;<Text style={styles.bold}>Assinar</Text>&quot; para confirmar sua colaboração ao Projeto de Lei: <Text style={styles.bold}>{plipName}</Text>.</Text>);
+    const modalDescription = (
+      <Text style={styles.text}>
+        Clique em &quot;<Text style={styles.bold}>Assinar</Text>&quot; para
+        confirmar sua colaboração ao Projeto de Lei:{" "}
+        <Text style={styles.bold}>{plipName}</Text>.
+      </Text>
+    );
 
     return (
       <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-        <TouchableOpacity style={styles.background} onPress={onToggleSignModal} />
-        <Animated.View style={[styles.modal, {bottom: bottom}]}>
+        <TouchableOpacity
+          style={styles.background}
+          onPress={onToggleSignModal}
+        />
+        <Animated.View style={[styles.modal, { bottom: bottom }]}>
           <Text style={[styles.text, styles.title]}>{modalTitle}</Text>
-          <View style={styles.descriptionContainer}>
-            {modalDescription}
-          </View>
+          <View style={styles.descriptionContainer}>{modalDescription}</View>
           <View style={styles.buttonPanel}>
-            { this.renderButtonCancel() }
-            { this.renderButtonSign() }
+            {this.renderButtonCancel()}
+            {this.renderButtonSign()}
           </View>
         </Animated.View>
       </Animated.View>
