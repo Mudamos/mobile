@@ -1,5 +1,7 @@
 # Next
 
+* [PR 528] Avoid concurrency when calling the avatar camera
+
 ## [2.7.0] 30/12/2020
 
 * [PR 526] Upgrade to RN 0.63.3
