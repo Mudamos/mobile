@@ -22,14 +22,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   button: {
-    marginHorizontal: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
   buttonPanel: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-around",
     flexWrap: "wrap",
   },
   container: {
