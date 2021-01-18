@@ -22,6 +22,7 @@ import locale from "../locales/pt-BR";
 const noHeight = { height: null };
 const darkGray = "#595959";
 const whiteStyle = { color: "#ffffff" };
+const WEBVIEW_TIMEOUT = 10 * 1000;
 
 export default class TSELayout extends Component {
   state = {
@@ -52,6 +53,19 @@ export default class TSELayout extends Component {
   get loadingWebView() {
     const { loading, tutorialDone } = this.state;
     return loading && tutorialDone;
+  }
+
+  componentDidUpdate(_prevProps, prevState) {
+    const { tutorialDone } = this.state;
+
+    if (tutorialDone && !prevState.tutorialDone) {
+      this.resetWebviewTimeout();
+      this.webviewLoadTimeoutId = setTimeout(this.onLoadEnd, WEBVIEW_TIMEOUT);
+    }
+  }
+
+  componentWillUnmount() {
+    this.resetWebviewTimeout();
   }
 
   render() {
@@ -266,5 +280,10 @@ export default class TSELayout extends Component {
     );
   }
 
-  onLoadEnd = () => this.setState({ loading: false });
+  resetWebviewTimeout = () => clearTimeout(this.webviewLoadTimeoutId);
+
+  onLoadEnd = () => {
+    this.setState({ loading: false });
+    this.resetWebviewTimeout();
+  };
 }
