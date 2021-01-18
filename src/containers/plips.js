@@ -39,6 +39,7 @@ import {
   searchPlip,
   setCurrentPlip,
   toggleFavorite,
+  permissionRemoveUnauthorized,
 } from "../actions";
 
 import {
@@ -95,6 +96,7 @@ import {
   hasLoadedUserLocationPlips,
   isValidatingProfile,
   searchPlipTitle,
+  getUnauthorizedPermissions,
 } from "../selectors";
 
 import { SCREEN_KEYS } from "../models";
@@ -124,68 +126,54 @@ const styles = StyleSheet.create({
 });
 
 class Container extends Component {
-  state = {
-    menuOpen: false,
+  openMenu = () => {
+    const { onFetchProfile } = this.props;
+
+    this.setState({ menuOpen: true });
+    onFetchProfile();
   };
 
-  static propTypes = {
-    allPlips: PropTypes.array,
-    appLoadingProgress: PropTypes.number,
-    currentSigningPlip: PropTypes.object,
-    currentUser: PropTypes.object,
-    errorFetchingAllPlips: PropTypes.bool,
-    errorFetchingNationwidePlips: PropTypes.bool,
-    errorFetchingSignedPlips: PropTypes.bool,
-    errorFetchingUserFavoritePlips: PropTypes.bool,
-    errorFetchingUserLocationPlips: PropTypes.bool,
-    isAddingFavoritePlip: PropTypes.bool,
-    isAppReady: PropTypes.bool,
-    isFetchingAllPlips: PropTypes.bool.isRequired,
-    isFetchingFavoritePlips: PropTypes.bool.isRequired,
-    isFetchingNationwidePlips: PropTypes.bool.isRequired,
-    isFetchingPlipsByLocation: PropTypes.bool.isRequired,
-    isFetchingPlipsNextPageAllPlips: PropTypes.bool.isRequired,
-    isFetchingPlipsNextPageFavoritePlips: PropTypes.bool.isRequired,
-    isFetchingPlipsNextPageNationwidePlips: PropTypes.bool.isRequired,
-    isFetchingPlipsNextPagePlipsByLocation: PropTypes.bool.isRequired,
-    isFetchingPlipsNextPageSignedPlips: PropTypes.bool.isRequired,
-    isFetchingProfile: PropTypes.bool,
-    isFetchingSignedPlips: PropTypes.bool.isRequired,
-    isRefreshingAllPlips: PropTypes.bool.isRequired,
-    isRefreshingFavoritePlips: PropTypes.bool.isRequired,
-    isRefreshingNationwidePlips: PropTypes.bool.isRequired,
-    isRefreshingPlipsByLocation: PropTypes.bool.isRequired,
-    isRefreshingSignedPlips: PropTypes.bool.isRequired,
-    isSearchingPlips: PropTypes.bool,
-    isUserFirstTime: PropTypes.bool,
-    isUserLoggedIn: PropTypes.bool,
-    isValidatingProfile: PropTypes.bool,
-    nationwidePlips: PropTypes.array,
-    remoteLinks: RemoteLinksType,
-    signedPlips: PropTypes.array,
-    userLocationPlips: PropTypes.array,
-    onAvatarChanged: PropTypes.func.isRequired,
-    onFetchProfile: PropTypes.func.isRequired,
-    onFirstTimeModalClose: PropTypes.func.isRequired,
-    onGoToPlip: PropTypes.func.isRequired,
-    onLogEvent: PropTypes.func.isRequired,
-    onLogout: PropTypes.func.isRequired,
-    onOpenURL: PropTypes.func.isRequired,
-    onPrivacyPolicy: PropTypes.func.isRequired,
-    onProfileEdit: PropTypes.func.isRequired,
-    onRefresh: PropTypes.func.isRequired,
-    onRetryPlips: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
-    onSignIn: PropTypes.func.isRequired,
-    onTapAboutApp: PropTypes.func.isRequired,
-    onTapHelp: PropTypes.func.isRequired,
-    onTapSendYourPl: PropTypes.func.isRequired,
-    onTellAFriend: PropTypes.func.isRequired,
-    onToggleFavorite: PropTypes.func.isRequired,
-    onValidateProfile: PropTypes.func.isRequired,
+  onAbout = () => {
+    const { onTapAboutApp, onLogEvent } = this.props;
+
+    onTapAboutApp();
+    onLogEvent({ name: "tapped_menu_about_app" });
   };
 
-  get menuEntries() {
+  onPrivacyPolicy = () => {
+    const { onLogEvent, onPrivacyPolicy } = this.props;
+    onLogEvent({ name: "tapped_menu_privacy_policy" });
+    onPrivacyPolicy();
+  };
+
+  onTellAFriend = () => {
+    const { onLogEvent, onTellAFriend } = this.props;
+    onLogEvent({ name: "tapped_menu_tell_a_friend" });
+    onTellAFriend();
+  };
+
+  onHelp = () => {
+    const { onTapHelp, onLogEvent } = this.props;
+
+    onTapHelp();
+    onLogEvent({ name: "tapped_menu_help" });
+  };
+
+  onSendYourPl = () => {
+    const { onTapSendYourPl, onLogEvent } = this.props;
+
+    onTapSendYourPl();
+    onLogEvent({ name: "tapped_menu_send_your_pl" });
+  };
+
+  onSignIn = () => {
+    const { onSignIn, onLogEvent } = this.props;
+
+    onSignIn();
+    onLogEvent({ name: "tapped_menu_signup" });
+  };
+
+  menuEntries = () => {
     const {
       currentUser,
       isFetchingProfile,
@@ -245,6 +233,86 @@ class Container extends Component {
     }
 
     return sortMenuEntries(entries);
+  };
+
+  state = {
+    menuOpen: false,
+    menuOptions: this.menuEntries(),
+  };
+
+  static propTypes = {
+    allPlips: PropTypes.array,
+    appLoadingProgress: PropTypes.number,
+    currentSigningPlip: PropTypes.object,
+    currentUser: PropTypes.object,
+    errorFetchingAllPlips: PropTypes.bool,
+    errorFetchingNationwidePlips: PropTypes.bool,
+    errorFetchingSignedPlips: PropTypes.bool,
+    errorFetchingUserFavoritePlips: PropTypes.bool,
+    errorFetchingUserLocationPlips: PropTypes.bool,
+    isAddingFavoritePlip: PropTypes.bool,
+    isAppReady: PropTypes.bool,
+    isFetchingAllPlips: PropTypes.bool.isRequired,
+    isFetchingFavoritePlips: PropTypes.bool.isRequired,
+    isFetchingNationwidePlips: PropTypes.bool.isRequired,
+    isFetchingPlipsByLocation: PropTypes.bool.isRequired,
+    isFetchingPlipsNextPageAllPlips: PropTypes.bool.isRequired,
+    isFetchingPlipsNextPageFavoritePlips: PropTypes.bool.isRequired,
+    isFetchingPlipsNextPageNationwidePlips: PropTypes.bool.isRequired,
+    isFetchingPlipsNextPagePlipsByLocation: PropTypes.bool.isRequired,
+    isFetchingPlipsNextPageSignedPlips: PropTypes.bool.isRequired,
+    isFetchingProfile: PropTypes.bool,
+    isFetchingSignedPlips: PropTypes.bool.isRequired,
+    isRefreshingAllPlips: PropTypes.bool.isRequired,
+    isRefreshingFavoritePlips: PropTypes.bool.isRequired,
+    isRefreshingNationwidePlips: PropTypes.bool.isRequired,
+    isRefreshingPlipsByLocation: PropTypes.bool.isRequired,
+    isRefreshingSignedPlips: PropTypes.bool.isRequired,
+    isSearchingPlips: PropTypes.bool,
+    isUserFirstTime: PropTypes.bool,
+    isUserLoggedIn: PropTypes.bool,
+    isValidatingProfile: PropTypes.bool,
+    nationwidePlips: PropTypes.array,
+    remoteLinks: RemoteLinksType,
+    signedPlips: PropTypes.array,
+    userLocationPlips: PropTypes.array,
+    onAvatarChanged: PropTypes.func.isRequired,
+    onFetchProfile: PropTypes.func.isRequired,
+    onFirstTimeModalClose: PropTypes.func.isRequired,
+    onGoToPlip: PropTypes.func.isRequired,
+    onLogEvent: PropTypes.func.isRequired,
+    onLogout: PropTypes.func.isRequired,
+    onOpenURL: PropTypes.func.isRequired,
+    onPrivacyPolicy: PropTypes.func.isRequired,
+    onProfileEdit: PropTypes.func.isRequired,
+    onRefresh: PropTypes.func.isRequired,
+    onRetryPlips: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
+    onSignIn: PropTypes.func.isRequired,
+    onTapAboutApp: PropTypes.func.isRequired,
+    onTapHelp: PropTypes.func.isRequired,
+    onTapSendYourPl: PropTypes.func.isRequired,
+    onTellAFriend: PropTypes.func.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
+    onValidateProfile: PropTypes.func.isRequired,
+  };
+
+  componentDidUpdate(prevProps) {
+    const {
+      currentUser,
+      isFetchingProfile,
+      onProfileEdit,
+      isUserLoggedIn,
+    } = this.props;
+
+    if (
+      isFetchingProfile !== prevProps.isFetchingProfile ||
+      currentUser !== prevProps.currentUser ||
+      onProfileEdit !== prevProps.onProfileEdit ||
+      isUserLoggedIn !== prevProps.isUserLoggedIn
+    ) {
+      this.updateMenuOptions();
+    }
   }
 
   componentDidMount() {
@@ -262,6 +330,11 @@ class Container extends Component {
       setTimeout(() => onGoToPlip(currentSigningPlip), 500);
     }
   }
+
+  updateMenuOptions = () => {
+    const menuOptions = this.menuEntries();
+    this.setState({ menuOptions });
+  };
 
   render() {
     const { isValidatingProfile, onFetchProfile } = this.props;
@@ -313,11 +386,14 @@ class Container extends Component {
       isFetchingProfile,
       isUserLoggedIn,
       permission,
+      unauthorizedPermissions,
       onAvatarChanged,
       onLogout,
       onRequestCameraPermission,
       onRequestGalleryPermission,
+      onRemoveUnauthorizedPermission,
     } = this.props;
+    const { menuOptions } = this.state;
 
     return (
       <LoggedInMenu
@@ -330,67 +406,12 @@ class Container extends Component {
         onLogout={onLogout}
         onRequestCameraPermission={onRequestCameraPermission}
         onRequestGalleryPermission={onRequestGalleryPermission}
-        menuEntries={this.menuEntries}
+        menuEntries={menuOptions}
+        unauthorizedPermissions={unauthorizedPermissions}
+        onRemoveUnauthorizedPermission={onRemoveUnauthorizedPermission}
       />
     );
   }
-
-  openMenu = () => {
-    const { onFetchProfile } = this.props;
-
-    this.setState({ menuOpen: true });
-    onFetchProfile();
-  };
-
-  closeMenu() {
-    this.setState({ menuOpen: false });
-  }
-
-  onAbout = () => {
-    const { onTapAboutApp, onLogEvent } = this.props;
-
-    onTapAboutApp();
-    onLogEvent({ name: "tapped_menu_about_app" });
-  };
-
-  onPrivacyPolicy = () => {
-    const { onLogEvent, onPrivacyPolicy } = this.props;
-    onLogEvent({ name: "tapped_menu_privacy_policy" });
-    onPrivacyPolicy();
-  };
-
-  onTellAFriend = () => {
-    const { onLogEvent, onTellAFriend } = this.props;
-    onLogEvent({ name: "tapped_menu_tell_a_friend" });
-    onTellAFriend();
-  };
-
-  onHelp = () => {
-    const { onTapHelp, onLogEvent } = this.props;
-
-    onTapHelp();
-    onLogEvent({ name: "tapped_menu_help" });
-  };
-
-  onSendYourPl = () => {
-    const { onTapSendYourPl, onLogEvent } = this.props;
-
-    onTapSendYourPl();
-    onLogEvent({ name: "tapped_menu_send_your_pl" });
-  };
-
-  onOpenURL({ eventName, link }) {
-    const { onLogEvent, onOpenURL } = this.props;
-    onLogEvent({ name: eventName });
-    onOpenURL(link);
-  }
-
-  onSignIn = () => {
-    const { onSignIn, onLogEvent } = this.props;
-
-    onSignIn();
-    onLogEvent({ name: "tapped_menu_signup" });
-  };
 }
 
 const mapStateToProps = (state) => ({
@@ -453,6 +474,7 @@ const mapStateToProps = (state) => ({
   tabViewState: getMainTabView(state),
   userSignInfo: getUserSignInfo(state),
   plipsFavoriteInfo: findPlipsFavoriteInfo(state),
+  unauthorizedPermissions: getUnauthorizedPermissions(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -486,6 +508,8 @@ const mapDispatchToProps = (dispatch) => ({
   onSearchPlip: (title) => dispatch(searchPlip(title)),
   onShare: (plip) => dispatch(sharePlip(plip)),
   onToggleFavorite: (detailId) => dispatch(toggleFavorite({ detailId })),
+  onRemoveUnauthorizedPermission: (permission) =>
+    dispatch(permissionRemoveUnauthorized(permission)),
 });
 
 const enhance = compose(

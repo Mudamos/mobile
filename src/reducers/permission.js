@@ -21,6 +21,13 @@ export default (state = initialState, action) => {
         ...state,
         unauthorized: uniq([...state.unauthorized, payload.permission]),
       };
+    case "PERMISSION_REMOVE_UNAUTHORIZED":
+      return {
+        ...state,
+        unauthorized: state.unauthorized.filter(
+          (permission) => permission !== payload.permission,
+        ),
+      };
     default:
       return state;
   }

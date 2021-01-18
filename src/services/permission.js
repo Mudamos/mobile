@@ -9,6 +9,21 @@ export const DENIED = "denied";
 export const AUTHORIZED = "authorized";
 export const OPEN_SETTINGS = "open_settings";
 
+export const PERMISSIONS = {
+  camera: Platform.select({
+    android: Permissions.PERMISSIONS.ANDROID.CAMERA,
+    ios: Permissions.PERMISSIONS.IOS.CAMERA,
+  }),
+  location: Platform.select({
+    android: Permissions.PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+    ios: Permissions.PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+  }),
+  photo: Platform.select({
+    android: Permissions.PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+    ios: Permissions.PERMISSIONS.IOS.PHOTO_LIBRARY,
+  }),
+};
+
 const successStatuses = [
   Permissions.RESULTS.GRANTED,
   Permissions.RESULTS.LIMITED,
@@ -55,20 +70,7 @@ const service = () => ({
   checkStatus,
   presentRationale,
   requestPermission,
-  permissions: {
-    camera: Platform.select({
-      android: Permissions.PERMISSIONS.ANDROID.CAMERA,
-      ios: Permissions.PERMISSIONS.IOS.CAMERA,
-    }),
-    location: Platform.select({
-      android: Permissions.PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
-      ios: Permissions.PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
-    }),
-    photo: Platform.select({
-      android: Permissions.PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
-      ios: Permissions.PERMISSIONS.IOS.PHOTO_LIBRARY,
-    }),
-  },
+  permissions: PERMISSIONS,
 });
 
 export default service;

@@ -13,6 +13,11 @@ export const permissionUnauthorized = (permission) => ({
   payload: { permission },
 });
 
+export const permissionRemoveUnauthorized = (permission) => ({
+  type: "PERMISSION_REMOVE_UNAUTHORIZED",
+  payload: { permission },
+});
+
 export const requestCameraAccess = () => ({
   type: "PERMISSION_REQUEST_CAMERA",
 });
