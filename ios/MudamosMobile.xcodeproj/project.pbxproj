@@ -2382,7 +2382,7 @@
 				CODE_SIGN_ENTITLEMENTS = MessageSignerActionProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.7.3;
+				CURRENT_PROJECT_VERSION = 2.7.4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = YGK2CQTELW;
 				ENABLE_TESTABILITY = YES;
@@ -2411,7 +2411,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.7.3;
+				MARKETING_VERSION = 2.7.4;
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition.MessageSignerAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "666ddbc4-844f-4bae-a6fe-679c442a0dfe";
@@ -2447,7 +2447,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2.7.3;
+				CURRENT_PROJECT_VERSION = 2.7.4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YGK2CQTELW;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2475,7 +2475,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.7.3;
+				MARKETING_VERSION = 2.7.4;
 				PRODUCT_BUNDLE_IDENTIFIER = org.mudamos.petition.MessageSignerAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "96281e7c-fb13-45f3-9794-ca27e351fd54";
@@ -2497,7 +2497,7 @@
 				CODE_SIGN_ENTITLEMENTS = MudamosProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.7.3;
+				CURRENT_PROJECT_VERSION = 2.7.4;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = YGK2CQTELW;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2521,7 +2521,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.7.3;
+				MARKETING_VERSION = 2.7.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2548,7 +2548,7 @@
 				CODE_SIGN_ENTITLEMENTS = MudamosProduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Instituto de Tecnologia e Sociedade (YGK2CQTELW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 2.7.3;
+				CURRENT_PROJECT_VERSION = 2.7.4;
 				DEVELOPMENT_TEAM = YGK2CQTELW;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2571,7 +2571,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.7.3;
+				MARKETING_VERSION = 2.7.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

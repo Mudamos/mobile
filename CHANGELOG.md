@@ -1,5 +1,7 @@
 # Next
 
+## [2.7.1-android 2.7.4-ios] 16/02/2021
+
 * [PR 528] Avoid concurrency when calling the avatar camera
 
 ## [2.7.0] 30/12/2020
