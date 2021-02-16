@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { equals, cond, T, identity } from "ramda";
+import { equals, cond, T, identity, includes } from "ramda";
 
-import ListView from "deprecated-react-native-listview";
-import { Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 
 import Spinner from "react-native-spinkit";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -29,7 +28,14 @@ const mediaOptions = {
   mediaType: "photo",
 };
 
+const hasPermission = includes;
+
 export default class Menu extends Component {
+  state = {
+    newAvatar: null,
+    requestedPermission: false,
+  };
+
   static propTypes = {
     authorizedPermission: PropTypes.string,
     currentUser: PropTypes.object,
@@ -38,37 +44,35 @@ export default class Menu extends Component {
     menuEntries: PropTypes.array.isRequired,
     permission: PermissionShape.isRequired,
     showActionSheetWithOptions: PropTypes.func.isRequired,
+    unauthorizedPermissions: PropTypes.arrayOf(PropTypes.string).isRequired,
     onAvatarChanged: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
+    onRemoveUnauthorizedPermission: PropTypes.func.isRequired,
     onRequestCameraPermission: PropTypes.func.isRequired,
     onRequestGalleryPermission: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
-
-    this.state = {
-      entries: this.dataSource.cloneWithRows(this.props.menuEntries),
-      newAvatar: null,
-    };
-  }
-
-  UNSAFE_componentWillReceiveProps(newProps) {
-    if (newProps.menuEntries !== undefined) {
-      this.setState({
-        entries: this.dataSource.cloneWithRows(newProps.menuEntries),
-      });
+  static getDerivedStateFromProps(
+    { unauthorizedPermissions, permission: { service } },
+    { requestedPermission },
+  ) {
+    if (
+      requestedPermission &&
+      (hasPermission(service.permissions.camera, unauthorizedPermissions) ||
+        hasPermission(service.permissions.photo, unauthorizedPermissions))
+    ) {
+      return { requestedPermission: false };
     }
+
+    return null;
   }
 
   componentDidUpdate(prevProps) {
     const { authorizedPermission } = this.props;
+    const { requestedPermission } = this.state;
 
     if (
+      requestedPermission &&
       authorizedPermission &&
       authorizedPermission !== prevProps.authorizedPermission
     ) {
@@ -130,24 +134,28 @@ export default class Menu extends Component {
   }
 
   renderTable() {
+    const { menuEntries } = this.props;
+
     return (
       <View style={styles.menuListContainer}>
-        <ListView
+        <FlatList
           bounces={false}
-          dataSource={this.state.entries}
-          renderRow={this.renderMenuEntry}
+          data={menuEntries}
+          renderItem={this.renderMenuEntry}
+          keyExtractor={this.keyExtractor}
           style={styles.full}
         />
       </View>
     );
   }
 
-  renderMenuEntry = (entry, section, row, highlightRow) => {
+  keyExtractor = (item) => item.icon;
+
+  renderMenuEntry = ({ item: entry }) => {
     return (
       <TouchableOpacity
         onPress={() => {
           this.menuSelected(entry);
-          highlightRow(section, row);
         }}
         style={styles.rowContainer}>
         <View style={styles.row}>
@@ -163,9 +171,9 @@ export default class Menu extends Component {
     );
   };
 
-  menuSelected(entry) {
+  menuSelected = (entry) => {
     entry.action();
-  }
+  };
 
   renderFooter() {
     const { isFetchingProfile, isUserLoggedIn } = this.props;
@@ -227,15 +235,17 @@ export default class Menu extends Component {
     ])(authorizedPermission);
   };
 
-  onImageResult = ({ didCancel, errorCode, uri }) => {
+  onImageResult = ({ didCancel, errorCode, errorMessage, uri }) => {
     const { onAvatarChanged } = this.props;
 
-    log({ didCancel, errorCode }, { tag: "avatar" });
+    this.setState({ requestedPermission: false });
+
+    log({ didCancel, errorCode, errorMessage }, { tag: "avatar menu" });
 
     if (didCancel || !uri) return;
 
     const name = baseName(uri);
-    log(uri, { tag: "avatar" }, { errorCode });
+    log(uri, { tag: "avatar menu" }, { errorCode });
 
     const newAvatar = {
       uri,
@@ -252,6 +262,7 @@ export default class Menu extends Component {
     const {
       onRequestCameraPermission,
       onRequestGalleryPermission,
+      onRemoveUnauthorizedPermission,
       showActionSheetWithOptions,
       permission: { service },
     } = this.props;
@@ -277,6 +288,9 @@ export default class Menu extends Component {
               if (isGranted) {
                 this.continueAvatarFlow(service.permissions.camera);
               } else {
+                onRemoveUnauthorizedPermission(service.permissions.camera);
+                this.setState({ requestedPermission: true });
+
                 onRequestCameraPermission();
               }
             },
@@ -293,6 +307,9 @@ export default class Menu extends Component {
               if (isGranted) {
                 this.continueAvatarFlow(service.permissions.photo);
               } else {
+                onRemoveUnauthorizedPermission(service.permissions.photo);
+                this.setState({ requestedPermission: true });
+
                 onRequestGalleryPermission();
               }
             },

@@ -115,6 +115,7 @@ export default class ProfileUpdateLayout extends Component {
       authorizedPermission &&
       authorizedPermission !== prevProps.authorizedPermission
     ) {
+      log("Continue avatar flow", { tag: "avatar" });
       this.continueAvatarFlow(authorizedPermission);
     }
   }
@@ -145,13 +146,13 @@ export default class ProfileUpdateLayout extends Component {
     ])(authorizedPermission);
   };
 
-  onImageResult = ({ didCancel, errorCode, uri }) => {
-    log({ didCancel, errorCode }, { tag: "avatar" });
+  onImageResult = ({ didCancel, errorCode, errorMessage, uri }) => {
+    log({ didCancel, errorCode, errorMessage }, { tag: "avatar" });
 
     if (didCancel || !uri) return;
 
     const name = baseName(uri);
-    log(uri, { tag: "avatar" }, { errorCode });
+    log(uri, { tag: "avatar" }, { errorCode, name });
 
     this.setState({
       avatar: {

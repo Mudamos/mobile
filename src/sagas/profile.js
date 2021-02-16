@@ -41,6 +41,7 @@ import {
   getCurrentSigningPlip,
   isProfileComplete,
   profileSaveErrors,
+  hasProfileSaveErrors,
 } from "../selectors";
 
 import { User } from "../models";
@@ -570,12 +571,14 @@ function* updateUser({ mobileApi }) {
     ]);
 
     const avatarError = yield select(avatarSaveErrors);
-    const profileErrors = yield select(profileSaveErrors);
+    const profileValidationErrors = yield select(profileSaveErrors);
+    const hasProfileErrors = yield select(hasProfileSaveErrors);
     const passwordErrors = yield select(getChangePasswordErrors);
 
     if (
+      !hasProfileErrors &&
       isBlank(avatarError) &&
-      isBlank(profileErrors) &&
+      isBlank(profileValidationErrors) &&
       isBlank(passwordErrors)
     ) {
       yield put(navigate("plipsNav", { type: "reset" }));

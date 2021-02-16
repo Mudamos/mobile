@@ -11,6 +11,7 @@ import {
   fetchUserLocationError,
   permissionAuthorized,
   permissionUnauthorized,
+  permissionRemoveUnauthorized,
 } from "../actions";
 
 import { Linking } from "react-native";
@@ -53,6 +54,8 @@ function* camera({ permissionService }) {
   yield takeLatest("PERMISSION_REQUEST_CAMERA", function* () {
     try {
       const permission = permissionService.permissions.camera;
+      yield put(permissionRemoveUnauthorized(permission));
+
       const cameraResult = yield call(
         permissionService.requestPermission,
         permission,
@@ -73,8 +76,9 @@ function* camera({ permissionService }) {
         log(result, { tag: "Camera explanation" });
 
         if (result === OPEN_SETTINGS) yield call(Linking.openSettings);
-        return;
       }
+
+      yield put(permissionUnauthorized(permission));
     } catch (e) {
       logError(e);
     }
@@ -85,6 +89,8 @@ function* gallery({ permissionService }) {
   yield takeLatest("PERMISSION_REQUEST_GALLERY", function* () {
     try {
       const permission = permissionService.permissions.photo;
+      yield put(permissionRemoveUnauthorized(permission));
+
       const photoResult = yield call(
         permissionService.requestPermission,
         permission,
@@ -105,8 +111,9 @@ function* gallery({ permissionService }) {
         log(result, { tag: "Camera explanation" });
 
         if (result === OPEN_SETTINGS) yield call(Linking.openSettings);
-        return;
       }
+
+      yield put(permissionUnauthorized(permission));
     } catch (e) {
       logError(e);
     }
