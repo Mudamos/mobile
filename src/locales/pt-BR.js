@@ -1,5 +1,10 @@
 const translations = {
+  actionSigner: {
+    success: "Assinatura feita com sucesso!",
+    finish: "Concluir",
+  },
   actionSignerError: {
+    "invalid-integrator-signature": "Integração inválida",
     "invalid-payload": "Mensagem inválida.",
     "invalid-payload-size": "Tamanho da mensagem é inválido.",
     "incomplete-profile":
@@ -117,6 +122,7 @@ const translations = {
   logout: "Sair",
   makeTheDifferenceAndShare: "Faça a diferença e compartilhe",
   mayIHelpYou: "como podemos te ajudar?",
+  messageSignTitle: "Assinatura com sua identidade Mudamos",
   mobile: "Celular",
   moreInfo: "Saiba mais",
   moreDetails: "Mais detalhes",
@@ -300,6 +306,10 @@ const translations = {
   zipCode: "CEP",
   zipCodeReason:
     "Não precisamos saber o seu endereço específico, apenas uma localização aproximada de onde você mora",
+  signLinkErrors: {
+    invalidContent: "Conteúdo a ser validado é inválido",
+    processError: "Houve um erro ao tentar validar o conteúdo",
+  },
   errors: {
     appleSignInError: "Não foi possível conectar-se a apple.",
     facebookLoginError: "Não foi possível conectar-se ao facebook.",

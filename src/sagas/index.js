@@ -91,6 +91,6 @@ export default function* rootSaga({
   yield spawn(walletSaga, { mobileApi, walletStore });
   yield fork(setupSaga, { mobileApi, mudamosSigner, sessionStore });
   yield spawn(appStateSaga);
-  yield fork(appLinkSaga, { mobileApi, mudDynamicLink });
+  yield fork(appLinkSaga, { mobileApi, mudDynamicLink, walletStore });
   yield fork(voteConfirmationSaga, { DeviceInfo, dispatch, mobileApi });
 }

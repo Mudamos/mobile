@@ -7,6 +7,11 @@ export const actionSignerError = ({ message }) => ({
   payload: { message },
 });
 
+export const actionSignerIntegratorError = (error) => ({
+  type: "ACTION_SIGNER_INTEGRATOR_SIGN_ERROR",
+  payload: { error },
+});
+
 export const actionSignerSuccess = ({
   message,
   signature,
@@ -22,6 +27,16 @@ export const actionSignerSuccess = ({
   },
 });
 
-export const ationSignerReset = () => ({
+export const actionSignerReset = () => ({
   type: "ACTION_SIGNER_RESET",
+});
+
+export const actionSignerSetUrl = ({ url }) => ({
+  type: "ACTION_SIGNER_SET_URL",
+  payload: { url },
+});
+
+export const actionSignerProceedSignMessageWithUrl = ({ url }) => ({
+  type: "ACTION_SIGNER_PROCEED_SIGN_MESSAGE",
+  payload: { url },
 });

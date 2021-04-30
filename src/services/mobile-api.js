@@ -265,11 +265,11 @@ const signPlip = ({ client }) => (authToken, signMessage) =>
     .send({ signMessage })
     .then(getData);
 
-const signMessage = ({ client }) => (authToken, { message }) =>
+const signMessage = ({ client }) => (authToken, { message, integrator }) =>
   authorizedClient(client, authToken)
     .use(serializeJson)
     .post("/message/sign/custom")
-    .send({ message })
+    .send({ message, integrator })
     .then(getData);
 
 const userSignInfo = ({ client }) => (authToken, plipId) =>

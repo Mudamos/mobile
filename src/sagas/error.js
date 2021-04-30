@@ -38,6 +38,8 @@ function appError({ type, payload }) {
     defaultErrorHandler({ payload, defaultMessage });
 
   switch (type) {
+    case "ACTION_SIGNER_INTEGRATOR_SIGN_ERROR":
+      return;
     case "APPLE_SIGN_IN_ERROR":
       return handleWithPayload({
         defaultMessage: locale.errors.appleSignInError,

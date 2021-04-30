@@ -8,6 +8,7 @@ import {
   clearPlipSignersError,
   clearProfileSaveErrors,
   signingPlip,
+  actionSignerReset,
 } from "./actions";
 
 import { SCREEN_KEYS } from "./models";
@@ -60,6 +61,10 @@ export default (store) => () => {
     case "profileWallet":
     case SCREEN_KEYS.CONFIRM_VOTE:
       return true;
+    case SCREEN_KEYS.MESSAGE_SIGN: {
+      store.dispatch(actionSignerReset());
+      return defaultBackAction();
+    }
     default:
       return defaultBackAction();
   }

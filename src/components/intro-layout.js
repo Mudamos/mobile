@@ -14,7 +14,7 @@ import locale from "../locales/pt-BR";
 
 import styles from "../styles/intro-layout";
 
-import { isNotNil } from "../utils";
+import { isPresent, isNotNil } from "../utils";
 
 export default class IntroLayout extends Component {
   state = {
@@ -24,16 +24,24 @@ export default class IntroLayout extends Component {
   };
 
   static propTypes = {
+    appLink: PropTypes.string,
     appLoadingProgress: PropTypes.number,
     isAppReady: PropTypes.bool,
     isUserFirstTime: PropTypes.bool,
+    onHandleAppLink: PropTypes.func.isRequired,
     onHome: PropTypes.func.isRequired,
   };
 
   componentDidUpdate() {
-    const { isUserFirstTime, onHome } = this.props;
+    const { appLink, isUserFirstTime, onHandleAppLink, onHome } = this.props;
 
-    if (isNotNil(isUserFirstTime) && !isUserFirstTime) onHome();
+    if (isNotNil(isUserFirstTime) && !isUserFirstTime) {
+      onHome();
+
+      if (isPresent(appLink)) {
+        onHandleAppLink();
+      }
+    }
   }
 
   get totalPages() {

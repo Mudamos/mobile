@@ -10,7 +10,8 @@ import {
 
 import { Actions } from "react-native-router-flux";
 
-import { homeSceneKey, isDev } from "../utils";
+import { log, logError, homeSceneKey } from "../utils";
+import { actionSignerUrl } from "../selectors";
 
 import { findIndex } from "ramda";
 
@@ -25,18 +26,18 @@ import {
   isWalletProfileComplete,
 } from "../selectors";
 
-import { navigate } from "../actions";
+import { navigate, actionSignerProceedSignMessageWithUrl } from "../actions";
 
 function* forward() {
   yield takeEvery("NAVIGATE", function* ({ payload }) {
     const { route, params } = payload;
 
-    if (isDev) console.log("Will navigate with: ", route, params);
+    log("Will navigate with: ", { tag: "NAVIGATE" }, route, params);
 
     try {
       yield call(Actions[route], params);
     } catch (e) {
-      if (isDev) console.log(e);
+      logError(e);
     }
   });
 }
@@ -54,9 +55,7 @@ function* unauthorized({ mobileApi, sessionStore }) {
       yield call(logout, { mobileApi, sessionStore });
       yield put(navigate("signIn", params));
     } catch (e) {
-      if (isDev) {
-        console.log("Error unauthorized navigation: ", e.message, e.stack, e);
-      }
+      logError(e, { tag: "NAVIGATE_UNAUTHORIZED" });
     }
   });
 }
@@ -70,11 +69,31 @@ function* userProfileNavigator() {
       const { key, ...args } = yield call(profileScreenForCurrentUser, params);
       const options = { ...args, ...params };
 
-      if (isDev) console.log("Go to profile screen: ", key, options);
+      log(
+        "Go to profile screen: ",
+        { tag: "USER_PROFILE_NAVIGATOR" },
+        key,
+        options,
+      );
 
       yield put(navigate(key, options));
+
+      const isComplete = key === homeSceneKey;
+      if (isComplete) {
+        const url = yield select(actionSignerUrl);
+
+        if (url) {
+          log(
+            "Will proceed sign message because there is a url",
+            { tag: "USER_PROFILE_NAVIGATOR" },
+            { url },
+          );
+
+          yield put(actionSignerProceedSignMessageWithUrl({ url }));
+        }
+      }
     } catch (e) {
-      if (isDev) console.log("Error while navigating: ", e.message, e.stack, e);
+      logError(e, { tag: "USER_PROFILE_NAVIGATOR" });
     }
   });
 }

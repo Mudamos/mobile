@@ -1,3 +1,4 @@
+import { set, lensPath } from "ramda";
 const initialState = {
   error: false,
   done: false,
@@ -5,6 +6,9 @@ const initialState = {
   signature: null,
   publicKey: null,
   timestamp: null,
+  integrator: {
+    url: null,
+  },
 };
 
 export default (state = initialState, action) => {
@@ -36,12 +40,19 @@ export default (state = initialState, action) => {
         timestamp,
       };
     }
+    case "ACTION_SIGNER_SET_URL": {
+      return set(lensPath(["integrator", "url"]), action.payload.url, state);
+    }
+    case "ACTION_SIGNER_INTEGRATOR_SIGN_ERROR": {
+      return set(
+        lensPath(["integrator", "error"]),
+        action.payload.error,
+        state,
+      );
+    }
     case "ACTION_SIGNER_RESET":
     case "ACTION_SIGN_APP_SETUP": {
-      return {
-        ...state,
-        ...initialState,
-      };
+      return initialState;
     }
     default: {
       return state;

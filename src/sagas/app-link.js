@@ -1,6 +1,7 @@
 import { call, fork, put, select, take, takeLatest } from "redux-saga/effects";
 
 import { buffers, eventChannel } from "redux-saga";
+import { URL } from "react-native-url-polyfill";
 
 import {
   appLinkHandleError,
@@ -15,11 +16,19 @@ import {
   findPlipByPath,
   getAppLinkUrl,
   handlingAppLinkError,
+  isUserFirstTime,
+  isAppReady,
 } from "../selectors";
 
-import { logError } from "../utils";
+import { signMessageWithUrl } from "./action-signer";
+
+import { isBlank, isNotNil, log, logError, isDev } from "../utils";
 
 import { head } from "ramda";
+import Toast from "react-native-simple-toast";
+
+const SIGN_MESSAGE_PATH = "/signlink";
+const isSignMessage = (url) => url.pathname === "/signlink";
 
 const createMessageChannel = ({
   mudDynamicLink,
@@ -32,8 +41,27 @@ function* receiveAppLink({ mudDynamicLink }) {
   try {
     while (true) {
       const url = yield take(channel);
+      log(`message app link on channel: ${url}`);
+
+      if (isBlank(url)) {
+        return;
+      }
+
       yield put(setAppLinkUrl(url));
-      yield put(handleAppLink());
+      const appReady = yield select(isAppReady);
+      const userFirstTime = yield select(isUserFirstTime);
+
+      // Only handle if loading screen is ready, the loading screen will fire
+      // a handleAppLink if there is one available.
+      const isNotFirstTime = isNotNil(userFirstTime) && !userFirstTime;
+      log(
+        "on receiveAppLink",
+        { tag: "receiveAppLink" },
+        { isNotFirstTime, appReady },
+      );
+      if (appReady && isNotFirstTime) {
+        yield put(handleAppLink());
+      }
     }
   } finally {
     channel.close();
@@ -45,13 +73,17 @@ function* handlePlip({ mobileApi }) {
   yield takeLatest("HANDLE_APP_LINK", function* () {
     const url = yield select(getAppLinkUrl);
 
-    const pathMatches = /\S+(\/temas\/\S+\/plugins\/peticao)\/?$/.exec(url);
+    if (isBlank(url)) {
+      return;
+    }
 
-    if (pathMatches != null) {
+    const pathMatchesPlip = /\S+(\/temas\/\S+\/plugins\/peticao)\/?$/.exec(url);
+
+    if (pathMatchesPlip != null) {
       try {
         yield put(navigate("showPlip"));
 
-        const path = pathMatches[1];
+        const path = pathMatchesPlip[1];
         const foundPlip = yield select(findPlipByPath(path));
 
         if (foundPlip) {
@@ -76,6 +108,38 @@ function* handlePlip({ mobileApi }) {
   });
 }
 
+function* handleSignMessageLink({ mobileApi, walletStore }) {
+  yield takeLatest("HANDLE_APP_LINK", function* () {
+    const url = yield select(getAppLinkUrl);
+
+    log(`app link: ${url}`, { tag: "handleSignMessageLink" });
+
+    if (isDev) {
+      Toast.show(`APP LINK: ${url}`);
+    }
+
+    if (isBlank(url)) {
+      return;
+    }
+
+    try {
+      const linkedUrl = new URL(url);
+      log(`Parsed linked url: ${linkedUrl}`, { tag: "handleSignMessageLink" });
+
+      if (isSignMessage(linkedUrl)) {
+        yield call(signMessageWithUrl, {
+          url: linkedUrl,
+          mobileApi,
+          walletStore,
+        });
+        return;
+      }
+    } catch (e) {
+      logError(e);
+    }
+  });
+}
+
 // When navigate to other page the appLinkError should disable to don't appear in other pages
 function* clearError() {
   yield takeLatest("NAVIGATION", function* () {
@@ -86,8 +150,13 @@ function* clearError() {
   });
 }
 
-export default function* appLinkSaga({ mobileApi, mudDynamicLink }) {
+export default function* appLinkSaga({
+  mobileApi,
+  mudDynamicLink,
+  walletStore,
+}) {
   yield fork(receiveAppLink, { mudDynamicLink });
   yield fork(handlePlip, { mobileApi });
+  yield fork(handleSignMessageLink, { mobileApi, walletStore });
   yield fork(clearError);
 }
