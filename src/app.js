@@ -33,6 +33,7 @@ import {
   ProfileSignUpContainer,
   ProfileVoteAddressContainer,
   ProfileWalletContainer,
+  ScannerContainer,
   SendYourPLContainer,
   ShowVideoContainer,
   SignersContainer,
@@ -182,6 +183,8 @@ const scenes = Actions.create(
       direction="vertical"
       hideNavBar
     />
+
+    <Scene key={SCREEN_KEYS.SCANNER} component={ScannerContainer} hideNavBar />
   </Scene>,
 );
 

@@ -96,7 +96,7 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Para você tirar uma foto para seu avatar</string>
+	<string>Para você tirar uma foto para seu avatar e pode assinar atráves de QR code</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Compartilhar sua localização permite que o Mudamos personalize a aba "Minha Região" do seu aplicativo e o reconhecimento automático do seu CEP.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

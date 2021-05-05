@@ -15,6 +15,7 @@ import profileSaga from "./profile";
 import stateSaga from "./state";
 import navigationSaga from "./navigation";
 import notificationSaga from "./notification";
+import qrCodeScan from "./qr-code-scan";
 import remoteConfigSaga from "./remote-config";
 import sessionSaga from "./session";
 import shareSaga from "./share";
@@ -93,4 +94,5 @@ export default function* rootSaga({
   yield spawn(appStateSaga);
   yield fork(appLinkSaga, { mobileApi, mudDynamicLink, walletStore });
   yield fork(voteConfirmationSaga, { DeviceInfo, dispatch, mobileApi });
+  yield fork(qrCodeScan, { mobileApi, walletStore });
 }

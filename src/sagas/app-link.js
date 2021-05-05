@@ -22,13 +22,17 @@ import {
 
 import { signMessageWithUrl } from "./action-signer";
 
-import { isBlank, isNotNil, log, logError, isDev } from "../utils";
+import {
+  isBlank,
+  isNotNil,
+  log,
+  logError,
+  isDev,
+  isSignMessage,
+} from "../utils";
 
 import { head } from "ramda";
 import Toast from "react-native-simple-toast";
-
-const SIGN_MESSAGE_PATH = "/signlink";
-const isSignMessage = (url) => url.pathname === "/signlink";
 
 const createMessageChannel = ({
   mudDynamicLink,

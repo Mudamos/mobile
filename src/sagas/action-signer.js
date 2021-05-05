@@ -5,7 +5,7 @@ import { URLSearchParams } from "react-native-url-polyfill";
 import Toast from "react-native-simple-toast";
 import { Buffer } from "buffer";
 
-import { nth, pipe, split } from "ramda";
+import { includes, nth, pipe, split } from "ramda";
 
 import {
   actionSignerError,
@@ -40,6 +40,11 @@ import { validateLocalWallet } from "./wallet";
 const buildMessage = ({ message, timestamp }) => [message, timestamp].join(";");
 
 const signature = pipe(split(";"), nth(-2));
+
+function* navigateBackWithDelay(delayTimeout = 1) {
+  yield put(navigateBack());
+  if (delayTimeout) yield call(delay, delayTimeout);
+}
 
 function* signMessage({ mobileApi, mudamosSigner, walletStore }) {
   yield takeLatest("ACTION_SIGNER_SIGN_MESSAGE", function* () {
@@ -176,25 +181,28 @@ export function* signMessageWithUrl({ mobileApi, url, walletStore }) {
 
     yield put(actionSignerReset());
 
-    const navigationOptions =
-      (yield select(currentScreenKey)) === SCREEN_KEYS.MESSAGE_SIGN_SUCCESS
-        ? {
-            type: SCREEN_NAVIGATION_TYPES.replace,
-          }
-        : {};
+    const currentScreen = yield select(currentScreenKey);
+    const navigationOptions = includes(currentScreen, [
+      SCREEN_KEYS.MESSAGE_SIGN_SUCCESS,
+      SCREEN_KEYS.SCANNER,
+    ])
+      ? {
+          type: SCREEN_NAVIGATION_TYPES.replace,
+        }
+      : {};
     yield put(navigate(SCREEN_KEYS.MESSAGE_SIGN, navigationOptions));
 
     yield put(actionSignerSetUrl({ url }));
 
     const isLoggedIn = yield select(isUserLoggedIn);
     if (!isLoggedIn) {
-      yield put(navigateBack());
+      yield call(navigateBackWithDelay);
       return yield put(navigate(SCREEN_KEYS.SIGN_IN));
     }
 
     const user = yield call(fetchProfile, { mobileApi, force: true });
     if (!user) {
-      yield put(navigateBack());
+      yield call(navigateBackWithDelay);
       return yield put(navigate(SCREEN_KEYS.SIGN_IN));
     }
 
@@ -208,7 +216,7 @@ export function* signMessageWithUrl({ mobileApi, url, walletStore }) {
     if (!publicKey || publicKey !== user.wallet.key || !user.wallet.status) {
       log("Public key does not match", { tag: "signMessageWithUrl" });
       yield put(invalidatePhone());
-      yield put(navigateBack());
+      yield call(navigateBackWithDelay);
       return yield call(navigateToMissingScreen);
     }
 
@@ -216,13 +224,13 @@ export function* signMessageWithUrl({ mobileApi, url, walletStore }) {
     if (!validWallet) {
       log("LocalWallet is invalid", { tag: "signMessageWithUrl" });
       yield put(invalidatePhone());
-      yield put(navigateBack());
+      yield call(navigateBackWithDelay);
       return yield call(navigateToMissingScreen);
     }
 
     if (!(yield select(isProfileComplete))) {
       log("Profile is incomplete", { tag: "signMessageWithUrl" });
-      yield put(navigateBack());
+      yield call(navigateBackWithDelay);
       return yield call(navigateToMissingScreen);
     }
 

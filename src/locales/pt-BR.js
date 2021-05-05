@@ -32,6 +32,8 @@ const translations = {
   cancel: "Cancelar",
   cantRememberVoteCard: "Não lembra do seu título?",
   change: "Alterar",
+  cantScanQrCodeUnauthorized:
+    "O uso da camêra não foi autorizado. Para que seja possível fazer a leitura do QR code, habilite a permissão nas configurações do dispositivo.",
   changeForgotPasswordTitle: "Alterar senha",
   changePasswordTitle: "Alterar senha",
   chooseAvatar: "Escolha seu avatar",
@@ -132,6 +134,7 @@ const translations = {
     myProfile: "Meu perfil",
     help: "Dúvidas",
     privacyPolicy: "Política de privacidade",
+    scanner: "Leitor QR code",
     tellAFriend: "Contar para um amigo",
     validateProfile: "Validar perfil",
   },
@@ -188,6 +191,11 @@ const translations = {
   projectSignedYeah: ({ plipName }) =>
     `Parabéns, você assinou o projeto de lei "${plipName}"!`,
   pullToRefresh: "Puxe para atualizar",
+  qrCodeScanTitle: "Leitor de QR code",
+  qrCodeScanUnknownData: "QR code desconhecido",
+  qrCodeCameraPermissionTitle: "Permissão para acessar a camêra",
+  qrCodeCameraPermissionDescription:
+    "Para que você possa fazer a leitura do QR code",
   readAndAgreedWithTermsPrefix: "Li e concordo com os",
   readFullText: "Leia a proposta na íntegra",
   registeredAt: "Registrada em: ",
@@ -318,6 +326,7 @@ const translations = {
     genericError: "Algo deu errado, tente novamente em alguns segundos.",
     locationError: "Não foi possível obter sua localização.",
     loginError: "Não foi possível realizar o login.",
+    mountingCamera: "Houve um erro ao tentar acessar a camêra do dispositivo",
     noEmailDuringSignIn:
       "Para efetuar o login é necessário compartilhar algum email.",
     openURLError: "Não foi possível recuperar o endereço solicitado.",

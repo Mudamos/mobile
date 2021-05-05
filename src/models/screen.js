@@ -6,6 +6,7 @@ export const SCREEN_KEYS = {
   MESSAGE_SIGN: "messageSign",
   MESSAGE_SIGN_SUCCESS: "messageSignSuccess",
   PRIVACY_POLICY: "privacyPolicy",
+  SCANNER: "scanner",
   SIGN_IN: "signIn",
 };
 

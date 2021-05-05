@@ -345,3 +345,5 @@ export const filterDataByTerm = curry((term, formatter, collection) =>
     ),
   )(collection),
 );
+
+export const isSignMessage = propEq("pathname", "/signlink");
