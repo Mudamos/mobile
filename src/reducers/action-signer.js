@@ -7,6 +7,7 @@ const initialState = {
   publicKey: null,
   timestamp: null,
   integrator: {
+    error: null,
     url: null,
   },
 };

@@ -43,6 +43,8 @@ const signature = pipe(split(";"), nth(-2));
 
 function* navigateBackWithDelay(delayTimeout = 1) {
   yield put(navigateBack());
+  // This allow the back action to be processed before continuing
+  // Avoids changing screen later on and having issues with multiple screen navigations in sequence
   if (delayTimeout) yield call(delay, delayTimeout);
 }
 
