@@ -15,3 +15,7 @@ export const handleAppLink = () => ({
 export const clearAppLinkError = () => ({
   type: "CLEAR_APP_LINK_ERROR",
 });
+
+export const appLinkReset = () => ({
+  type: "APP_LINK_RESET",
+});

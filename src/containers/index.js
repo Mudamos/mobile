@@ -22,4 +22,4 @@ export { default as SignersContainer } from "./signers";
 export { default as TSEContainer } from "./tse";
 export * from "./vote";
 
-export { ActionSignerContainer } from "./action-signer";
+export * from "./action-signer";

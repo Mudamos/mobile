@@ -21,6 +21,8 @@ import {
   ForgotPasswordContainer,
   HelpContainer,
   IntroContainer,
+  MessageSignerContainer,
+  MessageSignerSuccessContainer,
   PlipContainer,
   PlipsContainer,
   PlipViewerContainer,
@@ -31,6 +33,7 @@ import {
   ProfileSignUpContainer,
   ProfileVoteAddressContainer,
   ProfileWalletContainer,
+  ScannerContainer,
   SendYourPLContainer,
   ShowVideoContainer,
   SignersContainer,
@@ -165,6 +168,23 @@ const scenes = Actions.create(
       component={PrivacyPolicyContainer}
       hideNavBar
     />
+
+    <Scene
+      key={SCREEN_KEYS.MESSAGE_SIGN}
+      component={MessageSignerContainer}
+      duration={0}
+      hideNavBar
+    />
+
+    <Scene
+      key={SCREEN_KEYS.MESSAGE_SIGN_SUCCESS}
+      component={MessageSignerSuccessContainer}
+      type="replace"
+      direction="vertical"
+      hideNavBar
+    />
+
+    <Scene key={SCREEN_KEYS.SCANNER} component={ScannerContainer} hideNavBar />
   </Scene>,
 );
 

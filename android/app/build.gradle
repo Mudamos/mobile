@@ -148,6 +148,9 @@ android {
         manifestPlaceholders = [onesignal_app_id: project.env.get("ONESIGNAL_APP_ID"),
                                 onesignal_google_project_number: project.env.get("ANDROID_PUSH_GOOGLE_SENDER_ID")]
 
+        // Added because of react-native-qrcode-scanner which depends on react-native-camera
+        missingDimensionStrategy "react-native-camera", "general"
+
         // react-native-config
         resValue "string", "build_config_package", "org.mudamos.petition"
     }

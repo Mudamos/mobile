@@ -133,6 +133,13 @@ class Container extends Component {
     onFetchProfile();
   };
 
+  onScan = () => {
+    const { onTapScan, onLogEvent } = this.props;
+
+    onTapScan();
+    onLogEvent({ name: "tapped_menu_qr_code_scan" });
+  };
+
   onAbout = () => {
     const { onTapAboutApp, onLogEvent } = this.props;
 
@@ -183,34 +190,40 @@ class Container extends Component {
 
     const entries = [
       {
+        icon: "qr-code-scanner",
+        title: locale.menu.scanner,
+        action: this.onScan,
+        position: 2,
+      },
+      {
         icon: "bubble-chart",
         title: locale.menu.about,
         action: this.onAbout,
-        position: 2,
+        position: 3,
       },
       {
         icon: "account-balance",
         title: locale.links.sendYourPL,
         action: this.onSendYourPl,
-        position: 3,
+        position: 4,
       },
       {
         icon: "help",
         title: locale.menu.help,
         action: this.onHelp,
-        position: 5,
+        position: 6,
       },
       {
         icon: "description",
         title: locale.menu.privacyPolicy,
         action: this.onPrivacyPolicy,
-        position: 6,
+        position: 7,
       },
       {
         icon: "share",
         title: locale.menu.tellAFriend,
         action: this.onTellAFriend,
-        position: 7,
+        position: 8,
       },
     ];
 
@@ -290,6 +303,7 @@ class Container extends Component {
     onShare: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
     onTapAboutApp: PropTypes.func.isRequired,
+    onTapScan: PropTypes.func.isRequired,
     onTapHelp: PropTypes.func.isRequired,
     onTapSendYourPl: PropTypes.func.isRequired,
     onTellAFriend: PropTypes.func.isRequired,
@@ -497,6 +511,7 @@ const mapDispatchToProps = (dispatch) => ({
   onRefresh: ({ typeList }) => dispatch(refreshPlips({ typeList })),
   onSignIn: () => dispatch(navigate("signIn")),
   onTapAboutApp: () => dispatch(navigate("aboutApp")),
+  onTapScan: () => dispatch(navigate(SCREEN_KEYS.SCANNER)),
   onTapHelp: () => dispatch(navigate("help")),
   onTapSendYourPl: () => dispatch(navigate("sendYourPl")),
   onMainTabChange: ({ index }) => dispatch(updateMainTabViewIndex(index)),

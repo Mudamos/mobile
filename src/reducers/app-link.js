@@ -25,6 +25,9 @@ export default (state = initialState, action) => {
         ...state,
         handlingAppLinkError: false,
       };
+    case "APP_LINK_RESET": {
+      return initialState;
+    }
     default:
       return state;
   }
