@@ -1,6 +1,7 @@
 # Next
 
 * [PR 530] Add custom sign message via integrator
+* [hotfix] Fix scode build with swift crash
 
 ## [2.7.1-android 2.7.4-ios] 16/02/2021
 
