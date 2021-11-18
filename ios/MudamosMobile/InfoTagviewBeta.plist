@@ -45,6 +45,8 @@
 	<string>1804378059818637</string>
 	<key>FacebookDisplayName</key>
 	<string>Mudamos</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

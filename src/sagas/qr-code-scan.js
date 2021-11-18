@@ -1,4 +1,4 @@
-import { call, fork, takeLatest, put } from "redux-saga/effects";
+import { call, fork, takeLatest } from "redux-saga/effects";
 import { URL, URLSearchParams } from "react-native-url-polyfill";
 import Toast from "react-native-simple-toast";
 
