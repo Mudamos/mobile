@@ -340,6 +340,8 @@ PODS:
     - React-Core
   - react-native-spinkit (1.4.1):
     - React
+  - react-native-tracking-transparency (0.1.1):
+    - React
   - react-native-webview (11.0.3):
     - React-Core
   - React-RCTActionSheet (0.63.4):
@@ -467,6 +469,7 @@ DEPENDENCIES:
   - react-native-randombytes (from `../node_modules/react-native-randombytes`)
   - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
   - react-native-spinkit (from `../node_modules/react-native-spinkit`)
+  - react-native-tracking-transparency (from `../node_modules/react-native-tracking-transparency`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -577,6 +580,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-simple-toast"
   react-native-spinkit:
     :path: "../node_modules/react-native-spinkit"
+  react-native-tracking-transparency:
+    :path: "../node_modules/react-native-tracking-transparency"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
@@ -675,6 +680,7 @@ SPEC CHECKSUMS:
   react-native-randombytes: b6677f7d495c27e9ee0dbd77ebc97b3c59173729
   react-native-simple-toast: 89160aec21d1e7e67ef0564546d2562f76908b07
   react-native-spinkit: da294fd828216ad211fe36a5c14c1e09f09e62db
+  react-native-tracking-transparency: b2029ff756f1128b1f2c7c7c7f3003bc3c950f9f
   react-native-webview: 21fdfbdd5a2268195ca013174f8f656f3509de50
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b

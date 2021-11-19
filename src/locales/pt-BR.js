@@ -23,6 +23,9 @@ const translations = {
     "Não precisamos saber seu endereço específico, apenas uma localização aproximada de onde você mora.",
   agreeWithTerms: "Li e estou de acordo com os termos de uso",
   alreadyHavePasswordCode: "Já possuo um código",
+  appTrackingTransparencyModalDescription:
+    "O Mudamos+ coleta suas informações de forma segura para garantir a validade da assinatura digital eletrônica no aplicativo.",
+  appTrackingTransparencyModalTitle: "Tecnologia anti-fraude",
   avatarSaved: "Avatar salvo!",
   back: "voltar",
   backToMainPageToSignAndShareNationalPlipOrFromYourRegion:

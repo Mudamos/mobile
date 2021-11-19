@@ -23,12 +23,16 @@ const getUserTags = pipe(
 
 const signedPlipTag = pipe(String, concat("signed-plip-"));
 
-function* updateOneSignalProfile() {
+function* updateOneSignalProfile({ trackingTransparency }) {
   yield takeLatest("PROFILE_USER_UPDATED", function* ({
     payload: { currentUser },
   }) {
     try {
       if (!currentUser) return;
+
+      const isTrackingEnabled = yield call(trackingTransparency.isEnabled);
+      if (!isTrackingEnabled) return;
+
       const info = yield select(oneSignalUserInfo);
 
       const newAttrs = {
@@ -53,7 +57,7 @@ function* updateOneSignalProfile() {
   });
 }
 
-function* signedPlips({ mobileApi }) {
+function* signedPlips({ mobileApi, trackingTransparency }) {
   yield takeLatest("PLIP_USER_SIGN_INFO", function* () {
     try {
       yield call(delay, 3000);
@@ -61,6 +65,9 @@ function* signedPlips({ mobileApi }) {
       const authToken = yield select(currentAuthToken);
 
       if (!authToken) return;
+
+      const isTrackingEnabled = yield call(trackingTransparency.isEnabled);
+      if (!isTrackingEnabled) return;
 
       const response = yield call(mobileApi.listSignedPlipsByUser, authToken);
       const plips = response.petitions;
@@ -77,9 +84,12 @@ function* signedPlips({ mobileApi }) {
   });
 }
 
-function* clearOneSinalProfileInfo() {
+function* clearOneSinalProfileInfo({ trackingTransparency }) {
   yield takeLatest("SESSION_USER_LOGGED_OUT", function* () {
     try {
+      const isTrackingEnabled = yield call(trackingTransparency.isEnabled);
+      if (!isTrackingEnabled) return;
+
       const newAttrs = {
         email: "",
         uf: "",
@@ -96,9 +106,12 @@ function* clearOneSinalProfileInfo() {
   });
 }
 
-function* clearSignedPlips() {
+function* clearSignedPlips({ trackingTransparency }) {
   yield takeLatest("SESSION_USER_LOGGED_OUT", function* () {
     try {
+      const isTrackingEnabled = yield call(trackingTransparency.isEnabled);
+      if (!isTrackingEnabled) return;
+
       const plips = yield select(listAllPlips);
       const tags = pipe(
         map(prop("detailId")),
@@ -114,9 +127,9 @@ function* clearSignedPlips() {
   });
 }
 
-export default function* notificationSaga({ mobileApi }) {
-  yield fork(updateOneSignalProfile);
-  yield fork(clearOneSinalProfileInfo);
-  yield fork(signedPlips, { mobileApi });
-  yield fork(clearSignedPlips);
+export default function* notificationSaga({ mobileApi, trackingTransparency }) {
+  yield fork(updateOneSignalProfile, { trackingTransparency });
+  yield fork(clearOneSinalProfileInfo, { trackingTransparency });
+  yield fork(signedPlips, { mobileApi, trackingTransparency });
+  yield fork(clearSignedPlips, { trackingTransparency });
 }

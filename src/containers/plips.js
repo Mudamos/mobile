@@ -101,6 +101,7 @@ import {
 
 import { SCREEN_KEYS } from "../models";
 
+import TrackingTransparencyModal from "../components/tracking-transparency-modal";
 import PageLoader from "../components/page-loader";
 import PlipsLayout from "../components/plips-layout";
 import SplashLoader from "../components/splash-loader";
@@ -351,7 +352,7 @@ class Container extends Component {
   };
 
   render() {
-    const { isValidatingProfile, onFetchProfile } = this.props;
+    const { isAppReady, isValidatingProfile, onFetchProfile } = this.props;
     const { menuOpen: open } = this.state;
 
     return (
@@ -369,6 +370,7 @@ class Container extends Component {
           </Menu>
         </ActionSheetProvider>
 
+        {isAppReady && <TrackingTransparencyModal />}
         <PageLoader isVisible={isValidatingProfile} />
       </View>
     );

@@ -105,6 +105,8 @@
 	<string>Compartilhar sua localização permite que o Mudamos personalize a aba "Minha Região" do seu aplicativo e o reconhecimento automático do seu CEP.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Para você escolher um avatar</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Coletamos suas informações de forma segura para garantir a validade da assinatura digital eletrônica no aplicativo.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>pt_sans_bold.ttf</string>
