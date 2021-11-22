@@ -1,6 +1,6 @@
 # Next
 
-* [PR xxx] Add app tracking transparency
+* [PR 532] Add app tracking transparency
 
 ## [2.8.0] 02/09/2021
 
