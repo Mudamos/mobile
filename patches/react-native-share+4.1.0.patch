@@ -1,0 +1,11 @@
+diff --git a/node_modules/react-native-share/RNShare.podspec b/node_modules/react-native-share/RNShare.podspec
+index 32750f0..0c2b4fd 100644
+--- a/node_modules/react-native-share/RNShare.podspec
++++ b/node_modules/react-native-share/RNShare.podspec
+@@ -15,4 +15,6 @@ Pod::Spec.new do |s|
+   s.source_files  = "ios/**/*.{h,m}"
+
+   s.dependency "React-Core"
++
++  s.ios.weak_framework = "LinkPresentation"
+ end

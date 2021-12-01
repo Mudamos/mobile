@@ -21,6 +21,7 @@ import MobileApi from "./services/mobile-api";
 import PermissionService from "./services/permission";
 import RemoteConfigService from "./services/remote-config";
 import SessionManager from "./services/session";
+import TrackingTransparency from "./services/tracking-transparency";
 import WalletManager from "./services/wallet";
 
 import * as repositories from "./repositories";
@@ -81,6 +82,7 @@ export const storeBuilder = () => {
         RemoteConfigService,
         repositories,
         sessionStore,
+        trackingTransparency: TrackingTransparency(),
         walletStore,
       });
     },

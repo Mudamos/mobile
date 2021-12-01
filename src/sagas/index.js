@@ -45,6 +45,7 @@ export default function* rootSaga({
   RemoteConfigService,
   repositories,
   sessionStore,
+  trackingTransparency,
   walletStore,
 }) {
   yield fork(actionSignerSaga, { mobileApi, mudamosSigner, walletStore });
@@ -62,7 +63,7 @@ export default function* rootSaga({
   yield spawn(facebookSaga, { sessionStore, mobileApi, Crypto });
   yield spawn(featureSaga, { RemoteConfigService });
   yield spawn(authenticationSaga, { sessionStore, mobileApi });
-  yield spawn(notificationSaga, { mobileApi });
+  yield spawn(notificationSaga, { mobileApi, trackingTransparency });
   yield spawn(passwordSaga, { mobileApi, sessionStore, Crypto });
   yield spawn(permissionSaga, { permissionService });
   yield spawn(plipSaga, {

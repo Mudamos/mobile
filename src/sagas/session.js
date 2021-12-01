@@ -1,6 +1,6 @@
 import { call, fork, put, select, takeLatest } from "redux-saga/effects";
 
-import { LoginManager } from "react-native-fbsdk";
+import { LoginManager } from "react-native-fbsdk-next";
 
 import { isDev } from "../utils";
 

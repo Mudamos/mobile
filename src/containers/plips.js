@@ -101,6 +101,7 @@ import {
 
 import { SCREEN_KEYS } from "../models";
 
+import TrackingTransparencyModal from "../components/tracking-transparency-modal";
 import PageLoader from "../components/page-loader";
 import PlipsLayout from "../components/plips-layout";
 import SplashLoader from "../components/splash-loader";
@@ -303,8 +304,8 @@ class Container extends Component {
     onShare: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
     onTapAboutApp: PropTypes.func.isRequired,
-    onTapScan: PropTypes.func.isRequired,
     onTapHelp: PropTypes.func.isRequired,
+    onTapScan: PropTypes.func.isRequired,
     onTapSendYourPl: PropTypes.func.isRequired,
     onTellAFriend: PropTypes.func.isRequired,
     onToggleFavorite: PropTypes.func.isRequired,
@@ -351,7 +352,7 @@ class Container extends Component {
   };
 
   render() {
-    const { isValidatingProfile, onFetchProfile } = this.props;
+    const { isAppReady, isValidatingProfile, onFetchProfile } = this.props;
     const { menuOpen: open } = this.state;
 
     return (
@@ -369,6 +370,7 @@ class Container extends Component {
           </Menu>
         </ActionSheetProvider>
 
+        {isAppReady && <TrackingTransparencyModal />}
         <PageLoader isVisible={isValidatingProfile} />
       </View>
     );

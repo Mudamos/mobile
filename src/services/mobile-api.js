@@ -135,6 +135,21 @@ const fbSignIn = ({ client }) => ({ fbToken, plipId, block }) => {
     .then((json) => json.accessToken);
 };
 
+const fbLimitedSignIn = ({ client }) => ({ fbToken, plipId, block }) => {
+  let requester = client
+    .use((req) => req.set("access_token", fbToken))
+    .use(serializeJson)
+    .post("/auth/facebook/limited_token");
+
+  const payload = { block };
+  if (plipId) payload.petition = { versionId: plipId };
+
+  return requester
+    .send(payload)
+    .then(getData)
+    .then((json) => json.accessToken);
+};
+
 const signIn = ({ client }) => (email, password) =>
   client
     .use((req) =>
@@ -532,6 +547,7 @@ export default function MobileApi(host) {
     changeForgotPassword: changeForgotPassword({ client: v2Client }),
     difficulty: fetchDifficulty({ client: v1Client }),
     fbSignIn: fbSignIn({ client: v2Client }),
+    fbLimitedSignIn: fbLimitedSignIn({ client: v2Client }),
     fetchOfflinePlipSigners: fetchOfflinePlipSigners({ client: v1Client }),
     fetchPlipSigners: fetchPlipSigners({ client: v1Client }),
     fetchOfflineShortPlipSigners: fetchOfflineShortPlipSigners({
