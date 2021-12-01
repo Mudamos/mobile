@@ -43,10 +43,10 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
 	<string>1802796723310104</string>
-	<key>FacebookDisplayName</key>
-	<string>Mudamos</string>
 	<key>FacebookAutoLogAppEventsEnabled</key>
 	<false/>
+	<key>FacebookDisplayName</key>
+	<string>Mudamos</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

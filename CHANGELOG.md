@@ -1,5 +1,7 @@
 # Next
 
+## [2.9.0] 23/11/2021
+
 * [PR 532] Add app tracking transparency
 
 ## [2.8.0] 02/09/2021

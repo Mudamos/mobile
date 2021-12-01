@@ -250,8 +250,8 @@ android {
         production {
             dimension "version"
             applicationId = "org.mudamos.petition"
-            versionCode 31
-            versionName "2.8.0"
+            versionCode 32
+            versionName "2.9.0"
             signingConfig signingConfigs.production
         }
     }
