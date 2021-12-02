@@ -1,5 +1,7 @@
 # Next
 
+* [PR 534] Fix accepting dynamic link in ios
+
 ## [2.9.0] 23/11/2021
 
 * [PR 532] Add app tracking transparency
