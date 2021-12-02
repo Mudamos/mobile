@@ -12,6 +12,7 @@ import { Actions } from "react-native-router-flux";
 
 import { log, logError, homeSceneKey } from "../utils";
 import { actionSignerUrl } from "../selectors";
+import { SCREEN_KEYS } from "../models";
 
 import { findIndex } from "ramda";
 
@@ -26,7 +27,13 @@ import {
   isWalletProfileComplete,
 } from "../selectors";
 
-import { navigate, actionSignerProceedSignMessageWithUrl } from "../actions";
+import {
+  signingUp,
+  navigate,
+  actionSignerProceedSignMessageWithUrl,
+} from "../actions";
+
+const homeWithReset = { key: homeSceneKey, type: "reset" };
 
 function* forward() {
   yield takeEvery("NAVIGATE", function* ({ payload }) {
@@ -75,6 +82,24 @@ function* userProfileNavigator() {
         key,
         options,
       );
+
+      // When signingUp profile conclude is present to the user
+      if (key === SCREEN_KEYS.PROFILE_CONCLUDE) {
+        const url = yield select(actionSignerUrl);
+
+        if (url) {
+          yield put(signingUp(false));
+          yield put(navigate(homeSceneKey, { type: "reset" }));
+
+          log(
+            "Will override profile conclude because there is a sign message url",
+            { tag: "USER_PROFILE_NAVIGATOR" },
+            { url },
+          );
+
+          return yield put(actionSignerProceedSignMessageWithUrl({ url }));
+        }
+      }
 
       yield put(navigate(key, options));
 
@@ -127,7 +152,7 @@ export function* profileScreenForCurrentUser(params = {}) {
 
   if (revalidateProfileSignPlip) return { key: "showPlip" };
 
-  return { key: homeSceneKey, type: "reset" };
+  return homeWithReset;
 }
 
 export default function* navigationSaga({ mobileApi, sessionStore }) {
