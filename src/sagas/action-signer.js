@@ -158,6 +158,9 @@ export function* signMessageWithUrl({ mobileApi, url, walletStore }) {
   try {
     log("Raw url:", { tag: "signMessageWithUrl" }, url);
 
+    // Allow navigation actions to be processed before
+    yield call(delay, 1);
+
     const params = new URLSearchParams(url.search);
     const encodedUserMessage = params.get("message");
     const userMessage = Buffer.from(encodedUserMessage, "hex").toString(

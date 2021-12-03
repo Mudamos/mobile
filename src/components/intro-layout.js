@@ -60,6 +60,15 @@ export default class IntroLayout extends Component {
     return this.state.page === 0;
   }
 
+  onFinishFirstTime = () => {
+    const { appLink, onHome, onHandleAppLink } = this.props;
+    onHome();
+
+    if (isPresent(appLink)) {
+      onHandleAppLink();
+    }
+  };
+
   goToNextPage = () => {
     if (this.isLastPage) return;
 
@@ -184,15 +193,13 @@ export default class IntroLayout extends Component {
   }
 
   renderButton() {
-    const { onHome } = this.props;
-
     const title = this.isLastPage ? locale.letsGo : locale.skip;
 
     return (
       <View style={styles.buttonContainer}>
         <RoundedButton
           title={title}
-          action={onHome}
+          action={this.onFinishFirstTime}
           buttonStyle={styles.button}
           titleStyle={styles.buttonTitle}
         />

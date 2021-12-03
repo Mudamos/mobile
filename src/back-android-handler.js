@@ -1,6 +1,7 @@
 import { Actions } from "react-native-router-flux";
 
 import {
+  appLinkReset,
   clearChangeForgotPasswordError,
   clearChangePasswordError,
   clearPlipInfo,
@@ -59,6 +60,10 @@ export default (store) => () => {
     case "profileMissingFields":
     case "profilePhone":
     case "profileWallet":
+    case SCREEN_KEYS.SIGN_IN: {
+      store.dispatch(appLinkReset());
+      return defaultBackAction();
+    }
     case SCREEN_KEYS.CONFIRM_VOTE:
       return true;
     case SCREEN_KEYS.MESSAGE_SIGN: {
