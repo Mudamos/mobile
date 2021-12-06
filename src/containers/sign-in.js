@@ -11,6 +11,7 @@ import {
 
 import {
   appleSignIn,
+  actionSignerReset,
   clearAuthLoginError,
   facebookUserLogIn,
   loginUser,
@@ -33,6 +34,7 @@ const mapDispatchToProps = (dispatch) => ({
   onAppleSignIn: () => dispatch(appleSignIn()),
   onBack: () => {
     dispatch(signingUp(false));
+    dispatch(actionSignerReset());
     dispatch(navigateBack());
   },
   onClearAuthLoginError: () => dispatch(clearAuthLoginError()),

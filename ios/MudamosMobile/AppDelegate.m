@@ -66,9 +66,10 @@
 
   [FBSDKApplicationDelegate initializeSDK:launchOptions];
 
-  //return YES;
-  return [[FBSDKApplicationDelegate sharedInstance] application:application
+  
+  [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
+  return YES;
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
@@ -80,7 +81,14 @@
 #endif
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler {
+- (BOOL)application:(UIApplication *)application
+continueUserActivity:(nonnull NSUserActivity *)userActivity
+ restorationHandler:
+#if defined(__IPHONE_12_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_12_0)
+(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> *_Nullable))restorationHandler {
+#else
+    (nonnull void (^)(NSArray *_Nullable))restorationHandler {
+#endif  // __IPHONE_12_0
   BOOL handled = [[FIRDynamicLinks dynamicLinks] handleUniversalLink:userActivity.webpageURL
                                                           completion: ^(FIRDynamicLink * _Nullable dynamicLink, NSError * _Nullable error) {
                                                             if (dynamicLink && !error) {
@@ -92,6 +100,18 @@
                                                           }];
   return handled;
 }
+  
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString *, id> *)options {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    return [self application:app
+                     openURL:url
+           sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                  annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+#pragma clang diagnostic pop
+  }
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
