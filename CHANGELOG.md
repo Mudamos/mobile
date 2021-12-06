@@ -1,5 +1,7 @@
 # Next
 
+## [2.9.1] 03/10/2021
+
 * [PR 534] Fix accepting dynamic link in ios
 
 ## [2.9.0] 23/11/2021

@@ -251,7 +251,7 @@ android {
             dimension "version"
             applicationId = "org.mudamos.petition"
             versionCode 32
-            versionName "2.9.0"
+            versionName "2.9.1"
             signingConfig signingConfigs.production
         }
     }
